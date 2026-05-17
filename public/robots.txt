@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stroyrayon.kg/sitemap.xml

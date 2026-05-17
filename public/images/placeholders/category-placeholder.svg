@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="StroyRayon категория сүрөтү даярдалууда">
+  <rect width="900" height="520" fill="#1f4e3a"/>
+  <rect x="58" y="58" width="784" height="404" rx="26" fill="#ffffff" opacity=".08" stroke="#f7f4ee" stroke-width="4"/>
+  <path d="M195 350h510" stroke="#f7f4ee" stroke-width="22" stroke-linecap="round" opacity=".92"/>
+  <path d="M280 320l170-190 170 190H515v-72H385v72z" fill="#f7f4ee"/>
+  <rect x="356" y="368" width="188" height="34" rx="8" fill="#d9822b"/>
+  <text x="450" y="106" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="800" fill="#ffffff">StroyRayon</text>
+  <text x="450" y="452" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff">Категория сүрөтү даярдалууда</text>
+</svg>

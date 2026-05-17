@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="StroyRayon">
+  <rect width="64" height="64" rx="12" fill="#1f4e3a"/>
+  <path d="M14 42h36v8H14z" fill="#d9822b"/>
+  <path d="M18 38 32 16l14 22H36v-9h-8v9z" fill="#fff"/>
+  <path d="M24 50h16" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</svg>

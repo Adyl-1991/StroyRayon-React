@@ -1,0 +1,229 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStockStatus {
+  IN_STOCK
+  LOW_STOCK
+  PRE_ORDER
+  OUT_OF_STOCK
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PROCESSING
+  DELIVERED
+  CANCELLED
+}
+
+enum ProductImageType {
+  MAIN
+  GALLERY
+}
+
+enum AdminRole {
+  OWNER
+  MANAGER
+  CONTENT
+}
+
+model CatalogNode {
+  id               String        @id @default(cuid())
+  parentId         String?
+  parent           CatalogNode?  @relation("CatalogNodeChildren", fields: [parentId], references: [id], onDelete: SetNull)
+  children         CatalogNode[] @relation("CatalogNodeChildren")
+  titleKg          String
+  titleRu          String?
+  titleEn          String?
+  slug             String
+  path             String        @unique
+  level            Int
+  sortOrder        Int           @default(0)
+  descriptionKg    String?
+  seoTextKg        String?
+  seoTitleKg       String?
+  seoDescriptionKg String?
+  icon             String?
+  imageUrl         String?
+  isActive         Boolean       @default(true)
+  products         Product[]
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([parentId])
+  @@index([slug])
+  @@index([path])
+  @@index([isActive, sortOrder])
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  country   String?
+  isActive  Boolean   @default(true)
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id                 String              @id @default(cuid())
+  catalogNodeId      String
+  catalogNode        CatalogNode         @relation(fields: [catalogNodeId], references: [id], onDelete: Restrict)
+  brandId            String?
+  brand              Brand?              @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  titleKg            String
+  titleRu            String?
+  titleEn            String?
+  slug               String              @unique
+  sku                String              @unique
+  price              Decimal             @db.Decimal(12, 2)
+  oldPrice           Decimal?            @db.Decimal(12, 2)
+  currency           String              @default("KGS")
+  unit               String
+  stockStatus        ProductStockStatus  @default(IN_STOCK)
+  minOrder           String?
+  shortDescriptionKg String?
+  descriptionKg      String?
+  packageInfoKg      String?
+  deliveryInfoKg     String?
+  warrantyInfoKg     String?
+  recommendedUseKg   String?
+  specs              Json?
+  tags               String[]
+  faqKg              Json?
+  seoTitleKg         String?
+  seoDescriptionKg   String?
+  isActive           Boolean             @default(true)
+  images             ProductImage[]
+  stock              Stock?
+  orderItems         OrderItem[]
+  relatedFrom        ProductRelation[]   @relation("RelatedFrom")
+  relatedTo          ProductRelation[]   @relation("RelatedTo")
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([catalogNodeId])
+  @@index([brandId])
+  @@index([stockStatus])
+  @@index([isActive])
+}
+
+model ProductImage {
+  id        String           @id @default(cuid())
+  productId String
+  product   Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  src       String
+  alt       String
+  width     Int
+  height    Int
+  type      ProductImageType @default(GALLERY)
+  sortOrder Int              @default(0)
+  createdAt DateTime         @default(now())
+
+  @@index([productId, sortOrder])
+}
+
+model ProductRelation {
+  id               String  @id @default(cuid())
+  productId        String
+  relatedProductId String
+  product          Product @relation("RelatedFrom", fields: [productId], references: [id], onDelete: Cascade)
+  relatedProduct   Product @relation("RelatedTo", fields: [relatedProductId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, relatedProductId])
+  @@index([relatedProductId])
+}
+
+model Stock {
+  id                String   @id @default(cuid())
+  productId         String   @unique
+  product           Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity          Int      @default(0)
+  reservedQuantity  Int      @default(0)
+  lowStockThreshold Int      @default(5)
+  warehouseName     String?
+  updatedAt         DateTime @updatedAt
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String   @unique
+  region    String?
+  address   String?
+  orders    Order[]
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  customerId      String
+  customer        Customer    @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  status          OrderStatus @default(NEW)
+  subtotal        Decimal     @db.Decimal(12, 2)
+  deliveryPrice   Decimal     @default(0) @db.Decimal(12, 2)
+  total           Decimal     @db.Decimal(12, 2)
+  currency        String      @default("KGS")
+  source          String      @default("website")
+  whatsappText    String
+  customerComment String?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id                   String   @id @default(cuid())
+  orderId              String
+  order                Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId            String?
+  product              Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productTitleSnapshot String
+  productSkuSnapshot   String
+  unitPriceSnapshot    Decimal  @db.Decimal(12, 2)
+  quantity             Int
+  totalSnapshot        Decimal  @db.Decimal(12, 2)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(MANAGER)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model BlogPost {
+  id               String    @id @default(cuid())
+  titleKg          String
+  titleRu          String?
+  titleEn          String?
+  slug             String    @unique
+  excerptKg        String?
+  contentKg        String?
+  seoTitleKg       String?
+  seoDescriptionKg String?
+  isPublished      Boolean   @default(false)
+  publishedAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}

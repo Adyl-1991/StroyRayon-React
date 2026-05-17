@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: stroyrayon-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stroyrayon
+      POSTGRES_USER: stroyrayon
+      POSTGRES_PASSWORD: stroyrayon_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stroyrayon -d stroyrayon"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:
