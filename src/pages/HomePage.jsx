@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { HeroSlider } from '../components/home/HeroSlider'
+import { OrderProcessBlock } from '../components/home/OrderProcessBlock'
 import { blogPosts } from '../data/blogPosts'
 import { categories } from '../data/categories'
 import { CategoryCard } from '../components/catalog/CategoryCard'
@@ -7,48 +9,24 @@ import { TrustBlock } from '../components/marketing/TrustBlock'
 import { Seo } from '../components/seo/Seo'
 import { Button } from '../components/ui/Button'
 import { SectionTitle } from '../components/ui/SectionTitle'
+import { useLocale } from '../i18n/LocaleContext'
 import { getProducts } from '../services/productService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function HomePage() {
+  const { t } = useLocale()
   const popularProducts = getProducts({ popular: true }).slice(0, 4)
   const saleProducts = getProducts({ sale: true }).slice(0, 4)
 
   return (
     <>
       <Seo title="StroyRayon" canonical={getPageCanonical('/')} />
-      <section className="hero-section">
-        <div className="hero-section__content">
-          <p className="eyebrow">Кыргызстан боюнча курулуш материалдары</p>
-          <h1>Курулуш материалдарын оңой тандаңыз</h1>
-          <p>
-            StroyRayon курулушка керектүү товарды өлчөмү, колдонуу багыты жана наличиеси боюнча тандап алууга жардам берет.
-            Товарды себетке кошуп, заказды WhatsApp аркылуу менеджерге жөнөтө аласыз.
-          </p>
-          <div className="hero-actions">
-            <Button to="/catalog">Каталогду ачуу</Button>
-            <Button to="/contacts" variant="secondary">
-              Консультация алуу
-            </Button>
-          </div>
-        </div>
-        <div className="hero-section__media" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1100&q=80"
-            alt=""
-            width="1100"
-            height="820"
-          />
-        </div>
-      </section>
+      <HeroSlider />
+      <OrderProcessBlock />
 
-      <section className="page-section">
-        <SectionTitle
-          eyebrow="Каталог"
-          title="Категориялар"
-          text="Товарлар колдонуу багыты боюнча бөлүнгөн, ошондуктан керектүүсүн бат табасыз."
-        />
-        <div className="category-grid">
+      <section className="page-section home-categories">
+        <SectionTitle eyebrow={t('home.catalogEyebrow')} title={t('home.categoriesTitle')} text={t('home.categoriesText')} />
+        <div className="category-grid category-grid--home">
           {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
@@ -56,25 +34,24 @@ export function HomePage() {
       </section>
 
       <section className="page-section">
-        <SectionTitle title="Популярдуу товарлар" text="Курулуш бригадалары көп заказ кылган позициялар." />
+        <SectionTitle title={t('home.popularTitle')} text={t('home.popularText')} />
         <ProductGrid products={popularProducts} />
       </section>
 
       <section className="page-section">
-        <SectionTitle title="Акциядагы товарлар" text="Баасы төмөндөгөн товарлар, кампадагы саны өзгөрүшү мүмкүн." />
+        <SectionTitle title={t('home.saleTitle')} text={t('home.saleText')} />
         <ProductGrid products={saleProducts} />
       </section>
 
       <section className="benefits-band">
         <div>
-          <h2>Эмне үчүн StroyRayon?</h2>
-          <p>Биз товарды жөн эле тизмектебейбиз: кардар туура материал тандашы үчүн түшүндүрмө, кеңеш жана байланыш беребиз.</p>
+          <h2>{t('home.benefitsTitle')}</h2>
+          <p>{t('home.benefitsText')}</p>
         </div>
         <ul>
-          <li>Сом менен так баа жана наличиеси</li>
-          <li>WhatsApp аркылуу тез байланыш</li>
-          <li>Бишкек жана региондорго жеткирүү</li>
-          <li>Көлөмдү эсептөөгө менеджер жардам берет</li>
+          {t('home.benefits').map((benefit) => (
+            <li key={benefit}>{benefit}</li>
+          ))}
         </ul>
       </section>
 
@@ -82,32 +59,32 @@ export function HomePage() {
 
       <section className="delivery-band">
         <div>
-          <p className="eyebrow">Региондорго жеткирүү</p>
-          <h2>Баткен, Ош, Жалал-Абад, Нарын, Ысык-Көл, Талас жана Чүйгө жөнөтөбүз</h2>
-          <p>Жеткирүү баасы жана убактысы товар көлөмүнө, салмагына жана түшүрүү дарегине жараша заказ алдында такталат.</p>
+          <p className="eyebrow">{t('home.deliveryEyebrow')}</p>
+          <h2>{t('home.deliveryTitle')}</h2>
+          <p>{t('home.deliveryText')}</p>
         </div>
         <Button to="/delivery" variant="secondary">
-          Шарттарын көрүү
+          {t('home.deliveryCta')}
         </Button>
       </section>
 
       <section className="consultation-band">
-        <h2>Менеджерден консультация алуу</h2>
-        <p>Диаметр, өлчөм, материал же комплектация боюнча күмөн санасаңыз, менеджерге сүрөт же өлчөмдөрдү жөнөтүңүз.</p>
+        <h2>{t('home.consultTitle')}</h2>
+        <p>{t('home.consultText')}</p>
         <Button href="https://wa.me/996700123456" target="_blank" rel="noreferrer" variant="whatsapp">
-          Менеджерден кеңеш алуу
+          {t('common.whatsappWrite')}
         </Button>
       </section>
 
       <section className="page-section">
-        <SectionTitle title="Кеңештер" text="Курулуш материалдарын туура тандоого жардам берген кыска макалалар." />
+        <SectionTitle title={t('home.adviceTitle')} text={t('home.adviceText')} />
         <div className="blog-grid">
           {blogPosts.slice(0, 3).map((post) => (
             <article className="blog-card" key={post.id}>
               <p className="eyebrow">{post.category}</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <Link to="/blog">Окуу</Link>
+              <Link to="/blog">{t('common.read')}</Link>
             </article>
           ))}
         </div>

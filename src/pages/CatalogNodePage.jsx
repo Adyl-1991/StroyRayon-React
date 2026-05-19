@@ -9,11 +9,8 @@ import { EmptyState } from '../components/ui/EmptyState'
 import { useCatalogNode } from '../hooks/useCatalogTree'
 import { useCatalogFilters } from '../hooks/useCatalogFilters'
 import { useProducts } from '../hooks/useProducts'
-import {
-  getCatalogNodeUrl,
-  getFilterOptions,
-  getProductsByCatalogNode,
-} from '../services/productService'
+import { useLocale } from '../i18n/LocaleContext'
+import { getCatalogNodeUrl, getFilterOptions, getProductsByCatalogNode } from '../services/productService'
 import { buildBreadcrumbStructuredData, getCatalogNodeSeo } from '../utils/seoUtils'
 
 export function CatalogNodePage() {
@@ -21,25 +18,30 @@ export function CatalogNodePage() {
   const pathSegments = (params['*'] || '').split('/').filter(Boolean)
   const { node, isLoading: isCatalogLoading } = useCatalogNode(pathSegments)
   const { filters, setFilters } = useCatalogFilters()
-  const { products, total, page, totalPages, filterOptions: apiFilterOptions, isLoading: isProductsLoading } = useProducts({ ...filters, catalogNode: node })
+  const { t, nodeText } = useLocale()
+  const { products, total, page, totalPages, filterOptions: apiFilterOptions, isLoading: isProductsLoading } = useProducts({
+    ...filters,
+    catalogNode: node,
+  })
 
   if (!node) {
     return (
       <main className="page">
-        <Seo title="Бөлүм табылган жок" description="StroyRayon каталогунан башка бөлүмдү тандаңыз." />
-        <EmptyState title="Бөлүм табылган жок" text="Каталогдон башка багытты тандап көрүңүз же менеджерге жазыңыз." />
+        <Seo title={t('catalog.notFoundTitle')} description={t('catalog.notFoundText')} />
+        <EmptyState title={t('catalog.notFoundTitle')} text={t('catalog.notFoundText')} />
       </main>
     )
   }
 
+  const current = nodeText(node)
   const children = node.children || []
   const scopedProducts = getProductsByCatalogNode(node)
   const filterOptions = apiFilterOptions || getFilterOptions({ catalogNode: node })
   const hasProductScope = scopedProducts.length > 0
   const breadcrumbItems = [
-    { label: 'Каталог', to: '/catalog' },
+    { label: t('common.catalog'), to: '/catalog' },
     ...node.breadcrumbs.map((item, index) => ({
-      label: item.titleKg,
+      label: nodeText(item).title,
       to: index === node.breadcrumbs.length - 1 ? undefined : getCatalogNodeUrl(item.path),
     })),
   ]
@@ -48,20 +50,20 @@ export function CatalogNodePage() {
   return (
     <main className="page catalog-node-page">
       <Seo
-        title={seo.title}
-        description={seo.description}
+        title={current.title || seo.title}
+        description={current.description || seo.description}
         canonical={seo.canonical}
         structuredData={buildBreadcrumbStructuredData(breadcrumbItems)}
       />
       <Breadcrumbs items={breadcrumbItems} />
       <div className="page-heading page-heading--compact">
-        <h1>{node.titleKg}</h1>
-        <p>{node.descriptionKg}</p>
+        <h1>{current.title}</h1>
+        <p>{current.description}</p>
       </div>
 
       {children.length > 0 && (
         <section className="catalog-node-section" aria-labelledby="catalog-node-children">
-          <h2 id="catalog-node-children">Бөлүмдөр</h2>
+          <h2 id="catalog-node-children">{t('common.sections')}</h2>
           <CatalogNodeGrid nodes={children} basePath={pathSegments} />
         </section>
       )}
@@ -70,13 +72,15 @@ export function CatalogNodePage() {
         <section className="catalog-node-section" aria-labelledby="catalog-node-products">
           <div className="catalog-node-section__head">
             <div>
-              <h2 id="catalog-node-products">{children.length ? 'Бул бөлүмдөгү товарлар' : 'Товарлар'}</h2>
-              <p>{total} товар табылды</p>
+              <h2 id="catalog-node-products">{children.length ? t('catalog.sectionProducts') : t('common.products')}</h2>
+              <p>
+                {total} {t('common.foundProducts')}
+              </p>
             </div>
           </div>
           {(isCatalogLoading || isProductsLoading) && (
             <p className="microcopy" role="status">
-              Товарлар жаңыланууда...
+              {t('common.loadingProducts')}
             </p>
           )}
           <Filters filters={filters} setFilters={setFilters} options={filterOptions} resultCount={total} />
@@ -85,25 +89,22 @@ export function CatalogNodePage() {
         </section>
       )}
 
-      {!children.length && !hasProductScope && (
-        <EmptyState
-          title="Бул бөлүм азырынча бош"
-          text="Ассортимент толукталууда. Керектүү товарды менеджерден WhatsApp аркылуу тактап алсаңыз болот."
-        />
-      )}
+      {!children.length && !hasProductScope && <EmptyState title={t('catalog.emptyTitle')} text={t('catalog.emptyText')} />}
 
       <section className="consultation-inline catalog-consultation">
-        <h2>Кайсы товарды тандай албай жатасызбы?</h2>
-        <p>Объекттин түрүн, көлөмүн жана колдонуу жерин жазыңыз. Менеджер туура бөлүмдү же товарды сунуштайт.</p>
+        <h2>{t('catalog.consultTitle')}</h2>
+        <p>{t('catalog.consultText')}</p>
         <a href="https://wa.me/996700123456" target="_blank" rel="noreferrer">
-          Менеджерден кеңеш алуу
+          {t('common.askManager')}
         </a>
       </section>
 
-      {node.seoTextKg && (
+      {current.seoText && (
         <article className="seo-text">
-          <h2>{node.titleKg} боюнча кыскача</h2>
-          <p>{node.seoTextKg}</p>
+          <h2>
+            {current.title} {t('catalog.shortAbout')}
+          </h2>
+          <p>{current.seoText}</p>
         </article>
       )}
     </main>

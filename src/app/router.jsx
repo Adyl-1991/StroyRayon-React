@@ -10,13 +10,13 @@ import { DeliveryPage } from '../pages/DeliveryPage'
 import { HomePage } from '../pages/HomePage'
 import { ProductPage } from '../pages/ProductPage'
 import { SearchPage } from '../pages/SearchPage'
-import { EmptyState } from '../components/ui/EmptyState'
+import { RouteError } from '../components/ui/RouteError'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <EmptyState title="Барак ачылган жок" text="Башкы бетке кайтып, кайра аракет кылып көрүңүз." />,
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'catalog', element: <CatalogPage /> },

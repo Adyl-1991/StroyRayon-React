@@ -1,11 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
+import { useLocale } from '../../i18n/LocaleContext'
 
 function NavIcon({ name }) {
   const icons = {
-    home: (
-      <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5.2v-6.2H9.2V22H4a1 1 0 0 1-1-1z" />
-    ),
+    home: <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5.2v-6.2H9.2V22H4a1 1 0 0 1-1-1z" />,
     catalog: (
       <>
         <rect x="3" y="4" width="7" height="7" rx="1.4" />
@@ -42,24 +41,25 @@ function NavIcon({ name }) {
 
 export function MobileNav() {
   const { count } = useCart()
+  const { t } = useLocale()
 
   return (
-    <nav className="mobile-nav" aria-label="Мобилдик меню">
+    <nav className="mobile-nav" aria-label="Mobile menu">
       <NavLink to="/">
         <NavIcon name="home" />
-        Башкы
+        {t('nav.home')}
       </NavLink>
       <NavLink to="/catalog">
         <NavIcon name="catalog" />
-        Каталог
+        {t('nav.catalog')}
       </NavLink>
       <NavLink to="/delivery">
         <NavIcon name="truck" />
-        Жеткирүү
+        {t('nav.delivery')}
       </NavLink>
       <NavLink to="/cart">
         <NavIcon name="cart" />
-        Себет {count > 0 ? `(${count})` : ''}
+        {t('nav.cart')} {count > 0 ? `(${count})` : ''}
       </NavLink>
     </nav>
   )
