@@ -50,7 +50,6 @@ export function ProductCard({ product }) {
       <div className="product-card__body">
         <div className="product-card__meta">
           <span>{product.brand || 'StroyRayon'}</span>
-          <span className={`stock-pill stock-pill--${stockStatus}`}>{stockLabels[locale][stockStatus] || stockStatus}</span>
         </div>
         <h3>
           <Link to={`/product/${product.slug}`}>{productName}</Link>
@@ -61,6 +60,7 @@ export function ProductCard({ product }) {
           {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
           <span>/ {product.unit}</span>
         </div>
+        <span className={`stock-pill stock-pill--${stockStatus}`}>{stockLabels[locale][stockStatus] || stockStatus}</span>
         <div className="rating">
           {t('productCard.rating')} {product.rating} / 5 ({product.reviewsCount})
         </div>

@@ -1,3 +1,6 @@
+/* global process */
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { catalogTree } from '../data/catalogTree.js'
 import { categories } from '../data/categories.js'
 import { PRODUCT_REQUIRED_FIELDS, PRODUCT_UNIT_VALUES, STOCK_STATUS_VALUES } from '../data/productSchema.js'
@@ -31,6 +34,13 @@ function normalize(value) {
   return String(value || '')
     .trim()
     .toLowerCase()
+}
+
+function publicImageExists(src) {
+  if (!src || !src.startsWith('/')) return true
+  if (!src.startsWith('/images/')) return true
+
+  return existsSync(resolve(process.cwd(), 'public', src.replace(/^\/+/, '')))
 }
 
 export function validateCatalogData() {
@@ -93,6 +103,8 @@ export function validateCatalogData() {
 
         if (!normalizedImage.src) {
           warnings.push(`${product.id}: image ${index} src is empty`)
+        } else if (!publicImageExists(normalizedImage.src)) {
+          warnings.push(`${product.id}: image ${index} file not found: ${normalizedImage.src}`)
         }
 
         if (!normalizedImage.alt) {

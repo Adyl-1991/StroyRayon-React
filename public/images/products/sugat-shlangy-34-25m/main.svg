@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Сугат шлангы 25 м">
+  <defs>
+    <linearGradient id="hoseGreen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#48a878"/>
+      <stop offset="0.55" stop-color="#2d6a4f"/>
+      <stop offset="1" stop-color="#1b4332"/>
+    </linearGradient>
+    <filter id="hoseShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#1f2d25" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="675" fill="#f7f8f4"/>
+  <ellipse cx="450" cy="552" rx="270" ry="32" fill="#cfd7cf"/>
+  <g transform="translate(168 112)" filter="url(#hoseShadow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="238" cy="236" r="174" stroke="#1b4332" stroke-width="54"/>
+    <circle cx="238" cy="236" r="124" stroke="url(#hoseGreen)" stroke-width="38"/>
+    <circle cx="238" cy="236" r="78" stroke="#8fc2a5" stroke-width="26"/>
+    <path d="M118 138c64-64 187-69 256-9" stroke="#ffffff" stroke-width="8" opacity="0.28"/>
+    <path d="M120 348c74 58 184 61 251 8" stroke="#0b221a" stroke-width="9" opacity="0.35"/>
+
+    <path d="M386 306c82 1 128 36 168 91 32 44 86 66 142 43" stroke="#1b4332" stroke-width="56"/>
+    <path d="M386 306c76 4 116 38 154 88 29 38 80 56 132 36" stroke="url(#hoseGreen)" stroke-width="34"/>
+    <path d="M430 319c44 12 77 36 104 73" stroke="#ffffff" stroke-width="6" opacity="0.25"/>
+
+    <path d="M672 426 762 378" stroke="#1b4332" stroke-width="38"/>
+    <rect x="722" y="332" width="84" height="72" rx="10" fill="#f0b05a" stroke="#1b4332" stroke-width="11"/>
+    <path d="M740 332v72M762 332v72M784 332v72" stroke="#d88726" stroke-width="6"/>
+    <path d="M764 404v48" stroke="#1b4332" stroke-width="14"/>
+    <path d="M740 452h48" stroke="#1b4332" stroke-width="12"/>
+    <text x="238" y="246" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="800" fill="#f7f8f4">25 м</text>
+  </g>
+</svg>

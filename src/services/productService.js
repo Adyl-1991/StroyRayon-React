@@ -88,6 +88,48 @@ export function getProducts(filters = {}) {
   })
 }
 
+const HOME_POPULAR_GROUPS = [
+  { key: 'stroymaterial', labelKg: 'Стройматериал', slugs: ['stroymaterial'], preferredIds: ['cement-m500-50kg'] },
+  { key: 'instrument', labelKg: 'Инструмент', slugs: ['instrument'], preferredIds: ['drill-650w', 'cordless-screwdriver-12v'] },
+  { key: 'elektrika', labelKg: 'Электрика', slugs: ['elektrika'], preferredIds: ['cable-vvg-3x2-5', 'socket-white-single'] },
+  { key: 'santehnika', labelKg: 'Сантехника', slugs: ['santehnika'], preferredIds: ['kitchen-mixer-basic', 'bath-mixer-shower-set'] },
+  { key: 'ventilyaciya', labelKg: 'Вентиляция', slugs: ['ventilyaciya'], preferredIds: ['ventilation-grille-150'] },
+  { key: 'krepezh', labelKg: 'Катыргычтар/крепежи', slugs: ['krepezh'], preferredIds: ['screw-black-35', 'wood-screw-4x50'] },
+  { key: 'boiok-tush-kagaz', labelKg: 'Боёктор/туш кагаздар', slugs: ['boiok-tush-kagaz'], preferredIds: ['interior-paint-white-10l'] },
+  { key: 'bak-koroo', labelKg: 'Бак жана короо', slugs: ['bak-koroo'], preferredIds: ['garden-hose-3-4-25m', 'garden-shovel-metal'] },
+]
+
+export function getHomePopularProducts(sourceProducts = products) {
+  const normalizedSource = sourceProducts.map(normalizeProduct)
+  const normalizedFallback = products.map(normalizeProduct)
+  const selected = []
+
+  for (const group of HOME_POPULAR_GROUPS) {
+    const product =
+      findProductForGroup(normalizedSource, group, selected) ||
+      findProductForGroup(normalizedFallback, group, selected)
+
+    if (product) selected.push(product)
+  }
+
+  return selected
+}
+
+function findProductForGroup(productList, group, selectedProducts) {
+  const selectedIds = new Set(selectedProducts.map((product) => product.id))
+  const byPreferredId = group.preferredIds
+    .map((id) => productList.find((product) => product.id === id && !selectedIds.has(product.id)))
+    .find(Boolean)
+
+  if (byPreferredId) return byPreferredId
+
+  return productList.find(
+    (product) =>
+      !selectedIds.has(product.id) &&
+      product.catalogPath?.some((slug) => group.slugs.includes(slug)),
+  )
+}
+
 export function sortProducts(productsToSort, sort = 'popular') {
   return [...productsToSort].map(normalizeProduct).sort((a, b) => {
     if (sort === 'price-asc') return a.price - b.price

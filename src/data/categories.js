@@ -260,6 +260,19 @@ export const categories = [
     ],
   }),
   legacyCategory({
+    id: 'ventilation',
+    titleKg: 'Вентиляция',
+    slug: 'ventilyaciya',
+    icon: 'vent',
+    descriptionKg: 'Үй, кеңсе жана курулуш объекттери үчүн вентиляция товарлары.',
+    subcategories: [
+      legacySubcategory('Вентиляторлор', 'ventilyatorlor', 'Аба айландыруу жана сордуруу үчүн вентиляция вентиляторлору.'),
+      legacySubcategory('Вентиляция решеткалары', 'ventilyaciya-reshetkalary', 'Вентиляция каналдары үчүн декоративдик жана монтаждык решеткалар.'),
+      legacySubcategory('Аба өткөргүчтөр', 'aba-otkorguchtor', 'Аба өткөрүүчү каналдар жана түтүктөр.'),
+      legacySubcategory('Хомут жана монтаж аксессуарлары', 'homut-montazh-aksessuarlar', 'Вентиляция монтажына керектүү бекиткичтер жана аксессуарлар.'),
+    ],
+  }),
+  legacyCategory({
     id: 'doors-windows',
     titleKg: 'Эшик жана терезе',
     slug: 'doors-windows',

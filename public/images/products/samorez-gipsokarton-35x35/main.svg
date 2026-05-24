@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Drywall screw 35 mm">
+  <defs>
+    <linearGradient id="screwSteel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#6b7280"/>
+      <stop offset="0.35" stop-color="#1f2937"/>
+      <stop offset="0.7" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#4b5563"/>
+    </linearGradient>
+    <linearGradient id="screwShine" x1="0" x2="1">
+      <stop offset="0" stop-color="#9ca3af"/>
+      <stop offset="0.5" stop-color="#f9fafb"/>
+      <stop offset="1" stop-color="#374151"/>
+    </linearGradient>
+    <filter id="screwDrop" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="15" flood-color="#1f2d25" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="675" fill="#f7f8f4"/>
+  <ellipse cx="450" cy="555" rx="276" ry="34" fill="#cbd4cc"/>
+
+  <g transform="translate(105 98) rotate(-28 350 245)" filter="url(#screwDrop)">
+    <path d="M166 264h392" stroke="#0b1220" stroke-width="48" stroke-linecap="round"/>
+    <path d="M174 249h374" stroke="url(#screwShine)" stroke-width="12" stroke-linecap="round" opacity="0.72"/>
+    <path d="M162 281h390" stroke="#000" stroke-width="9" stroke-linecap="round" opacity="0.34"/>
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M199 231 239 297" stroke="#d1d5db" stroke-width="9"/>
+      <path d="M246 228 292 300" stroke="#d1d5db" stroke-width="9"/>
+      <path d="M296 228 343 300" stroke="#d1d5db" stroke-width="9"/>
+      <path d="M348 228 395 300" stroke="#d1d5db" stroke-width="9"/>
+      <path d="M400 229 445 297" stroke="#d1d5db" stroke-width="9"/>
+      <path d="M452 232 492 292" stroke="#d1d5db" stroke-width="9"/>
+
+      <path d="M216 231 250 288" stroke="#050a12" stroke-width="8" opacity="0.95"/>
+      <path d="M265 229 305 292" stroke="#050a12" stroke-width="8" opacity="0.95"/>
+      <path d="M317 229 357 292" stroke="#050a12" stroke-width="8" opacity="0.95"/>
+      <path d="M369 229 409 292" stroke="#050a12" stroke-width="8" opacity="0.95"/>
+      <path d="M421 231 456 288" stroke="#050a12" stroke-width="8" opacity="0.95"/>
+    </g>
+
+    <path d="M552 264 654 211 654 317Z" fill="url(#screwSteel)" stroke="#0b1220" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M584 251 640 224 640 278Z" fill="#9ca3af" opacity="0.58"/>
+    <path d="M650 211 690 264 650 317Z" fill="#080d16"/>
+
+    <g transform="translate(102 264)">
+      <ellipse cx="0" cy="0" rx="96" ry="72" fill="url(#screwSteel)" stroke="#0b1220" stroke-width="9"/>
+      <ellipse cx="0" cy="0" rx="65" ry="46" fill="#374151" stroke="#cbd5e1" stroke-width="6"/>
+      <path d="M-48 0H48M0-36V36" stroke="#050a12" stroke-width="20" stroke-linecap="round"/>
+      <path d="M-39 0H39M0-29V29" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round"/>
+      <path d="M-54-31c29-20 82-17 108 3" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity="0.42"/>
+      <path d="M-74 24c36 30 112 32 149 2" fill="none" stroke="#050a12" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    </g>
+
+    <path d="M154 342h420" stroke="#b9c5bd" stroke-width="14" stroke-linecap="round" opacity="0.78"/>
+    <path d="M220 383h275" stroke="#d8ded4" stroke-width="12" stroke-linecap="round" opacity="0.74"/>
+  </g>
+</svg>

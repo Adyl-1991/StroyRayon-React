@@ -6,6 +6,7 @@ const prisma = new PrismaClient()
 type CatalogNodeInput = {
   id?: string
   titleKg: string
+  titleRu?: string
   slug: string
   descriptionKg?: string
   seoTextKg?: string
@@ -68,6 +69,7 @@ type SeedStats = {
   stock: number
   skippedProducts: string[]
   warnings: string[]
+  staleCatalogNodes: number
 }
 
 const stockStatusMap: Record<string, ProductStockStatus> = {
@@ -114,6 +116,36 @@ async function loadFrontendData() {
   }
 }
 
+function collectCatalogPaths(nodes: CatalogNodeInput[], parentPath = '', paths = new Set<string>()) {
+  for (const node of nodes) {
+    if (!node.slug) continue
+    const path = parentPath ? `${parentPath}/${node.slug}` : node.slug
+    paths.add(path)
+    if (node.children?.length) collectCatalogPaths(node.children, path, paths)
+  }
+
+  return paths
+}
+
+function catalogNodeData(node: CatalogNodeInput, parentId: string | null, path: string, level: number, sortOrder: number) {
+  return {
+    parentId,
+    titleKg: node.titleKg,
+    titleRu: node.titleRu || null,
+    slug: node.slug,
+    path,
+    level,
+    sortOrder,
+    descriptionKg: node.descriptionKg || null,
+    seoTextKg: node.seoTextKg || null,
+    seoTitleKg: node.seoTitleKg || `${node.titleKg} - StroyRayon`,
+    seoDescriptionKg: node.seoDescriptionKg || node.descriptionKg || node.seoTextKg || null,
+    icon: node.icon || null,
+    imageUrl: imageSrc(node.image),
+    isActive: true,
+  }
+}
+
 async function seedCatalogNodes(nodes: CatalogNodeInput[], stats: SeedStats, parentId: string | null = null, parentPath = '', level = 0) {
   const siblingSlugs = new Set<string>()
 
@@ -129,39 +161,24 @@ async function seedCatalogNodes(nodes: CatalogNodeInput[], stats: SeedStats, par
     siblingSlugs.add(node.slug)
 
     const path = parentPath ? `${parentPath}/${node.slug}` : node.slug
-    await prisma.catalogNode.upsert({
-      where: { path },
-      update: {
-        parentId,
-        titleKg: node.titleKg,
-        slug: node.slug,
-        level,
-        sortOrder: index,
-        descriptionKg: node.descriptionKg || null,
-        seoTextKg: node.seoTextKg || null,
-        seoTitleKg: node.seoTitleKg || `${node.titleKg} - StroyRayon`,
-        seoDescriptionKg: node.seoDescriptionKg || node.descriptionKg || node.seoTextKg || null,
-        icon: node.icon || null,
-        imageUrl: imageSrc(node.image),
-        isActive: true,
-      },
-      create: {
-        id: node.id || undefined,
-        parentId,
-        titleKg: node.titleKg,
-        slug: node.slug,
-        path,
-        level,
-        sortOrder: index,
-        descriptionKg: node.descriptionKg || null,
-        seoTextKg: node.seoTextKg || null,
-        seoTitleKg: node.seoTitleKg || `${node.titleKg} - StroyRayon`,
-        seoDescriptionKg: node.seoDescriptionKg || node.descriptionKg || node.seoTextKg || null,
-        icon: node.icon || null,
-        imageUrl: imageSrc(node.image),
-        isActive: true,
-      },
-    })
+    const data = catalogNodeData(node, parentId, path, level, index)
+    const existingById = node.id ? await prisma.catalogNode.findUnique({ where: { id: node.id }, select: { id: true } }) : null
+
+    if (existingById) {
+      await prisma.catalogNode.update({
+        where: { id: node.id },
+        data,
+      })
+    } else {
+      await prisma.catalogNode.upsert({
+        where: { path },
+        update: data,
+        create: {
+          id: node.id || undefined,
+          ...data,
+        },
+      })
+    }
     stats.catalogNodes += 1
 
     if (node.children?.length) {
@@ -169,6 +186,18 @@ async function seedCatalogNodes(nodes: CatalogNodeInput[], stats: SeedStats, par
       await seedCatalogNodes(node.children, stats, savedNode.id, path, level + 1)
     }
   }
+}
+
+async function deactivateStaleCatalogNodes(activePaths: Set<string>, stats: SeedStats) {
+  const result = await prisma.catalogNode.updateMany({
+    where: {
+      isActive: true,
+      path: { notIn: [...activePaths] },
+    },
+    data: { isActive: false },
+  })
+
+  stats.staleCatalogNodes = result.count
 }
 
 async function seedBrands(products: ProductInput[], stats: SeedStats) {
@@ -353,11 +382,13 @@ async function main() {
     stock: 0,
     skippedProducts: [],
     warnings: [],
+    staleCatalogNodes: 0,
   }
 
   console.log('Seed started')
   const { catalogTree, products } = await loadFrontendData()
   await seedCatalogNodes(catalogTree, stats)
+  await deactivateStaleCatalogNodes(collectCatalogPaths(catalogTree), stats)
   const brandMap = await seedBrands(products, stats)
   const importedProducts = await seedProducts(products, brandMap, stats)
   await seedProductRelations(products, importedProducts, stats)
@@ -371,6 +402,7 @@ async function main() {
         productImages: stats.images,
         productRelations: stats.relations,
         stockRecords: stats.stock,
+        staleCatalogNodes: stats.staleCatalogNodes,
         skippedProducts: stats.skippedProducts.length,
         warnings: stats.warnings,
       },

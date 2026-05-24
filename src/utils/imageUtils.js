@@ -1,3 +1,4 @@
+import { getRootCategoryImage } from '../data/categoryAssets.js'
 import { getCategoryAssetEntry, getProductAssetEntry } from '../data/productAssets.js'
 
 export const productFallback = {
@@ -85,7 +86,7 @@ export function getProductImage(product, variant = 'main') {
     return normalizeImage(
       {
         src: expectedSrc,
-        alt: getImageAlt(product, fallback.alt),
+        alt: assetEntry.altKg || getImageAlt(product, fallback.alt),
         width: fallback.width,
         height: fallback.height,
         type: variant === 'main' ? 'product' : 'gallery',
@@ -113,8 +114,10 @@ export function getProductGallery(product) {
   const assetEntry = getProductAssetEntry(product?.slug)
   if (assetEntry?.available) {
     return [
-      normalizeImage(assetEntry.main, fallback),
-      ...assetEntry.gallery.map((src) => normalizeImage({ src, type: 'gallery', alt: getImageAlt(product, fallback.alt) }, fallback)),
+      normalizeImage({ src: assetEntry.main, type: 'product', alt: assetEntry.altKg || getImageAlt(product, fallback.alt) }, fallback),
+      ...assetEntry.gallery.map((src) =>
+        normalizeImage({ src, type: 'gallery', alt: assetEntry.altKg || getImageAlt(product, fallback.alt) }, fallback),
+      ),
     ]
   }
 
@@ -123,12 +126,15 @@ export function getProductGallery(product) {
 
 export function getCategoryImage(category) {
   const assetEntry = getCategoryAssetEntry(category?.slug)
+  const rootImage = getRootCategoryImage(category?.slug)
+  const currentImage = category?.image
+  const shouldUseRootImage = rootImage && (!currentImage || currentImage.type === 'placeholder' || currentImage.src === categoryFallback.src)
 
-  return normalizeImage(category?.image, {
+  return normalizeImage(shouldUseRootImage ? rootImage : currentImage, {
     ...categoryFallback,
     alt: getImageAlt(category, categoryFallback.alt),
-    expectedSrc: assetEntry?.src,
-    futureSrc: assetEntry?.src,
+    expectedSrc: rootImage?.src || assetEntry?.src,
+    futureSrc: rootImage?.src || assetEntry?.src,
   })
 }
 

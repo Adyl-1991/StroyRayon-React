@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Portland cement M500 50 kg">
+  <defs>
+    <linearGradient id="cementFront" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8efd9"/>
+      <stop offset="0.45" stop-color="#dfcfad"/>
+      <stop offset="1" stop-color="#c5ad83"/>
+    </linearGradient>
+    <linearGradient id="cementLeft" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#a99064"/>
+      <stop offset="1" stop-color="#d9c7a1"/>
+    </linearGradient>
+    <linearGradient id="cementRight" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#d9c7a1"/>
+      <stop offset="1" stop-color="#9d8359"/>
+    </linearGradient>
+    <linearGradient id="labelGreen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#327a5c"/>
+      <stop offset="1" stop-color="#1b4332"/>
+    </linearGradient>
+    <filter id="cementShadow" x="-22%" y="-22%" width="144%" height="144%">
+      <feDropShadow dx="0" dy="20" stdDeviation="17" flood-color="#1f2d25" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="675" fill="#f7f8f4"/>
+  <ellipse cx="452" cy="573" rx="245" ry="38" fill="#cbd4cc"/>
+
+  <g filter="url(#cementShadow)">
+    <path d="M300 132 250 526c-3 25 16 47 41 47h46l43-441Z" fill="url(#cementLeft)" stroke="#8e7856" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M602 132 648 526c3 25-16 47-41 47h-52l-38-441Z" fill="url(#cementRight)" stroke="#8e7856" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M300 132h302l-47 441H337L300 132Z" fill="url(#cementFront)" stroke="#8e7856" stroke-width="5" stroke-linejoin="round"/>
+
+    <path d="M330 78c54-20 190-20 244 0l28 54H300l30-54Z" fill="#f9f0dc" stroke="#8e7856" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M342 94c48 16 173 16 220 0" fill="none" stroke="#c1aa7e" stroke-width="6" stroke-linecap="round"/>
+    <path d="M324 132c35 25 221 25 256 0" fill="none" stroke="#a58d64" stroke-width="4" stroke-linecap="round"/>
+
+    <path d="M333 182c54 22 180 24 238 0M321 229c71 22 205 23 265 0M313 476c64 25 206 25 279 0" fill="none" stroke="#b49c70" stroke-width="5" stroke-linecap="round" opacity="0.78"/>
+    <path d="M316 158c21 91 19 284-10 381" fill="none" stroke="#f8edcf" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    <path d="M574 158c-18 106-8 286 24 380" fill="none" stroke="#7c6847" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+    <path d="M282 178c22 104 13 271-18 344M623 179c-10 116 6 253 23 337" fill="none" stroke="#8e7856" stroke-width="3" stroke-dasharray="10 12" opacity="0.75"/>
+
+    <path d="M315 292h270l22 132H293l22-132Z" fill="url(#labelGreen)" stroke="#14372a" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M333 308h235l12 34H321l12-34Z" fill="#3b8b68" opacity="0.95"/>
+    <text x="451" y="354" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="900" fill="#ffffff">M500</text>
+    <text x="451" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#f4c06d">CEMENT</text>
+    <text x="451" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#ffffff">50 kg</text>
+
+    <g fill="none" stroke-linecap="round">
+      <path d="M373 510h159" stroke="#8b7350" stroke-width="8"/>
+      <path d="M349 538h207" stroke="#b99f70" stroke-width="5"/>
+      <path d="M374 251h154" stroke="#8b7350" stroke-width="9"/>
+      <path d="M360 266h184" stroke="#e5d4ac" stroke-width="4"/>
+    </g>
+    <g opacity="0.28">
+      <circle cx="365" cy="168" r="4" fill="#8e7856"/>
+      <circle cx="423" cy="208" r="3" fill="#8e7856"/>
+      <circle cx="515" cy="166" r="4" fill="#8e7856"/>
+      <circle cx="552" cy="500" r="3" fill="#8e7856"/>
+      <circle cx="340" cy="434" r="3" fill="#8e7856"/>
+    </g>
+  </g>
+</svg>

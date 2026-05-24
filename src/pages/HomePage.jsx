@@ -2,20 +2,20 @@ import { Link } from 'react-router-dom'
 import { HeroSlider } from '../components/home/HeroSlider'
 import { OrderProcessBlock } from '../components/home/OrderProcessBlock'
 import { blogPosts } from '../data/blogPosts'
-import { categories } from '../data/categories'
-import { CategoryCard } from '../components/catalog/CategoryCard'
 import { ProductGrid } from '../components/catalog/ProductGrid'
 import { TrustBlock } from '../components/marketing/TrustBlock'
 import { Seo } from '../components/seo/Seo'
 import { Button } from '../components/ui/Button'
 import { SectionTitle } from '../components/ui/SectionTitle'
+import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
-import { getProducts } from '../services/productService'
+import { getHomePopularProducts, getProducts } from '../services/productService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function HomePage() {
   const { t } = useLocale()
-  const popularProducts = getProducts({ popular: true }).slice(0, 4)
+  const { products: homeProducts } = useProducts({ limit: 100, sort: 'popular' })
+  const popularProducts = getHomePopularProducts(homeProducts)
   const saleProducts = getProducts({ sale: true }).slice(0, 4)
 
   return (
@@ -24,17 +24,16 @@ export function HomePage() {
       <HeroSlider />
       <OrderProcessBlock />
 
-      <section className="page-section home-categories">
-        <SectionTitle eyebrow={t('home.catalogEyebrow')} title={t('home.categoriesTitle')} text={t('home.categoriesText')} />
-        <div className="category-grid category-grid--home">
-          {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
-          ))}
-        </div>
-      </section>
-
       <section className="page-section">
-        <SectionTitle title={t('home.popularTitle')} text={t('home.popularText')} />
+        <SectionTitle
+          title={t('home.popularTitle')}
+          text={t('home.popularText')}
+          action={
+            <Button to="/catalog" variant="secondary">
+              {t('home.allProducts')}
+            </Button>
+          }
+        />
         <ProductGrid products={popularProducts} />
       </section>
 

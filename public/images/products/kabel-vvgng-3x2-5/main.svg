@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Кабель ВВГнг 3x2.5">
+  <defs>
+    <linearGradient id="cableOuter" x1="0" x2="1">
+      <stop offset="0" stop-color="#0f2f24"/>
+      <stop offset="0.55" stop-color="#1b4332"/>
+      <stop offset="1" stop-color="#2d6a4f"/>
+    </linearGradient>
+    <filter id="cableShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#1f2d25" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="900" height="675" fill="#f7f8f4"/>
+  <ellipse cx="450" cy="548" rx="270" ry="32" fill="#cfd7cf"/>
+  <g transform="translate(170 102)" filter="url(#cableShadow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="250" cy="248" r="196" stroke="#102f24" stroke-width="68"/>
+    <circle cx="250" cy="248" r="144" stroke="#2d6a4f" stroke-width="34"/>
+    <circle cx="250" cy="248" r="88" stroke="#8fc2a5" stroke-width="28"/>
+    <path d="M106 150c70-70 220-76 300-4" stroke="#ffffff" stroke-width="8" opacity="0.22"/>
+    <path d="M116 372c72 54 206 58 286 0" stroke="#0b221a" stroke-width="10" opacity="0.35"/>
+
+    <path d="M428 302c104-4 170 42 200 124" stroke="#102f24" stroke-width="70"/>
+    <path d="M438 302c88-2 142 36 166 100" stroke="#2d6a4f" stroke-width="42"/>
+
+    <g transform="translate(620 426)">
+      <path d="M-40-42c36-22 142-5 184 42" stroke="#102f24" stroke-width="60"/>
+      <path d="M-34-38c36-16 126-2 166 36" stroke="#2d6a4f" stroke-width="34"/>
+      <circle cx="0" cy="0" r="28" fill="#f0b05a" stroke="#9f5d11" stroke-width="7"/>
+      <circle cx="64" cy="-8" r="28" fill="#dfe8df" stroke="#8fa19a" stroke-width="7"/>
+      <circle cx="126" cy="14" r="28" fill="#9ca3af" stroke="#4b5563" stroke-width="7"/>
+      <circle cx="0" cy="0" r="11" fill="#fff2cc"/>
+      <circle cx="64" cy="-8" r="11" fill="#fff"/>
+      <circle cx="126" cy="14" r="11" fill="#e5e7eb"/>
+    </g>
+    <text x="250" y="258" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="800" fill="#f7f8f4">3 x 2.5</text>
+  </g>
+</svg>
