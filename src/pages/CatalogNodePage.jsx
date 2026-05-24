@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { CatalogNodeGrid } from '../components/catalog/CatalogNodeGrid'
-import { Filters } from '../components/catalog/Filters'
+import { CatalogActiveFilters, Filters } from '../components/catalog/Filters'
 import { Pagination } from '../components/catalog/Pagination'
 import { ProductGrid } from '../components/catalog/ProductGrid'
 import { Seo } from '../components/seo/Seo'
@@ -83,9 +83,16 @@ export function CatalogNodePage() {
               {t('common.loadingProducts')}
             </p>
           )}
-          <Filters filters={filters} setFilters={setFilters} options={filterOptions} resultCount={total} />
-          <ProductGrid products={products} />
-          <Pagination page={page} totalPages={totalPages} setFilters={setFilters} />
+          <div className="catalog-products-layout">
+            <aside className="catalog-products-layout__filters" aria-label="Фильтрлер">
+              <Filters filters={filters} setFilters={setFilters} options={filterOptions} resultCount={total} variant="sidebar" showActiveChips={false} />
+            </aside>
+            <div className="catalog-products-layout__content">
+              <CatalogActiveFilters filters={filters} options={filterOptions} className="active-filters--products" />
+              <ProductGrid products={products} />
+              <Pagination page={page} totalPages={totalPages} setFilters={setFilters} />
+            </div>
+          </div>
         </section>
       )}
 

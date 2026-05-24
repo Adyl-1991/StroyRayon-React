@@ -16,7 +16,7 @@ export const BADGE_LABELS = {
   new: 'Жаңы',
 }
 
-const UNIT_OPTIONS = ['даана', 'метр', 'комплект', 'кап', 'рулон']
+const CUSTOMER_BADGES = ['hit', 'sale', 'quality', 'new']
 
 export function getCategories() {
   return categories
@@ -226,8 +226,8 @@ export function getFilterOptions(scopeFilters = {}) {
 
   return {
     brands: unique(scopedProducts.map((product) => product.brand).filter(Boolean)),
-    units: UNIT_OPTIONS,
-    tags: unique(['hit', 'sale', 'quality', 'new', ...scopedProducts.flatMap((product) => product.tags || [])]),
+    units: unique(scopedProducts.map((product) => product.unit).filter(Boolean)),
+    tags: CUSTOMER_BADGES.filter((tag) => scopedProducts.some((product) => hasTag(product, tag))),
   }
 }
 

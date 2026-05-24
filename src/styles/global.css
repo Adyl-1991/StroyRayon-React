@@ -1159,6 +1159,10 @@ del {
   border-radius: var(--radius);
 }
 
+.filters--sidebar {
+  margin-bottom: 0;
+}
+
 .filters summary {
   display: flex;
   min-height: 50px;
@@ -1191,8 +1195,8 @@ del {
 
 .filters__body {
   display: grid;
-  gap: 14px;
-  padding: 0 14px 14px;
+  gap: 12px;
+  padding: 0 12px 12px;
 }
 
 .filter-group {
@@ -1212,7 +1216,18 @@ del {
   font-weight: var(--weight-semibold);
 }
 
-.filter-group label,
+.filter-group label {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 9px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  font-weight: var(--weight-medium);
+}
+
 .subcategory-list a {
   min-height: 42px;
   display: inline-flex;
@@ -1223,6 +1238,13 @@ del {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   font-weight: var(--weight-medium);
+}
+
+.filter-group--scroll {
+  max-height: 184px;
+  overflow: auto;
+  padding-right: 3px;
+  scrollbar-width: thin;
 }
 
 .filter-group--price {
@@ -1261,6 +1283,21 @@ del {
   color: var(--color-muted);
   font-size: 0.85rem;
   font-weight: var(--weight-medium);
+}
+
+.active-filters--products {
+  margin-bottom: 12px;
+}
+
+.catalog-products-layout {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+.catalog-products-layout__filters,
+.catalog-products-layout__content {
+  min-width: 0;
 }
 
 .result-note {
@@ -1676,6 +1713,18 @@ del {
     align-items: start;
   }
 
+  .filters--sidebar .filters__body {
+    grid-template-columns: 1fr;
+  }
+
+  .filters--sidebar .filter-group--price {
+    grid-template-columns: 1fr;
+  }
+
+  .filters--sidebar .filter-group--price > span {
+    grid-column: auto;
+  }
+
   .filter-group--price {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1700,6 +1749,15 @@ del {
   .catalog-layout {
     grid-template-columns: 280px minmax(0, 1fr);
     align-items: start;
+  }
+
+  .catalog-products-layout {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+
+  .catalog-products-layout__filters {
+    position: sticky;
+    top: 112px;
   }
 
   .product-layout {

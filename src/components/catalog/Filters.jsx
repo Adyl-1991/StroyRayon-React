@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import { BADGE_LABELS, STOCK_LABELS } from '../../services/productService'
 import { defaultCatalogFilters } from './filterDefaults'
 
@@ -18,23 +18,13 @@ const sortOptions = [
   { value: 'new', label: 'Жаңы товарлар' },
 ]
 
-export function Filters({ filters, setFilters, options, resultCount }) {
+export function Filters({ filters, setFilters, options, resultCount, variant = 'inline', showActiveChips = true }) {
   const [isOpen, setIsOpen] = useState(false)
   const safeOptions = {
     brands: options?.brands || [],
     tags: options?.tags || [],
     units: options?.units || [],
   }
-
-  useEffect(() => {
-    const desktopQuery = window.matchMedia('(min-width: 940px)')
-    const syncOpenState = () => setIsOpen(desktopQuery.matches)
-
-    syncOpenState()
-    desktopQuery.addEventListener('change', syncOpenState)
-
-    return () => desktopQuery.removeEventListener('change', syncOpenState)
-  }, [])
 
   function updateField(field, value) {
     setFilters((current) => ({ ...current, [field]: value }))
@@ -54,28 +44,19 @@ export function Filters({ filters, setFilters, options, resultCount }) {
     setFilters(defaultCatalogFilters)
   }
 
-  const activeFilterLabels = useMemo(
-    () =>
-      [
-        filters.minPrice && `Мин: ${filters.minPrice} сом`,
-        filters.maxPrice && `Макс: ${filters.maxPrice} сом`,
-        ...(filters.stockStatuses || []).map((value) => STOCK_LABELS[value]),
-        ...(filters.brands || []).map((value) => getSelectedLabel(safeOptions.brands, value)),
-        ...(filters.tags || []).map((value) => getSelectedLabel(safeOptions.tags, value) || BADGE_LABELS[value] || value),
-        ...(filters.units || []).map((value) => getSelectedLabel(safeOptions.units, value)),
-      ].filter(Boolean),
-    [filters, safeOptions.brands, safeOptions.tags, safeOptions.units],
-  )
+  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions)
+  const hasActiveFilters = activeFilterLabels.length > 0
+  const hasBrands = safeOptions.brands.length > 0
+  const hasTags = safeOptions.tags.length > 0
+  const hasUnits = safeOptions.units.length > 1
 
   return (
-    <details className="filters" open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
+    <details className={`filters filters--${variant}`} open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
       <summary>
-        <span>Фильтрлер</span>
+        <span>{hasActiveFilters ? `Фильтрлер · ${activeFilterLabels.length}` : 'Фильтрлер'}</span>
         <strong>{resultCount} товар</strong>
       </summary>
-      <div className="active-filters active-filters--summary" aria-live="polite">
-        {activeFilterLabels.length ? activeFilterLabels.map((label) => <span key={label}>{label}</span>) : <span>Активдүү фильтр жок</span>}
-      </div>
+      {showActiveChips && <ActiveFilterChips labels={activeFilterLabels} className="active-filters--summary" />}
       <div className="filters__body">
         <div className="filter-group filter-group--price">
           <span>Баа диапазону</span>
@@ -115,39 +96,45 @@ export function Filters({ filters, setFilters, options, resultCount }) {
           ))}
         </fieldset>
 
-        <fieldset className="filter-group">
-          <legend>Бренд</legend>
-          {safeOptions.brands.map((brand) => (
-            <label key={getOptionValue(brand)}>
-              <input
-                type="checkbox"
-                checked={filters.brands.includes(getOptionValue(brand))}
-                onChange={() => toggleArrayValue('brands', getOptionValue(brand))}
-              />
-              {getOptionLabel(brand)}
-            </label>
-          ))}
-        </fieldset>
+        {hasBrands && (
+          <fieldset className="filter-group filter-group--scroll">
+            <legend>Бренд</legend>
+            {safeOptions.brands.map((brand) => (
+              <label key={getOptionValue(brand)}>
+                <input
+                  type="checkbox"
+                  checked={filters.brands.includes(getOptionValue(brand))}
+                  onChange={() => toggleArrayValue('brands', getOptionValue(brand))}
+                />
+                {getOptionLabel(brand)}
+              </label>
+            ))}
+          </fieldset>
+        )}
 
-        <fieldset className="filter-group">
-          <legend>Бейдж</legend>
-          {safeOptions.tags.map((tag) => (
-            <label key={getOptionValue(tag)}>
-              <input type="checkbox" checked={filters.tags.includes(getOptionValue(tag))} onChange={() => toggleArrayValue('tags', getOptionValue(tag))} />
-              {getOptionLabel(tag)}
-            </label>
-          ))}
-        </fieldset>
+        {hasTags && (
+          <fieldset className="filter-group filter-group--scroll">
+            <legend>Белгилер</legend>
+            {safeOptions.tags.map((tag) => (
+              <label key={getOptionValue(tag)}>
+                <input type="checkbox" checked={filters.tags.includes(getOptionValue(tag))} onChange={() => toggleArrayValue('tags', getOptionValue(tag))} />
+                {getOptionLabel(tag)}
+              </label>
+            ))}
+          </fieldset>
+        )}
 
-        <fieldset className="filter-group">
-          <legend>Бирдик</legend>
-          {safeOptions.units.map((unit) => (
-            <label key={getOptionValue(unit)}>
-              <input type="checkbox" checked={filters.units.includes(getOptionValue(unit))} onChange={() => toggleArrayValue('units', getOptionValue(unit))} />
-              {getOptionLabel(unit)}
-            </label>
-          ))}
-        </fieldset>
+        {hasUnits && (
+          <fieldset className="filter-group filter-group--scroll">
+            <legend>Бирдик</legend>
+            {safeOptions.units.map((unit) => (
+              <label key={getOptionValue(unit)}>
+                <input type="checkbox" checked={filters.units.includes(getOptionValue(unit))} onChange={() => toggleArrayValue('units', getOptionValue(unit))} />
+                {getOptionLabel(unit)}
+              </label>
+            ))}
+          </fieldset>
+        )}
 
         <label className="filter-group">
           Сорттоо
@@ -160,9 +147,7 @@ export function Filters({ filters, setFilters, options, resultCount }) {
           </select>
         </label>
 
-        <div className="active-filters active-filters--body" aria-live="polite">
-          {activeFilterLabels.length ? activeFilterLabels.map((label) => <span key={label}>{label}</span>) : <span>Активдүү фильтр жок</span>}
-        </div>
+        {showActiveChips && <ActiveFilterChips labels={activeFilterLabels} className="active-filters--body" />}
 
         <button className="text-button" type="button" onClick={clearFilters}>
           Фильтрди тазалоо
@@ -170,6 +155,40 @@ export function Filters({ filters, setFilters, options, resultCount }) {
       </div>
     </details>
   )
+}
+
+export function CatalogActiveFilters({ filters, options, className = '' }) {
+  const safeOptions = {
+    brands: options?.brands || [],
+    tags: options?.tags || [],
+    units: options?.units || [],
+  }
+  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions)
+
+  return <ActiveFilterChips labels={activeFilterLabels} className={className} />
+}
+
+function ActiveFilterChips({ labels, className = '' }) {
+  if (!labels.length) return null
+
+  return (
+    <div className={`active-filters ${className}`.trim()} aria-live="polite">
+      {labels.map((label) => (
+        <span key={label}>{label}</span>
+      ))}
+    </div>
+  )
+}
+
+function getActiveFilterLabels(filters, options) {
+  return [
+    filters.minPrice && `Мин: ${filters.minPrice} сом`,
+    filters.maxPrice && `Макс: ${filters.maxPrice} сом`,
+    ...(filters.stockStatuses || []).map((value) => STOCK_LABELS[value]),
+    ...(filters.brands || []).map((value) => getSelectedLabel(options.brands, value)),
+    ...(filters.tags || []).map((value) => getSelectedLabel(options.tags, value) || BADGE_LABELS[value] || value),
+    ...(filters.units || []).map((value) => getSelectedLabel(options.units, value)),
+  ].filter(Boolean)
 }
 
 function getOptionValue(option) {
