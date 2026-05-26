@@ -1217,6 +1217,7 @@ del {
 }
 
 .filter-group label {
+  min-width: 0;
   min-height: 34px;
   display: inline-flex;
   align-items: center;
@@ -1253,10 +1254,16 @@ del {
 
 .filter-group input[type='number'],
 .filters select {
+  width: 100%;
+  min-width: 0;
   min-height: 36px;
   padding: 0 8px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
+}
+
+.filter-group input[type='checkbox'] {
+  flex: 0 0 auto;
 }
 
 .active-filters {
@@ -1723,6 +1730,13 @@ del {
 
   .filters--sidebar .filter-group--price > span {
     grid-column: auto;
+  }
+
+  .filters--sidebar .filter-group--price label {
+    display: grid;
+    gap: 5px;
+    align-items: start;
+    padding: 7px 9px;
   }
 
   .filter-group--price {
