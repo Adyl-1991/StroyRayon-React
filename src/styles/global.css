@@ -1410,7 +1410,7 @@ del {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 60px;
+  bottom: 68px;
   z-index: 25;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
@@ -1939,6 +1939,7 @@ del {
     line-height: 1.16;
     text-align: left;
     overflow-wrap: anywhere;
+    text-wrap: balance;
   }
 
   .order-process__steps {
@@ -2003,6 +2004,38 @@ del {
     min-width: 0;
     max-width: 100%;
     overflow-wrap: break-word;
+  }
+
+  .page-heading {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .page-heading p {
+    line-height: 1.5;
+    word-break: normal;
+  }
+
+  .order-process,
+  .order-process h2,
+  .order-process__text {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .product-sticky-cta {
+    bottom: 72px;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 6px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .product-sticky-cta .button {
+    min-height: 36px;
+    padding-inline: 8px;
+    font-size: 0.82rem;
   }
 }
 
