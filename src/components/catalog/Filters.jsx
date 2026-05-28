@@ -19,7 +19,12 @@ const sortOptions = [
 ]
 
 export function Filters({ filters, setFilters, options, resultCount, variant = 'inline', showActiveChips = true }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(() => {
+    if (variant !== 'sidebar') return false
+    if (typeof window === 'undefined' || !window.matchMedia) return true
+
+    return window.matchMedia('(min-width: 940px)').matches
+  })
   const safeOptions = {
     brands: options?.brands || [],
     tags: options?.tags || [],

@@ -11,16 +11,18 @@ export function ProductStickyCta({ product }) {
 
   return (
     <aside className="product-sticky-cta" aria-label="Товар боюнча тез аракеттер">
-      <div>
+      <div className="product-sticky-cta__info">
         <strong>{formatPrice(product.price)}</strong>
         <span>{product.name}</span>
       </div>
-      <Button disabled={!canBuy} onClick={() => addToCart(product)}>
-        Корзинага
-      </Button>
-      <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">
-        Суроо
-      </Button>
+      <div className="product-sticky-cta__actions">
+        <Button disabled={!canBuy} onClick={() => addToCart(product)}>
+          Корзинага
+        </Button>
+        <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">
+          Суроо
+        </Button>
+      </div>
     </aside>
   )
 }
