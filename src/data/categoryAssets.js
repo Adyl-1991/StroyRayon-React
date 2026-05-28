@@ -1,9 +1,9 @@
 export const rootCategoryImages = {
   stroymaterial: {
-    src: '/images/categories/stroymaterial.svg',
+    src: '/images/categories/stroymaterial-realistic.jpg',
     alt: 'StroyRayon стройматериал категориясы',
-    width: 900,
-    height: 520,
+    width: 1672,
+    height: 941,
     type: 'category',
   },
   instrument: {
