@@ -2,15 +2,15 @@ export const rootCategoryImages = {
   stroymaterial: {
     src: '/images/categories/stroymaterial-realistic.jpg',
     alt: 'StroyRayon стройматериал категориясы',
-    width: 1672,
-    height: 941,
+    width: 800,
+    height: 450,
     type: 'category',
   },
   instrument: {
-    src: '/images/categories/instrument.svg',
+    src: '/images/categories/instrument-realistic.jpg',
     alt: 'StroyRayon инструмент категориясы',
-    width: 900,
-    height: 520,
+    width: 800,
+    height: 450,
     type: 'category',
   },
   santehnika: {
