@@ -274,15 +274,23 @@ h3 {
 }
 
 .brand-logo__mark {
-  display: inline-grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border-radius: var(--radius);
-  background: var(--color-primary-dark);
-  color: #fff;
-  font-size: 0.82rem;
-  letter-spacing: 0;
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(22, 91, 67, 0.12);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.brand-logo__mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .brand-logo__name,
@@ -843,8 +851,10 @@ h3 {
 }
 
 .category-card img {
+  display: block;
   width: 100%;
-  height: 160px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -2187,8 +2197,10 @@ del {
 }
 
 .catalog-directory-section__media img {
+  display: block;
   width: 100%;
-  height: 140px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
