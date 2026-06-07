@@ -183,12 +183,13 @@ export const catalogTree = [
     children: [
       node({
         id: 'pipes',
-        titleKg: 'Трубалар',
+        titleKg: 'Суу трубалар & фитингтер',
+        titleRu: 'Водопроводные трубы и фитинги',
         slug: 'trubalar',
-        aliases: ['ppr-sistema', 'metall-plastik-sistema', 'pnd-trubalar'],
+        aliases: ['ppr-sistema', 'metall-plastik-sistema', 'pnd-trubalar', 'fitingder', 'gibkaya-podvodka', 'zapornaya-armatura'],
         icon: 'pipe',
-        descriptionKg: 'Суу, жылытуу жана чарба линияларына трубалар.',
-        seoTextKg: 'Трубалар диаметри, басымы жана колдонуу багыты боюнча тандалат.',
+        descriptionKg: 'Суу линиялары үчүн трубалар, фитингдер, подводка жана крандар.',
+        seoTextKg: 'Суу трубалары жана фитингдер диаметри, басымы, материалы жана монтаж схемасы боюнча тандалат.',
         children: [
           node({
             id: 'ppr-pipes',
@@ -206,20 +207,22 @@ export const catalogTree = [
           leaf('metal-plastic-pipes', 'Металл-пластик трубалар', 'metall-plastik-trubalar', 'pipe', ['metal-plastic-pipe']),
           leaf('pnd-pipes', 'ПНД трубалар', 'pnd-trubalar', 'pipe', ['pnd-pipe']),
           leaf('heating-pipes-node', 'Жылытуу трубалары', 'zhylytu-trubalary', 'pipe'),
-        ],
-      }),
-      node({
-        id: 'fittings',
-        titleKg: 'Фитингдер',
-        slug: 'fitingder',
-        icon: 'fitting',
-        descriptionKg: 'Труба системасын бириктирүүчү муфта, уголок, тройник жана крандар.',
-        seoTextKg: 'Фитингдер труба диаметри жана материал түрү менен шайкеш болушу керек.',
-        children: [
-          leaf('ppr-couplings', 'ППР муфталар', 'ppr-muftalar', 'fitting', ['ppr-fitting']),
-          leaf('ppr-elbows', 'ППР уголоктор', 'ppr-ugoloktor', 'fitting', ['ppr-fitting']),
-          leaf('ppr-tees', 'ППР тройниктер', 'ppr-troynikter', 'fitting', ['ppr-fitting']),
-          leaf('ppr-valves', 'ППР крандар', 'ppr-krandar', 'valve', ['ppr-valve']),
+          node({
+            id: 'fittings',
+            titleKg: 'Фитингдер',
+            slug: 'fitingder',
+            icon: 'fitting',
+            descriptionKg: 'Труба системасын бириктирүүчү муфта, уголок, тройник жана крандар.',
+            seoTextKg: 'Фитингдер труба диаметри жана материал түрү менен шайкеш болушу керек.',
+            children: [
+              leaf('ppr-couplings', 'ППР муфталар', 'ppr-muftalar', 'fitting', ['ppr-fitting']),
+              leaf('ppr-elbows', 'ППР уголоктор', 'ppr-ugoloktor', 'fitting', ['ppr-fitting']),
+              leaf('ppr-tees', 'ППР тройниктер', 'ppr-troynikter', 'fitting', ['ppr-fitting']),
+              leaf('ppr-valves', 'ППР крандар', 'ppr-krandar', 'valve', ['ppr-valve']),
+            ],
+          }),
+          leaf('flex-hoses', 'Гибкая подводка', 'gibkaya-podvodka', 'hose'),
+          leaf('valves', 'Запорная арматура', 'zapornaya-armatura', 'valve'),
         ],
       }),
       node({
@@ -259,8 +262,6 @@ export const catalogTree = [
         ],
       }),
       leaf('siphons', 'Сифондор', 'sifondor', 'siphon'),
-      leaf('flex-hoses', 'Гибкая подводка', 'gibkaya-podvodka', 'hose'),
-      leaf('valves', 'Запорная арматура', 'zapornaya-armatura', 'valve'),
       leaf('toilets', 'Унитаздар', 'unitazdar', 'toilet'),
       leaf('sinks', 'Раковиналар', 'rakovinalar', 'sink'),
       leaf('shower-systems', 'Душ системалары', 'dush-sistemalary', 'shower'),

@@ -4,8 +4,8 @@ import { applyImageFallback, getCategoryImage } from '../../utils/imageUtils'
 
 const categoryCopy = {
   pipes: {
-    kg: { title: 'Трубалар', description: 'Суу, жылытуу жана монтаж системалары үчүн трубалар.' },
-    ru: { title: 'Трубы', description: 'Трубы для воды, отопления и монтажных систем.' },
+    kg: { title: 'Суу трубалар & фитингтер', description: 'Суу линиялары үчүн трубалар, фитингдер, подводка жана крандар.' },
+    ru: { title: 'Водопроводные трубы и фитинги', description: 'Трубы, фитинги, подводка и краны для водяных линий.' },
   },
   fittings: {
     kg: { title: 'Фитингдер', description: 'Труба системаларын бириктирүүчү муфта, уголок, тройник жана крандар.' },

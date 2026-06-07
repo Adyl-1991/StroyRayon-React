@@ -106,7 +106,7 @@ export const rootCategoryImages = {
   },
   trubalar: {
     src: '/images/categories/subcategories/trubalar.jpg',
-    alt: 'StroyRayon трубалар категориясы',
+    alt: 'StroyRayon суу трубалар жана фитингтер категориясы',
     width: 480,
     height: 270,
     type: 'category',
