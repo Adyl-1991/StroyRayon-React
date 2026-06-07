@@ -28,7 +28,7 @@ export function CartPage() {
       <div className="cart-layout">
         <section className="cart-list">
           {items.map((item) => (
-            <CartItem key={item.productId} item={item} setQuantity={setQuantity} removeFromCart={removeFromCart} />
+            <CartItem key={item.cartItemId || item.productId} item={item} setQuantity={setQuantity} removeFromCart={removeFromCart} />
           ))}
         </section>
         <CartSummary total={total} count={count} />

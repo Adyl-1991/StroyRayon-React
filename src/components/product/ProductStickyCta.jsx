@@ -4,19 +4,24 @@ import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Button } from '../ui/Button'
 
-export function ProductStickyCta({ product }) {
+export function ProductStickyCta({ product, selectedVariant }) {
   const { addToCart } = useCart()
-  const canBuy = isPurchasable(product)
-  const askText = `Салам! Мен StroyRayon сайтынан ${product.name} боюнча маалымат алгым келет.`
+  const canBuy = isPurchasable(product, selectedVariant)
+  const activePrice = selectedVariant?.price ?? product.price
+  const activeUnit = selectedVariant?.unit || product.unit
+  const activeName = selectedVariant ? `${product.name} (${selectedVariant.size})` : product.name
+  const askText = `Салам! Мен StroyRayon сайтынан ${activeName} боюнча маалымат алгым келет.`
 
   return (
     <aside className="product-sticky-cta" aria-label="Товар боюнча тез аракеттер">
       <div className="product-sticky-cta__info">
-        <strong>{formatPrice(product.price)}</strong>
-        <span>{product.name}</span>
+        <strong>
+          {formatPrice(activePrice)} / {activeUnit}
+        </strong>
+        <span>{activeName}</span>
       </div>
       <div className="product-sticky-cta__actions">
-        <Button disabled={!canBuy} onClick={() => addToCart(product)}>
+        <Button disabled={!canBuy} onClick={() => addToCart(product, 1, selectedVariant)}>
           Корзинага
         </Button>
         <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">

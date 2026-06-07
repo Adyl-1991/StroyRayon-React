@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "validate:catalog": "node src/scripts/validateCatalogData.js",
     "generate:sitemap": "node src/scripts/generateSitemap.js",
     "lint": "eslint .",
     "preview": "vite preview"

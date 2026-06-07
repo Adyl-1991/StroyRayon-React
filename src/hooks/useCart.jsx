@@ -24,14 +24,14 @@ export function CartProvider({ children }) {
       items,
       total,
       count,
-      addToCart(product, quantity = 1) {
-        setItems((currentItems) => addCartItem(currentItems, product, quantity))
+      addToCart(product, quantity = 1, variant = null) {
+        setItems((currentItems) => addCartItem(currentItems, product, quantity, variant))
       },
-      setQuantity(productId, quantity) {
-        setItems((currentItems) => updateCartQuantity(currentItems, productId, quantity))
+      setQuantity(cartItemId, quantity) {
+        setItems((currentItems) => updateCartQuantity(currentItems, cartItemId, quantity))
       },
-      removeFromCart(productId) {
-        setItems((currentItems) => removeCartItem(currentItems, productId))
+      removeFromCart(cartItemId) {
+        setItems((currentItems) => removeCartItem(currentItems, cartItemId))
       },
       clearCart() {
         setItems([])

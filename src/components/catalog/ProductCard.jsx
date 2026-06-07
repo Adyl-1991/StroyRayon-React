@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getStockStatus, isPurchasable } from '../../services/productService'
+import { getStockStatus, getVariantSizeSummary, hasProductVariants, isPurchasable } from '../../services/productService'
 import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { applyImageFallback, getProductImage } from '../../utils/imageUtils'
@@ -23,6 +23,8 @@ export function ProductCard({ product }) {
   const { locale, t } = useLocale()
   const stockStatus = getStockStatus(product)
   const canBuy = isPurchasable(product)
+  const hasVariants = hasProductVariants(product)
+  const sizeSummary = getVariantSizeSummary(product, 5)
   const image = getProductImage(product)
   const productName = product.name || product.titleKg || product.title
   const askText = t('productCard.askText', { name: productName })
@@ -56,10 +58,11 @@ export function ProductCard({ product }) {
         </h3>
         <p>{product.shortDescription || product.description}</p>
         <div className="price-row">
-          <strong>{formatPrice(product.price)}</strong>
+          <strong>{hasVariants ? `от ${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
           {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
           <span>/ {product.unit}</span>
         </div>
+        {hasVariants && sizeSummary && <p className="product-card__variants">Өлчөмдөр: {sizeSummary}</p>}
         <span className={`stock-pill stock-pill--${stockStatus}`}>{stockLabels[locale][stockStatus] || stockStatus}</span>
         <div className="rating">
           {t('productCard.rating')} {product.rating} / 5 ({product.reviewsCount})
@@ -70,9 +73,13 @@ export function ProductCard({ product }) {
           </p>
         )}
         <div className="product-card__actions">
-          <Button disabled={!canBuy} onClick={() => addToCart(product)}>
-            {t('productCard.addToCart')}
-          </Button>
+          {hasVariants ? (
+            <Button to={`/product/${product.slug}`}>Вариант тандоо</Button>
+          ) : (
+            <Button disabled={!canBuy} onClick={() => addToCart(product)}>
+              {t('productCard.addToCart')}
+            </Button>
+          )}
           <Button to={`/product/${product.slug}`} variant="secondary">
             {t('productCard.details')}
           </Button>

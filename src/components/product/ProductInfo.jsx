@@ -1,15 +1,28 @@
 import { useCart } from '../../hooks/useCart'
-import { getStockLabel, getStockStatus, isPurchasable } from '../../services/productService'
+import {
+  getDefaultVariant,
+  getProductVariants,
+  getStockLabel,
+  getStockStatus,
+  isPurchasable,
+} from '../../services/productService'
 import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 
-export function ProductInfo({ product }) {
+export function ProductInfo({ product, selectedVariant, onVariantChange }) {
   const { addToCart } = useCart()
-  const stockStatus = getStockStatus(product)
-  const canBuy = isPurchasable(product)
-  const quickText = `Салам! Мен StroyRayon сайтынан ${product.name} боюнча маалымат алгым келет.`
+  const variants = getProductVariants(product)
+  const activeVariant = selectedVariant || getDefaultVariant(product)
+  const stockStatus = activeVariant ? getStockStatus(activeVariant) : getStockStatus(product)
+  const canBuy = isPurchasable(product, activeVariant)
+  const activePrice = activeVariant?.price ?? product.price
+  const activeUnit = activeVariant?.unit || product.unit
+  const activeSku = activeVariant?.sku || product.sku
+  const activeMinOrder = activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`
+  const quickName = activeVariant ? `${product.name} (${activeVariant.size})` : product.name
+  const quickText = `Салам! Мен StroyRayon сайтынан ${quickName} боюнча маалымат алгым келет.`
 
   return (
     <section className="product-info">
@@ -21,7 +34,7 @@ export function ProductInfo({ product }) {
       <dl className="product-facts">
         <div>
           <dt>SKU</dt>
-          <dd>{product.sku || 'Такталат'}</dd>
+          <dd>{activeSku || 'Такталат'}</dd>
         </div>
         <div>
           <dt>Бренд</dt>
@@ -29,18 +42,48 @@ export function ProductInfo({ product }) {
         </div>
         <div>
           <dt>Минималдуу заказ</dt>
-          <dd>{product.minOrder || `1 ${product.unit}`}</dd>
+          <dd>{activeMinOrder}</dd>
         </div>
       </dl>
-      <div className="rating">Рейтинг {product.rating} / 5, {product.reviewsCount} пикир</div>
+      <div className="rating">
+        Рейтинг {product.rating} / 5, {product.reviewsCount} пикир
+      </div>
       <div className="product-price">
-        <strong>{formatPrice(product.price)}</strong>
+        <strong>{formatPrice(activePrice)}</strong>
         {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
+        <span>/ {activeUnit}</span>
         {product.isSale && <Badge tone="sale">Акция</Badge>}
       </div>
+      {variants.length > 0 && (
+        <fieldset className="variant-selector">
+          <legend>Өлчөмдү тандаңыз</legend>
+          <div className="variant-selector__grid">
+            {variants.map((variant) => {
+              const variantStock = getStockStatus(variant)
+              const isActive = activeVariant?.id === variant.id
+
+              return (
+                <button
+                  key={variant.id}
+                  type="button"
+                  className={`variant-option${isActive ? ' is-active' : ''}`}
+                  disabled={variantStock === 'out_of_stock'}
+                  onClick={() => onVariantChange?.(variant.id)}
+                >
+                  <span>{variant.size}</span>
+                  <small>
+                    {formatPrice(variant.price)} / {variant.unit}
+                  </small>
+                  <em>{getStockLabel(variantStock)}</em>
+                </button>
+              )
+            })}
+          </div>
+        </fieldset>
+      )}
       <p>{product.description}</p>
       <div className="product-info__actions">
-        <Button disabled={!canBuy} onClick={() => addToCart(product)}>
+        <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>
           Корзинага кошуу
         </Button>
         <Button href={getWhatsAppUrl(quickText)} target="_blank" rel="noreferrer" variant="whatsapp">

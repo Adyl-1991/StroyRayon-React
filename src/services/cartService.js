@@ -15,7 +15,9 @@ export function readCart() {
 
     return parsedCart.filter(isValidCartItem).map((item) => ({
       ...item,
+      cartItemId: item.cartItemId || item.productId,
       quantity: clampQuantity(item.quantity),
+      price: Number(item.price || 0),
     }))
   } catch {
     return []
@@ -53,41 +55,63 @@ export function saveCart(items) {
   window.localStorage.setItem(CART_KEY, JSON.stringify(items))
 }
 
-export function addCartItem(items, product, quantity = 1) {
+function getVariantKey(variant) {
+  return variant?.sku || variant?.id || variant?.size || ''
+}
+
+function getCartItemId(product, variant) {
+  const variantKey = getVariantKey(variant)
+  return variantKey ? `${product.id}:${variantKey}` : product.id
+}
+
+export function addCartItem(items, product, quantity = 1, variant = null) {
   const safeQuantity = clampQuantity(quantity)
-  const existingItem = items.find((item) => item.productId === product.id)
+  const cartItemId = getCartItemId(product, variant)
+  const existingItem = items.find((item) => (item.cartItemId || item.productId) === cartItemId)
 
   if (existingItem) {
     return items.map((item) =>
-      item.productId === product.id ? { ...item, quantity: clampQuantity(item.quantity + safeQuantity) } : item,
+      (item.cartItemId || item.productId) === cartItemId
+        ? { ...item, cartItemId, quantity: clampQuantity(item.quantity + safeQuantity) }
+        : item,
     )
   }
 
   return [
     ...items,
     {
+      cartItemId,
       productId: product.id,
       slug: product.slug,
       name: product.titleKg || product.name,
-      price: product.price,
+      price: Number(variant?.price ?? product.price ?? 0),
       image: product.images?.[0],
-      unit: product.unit,
+      unit: variant?.unit || product.unit,
       quantity: safeQuantity,
+      sku: variant?.sku || product.sku,
+      variantId: variant?.id,
+      variantSize: variant?.size,
+      variantSku: variant?.sku,
+      packageInfo: variant?.packageInfo || product.packageInfoKg || product.minOrder,
     },
   ]
 }
 
-export function updateCartQuantity(items, productId, quantity) {
+export function updateCartQuantity(items, cartItemId, quantity) {
   const numericQuantity = Number(quantity)
   if (!Number.isFinite(numericQuantity) || numericQuantity < MIN_QUANTITY) {
-    return items.filter((item) => item.productId !== productId)
+    return items.filter((item) => (item.cartItemId || item.productId) !== cartItemId)
   }
 
-  return items.map((item) => (item.productId === productId ? { ...item, quantity: clampQuantity(numericQuantity) } : item))
+  return items.map((item) =>
+    (item.cartItemId || item.productId) === cartItemId
+      ? { ...item, cartItemId, quantity: clampQuantity(numericQuantity) }
+      : item,
+  )
 }
 
-export function removeCartItem(items, productId) {
-  return items.filter((item) => item.productId !== productId)
+export function removeCartItem(items, cartItemId) {
+  return items.filter((item) => (item.cartItemId || item.productId) !== cartItemId)
 }
 
 export function getCartTotal(items) {

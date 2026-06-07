@@ -7,13 +7,15 @@ import { Logo } from './Logo'
 
 const quickNavItems = [
   { labelKg: 'Стройматериал', to: '/catalog/stroymaterial' },
-  { labelKg: 'Инструмент', to: '/catalog/instrument' },
+  { labelKg: 'Инженердик сантехника', to: '/catalog/inzhenerdik-santehnika' },
   { labelKg: 'Сантехника', to: '/catalog/santehnika' },
   { labelKg: 'Электрика', to: '/catalog/elektrika' },
-  { labelKg: 'Вентиляция', to: '/catalog/ventilyaciya' },
-  { labelKg: 'Боёктор', to: '/catalog/boiok-tush-kagaz' },
+  { labelKg: 'Инструмент', to: '/catalog/instrument' },
   { labelKg: 'Крепеж', to: '/catalog/krepezh' },
-  { labelKg: 'Бак/короо', to: '/catalog/bak-koroo' },
+  { labelKg: 'Боёк', to: '/catalog/boiok-tush-kagaz' },
+  { labelKg: 'Вентиляция', to: '/catalog/ventilyaciya' },
+  { labelKg: 'Теплый пол', to: '/catalog/teplyi-pol' },
+  { labelKg: 'Бак/хоз', to: '/catalog/bak-koroo' },
 ]
 
 export function Header() {

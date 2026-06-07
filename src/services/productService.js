@@ -197,6 +197,7 @@ export function getStockLabel(stockStatus) {
 }
 
 export function getStockStatus(product) {
+  if (!product) return 'out_of_stock'
   if (product.stockStatus) return product.stockStatus
   const stockText = typeof product.stock === 'string' ? product.stock.toLowerCase() : ''
   if (stockText.includes('заказ')) return 'pre_order'
@@ -204,7 +205,61 @@ export function getStockStatus(product) {
   return 'in_stock'
 }
 
-export function isPurchasable(product) {
+export function getProductVariants(product) {
+  if (!Array.isArray(product?.variants)) return []
+
+  return product.variants
+    .map((variant) => ({
+      ...variant,
+      id: String(variant.id || variant.sku || variant.size || '').trim(),
+      size: String(variant.size || '').trim(),
+      price: Number(variant.price ?? product.price ?? 0),
+      unit: variant.unit || product.unit,
+      packageInfo: variant.packageInfo || variant.packageInfoKg || product.packageInfoKg || product.minOrder,
+      stockStatus: variant.stockStatus || product.stockStatus || 'in_stock',
+      sku: variant.sku || `${product.sku || product.id}-${variant.id || variant.size || 'variant'}`,
+    }))
+    .filter((variant) => variant.id && variant.size && Number.isFinite(variant.price))
+}
+
+export function hasProductVariants(product) {
+  return getProductVariants(product).length > 0
+}
+
+export function getProductPrice(product) {
+  const variants = getProductVariants(product)
+  if (!variants.length) return Number(product?.price || 0)
+
+  return Math.min(...variants.map((variant) => Number(variant.price || 0)))
+}
+
+export function getDefaultVariant(product) {
+  const variants = getProductVariants(product)
+  return variants.find((variant) => getStockStatus(variant) !== 'out_of_stock') || variants[0] || null
+}
+
+export function getSelectedVariant(product, variantId) {
+  const variants = getProductVariants(product)
+  if (!variants.length) return null
+
+  return variants.find((variant) => variant.id === variantId || variant.sku === variantId) || getDefaultVariant(product)
+}
+
+export function getVariantSizeSummary(product, limit = 4) {
+  const sizes = getProductVariants(product).map((variant) => variant.size).filter(Boolean)
+  if (!sizes.length) return ''
+
+  const visibleSizes = sizes.slice(0, limit).join(', ')
+  const hiddenCount = sizes.length - limit
+
+  return hiddenCount > 0 ? `${visibleSizes} +${hiddenCount}` : visibleSizes
+}
+
+export function isPurchasable(product, selectedVariant) {
+  if (selectedVariant) return getStockStatus(selectedVariant) !== 'out_of_stock'
+  const variants = getProductVariants(product)
+  if (variants.length) return variants.some((variant) => getStockStatus(variant) !== 'out_of_stock')
+
   return getStockStatus(product) !== 'out_of_stock'
 }
 
@@ -246,6 +301,7 @@ function getSearchIndex(product) {
     normalizedProduct.categorySlug,
     normalizedProduct.subcategorySlug,
     normalizedProduct.catalogPath?.join(' '),
+    normalizedProduct.variants?.map((variant) => `${variant.size} ${variant.sku}`).join(' '),
     category?.name,
     subcategory?.name,
     specs,
@@ -259,7 +315,8 @@ function getSearchIndex(product) {
 export function normalizeProduct(product) {
   if (!product) return product
   const brandName = typeof product.brand === 'string' ? product.brand : product.brand?.name
-  const stockStatus = getStockStatus({ ...product, brand: brandName })
+  const variants = getProductVariants({ ...product, brand: brandName })
+  const stockStatus = getAggregateVariantStockStatus(variants) || getStockStatus({ ...product, brand: brandName })
   const tags = product.tags || product.badges || []
   const rating = product.rating || 0
   const reviewsCount = product.reviewsCount || 0
@@ -270,7 +327,8 @@ export function normalizeProduct(product) {
     name: product.name || product.titleKg,
     description: product.description || product.descriptionKg,
     shortDescription: product.shortDescription || product.shortDescriptionKg,
-    price: Number(product.price || 0),
+    variants,
+    price: variants.length ? getProductPrice({ ...product, variants }) : Number(product.price || 0),
     oldPrice: product.oldPrice ? Number(product.oldPrice) : null,
     stockStatus,
     stock: product.stock,
@@ -282,6 +340,14 @@ export function normalizeProduct(product) {
     reviewsCount,
     catalogPath: Array.isArray(product.catalogPath) ? product.catalogPath : getNodePathSegments(product.catalogNode),
   }
+}
+
+function getAggregateVariantStockStatus(variants) {
+  if (!variants.length) return ''
+  if (variants.some((variant) => getStockStatus(variant) === 'in_stock')) return 'in_stock'
+  if (variants.some((variant) => getStockStatus(variant) === 'low_stock')) return 'low_stock'
+  if (variants.some((variant) => getStockStatus(variant) === 'pre_order')) return 'pre_order'
+  return 'out_of_stock'
 }
 
 export function normalizeCatalogTree(nodes = []) {

@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ProductFaq } from '../components/product/ProductFaq'
 import { ProductGallery } from '../components/product/ProductGallery'
@@ -15,7 +16,11 @@ import {
   getCatalogBreadcrumbs,
   getCatalogNodeUrl,
   getCategoryBySlug,
+  getDefaultVariant,
   getRelatedProducts,
+  getSelectedVariant,
+  getStockLabel,
+  getStockStatus,
   getSubcategory,
 } from '../services/productService'
 import {
@@ -29,6 +34,18 @@ export function ProductPage() {
   const { productSlug } = useParams()
   const { nodes: catalogNodes } = useCatalogTree()
   const { product, isLoading } = useProductBySlug(productSlug)
+  const [variantSelection, setVariantSelection] = useState({ productId: '', variantId: '' })
+  const defaultVariant = useMemo(() => getDefaultVariant(product), [product])
+  const selectedVariantId = variantSelection.productId === product?.id ? variantSelection.variantId : defaultVariant?.id || ''
+
+  const selectedVariant = useMemo(
+    () => getSelectedVariant(product, selectedVariantId),
+    [product, selectedVariantId],
+  )
+
+  function handleVariantChange(variantId) {
+    setVariantSelection({ productId: product?.id || '', variantId })
+  }
 
   if (!product && isLoading) {
     return (
@@ -48,6 +65,16 @@ export function ProductPage() {
   const subcategory = getSubcategory(product.categorySlug, product.subcategorySlug)
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
+  const variantSpecs = selectedVariant
+    ? {
+        ...product.specs,
+        Өлчөм: selectedVariant.size,
+        SKU: selectedVariant.sku,
+        Таңгак: selectedVariant.packageInfo || product.packageInfoKg || product.minOrder,
+        Наличие: getStockLabel(getStockStatus(selectedVariant)),
+      }
+    : product.specs
+  const packageInfo = selectedVariant?.packageInfo || product.packageInfoKg || 'Менеджер менен такталат'
   const breadcrumbItems = [
     { label: 'Каталог', to: '/catalog' },
     ...(catalogBreadcrumbs.length
@@ -86,10 +113,10 @@ export function ProductPage() {
       )}
       <div className="product-layout">
         <ProductGallery key={product.id} product={product} />
-        <ProductInfo product={product} />
+        <ProductInfo product={product} selectedVariant={selectedVariant} onVariantChange={handleVariantChange} />
       </div>
       <div className="product-details">
-        <ProductSpecs specs={product.specs} />
+        <ProductSpecs specs={variantSpecs} />
         <section className="detail-panel">
           <h2>Колдонуу боюнча кеңеш</h2>
           <p>{product.recommendedUseKg || product.advice}</p>
@@ -99,7 +126,7 @@ export function ProductPage() {
           <dl className="specs">
             <div>
               <dt>Таңгак</dt>
-              <dd>{product.packageInfoKg || 'Менеджер менен такталат'}</dd>
+              <dd>{packageInfo}</dd>
             </div>
             <div>
               <dt>Жеткирүү</dt>
@@ -122,7 +149,7 @@ export function ProductPage() {
         <ProductReviews product={product} />
       </div>
       <RelatedProducts products={relatedProducts} />
-      <ProductStickyCta product={product} />
+      <ProductStickyCta product={product} selectedVariant={selectedVariant} />
     </main>
   )
 }

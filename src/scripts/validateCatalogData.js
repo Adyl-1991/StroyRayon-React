@@ -48,6 +48,7 @@ export function validateCatalogData() {
   const categoryMap = new Map(categories.map((category) => [category.slug, category]))
   const productIds = new Set(products.map((product) => product.id))
   const productSkus = products.map((product) => product.sku).filter(Boolean)
+  const variantSkus = products.flatMap((product) => (product.variants || []).map((variant) => variant.sku).filter(Boolean))
   const flatNodes = flattenNodes(catalogTree)
   const nodePaths = flatNodes.map(({ path }) => path.join('/'))
   const productBrands = new Set(products.map((product) => normalize(product.brand)).filter(Boolean))
@@ -63,6 +64,10 @@ export function validateCatalogData() {
 
   findDuplicates(productSkus).forEach((sku) => {
     warnings.push(`Duplicate product sku: ${sku}`)
+  })
+
+  findDuplicates(variantSkus).forEach((sku) => {
+    warnings.push(`Duplicate product variant sku: ${sku}`)
   })
 
   findDuplicates(categories.map((category) => category.slug)).forEach((slug) => {
@@ -133,6 +138,28 @@ export function validateCatalogData() {
       warnings.push(`${product.id}: unit "${product.unit}" is not in allowed values`)
     }
 
+    if (product.variants !== undefined && !Array.isArray(product.variants)) {
+      warnings.push(`${product.id}: variants must be an array`)
+    }
+
+    ;(product.variants || []).forEach((variant, index) => {
+      const label = `${product.id}: variant ${index + 1}`
+
+      if (!variant.id) warnings.push(`${label}: id is empty`)
+      if (!variant.size) warnings.push(`${label}: size is empty`)
+      if (!variant.sku) warnings.push(`${label}: sku is empty`)
+      if (!variant.packageInfo) warnings.push(`${label}: packageInfo is empty`)
+      if (!Number.isFinite(Number(variant.price)) || Number(variant.price) < 0) {
+        warnings.push(`${label}: price must be a positive number`)
+      }
+      if (!PRODUCT_UNIT_VALUES.includes(variant.unit)) {
+        warnings.push(`${label}: unit "${variant.unit}" is not in allowed values`)
+      }
+      if (!STOCK_STATUS_VALUES.includes(variant.stockStatus)) {
+        warnings.push(`${label}: stockStatus "${variant.stockStatus}" is not allowed`)
+      }
+    })
+
     if (!Array.isArray(product.faqKg)) {
       warnings.push(`${product.id}: faqKg must be an array`)
     }
@@ -169,4 +196,13 @@ export function validateCatalogData() {
   }
 
   return warnings
+}
+
+if (process.argv[1]?.endsWith('validateCatalogData.js')) {
+  const warnings = validateCatalogData()
+  console.log(`Catalog validation warnings: ${warnings.length}`)
+
+  if (warnings.length) {
+    process.exitCode = 1
+  }
 }

@@ -13,6 +13,13 @@ export const rootCategoryImages = {
     height: 450,
     type: 'category',
   },
+  'inzhenerdik-santehnika': {
+    src: '/images/categories/subcategories/trubalar.jpg',
+    alt: 'StroyRayon инженердик сантехника категориясы',
+    width: 800,
+    height: 450,
+    type: 'category',
+  },
   'kurgak-aralashmalar': {
     src: '/images/categories/subcategories/kurgak-aralashmalar.jpg',
     alt: 'StroyRayon кургак аралашмалар категориясы',
@@ -37,6 +44,13 @@ export const rootCategoryImages = {
   teploizolyaciya: {
     src: '/images/categories/subcategories/teploizolyaciya.jpg',
     alt: 'StroyRayon теплоизоляция категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
+  izolyaciya: {
+    src: '/images/categories/subcategories/teploizolyaciya.jpg',
+    alt: 'StroyRayon изоляция категориясы',
     width: 480,
     height: 270,
     type: 'category',
@@ -111,6 +125,20 @@ export const rootCategoryImages = {
     height: 270,
     type: 'category',
   },
+  'ppr-trubalar-fitingder': {
+    src: '/images/categories/subcategories/trubalar.jpg',
+    alt: 'StroyRayon ППР трубалар жана фитингдер категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
+  'ppr-trubalar': {
+    src: '/images/categories/subcategories/trubalar.jpg',
+    alt: 'StroyRayon ППР трубалар категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
   fitingder: {
     src: '/images/categories/subcategories/fitingder.jpg',
     alt: 'StroyRayon фитингдер категориясы',
@@ -153,6 +181,13 @@ export const rootCategoryImages = {
     height: 270,
     type: 'category',
   },
+  'shlang-podvodka': {
+    src: '/images/categories/subcategories/gibkaya-podvodka.jpg',
+    alt: 'StroyRayon шланги жана подводки категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
   'zapornaya-armatura': {
     src: '/images/categories/subcategories/zapornaya-armatura.jpg',
     alt: 'StroyRayon запорная арматура категориясы',
@@ -188,6 +223,13 @@ export const rootCategoryImages = {
     height: 270,
     type: 'category',
   },
+  otoplenie: {
+    src: '/images/categories/subcategories/zhylytu.jpg',
+    alt: 'StroyRayon отопление категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
   santehnika: {
     src: '/images/categories/santehnika-realistic.jpg',
     alt: 'StroyRayon сантехника категориясы',
@@ -219,6 +261,13 @@ export const rootCategoryImages = {
   krepezh: {
     src: '/images/categories/krepezh-realistic.jpg',
     alt: 'StroyRayon крепеж категориясы',
+    width: 800,
+    height: 450,
+    type: 'category',
+  },
+  'teplyi-pol': {
+    src: '/images/categories/subcategories/zhylytu.jpg',
+    alt: 'StroyRayon теплый пол категориясы',
     width: 800,
     height: 450,
     type: 'category',

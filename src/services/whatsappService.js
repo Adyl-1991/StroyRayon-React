@@ -6,6 +6,16 @@ export const contactConfig = {
   telegram: '@StroyRayon',
 }
 
+function formatOrderItem(item, index) {
+  const variantText = item.variantSize ? ` (${item.variantSize})` : ''
+  const skuText = item.variantSku || item.sku ? `, SKU: ${item.variantSku || item.sku}` : ''
+  const packageText = item.packageInfo ? `, таңгак: ${item.packageInfo}` : ''
+
+  return `${index + 1}. ${item.name}${variantText}${skuText}${packageText} - ${item.quantity} ${item.unit} x ${formatPrice(item.price)} = ${formatPrice(
+    item.price * item.quantity,
+  )}`
+}
+
 export function buildWhatsAppOrderText({ customer, items, total }) {
   const lines = [
     'Саламатсызбы, StroyRayon!',
@@ -16,12 +26,7 @@ export function buildWhatsAppOrderText({ customer, items, total }) {
     `Дарек/регион: ${customer.address}`,
     '',
     'Товарлар:',
-    ...items.map(
-      (item, index) =>
-        `${index + 1}. ${item.name} - ${item.quantity} ${item.unit} x ${formatPrice(item.price)} = ${formatPrice(
-          item.price * item.quantity,
-        )}`,
-    ),
+    ...items.map((item, index) => formatOrderItem(item, index)),
     '',
     `Жалпы сумма: ${formatPrice(total)}`,
     `Комментарий: ${customer.comment || 'Жок'}`,
