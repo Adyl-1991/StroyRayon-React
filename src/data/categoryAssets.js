@@ -132,6 +132,13 @@ export const rootCategoryImages = {
     height: 270,
     type: 'category',
   },
+  'dush-smesitelderi': {
+    src: '/images/categories/subcategories/smesitelder.jpg',
+    alt: 'StroyRayon душ смесителдери категориясы',
+    width: 480,
+    height: 270,
+    type: 'category',
+  },
   sifondor: {
     src: '/images/categories/subcategories/sifondor.jpg',
     alt: 'StroyRayon сифондор категориясы',

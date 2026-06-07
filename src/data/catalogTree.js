@@ -259,6 +259,7 @@ export const catalogTree = [
         children: [
           leaf('kitchen-mixers', 'Ашкана смесителдери', 'ashkana-smesitelderi', 'mixer', ['mixer']),
           leaf('bath-mixers', 'Ванна смесителдери', 'vanna-smesitelderi', 'mixer', ['mixer']),
+          leaf('shower-mixers', 'Душ смесителдери', 'dush-smesitelderi', 'mixer', ['vanna-smesitelderi']),
         ],
       }),
       leaf('siphons', 'Сифондор', 'sifondor', 'siphon'),

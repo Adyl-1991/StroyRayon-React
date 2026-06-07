@@ -151,10 +151,6 @@ export function filterProducts(productsToFilter, filters = {}) {
     if (filters.brands?.length && !filters.brands.includes(product.brand)) return false
     if (filters.tags?.length && !filters.tags.some((tag) => hasTag(product, tag))) return false
     if (filters.units?.length && !filters.units.includes(product.unit)) return false
-    if (filters.catalogNode) {
-      const descendantSlugs = getDescendantSlugs(filters.catalogNode)
-      if (!product.catalogPath?.some((slug) => descendantSlugs.includes(slug))) return false
-    }
     if (filters.saleOnly && !product.isSale) return false
     return true
   })
