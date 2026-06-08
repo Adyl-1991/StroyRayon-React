@@ -39,6 +39,7 @@ export function ProductCard({ product }) {
           loading="lazy"
           width={image.width}
           height={image.height}
+          data-fallback-src={image.fallbackSrc}
           onError={(event) => applyImageFallback(event, 'product')}
         />
         <div className="product-card__badges">
@@ -58,7 +59,7 @@ export function ProductCard({ product }) {
         </h3>
         <p>{product.shortDescription || product.description}</p>
         <div className="price-row">
-          <strong>{hasVariants ? `от ${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
+          <strong>{hasVariants ? `${locale === 'kg' ? 'баштап ' : 'от '}${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
           {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
           <span>/ {product.unit}</span>
         </div>

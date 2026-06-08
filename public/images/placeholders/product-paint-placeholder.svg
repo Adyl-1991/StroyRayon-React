@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Боёк товарынын сүрөтү даярдалууда">
+  <rect width="900" height="675" fill="#f8f2ee"/>
+  <rect x="60" y="60" width="780" height="555" rx="28" fill="#ffffff" stroke="#ded7ca" stroke-width="5"/>
+  <rect x="290" y="282" width="178" height="190" rx="22" fill="#eef4ef" stroke="#1f4e3a" stroke-width="12"/>
+  <path d="M306 330h146" stroke="#d9822b" stroke-width="34" stroke-linecap="round"/>
+  <path d="M542 282h112v56H542z" fill="#2d6a4f" stroke="#153a2b" stroke-width="8"/>
+  <path d="M600 338v114" stroke="#1f4e3a" stroke-width="20" stroke-linecap="round"/>
+  <path d="M556 452h88" stroke="#f3b35c" stroke-width="30" stroke-linecap="round"/>
+  <path d="M215 505h485" stroke="#c9d8cd" stroke-width="30" stroke-linecap="round"/>
+  <text x="450" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#1f4e3a">StroyRayon</text>
+  <text x="450" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#687169">Боёк жана сырлар</text>
+</svg>

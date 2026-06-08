@@ -89,12 +89,12 @@ export function getProducts(filters = {}) {
 }
 
 const HOME_POPULAR_GROUPS = [
-  { key: 'stroymaterial', labelKg: 'Стройматериал', slugs: ['stroymaterial'], preferredIds: ['cement-m500-50kg'] },
-  { key: 'instrument', labelKg: 'Инструмент', slugs: ['instrument'], preferredIds: ['drill-650w', 'cordless-screwdriver-12v'] },
+  { key: 'stroymaterial', labelKg: 'Курулуш материалдары', slugs: ['stroymaterial'], preferredIds: ['cement-m500-50kg'] },
+  { key: 'instrument', labelKg: 'Шаймандар', slugs: ['instrument'], preferredIds: ['drill-650w', 'cordless-screwdriver-12v'] },
   { key: 'elektrika', labelKg: 'Электрика', slugs: ['elektrika'], preferredIds: ['cable-vvg-3x2-5', 'socket-white-single'] },
   { key: 'santehnika', labelKg: 'Сантехника', slugs: ['santehnika'], preferredIds: ['kitchen-mixer-basic', 'bath-mixer-shower-set'] },
   { key: 'ventilyaciya', labelKg: 'Вентиляция', slugs: ['ventilyaciya'], preferredIds: ['ventilation-grille-150'] },
-  { key: 'krepezh', labelKg: 'Катыргычтар/крепежи', slugs: ['krepezh'], preferredIds: ['screw-black-35', 'wood-screw-4x50'] },
+  { key: 'krepezh', labelKg: 'Бекиткичтер', slugs: ['krepezh'], preferredIds: ['screw-black-35', 'wood-screw-4x50'] },
   { key: 'boiok-tush-kagaz', labelKg: 'Боёктор/туш кагаздар', slugs: ['boiok-tush-kagaz'], preferredIds: ['interior-paint-white-10l'] },
   { key: 'bak-koroo', labelKg: 'Бак жана короо', slugs: ['bak-koroo'], preferredIds: ['garden-hose-3-4-25m', 'garden-shovel-metal'] },
 ]
@@ -306,6 +306,7 @@ function getSearchIndex(product) {
     subcategory?.name,
     specs,
     normalizedProduct.tags?.join(' '),
+    normalizedProduct.aliases?.join(' '),
   ]
     .filter(Boolean)
     .join(' ')
@@ -318,6 +319,7 @@ export function normalizeProduct(product) {
   const variants = getProductVariants({ ...product, brand: brandName })
   const stockStatus = getAggregateVariantStockStatus(variants) || getStockStatus({ ...product, brand: brandName })
   const tags = product.tags || product.badges || []
+  const aliases = Array.isArray(product.aliases) ? product.aliases : []
   const rating = product.rating || 0
   const reviewsCount = product.reviewsCount || 0
 
@@ -333,6 +335,7 @@ export function normalizeProduct(product) {
     stockStatus,
     stock: product.stock,
     tags,
+    aliases,
     badges: product.badges || tags,
     isSale: product.isSale ?? tags.includes('sale'),
     isPopular: product.isPopular ?? tags.includes('hit'),

@@ -1,3 +1,5 @@
+import { getProductImage } from '../utils/imageUtils'
+
 const CART_KEY = 'stroyrayon_cart'
 const MIN_QUANTITY = 1
 const MAX_QUANTITY = 999
@@ -85,7 +87,7 @@ export function addCartItem(items, product, quantity = 1, variant = null) {
       slug: product.slug,
       name: product.titleKg || product.name,
       price: Number(variant?.price ?? product.price ?? 0),
-      image: product.images?.[0],
+      image: getProductImage(product, variant || 'main'),
       unit: variant?.unit || product.unit,
       quantity: safeQuantity,
       sku: variant?.sku || product.sku,

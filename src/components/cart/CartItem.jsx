@@ -14,6 +14,7 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
         loading="lazy"
         width="82"
         height="82"
+        data-fallback-src={image.fallbackSrc}
         onError={(event) => applyImageFallback(event, 'product')}
       />
       <div>

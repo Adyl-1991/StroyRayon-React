@@ -120,21 +120,21 @@ export const rootCategoryImages = {
   },
   trubalar: {
     src: '/images/categories/subcategories/trubalar.jpg',
-    alt: 'StroyRayon суу трубалар жана фитингтер категориясы',
+    alt: 'StroyRayon суу түтүктөрү жана фитингдер категориясы',
     width: 480,
     height: 270,
     type: 'category',
   },
   'ppr-trubalar-fitingder': {
     src: '/images/categories/subcategories/trubalar.jpg',
-    alt: 'StroyRayon ППР трубалар жана фитингдер категориясы',
+    alt: 'StroyRayon ППР түтүктөр жана фитингдер категориясы',
     width: 480,
     height: 270,
     type: 'category',
   },
   'ppr-trubalar': {
     src: '/images/categories/subcategories/trubalar.jpg',
-    alt: 'StroyRayon ППР трубалар категориясы',
+    alt: 'StroyRayon ППР түтүктөр категориясы',
     width: 480,
     height: 270,
     type: 'category',
@@ -260,7 +260,7 @@ export const rootCategoryImages = {
   },
   krepezh: {
     src: '/images/categories/krepezh-realistic.jpg',
-    alt: 'StroyRayon крепеж категориясы',
+    alt: 'StroyRayon бекиткичтер категориясы',
     width: 800,
     height: 450,
     type: 'category',

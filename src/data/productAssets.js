@@ -1,11 +1,45 @@
 export const PRODUCT_IMAGE_BASE_PATH = '/images/products'
 export const CATEGORY_IMAGE_BASE_PATH = '/images/categories'
+export const PRODUCT_PLACEHOLDER_BASE_PATH = '/images/placeholders'
+
+export const productPlaceholderByType = {
+  generic: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-placeholder.svg`,
+  building: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-building-placeholder.svg`,
+  plumbing: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-plumbing-placeholder.svg`,
+  electrical: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-electrical-placeholder.svg`,
+  tool: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-tool-placeholder.svg`,
+  fastener: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-fastener-placeholder.svg`,
+  paint: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-paint-placeholder.svg`,
+  ventilation: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-ventilation-placeholder.svg`,
+  heating: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-heating-placeholder.svg`,
+  garden: `${PRODUCT_PLACEHOLDER_BASE_PATH}/product-garden-placeholder.svg`,
+}
 
 export const productImageNaming = {
   productMain: `${PRODUCT_IMAGE_BASE_PATH}/{product-slug}/main.webp`,
   productGallery: `${PRODUCT_IMAGE_BASE_PATH}/{product-slug}/gallery-{index}.webp`,
   categorySvg: `${CATEGORY_IMAGE_BASE_PATH}/{catalog-node-slug}.svg`,
   categoryWebp: `${CATEGORY_IMAGE_BASE_PATH}/{catalog-node-slug}.webp`,
+}
+
+export function getProductPlaceholderByType(type = 'generic') {
+  return productPlaceholderByType[type] || productPlaceholderByType.generic
+}
+
+export function inferProductAssetType(slug = '') {
+  const value = String(slug).toLowerCase()
+
+  if (/(kabel|provod|avtomat|uzo|difavtomat|rozetka|vyklyuchatel|led|svet|lampa|shit|podrozetnik|raspred)/.test(value)) return 'electrical'
+  if (/(drel|shurupovert|molotok|kurok|instrument|valik|kist|sverlo|disk)/.test(value)) return 'tool'
+  if (/(samorez|dyubel|anker|bolt|gaika|shaiba|homut|klipsa)/.test(value)) return 'fastener'
+  if (/(boyok|emal|lak|kraska|kolor|rastvoritel)/.test(value)) return 'paint'
+  if (/(vent|vozduh|reshet|kanal)/.test(value)) return 'ventilation'
+  if (/(teplyi|radiator|termostat|rasshiritel|zhylytkich|vodonagrevatel)/.test(value)) return 'heating'
+  if (/(shlang|sugat|sugaruu|nasadka|sad|koroo|hoz|araba)/.test(value)) return 'garden'
+  if (/(ppr|pnd|truba|mufta|ugol|troynik|kran|kanaliz|filtr|smesitel|rakovina|sifon|unitaz|vanna|trap|podvodka|aerator|manometr|reduktor|klapan)/.test(value)) return 'plumbing'
+  if (/(cement|gips|shtukatur|shpak|grunt|gidro|plitka|kley|gipsokarton|profnastil|krovlya|podokonnik|pena|germetik|plastifikator)/.test(value)) return 'building'
+
+  return 'generic'
 }
 
 const packshotAssets = {
@@ -32,7 +66,7 @@ const packshotAssets = {
   'ventilyaciya-reshetkasy-150x150mm': {
     main: `${PRODUCT_IMAGE_BASE_PATH}/ventilyaciya-reshetkasy-150x150mm/main.svg`,
     gallery: [],
-    altKg: 'Вентиляция решеткасы 150x150 мм - товар сүрөтү',
+    altKg: 'Вентиляция торчосу 150x150 мм - товар сүрөтү',
   },
   'samorez-gipsokarton-35x35': {
     main: `${PRODUCT_IMAGE_BASE_PATH}/samorez-gipsokarton-35x35/main.svg`,
@@ -53,14 +87,18 @@ const packshotAssets = {
 
 export function createProductAssetEntry(slug, options = {}) {
   const galleryCount = Number.isFinite(Number(options.galleryCount)) ? Number(options.galleryCount) : 2
+  const assetType = options.type || inferProductAssetType(slug)
 
   return {
     slug,
     main: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`,
-    placeholder: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.svg`,
+    placeholder: getProductPlaceholderByType(assetType),
+    fallback: getProductPlaceholderByType(assetType),
     futureMain: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`,
     gallery: Array.from({ length: galleryCount }, (_, index) => `${PRODUCT_IMAGE_BASE_PATH}/${slug}/gallery-${index + 1}.webp`),
+    type: assetType,
     available: Boolean(options.available),
+    altKg: options.altKg,
   }
 }
 
@@ -110,10 +148,20 @@ const plannedProductAssets = Object.fromEntries(
 export function getProductAssetEntry(slug) {
   if (!slug) return null
   if (packshotAssets[slug]) {
+    const assetType = inferProductAssetType(slug)
+    const futureMain = `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`
+
     return {
       slug,
-      ...packshotAssets[slug],
-      available: true,
+      main: futureMain,
+      fallback: packshotAssets[slug].main || getProductPlaceholderByType(assetType),
+      placeholder: packshotAssets[slug].main || getProductPlaceholderByType(assetType),
+      gallery: packshotAssets[slug].gallery || [],
+      altKg: packshotAssets[slug].altKg,
+      futureMain,
+      type: assetType,
+      available: false,
+      localFallbackAvailable: true,
     }
   }
   if (plannedProductAssets[slug]) return plannedProductAssets[slug]

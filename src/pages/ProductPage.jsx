@@ -71,7 +71,7 @@ export function ProductPage() {
         Өлчөм: selectedVariant.size,
         SKU: selectedVariant.sku,
         Таңгак: selectedVariant.packageInfo || product.packageInfoKg || product.minOrder,
-        Наличие: getStockLabel(getStockStatus(selectedVariant)),
+        'Бар-жогу': getStockLabel(getStockStatus(selectedVariant)),
       }
     : product.specs
   const packageInfo = selectedVariant?.packageInfo || product.packageInfoKg || 'Менеджер менен такталат'
@@ -112,7 +112,7 @@ export function ProductPage() {
         </section>
       )}
       <div className="product-layout">
-        <ProductGallery key={product.id} product={product} />
+        <ProductGallery key={product.id} product={product} selectedVariant={selectedVariant} />
         <ProductInfo product={product} selectedVariant={selectedVariant} onVariantChange={handleVariantChange} />
       </div>
       <div className="product-details">

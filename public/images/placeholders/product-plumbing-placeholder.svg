@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Сантехника товарынын сүрөтү даярдалууда">
+  <rect width="900" height="675" fill="#eef6f2"/>
+  <rect x="60" y="60" width="780" height="555" rx="28" fill="#ffffff" stroke="#d4e0d8" stroke-width="5"/>
+  <path d="M210 380h180v-92h180" fill="none" stroke="#1f4e3a" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M570 288h92v118" fill="none" stroke="#2d6a4f" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="390" cy="288" r="38" fill="#f3b35c" stroke="#1f4e3a" stroke-width="8"/>
+  <path d="M205 480h500" stroke="#c9d8cd" stroke-width="30" stroke-linecap="round"/>
+  <text x="450" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#1f4e3a">StroyRayon</text>
+  <text x="450" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#687169">Сантехника жана түтүктөр</text>
+</svg>

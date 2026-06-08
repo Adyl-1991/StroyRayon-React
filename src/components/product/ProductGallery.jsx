@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { applyImageFallback, getProductGallery, getProductImage, resolveImage } from '../../utils/imageUtils'
 
-export function ProductGallery({ product }) {
-  const images = getProductGallery(product)
-  const [activeImage, setActiveImage] = useState(images[0])
-  const active = resolveImage(activeImage, getProductImage(product))
+export function ProductGallery({ product, selectedVariant }) {
+  const images = useMemo(() => getProductGallery(product, selectedVariant), [product, selectedVariant])
+  const [activeImageSrc, setActiveImageSrc] = useState(null)
+  const fallbackImage = getProductImage(product, selectedVariant)
+  const activeImage =
+    images.find((image) => resolveImage(image, fallbackImage).src === activeImageSrc) || images[0] || fallbackImage
+  const active = resolveImage(activeImage, fallbackImage)
 
   return (
     <div className="product-gallery">
@@ -14,6 +17,7 @@ export function ProductGallery({ product }) {
         alt={active.alt}
         width={active.width}
         height={active.height}
+        data-fallback-src={active.fallbackSrc}
         onError={(event) => applyImageFallback(event, 'product')}
       />
       <div className="product-gallery__thumbs">
@@ -26,7 +30,7 @@ export function ProductGallery({ product }) {
               className={isActive ? 'active' : ''}
               key={`${resolved.src}-${index}`}
               type="button"
-              onClick={() => setActiveImage(image)}
+              onClick={() => setActiveImageSrc(resolved.src)}
             >
               <img
                 src={resolved.src}
@@ -34,6 +38,7 @@ export function ProductGallery({ product }) {
                 loading="lazy"
                 width="180"
                 height="180"
+                data-fallback-src={resolved.fallbackSrc}
                 onError={(event) => applyImageFallback(event, 'product')}
               />
             </button>

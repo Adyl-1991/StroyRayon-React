@@ -84,7 +84,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
       <p>{product.description}</p>
       <div className="product-info__actions">
         <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>
-          Корзинага кошуу
+          Себетке кошуу
         </Button>
         <Button href={getWhatsAppUrl(quickText)} target="_blank" rel="noreferrer" variant="whatsapp">
           WhatsApp аркылуу суроо берүү

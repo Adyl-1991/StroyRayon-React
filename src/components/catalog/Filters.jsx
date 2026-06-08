@@ -88,7 +88,7 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
         </div>
 
         <fieldset className="filter-group">
-          <legend>Наличиеси</legend>
+          <legend>Бар-жогу</legend>
           {stockOptions.map((option) => (
             <label key={option.value}>
               <input

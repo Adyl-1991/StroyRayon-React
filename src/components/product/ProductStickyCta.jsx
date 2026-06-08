@@ -22,7 +22,7 @@ export function ProductStickyCta({ product, selectedVariant }) {
       </div>
       <div className="product-sticky-cta__actions">
         <Button disabled={!canBuy} onClick={() => addToCart(product, 1, selectedVariant)}>
-          Корзинага
+          Себетке
         </Button>
         <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">
           Суроо

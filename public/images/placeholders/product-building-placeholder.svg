@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Курулуш материалынын сүрөтү даярдалууда">
+  <rect width="900" height="675" fill="#f7f4ee"/>
+  <rect x="60" y="60" width="780" height="555" rx="28" fill="#fffdf8" stroke="#ded7ca" stroke-width="5"/>
+  <rect x="185" y="374" width="150" height="104" fill="#d9822b" stroke="#8d4c1e" stroke-width="8"/>
+  <path d="M405 478h210l-34-230H439z" fill="#eadfc9" stroke="#9b7a47" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M454 328h88" stroke="#1f4e3a" stroke-width="16" stroke-linecap="round"/>
+  <path d="M442 384h114" stroke="#1f4e3a" stroke-width="34" stroke-linecap="round"/>
+  <path d="M188 510h520" stroke="#c9d8cd" stroke-width="28" stroke-linecap="round"/>
+  <text x="450" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#1f4e3a">StroyRayon</text>
+  <text x="450" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#687169">Курулуш материалы</text>
+</svg>

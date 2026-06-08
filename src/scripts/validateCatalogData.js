@@ -43,6 +43,10 @@ function publicImageExists(src) {
   return existsSync(resolve(process.cwd(), 'public', src.replace(/^\/+/, '')))
 }
 
+function imageHasUsableFallback(image) {
+  return Boolean(image?.fallbackSrc && publicImageExists(image.fallbackSrc))
+}
+
 export function validateCatalogData() {
   const warnings = []
   const categoryMap = new Map(categories.map((category) => [category.slug, category]))
@@ -109,7 +113,13 @@ export function validateCatalogData() {
         if (!normalizedImage.src) {
           warnings.push(`${product.id}: image ${index} src is empty`)
         } else if (!publicImageExists(normalizedImage.src)) {
-          warnings.push(`${product.id}: image ${index} file not found: ${normalizedImage.src}`)
+          if (!imageHasUsableFallback(normalizedImage)) {
+            warnings.push(`${product.id}: image ${index} file not found: ${normalizedImage.src}`)
+          }
+        }
+
+        if (normalizedImage.fallbackSrc && !publicImageExists(normalizedImage.fallbackSrc)) {
+          warnings.push(`${product.id}: image ${index} fallback file not found: ${normalizedImage.fallbackSrc}`)
         }
 
         if (!normalizedImage.alt) {

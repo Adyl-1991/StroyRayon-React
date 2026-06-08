@@ -1,8 +1,9 @@
 import { getRootCategoryImage } from '../data/categoryAssets.js'
-import { getCategoryAssetEntry, getProductAssetEntry } from '../data/productAssets.js'
+import { getCategoryAssetEntry, getProductAssetEntry, getProductPlaceholderByType, inferProductAssetType } from '../data/productAssets.js'
 
 export const productFallback = {
   src: '/images/placeholders/product-placeholder.svg',
+  fallbackSrc: '/images/placeholders/product-placeholder.svg',
   alt: 'StroyRayon товар сүрөтү',
   width: 900,
   height: 675,
@@ -32,6 +33,7 @@ export function normalizeImage(image, fallback = productFallback) {
     return {
       ...fallback,
       src: image,
+      fallbackSrc: fallback.fallbackSrc || fallback.src,
       type: fallback.type === 'placeholder' ? 'external' : fallback.type,
     }
   }
@@ -40,6 +42,7 @@ export function normalizeImage(image, fallback = productFallback) {
     ...fallback,
     ...image,
     src: image.src || fallback.src,
+    fallbackSrc: image.fallbackSrc || image.fallback || fallback.fallbackSrc || fallback.src,
     alt: image.alt || fallback.alt,
     width: image.width || fallback.width,
     height: image.height || fallback.height,
@@ -49,13 +52,51 @@ export function normalizeImage(image, fallback = productFallback) {
 
 export const resolveImage = normalizeImage
 
+const productPlaceholderTypeByCatalogRoot = {
+  stroymaterial: 'building',
+  'inzhenerdik-santehnika': 'plumbing',
+  santehnika: 'plumbing',
+  elektrika: 'electrical',
+  instrument: 'tool',
+  krepezh: 'fastener',
+  'boiok-tush-kagaz': 'paint',
+  ventilyaciya: 'ventilation',
+  'teplyi-pol': 'heating',
+  'bak-koroo': 'garden',
+}
+
+export function getProductPlaceholderSrc(product) {
+  const catalogPath = Array.isArray(product?.catalogPath) ? product.catalogPath : []
+  const catalogType = productPlaceholderTypeByCatalogRoot[catalogPath[0]]
+  const inferredType = catalogType || inferProductAssetType(product?.slug || product?.id || product?.name)
+
+  return getProductPlaceholderByType(inferredType)
+}
+
 function getProductFallback(product, expectedSrc) {
+  const fallbackSrc = getProductPlaceholderSrc(product)
+
   return {
     ...productFallback,
+    src: fallbackSrc,
+    fallbackSrc,
     alt: getImageAlt(product, productFallback.alt),
     expectedSrc,
     futureSrc: expectedSrc,
   }
+}
+
+function getVariantSpecificImage(product, variant, fallback) {
+  if (!variant || typeof variant !== 'object') return null
+
+  const image = variant.image || variant.imageKg || variant.images?.[0]
+  if (!image) return null
+
+  return normalizeImage(image, {
+    ...fallback,
+    alt: `${product?.name || product?.titleKg || fallback.alt} ${variant.size || ''}`.trim(),
+    type: 'variant',
+  })
 }
 
 function getProductImageByVariant(product, variant) {
@@ -78,6 +119,9 @@ export function getProductImage(product, variant = 'main') {
       ? assetEntry?.main
       : assetEntry?.gallery?.[Number(String(variant).replace('gallery-', '')) - 1]
   const fallback = getProductFallback(product, expectedSrc)
+  const variantImage = getVariantSpecificImage(product, variant, fallback)
+  if (variantImage) return variantImage
+
   const image = getProductImageByVariant(product, variant)
 
   if (image) return normalizeImage(image, fallback)
@@ -98,30 +142,43 @@ export function getProductImage(product, variant = 'main') {
   return fallback
 }
 
-export function getProductGallery(product) {
+export function getProductGallery(product, selectedVariant = null) {
   const images = Array.isArray(product?.images) ? product.images : []
   const fallback = getProductImage(product)
+  const variantImage = getVariantSpecificImage(product, selectedVariant, fallback)
 
   if (images.length) {
-    return images.map((image, index) =>
+    const normalizedImages = images.map((image, index) =>
       normalizeImage(image, {
         ...fallback,
         type: index === 0 ? 'product' : 'gallery',
       }),
     )
+
+    if (variantImage && !normalizedImages.some((image) => image.src === variantImage.src)) {
+      return [variantImage, ...normalizedImages]
+    }
+
+    return normalizedImages
   }
 
   const assetEntry = getProductAssetEntry(product?.slug)
   if (assetEntry?.available) {
-    return [
+    const assetImages = [
       normalizeImage({ src: assetEntry.main, type: 'product', alt: assetEntry.altKg || getImageAlt(product, fallback.alt) }, fallback),
       ...assetEntry.gallery.map((src) =>
         normalizeImage({ src, type: 'gallery', alt: assetEntry.altKg || getImageAlt(product, fallback.alt) }, fallback),
       ),
     ]
+
+    if (variantImage && !assetImages.some((image) => image.src === variantImage.src)) {
+      return [variantImage, ...assetImages]
+    }
+
+    return assetImages
   }
 
-  return [fallback]
+  return variantImage ? [variantImage, fallback] : [fallback]
 }
 
 export function getCategoryImage(category) {
@@ -142,9 +199,10 @@ export function getImageFallbackSrc(type = 'product') {
   return type === 'category' ? categoryFallback.src : productFallback.src
 }
 
-export function applyImageFallback(event, type = 'product') {
-  const fallbackSrc = getImageFallbackSrc(type)
+export function applyImageFallback(event, type = 'product', fallbackOverride = '') {
+  const fallbackSrc = fallbackOverride || event?.currentTarget?.dataset?.fallbackSrc || getImageFallbackSrc(type)
   if (!event?.currentTarget || event.currentTarget.src.endsWith(fallbackSrc)) return
 
+  event.currentTarget.removeAttribute('srcset')
   event.currentTarget.src = fallbackSrc
 }

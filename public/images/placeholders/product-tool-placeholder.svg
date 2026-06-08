@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 675" role="img" aria-label="Шаймандын сүрөтү даярдалууда">
+  <rect width="900" height="675" fill="#f4f5ee"/>
+  <rect x="60" y="60" width="780" height="555" rx="28" fill="#ffffff" stroke="#ded7ca" stroke-width="5"/>
+  <path d="M245 333h250l94 74h-244" fill="#1f4e3a" stroke="#153a2b" stroke-width="10" stroke-linejoin="round"/>
+  <rect x="246" y="302" width="196" height="92" rx="10" fill="#2d6a4f" stroke="#153a2b" stroke-width="9"/>
+  <rect x="315" y="388" width="84" height="118" rx="12" fill="#2d6a4f" stroke="#153a2b" stroke-width="9"/>
+  <circle cx="438" cy="348" r="28" fill="#f3b35c" stroke="#153a2b" stroke-width="8"/>
+  <path d="M570 382l92-92 72 72-92 92z" fill="#eef4ef" stroke="#7e8d8c" stroke-width="10"/>
+  <path d="M236 505h510" stroke="#c9d8cd" stroke-width="30" stroke-linecap="round"/>
+  <text x="450" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#1f4e3a">StroyRayon</text>
+  <text x="450" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#687169">Шаймандар</text>
+</svg>
