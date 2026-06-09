@@ -10,6 +10,7 @@ import { SectionTitle } from '../components/ui/SectionTitle'
 import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
 import { getHomePopularProducts, getProducts } from '../services/productService'
+import { getWhatsAppUrl } from '../services/whatsappService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function HomePage() {
@@ -70,7 +71,7 @@ export function HomePage() {
       <section className="consultation-band">
         <h2>{t('home.consultTitle')}</h2>
         <p>{t('home.consultText')}</p>
-        <Button href="https://wa.me/996700123456" target="_blank" rel="noreferrer" variant="whatsapp">
+        <Button href={getWhatsAppUrl('Салам! StroyRayon боюнча кеңеш алгым келет.')} target="_blank" rel="noreferrer" variant="whatsapp">
           {t('common.whatsappWrite')}
         </Button>
       </section>

@@ -20,9 +20,9 @@ export function Footer() {
       </div>
       <div className="site-footer__links">
         <h3>{t('footer.contacts')}</h3>
-        <a href={`tel:${contactConfig.phone.replaceAll(' ', '')}`}>{contactConfig.phone}</a>
+        <a href={`tel:+${contactConfig.phoneDigits}`}>{contactConfig.phone}</a>
         <a href={`https://wa.me/${contactConfig.whatsapp}`}>WhatsApp</a>
-        <a href={`https://t.me/${contactConfig.telegram.replace('@', '')}`}>{contactConfig.telegram}</a>
+        <a href={contactConfig.telegramUrl}>{contactConfig.telegram}</a>
       </div>
     </footer>
   )

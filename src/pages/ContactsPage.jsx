@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Button } from '../components/ui/Button'
 import { Seo } from '../components/seo/Seo'
-import { contactConfig } from '../services/whatsappService'
+import { businessHours, contactConfig, deliverySummary } from '../services/whatsappService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function ContactsPage() {
@@ -17,7 +17,7 @@ export function ContactsPage() {
         <article>
           <h2>Телефон</h2>
           <a href={`tel:${contactConfig.phone.replaceAll(' ', '')}`}>{contactConfig.phone}</a>
-          <p>Күн сайын 09:00 - 19:00</p>
+          <p>{businessHours.join('. ')}</p>
         </article>
         <article>
           <h2>WhatsApp</h2>
@@ -28,8 +28,13 @@ export function ContactsPage() {
         </article>
         <article>
           <h2>Telegram</h2>
-          <a href={`https://t.me/${contactConfig.telegram.replace('@', '')}`}>{contactConfig.telegram}</a>
+          <a href={contactConfig.telegramUrl}>{contactConfig.telegram}</a>
           <p>Жеткирүү статусун жана алдын ала эсепти тактайбыз.</p>
+        </article>
+        <article>
+          <h2>Дарек</h2>
+          <p>{contactConfig.address}</p>
+          <p>{deliverySummary}</p>
         </article>
       </section>
     </main>

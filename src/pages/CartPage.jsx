@@ -4,6 +4,7 @@ import { Seo } from '../components/seo/Seo'
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCart } from '../hooks/useCart'
+import { shortPriceStockDisclaimer } from '../services/whatsappService'
 
 export function CartPage() {
   const { items, total, count, setQuantity, removeFromCart } = useCart()
@@ -24,6 +25,7 @@ export function CartPage() {
       <div className="page-heading">
         <h1>Себет</h1>
         <p>Санын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.</p>
+        <p className="microcopy">{shortPriceStockDisclaimer}</p>
       </div>
       <div className="cart-layout">
         <section className="cart-list">

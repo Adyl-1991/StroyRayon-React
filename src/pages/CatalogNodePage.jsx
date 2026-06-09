@@ -11,6 +11,7 @@ import { useCatalogFilters } from '../hooks/useCatalogFilters'
 import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
 import { getCatalogNodeUrl, getFilterOptions, getProductsByCatalogNode } from '../services/productService'
+import { getWhatsAppUrl } from '../services/whatsappService'
 import { buildBreadcrumbStructuredData, getCatalogNodeSeo } from '../utils/seoUtils'
 
 export function CatalogNodePage() {
@@ -101,7 +102,7 @@ export function CatalogNodePage() {
       <section className="consultation-inline catalog-consultation">
         <h2>{t('catalog.consultTitle')}</h2>
         <p>{t('catalog.consultText')}</p>
-        <a href="https://wa.me/996700123456" target="_blank" rel="noreferrer">
+        <a href={getWhatsAppUrl('Салам! StroyRayon каталог бөлүмү боюнча менеджерден кеңеш алгым келет.')} target="_blank" rel="noreferrer">
           {t('common.askManager')}
         </a>
       </section>

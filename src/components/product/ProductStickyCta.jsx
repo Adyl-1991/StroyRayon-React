@@ -1,6 +1,6 @@
 import { useCart } from '../../hooks/useCart'
 import { isPurchasable } from '../../services/productService'
-import { getWhatsAppUrl } from '../../services/whatsappService'
+import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Button } from '../ui/Button'
 
@@ -10,7 +10,7 @@ export function ProductStickyCta({ product, selectedVariant }) {
   const activePrice = selectedVariant?.price ?? product.price
   const activeUnit = selectedVariant?.unit || product.unit
   const activeName = selectedVariant ? `${product.name} (${selectedVariant.size})` : product.name
-  const askText = `Салам! Мен StroyRayon сайтынан ${activeName} боюнча маалымат алгым келет.`
+  const askText = buildProductInquiryText({ product, variant: selectedVariant })
 
   return (
     <aside className="product-sticky-cta" aria-label="Товар боюнча тез аракеттер">

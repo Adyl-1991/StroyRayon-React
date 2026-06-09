@@ -23,6 +23,7 @@ import {
   getStockStatus,
   getSubcategory,
 } from '../services/productService'
+import { buildProductInquiryText, getWhatsAppUrl } from '../services/whatsappService'
 import {
   buildBreadcrumbStructuredData,
   buildProductStructuredData,
@@ -88,6 +89,7 @@ export function ProductPage() {
     { label: product.name },
   ]
   const seo = getProductSeo(product)
+  const managerAskText = buildProductInquiryText({ product, variant: selectedVariant })
 
   return (
     <main className="page">
@@ -141,7 +143,7 @@ export function ProductPage() {
         <section className="detail-panel manager-cta">
           <h2>Бул товарды туура тандоо үчүн менеджерден кеңеш алыңыз</h2>
           <p>Объекттин түрүн, көлөмүн жана колдонуу жерин айтсаңыз, туура марка же аналог сунуштайбыз.</p>
-          <a href={`https://wa.me/996700123456?text=${encodeURIComponent(`Салам! Мен StroyRayon сайтынан ${product.name} боюнча маалымат алгым келет.`)}`} target="_blank" rel="noreferrer">
+          <a href={getWhatsAppUrl(managerAskText)} target="_blank" rel="noreferrer">
             WhatsApp аркылуу суроо берүү
           </a>
         </section>

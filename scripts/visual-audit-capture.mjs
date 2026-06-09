@@ -43,6 +43,8 @@ const routes = [
   { id: '23-search-warm-floor', label: 'Search / warm floor', path: '/search?q=%D1%82%D0%B5%D0%BF%D0%BB%D1%8B%D0%B9%20%D0%BF%D0%BE%D0%BB' },
   { id: '24-cart-empty', label: 'Cart / empty', path: '/cart' },
   { id: '25-checkout-empty', label: 'Checkout / empty', path: '/checkout' },
+  { id: '29-contacts', label: 'Contacts', path: '/contacts' },
+  { id: '30-delivery', label: 'Delivery and payment', path: '/delivery' },
 ]
 
 const interactiveRoutes = [

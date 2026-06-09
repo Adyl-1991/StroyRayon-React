@@ -6,7 +6,7 @@ import {
   getStockStatus,
   isPurchasable,
 } from '../../services/productService'
-import { getWhatsAppUrl } from '../../services/whatsappService'
+import { buildProductInquiryText, getWhatsAppUrl, shortPriceStockDisclaimer } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
@@ -21,8 +21,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
   const activeUnit = activeVariant?.unit || product.unit
   const activeSku = activeVariant?.sku || product.sku
   const activeMinOrder = activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`
-  const quickName = activeVariant ? `${product.name} (${activeVariant.size})` : product.name
-  const quickText = `Салам! Мен StroyRayon сайтынан ${quickName} боюнча маалымат алгым келет.`
+  const quickText = buildProductInquiryText({ product, variant: activeVariant })
 
   return (
     <section className="product-info">
@@ -54,6 +53,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
         <span>/ {activeUnit}</span>
         {product.isSale && <Badge tone="sale">Акция</Badge>}
       </div>
+      <p className="price-disclaimer">{shortPriceStockDisclaimer}</p>
       {variants.length > 0 && (
         <fieldset className="variant-selector">
           <legend>Өлчөмдү тандаңыз</legend>

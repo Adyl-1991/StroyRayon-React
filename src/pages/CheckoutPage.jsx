@@ -7,7 +7,7 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Button } from '../components/ui/Button'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCart } from '../hooks/useCart'
-import { buildWhatsAppOrderText, getWhatsAppUrl } from '../services/whatsappService'
+import { buildWhatsAppOrderText, getWhatsAppUrl, shortPriceStockDisclaimer } from '../services/whatsappService'
 
 export function CheckoutPage() {
   const { items, total, count } = useCart()
@@ -123,6 +123,7 @@ export function CheckoutPage() {
       <div className="page-heading">
         <h1>Заказ берүү</h1>
         <p>Байланыш маалыматыңызды жазыңыз. Товарлар жана жеткирүү шарттары менеджер менен WhatsApp аркылуу такталат.</p>
+        <p className="microcopy">{shortPriceStockDisclaimer}</p>
       </div>
       <div className="checkout-layout">
         <form className="checkout-form" onSubmit={handleSubmit}>

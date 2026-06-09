@@ -1,4 +1,5 @@
 import { formatPrice } from '../../utils/formatPrice'
+import { shortPriceStockDisclaimer } from '../../services/whatsappService'
 import { Button } from '../ui/Button'
 
 export function CartSummary({ total, count, checkout = true }) {
@@ -13,7 +14,7 @@ export function CartSummary({ total, count, checkout = true }) {
         <span>Жалпы сумма</span>
         <strong>{formatPrice(total)}</strong>
       </div>
-      <p>Жеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.</p>
+      <p>Жеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат. {shortPriceStockDisclaimer}</p>
       {checkout && <Button to="/checkout">Заказга өтүү</Button>}
     </aside>
   )

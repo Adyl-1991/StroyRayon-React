@@ -1598,6 +1598,13 @@ del {
   color: var(--color-muted);
 }
 
+.price-disclaimer {
+  margin: -4px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
 .variant-selector {
   min-width: 0;
   margin: 0;

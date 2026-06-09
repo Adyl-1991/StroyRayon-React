@@ -1,5 +1,13 @@
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
+import { Button } from '../components/ui/Button'
 import { Seo } from '../components/seo/Seo'
+import {
+  businessHours,
+  contactConfig,
+  deliverySummary,
+  getWhatsAppUrl,
+  priceStockDisclaimer,
+} from '../services/whatsappService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function DeliveryPage() {
@@ -9,7 +17,7 @@ export function DeliveryPage() {
       <Breadcrumbs items={[{ label: 'Жеткирүү жана төлөм' }]} />
       <div className="page-heading">
         <h1>Жеткирүү жана төлөм</h1>
-        <p>Курулуш материалы оор жана көлөмдүү болгондуктан, жеткирүү шарттары заказ боюнча такталат.</p>
+        <p>{deliverySummary} Курулуш материалы оор жана көлөмдүү болгондуктан, акыркы шарттар заказ боюнча такталат.</p>
       </div>
       <section className="info-grid">
         <article>
@@ -22,12 +30,24 @@ export function DeliveryPage() {
         </article>
         <article>
           <h2>Төлөм</h2>
-          <p>Накталай, которуу же эсеп-фактура боюнча төлөө шарттары заказ алдында менеджер менен макулдашылат.</p>
+          <p>Накталай жана онлайн которуу аркылуу төлөм кабыл алынат. Төлөм ыкмасы заказ такталгандан кийин менеджер менен макулдашылат.</p>
+        </article>
+        <article>
+          <h2>Иш убактысы</h2>
+          {businessHours.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
+          <p>Дарек: {contactConfig.address}</p>
         </article>
       </section>
       <section className="seo-text">
         <h2>Жеткирүүнү кантип тездетсе болот?</h2>
         <p>Заказ бергенде товарлардын санын, регионду, так даректи жана түшүрүү шартын жазыңыз.</p>
+        <p>Оор жана көлөмдүү товарлар боюнча жеткирүү баасы заказдын көлөмүнө, салмагына жана дарекке жараша такталат.</p>
+        <p>{priceStockDisclaimer}</p>
+        <Button href={getWhatsAppUrl('Салам! StroyRayon жеткирүү жана төлөм шарттарын тактап бериңиз.')} target="_blank" rel="noreferrer" variant="whatsapp">
+          WhatsApp аркылуу шарттарды тактоо
+        </Button>
       </section>
     </main>
   )

@@ -8,6 +8,7 @@ import { EmptyState } from '../components/ui/EmptyState'
 import { useCatalogFilters } from '../hooks/useCatalogFilters'
 import { useProducts } from '../hooks/useProducts'
 import { getCategoryBySlug, getFilterOptions, getSubcategory } from '../services/productService'
+import { getWhatsAppUrl } from '../services/whatsappService'
 
 export function SubcategoryPage() {
   const { categorySlug, subcategorySlug } = useParams()
@@ -45,7 +46,7 @@ export function SubcategoryPage() {
           <section className="consultation-inline">
             <h2>Кайсы товарды тандай албай жатасызбы?</h2>
             <p>Кайсы негизге жана канча көлөмгө керек экенин жазсаңыз, менеджер туура товарды тактап берет.</p>
-            <a href="https://wa.me/996700123456" target="_blank" rel="noreferrer">
+            <a href={getWhatsAppUrl('Салам! StroyRayon бөлүмү боюнча менеджерден кеңеш алгым келет.')} target="_blank" rel="noreferrer">
               Менеджерден кеңеш алуу
             </a>
           </section>
