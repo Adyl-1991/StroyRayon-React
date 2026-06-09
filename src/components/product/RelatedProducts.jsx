@@ -2,7 +2,7 @@ import { ProductGrid } from '../catalog/ProductGrid'
 
 export function RelatedProducts({ products }) {
   return (
-    <section className="page-section">
+    <section className="page-section related-products">
       <h2>Окшош товарлар</h2>
       <ProductGrid products={products} />
     </section>

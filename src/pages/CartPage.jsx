@@ -10,15 +10,15 @@ export function CartPage() {
 
   if (!items.length) {
     return (
-      <>
+      <main className="page page--cart">
         <Seo title="Себет" description="StroyRayon себетинде товарлардын санын жана жалпы сумманы тактап, WhatsApp аркылуу заказ бериңиз." />
         <EmptyState title="Себет бош" text="Керектүү товарларды каталогдон кошуп баштаңыз." />
-      </>
+      </main>
     )
   }
 
   return (
-    <main className="page">
+    <main className="page page--cart">
       <Seo title="Себет" description="StroyRayon себетинде товарлардын санын жана жалпы сумманы тактап, WhatsApp аркылуу заказ бериңиз." />
       <Breadcrumbs items={[{ label: 'Себет' }]} />
       <div className="page-heading">

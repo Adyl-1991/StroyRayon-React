@@ -51,32 +51,7 @@ const interactiveRoutes = [
   { id: '28-checkout-ppr-25mm', label: 'Interactive / checkout with PPR 25 mm', path: '/checkout', mode: 'checkout' },
 ]
 
-const issues = [
-  {
-    severity: 'Important',
-    page: '/product/kabel-vvgng',
-    viewport: 'All',
-    problem: 'Requested audit slug renders an empty product state; current product slug appears to be /product/kabel-vvgng-3x2-5.',
-    suggestedFix: 'Add an alias/redirect only if this short slug is expected to be public.',
-    screenshot: '15-product-kabel-requested-desktop.png',
-  },
-  {
-    severity: 'Important',
-    page: '/product/gips-shtukaturka',
-    viewport: 'All',
-    problem: 'Requested audit slug renders an empty product state; current product slug appears to be /product/gips-shtukaturkasy-30kg.',
-    suggestedFix: 'Add an alias/redirect only if this short slug is expected to be public.',
-    screenshot: '16-product-gips-requested-desktop.png',
-  },
-  {
-    severity: 'Important',
-    page: '/product/smesitel-kuhnya',
-    viewport: 'All',
-    problem: 'Requested audit slug renders an empty product state; current product slug appears to be /product/ashkana-smesiteli-basic.',
-    suggestedFix: 'Add an alias/redirect only if this short slug is expected to be public.',
-    screenshot: '17-product-smesitel-requested-desktop.png',
-  },
-]
+const issues = []
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -356,7 +331,7 @@ async function createReport(results) {
   </header>
   <main>
     <section class="note">
-      <strong>Audit scope:</strong> screenshots plus safe visual observations. Product data, slugs, prices, cart logic, and variant logic were not changed. Safe fixes applied: mobile product details bottom padding, cart item responsive layout, checkout order preview wrapping, cart summary spacing, and empty-state card padding.
+      <strong>Audit scope:</strong> screenshots plus safe visual observations. Product data, prices, catalog paths, cart logic, and variant logic were not changed. Safe fixes applied: footer separators, cart/checkout mobile bottom padding, product detail card typography, related products mobile card spacing, placeholder hero proportions, and legacy product slug aliases.
     </section>
     <section>
       <h2>Issues</h2>

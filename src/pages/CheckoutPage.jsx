@@ -109,15 +109,15 @@ export function CheckoutPage() {
 
   if (!items.length) {
     return (
-      <>
+      <main className="page page--checkout">
         <Seo title="Заказ берүү" description="StroyRayon барагында товарларды тандап, заказды WhatsApp аркылуу менеджерге жөнөтүңүз." />
         <EmptyState title="Заказ берүү үчүн товар жок" text="Адегенде себетке керектүү товарларды кошуңуз." />
-      </>
+      </main>
     )
   }
 
   return (
-    <main className="page">
+    <main className="page page--checkout">
       <Seo title="Заказ берүү" description="StroyRayon барагында товарларды тандап, заказды WhatsApp аркылуу менеджерге жөнөтүңүз." />
       <Breadcrumbs items={[{ label: 'Себет', to: '/cart' }, { label: 'Заказ берүү' }]} />
       <div className="page-heading">

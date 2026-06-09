@@ -99,6 +99,16 @@ const HOME_POPULAR_GROUPS = [
   { key: 'bak-koroo', labelKg: 'Бак жана короо', slugs: ['bak-koroo'], preferredIds: ['garden-hose-3-4-25m', 'garden-shovel-metal'] },
 ]
 
+export const legacyProductSlugAliases = {
+  'kabel-vvgng': 'kabel-vvgng-3x2-5',
+  'gips-shtukaturka': 'gips-shtukaturkasy-30kg',
+  'smesitel-kuhnya': 'ashkana-smesiteli-basic',
+}
+
+export function resolveProductSlug(productSlug) {
+  return legacyProductSlugAliases[productSlug] || productSlug
+}
+
 export function getHomePopularProducts(sourceProducts = products) {
   const normalizedSource = sourceProducts.map(normalizeProduct)
   const normalizedFallback = products.map(normalizeProduct)
@@ -168,7 +178,8 @@ export function getFilteredProducts(filters = {}, sourceProducts = products) {
 }
 
 export function getProductBySlug(productSlug) {
-  const product = products.find((product) => product.slug === productSlug)
+  const resolvedSlug = resolveProductSlug(productSlug)
+  const product = products.find((product) => product.slug === resolvedSlug)
   return product ? normalizeProduct(product) : undefined
 }
 

@@ -1,35 +1,10 @@
 {
   "screenshotCount": 84,
   "critical": 0,
-  "important": 3,
+  "important": 0,
   "minor": 0,
   "brokenImages": 0,
-  "issues": [
-    {
-      "severity": "Important",
-      "page": "/product/kabel-vvgng",
-      "viewport": "All",
-      "problem": "Requested audit slug renders an empty product state; current product slug appears to be /product/kabel-vvgng-3x2-5.",
-      "suggestedFix": "Add an alias/redirect only if this short slug is expected to be public.",
-      "screenshot": "15-product-kabel-requested-desktop.png"
-    },
-    {
-      "severity": "Important",
-      "page": "/product/gips-shtukaturka",
-      "viewport": "All",
-      "problem": "Requested audit slug renders an empty product state; current product slug appears to be /product/gips-shtukaturkasy-30kg.",
-      "suggestedFix": "Add an alias/redirect only if this short slug is expected to be public.",
-      "screenshot": "16-product-gips-requested-desktop.png"
-    },
-    {
-      "severity": "Important",
-      "page": "/product/smesitel-kuhnya",
-      "viewport": "All",
-      "problem": "Requested audit slug renders an empty product state; current product slug appears to be /product/ashkana-smesiteli-basic.",
-      "suggestedFix": "Add an alias/redirect only if this short slug is expected to be public.",
-      "screenshot": "17-product-smesitel-requested-desktop.png"
-    }
-  ],
+  "issues": [],
   "results": [
     {
       "id": "01-home",
@@ -38,10 +13,10 @@
       "captures": [
         {
           "file": "01-home-desktop.png",
-          "bytes": 1394186,
+          "bytes": 1395546,
           "dimensions": {
             "width": 1440,
-            "height": 5218
+            "height": 5149
           },
           "title": "StroyRayon",
           "brokenImages": 0,
@@ -64,7 +39,7 @@
         },
         {
           "file": "01-home-mobile.png",
-          "bytes": 664011,
+          "bytes": 664487,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -84,10 +59,10 @@
       "captures": [
         {
           "file": "02-catalog-desktop.png",
-          "bytes": 808231,
+          "bytes": 809632,
           "dimensions": {
             "width": 1440,
-            "height": 1985
+            "height": 1916
           },
           "title": "Каталог | StroyRayon",
           "brokenImages": 0,
@@ -97,10 +72,10 @@
         },
         {
           "file": "02-catalog-tablet.png",
-          "bytes": 972272,
+          "bytes": 973141,
           "dimensions": {
             "width": 768,
-            "height": 3011
+            "height": 3097
           },
           "title": "Каталог | StroyRayon",
           "brokenImages": 0,
@@ -110,10 +85,10 @@
         },
         {
           "file": "02-catalog-mobile.png",
-          "bytes": 1110819,
+          "bytes": 1111628,
           "dimensions": {
             "width": 390,
-            "height": 5468
+            "height": 5553
           },
           "title": "Каталог | StroyRayon",
           "brokenImages": 0,
@@ -130,10 +105,10 @@
       "captures": [
         {
           "file": "03-catalog-stroymaterial-desktop.png",
-          "bytes": 676400,
+          "bytes": 677734,
           "dimensions": {
             "width": 1440,
-            "height": 5507
+            "height": 5438
           },
           "title": "Курулуш материалдары | StroyRayon",
           "brokenImages": 0,
@@ -143,7 +118,7 @@
         },
         {
           "file": "03-catalog-stroymaterial-tablet.png",
-          "bytes": 474494,
+          "bytes": 493541,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -176,10 +151,10 @@
       "captures": [
         {
           "file": "04-catalog-profilder-desktop.png",
-          "bytes": 259164,
+          "bytes": 260617,
           "dimensions": {
             "width": 1440,
-            "height": 2522
+            "height": 2453
           },
           "title": "Профильдер | StroyRayon",
           "brokenImages": 0,
@@ -189,7 +164,7 @@
         },
         {
           "file": "04-catalog-profilder-tablet.png",
-          "bytes": 326561,
+          "bytes": 325000,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -202,10 +177,10 @@
         },
         {
           "file": "04-catalog-profilder-mobile.png",
-          "bytes": 199964,
+          "bytes": 200552,
           "dimensions": {
             "width": 390,
-            "height": 4211
+            "height": 4296
           },
           "title": "Профильдер | StroyRayon",
           "brokenImages": 0,
@@ -222,10 +197,10 @@
       "captures": [
         {
           "file": "05-catalog-engineering-desktop.png",
-          "bytes": 689915,
+          "bytes": 690968,
           "dimensions": {
             "width": 1440,
-            "height": 5796
+            "height": 5727
           },
           "title": "Инженердик сантехника | StroyRayon",
           "brokenImages": 0,
@@ -235,7 +210,7 @@
         },
         {
           "file": "05-catalog-engineering-tablet.png",
-          "bytes": 402700,
+          "bytes": 390000,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -248,7 +223,7 @@
         },
         {
           "file": "05-catalog-engineering-mobile.png",
-          "bytes": 473264,
+          "bytes": 469175,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -268,10 +243,10 @@
       "captures": [
         {
           "file": "06-catalog-ppr-desktop.png",
-          "bytes": 398566,
+          "bytes": 400064,
           "dimensions": {
             "width": 1440,
-            "height": 3517
+            "height": 3448
           },
           "title": "ППР түтүктөр жана фитингдер | StroyRayon",
           "brokenImages": 0,
@@ -281,7 +256,7 @@
         },
         {
           "file": "06-catalog-ppr-tablet.png",
-          "bytes": 367951,
+          "bytes": 353430,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -294,10 +269,10 @@
         },
         {
           "file": "06-catalog-ppr-mobile.png",
-          "bytes": 309740,
+          "bytes": 304930,
           "dimensions": {
             "width": 390,
-            "height": 5946
+            "height": 6031
           },
           "title": "ППР түтүктөр жана фитингдер | StroyRayon",
           "brokenImages": 0,
@@ -314,10 +289,10 @@
       "captures": [
         {
           "file": "07-catalog-elektrika-desktop.png",
-          "bytes": 557766,
+          "bytes": 559036,
           "dimensions": {
             "width": 1440,
-            "height": 5399
+            "height": 5330
           },
           "title": "Электрика | StroyRayon",
           "brokenImages": 0,
@@ -360,10 +335,10 @@
       "captures": [
         {
           "file": "08-catalog-ventilyaciya-desktop.png",
-          "bytes": 317130,
+          "bytes": 318399,
           "dimensions": {
             "width": 1440,
-            "height": 3365
+            "height": 3296
           },
           "title": "Вентиляция | StroyRayon",
           "brokenImages": 0,
@@ -386,10 +361,10 @@
         },
         {
           "file": "08-catalog-ventilyaciya-mobile.png",
-          "bytes": 245027,
+          "bytes": 245783,
           "dimensions": {
             "width": 390,
-            "height": 5362
+            "height": 5447
           },
           "title": "Вентиляция | StroyRayon",
           "brokenImages": 0,
@@ -406,10 +381,10 @@
       "captures": [
         {
           "file": "09-catalog-instrument-desktop.png",
-          "bytes": 499932,
+          "bytes": 501001,
           "dimensions": {
             "width": 1440,
-            "height": 3971
+            "height": 3902
           },
           "title": "Шаймандар | StroyRayon",
           "brokenImages": 0,
@@ -432,10 +407,10 @@
         },
         {
           "file": "09-catalog-instrument-mobile.png",
-          "bytes": 423698,
+          "bytes": 424417,
           "dimensions": {
             "width": 390,
-            "height": 7332
+            "height": 7417
           },
           "title": "Шаймандар | StroyRayon",
           "brokenImages": 0,
@@ -452,10 +427,10 @@
       "captures": [
         {
           "file": "10-catalog-teplyi-pol-desktop.png",
-          "bytes": 355122,
+          "bytes": 356454,
           "dimensions": {
             "width": 1440,
-            "height": 3205
+            "height": 3136
           },
           "title": "Жылуу пол | StroyRayon",
           "brokenImages": 0,
@@ -478,10 +453,10 @@
         },
         {
           "file": "10-catalog-teplyi-pol-mobile.png",
-          "bytes": 269051,
+          "bytes": 269755,
           "dimensions": {
             "width": 390,
-            "height": 5890
+            "height": 5975
           },
           "title": "Жылуу пол | StroyRayon",
           "brokenImages": 0,
@@ -498,10 +473,10 @@
       "captures": [
         {
           "file": "11-catalog-bak-koroo-desktop.png",
-          "bytes": 389252,
+          "bytes": 390592,
           "dimensions": {
             "width": 1440,
-            "height": 3918
+            "height": 3849
           },
           "title": "Бак жана короо | StroyRayon",
           "brokenImages": 0,
@@ -524,10 +499,10 @@
         },
         {
           "file": "11-catalog-bak-koroo-mobile.png",
-          "bytes": 312848,
+          "bytes": 313696,
           "dimensions": {
             "width": 390,
-            "height": 6689
+            "height": 6775
           },
           "title": "Бак жана короо | StroyRayon",
           "brokenImages": 0,
@@ -544,10 +519,10 @@
       "captures": [
         {
           "file": "12-catalog-paint-desktop.png",
-          "bytes": 429894,
+          "bytes": 431228,
           "dimensions": {
             "width": 1440,
-            "height": 3966
+            "height": 3897
           },
           "title": "Боёктор/туш кагаздар | StroyRayon",
           "brokenImages": 0,
@@ -570,10 +545,10 @@
         },
         {
           "file": "12-catalog-paint-mobile.png",
-          "bytes": 332388,
+          "bytes": 333093,
           "dimensions": {
             "width": 390,
-            "height": 6787
+            "height": 6872
           },
           "title": "Боёктор/туш кагаздар | StroyRayon",
           "brokenImages": 0,
@@ -590,10 +565,10 @@
       "captures": [
         {
           "file": "13-product-ppr-truba-desktop.png",
-          "bytes": 296821,
+          "bytes": 279376,
           "dimensions": {
             "width": 1440,
-            "height": 3126
+            "height": 2997
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -603,10 +578,10 @@
         },
         {
           "file": "13-product-ppr-truba-tablet.png",
-          "bytes": 314318,
+          "bytes": 300818,
           "dimensions": {
             "width": 768,
-            "height": 7486
+            "height": 7616
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -616,10 +591,10 @@
         },
         {
           "file": "13-product-ppr-truba-mobile.png",
-          "bytes": 249495,
+          "bytes": 256519,
           "dimensions": {
             "width": 390,
-            "height": 5512
+            "height": 6739
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -636,10 +611,10 @@
       "captures": [
         {
           "file": "14-product-ppr-ugolok-desktop.png",
-          "bytes": 284230,
+          "bytes": 267183,
           "dimensions": {
             "width": 1440,
-            "height": 3101
+            "height": 2972
           },
           "title": "ППР бурчтук 90° | StroyRayon",
           "brokenImages": 0,
@@ -649,10 +624,10 @@
         },
         {
           "file": "14-product-ppr-ugolok-tablet.png",
-          "bytes": 314888,
+          "bytes": 300615,
           "dimensions": {
             "width": 768,
-            "height": 7513
+            "height": 7643
           },
           "title": "ППР бурчтук 90° | StroyRayon",
           "brokenImages": 0,
@@ -662,10 +637,10 @@
         },
         {
           "file": "14-product-ppr-ugolok-mobile.png",
-          "bytes": 238190,
+          "bytes": 256350,
           "dimensions": {
             "width": 390,
-            "height": 5527
+            "height": 6773
           },
           "title": "ППР бурчтук 90° | StroyRayon",
           "brokenImages": 0,
@@ -682,40 +657,40 @@
       "captures": [
         {
           "file": "15-product-kabel-requested-desktop.png",
-          "bytes": 75637,
+          "bytes": 291533,
           "dimensions": {
             "width": 1440,
-            "height": 1200
+            "height": 2537
           },
-          "title": "StroyRayon",
+          "title": "Кабель ВВГнг 3x2.5 | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nБашкы бет\n/Каталог\n/Электрика\n/Кабель жана зым\n/ВВГнг кабель\n/Кабель ВВГнг 3x2.5\nElectroLine\nБар\nКабель ВВГнг 3x2.5\nSKU\nSR-EL-CAB-325\nБренд\nElectroLine\nМинималдуу заказ\n10 метр\nРейтинг 4.6 / 5, 15 пикир\n88 сом\n/ метр\n\nҮй ичиндеги электр линияларын тартууда колдонулуучу кабель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСечение\n3x2.5\nТүрү\nВВГнг\nКолдонуу\nРозетка линиясы\nБирдик\nметр\nКолдонуу боюнча кеңеш\n\nРозетка линиялары жана ички монтаж.\n\nЖеткирүү жана кепилдик\nТаңгак\nМетраж менен кесилип бериле",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "15-product-kabel-requested-tablet.png",
-          "bytes": 60104,
+          "bytes": 319851,
           "dimensions": {
             "width": 768,
-            "height": 1200
+            "height": 7185
           },
-          "title": "StroyRayon",
+          "title": "Кабель ВВГнг 3x2.5 | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nБашкы бет\n/Каталог\n/Электрика\n/Кабель жана зым\n/ВВГнг кабель\n/Кабель ВВГнг 3x2.5\nElectroLine\nБар\nКабель ВВГнг 3x2.5\nSKU\nSR-EL-CAB-325\nБренд\nElectroLine\nМинималдуу заказ\n10 метр\nРейтинг 4.6 / 5, 15 пикир\n88 сом\n/ метр\n\nҮй ичиндеги электр линияларын тартууда колдонулуучу кабель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСечение\n3x2.5\nТүрү\nВВГнг\nКолдонуу\nРозетка линиясы\nБирдик\nметр\nКолдонуу боюнча кеңеш\n\nРозетка линиялары жана ички монтаж.\n\nЖеткирүү жана кепилдик\nТаңгак\nМетраж менен кесилип берилет.\nЖеткирүү\nБишкек ичинде жана региондорго жеткирүү көлөм, салмак жа",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "15-product-kabel-requested-mobile.png",
-          "bytes": 43927,
+          "bytes": 248346,
           "dimensions": {
             "width": 390,
-            "height": 844
+            "height": 6108
           },
-          "title": "StroyRayon",
+          "title": "Кабель ВВГнг 3x2.5 | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nБашкы бет\n/Каталог\n/Электрика\n/Кабель жана зым\n/ВВГнг кабель\n/Кабель ВВГнг 3x2.5\nElectroLine\nБар\nКабель ВВГнг 3x2.5\nSKU\nSR-EL-CAB-325\nБренд\nElectroLine\nМинималдуу заказ\n10 метр\nРейтинг 4.6 / 5, 15 пикир\n88 сом\n/ метр\n\nҮй ичиндеги электр линияларын тартууда колдонулуучу кабель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСечение\n3x2.5\nТүрү\nВВГнг\nКолдонуу\nРозетка линиясы\nБирдик\nметр\nКолдонуу боюнча кеңеш\n\nРозетка линиялары жана ички монтаж.\n\nЖеткирүү жана кепилдик\nТаңгак\nМетраж менен кесилип берилет.\nЖеткирүү\nБишкек ичинде жана региондорго жеткирүү көлөм, салмак жана дарек боюнча менеджер менен такталат.\nКепилдик\nТовар кабыл алууда бүтүндүгүн жана комплектин текшерүү сунушталат.\nБул",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -728,40 +703,40 @@
       "captures": [
         {
           "file": "16-product-gips-requested-desktop.png",
-          "bytes": 75637,
+          "bytes": 276039,
           "dimensions": {
             "width": 1440,
-            "height": 1200
+            "height": 2572
           },
-          "title": "StroyRayon",
+          "title": "Гипс штукатуркасы, 30 кг | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nБашкы бет\n/Каталог\n/Курулуш материалдары\n/Кургак аралашмалар\n/Штукатуркалар\n/Гипстүү штукатурка\n/Гипс штукатуркасы, 30 кг\nBuildPro\nАз калды\nГипс штукатуркасы, 30 кг\nSKU\nSR-MIX-GYP-30\nБренд\nBuildPro\nМинималдуу заказ\n1 кап\nРейтинг 4.7 / 5, 22 пикир\n420 сом\n/ кап\n\nКургак ички бөлмөлөрдө дубалды тегиздөө үчүн жеңил иштелүүчү аралашма.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСалмагы\n30 кг\nКолдонуу\nИчки иштер\nКатмар\n5-50 мм\nНегиз\nГипс\nКолдонуу боюнча кеңеш\n\nИчки дубал жана шып тегиздөө.\n\nЖеткирүү ж",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "16-product-gips-requested-tablet.png",
-          "bytes": 60104,
+          "bytes": 276788,
           "dimensions": {
             "width": 768,
-            "height": 1200
+            "height": 7215
           },
-          "title": "StroyRayon",
+          "title": "Гипс штукатуркасы, 30 кг | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nБашкы бет\n/Каталог\n/Курулуш материалдары\n/Кургак аралашмалар\n/Штукатуркалар\n/Гипстүү штукатурка\n/Гипс штукатуркасы, 30 кг\nBuildPro\nАз калды\nГипс штукатуркасы, 30 кг\nSKU\nSR-MIX-GYP-30\nБренд\nBuildPro\nМинималдуу заказ\n1 кап\nРейтинг 4.7 / 5, 22 пикир\n420 сом\n/ кап\n\nКургак ички бөлмөлөрдө дубалды тегиздөө үчүн жеңил иштелүүчү аралашма.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСалмагы\n30 кг\nКолдонуу\nИчки иштер\nКатмар\n5-50 мм\nНегиз\nГипс\nКолдонуу боюнча кеңеш\n\nИчки дубал жана шып тегиздөө.\n\nЖеткирүү жана кепилдик\nТаңгак\n30 кг кап.\nЖеткирүү\nБишкек ичинде жана региондор",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "16-product-gips-requested-mobile.png",
-          "bytes": 43927,
+          "bytes": 234278,
           "dimensions": {
             "width": 390,
-            "height": 844
+            "height": 6197
           },
-          "title": "StroyRayon",
+          "title": "Гипс штукатуркасы, 30 кг | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nБашкы бет\n/Каталог\n/Курулуш материалдары\n/Кургак аралашмалар\n/Штукатуркалар\n/Гипстүү штукатурка\n/Гипс штукатуркасы, 30 кг\nBuildPro\nАз калды\nГипс штукатуркасы, 30 кг\nSKU\nSR-MIX-GYP-30\nБренд\nBuildPro\nМинималдуу заказ\n1 кап\nРейтинг 4.7 / 5, 22 пикир\n420 сом\n/ кап\n\nКургак ички бөлмөлөрдө дубалды тегиздөө үчүн жеңил иштелүүчү аралашма.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nСалмагы\n30 кг\nКолдонуу\nИчки иштер\nКатмар\n5-50 мм\nНегиз\nГипс\nКолдонуу боюнча кеңеш\n\nИчки дубал жана шып тегиздөө.\n\nЖеткирүү жана кепилдик\nТаңгак\n30 кг кап.\nЖеткирүү\nБишкек ичинде жана региондорго жеткирүү көлөм, салмак жана дарек боюнча менеджер менен такталат.\nКепилдик\nТовар кабыл алууда бүтүндүгүн жана комплек",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -774,40 +749,40 @@
       "captures": [
         {
           "file": "17-product-smesitel-requested-desktop.png",
-          "bytes": 75637,
+          "bytes": 289474,
           "dimensions": {
             "width": 1440,
-            "height": 1200
+            "height": 2655
           },
-          "title": "StroyRayon",
+          "title": "Ашкана смесители Basic | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nБашкы бет\n/Каталог\n/Сантехника\n/Смесителдер\n/Ашкана смесителдери\n/Ашкана смесители Basic\nSanLux\nБар\nАшкана смесители Basic\nSKU\nSR-MIX-KIT-BASIC\nБренд\nSanLux\nМинималдуу заказ\n1 даана\nРейтинг 4.6 / 5, 16 пикир\n1 800 сом\n2 390 сом\n/ даана\nАкция\n\nБир тешик монтаж үчүн ашкана мойкасына ылайык смеситель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nМатериал\nЛатунь/цинк аралашмасы\nТүсү\nХром\nМонтаж\nБир тешик\nКомплект\nШлангдар\nКолдонуу боюнча кеңеш\n\nАшкана мойкасы үчүн.\n\nЖеткирүү жана кепилдик\nТаңгак\nКутуд",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "17-product-smesitel-requested-tablet.png",
-          "bytes": 60104,
+          "bytes": 289758,
           "dimensions": {
             "width": 768,
-            "height": 1200
+            "height": 6259
           },
-          "title": "StroyRayon",
+          "title": "Ашкана смесители Basic | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nБашкы бет\n/Каталог\n/Сантехника\n/Смесителдер\n/Ашкана смесителдери\n/Ашкана смесители Basic\nSanLux\nБар\nАшкана смесители Basic\nSKU\nSR-MIX-KIT-BASIC\nБренд\nSanLux\nМинималдуу заказ\n1 даана\nРейтинг 4.6 / 5, 16 пикир\n1 800 сом\n2 390 сом\n/ даана\nАкция\n\nБир тешик монтаж үчүн ашкана мойкасына ылайык смеситель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nМатериал\nЛатунь/цинк аралашмасы\nТүсү\nХром\nМонтаж\nБир тешик\nКомплект\nШлангдар\nКолдонуу боюнча кеңеш\n\nАшкана мойкасы үчүн.\n\nЖеткирүү жана кепилдик\nТаңгак\nКутуда смеситель, шлангдар жана монтаж комплекти.\nЖеткирүү\nБишкек ичинде ",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "17-product-smesitel-requested-mobile.png",
-          "bytes": 43927,
+          "bytes": 228843,
           "dimensions": {
             "width": 390,
-            "height": 844
+            "height": 5556
           },
-          "title": "StroyRayon",
+          "title": "Ашкана смесители Basic | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nТовар табылган жок\n\nКаталогдон башка товарды тандап көрүңүз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nБашкы бет\n/Каталог\n/Сантехника\n/Смесителдер\n/Ашкана смесителдери\n/Ашкана смесители Basic\nSanLux\nБар\nАшкана смесители Basic\nSKU\nSR-MIX-KIT-BASIC\nБренд\nSanLux\nМинималдуу заказ\n1 даана\nРейтинг 4.6 / 5, 16 пикир\n1 800 сом\n2 390 сом\n/ даана\nАкция\n\nБир тешик монтаж үчүн ашкана мойкасына ылайык смеситель.\n\nСебетке кошуу\nWhatsApp аркылуу суроо берүү\n\nТак көлөмдү билбей жатсаңыз, менеджерге өлчөмдөрдү жибериңиз. Биз эсептеп беребиз.\n\nХарактеристика\nМатериал\nЛатунь/цинк аралашмасы\nТүсү\nХром\nМонтаж\nБир тешик\nКомплект\nШлангдар\nКолдонуу боюнча кеңеш\n\nАшкана мойкасы үчүн.\n\nЖеткирүү жана кепилдик\nТаңгак\nКутуда смеситель, шлангдар жана монтаж комплекти.\nЖеткирүү\nБишкек ичинде жана региондорго жеткирүү көлөм, салмак жана дарек боюнча менеджер менен такталат.\nКепилдик\nТовар кабыл алууда бүтүндүгү",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -820,10 +795,10 @@
       "captures": [
         {
           "file": "18-product-vent-grid-desktop.png",
-          "bytes": 307404,
+          "bytes": 285309,
           "dimensions": {
             "width": 1440,
-            "height": 2901
+            "height": 2648
           },
           "title": "Вентиляция торчосу 150×150 мм | StroyRayon",
           "brokenImages": 0,
@@ -833,10 +808,10 @@
         },
         {
           "file": "18-product-vent-grid-tablet.png",
-          "bytes": 320970,
+          "bytes": 305538,
           "dimensions": {
             "width": 768,
-            "height": 7073
+            "height": 7209
           },
           "title": "Вентиляция торчосу 150×150 мм | StroyRayon",
           "brokenImages": 0,
@@ -846,10 +821,10 @@
         },
         {
           "file": "18-product-vent-grid-mobile.png",
-          "bytes": 227831,
+          "bytes": 244779,
           "dimensions": {
             "width": 390,
-            "height": 5054
+            "height": 6294
           },
           "title": "Вентиляция торчосу 150×150 мм | StroyRayon",
           "brokenImages": 0,
@@ -866,10 +841,10 @@
       "captures": [
         {
           "file": "19-search-ppr-desktop.png",
-          "bytes": 264866,
+          "bytes": 266096,
           "dimensions": {
             "width": 1440,
-            "height": 2795
+            "height": 2726
           },
           "title": "Издөө: ппр | StroyRayon",
           "brokenImages": 0,
@@ -892,10 +867,10 @@
         },
         {
           "file": "19-search-ppr-mobile.png",
-          "bytes": 248731,
+          "bytes": 249426,
           "dimensions": {
             "width": 390,
-            "height": 5028
+            "height": 5113
           },
           "title": "Издөө: ппр | StroyRayon",
           "brokenImages": 0,
@@ -912,10 +887,10 @@
       "captures": [
         {
           "file": "20-search-kabel-desktop.png",
-          "bytes": 283467,
+          "bytes": 284496,
           "dimensions": {
             "width": 1440,
-            "height": 3348
+            "height": 3279
           },
           "title": "Издөө: кабель | StroyRayon",
           "brokenImages": 0,
@@ -938,10 +913,10 @@
         },
         {
           "file": "20-search-kabel-mobile.png",
-          "bytes": 249578,
+          "bytes": 250113,
           "dimensions": {
             "width": 390,
-            "height": 5419
+            "height": 5505
           },
           "title": "Издөө: кабель | StroyRayon",
           "brokenImages": 0,
@@ -958,10 +933,10 @@
       "captures": [
         {
           "file": "21-search-plaster-desktop.png",
-          "bytes": 194622,
+          "bytes": 195923,
           "dimensions": {
             "width": 1440,
-            "height": 2045
+            "height": 1976
           },
           "title": "Издөө: штукатурка | StroyRayon",
           "brokenImages": 0,
@@ -971,10 +946,10 @@
         },
         {
           "file": "21-search-plaster-tablet.png",
-          "bytes": 311461,
+          "bytes": 312260,
           "dimensions": {
             "width": 768,
-            "height": 8674
+            "height": 8760
           },
           "title": "Издөө: штукатурка | StroyRayon",
           "brokenImages": 0,
@@ -984,10 +959,10 @@
         },
         {
           "file": "21-search-plaster-mobile.png",
-          "bytes": 174243,
+          "bytes": 174985,
           "dimensions": {
             "width": 390,
-            "height": 3458
+            "height": 3544
           },
           "title": "Издөө: штукатурка | StroyRayon",
           "brokenImages": 0,
@@ -1004,10 +979,10 @@
       "captures": [
         {
           "file": "22-search-vent-desktop.png",
-          "bytes": 228549,
+          "bytes": 229778,
           "dimensions": {
             "width": 1440,
-            "height": 2727
+            "height": 2658
           },
           "title": "Издөө: вентиляция | StroyRayon",
           "brokenImages": 0,
@@ -1030,10 +1005,10 @@
         },
         {
           "file": "22-search-vent-mobile.png",
-          "bytes": 196947,
+          "bytes": 197646,
           "dimensions": {
             "width": 390,
-            "height": 4174
+            "height": 4259
           },
           "title": "Издөө: вентиляция | StroyRayon",
           "brokenImages": 0,
@@ -1050,10 +1025,10 @@
       "captures": [
         {
           "file": "23-search-warm-floor-desktop.png",
-          "bytes": 237378,
+          "bytes": 238352,
           "dimensions": {
             "width": 1440,
-            "height": 2707
+            "height": 2638
           },
           "title": "Издөө: теплый пол | StroyRayon",
           "brokenImages": 0,
@@ -1076,10 +1051,10 @@
         },
         {
           "file": "23-search-warm-floor-mobile.png",
-          "bytes": 205202,
+          "bytes": 205890,
           "dimensions": {
             "width": 390,
-            "height": 4285
+            "height": 4370
           },
           "title": "Издөө: теплый пол | StroyRayon",
           "brokenImages": 0,
@@ -1096,40 +1071,40 @@
       "captures": [
         {
           "file": "24-cart-empty-desktop.png",
-          "bytes": 72917,
+          "bytes": 75241,
           "dimensions": {
             "width": 1440,
             "height": 1200
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "24-cart-empty-tablet.png",
-          "bytes": 58943,
+          "bytes": 59499,
           "dimensions": {
             "width": 768,
             "height": 1200
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "24-cart-empty-mobile.png",
-          "bytes": 43001,
+          "bytes": 40833,
           "dimensions": {
             "width": 390,
-            "height": 844
+            "height": 1065
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nСебет бош\n\nКеректүү товарларды каталогдон кошуп баштаңыз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -1142,40 +1117,40 @@
       "captures": [
         {
           "file": "25-checkout-empty-desktop.png",
-          "bytes": 82690,
+          "bytes": 84709,
           "dimensions": {
             "width": 1440,
             "height": 1200
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n0\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "25-checkout-empty-tablet.png",
-          "bytes": 62699,
+          "bytes": 63138,
           "dimensions": {
             "width": 768,
             "height": 1200
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "25-checkout-empty-mobile.png",
-          "bytes": 46948,
+          "bytes": 47133,
           "dimensions": {
             "width": 390,
-            "height": 844
+            "height": 1103
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
+          "textSample": "StroyRayon\nЗаказ берүү үчүн товар жок\n\nАдегенде себетке керектүү товарларды кошуңуз.\n\nКаталогго өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -1189,10 +1164,10 @@
       "captures": [
         {
           "file": "26-product-ppr-25mm-desktop.png",
-          "bytes": 288797,
+          "bytes": 271493,
           "dimensions": {
             "width": 1440,
-            "height": 3126
+            "height": 2997
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -1202,10 +1177,10 @@
         },
         {
           "file": "26-product-ppr-25mm-tablet.png",
-          "bytes": 326138,
+          "bytes": 303582,
           "dimensions": {
             "width": 768,
-            "height": 7486
+            "height": 7616
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -1215,10 +1190,10 @@
         },
         {
           "file": "26-product-ppr-25mm-mobile.png",
-          "bytes": 247348,
+          "bytes": 258888,
           "dimensions": {
             "width": 390,
-            "height": 5512
+            "height": 6739
           },
           "title": "ППР түтүк PN20 | StroyRayon",
           "brokenImages": 0,
@@ -1237,40 +1212,40 @@
       "captures": [
         {
           "file": "27-cart-ppr-25mm-desktop.png",
-          "bytes": 94603,
+          "bytes": 94898,
           "dimensions": {
             "width": 1440,
             "height": 1200
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n1\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n1\n+\n65 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n1\nЖалпы сумма\n65 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon",
+          "textSample": "StroyRayon\nКаталог\nЖеткирүү\nБайланыш\nСебет\n1\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nМатериалдар тизмеси?\nWhatsAppка жөнөтүңүз\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n1\n+\n65 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n1\nЖалпы сумма\n65 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon",
           "viewport": "desktop",
           "viewportLabel": "Desktop 1440x1200"
         },
         {
           "file": "27-cart-ppr-25mm-tablet.png",
-          "bytes": 80010,
+          "bytes": 77165,
           "dimensions": {
             "width": 768,
-            "height": 1200
+            "height": 1316
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n2\n+\n130 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n2\nЖалпы сумма\n130 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет (2)",
+          "textSample": "StroyRayon\nКаталог\nKG\nRU\nКурулуш\nИнженердик сантехника\nСантехника\nЭлектрика\nШаймандар\nБекиткич\nБоёк\nВентиляция\nЖылуу пол\nБак/чарба\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n2\n+\n130 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n2\nЖалпы сумма\n130 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет (2)",
           "viewport": "tablet",
           "viewportLabel": "Tablet 768x1200"
         },
         {
           "file": "27-cart-ppr-25mm-mobile.png",
-          "bytes": 63163,
+          "bytes": 66226,
           "dimensions": {
             "width": 390,
-            "height": 1306
+            "height": 1655
           },
           "title": "Себет | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n3\n+\n195 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n3\nЖалпы сумма\n195 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700 123 456WhatsApp@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет (3)",
+          "textSample": "StroyRayon\nБашкы бет\n/Себет\nСебет\n\nСанын тактап, заказ берүү барагы аркылуу WhatsAppка даяр билдирүү жөнөтүңүз.\n\nППР түтүк PN20\n\nӨлчөм: 25 мм · SKU: SR-PIP-PN20-025\n\nТаңгак: 4 м\n\n65 сом / метр\n\n-\n3\n+\n195 сом\nӨчүрүү\nЗаказ жыйынтыгы\nТовар саны\n3\nЖалпы сумма\n195 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nЗаказга өтүү\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 700 123 456\nWhatsApp\n@StroyRayon\nБашкы\nКаталог\nЖеткирүү\nСебет (3)",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
@@ -1285,10 +1260,10 @@
       "captures": [
         {
           "file": "28-checkout-ppr-25mm-desktop.png",
-          "bytes": 130889,
+          "bytes": 131097,
           "dimensions": {
             "width": 1440,
-            "height": 1640
+            "height": 1571
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
@@ -1298,10 +1273,10 @@
         },
         {
           "file": "28-checkout-ppr-25mm-tablet.png",
-          "bytes": 103771,
+          "bytes": 103558,
           "dimensions": {
             "width": 768,
-            "height": 1923
+            "height": 2045
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
@@ -1311,14 +1286,14 @@
         },
         {
           "file": "28-checkout-ppr-25mm-mobile.png",
-          "bytes": 89346,
+          "bytes": 88667,
           "dimensions": {
             "width": 390,
-            "height": 1918
+            "height": 2188
           },
           "title": "Заказ берүү | StroyRayon",
           "brokenImages": 0,
-          "textSample": "StroyRayon\nБашкы бет\n/Себет\n/Заказ берүү\nЗаказ берүү\n\nБайланыш маалыматыңызды жазыңыз. Товарлар жана жеткирүү шарттары менеджер менен WhatsApp аркылуу такталат.\n\nБайланыш маалыматы\nАты-жөнү\nТелефон\nЖеткирүү дареги\nДарек/регион\nКомментарий\nЗаказдын курамы\nСаламатсызбы, StroyRayon!\nЗаказ бергим келет.\n\nАты-жөнү: \nТелефон: \nДарек/регион: \n\nТоварлар:\n1. ППР түтүк PN20 (25 мм), SKU: SR-PIP-PN20-025, таңгак: 4 м - 6 метр x 65 сом = 390 сом\n\nЖалпы сумма: 390 сом\nКомментарий: Жок\nWhatsApp аркылуу заказ жөнөтүү\nЗаказ жыйынтыгы\nТовар саны\n6\nЖалпы сумма\n390 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталогЖеткирүү жана төлөмКеңештер\nБайланыш\n+996 700",
+          "textSample": "StroyRayon\nБашкы бет\n/Себет\n/Заказ берүү\nЗаказ берүү\n\nБайланыш маалыматыңызды жазыңыз. Товарлар жана жеткирүү шарттары менеджер менен WhatsApp аркылуу такталат.\n\nБайланыш маалыматы\nАты-жөнү\nТелефон\nЖеткирүү дареги\nДарек/регион\nКомментарий\nЗаказдын курамы\nСаламатсызбы, StroyRayon!\nЗаказ бергим келет.\n\nАты-жөнү: \nТелефон: \nДарек/регион: \n\nТоварлар:\n1. ППР түтүк PN20 (25 мм), SKU: SR-PIP-PN20-025, таңгак: 4 м - 6 метр x 65 сом = 390 сом\n\nЖалпы сумма: 390 сом\nКомментарий: Жок\nWhatsApp аркылуу заказ жөнөтүү\nЗаказ жыйынтыгы\nТовар саны\n6\nЖалпы сумма\n390 сом\n\nЖеткирүү баасы регион жана көлөм боюнча менеджер тарабынан такталат.\n\nStroyRayon\n\nКурулуш материалдарын тандоо, заказ кылуу жана региондорго жеткирүү үчүн ыңгайлуу онлайн каталог.\n\nБөлүмдөр\nКаталог\nЖеткирүү жана төлөм\nКеңештер\nБайланыш\n+996 7",
           "viewport": "mobile",
           "viewportLabel": "Mobile 390x844"
         }
