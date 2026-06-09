@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StroyRayon Visual Audit</title>
+  <style>
+    :root { color-scheme: light; --bg:#f7f5ef; --panel:#fff; --ink:#10251d; --muted:#60716a; --line:#ddd4c4; --brand:#1f6b4a; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:32px; background:#fff; border-bottom:1px solid var(--line); }
+    main { padding:24px 32px 48px; }
+    h1 { margin:0 0 8px; }
+    h2 { margin:0 0 8px; }
+    code { background:#eef3ef; padding:2px 5px; border-radius:4px; }
+    .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:20px; }
+    .metric { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .metric strong { display:block; font-size:28px; color:var(--brand); }
+    .route { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; margin:18px 0; }
+    .comment { color:var(--muted); }
+    .shots { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; align-items:start; }
+    figure { margin:0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#fafafa; }
+    figcaption { padding:8px 10px; font-size:13px; color:var(--muted); border-bottom:1px solid var(--line); }
+    img { display:block; width:100%; height:360px; object-fit:contain; background:#f7f7f7; }
+    table { border-collapse:collapse; width:100%; background:#fff; border:1px solid var(--line); }
+    th,td { text-align:left; vertical-align:top; padding:10px; border-bottom:1px solid var(--line); }
+    th { background:#eef3ef; }
+    .note { background:#fff7df; border:1px solid #eed48a; border-radius:8px; padding:14px; margin:18px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>StroyRayon Visual Audit</h1>
+    <p>Generated from local dev server: <code>http://127.0.0.1:5173</code></p>
+    <div class="summary">
+      <div class="metric"><strong>84</strong>screenshots</div>
+      <div class="metric"><strong>0</strong>critical issues</div>
+      <div class="metric"><strong>3</strong>important issues</div>
+      <div class="metric"><strong>0</strong>minor issues</div>
+      <div class="metric"><strong>0</strong>detected broken images</div>
+    </div>
+  </header>
+  <main>
+    <section class="note">
+      <strong>Audit scope:</strong> screenshots plus safe visual observations. Product data, slugs, prices, cart logic, and variant logic were not changed. Safe fixes applied: mobile product details bottom padding, cart item responsive layout, checkout order preview wrapping, cart summary spacing, and empty-state card padding.
+    </section>
+    <section>
+      <h2>Issues</h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Page</th><th>Viewport</th><th>Problem</th><th>Suggested fix</th><th>Screenshot</th></tr></thead>
+        <tbody>
+    <tr>
+      <td>Important</td>
+      <td><code>/product/kabel-vvgng</code></td>
+      <td>All</td>
+      <td>Requested audit slug renders an empty product state; current product slug appears to be /product/kabel-vvgng-3x2-5.</td>
+      <td>Add an alias/redirect only if this short slug is expected to be public.</td>
+      <td><code>15-product-kabel-requested-desktop.png</code></td>
+    </tr>
+  
+
+    <tr>
+      <td>Important</td>
+      <td><code>/product/gips-shtukaturka</code></td>
+      <td>All</td>
+      <td>Requested audit slug renders an empty product state; current product slug appears to be /product/gips-shtukaturkasy-30kg.</td>
+      <td>Add an alias/redirect only if this short slug is expected to be public.</td>
+      <td><code>16-product-gips-requested-desktop.png</code></td>
+    </tr>
+  
+
+    <tr>
+      <td>Important</td>
+      <td><code>/product/smesitel-kuhnya</code></td>
+      <td>All</td>
+      <td>Requested audit slug renders an empty product state; current product slug appears to be /product/ashkana-smesiteli-basic.</td>
+      <td>Add an alias/redirect only if this short slug is expected to be public.</td>
+      <td><code>17-product-smesitel-requested-desktop.png</code></td>
+    </tr>
+  </tbody>
+      </table>
+    </section>
+    
+    <section class="route">
+      <h2>Home</h2>
+      <p><code>/</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x5218</figcaption>
+            <a href="screenshots/01-home-desktop.png"><img src="screenshots/01-home-desktop.png" alt="Home Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/01-home-tablet.png"><img src="screenshots/01-home-tablet.png" alt="Home Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x9000</figcaption>
+            <a href="screenshots/01-home-mobile.png"><img src="screenshots/01-home-mobile.png" alt="Home Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog</h2>
+      <p><code>/catalog</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1985</figcaption>
+            <a href="screenshots/02-catalog-desktop.png"><img src="screenshots/02-catalog-desktop.png" alt="Catalog Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x3011</figcaption>
+            <a href="screenshots/02-catalog-tablet.png"><img src="screenshots/02-catalog-tablet.png" alt="Catalog Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5468</figcaption>
+            <a href="screenshots/02-catalog-mobile.png"><img src="screenshots/02-catalog-mobile.png" alt="Catalog Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / stroymaterial</h2>
+      <p><code>/catalog/stroymaterial</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x5507</figcaption>
+            <a href="screenshots/03-catalog-stroymaterial-desktop.png"><img src="screenshots/03-catalog-stroymaterial-desktop.png" alt="Catalog / stroymaterial Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/03-catalog-stroymaterial-tablet.png"><img src="screenshots/03-catalog-stroymaterial-tablet.png" alt="Catalog / stroymaterial Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x9000</figcaption>
+            <a href="screenshots/03-catalog-stroymaterial-mobile.png"><img src="screenshots/03-catalog-stroymaterial-mobile.png" alt="Catalog / stroymaterial Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / stroymaterial / profilder</h2>
+      <p><code>/catalog/stroymaterial/profilder</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2522</figcaption>
+            <a href="screenshots/04-catalog-profilder-desktop.png"><img src="screenshots/04-catalog-profilder-desktop.png" alt="Catalog / stroymaterial / profilder Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/04-catalog-profilder-tablet.png"><img src="screenshots/04-catalog-profilder-tablet.png" alt="Catalog / stroymaterial / profilder Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x4211</figcaption>
+            <a href="screenshots/04-catalog-profilder-mobile.png"><img src="screenshots/04-catalog-profilder-mobile.png" alt="Catalog / stroymaterial / profilder Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / inzhenerdik-santehnika</h2>
+      <p><code>/catalog/inzhenerdik-santehnika</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x5796</figcaption>
+            <a href="screenshots/05-catalog-engineering-desktop.png"><img src="screenshots/05-catalog-engineering-desktop.png" alt="Catalog / inzhenerdik-santehnika Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/05-catalog-engineering-tablet.png"><img src="screenshots/05-catalog-engineering-tablet.png" alt="Catalog / inzhenerdik-santehnika Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x9000</figcaption>
+            <a href="screenshots/05-catalog-engineering-mobile.png"><img src="screenshots/05-catalog-engineering-mobile.png" alt="Catalog / inzhenerdik-santehnika Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / PPR pipes and fittings</h2>
+      <p><code>/catalog/inzhenerdik-santehnika/ppr-trubalar-fitingder</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3517</figcaption>
+            <a href="screenshots/06-catalog-ppr-desktop.png"><img src="screenshots/06-catalog-ppr-desktop.png" alt="Catalog / PPR pipes and fittings Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/06-catalog-ppr-tablet.png"><img src="screenshots/06-catalog-ppr-tablet.png" alt="Catalog / PPR pipes and fittings Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5946</figcaption>
+            <a href="screenshots/06-catalog-ppr-mobile.png"><img src="screenshots/06-catalog-ppr-mobile.png" alt="Catalog / PPR pipes and fittings Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / elektrika</h2>
+      <p><code>/catalog/elektrika</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x5399</figcaption>
+            <a href="screenshots/07-catalog-elektrika-desktop.png"><img src="screenshots/07-catalog-elektrika-desktop.png" alt="Catalog / elektrika Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/07-catalog-elektrika-tablet.png"><img src="screenshots/07-catalog-elektrika-tablet.png" alt="Catalog / elektrika Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x9000</figcaption>
+            <a href="screenshots/07-catalog-elektrika-mobile.png"><img src="screenshots/07-catalog-elektrika-mobile.png" alt="Catalog / elektrika Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / ventilyaciya</h2>
+      <p><code>/catalog/ventilyaciya</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3365</figcaption>
+            <a href="screenshots/08-catalog-ventilyaciya-desktop.png"><img src="screenshots/08-catalog-ventilyaciya-desktop.png" alt="Catalog / ventilyaciya Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/08-catalog-ventilyaciya-tablet.png"><img src="screenshots/08-catalog-ventilyaciya-tablet.png" alt="Catalog / ventilyaciya Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5362</figcaption>
+            <a href="screenshots/08-catalog-ventilyaciya-mobile.png"><img src="screenshots/08-catalog-ventilyaciya-mobile.png" alt="Catalog / ventilyaciya Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / instrument</h2>
+      <p><code>/catalog/instrument</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3971</figcaption>
+            <a href="screenshots/09-catalog-instrument-desktop.png"><img src="screenshots/09-catalog-instrument-desktop.png" alt="Catalog / instrument Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/09-catalog-instrument-tablet.png"><img src="screenshots/09-catalog-instrument-tablet.png" alt="Catalog / instrument Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x7332</figcaption>
+            <a href="screenshots/09-catalog-instrument-mobile.png"><img src="screenshots/09-catalog-instrument-mobile.png" alt="Catalog / instrument Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / teplyi-pol</h2>
+      <p><code>/catalog/teplyi-pol</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3205</figcaption>
+            <a href="screenshots/10-catalog-teplyi-pol-desktop.png"><img src="screenshots/10-catalog-teplyi-pol-desktop.png" alt="Catalog / teplyi-pol Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/10-catalog-teplyi-pol-tablet.png"><img src="screenshots/10-catalog-teplyi-pol-tablet.png" alt="Catalog / teplyi-pol Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5890</figcaption>
+            <a href="screenshots/10-catalog-teplyi-pol-mobile.png"><img src="screenshots/10-catalog-teplyi-pol-mobile.png" alt="Catalog / teplyi-pol Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / bak-koroo</h2>
+      <p><code>/catalog/bak-koroo</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3918</figcaption>
+            <a href="screenshots/11-catalog-bak-koroo-desktop.png"><img src="screenshots/11-catalog-bak-koroo-desktop.png" alt="Catalog / bak-koroo Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/11-catalog-bak-koroo-tablet.png"><img src="screenshots/11-catalog-bak-koroo-tablet.png" alt="Catalog / bak-koroo Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x6689</figcaption>
+            <a href="screenshots/11-catalog-bak-koroo-mobile.png"><img src="screenshots/11-catalog-bak-koroo-mobile.png" alt="Catalog / bak-koroo Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Catalog / boiok-tush-kagaz</h2>
+      <p><code>/catalog/boiok-tush-kagaz</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3966</figcaption>
+            <a href="screenshots/12-catalog-paint-desktop.png"><img src="screenshots/12-catalog-paint-desktop.png" alt="Catalog / boiok-tush-kagaz Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/12-catalog-paint-tablet.png"><img src="screenshots/12-catalog-paint-tablet.png" alt="Catalog / boiok-tush-kagaz Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x6787</figcaption>
+            <a href="screenshots/12-catalog-paint-mobile.png"><img src="screenshots/12-catalog-paint-mobile.png" alt="Catalog / boiok-tush-kagaz Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / ppr-truba-pn20</h2>
+      <p><code>/product/ppr-truba-pn20</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3126</figcaption>
+            <a href="screenshots/13-product-ppr-truba-desktop.png"><img src="screenshots/13-product-ppr-truba-desktop.png" alt="Product / ppr-truba-pn20 Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x7486</figcaption>
+            <a href="screenshots/13-product-ppr-truba-tablet.png"><img src="screenshots/13-product-ppr-truba-tablet.png" alt="Product / ppr-truba-pn20 Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5512</figcaption>
+            <a href="screenshots/13-product-ppr-truba-mobile.png"><img src="screenshots/13-product-ppr-truba-mobile.png" alt="Product / ppr-truba-pn20 Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / ppr-ugolok-90</h2>
+      <p><code>/product/ppr-ugolok-90</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3101</figcaption>
+            <a href="screenshots/14-product-ppr-ugolok-desktop.png"><img src="screenshots/14-product-ppr-ugolok-desktop.png" alt="Product / ppr-ugolok-90 Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x7513</figcaption>
+            <a href="screenshots/14-product-ppr-ugolok-tablet.png"><img src="screenshots/14-product-ppr-ugolok-tablet.png" alt="Product / ppr-ugolok-90 Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5527</figcaption>
+            <a href="screenshots/14-product-ppr-ugolok-mobile.png"><img src="screenshots/14-product-ppr-ugolok-mobile.png" alt="Product / ppr-ugolok-90 Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / kabel-vvgng requested slug</h2>
+      <p><code>/product/kabel-vvgng</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/15-product-kabel-requested-desktop.png"><img src="screenshots/15-product-kabel-requested-desktop.png" alt="Product / kabel-vvgng requested slug Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/15-product-kabel-requested-tablet.png"><img src="screenshots/15-product-kabel-requested-tablet.png" alt="Product / kabel-vvgng requested slug Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x844</figcaption>
+            <a href="screenshots/15-product-kabel-requested-mobile.png"><img src="screenshots/15-product-kabel-requested-mobile.png" alt="Product / kabel-vvgng requested slug Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / gips-shtukaturka requested slug</h2>
+      <p><code>/product/gips-shtukaturka</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/16-product-gips-requested-desktop.png"><img src="screenshots/16-product-gips-requested-desktop.png" alt="Product / gips-shtukaturka requested slug Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/16-product-gips-requested-tablet.png"><img src="screenshots/16-product-gips-requested-tablet.png" alt="Product / gips-shtukaturka requested slug Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x844</figcaption>
+            <a href="screenshots/16-product-gips-requested-mobile.png"><img src="screenshots/16-product-gips-requested-mobile.png" alt="Product / gips-shtukaturka requested slug Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / smesitel-kuhnya requested slug</h2>
+      <p><code>/product/smesitel-kuhnya</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/17-product-smesitel-requested-desktop.png"><img src="screenshots/17-product-smesitel-requested-desktop.png" alt="Product / smesitel-kuhnya requested slug Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/17-product-smesitel-requested-tablet.png"><img src="screenshots/17-product-smesitel-requested-tablet.png" alt="Product / smesitel-kuhnya requested slug Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x844</figcaption>
+            <a href="screenshots/17-product-smesitel-requested-mobile.png"><img src="screenshots/17-product-smesitel-requested-mobile.png" alt="Product / smesitel-kuhnya requested slug Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Product / ventilation grille</h2>
+      <p><code>/product/ventilyaciya-reshetkasy-150x150mm</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2901</figcaption>
+            <a href="screenshots/18-product-vent-grid-desktop.png"><img src="screenshots/18-product-vent-grid-desktop.png" alt="Product / ventilation grille Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x7073</figcaption>
+            <a href="screenshots/18-product-vent-grid-tablet.png"><img src="screenshots/18-product-vent-grid-tablet.png" alt="Product / ventilation grille Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5054</figcaption>
+            <a href="screenshots/18-product-vent-grid-mobile.png"><img src="screenshots/18-product-vent-grid-mobile.png" alt="Product / ventilation grille Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Search / ppr</h2>
+      <p><code>/search?q=%D0%BF%D0%BF%D1%80</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2795</figcaption>
+            <a href="screenshots/19-search-ppr-desktop.png"><img src="screenshots/19-search-ppr-desktop.png" alt="Search / ppr Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/19-search-ppr-tablet.png"><img src="screenshots/19-search-ppr-tablet.png" alt="Search / ppr Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5028</figcaption>
+            <a href="screenshots/19-search-ppr-mobile.png"><img src="screenshots/19-search-ppr-mobile.png" alt="Search / ppr Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Search / cable</h2>
+      <p><code>/search?q=%D0%BA%D0%B0%D0%B1%D0%B5%D0%BB%D1%8C</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3348</figcaption>
+            <a href="screenshots/20-search-kabel-desktop.png"><img src="screenshots/20-search-kabel-desktop.png" alt="Search / cable Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/20-search-kabel-tablet.png"><img src="screenshots/20-search-kabel-tablet.png" alt="Search / cable Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5419</figcaption>
+            <a href="screenshots/20-search-kabel-mobile.png"><img src="screenshots/20-search-kabel-mobile.png" alt="Search / cable Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Search / plaster</h2>
+      <p><code>/search?q=%D1%88%D1%82%D1%83%D0%BA%D0%B0%D1%82%D1%83%D1%80%D0%BA%D0%B0</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2045</figcaption>
+            <a href="screenshots/21-search-plaster-desktop.png"><img src="screenshots/21-search-plaster-desktop.png" alt="Search / plaster Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x8674</figcaption>
+            <a href="screenshots/21-search-plaster-tablet.png"><img src="screenshots/21-search-plaster-tablet.png" alt="Search / plaster Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x3458</figcaption>
+            <a href="screenshots/21-search-plaster-mobile.png"><img src="screenshots/21-search-plaster-mobile.png" alt="Search / plaster Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Search / ventilation</h2>
+      <p><code>/search?q=%D0%B2%D0%B5%D0%BD%D1%82%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D1%8F</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2727</figcaption>
+            <a href="screenshots/22-search-vent-desktop.png"><img src="screenshots/22-search-vent-desktop.png" alt="Search / ventilation Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/22-search-vent-tablet.png"><img src="screenshots/22-search-vent-tablet.png" alt="Search / ventilation Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x4174</figcaption>
+            <a href="screenshots/22-search-vent-mobile.png"><img src="screenshots/22-search-vent-mobile.png" alt="Search / ventilation Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Search / warm floor</h2>
+      <p><code>/search?q=%D1%82%D0%B5%D0%BF%D0%BB%D1%8B%D0%B9%20%D0%BF%D0%BE%D0%BB</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x2707</figcaption>
+            <a href="screenshots/23-search-warm-floor-desktop.png"><img src="screenshots/23-search-warm-floor-desktop.png" alt="Search / warm floor Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x9000</figcaption>
+            <a href="screenshots/23-search-warm-floor-tablet.png"><img src="screenshots/23-search-warm-floor-tablet.png" alt="Search / warm floor Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x4285</figcaption>
+            <a href="screenshots/23-search-warm-floor-mobile.png"><img src="screenshots/23-search-warm-floor-mobile.png" alt="Search / warm floor Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Cart / empty</h2>
+      <p><code>/cart</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/24-cart-empty-desktop.png"><img src="screenshots/24-cart-empty-desktop.png" alt="Cart / empty Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/24-cart-empty-tablet.png"><img src="screenshots/24-cart-empty-tablet.png" alt="Cart / empty Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x844</figcaption>
+            <a href="screenshots/24-cart-empty-mobile.png"><img src="screenshots/24-cart-empty-mobile.png" alt="Cart / empty Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Checkout / empty</h2>
+      <p><code>/checkout</code></p>
+      <p class="comment">Visual pass captured for layout, images, typography, and responsive behavior review.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/25-checkout-empty-desktop.png"><img src="screenshots/25-checkout-empty-desktop.png" alt="Checkout / empty Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/25-checkout-empty-tablet.png"><img src="screenshots/25-checkout-empty-tablet.png" alt="Checkout / empty Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x844</figcaption>
+            <a href="screenshots/25-checkout-empty-mobile.png"><img src="screenshots/25-checkout-empty-mobile.png" alt="Checkout / empty Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Interactive / PPR 25 mm selected</h2>
+      <p><code>/product/ppr-truba-pn20</code></p>
+      <p class="comment">Interactive state captured after selecting 25 mm variant and/or placing it into cart.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x3126</figcaption>
+            <a href="screenshots/26-product-ppr-25mm-desktop.png"><img src="screenshots/26-product-ppr-25mm-desktop.png" alt="Interactive / PPR 25 mm selected Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x7486</figcaption>
+            <a href="screenshots/26-product-ppr-25mm-tablet.png"><img src="screenshots/26-product-ppr-25mm-tablet.png" alt="Interactive / PPR 25 mm selected Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x5512</figcaption>
+            <a href="screenshots/26-product-ppr-25mm-mobile.png"><img src="screenshots/26-product-ppr-25mm-mobile.png" alt="Interactive / PPR 25 mm selected Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Interactive / cart with PPR 25 mm</h2>
+      <p><code>/cart</code></p>
+      <p class="comment">Interactive state captured after selecting 25 mm variant and/or placing it into cart.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1200</figcaption>
+            <a href="screenshots/27-cart-ppr-25mm-desktop.png"><img src="screenshots/27-cart-ppr-25mm-desktop.png" alt="Interactive / cart with PPR 25 mm Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1200</figcaption>
+            <a href="screenshots/27-cart-ppr-25mm-tablet.png"><img src="screenshots/27-cart-ppr-25mm-tablet.png" alt="Interactive / cart with PPR 25 mm Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x1306</figcaption>
+            <a href="screenshots/27-cart-ppr-25mm-mobile.png"><img src="screenshots/27-cart-ppr-25mm-mobile.png" alt="Interactive / cart with PPR 25 mm Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+
+    <section class="route">
+      <h2>Interactive / checkout with PPR 25 mm</h2>
+      <p><code>/checkout</code></p>
+      <p class="comment">Interactive state captured after selecting 25 mm variant and/or placing it into cart.</p>
+      <div class="shots">
+        
+          <figure>
+            <figcaption>Desktop 1440x1200 - 1440x1640</figcaption>
+            <a href="screenshots/28-checkout-ppr-25mm-desktop.png"><img src="screenshots/28-checkout-ppr-25mm-desktop.png" alt="Interactive / checkout with PPR 25 mm Desktop 1440x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Tablet 768x1200 - 768x1923</figcaption>
+            <a href="screenshots/28-checkout-ppr-25mm-tablet.png"><img src="screenshots/28-checkout-ppr-25mm-tablet.png" alt="Interactive / checkout with PPR 25 mm Tablet 768x1200 screenshot"></a>
+          </figure>
+        
+          <figure>
+            <figcaption>Mobile 390x844 - 390x1918</figcaption>
+            <a href="screenshots/28-checkout-ppr-25mm-mobile.png"><img src="screenshots/28-checkout-ppr-25mm-mobile.png" alt="Interactive / checkout with PPR 25 mm Mobile 390x844 screenshot"></a>
+          </figure>
+        
+      </div>
+    </section>
+  
+  </main>
+</body>
+</html>
