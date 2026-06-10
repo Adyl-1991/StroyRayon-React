@@ -13,7 +13,7 @@
       "captures": [
         {
           "file": "01-home-desktop.png",
-          "bytes": 1395126,
+          "bytes": 1536348,
           "dimensions": {
             "width": 1440,
             "height": 5149
@@ -26,7 +26,7 @@
         },
         {
           "file": "01-home-tablet.png",
-          "bytes": 933018,
+          "bytes": 1680818,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -39,7 +39,7 @@
         },
         {
           "file": "01-home-mobile.png",
-          "bytes": 664534,
+          "bytes": 719539,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -105,7 +105,7 @@
       "captures": [
         {
           "file": "03-catalog-stroymaterial-desktop.png",
-          "bytes": 677292,
+          "bytes": 756365,
           "dimensions": {
             "width": 1440,
             "height": 5438
@@ -118,7 +118,7 @@
         },
         {
           "file": "03-catalog-stroymaterial-tablet.png",
-          "bytes": 474494,
+          "bytes": 1020277,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -131,7 +131,7 @@
         },
         {
           "file": "03-catalog-stroymaterial-mobile.png",
-          "bytes": 492393,
+          "bytes": 551083,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -197,7 +197,7 @@
       "captures": [
         {
           "file": "05-catalog-engineering-desktop.png",
-          "bytes": 690551,
+          "bytes": 775565,
           "dimensions": {
             "width": 1440,
             "height": 5727
@@ -210,7 +210,7 @@
         },
         {
           "file": "05-catalog-engineering-tablet.png",
-          "bytes": 390000,
+          "bytes": 803782,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -223,7 +223,7 @@
         },
         {
           "file": "05-catalog-engineering-mobile.png",
-          "bytes": 469175,
+          "bytes": 539832,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -243,7 +243,7 @@
       "captures": [
         {
           "file": "06-catalog-ppr-desktop.png",
-          "bytes": 399565,
+          "bytes": 473764,
           "dimensions": {
             "width": 1440,
             "height": 3448
@@ -256,7 +256,7 @@
         },
         {
           "file": "06-catalog-ppr-tablet.png",
-          "bytes": 353430,
+          "bytes": 958015,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -269,7 +269,7 @@
         },
         {
           "file": "06-catalog-ppr-mobile.png",
-          "bytes": 305056,
+          "bytes": 372625,
           "dimensions": {
             "width": 390,
             "height": 6061
@@ -289,7 +289,7 @@
       "captures": [
         {
           "file": "07-catalog-elektrika-desktop.png",
-          "bytes": 558527,
+          "bytes": 595689,
           "dimensions": {
             "width": 1440,
             "height": 5330
@@ -302,7 +302,7 @@
         },
         {
           "file": "07-catalog-elektrika-tablet.png",
-          "bytes": 320318,
+          "bytes": 524744,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -315,7 +315,7 @@
         },
         {
           "file": "07-catalog-elektrika-mobile.png",
-          "bytes": 400782,
+          "bytes": 442647,
           "dimensions": {
             "width": 390,
             "height": 9000
@@ -335,7 +335,7 @@
       "captures": [
         {
           "file": "08-catalog-ventilyaciya-desktop.png",
-          "bytes": 317978,
+          "bytes": 336863,
           "dimensions": {
             "width": 1440,
             "height": 3296
@@ -348,7 +348,7 @@
         },
         {
           "file": "08-catalog-ventilyaciya-tablet.png",
-          "bytes": 332028,
+          "bytes": 475207,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -361,7 +361,7 @@
         },
         {
           "file": "08-catalog-ventilyaciya-mobile.png",
-          "bytes": 245940,
+          "bytes": 260578,
           "dimensions": {
             "width": 390,
             "height": 5477
@@ -381,7 +381,7 @@
       "captures": [
         {
           "file": "09-catalog-instrument-desktop.png",
-          "bytes": 500568,
+          "bytes": 568769,
           "dimensions": {
             "width": 1440,
             "height": 3902
@@ -394,7 +394,7 @@
         },
         {
           "file": "09-catalog-instrument-tablet.png",
-          "bytes": 405622,
+          "bytes": 1227268,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -407,7 +407,7 @@
         },
         {
           "file": "09-catalog-instrument-mobile.png",
-          "bytes": 424555,
+          "bytes": 478005,
           "dimensions": {
             "width": 390,
             "height": 7446
@@ -565,7 +565,7 @@
       "captures": [
         {
           "file": "13-product-ppr-truba-desktop.png",
-          "bytes": 281518,
+          "bytes": 451318,
           "dimensions": {
             "width": 1440,
             "height": 3028
@@ -578,7 +578,7 @@
         },
         {
           "file": "13-product-ppr-truba-tablet.png",
-          "bytes": 303179,
+          "bytes": 722221,
           "dimensions": {
             "width": 768,
             "height": 7646
@@ -591,7 +591,7 @@
         },
         {
           "file": "13-product-ppr-truba-mobile.png",
-          "bytes": 259244,
+          "bytes": 412766,
           "dimensions": {
             "width": 390,
             "height": 6819
@@ -611,7 +611,7 @@
       "captures": [
         {
           "file": "14-product-ppr-ugolok-desktop.png",
-          "bytes": 269301,
+          "bytes": 358328,
           "dimensions": {
             "width": 1440,
             "height": 3003
@@ -624,7 +624,7 @@
         },
         {
           "file": "14-product-ppr-ugolok-tablet.png",
-          "bytes": 302831,
+          "bytes": 606767,
           "dimensions": {
             "width": 768,
             "height": 7674
@@ -637,7 +637,7 @@
         },
         {
           "file": "14-product-ppr-ugolok-mobile.png",
-          "bytes": 259039,
+          "bytes": 357831,
           "dimensions": {
             "width": 390,
             "height": 6853
@@ -657,7 +657,7 @@
       "captures": [
         {
           "file": "15-product-kabel-requested-desktop.png",
-          "bytes": 293718,
+          "bytes": 288274,
           "dimensions": {
             "width": 1440,
             "height": 2567
@@ -670,7 +670,7 @@
         },
         {
           "file": "15-product-kabel-requested-tablet.png",
-          "bytes": 322183,
+          "bytes": 353769,
           "dimensions": {
             "width": 768,
             "height": 7215
@@ -683,7 +683,7 @@
         },
         {
           "file": "15-product-kabel-requested-mobile.png",
-          "bytes": 250898,
+          "bytes": 253207,
           "dimensions": {
             "width": 390,
             "height": 6189
@@ -703,7 +703,7 @@
       "captures": [
         {
           "file": "16-product-gips-requested-desktop.png",
-          "bytes": 278731,
+          "bytes": 425906,
           "dimensions": {
             "width": 1440,
             "height": 2602
@@ -716,7 +716,7 @@
         },
         {
           "file": "16-product-gips-requested-tablet.png",
-          "bytes": 279526,
+          "bytes": 750376,
           "dimensions": {
             "width": 768,
             "height": 7245
@@ -729,7 +729,7 @@
         },
         {
           "file": "16-product-gips-requested-mobile.png",
-          "bytes": 237018,
+          "bytes": 366027,
           "dimensions": {
             "width": 390,
             "height": 6277
@@ -749,7 +749,7 @@
       "captures": [
         {
           "file": "17-product-smesitel-requested-desktop.png",
-          "bytes": 292029,
+          "bytes": 349766,
           "dimensions": {
             "width": 1440,
             "height": 2685
@@ -762,7 +762,7 @@
         },
         {
           "file": "17-product-smesitel-requested-tablet.png",
-          "bytes": 292239,
+          "bytes": 407373,
           "dimensions": {
             "width": 768,
             "height": 6290
@@ -775,7 +775,7 @@
         },
         {
           "file": "17-product-smesitel-requested-mobile.png",
-          "bytes": 231489,
+          "bytes": 264381,
           "dimensions": {
             "width": 390,
             "height": 5636
@@ -795,7 +795,7 @@
       "captures": [
         {
           "file": "18-product-vent-grid-desktop.png",
-          "bytes": 287769,
+          "bytes": 394668,
           "dimensions": {
             "width": 1440,
             "height": 2678
@@ -808,7 +808,7 @@
         },
         {
           "file": "18-product-vent-grid-tablet.png",
-          "bytes": 307996,
+          "bytes": 410911,
           "dimensions": {
             "width": 768,
             "height": 7240
@@ -821,7 +821,7 @@
         },
         {
           "file": "18-product-vent-grid-mobile.png",
-          "bytes": 247549,
+          "bytes": 284887,
           "dimensions": {
             "width": 390,
             "height": 6374
@@ -841,7 +841,7 @@
       "captures": [
         {
           "file": "19-search-ppr-desktop.png",
-          "bytes": 265652,
+          "bytes": 389785,
           "dimensions": {
             "width": 1440,
             "height": 2726
@@ -854,7 +854,7 @@
         },
         {
           "file": "19-search-ppr-tablet.png",
-          "bytes": 295537,
+          "bytes": 1042125,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -867,7 +867,7 @@
         },
         {
           "file": "19-search-ppr-mobile.png",
-          "bytes": 249590,
+          "bytes": 310706,
           "dimensions": {
             "width": 390,
             "height": 5142
@@ -887,7 +887,7 @@
       "captures": [
         {
           "file": "20-search-kabel-desktop.png",
-          "bytes": 284002,
+          "bytes": 295061,
           "dimensions": {
             "width": 1440,
             "height": 3279
@@ -900,7 +900,7 @@
         },
         {
           "file": "20-search-kabel-tablet.png",
-          "bytes": 350107,
+          "bytes": 467574,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -913,7 +913,7 @@
         },
         {
           "file": "20-search-kabel-mobile.png",
-          "bytes": 250250,
+          "bytes": 254607,
           "dimensions": {
             "width": 390,
             "height": 5534
@@ -933,7 +933,7 @@
       "captures": [
         {
           "file": "21-search-plaster-desktop.png",
-          "bytes": 195497,
+          "bytes": 293306,
           "dimensions": {
             "width": 1440,
             "height": 1976
@@ -946,7 +946,7 @@
         },
         {
           "file": "21-search-plaster-tablet.png",
-          "bytes": 311936,
+          "bytes": 794683,
           "dimensions": {
             "width": 768,
             "height": 8760
@@ -959,7 +959,7 @@
         },
         {
           "file": "21-search-plaster-mobile.png",
-          "bytes": 175184,
+          "bytes": 205770,
           "dimensions": {
             "width": 390,
             "height": 3573
@@ -979,7 +979,7 @@
       "captures": [
         {
           "file": "22-search-vent-desktop.png",
-          "bytes": 229292,
+          "bytes": 265919,
           "dimensions": {
             "width": 1440,
             "height": 2658
@@ -992,7 +992,7 @@
         },
         {
           "file": "22-search-vent-tablet.png",
-          "bytes": 326765,
+          "bytes": 473148,
           "dimensions": {
             "width": 768,
             "height": 9000
@@ -1005,7 +1005,7 @@
         },
         {
           "file": "22-search-vent-mobile.png",
-          "bytes": 197808,
+          "bytes": 211884,
           "dimensions": {
             "width": 390,
             "height": 4288
@@ -1143,7 +1143,7 @@
         },
         {
           "file": "25-checkout-empty-mobile.png",
-          "bytes": 47302,
+          "bytes": 47306,
           "dimensions": {
             "width": 390,
             "height": 1132
@@ -1256,7 +1256,7 @@
       "captures": [
         {
           "file": "26-product-ppr-25mm-desktop.png",
-          "bytes": 272813,
+          "bytes": 444428,
           "dimensions": {
             "width": 1440,
             "height": 3028
@@ -1269,7 +1269,7 @@
         },
         {
           "file": "26-product-ppr-25mm-tablet.png",
-          "bytes": 315893,
+          "bytes": 706628,
           "dimensions": {
             "width": 768,
             "height": 7646
@@ -1282,7 +1282,7 @@
         },
         {
           "file": "26-product-ppr-25mm-mobile.png",
-          "bytes": 263435,
+          "bytes": 416269,
           "dimensions": {
             "width": 390,
             "height": 6819
@@ -1304,7 +1304,7 @@
       "captures": [
         {
           "file": "27-cart-ppr-25mm-desktop.png",
-          "bytes": 100859,
+          "bytes": 105400,
           "dimensions": {
             "width": 1440,
             "height": 1200
@@ -1317,7 +1317,7 @@
         },
         {
           "file": "27-cart-ppr-25mm-tablet.png",
-          "bytes": 82370,
+          "bytes": 86775,
           "dimensions": {
             "width": 768,
             "height": 1383
@@ -1330,7 +1330,7 @@
         },
         {
           "file": "27-cart-ppr-25mm-mobile.png",
-          "bytes": 68557,
+          "bytes": 72788,
           "dimensions": {
             "width": 390,
             "height": 1775
