@@ -12,7 +12,7 @@ const publicDir = resolve(projectRoot, 'public')
 const sitemapPath = resolve(publicDir, 'sitemap.xml')
 const robotsPath = resolve(publicDir, 'robots.txt')
 
-const staticRoutes = ['/', '/catalog', '/contacts', '/delivery', '/blog']
+const staticRoutes = ['/', '/catalog', '/contacts', '/delivery', '/payment', '/return', '/about', '/privacy', '/blog']
 
 function normalizePath(path) {
   if (path === '/') return '/'

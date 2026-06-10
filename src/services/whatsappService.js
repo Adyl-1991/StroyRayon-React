@@ -18,7 +18,7 @@ export const businessHours = [
 export const priceStockDisclaimer =
   'Баалар өзгөрүшү мүмкүн. Акыркы бааны жана товар бар-жогун WhatsApp аркылуу тактап беребиз.'
 
-export const shortPriceStockDisclaimer = 'Акыркы баа жана бар-жогу менеджер аркылуу такталат.'
+export const shortPriceStockDisclaimer = priceStockDisclaimer
 
 export const deliverySummary = 'Бишкек шаары ичинде жана аймактарга жеткирүү бар.'
 

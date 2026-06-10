@@ -1,0 +1,1233 @@
+{
+  "generatedAt": "2026-06-10T08:25:28.432Z",
+  "catalog": {
+    "rootCategories": 10,
+    "totalNodes": 155,
+    "emptyNodes": 0
+  },
+  "products": {
+    "total": 177,
+    "withVariants": 5,
+    "productIssueCount": 166,
+    "missingRealImageCount": 136,
+    "brokenImageCount": 0,
+    "variantPriceOrderIssueCount": 0
+  },
+  "routes": {
+    "staticRoutes": [
+      "/",
+      "/catalog",
+      "/contacts",
+      "/delivery",
+      "/payment",
+      "/return",
+      "/about",
+      "/privacy",
+      "/blog"
+    ],
+    "requiredCommercialRoutes": [
+      "/contacts",
+      "/delivery",
+      "/payment",
+      "/return",
+      "/about",
+      "/privacy"
+    ],
+    "missingCommercialRoutes": [],
+    "legacyAliases": [
+      "/product/kabel-vvgng -> /product/kabel-vvgng-3x2-5",
+      "/product/gips-shtukaturka -> /product/gips-shtukaturkasy-30kg",
+      "/product/smesitel-kuhnya -> /product/ashkana-smesiteli-basic"
+    ],
+    "legacyAliasMissing": []
+  },
+  "sitemap": {
+    "urlCount": 341,
+    "missingStaticRoutes": [],
+    "legacyAliasesInSitemap": []
+  },
+  "visual": {
+    "screenshotCount": 90,
+    "brokenImages": 0,
+    "viewportLabels": [
+      "Desktop 1440x1200",
+      "Tablet 768x1200",
+      "Mobile 390x844"
+    ],
+    "missingRequiredViewports": [
+      "Mobile 360x800",
+      "Mobile 430x932",
+      "Tablet 768x1024",
+      "Desktop 1024x900"
+    ]
+  },
+  "findings": {
+    "emptyCatalogNodes": [],
+    "productIssueEntries": [
+      {
+        "slug": "ppr-troynik-25mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "ppr-sharovyi-kran-25mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "kanalizatsiya-truba-50mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kanalizatsiya-ugolok-50mm-45",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "kanalizatsiya-troynik-110-50mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "ashkana-smesiteli-basic",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "vanna-smesiteli-dush-komplekti",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "drel-650w-udarnyi",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "akkumulyatorduk-shurupovert-12v",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "molotok-500g",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "portlandcement-m500-50kg",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "plitka-kleyi-standard-25kg",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "gips-shtukaturkasy-30kg",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "kabel-vvgng-3x2-5",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "rozetka-ichki-montazh-ak",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "avtomat-16a-1p",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "samorez-gipsokarton-35x35",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "dyubel-6x40mm",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "anker-bolt-10x80mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "unitaz-kompakt-ak-standart",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "rakovina-keramika-50sm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "sifon-botolko-40mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "sharovyi-kran-latun-12",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "ichki-dubal-boyogu-ak-10l",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "fasad-boyogu-ak-10l",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "emal-ak-27kg",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "valik-boyok-uchun-250mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "alyuminii-radiator-500mm-sekciya",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "radiator-termostatikalyk-bash",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "sugat-shlangy-34-25m",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "kurok-metall-saptuu",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "sugaruu-nasadka-komplekti",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "montazh-kobugu-750ml",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "eshik-tutkasy-komplekt",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "pvh-podokonnik-200mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "finish-shpaklevka-25kg",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "gruntovka-tereng-singuu-10l",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "vlagostoikii-gipsokarton-125mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "pnd-truba-25mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "elektr-shit-12-modul",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "led-lampa-e27-12w",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "shurup-po-derevu-4x50mm",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "bolt-gaika-shaiba-m8-komplekt",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "metall-homut-20-32mm",
+        "issues": [
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "gidroizolyaciya-smes-20kg",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "zatirka-dlya-plitki-2kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "stroitelnyi-gips-25kg",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "profnastil-krovlya-08mm",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "plastifikator-beton-1l",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "ppr-perehodnik-25-20",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "ppr-klipsa-20",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "pnd-fiting-mufta-25",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kanalizaciya-truba-naruzhnaya-110",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "schetchik-vody-15",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "reduktor-davleniya-12",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "obratnyi-klapan-12",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "manometr-6bar",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "filtr-gruboi-ochistki-12",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "filtr-korpus-10",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kartridzh-polipropilen-10",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "rasshiritelnyi-bak-24l",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "rakovina-smesitel-basic",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "gigienicheskii-dush-komplekt",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "trap-dushevoi-10x10",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "vanna-akril-170",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "vodonagrevatel-50l",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "aerator-smesitelya-m24",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "pvs-provod-3x1-5",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "shvvp-provod-2x0-75",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "sip-kabel-2x16",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "uzo-2p-40a",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "difavtomat-16a",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "led-svetilnik-18w",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ulichnyi-prozhektor-30w",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "podrozetnik-plastik",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "raspredkorobka-80",
+        "issues": [
+          "short description",
+          "weak search aliases"
+        ]
+      },
+      {
+        "slug": "mat-teplyi-pol-1m2",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ventilyaciya-reshetkasy-200x200mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "pvc-ventilyaciya-kanaly-55x110",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "pvc-ventilyaciya-kanaly-60x120",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ventilyaciya-burchu-90",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ventilyaciya-muftasy",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "vytyazhnoi-ventilyator-100mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "vytyazhnoi-ventilyator-125mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "obratnyi-klapan-ventilyaciya",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "perforator-800w",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "bolgarka-125mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ruletka-5m",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "uroven-60sm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kurulush-bychagy",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "shpatel-100mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "shpatel-250mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "mikser-nasadka-kurgak-aralashma",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "bur-sds-plus-6mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "bur-sds-plus-8mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "otreznoi-disk-125mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "mat-teplyi-pol-2m2",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "mat-teplyi-pol-3m2",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kabeldik-teplyi-pol-10m",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kabeldik-teplyi-pol-20m",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "mehanikalyk-termoregulyator",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "elektronduk-termoregulyator",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "pol-datchigi",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "teplyi-pol-montazh-lenta",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "teplyi-pol-kollektor-komplekt",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "sugat-shlangy-12-25m",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "shlang-konnektoru",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "sugat-pistoleti",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "bakcha-leykasy",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "grabli",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "metla",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kurulush-chakasy-12l",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "plastik-taz",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "upakovka-skotch",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "tachka-araba-bakcha",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "vodoemulsiyalyk-boyok-10l",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "emal-pf115-kara",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "parket-lak",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "universal-koler",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "rastvoritel-646",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kist-50mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "malyardyk-lenta",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "boyok-vannochka",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "boyok-gruntovka-10l",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "flizelin-tush-kagaz",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ud-profil-27x28",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "cd-profil-60x27",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "uw-profil-50",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "cw-profil-50",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "tuz-podves",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "krab-soedinitel",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "lenta-serpyanka",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "perforaciyalangan-burchtuk",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "cementtuu-shtukaturka-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "fasaddyk-shtukaturka-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "dekorativdik-shtukaturka-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "plitka-kleyi-usilennyi-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "start-shpaklevka-20kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ozu-tegizdeluuchu-pol-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "peskobeton-m300-40kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "montazhdyk-aralashma-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "remonttuk-aralashma-25kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "m400-cement-50kg",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kurulush-blogu-200mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "bazalt-zhyluuloo-50mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kadimki-gipsokarton-125mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "shyp-uchun-gipsokarton-95mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "osb-plita-9mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "fanera-10mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "mdf-panel-6mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "cementtik-plita-8mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "cirkulyaciyalyk-nasos-25-40",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "filtr-korpusu-kluch-komplekt",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "dush-sistemasy-basic",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "1-klavishaluu-ochurguch",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "2-klavishaluu-ochurguch",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "zherge-tutashtyrgychy-bar-rozetka",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kabel-kanal-16x16",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "kabel-kanal-25x16",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "wago-tip-klemma-3-orun",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "izolenta-kara",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "gofra-tutuk-16mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "gofra-tutuk-20mm",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "internet-kabel-cat5e",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "perforaciyalangan-montazh-lenta",
+        "issues": [
+          "short description"
+        ]
+      },
+      {
+        "slug": "ppr-tutuk-keskich",
+        "issues": [
+          "short description"
+        ]
+      }
+    ],
+    "missingRealImageProducts": [
+      "kanalizatsiya-truba-50mm",
+      "kanalizatsiya-truba-110mm",
+      "akkumulyatorduk-shurupovert-12v",
+      "molotok-500g",
+      "rozetka-ichki-montazh-ak",
+      "samorez-gipsokarton-35x35",
+      "dyubel-6x40mm",
+      "anker-bolt-10x80mm",
+      "unitaz-kompakt-ak-standart",
+      "rakovina-keramika-50sm",
+      "gibkaya-podvodka-60sm-12",
+      "sharovyi-kran-latun-12",
+      "ichki-dubal-boyogu-ak-10l",
+      "fasad-boyogu-ak-10l",
+      "emal-ak-27kg",
+      "valik-boyok-uchun-250mm",
+      "alyuminii-radiator-500mm-sekciya",
+      "radiator-termostatikalyk-bash",
+      "teplyi-pol-truba-16mm",
+      "sugat-shlangy-34-25m",
+      "kurok-metall-saptuu",
+      "sugaruu-nasadka-komplekti",
+      "montazh-kobugu-750ml",
+      "eshik-tutkasy-komplekt",
+      "pvh-podokonnik-200mm",
+      "vlagostoikii-gipsokarton-125mm",
+      "metall-plastik-truba-16mm",
+      "elektr-shit-12-modul",
+      "led-lampa-e27-12w",
+      "shurup-po-derevu-4x50mm",
+      "bolt-gaika-shaiba-m8-komplekt",
+      "metall-homut-20-32mm",
+      "stroitelnyi-gips-25kg",
+      "profnastil-krovlya-08mm",
+      "plastifikator-beton-1l",
+      "ppr-klipsa-20",
+      "pnd-fiting-mufta-25",
+      "kanalizaciya-truba-naruzhnaya-110",
+      "obratnyi-klapan-12",
+      "manometr-6bar",
+      "filtr-gruboi-ochistki-12",
+      "filtr-korpus-10",
+      "kartridzh-polipropilen-10",
+      "rakovina-smesitel-basic",
+      "gigienicheskii-dush-komplekt",
+      "trap-dushevoi-10x10",
+      "vanna-akril-170",
+      "aerator-smesitelya-m24",
+      "shvvp-provod-2x0-75",
+      "sip-kabel-2x16",
+      "difavtomat-16a",
+      "ulichnyi-prozhektor-30w",
+      "podrozetnik-plastik",
+      "raspredkorobka-80",
+      "mat-teplyi-pol-1m2",
+      "ventilyaciya-reshetkasy-200x200mm",
+      "pvc-ventilyaciya-kanaly-60x120",
+      "ventilyaciya-burchu-90",
+      "ventilyaciya-muftasy",
+      "vytyazhnoi-ventilyator-125mm",
+      "obratnyi-klapan-ventilyaciya",
+      "bolgarka-125mm",
+      "ruletka-5m",
+      "uroven-60sm",
+      "kurulush-bychagy",
+      "shpatel-100mm",
+      "shpatel-250mm",
+      "mikser-nasadka-kurgak-aralashma",
+      "bur-sds-plus-6mm",
+      "bur-sds-plus-8mm",
+      "otreznoi-disk-125mm",
+      "mat-teplyi-pol-2m2",
+      "mat-teplyi-pol-3m2",
+      "kabeldik-teplyi-pol-10m",
+      "kabeldik-teplyi-pol-20m",
+      "mehanikalyk-termoregulyator",
+      "elektronduk-termoregulyator",
+      "pol-datchigi",
+      "teplyi-pol-montazh-lenta",
+      "teplyi-pol-kollektor-komplekt",
+      "sugat-shlangy-12-25m",
+      "shlang-konnektoru",
+      "sugat-pistoleti",
+      "bakcha-leykasy",
+      "grabli",
+      "metla",
+      "kurulush-chakasy-12l",
+      "plastik-taz",
+      "upakovka-skotch",
+      "tachka-araba-bakcha",
+      "vodoemulsiyalyk-boyok-10l",
+      "emal-pf115-kara",
+      "parket-lak",
+      "universal-koler",
+      "rastvoritel-646",
+      "kist-50mm",
+      "malyardyk-lenta",
+      "boyok-vannochka",
+      "boyok-gruntovka-10l",
+      "flizelin-tush-kagaz",
+      "ud-profil-27x28",
+      "cd-profil-60x27",
+      "uw-profil-50",
+      "cw-profil-50",
+      "tuz-podves",
+      "krab-soedinitel",
+      "lenta-serpyanka",
+      "perforaciyalangan-burchtuk",
+      "fasaddyk-shtukaturka-25kg",
+      "dekorativdik-shtukaturka-25kg",
+      "plitka-kleyi-usilennyi-25kg",
+      "peskobeton-m300-40kg",
+      "montazhdyk-aralashma-25kg",
+      "remonttuk-aralashma-25kg",
+      "m400-cement-50kg",
+      "kurulush-blogu-200mm",
+      "bazalt-zhyluuloo-50mm",
+      "shyp-uchun-gipsokarton-95mm",
+      "osb-plita-9mm",
+      "fanera-10mm",
+      "mdf-panel-6mm",
+      "cementtik-plita-8mm",
+      "cirkulyaciyalyk-nasos-25-40",
+      "filtr-korpusu-kluch-komplekt",
+      "1-klavishaluu-ochurguch",
+      "2-klavishaluu-ochurguch",
+      "zherge-tutashtyrgychy-bar-rozetka",
+      "kabel-kanal-16x16",
+      "kabel-kanal-25x16",
+      "wago-tip-klemma-3-orun",
+      "izolenta-kara",
+      "gofra-tutuk-16mm",
+      "gofra-tutuk-20mm",
+      "internet-kabel-cat5e",
+      "perforaciyalangan-montazh-lenta",
+      "ppr-tutuk-keskich"
+    ],
+    "brokenImageProducts": [],
+    "variantPriceOrderIssues": []
+  }
+}

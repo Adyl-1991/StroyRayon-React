@@ -12,9 +12,12 @@ const debugPort = Number(process.env.VISUAL_AUDIT_DEBUG_PORT || 9333)
 const userDataDir = path.join(process.env.TEMP || root, `stroyrayon-visual-audit-${Date.now()}`)
 
 const viewports = [
-  { key: 'desktop', label: 'Desktop 1440x1200', width: 1440, height: 1200, mobile: false },
-  { key: 'tablet', label: 'Tablet 768x1200', width: 768, height: 1200, mobile: false },
-  { key: 'mobile', label: 'Mobile 390x844', width: 390, height: 844, mobile: true },
+  { key: 'mobile-360', label: 'Mobile 360x800', width: 360, height: 800, mobile: true },
+  { key: 'mobile-390', label: 'Mobile 390x844', width: 390, height: 844, mobile: true },
+  { key: 'mobile-430', label: 'Mobile 430x932', width: 430, height: 932, mobile: true },
+  { key: 'tablet-768', label: 'Tablet 768x1024', width: 768, height: 1024, mobile: false },
+  { key: 'desktop-1024', label: 'Desktop 1024x900', width: 1024, height: 900, mobile: false },
+  { key: 'desktop-1440', label: 'Desktop 1440x1200', width: 1440, height: 1200, mobile: false },
 ]
 
 const routes = [
@@ -30,6 +33,8 @@ const routes = [
   { id: '10-catalog-teplyi-pol', label: 'Catalog / teplyi-pol', path: '/catalog/teplyi-pol' },
   { id: '11-catalog-bak-koroo', label: 'Catalog / bak-koroo', path: '/catalog/bak-koroo' },
   { id: '12-catalog-paint', label: 'Catalog / boiok-tush-kagaz', path: '/catalog/boiok-tush-kagaz' },
+  { id: '12b-catalog-santehnika', label: 'Catalog / santehnika', path: '/catalog/santehnika' },
+  { id: '12c-catalog-krepezh', label: 'Catalog / krepezh', path: '/catalog/krepezh' },
   { id: '13-product-ppr-truba', label: 'Product / ppr-truba-pn20', path: '/product/ppr-truba-pn20' },
   { id: '14-product-ppr-ugolok', label: 'Product / ppr-ugolok-90', path: '/product/ppr-ugolok-90' },
   { id: '15-product-kabel-requested', label: 'Product / kabel-vvgng requested slug', path: '/product/kabel-vvgng' },
@@ -45,6 +50,11 @@ const routes = [
   { id: '25-checkout-empty', label: 'Checkout / empty', path: '/checkout' },
   { id: '29-contacts', label: 'Contacts', path: '/contacts' },
   { id: '30-delivery', label: 'Delivery and payment', path: '/delivery' },
+  { id: '31-payment', label: 'Payment', path: '/payment' },
+  { id: '32-return', label: 'Return and exchange', path: '/return' },
+  { id: '33-about', label: 'About', path: '/about' },
+  { id: '34-privacy', label: 'Privacy policy', path: '/privacy' },
+  { id: '35-not-found', label: '404 / not found', path: '/not-found-audit-route' },
 ]
 
 const interactiveRoutes = [
@@ -333,7 +343,7 @@ async function createReport(results) {
   </header>
   <main>
     <section class="note">
-      <strong>Audit scope:</strong> screenshots plus safe visual observations. Product data, prices, catalog paths, cart logic, and variant logic were not changed. Safe fixes applied: footer separators, cart/checkout mobile bottom padding, product detail card typography, related products mobile card spacing, placeholder hero proportions, and legacy product slug aliases.
+      <strong>Audit scope:</strong> screenshots plus safe visual observations for the production storefront. Product data, prices, catalog paths, cart logic, and variant logic are kept intact. Safe checks cover footer spacing, mobile cart/checkout spacing, product detail typography, related product cards, placeholder proportions, legacy product slug aliases, and commercial information pages.
     </section>
     <section>
       <h2>Issues</h2>

@@ -8,6 +8,7 @@ import { CheckoutPage } from '../pages/CheckoutPage'
 import { ContactsPage } from '../pages/ContactsPage'
 import { DeliveryPage } from '../pages/DeliveryPage'
 import { HomePage } from '../pages/HomePage'
+import { AboutPage, PaymentPage, PrivacyPage, ReturnPage } from '../pages/InfoPages'
 import { ProductPage } from '../pages/ProductPage'
 import { SearchPage } from '../pages/SearchPage'
 import { RouteError } from '../components/ui/RouteError'
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'contacts', element: <ContactsPage /> },
       { path: 'delivery', element: <DeliveryPage /> },
+      { path: 'payment', element: <PaymentPage /> },
+      { path: 'return', element: <ReturnPage /> },
+      { path: 'about', element: <AboutPage /> },
+      { path: 'privacy', element: <PrivacyPage /> },
       { path: 'blog', element: <BlogPage /> },
     ],
   },

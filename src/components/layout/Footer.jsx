@@ -16,7 +16,11 @@ export function Footer() {
         <h3>{t('footer.sections')}</h3>
         <Link to="/catalog">{t('common.catalog')}</Link>
         <Link to="/delivery">{t('footer.deliveryPayment')}</Link>
+        <Link to="/payment">Төлөм</Link>
+        <Link to="/return">Кайтаруу</Link>
+        <Link to="/about">Биз жөнүндө</Link>
         <Link to="/blog">{t('footer.advice')}</Link>
+        <Link to="/privacy">Купуялык</Link>
       </div>
       <div className="site-footer__links">
         <h3>{t('footer.contacts')}</h3>
