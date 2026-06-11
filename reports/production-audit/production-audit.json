@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-10T08:25:28.432Z",
+  "generatedAt": "2026-06-11T06:16:59.699Z",
   "catalog": {
     "rootCategories": 10,
     "totalNodes": 155,
@@ -47,19 +47,17 @@
     "legacyAliasesInSitemap": []
   },
   "visual": {
-    "screenshotCount": 90,
+    "screenshotCount": 222,
     "brokenImages": 0,
     "viewportLabels": [
-      "Desktop 1440x1200",
-      "Tablet 768x1200",
-      "Mobile 390x844"
-    ],
-    "missingRequiredViewports": [
       "Mobile 360x800",
+      "Mobile 390x844",
       "Mobile 430x932",
       "Tablet 768x1024",
-      "Desktop 1024x900"
-    ]
+      "Desktop 1024x900",
+      "Desktop 1440x1200"
+    ],
+    "missingRequiredViewports": []
   },
   "findings": {
     "emptyCatalogNodes": [],
