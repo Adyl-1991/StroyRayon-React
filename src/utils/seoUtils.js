@@ -35,8 +35,8 @@ export function getCatalogNodeSeo(node) {
 
 export function getProductSeo(product) {
   return {
-    title: product?.titleKg || product?.name || 'Товар',
-    description: cleanText(product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
+    title: product?.seoTitleKg || product?.titleKg || product?.name || 'Товар',
+    description: cleanText(product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
     canonical: getPageCanonical(product?.slug ? `/product/${product.slug}` : '/catalog'),
   }
 }
@@ -50,7 +50,7 @@ export function buildProductStructuredData(product) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.titleKg,
-    description: product.descriptionKg || product.shortDescriptionKg,
+    description: product.seoDescriptionKg || product.descriptionKg || product.shortDescriptionKg,
     image: image?.src ? absoluteUrl(image.src) : undefined,
     sku: product.sku,
     brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,

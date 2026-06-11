@@ -73,8 +73,395 @@ function getAggregateStockStatus(variants, fallbackStatus) {
   return 'out_of_stock'
 }
 
+const contentProfiles = {
+  'inzhenerdik-santehnika': {
+    purpose: 'суу, жылытуу же канализация линиясын ишенимдүү чогултууга керек',
+    where: 'батирде, жеке үйдө жана чакан объекттерде ички инженердик монтажда колдонулат',
+    benefit: 'өлчөмү так тандалса линия тыкан чыгып, кийин тейлөө жеңил болот',
+    note: 'диаметрди, басым режимин жана кошумча фитингдерди объекттин схемасына жараша тактаңыз',
+    aliases: ['инженерная сантехника', 'труба', 'фитинг', 'сантехнические материалы', 'водоснабжение'],
+  },
+  santehnika: {
+    purpose: 'ванна, санузел же ашканадагы күнүмдүк сантехникалык түйүндү бүтүрүүгө арналган',
+    where: 'үй, батир, кеңсе жана чакан коммерциялык жайларда колдонулат',
+    benefit: 'туура комплектация тандалса монтаж тез жүрүп, колдонуу ыңгайлуу болот',
+    note: 'монтаж аралыгын, туташуу өлчөмүн жана комплектке кирген деталдарды алдын ала тактаңыз',
+    aliases: ['сантехника', 'смеситель', 'санфаянс', 'душ', 'раковина'],
+  },
+  instrument: {
+    purpose: 'ремонт жана монтаж иштерин так, ылдам аткарууга жардам берет',
+    where: 'үй ремонту, устакана жана объекттеги күнүмдүк иштерде колдонулат',
+    benefit: 'туура шайман убакытты үнөмдөп, иштин сапатын бир калыпта кармайт',
+    note: 'кубаттуулугун, өлчөмүн жана расходник шайкештигин иштин түрүнө жараша тандаңыз',
+    aliases: ['инструмент', 'электроинструмент', 'ручной инструмент', 'оснастка', 'ремонт'],
+  },
+  stroymaterial: {
+    purpose: 'негизди даярдоо, тегиздөө, бекемдөө же жасалгалоо иштерине колдонулат',
+    where: 'дубал, пол, шып, фасад жана жалпы курулуш иштеринде керектелет',
+    benefit: 'туура тандалган материал беттин сапатын жана кийинки катмардын кармалышын жакшыртат',
+    note: 'негиздин түрүн, нымдуулукту, катмар калыңдыгын жана расходду алдын ала эсептеңиз',
+    aliases: ['стройматериал', 'сухие смеси', 'цемент', 'штукатурка', 'строительные материалы'],
+  },
+  elektrika: {
+    purpose: 'электр линиясын коопсуз тартуу, коргоо же жарыктандыруу үчүн керек',
+    where: 'үй, батир, кеңсе жана чакан объекттердин ички же сырткы электр монтажында колдонулат',
+    benefit: 'ток жүгү туура эсептелсе система туруктуу иштеп, тейлөө жеңил болот',
+    note: 'сечениени, номиналды, монтаж түрүн жана коргоо классын электрик менен тактаңыз',
+    aliases: ['электрика', 'кабель', 'автомат', 'розетка', 'электромонтаж'],
+  },
+  krepezh: {
+    purpose: 'конструкцияларды, профильдерди жана жабдууларды негизге бекитүүгө арналган',
+    where: 'бетон, кирпич, металл, жыгач жана гипсокартон монтажында колдонулат',
+    benefit: 'жүккө туура тандалган бекиткич конструкцияны бекем кармайт',
+    note: 'негиздин материалын, жүктүн салмагын жана бекитүү тереңдигин эске алыңыз',
+    aliases: ['крепеж', 'саморез', 'дюбель', 'анкер', 'хомут'],
+  },
+  'boiok-tush-kagaz': {
+    purpose: 'бетти коргоо, жаңылоо же акыркы декоративдик көрүнүш берүү үчүн колдонулат',
+    where: 'ички дубал, фасад, металл, жыгач жана сырдоо иштеринде керектелет',
+    benefit: 'негиз туура даярдалса түс бир калыпта чыгып, жабын узак кызмат кылат',
+    note: 'бетти тазалап, керек болсо грунтовка сүйкөп, расходду катмар санына жараша эсептеңиз',
+    aliases: ['краска', 'эмаль', 'лак', 'валик', 'малярные материалы'],
+  },
+  'teplyi-pol': {
+    purpose: 'пол зонасында кошумча же негизги жылуулукту уюштурууга арналган',
+    where: 'ванна, ашкана, коридор жана жашоо бөлмөлөрүндө жылуу пол системасында колдонулат',
+    benefit: 'туура комплект бөлмөнү бир калыпта жылытып, колдонууда ыңгайлуулук берет',
+    note: 'аянтты, башкаруу түрүн жана монтаж катмарын алдын ала өлчөп алыңыз',
+    aliases: ['теплый пол', 'жылуу пол', 'терморегулятор', 'нагревательный мат', 'датчик пола'],
+  },
+  'bak-koroo': {
+    purpose: 'бакча, короо жана күнүмдүк чарба иштерин жеңилдетүүгө керек',
+    where: 'сугаруу, тазалоо, сактоо жана майда чарба иштеринде колдонулат',
+    benefit: 'туура өлчөм жана материал тандалса товар күнүмдүк колдонууда ыңгайлуу болот',
+    note: 'узундугун, көлөмүн, туташуу өлчөмүн же материалын колдонуу жери боюнча тандаңыз',
+    aliases: ['хозтовары', 'садовый инструмент', 'поливочный шланг', 'бакча', 'короо'],
+  },
+  ventilyaciya: {
+    purpose: 'аба алмашууну уюштуруп, бөлмөдөгү ным жана жытты чыгарууга жардам берет',
+    where: 'ашкана, ванна, санузел, кеңсе жана техникалык бөлмөлөрдө колдонулат',
+    benefit: 'канал өлчөмү туура келсе аба жүрүшү туруктуу болуп, көрүнүшү тыкан чыгат',
+    note: 'каналдын өлчөмүн, тартуу багытын жана монтаж жерин алдын ала өлчөңүз',
+    aliases: ['вентиляция', 'вентиляционная решетка', 'воздуховод', 'вентилятор', 'обратный клапан'],
+  },
+}
+
+const defaultContentProfile = {
+  purpose: 'ремонт жана курулуш иштеринде керектүү практикалык товар катары колдонулат',
+  where: 'үйдө, батирде, короодо же чакан объектте күнүмдүк иштерге жарайт',
+  benefit: 'туура тандалса ишти ылдамдатып, ашыкча чыгымды азайтат',
+  note: 'өлчөмүн, комплектин жана бар-жогун заказ алдында менеджер менен тактаңыз',
+  aliases: ['стройрайон', 'товар', 'материал', 'ремонт', 'курулуш'],
+}
+
+const contentRefinements = [
+  {
+    match: /ppr|ппр|ppr-trubalar|ppr-mufta|ppr-ugolok|ppr-troynik|ppr-kran|ppr-klipsa/,
+    profile: {
+      purpose: 'ички суу жана жылытуу линиясын ППР пайка системасы менен чогултууга арналган',
+      where: 'батирде, жеке үйдө, санузелде, ашканада жана чакан объекттердин суу берүү тармагында колдонулат',
+      benefit: 'пайкасы бекем болуп, туура диаметр тандалса агым туруктуу жана монтаж тыкан чыгат',
+      note: 'диаметрди, PN классын жана муфта, бурчтук, тройник же кран шайкештигин схемадан текшериңиз',
+      aliases: ['ППР труба', 'полипропилен труба', 'PPR pipe', 'ППР фитинг', 'ППР пайка'],
+    },
+  },
+  {
+    match: /kanaliz|канализация|sewer/,
+    profile: {
+      purpose: 'тиричилик агындысын канализация линиясына коопсуз өткөрүүгө арналган',
+      where: 'санузел, ашкана, ванна, ички жана сырткы канализация түйүндөрүндө колдонулат',
+      benefit: 'түйүндөр туура тандалса агын суу тоскоолдуксуз өтүп, жагымсыз жыт жана агып кетүү коркунучу азаят',
+      note: 'диаметрди, бурчту жана ички же сырткы монтажга ылайыктуу түрүн алдын ала тактаңыз',
+      aliases: ['канализация труба', 'канализационная труба', 'ПВХ канализация', 'sewer pipe', 'канализация фитинг'],
+    },
+  },
+  {
+    match: /pnd|пнд/,
+    profile: {
+      purpose: 'муздак суу берүүчү же короо сыртындагы суу линиясын чогултууга колдонулат',
+      where: 'короо, бакча, суу киргизүү линиясы жана чарбалык суу тармактарында колдонулат',
+      benefit: 'ийкемдүү материал трассаны ыңгайлуу алып өтүүгө жардам берет жана туура фитинг менен бекем туташат',
+      note: 'диаметрди, дубал калыңдыгын жана ПНД фитингдин түрүн суу басымына жараша тандаңыз',
+      aliases: ['ПНД труба', 'ПЭ труба', 'HDPE pipe', 'ПНД фитинг', 'суу труба'],
+    },
+  },
+  {
+    match: /filtr|kartridzh|schetchik|reduktor|manometr|klapan|rasshiritel|nasos|radiator|termostat/,
+    profile: {
+      purpose: 'инженердик системанын басымын, тазалыгын же жылытуу режимин көзөмөлдөөгө жардам берет',
+      where: 'суу киргизүү түйүнүндө, жылытуу системасында, фильтр блогунда жана техникалык шкафта колдонулат',
+      benefit: 'түйүн туура коюлса жабдуулар узагыраак кызмат кылып, системаны тейлөө жеңилдейт',
+      note: 'иштөө басымын, туташуу өлчөмүн жана орнотуу багытын монтаж схемасына жараша текшериңиз',
+      aliases: ['фильтр воды', 'счетчик воды', 'редуктор давления', 'манометр', 'обратный клапан', 'расширительный бак'],
+    },
+  },
+  {
+    match: /smesitel|dush|rakovina|vanna|sifon|trap|unitaz|vodonagrevatel|podvodka|aerator/,
+    profile: {
+      purpose: 'ванна, санузел же ашканадагы сантехникалык түйүндү ыңгайлуу колдонууга даярдайт',
+      where: 'үй, батир, кеңсе, ижарага берилген жай жана чакан коммерциялык объекттерде колдонулат',
+      benefit: 'туура комплект тандалса монтаж тез бүтүп, күнүмдүк колдонуу ыңгайлуу жана тыкан болот',
+      note: 'туташуу өлчөмүн, монтаж аралыгын, комплекттеги деталдарды жана суу басымына шайкештигин тактаңыз',
+      aliases: ['смеситель', 'душ', 'раковина', 'сифон', 'трап', 'водонагреватель', 'сантехника'],
+    },
+  },
+  {
+    match: /shtukatur|shpak|kley|grunt|gidro|zatirka|gips|cement|peskobeton|aralashma|pol-25kg/,
+    profile: {
+      purpose: 'бетти даярдоо, тегиздөө, бекемдөө же плитка иштерин сапаттуу бүтүрүү үчүн колдонулат',
+      where: 'дубал, пол, шып, ванна, ашкана жана жалпы ремонт иштеринде керектелет',
+      benefit: 'негиз туура даярдалса кийинки катмар жакшы кармалып, бет жылмакай жана бышык чыгат',
+      note: 'негиздин нымдуулугун, катмар калыңдыгын, расходун жана кургоо убактысын иш баштаардан мурун эсептеңиз',
+      aliases: ['сухие смеси', 'штукатурка', 'шпаклевка', 'плиточный клей', 'наливной пол', 'грунтовка'],
+    },
+  },
+  {
+    match: /gipsokarton|profil|podves|serpyanka|burchtuk|krab|osb|fanera|plita|panel/,
+    profile: {
+      purpose: 'каркас, лист же тегиз бет түзүп, ички жасалгалоону тыкан бүтүрүүгө жардам берет',
+      where: 'шып, дубал, перегородка, откос жана жеңил конструкция монтажында колдонулат',
+      benefit: 'өлчөмү жана комплекттери туура тандалса конструкция түз чыгып, кийинки жасалгалоо жеңилдейт',
+      note: 'лист калыңдыгын, профиль түрүн, бекиткич аралыгын жана нымга туруктуулук талабын алдын ала текшериңиз',
+      aliases: ['гипсокартон', 'профиль', 'OSB', 'фанера', 'листовые материалы', 'каркас'],
+    },
+  },
+  {
+    match: /kabel|provod|avtomat|uzo|difavtomat|rozetka|ochurguch|vyklyuchatel|led|lampa|svet|prozhektor|podrozetnik|raspred|gofra|wago|izolenta/,
+    profile: {
+      purpose: 'электр линиясын коопсуз тартуу, коргоо, жарыктандыруу же туташтыруу үчүн керек',
+      where: 'үй, батир, кеңсе жана чакан объекттердин ички же сырткы электр монтажында колдонулат',
+      benefit: 'номинал жана сечение туура тандалса линия туруктуу иштеп, тейлөөдө түшүнүктүү болот',
+      note: 'жүктү, кабель сечениесин, автомат номиналын жана монтаж ордун электрик менен тактаңыз',
+      aliases: ['кабель', 'провод', 'автомат', 'УЗО', 'розетка', 'выключатель', 'электрика'],
+    },
+  },
+  {
+    match: /drel|shurupovert|perforator|bolgarka|ruletka|uroven|bychag|shpatel|mikser|bur|disk|molotok|keskich/,
+    profile: {
+      purpose: 'ремонт, монтаж, өлчөө же материал иштетүү иштерин так жана ылдам аткарууга жардам берет',
+      where: 'үй ремонтунда, устаканада, объектте жана күнүмдүк мастердик иштерде колдонулат',
+      benefit: 'шайман жумушка туура келсе убакыт үнөмдөлүп, иштин сапаты бир калыпта сакталат',
+      note: 'кубаттуулугун, өлчөмүн, расходник шайкештигин жана коопсуздук талабын иштин түрүнө жараша тандаңыз',
+      aliases: ['инструмент', 'дрель', 'перфоратор', 'болгарка', 'шуруповерт', 'ручной инструмент'],
+    },
+  },
+  {
+    match: /boyok|emal|lak|koler|rastvoritel|valik|kist|lenta|vannochka|tush-kagaz/,
+    profile: {
+      purpose: 'бетти сырдоо, коргоо, түс берүү же акыркы декоративдик көрүнүштү бүтүрүү үчүн колдонулат',
+      where: 'ички дубал, фасад, жыгач, металл жана майда жасалгалоо иштеринде керектелет',
+      benefit: 'негиз даяр болуп, туура шайман тандалса түс тегиз чыгып, жабын узагыраак кызмат кылат',
+      note: 'бетти тазалап, керек болсо грунтовка сүйкөп, расходду катмар санына жараша эсептеңиз',
+      aliases: ['краска', 'эмаль', 'лак', 'колер', 'валик', 'кисть', 'малярные материалы'],
+    },
+  },
+  {
+    match: /samorez|dyubel|anker|bolt|gaika|shaiba|homut|shurup|lenta/,
+    profile: {
+      purpose: 'материалдарды, профилдерди же жабдууларды негизге бекем карматууга арналган',
+      where: 'бетон, кирпич, металл, жыгач, гипсокартон жана инженердик монтаж иштеринде колдонулат',
+      benefit: 'жүккө туура тандалган бекиткич конструкцияны бекем кармап, кайра оңдоону азайтат',
+      note: 'негиздин материалын, бекитүү тереңдигин, диаметрин жана жүктү алдын ала эсептеңиз',
+      aliases: ['крепеж', 'саморез', 'дюбель', 'анкер', 'болт', 'гайка', 'хомут'],
+    },
+  },
+  {
+    match: /ventilyaciya|vent|vozduh|reshet|vytyazh|klapan-ventilyaciya/,
+    profile: {
+      purpose: 'бөлмөдөгү аба алмашууну уюштуруп, ным жана жытты чыгарууга жардам берет',
+      where: 'ашкана, ванна, санузел, техникалык бөлмө жана чакан коммерциялык жайларда колдонулат',
+      benefit: 'өлчөмү туура келсе аба жүрүшү туруктуу болуп, көрүнүшү тыкан жана тейлөөгө ыңгайлуу чыгат',
+      note: 'канал өлчөмүн, тартуу багытын, вентилятор кубаттуулугун жана клапандын ачылышын текшериңиз',
+      aliases: ['вентиляция', 'вентилятор', 'вентиляционная решетка', 'воздуховод', 'обратный клапан'],
+    },
+  },
+  {
+    match: /teplyi-pol|termoregulyator|datchik|kollektor|zhyluu-pol/,
+    profile: {
+      purpose: 'пол зонасында кошумча же негизги жылуулукту башкарууга жана бөлүштүрүүгө арналган',
+      where: 'ванна, ашкана, коридор, балкон жана жашоо бөлмөлөрүндөгү жылуу пол системасында колдонулат',
+      benefit: 'туура комплект бөлмөнү бир калыпта жылытып, башкарууну ыңгайлуу кылат',
+      note: 'аянтты, кубаттуулукту, монтаж катмарын жана башкаруу түрүн алдын ала эсептеп алыңыз',
+      aliases: ['теплый пол', 'жылуу пол', 'терморегулятор', 'датчик пола', 'нагревательный мат'],
+    },
+  },
+  {
+    match: /shlang|sugat|sugaruu|nasadka|leyka|grabli|metla|chakasy|taz|skotch|araba|kurok/,
+    profile: {
+      purpose: 'бакча, короо жана күнүмдүк чарба иштерин жеңилдетүү үчүн колдонулат',
+      where: 'сугаруу, тазалоо, ташуу, сактоо жана майда чарбалык иштерде керектелет',
+      benefit: 'өлчөмү жана материалы туура болсо товар күнүмдүк колдонууда ыңгайлуу болуп, ишти тездетет',
+      note: 'узундугун, көлөмүн, туткасын, туташуу өлчөмүн же көтөрө турган жүктү колдонуу жерине жараша тандаңыз',
+      aliases: ['хозтовары', 'садовый инструмент', 'поливочный шланг', 'бакча', 'короо', 'чарба товарлары'],
+    },
+  },
+]
+
+function getContentProfile(catalogPath = [], data = {}) {
+  const baseProfile = contentProfiles[catalogPath[0]] || defaultContentProfile
+  const searchable = compactText([data.slug, data.id, data.titleKg, data.name, ...catalogPath].filter(Boolean).join(' ')).toLowerCase()
+
+  return contentRefinements.reduce((profile, refinement) => {
+    if (!refinement.match.test(searchable)) return profile
+    return {
+      ...profile,
+      ...refinement.profile,
+      aliases: [...new Set([...(profile.aliases || []), ...(refinement.profile.aliases || [])])],
+    }
+  }, baseProfile)
+}
+
+function compactText(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim()
+}
+
+function capitalizeFirst(value) {
+  const text = compactText(value)
+  return text ? `${text.charAt(0).toUpperCase()}${text.slice(1)}` : ''
+}
+
+function sentence(value) {
+  const text = capitalizeFirst(value)
+  if (!text) return ''
+  return /[.!?]$/.test(text) ? text : `${text}.`
+}
+
+function buildPackageSentence(data, variants, unit) {
+  if (variants.length) {
+    const sizes = variants.map((variant) => variant.size).filter(Boolean).slice(0, 8).join(', ')
+    return sentence(`Өлчөмдөрү: ${sizes}. Баа, SKU жана таңгак тандалган вариантка жараша өзгөрөт`)
+  }
+
+  const pack = data.packageInfoKg || data.minOrder || `1 ${unit}`
+  return sentence(`Бирдиги: ${unit}; заказ көлөмү жана таңгак: ${pack}`)
+}
+
+function buildCommercialDescription(data, catalogPath, variants) {
+  const profile = getContentProfile(catalogPath, data)
+  const pack = buildPackageSentence(data, variants, data.unit || 'даана')
+
+  return [
+    sentence(`Бул ${data.titleKg} ${profile.purpose}`),
+    sentence(profile.where),
+    sentence(`Негизги артыкчылыгы - ${profile.benefit}`),
+    sentence(`Тандоодо ${profile.note}`),
+    pack,
+  ]
+    .filter(Boolean)
+    .join(' ')
+}
+
+function buildRecommendedUse(data, catalogPath) {
+  const profile = getContentProfile(catalogPath, data)
+  return sentence(`${data.titleKg} ${profile.where}. Так өлчөм, партия жана шайкеш комплект заказ алдында менеджер менен такталат`)
+}
+
+function buildFaq(data, catalogPath, variants) {
+  const profile = getContentProfile(catalogPath, data)
+  const sizeAnswer = variants.length
+    ? `Бул товарда ${variants.map((variant) => variant.size).filter(Boolean).slice(0, 6).join(', ')} варианттары бар.`
+    : `Өлчөмү жана комплектациясы товар карточкасындагы маалымат жана менеджердин тактоосу боюнча тандалат.`
+
+  return [
+    {
+      question: 'Бул товарды кайсы жерде колдонсо болот?',
+      answer: sentence(`${data.titleKg} ${profile.where}`),
+    },
+    {
+      question: 'Заказ алдында эмнени тактоо керек?',
+      answer: `${sizeAnswer} ${sentence(profile.note)}`,
+    },
+  ]
+}
+
+function buildSeoTitle(data) {
+  return `${data.titleKg} - баасы жана заказ StroyRayon`
+}
+
+function buildSeoDescription(data, catalogPath, variants) {
+  const profile = getContentProfile(catalogPath, data)
+  const variantText = variants.length ? ` Өлчөм варианттары бар.` : ''
+  return compactText(`${data.titleKg}: ${profile.purpose}. ${capitalizeFirst(profile.where)}.${variantText} Баасын жана бар-жогун WhatsApp аркылуу тактаңыз.`)
+}
+
+function buildAliases(data, catalogPath, variants) {
+  const profile = getContentProfile(catalogPath, data)
+  const slugWords = String(data.slug || '').split(/[-_]+/).filter((word) => word.length > 2)
+  const variantWords = variants.flatMap((variant) => [variant.size, variant.sku]).filter(Boolean)
+  const baseAliases = [
+    ...(data.aliases || []),
+    data.titleKg,
+    data.name,
+    data.sku,
+    data.brand,
+    catalogPath.join(' '),
+    ...slugWords,
+    ...variantWords,
+    ...profile.aliases,
+  ]
+
+  return [...new Set(baseAliases.map(compactText).filter(Boolean))]
+}
+
+const visibleKgReplacements = [
+  [/ППР шаровый кран/gi, 'ППР шар кран'],
+  [/шаровый кран/gi, 'шар кран'],
+  [/ударный режим/gi, 'удар режими'],
+  [/ударный дрель/gi, 'удар режими бар дрель'],
+  [/Вытяжной вентилятор/gi, 'Сордуруучу вентилятор'],
+  [/вытяжной вентилятор/gi, 'сордуруучу вентилятор'],
+  [/Вытяжной/gi, 'Сордуруучу'],
+  [/вытяжной/gi, 'сордуруучу'],
+  [/ПВХ подоконник/gi, 'ПВХ терезе алды тактайы'],
+  [/подоконник/gi, 'терезе алды тактайы'],
+  [/Влагостойкий гипсокартон/gi, 'Нымга туруктуу гипсокартон'],
+  [/Влагостойкий/gi, 'Нымга туруктуу'],
+  [/Шуруп по дереву/gi, 'Жыгач үчүн шуруп'],
+  [/Гидроизоляция смесь/gi, 'Гидроизоляция аралашмасы'],
+  [/Строительный гипс/gi, 'Курулуш гипси'],
+  [/строительный гипс/gi, 'курулуш гипси'],
+  [/Профнастил кровля/gi, 'Кровля үчүн профнастил'],
+  [/Кровля үчүн/gi, 'Чатыр үчүн'],
+  [/Пластификатор для бетона/gi, 'Бетон үчүн пластификатор'],
+  [/Смеситель для раковины/gi, 'Раковина смесители'],
+  [/Гигиенический душ/gi, 'Гигиеналык душ'],
+  [/гигиенический душ/gi, 'гигиеналык душ'],
+  [/Трап душевой/gi, 'Душ трабы'],
+  [/Подрозетник пластиковый/gi, 'Пластик подрозетник'],
+  [/Распредкоробка/gi, 'Таратуу коробкасы'],
+  [/распредкоробка/gi, 'таратуу коробкасы'],
+  [/Грабли/gi, 'Тырмоо'],
+  [/грабли/gi, 'тырмоо'],
+  [/Упаковочный скотч/gi, 'Таңгак скотчу'],
+  [/упаковочный скотч/gi, 'таңгак скотчу'],
+  [/Тачка\/араба/gi, 'Бакча арабасы'],
+  [/тачка/gi, 'араба'],
+  [/Растворитель/gi, 'Эриткич'],
+  [/растворитель/gi, 'эриткич'],
+  [/Кисть/gi, 'Боёк кисти'],
+  [/кисть/gi, 'боёк кисти'],
+  [/Краб соединитель/gi, 'Краб бириктиргич'],
+  [/краб соединитель/gi, 'краб бириктиргич'],
+  [/Крыша/gi, 'Чатыр'],
+  [/крыша/gi, 'чатыр'],
+  [/строительная химия/gi, 'курулуш химиясы'],
+  [/выключатель/gi, 'өчүргүч'],
+  [/үчүн Курулуш/g, 'үчүн курулуш'],
+  [/мм Таратуу/g, 'мм таратуу'],
+]
+
+function normalizeVisibleKg(value) {
+  return visibleKgReplacements.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), compactText(value))
+}
+
 function product(data) {
   const badges = data.badges || []
+  const titleKg = normalizeVisibleKg(data.titleKg)
+  const normalizedData = {
+    ...data,
+    titleKg,
+    aliases: [...(data.aliases || []), data.titleKg].filter(Boolean),
+  }
   const catalogPath = data.catalogPath || inferCatalogPath(data)
   const imageAssets = data.imageAssets || getProductAssetEntry(data.slug)
   const variants = Array.isArray(data.variants)
@@ -90,6 +477,21 @@ function product(data) {
   const variantPrices = variants.map((variant) => Number(variant.price)).filter((price) => Number.isFinite(price) && price >= 0)
   const price = variantPrices.length ? Math.min(...variantPrices) : Number(data.price || 0)
   const stockStatus = getAggregateStockStatus(variants, data.stockStatus)
+  const descriptionKg = buildCommercialDescription(normalizedData, catalogPath, variants)
+  const shortDescriptionKg = data.shortDescriptionKg
+    ? normalizeVisibleKg(data.shortDescriptionKg)
+    : compactText(`${titleKg} - StroyRayon каталогундагы ${data.unit || 'даана'} менен сатылган товар.`)
+  const faqKg = Array.isArray(data.faqKg) && data.faqKg.length >= 2
+    ? data.faqKg.map((item) => ({
+        ...item,
+        question: normalizeVisibleKg(item.question),
+        answer: normalizeVisibleKg(item.answer),
+      }))
+    : buildFaq(normalizedData, catalogPath, variants)
+  const recommendedUseKg = data.recommendedUseKg && compactText(data.recommendedUseKg).length >= 80
+    ? normalizeVisibleKg(data.recommendedUseKg)
+    : buildRecommendedUse(normalizedData, catalogPath)
+  const aliases = buildAliases(normalizedData, catalogPath, variants)
 
   return {
     currency: 'KGS',
@@ -101,10 +503,18 @@ function product(data) {
     variants,
     price,
     stockStatus,
-    images: data.images || imageFor(data.titleKg, data.slug),
-    name: data.titleKg,
-    description: data.descriptionKg,
-    shortDescription: data.shortDescriptionKg,
+    titleKg,
+    images: data.images || imageFor(titleKg, data.slug),
+    name: titleKg,
+    description: descriptionKg,
+    descriptionKg,
+    shortDescription: shortDescriptionKg,
+    shortDescriptionKg,
+    seoTitleKg: data.seoTitleKg || buildSeoTitle(normalizedData),
+    seoDescriptionKg: data.seoDescriptionKg || buildSeoDescription(normalizedData, catalogPath, variants),
+    aliases,
+    recommendedUseKg,
+    faqKg,
     stock: stockStatus === 'pre_order' ? 'Заказ менен' : stockStatus === 'low_stock' ? 'Аз калды' : stockStatus === 'out_of_stock' ? 'Жок' : 'Кампада бар',
     isSale: badges.includes('sale'),
     isPopular: badges.includes('hit'),

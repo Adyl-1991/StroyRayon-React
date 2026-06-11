@@ -60,6 +60,55 @@ function hasRealImage(product) {
   return Boolean(image?.src && image.src.endsWith('.webp') && localPublicFileExists(image.src))
 }
 
+function expectedWebpFor(product) {
+  const image = getMainImage(product)
+  return image?.expectedSrc || image?.futureSrc || `/images/products/${product.slug}/main.webp`
+}
+
+function getImageStatus(product) {
+  const image = getMainImage(product)
+  const expectedWebp = expectedWebpFor(product)
+  const fallbackSrc = image?.fallbackSrc || image?.fallback || null
+  const realImageExists = Boolean(expectedWebp?.endsWith('.webp') && localPublicFileExists(expectedWebp))
+  const fallbackExists = Boolean(fallbackSrc && localPublicFileExists(fallbackSrc))
+  const hasProductSvgFallback = Boolean(fallbackSrc?.startsWith(`/images/products/${product.slug}/`) && fallbackSrc.endsWith('.svg'))
+  const hasTypedPlaceholder = Boolean(fallbackSrc?.startsWith('/images/placeholders/product-') && fallbackSrc !== '/images/placeholders/product-placeholder.svg')
+  const missingLocalWebp = Boolean(expectedWebp?.endsWith('.webp') && !localPublicFileExists(expectedWebp))
+
+  let status = 'placeholder гана'
+  if (realImageExists) status = 'real image бар'
+  else if (hasProductSvgFallback || hasTypedPlaceholder) status = 'branded placeholder'
+
+  return {
+    slug: product.slug,
+    titleKg: product.titleKg,
+    catalogPath: product.catalogPath || [],
+    status,
+    missingLocalWebp,
+    mainSrc: image?.src || null,
+    expectedWebp,
+    fallbackSrc,
+    fallbackExists,
+  }
+}
+
+function hasReadyDescription(product) {
+  const description = product.descriptionKg || product.description || ''
+  return description.trim().length >= 180 && !genericDescriptionPatterns.some((pattern) => pattern.test(description))
+}
+
+function hasReadySeo(product) {
+  return Boolean(product.seoTitleKg && product.seoDescriptionKg && product.seoDescriptionKg.length >= 120)
+}
+
+function hasReadyFaq(product) {
+  return Array.isArray(product.faqKg) && product.faqKg.length >= 2
+}
+
+function hasReadyAliases(product) {
+  return Array.isArray(product.aliases) && product.aliases.length >= 6
+}
+
 function checkVariantPrices(product) {
   if (!Array.isArray(product.variants) || product.variants.length < 2) return null
   const prices = product.variants.map((variant) => Number(variant.price))
@@ -164,6 +213,13 @@ async function main() {
     .filter((product) => !hasRealImage(product))
     .map((product) => product.slug)
 
+  const imageStatusEntries = products.map(getImageStatus)
+  const imageStatusCounts = imageStatusEntries.reduce((counts, item) => {
+    counts[item.status] = (counts[item.status] || 0) + 1
+    if (item.missingLocalWebp) counts['missing local WebP'] = (counts['missing local WebP'] || 0) + 1
+    return counts
+  }, {})
+
   const brokenImageProducts = products
     .filter((product) => {
       const image = getMainImage(product)
@@ -189,10 +245,15 @@ async function main() {
     products: {
       total: products.length,
       withVariants: products.filter((product) => product.variants?.length).length,
+      descriptionReadyCount: products.filter(hasReadyDescription).length,
+      seoReadyCount: products.filter(hasReadySeo).length,
+      faqReadyCount: products.filter(hasReadyFaq).length,
+      aliasReadyCount: products.filter(hasReadyAliases).length,
       productIssueCount: productIssueEntries.length,
       missingRealImageCount: missingRealImageProducts.length,
       brokenImageCount: brokenImageProducts.length,
       variantPriceOrderIssueCount: variantPriceOrderIssues.length,
+      imageStatusCounts,
     },
     routes: {
       staticRoutes,
@@ -211,10 +272,29 @@ async function main() {
       emptyCatalogNodes,
       productIssueEntries,
       missingRealImageProducts,
+      imageStatusEntries,
       brokenImageProducts,
       variantPriceOrderIssues,
     },
   }
+
+  const imageStatusMarkdown = `# Product Image Status
+
+Generated: ${summary.generatedAt}
+
+## Summary
+- Products checked: ${summary.products.total}
+- Real local WebP: ${summary.products.imageStatusCounts['real image бар'] || 0}
+- Branded placeholder: ${summary.products.imageStatusCounts['branded placeholder'] || 0}
+- Placeholder only: ${summary.products.imageStatusCounts['placeholder гана'] || 0}
+- Missing local WebP: ${summary.products.imageStatusCounts['missing local WebP'] || 0}
+- Broken image fallback: ${summary.products.brokenImageCount}
+
+## Products
+${imageStatusEntries
+  .map((item) => `- ${item.slug}: ${item.status}${item.missingLocalWebp ? '; missing local WebP' : ''}; fallback ${item.fallbackExists ? 'ok' : 'missing'}; future ${item.expectedWebp}`)
+  .join('\n')}
+`
 
   const markdown = `# StroyRayon Production Audit
 
@@ -265,6 +345,19 @@ ${markdownList([
   productIssueEntries.length ? `${productIssueEntries.length} products need manual content review for descriptions, aliases, specs, FAQ, or package details.` : '',
 ].filter(Boolean), 'None detected by automated checks')}
 
+## Content Readiness
+- Descriptions ready: ${summary.products.descriptionReadyCount}/${summary.products.total}
+- SEO title/meta ready: ${summary.products.seoReadyCount}/${summary.products.total}
+- FAQ ready: ${summary.products.faqReadyCount}/${summary.products.total}
+- Search aliases ready: ${summary.products.aliasReadyCount}/${summary.products.total}
+
+## Product Image Status
+- Real local WebP: ${summary.products.imageStatusCounts['real image бар'] || 0}
+- Branded placeholder: ${summary.products.imageStatusCounts['branded placeholder'] || 0}
+- Placeholder only: ${summary.products.imageStatusCounts['placeholder гана'] || 0}
+- Missing local WebP: ${summary.products.imageStatusCounts['missing local WebP'] || 0}
+- Full list: reports/production-audit/product-image-status.md
+
 ## Route And Alias Checks
 ${markdownList(aliasMappings)}
 
@@ -273,15 +366,12 @@ ${markdownList(aliasMappings)}
 - Missing static routes: ${summary.sitemap.missingStaticRoutes.length || 0}
 - Legacy alias URLs in sitemap: ${summary.sitemap.legacyAliasesInSitemap.length || 0}
 
-## Exact Files To Change
-- src/app/router.jsx
-- src/pages/InfoPages.jsx
-- src/components/layout/Footer.jsx
-- src/components/seo/Seo.jsx
-- src/services/whatsappService.js
-- src/scripts/generateSitemap.js
-- scripts/visual-audit-capture.mjs
+## Exact Files To Maintain Next
+- src/data/products.js
+- src/data/productAssets.js
+- public/images/products/{product-slug}/main.webp
 - scripts/production-audit.mjs
+- reports/production-audit/product-image-status.md
 
 ## Exact Routes Affected
 ${markdownList([
@@ -298,11 +388,17 @@ ${markdownList([
 
   await writeFile(path.join(reportDir, 'production-audit.json'), JSON.stringify(summary, null, 2), 'utf8')
   await writeFile(path.join(reportDir, 'production-audit.md'), markdown, 'utf8')
+  await writeFile(path.join(reportDir, 'product-image-status.json'), JSON.stringify(imageStatusEntries, null, 2), 'utf8')
+  await writeFile(path.join(reportDir, 'product-image-status.md'), imageStatusMarkdown, 'utf8')
   console.log(JSON.stringify({
     report: 'reports/production-audit/production-audit.md',
+    imageStatus: 'reports/production-audit/product-image-status.md',
     products: summary.products.total,
     catalogNodes: summary.catalog.totalNodes,
     emptyCatalogNodes: summary.catalog.emptyNodes,
+    descriptionReadyCount: summary.products.descriptionReadyCount,
+    seoReadyCount: summary.products.seoReadyCount,
+    faqReadyCount: summary.products.faqReadyCount,
     productIssueCount: summary.products.productIssueCount,
     missingRealImageCount: summary.products.missingRealImageCount,
     brokenImageCount: summary.products.brokenImageCount,

@@ -1,0 +1,2569 @@
+[
+  {
+    "slug": "ppr-truba-pn20",
+    "titleKg": "ППР түтүк PN20",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-trubalar",
+      "ppr-truba-pn20"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-truba-pn20/main.webp",
+    "expectedWebp": "/images/products/ppr-truba-pn20/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-truba-pn20-25mm",
+    "titleKg": "ППР түтүк PN20, 25 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-trubalar",
+      "ppr-truba-pn20"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-truba-pn20-25mm/main.webp",
+    "expectedWebp": "/images/products/ppr-truba-pn20-25mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "armirlengen-ppr-truba-32mm",
+    "titleKg": "Стекловолокно катмарлуу ППР түтүк, 32 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-trubalar",
+      "armirlengen-ppr-trubalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/armirlengen-ppr-truba-32mm/main.webp",
+    "expectedWebp": "/images/products/armirlengen-ppr-truba-32mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-mufta-20mm",
+    "titleKg": "ППР муфта 20 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-muftalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-mufta-20mm/main.webp",
+    "expectedWebp": "/images/products/ppr-mufta-20mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-ugolok-90",
+    "titleKg": "ППР бурчтук 90°",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-ugoloktor"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-ugolok-90/main.webp",
+    "expectedWebp": "/images/products/ppr-ugolok-90/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-troynik-25mm",
+    "titleKg": "ППР тройник 25 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-troynikter"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-troynik-25mm/main.webp",
+    "expectedWebp": "/images/products/ppr-troynik-25mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-sharovyi-kran-25mm",
+    "titleKg": "ППР шар кран 25 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-krandar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-sharovyi-kran-25mm/main.webp",
+    "expectedWebp": "/images/products/ppr-sharovyi-kran-25mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kanalizatsiya-truba-50mm",
+    "titleKg": "Канализация түтүгү 50 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "kanalizaciya",
+      "ichki-kanalizaciya",
+      "kanalizaciya-trubalary-50"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kanalizatsiya-truba-50mm/main.webp",
+    "expectedWebp": "/images/products/kanalizatsiya-truba-50mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kanalizatsiya-truba-110mm",
+    "titleKg": "Канализация түтүгү 110 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "kanalizaciya",
+      "ichki-kanalizaciya",
+      "kanalizaciya-trubalary-110"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kanalizatsiya-truba-110mm/main.webp",
+    "expectedWebp": "/images/products/kanalizatsiya-truba-110mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kanalizatsiya-ugolok-50mm-45",
+    "titleKg": "Канализация бурчтугу 50 мм, 45°",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "kanalizaciya",
+      "ichki-kanalizaciya",
+      "kanalizaciya-ugoloktor"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/kanalizatsiya-ugolok-50mm-45/main.webp",
+    "expectedWebp": "/images/products/kanalizatsiya-ugolok-50mm-45/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kanalizatsiya-troynik-110-50mm",
+    "titleKg": "Канализация тройник 110/50 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "kanalizaciya",
+      "ichki-kanalizaciya",
+      "kanalizaciya-troynikter"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/kanalizatsiya-troynik-110-50mm/main.webp",
+    "expectedWebp": "/images/products/kanalizatsiya-troynik-110-50mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ashkana-smesiteli-basic",
+    "titleKg": "Ашкана смесители Basic",
+    "catalogPath": [
+      "santehnika",
+      "smesitelder",
+      "ashkana-smesitelderi"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ashkana-smesiteli-basic/main.webp",
+    "expectedWebp": "/images/products/ashkana-smesiteli-basic/main.webp",
+    "fallbackSrc": "/images/products/ashkana-smesiteli-basic/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vanna-smesiteli-dush-komplekti",
+    "titleKg": "Ванна смесители душ комплекти менен",
+    "catalogPath": [
+      "santehnika",
+      "smesitelder",
+      "vanna-smesitelderi"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/vanna-smesiteli-dush-komplekti/main.webp",
+    "expectedWebp": "/images/products/vanna-smesiteli-dush-komplekti/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "drel-650w-udarnyi",
+    "titleKg": "Дрель 650W, удар режими",
+    "catalogPath": [
+      "instrument",
+      "elektroinstrument"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/drel-650w-udarnyi/main.webp",
+    "expectedWebp": "/images/products/drel-650w-udarnyi/main.webp",
+    "fallbackSrc": "/images/products/drel-650w-udarnyi/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "akkumulyatorduk-shurupovert-12v",
+    "titleKg": "Аккумулятордук шуруповерт 12V",
+    "catalogPath": [
+      "instrument",
+      "elektroinstrument"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/akkumulyatorduk-shurupovert-12v/main.webp",
+    "expectedWebp": "/images/products/akkumulyatorduk-shurupovert-12v/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "molotok-500g",
+    "titleKg": "Молоток 500 г",
+    "catalogPath": [
+      "instrument",
+      "kol-instrumentter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/molotok-500g/main.webp",
+    "expectedWebp": "/images/products/molotok-500g/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "portlandcement-m500-50kg",
+    "titleKg": "Портландцемент М500, 50 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "cement",
+      "m500-cement"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/portlandcement-m500-50kg/main.webp",
+    "expectedWebp": "/images/products/portlandcement-m500-50kg/main.webp",
+    "fallbackSrc": "/images/products/portlandcement-m500-50kg/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "plitka-kleyi-standard-25kg",
+    "titleKg": "Плитка клейи Standard, 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "plitka-kleileri"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/plitka-kleyi-standard-25kg/main.webp",
+    "expectedWebp": "/images/products/plitka-kleyi-standard-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gips-shtukaturkasy-30kg",
+    "titleKg": "Гипс штукатуркасы, 30 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shtukaturkalar",
+      "gipstuu-shtukaturka"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/gips-shtukaturkasy-30kg/main.webp",
+    "expectedWebp": "/images/products/gips-shtukaturkasy-30kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kabel-vvgng-3x2-5",
+    "titleKg": "Кабель ВВГнг 3x2.5",
+    "catalogPath": [
+      "elektrika",
+      "kabel-provod",
+      "vvgng-kabel"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/kabel-vvgng-3x2-5/main.webp",
+    "expectedWebp": "/images/products/kabel-vvgng-3x2-5/main.webp",
+    "fallbackSrc": "/images/products/kabel-vvgng-3x2-5/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "rozetka-ichki-montazh-ak",
+    "titleKg": "Розетка ички монтаж, ак",
+    "catalogPath": [
+      "elektrika",
+      "rozetka-vyklyuchatel",
+      "rozetkalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/rozetka-ichki-montazh-ak/main.webp",
+    "expectedWebp": "/images/products/rozetka-ichki-montazh-ak/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "avtomat-16a-1p",
+    "titleKg": "Автомат 16A, 1P",
+    "catalogPath": [
+      "elektrika",
+      "avtomatika-korgoo",
+      "avtomattar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/avtomat-16a-1p/main.webp",
+    "expectedWebp": "/images/products/avtomat-16a-1p/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "samorez-gipsokarton-35x35",
+    "titleKg": "Саморез гипсокартон үчүн 3.5x35",
+    "catalogPath": [
+      "krepezh",
+      "samorezder"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/samorez-gipsokarton-35x35/main.webp",
+    "expectedWebp": "/images/products/samorez-gipsokarton-35x35/main.webp",
+    "fallbackSrc": "/images/products/samorez-gipsokarton-35x35/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "dyubel-6x40mm",
+    "titleKg": "Дюбель 6x40 мм",
+    "catalogPath": [
+      "krepezh",
+      "dyubelder"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/dyubel-6x40mm/main.webp",
+    "expectedWebp": "/images/products/dyubel-6x40mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-fastener-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "anker-bolt-10x80mm",
+    "titleKg": "Анкер болт 10x80 мм",
+    "catalogPath": [
+      "krepezh",
+      "ankerler"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/anker-bolt-10x80mm/main.webp",
+    "expectedWebp": "/images/products/anker-bolt-10x80mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-fastener-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "unitaz-kompakt-ak-standart",
+    "titleKg": "Унитаз компакт, ак, стандарт чыгаруу",
+    "catalogPath": [
+      "santehnika",
+      "unitazdar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/unitaz-kompakt-ak-standart/main.webp",
+    "expectedWebp": "/images/products/unitaz-kompakt-ak-standart/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "rakovina-keramika-50sm",
+    "titleKg": "Раковина керамика 50 см",
+    "catalogPath": [
+      "santehnika",
+      "rakovinalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/rakovina-keramika-50sm/main.webp",
+    "expectedWebp": "/images/products/rakovina-keramika-50sm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sifon-botolko-40mm",
+    "titleKg": "Сифон бөтөлкө түрү 40 мм",
+    "catalogPath": [
+      "santehnika",
+      "sifondor"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/sifon-botolko-40mm/main.webp",
+    "expectedWebp": "/images/products/sifon-botolko-40mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gibkaya-podvodka-60sm-12",
+    "titleKg": "Ийкемдүү подводка 60 см, 1/2\"",
+    "catalogPath": [
+      "santehnika",
+      "shlang-podvodka"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/gibkaya-podvodka-60sm-12/main.webp",
+    "expectedWebp": "/images/products/gibkaya-podvodka-60sm-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sharovyi-kran-latun-12",
+    "titleKg": "шар кран латунь 1/2\"",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "zapornaya-armatura"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sharovyi-kran-latun-12/main.webp",
+    "expectedWebp": "/images/products/sharovyi-kran-latun-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ichki-dubal-boyogu-ak-10l",
+    "titleKg": "Ички дубал боёгу ак, 10 л",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "ichki-boyok"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ichki-dubal-boyogu-ak-10l/main.webp",
+    "expectedWebp": "/images/products/ichki-dubal-boyogu-ak-10l/main.webp",
+    "fallbackSrc": "/images/products/ichki-dubal-boyogu-ak-10l/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "fasad-boyogu-ak-10l",
+    "titleKg": "Фасад боёгу ак, 10 л",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "fasad-boyogu"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/fasad-boyogu-ak-10l/main.webp",
+    "expectedWebp": "/images/products/fasad-boyogu-ak-10l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "emal-ak-27kg",
+    "titleKg": "Эмаль ак, 2.7 кг",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "emal"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/emal-ak-27kg/main.webp",
+    "expectedWebp": "/images/products/emal-ak-27kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "valik-boyok-uchun-250mm",
+    "titleKg": "Валик боёк үчүн 250 мм",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "valik-kist"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/valik-boyok-uchun-250mm/main.webp",
+    "expectedWebp": "/images/products/valik-boyok-uchun-250mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "alyuminii-radiator-500mm-sekciya",
+    "titleKg": "Алюминий радиатор 500 мм, 1 секция",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "otoplenie",
+      "radiatorlor"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/alyuminii-radiator-500mm-sekciya/main.webp",
+    "expectedWebp": "/images/products/alyuminii-radiator-500mm-sekciya/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "radiator-termostatikalyk-bash",
+    "titleKg": "Радиатор үчүн термостатикалык баш",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "otoplenie",
+      "termostattar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/radiator-termostatikalyk-bash/main.webp",
+    "expectedWebp": "/images/products/radiator-termostatikalyk-bash/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "teplyi-pol-truba-16mm",
+    "titleKg": "Жылуу пол түтүгү 16 мм",
+    "catalogPath": [
+      "teplyi-pol",
+      "suu-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/teplyi-pol-truba-16mm/main.webp",
+    "expectedWebp": "/images/products/teplyi-pol-truba-16mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sugat-shlangy-34-25m",
+    "titleKg": "Сугат шлангы 3/4\", 25 м",
+    "catalogPath": [
+      "bak-koroo",
+      "sugat-shlangdary"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sugat-shlangy-34-25m/main.webp",
+    "expectedWebp": "/images/products/sugat-shlangy-34-25m/main.webp",
+    "fallbackSrc": "/images/products/sugat-shlangy-34-25m/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kurok-metall-saptuu",
+    "titleKg": "Күрөк металл саптуу",
+    "catalogPath": [
+      "bak-koroo",
+      "bakcha-shaimandary"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kurok-metall-saptuu/main.webp",
+    "expectedWebp": "/images/products/kurok-metall-saptuu/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sugaruu-nasadka-komplekti",
+    "titleKg": "Сугаруу насадка комплекти",
+    "catalogPath": [
+      "bak-koroo",
+      "sugaruu-aksessuarlar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sugaruu-nasadka-komplekti/main.webp",
+    "expectedWebp": "/images/products/sugaruu-nasadka-komplekti/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "montazh-kobugu-750ml",
+    "titleKg": "Монтаж көбүгү 750 мл",
+    "catalogPath": [
+      "stroymaterial",
+      "eshik-tereze-materialdary",
+      "pena-germetik"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/montazh-kobugu-750ml/main.webp",
+    "expectedWebp": "/images/products/montazh-kobugu-750ml/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "eshik-tutkasy-komplekt",
+    "titleKg": "Эшик туткасы комплект",
+    "catalogPath": [
+      "stroymaterial",
+      "eshik-tereze-materialdary",
+      "eshik-furniturasy"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/eshik-tutkasy-komplekt/main.webp",
+    "expectedWebp": "/images/products/eshik-tutkasy-komplekt/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pvh-podokonnik-200mm",
+    "titleKg": "ПВХ терезе алды тактайы 200 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "eshik-tereze-materialdary",
+      "podokonnik-otkos"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/pvh-podokonnik-200mm/main.webp",
+    "expectedWebp": "/images/products/pvh-podokonnik-200mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "finish-shpaklevka-25kg",
+    "titleKg": "Финиш шпаклевка 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shpaklevkalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/finish-shpaklevka-25kg/main.webp",
+    "expectedWebp": "/images/products/finish-shpaklevka-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gruntovka-tereng-singuu-10l",
+    "titleKg": "Грунтовка терең сиңүүчү 10 л",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "gruntovkalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/gruntovka-tereng-singuu-10l/main.webp",
+    "expectedWebp": "/images/products/gruntovka-tereng-singuu-10l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vlagostoikii-gipsokarton-125mm",
+    "titleKg": "Нымга туруктуу гипсокартон 12.5 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "gipsokarton",
+      "vlagostoikii-gipsokarton"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/vlagostoikii-gipsokarton-125mm/main.webp",
+    "expectedWebp": "/images/products/vlagostoikii-gipsokarton-125mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "metall-plastik-truba-16mm",
+    "titleKg": "Металл-пластик түтүк 16 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "metall-plastik-trubalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/metall-plastik-truba-16mm/main.webp",
+    "expectedWebp": "/images/products/metall-plastik-truba-16mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pnd-truba-25mm",
+    "titleKg": "ПНД түтүк 25 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "pnd-trubalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/pnd-truba-25mm/main.webp",
+    "expectedWebp": "/images/products/pnd-truba-25mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "elektr-shit-12-modul",
+    "titleKg": "Электр щит 12 модуль",
+    "catalogPath": [
+      "elektrika",
+      "shitter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/elektr-shit-12-modul/main.webp",
+    "expectedWebp": "/images/products/elektr-shit-12-modul/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "led-lampa-e27-12w",
+    "titleKg": "LED лампа E27, 12W",
+    "catalogPath": [
+      "elektrika",
+      "zharyk-beruu",
+      "lampalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/led-lampa-e27-12w/main.webp",
+    "expectedWebp": "/images/products/led-lampa-e27-12w/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shurup-po-derevu-4x50mm",
+    "titleKg": "Жыгач үчүн шуруп 4x50 мм",
+    "catalogPath": [
+      "krepezh",
+      "shuruptar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shurup-po-derevu-4x50mm/main.webp",
+    "expectedWebp": "/images/products/shurup-po-derevu-4x50mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bolt-gaika-shaiba-m8-komplekt",
+    "titleKg": "Болт, гайка, шайба М8 комплект",
+    "catalogPath": [
+      "krepezh",
+      "bolt-gaika-shaiba"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bolt-gaika-shaiba-m8-komplekt/main.webp",
+    "expectedWebp": "/images/products/bolt-gaika-shaiba-m8-komplekt/main.webp",
+    "fallbackSrc": "/images/placeholders/product-fastener-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "metall-homut-20-32mm",
+    "titleKg": "Металл хомут 20-32 мм",
+    "catalogPath": [
+      "krepezh",
+      "homuttar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/metall-homut-20-32mm/main.webp",
+    "expectedWebp": "/images/products/metall-homut-20-32mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-fastener-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ventilyaciya-reshetkasy-150x150mm",
+    "titleKg": "Вентиляция торчосу 150×150 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "ventilyaciya-reshetkalary"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ventilyaciya-reshetkasy-150x150mm/main.webp",
+    "expectedWebp": "/images/products/ventilyaciya-reshetkasy-150x150mm/main.webp",
+    "fallbackSrc": "/images/products/ventilyaciya-reshetkasy-150x150mm/main.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gidroizolyaciya-smes-20kg",
+    "titleKg": "Гидроизоляция аралашмасы, 20 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "gidroizolyaciya"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/gidroizolyaciya-smes-20kg/main.webp",
+    "expectedWebp": "/images/products/gidroizolyaciya-smes-20kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "zatirka-dlya-plitki-2kg",
+    "titleKg": "Плитка аралыгы үчүн затирка, 2 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "zatirka"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/zatirka-dlya-plitki-2kg/main.webp",
+    "expectedWebp": "/images/products/zatirka-dlya-plitki-2kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "stroitelnyi-gips-25kg",
+    "titleKg": "Курулуш гипси, 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "stroitelnyi-gips"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/stroitelnyi-gips-25kg/main.webp",
+    "expectedWebp": "/images/products/stroitelnyi-gips-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "profnastil-krovlya-08mm",
+    "titleKg": "Чатыр үчүн профнастил 0.8 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "krovlya"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/profnastil-krovlya-08mm/main.webp",
+    "expectedWebp": "/images/products/profnastil-krovlya-08mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "plastifikator-beton-1l",
+    "titleKg": "Бетон үчүн пластификатор, 1 л",
+    "catalogPath": [
+      "stroymaterial",
+      "stroitelnaya-himiya"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/plastifikator-beton-1l/main.webp",
+    "expectedWebp": "/images/products/plastifikator-beton-1l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-perehodnik-25-20",
+    "titleKg": "ППР переходник 25x20 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-perehodnikter"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-perehodnik-25-20/main.webp",
+    "expectedWebp": "/images/products/ppr-perehodnik-25-20/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-kombinirovannaya-mufta-20-12",
+    "titleKg": "ППР комбинирленген муфта 20x1/2",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "kombinirovannye-fitingder"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ppr-kombinirovannaya-mufta-20-12/main.webp",
+    "expectedWebp": "/images/products/ppr-kombinirovannaya-mufta-20-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-klipsa-20",
+    "titleKg": "ППР клипса 20 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "ppr-trubalar-fitingder",
+      "ppr-klipsy-krepleniya"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ppr-klipsa-20/main.webp",
+    "expectedWebp": "/images/products/ppr-klipsa-20/main.webp",
+    "fallbackSrc": "/images/placeholders/product-fastener-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pnd-fiting-mufta-25",
+    "titleKg": "ПНД муфта 25 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "pnd-fitingder"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/pnd-fiting-mufta-25/main.webp",
+    "expectedWebp": "/images/products/pnd-fiting-mufta-25/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kanalizaciya-truba-naruzhnaya-110",
+    "titleKg": "Сырткы канализация түтүгү 110 мм",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "kanalizaciya",
+      "syrtky-kanalizaciya"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kanalizaciya-truba-naruzhnaya-110/main.webp",
+    "expectedWebp": "/images/products/kanalizaciya-truba-naruzhnaya-110/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "schetchik-vody-15",
+    "titleKg": "Суу эсептегич 1/2",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "schetchiki-vody"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/schetchik-vody-15/main.webp",
+    "expectedWebp": "/images/products/schetchik-vody-15/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "reduktor-davleniya-12",
+    "titleKg": "Басым редуктору 1/2",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "reduktory-davleniya"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/reduktor-davleniya-12/main.webp",
+    "expectedWebp": "/images/products/reduktor-davleniya-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "obratnyi-klapan-12",
+    "titleKg": "Кайтарма клапан 1/2",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "obratnye-klapany"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/obratnyi-klapan-12/main.webp",
+    "expectedWebp": "/images/products/obratnyi-klapan-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "manometr-6bar",
+    "titleKg": "Манометр 6 bar",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "manometry"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/manometr-6bar/main.webp",
+    "expectedWebp": "/images/products/manometr-6bar/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "filtr-gruboi-ochistki-12",
+    "titleKg": "Ири тазалоо фильтри 1/2",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "filtry-gruboi-ochistki"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/filtr-gruboi-ochistki-12/main.webp",
+    "expectedWebp": "/images/products/filtr-gruboi-ochistki-12/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "filtr-korpus-10",
+    "titleKg": "Фильтр корпус 10\"",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "filtry-dlya-vody"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/filtr-korpus-10/main.webp",
+    "expectedWebp": "/images/products/filtr-korpus-10/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kartridzh-polipropilen-10",
+    "titleKg": "Картридж полипропилен 10\"",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "filtry-dlya-vody",
+      "kartridzhi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kartridzh-polipropilen-10/main.webp",
+    "expectedWebp": "/images/products/kartridzh-polipropilen-10/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "rasshiritelnyi-bak-24l",
+    "titleKg": "Кеңейтүүчү бак 24 л",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "otoplenie",
+      "rasshiritelnye-baki"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/rasshiritelnyi-bak-24l/main.webp",
+    "expectedWebp": "/images/products/rasshiritelnyi-bak-24l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "rakovina-smesitel-basic",
+    "titleKg": "Раковина смесители Basic",
+    "catalogPath": [
+      "santehnika",
+      "smesitelder",
+      "rakovina-smesitelderi"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/rakovina-smesitel-basic/main.webp",
+    "expectedWebp": "/images/products/rakovina-smesitel-basic/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gigienicheskii-dush-komplekt",
+    "titleKg": "Гигиеналык душ комплект",
+    "catalogPath": [
+      "santehnika",
+      "gigienicheskii-dush"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/gigienicheskii-dush-komplekt/main.webp",
+    "expectedWebp": "/images/products/gigienicheskii-dush-komplekt/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "trap-dushevoi-10x10",
+    "titleKg": "Душ трабы 10x10 см",
+    "catalogPath": [
+      "santehnika",
+      "trapy"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/trap-dushevoi-10x10/main.webp",
+    "expectedWebp": "/images/products/trap-dushevoi-10x10/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vanna-akril-170",
+    "titleKg": "Акрил ванна 170 см",
+    "catalogPath": [
+      "santehnika",
+      "vanny"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/vanna-akril-170/main.webp",
+    "expectedWebp": "/images/products/vanna-akril-170/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vodonagrevatel-50l",
+    "titleKg": "Суу жылыткыч 50 л",
+    "catalogPath": [
+      "santehnika",
+      "vodonagrevateli"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/vodonagrevatel-50l/main.webp",
+    "expectedWebp": "/images/products/vodonagrevatel-50l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "aerator-smesitelya-m24",
+    "titleKg": "Аэратор смесителя M24",
+    "catalogPath": [
+      "santehnika",
+      "komplektuyushchie-smesitelei"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/aerator-smesitelya-m24/main.webp",
+    "expectedWebp": "/images/products/aerator-smesitelya-m24/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pvs-provod-3x1-5",
+    "titleKg": "ПВС зым 3x1.5",
+    "catalogPath": [
+      "elektrika",
+      "kabel-provod",
+      "pvs-provod"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/pvs-provod-3x1-5/main.webp",
+    "expectedWebp": "/images/products/pvs-provod-3x1-5/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shvvp-provod-2x0-75",
+    "titleKg": "ШВВП зым 2x0.75",
+    "catalogPath": [
+      "elektrika",
+      "kabel-provod",
+      "shvvp-provod"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shvvp-provod-2x0-75/main.webp",
+    "expectedWebp": "/images/products/shvvp-provod-2x0-75/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sip-kabel-2x16",
+    "titleKg": "СИП кабель 2x16",
+    "catalogPath": [
+      "elektrika",
+      "kabel-provod",
+      "sip-kabel"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sip-kabel-2x16/main.webp",
+    "expectedWebp": "/images/products/sip-kabel-2x16/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "uzo-2p-40a",
+    "titleKg": "УЗО 2P 40A",
+    "catalogPath": [
+      "elektrika",
+      "avtomatika-korgoo",
+      "uzo"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/uzo-2p-40a/main.webp",
+    "expectedWebp": "/images/products/uzo-2p-40a/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "difavtomat-16a",
+    "titleKg": "Дифавтомат 16A",
+    "catalogPath": [
+      "elektrika",
+      "avtomatika-korgoo",
+      "difavtomattar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/difavtomat-16a/main.webp",
+    "expectedWebp": "/images/products/difavtomat-16a/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "led-svetilnik-18w",
+    "titleKg": "LED жарык берүүчү шам 18W",
+    "catalogPath": [
+      "elektrika",
+      "zharyk-beruu",
+      "led-svetilnikter"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/led-svetilnik-18w/main.webp",
+    "expectedWebp": "/images/products/led-svetilnik-18w/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ulichnyi-prozhektor-30w",
+    "titleKg": "Сырткы прожектор 30W",
+    "catalogPath": [
+      "elektrika",
+      "zharyk-beruu",
+      "syrtky-zharyktandyruu"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ulichnyi-prozhektor-30w/main.webp",
+    "expectedWebp": "/images/products/ulichnyi-prozhektor-30w/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "podrozetnik-plastik",
+    "titleKg": "Пластик подрозетник",
+    "catalogPath": [
+      "elektrika",
+      "podrozetnikter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/podrozetnik-plastik/main.webp",
+    "expectedWebp": "/images/products/podrozetnik-plastik/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "raspredkorobka-80",
+    "titleKg": "Таратуу коробкасы 80 мм",
+    "catalogPath": [
+      "elektrika",
+      "raspredkorobkalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/raspredkorobka-80/main.webp",
+    "expectedWebp": "/images/products/raspredkorobka-80/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mat-teplyi-pol-1m2",
+    "titleKg": "Жылуу пол маты 1 м²",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mat-teplyi-pol-1m2/main.webp",
+    "expectedWebp": "/images/products/mat-teplyi-pol-1m2/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ventilyaciya-reshetkasy-200x200mm",
+    "titleKg": "Вентиляция торчосу 200x200 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "ventilyaciya-reshetkalary"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ventilyaciya-reshetkasy-200x200mm/main.webp",
+    "expectedWebp": "/images/products/ventilyaciya-reshetkasy-200x200mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pvc-ventilyaciya-kanaly-55x110",
+    "titleKg": "PVC вентиляция каналы 55x110 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "aba-otkorguchtor"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/pvc-ventilyaciya-kanaly-55x110/main.webp",
+    "expectedWebp": "/images/products/pvc-ventilyaciya-kanaly-55x110/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pvc-ventilyaciya-kanaly-60x120",
+    "titleKg": "PVC вентиляция каналы 60x120 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "ventilyaciya-kanaldary"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/pvc-ventilyaciya-kanaly-60x120/main.webp",
+    "expectedWebp": "/images/products/pvc-ventilyaciya-kanaly-60x120/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ventilyaciya-burchu-90",
+    "titleKg": "Вентиляция бурчу 90°",
+    "catalogPath": [
+      "ventilyaciya",
+      "homut-montazh-aksessuarlar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ventilyaciya-burchu-90/main.webp",
+    "expectedWebp": "/images/products/ventilyaciya-burchu-90/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ventilyaciya-muftasy",
+    "titleKg": "Вентиляция муфтасы",
+    "catalogPath": [
+      "ventilyaciya",
+      "homut-montazh-aksessuarlar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ventilyaciya-muftasy/main.webp",
+    "expectedWebp": "/images/products/ventilyaciya-muftasy/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vytyazhnoi-ventilyator-100mm",
+    "titleKg": "Сордуруучу вентилятор 100 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "ventilyatorlor"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/vytyazhnoi-ventilyator-100mm/main.webp",
+    "expectedWebp": "/images/products/vytyazhnoi-ventilyator-100mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vytyazhnoi-ventilyator-125mm",
+    "titleKg": "Сордуруучу вентилятор 125 мм",
+    "catalogPath": [
+      "ventilyaciya",
+      "ventilyatorlor"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/vytyazhnoi-ventilyator-125mm/main.webp",
+    "expectedWebp": "/images/products/vytyazhnoi-ventilyator-125mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "obratnyi-klapan-ventilyaciya",
+    "titleKg": "Вентиляция үчүн кайтарма клапан",
+    "catalogPath": [
+      "ventilyaciya",
+      "homut-montazh-aksessuarlar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/obratnyi-klapan-ventilyaciya/main.webp",
+    "expectedWebp": "/images/products/obratnyi-klapan-ventilyaciya/main.webp",
+    "fallbackSrc": "/images/placeholders/product-ventilation-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "perforator-800w",
+    "titleKg": "Перфоратор 800W",
+    "catalogPath": [
+      "instrument",
+      "elektroinstrument"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/perforator-800w/main.webp",
+    "expectedWebp": "/images/products/perforator-800w/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bolgarka-125mm",
+    "titleKg": "Болгарка 125 мм",
+    "catalogPath": [
+      "instrument",
+      "elektroinstrument"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bolgarka-125mm/main.webp",
+    "expectedWebp": "/images/products/bolgarka-125mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ruletka-5m",
+    "titleKg": "Рулетка 5 м",
+    "catalogPath": [
+      "instrument",
+      "olchoo-instrumentteri"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ruletka-5m/main.webp",
+    "expectedWebp": "/images/products/ruletka-5m/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "uroven-60sm",
+    "titleKg": "Уровень 60 см",
+    "catalogPath": [
+      "instrument",
+      "olchoo-instrumentteri"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/uroven-60sm/main.webp",
+    "expectedWebp": "/images/products/uroven-60sm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kurulush-bychagy",
+    "titleKg": "Курулуш бычагы",
+    "catalogPath": [
+      "instrument",
+      "kol-instrumentter"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kurulush-bychagy/main.webp",
+    "expectedWebp": "/images/products/kurulush-bychagy/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shpatel-100mm",
+    "titleKg": "Шпатель 100 мм",
+    "catalogPath": [
+      "instrument",
+      "kol-instrumentter"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shpatel-100mm/main.webp",
+    "expectedWebp": "/images/products/shpatel-100mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shpatel-250mm",
+    "titleKg": "Шпатель 250 мм",
+    "catalogPath": [
+      "instrument",
+      "kol-instrumentter"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shpatel-250mm/main.webp",
+    "expectedWebp": "/images/products/shpatel-250mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mikser-nasadka-kurgak-aralashma",
+    "titleKg": "Кургак аралашма үчүн миксер насадка",
+    "catalogPath": [
+      "instrument",
+      "rashodnikter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mikser-nasadka-kurgak-aralashma/main.webp",
+    "expectedWebp": "/images/products/mikser-nasadka-kurgak-aralashma/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bur-sds-plus-6mm",
+    "titleKg": "Бур SDS+ 6 мм",
+    "catalogPath": [
+      "instrument",
+      "disk-bur-sverlo"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bur-sds-plus-6mm/main.webp",
+    "expectedWebp": "/images/products/bur-sds-plus-6mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bur-sds-plus-8mm",
+    "titleKg": "Бур SDS+ 8 мм",
+    "catalogPath": [
+      "instrument",
+      "disk-bur-sverlo"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bur-sds-plus-8mm/main.webp",
+    "expectedWebp": "/images/products/bur-sds-plus-8mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "otreznoi-disk-125mm",
+    "titleKg": "Отрезной диск 125 мм",
+    "catalogPath": [
+      "instrument",
+      "disk-bur-sverlo"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/otreznoi-disk-125mm/main.webp",
+    "expectedWebp": "/images/products/otreznoi-disk-125mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mat-teplyi-pol-2m2",
+    "titleKg": "Жылуу пол маты 2 м²",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mat-teplyi-pol-2m2/main.webp",
+    "expectedWebp": "/images/products/mat-teplyi-pol-2m2/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mat-teplyi-pol-3m2",
+    "titleKg": "Жылуу пол маты 3 м²",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mat-teplyi-pol-3m2/main.webp",
+    "expectedWebp": "/images/products/mat-teplyi-pol-3m2/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kabeldik-teplyi-pol-10m",
+    "titleKg": "Кабелдик жылуу пол 10 м",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kabeldik-teplyi-pol-10m/main.webp",
+    "expectedWebp": "/images/products/kabeldik-teplyi-pol-10m/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kabeldik-teplyi-pol-20m",
+    "titleKg": "Кабелдик жылуу пол 20 м",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kabeldik-teplyi-pol-20m/main.webp",
+    "expectedWebp": "/images/products/kabeldik-teplyi-pol-20m/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mehanikalyk-termoregulyator",
+    "titleKg": "Механикалык терморегулятор",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mehanikalyk-termoregulyator/main.webp",
+    "expectedWebp": "/images/products/mehanikalyk-termoregulyator/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "elektronduk-termoregulyator",
+    "titleKg": "Электрондук терморегулятор",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/elektronduk-termoregulyator/main.webp",
+    "expectedWebp": "/images/products/elektronduk-termoregulyator/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "pol-datchigi",
+    "titleKg": "Пол датчиги",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/pol-datchigi/main.webp",
+    "expectedWebp": "/images/products/pol-datchigi/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "teplyi-pol-montazh-lenta",
+    "titleKg": "Жылуу пол үчүн монтаж лента",
+    "catalogPath": [
+      "teplyi-pol",
+      "elektr-teplyi-pol"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/teplyi-pol-montazh-lenta/main.webp",
+    "expectedWebp": "/images/products/teplyi-pol-montazh-lenta/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "teplyi-pol-kollektor-komplekt",
+    "titleKg": "Жылуу пол коллектор комплекти",
+    "catalogPath": [
+      "teplyi-pol",
+      "kollektor-komplektter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/teplyi-pol-kollektor-komplekt/main.webp",
+    "expectedWebp": "/images/products/teplyi-pol-kollektor-komplekt/main.webp",
+    "fallbackSrc": "/images/placeholders/product-heating-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sugat-shlangy-12-25m",
+    "titleKg": "Сугат шлангы 1/2, 25 м",
+    "catalogPath": [
+      "bak-koroo",
+      "sugat-shlangdary"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sugat-shlangy-12-25m/main.webp",
+    "expectedWebp": "/images/products/sugat-shlangy-12-25m/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shlang-konnektoru",
+    "titleKg": "Шланг коннектору",
+    "catalogPath": [
+      "bak-koroo",
+      "sugaruu-aksessuarlar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shlang-konnektoru/main.webp",
+    "expectedWebp": "/images/products/shlang-konnektoru/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "sugat-pistoleti",
+    "titleKg": "Сугат пистолети",
+    "catalogPath": [
+      "bak-koroo",
+      "nasadkalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/sugat-pistoleti/main.webp",
+    "expectedWebp": "/images/products/sugat-pistoleti/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bakcha-leykasy",
+    "titleKg": "Бакча лейкасы",
+    "catalogPath": [
+      "bak-koroo",
+      "sugaruu-aksessuarlar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bakcha-leykasy/main.webp",
+    "expectedWebp": "/images/products/bakcha-leykasy/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "grabli",
+    "titleKg": "Тырмоо",
+    "catalogPath": [
+      "bak-koroo",
+      "bakcha-shaimandary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/grabli/main.webp",
+    "expectedWebp": "/images/products/grabli/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "metla",
+    "titleKg": "Метла",
+    "catalogPath": [
+      "bak-koroo",
+      "charba-buyumdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/metla/main.webp",
+    "expectedWebp": "/images/products/metla/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kurulush-chakasy-12l",
+    "titleKg": "Курулуш чакасы 12 л",
+    "catalogPath": [
+      "bak-koroo",
+      "charba-buyumdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kurulush-chakasy-12l/main.webp",
+    "expectedWebp": "/images/products/kurulush-chakasy-12l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "plastik-taz",
+    "titleKg": "Пластик таз",
+    "catalogPath": [
+      "bak-koroo",
+      "charba-buyumdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/plastik-taz/main.webp",
+    "expectedWebp": "/images/products/plastik-taz/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "upakovka-skotch",
+    "titleKg": "Таңгак скотчу",
+    "catalogPath": [
+      "bak-koroo",
+      "charba-buyumdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/upakovka-skotch/main.webp",
+    "expectedWebp": "/images/products/upakovka-skotch/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "tachka-araba-bakcha",
+    "titleKg": "Бакча арабасы",
+    "catalogPath": [
+      "bak-koroo",
+      "tachka-araba"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/tachka-araba-bakcha/main.webp",
+    "expectedWebp": "/images/products/tachka-araba-bakcha/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "vodoemulsiyalyk-boyok-10l",
+    "titleKg": "Водоэмульсиялык боёк 10 л",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "ichki-boyok"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/vodoemulsiyalyk-boyok-10l/main.webp",
+    "expectedWebp": "/images/products/vodoemulsiyalyk-boyok-10l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "emal-pf115-kara",
+    "titleKg": "Эмаль ПФ-115 кара",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "emal"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/emal-pf115-kara/main.webp",
+    "expectedWebp": "/images/products/emal-pf115-kara/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "parket-lak",
+    "titleKg": "Паркет лак",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "laktar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/parket-lak/main.webp",
+    "expectedWebp": "/images/products/parket-lak/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "universal-koler",
+    "titleKg": "Универсал колер",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "ichki-boyok"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/universal-koler/main.webp",
+    "expectedWebp": "/images/products/universal-koler/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "rastvoritel-646",
+    "titleKg": "Эриткич 646",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "emal"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/rastvoritel-646/main.webp",
+    "expectedWebp": "/images/products/rastvoritel-646/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kist-50mm",
+    "titleKg": "Боёк кисти 50 мм",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "valik-kist"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kist-50mm/main.webp",
+    "expectedWebp": "/images/products/kist-50mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-tool-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "malyardyk-lenta",
+    "titleKg": "Малярдык лента",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "valik-kist"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/malyardyk-lenta/main.webp",
+    "expectedWebp": "/images/products/malyardyk-lenta/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "boyok-vannochka",
+    "titleKg": "Боёк үчүн ванночка",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "valik-kist"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/boyok-vannochka/main.webp",
+    "expectedWebp": "/images/products/boyok-vannochka/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "boyok-gruntovka-10l",
+    "titleKg": "Боёк үчүн грунтовка 10 л",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "gruntovka"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/boyok-gruntovka-10l/main.webp",
+    "expectedWebp": "/images/products/boyok-gruntovka-10l/main.webp",
+    "fallbackSrc": "/images/placeholders/product-paint-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "flizelin-tush-kagaz",
+    "titleKg": "Флизелин туш кагаз",
+    "catalogPath": [
+      "boiok-tush-kagaz",
+      "tush-kagazdar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/flizelin-tush-kagaz/main.webp",
+    "expectedWebp": "/images/products/flizelin-tush-kagaz/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ud-profil-27x28",
+    "titleKg": "UD профиль 27x28",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ud-profil-27x28/main.webp",
+    "expectedWebp": "/images/products/ud-profil-27x28/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "cd-profil-60x27",
+    "titleKg": "CD профиль 60x27",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/cd-profil-60x27/main.webp",
+    "expectedWebp": "/images/products/cd-profil-60x27/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "uw-profil-50",
+    "titleKg": "UW профиль 50",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/uw-profil-50/main.webp",
+    "expectedWebp": "/images/products/uw-profil-50/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "cw-profil-50",
+    "titleKg": "CW профиль 50",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/cw-profil-50/main.webp",
+    "expectedWebp": "/images/products/cw-profil-50/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "tuz-podves",
+    "titleKg": "Түз подвес",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/tuz-podves/main.webp",
+    "expectedWebp": "/images/products/tuz-podves/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "krab-soedinitel",
+    "titleKg": "Краб бириктиргич",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/krab-soedinitel/main.webp",
+    "expectedWebp": "/images/products/krab-soedinitel/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "lenta-serpyanka",
+    "titleKg": "Лента серпянка",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "gipsokarton-profilderi"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/lenta-serpyanka/main.webp",
+    "expectedWebp": "/images/products/lenta-serpyanka/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "perforaciyalangan-burchtuk",
+    "titleKg": "Перфорацияланган бурчтук",
+    "catalogPath": [
+      "stroymaterial",
+      "profilder",
+      "ugolok-profilder"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/perforaciyalangan-burchtuk/main.webp",
+    "expectedWebp": "/images/products/perforaciyalangan-burchtuk/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "cementtuu-shtukaturka-25kg",
+    "titleKg": "Цементтүү штукатурка 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shtukaturkalar",
+      "cementtik-shtukaturka"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/cementtuu-shtukaturka-25kg/main.webp",
+    "expectedWebp": "/images/products/cementtuu-shtukaturka-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "fasaddyk-shtukaturka-25kg",
+    "titleKg": "Фасаддык штукатурка 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shtukaturkalar",
+      "fasaddyk-shtukaturka"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/fasaddyk-shtukaturka-25kg/main.webp",
+    "expectedWebp": "/images/products/fasaddyk-shtukaturka-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-garden-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "dekorativdik-shtukaturka-25kg",
+    "titleKg": "Декоративдик штукатурка 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shtukaturkalar",
+      "dekorativdik-shtukaturka"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/dekorativdik-shtukaturka-25kg/main.webp",
+    "expectedWebp": "/images/products/dekorativdik-shtukaturka-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "plitka-kleyi-usilennyi-25kg",
+    "titleKg": "Күчөтүлгөн плитка клейи 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "plitka-kleileri"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/plitka-kleyi-usilennyi-25kg/main.webp",
+    "expectedWebp": "/images/products/plitka-kleyi-usilennyi-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "start-shpaklevka-20kg",
+    "titleKg": "Шпаклёвка старт 20 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "shpaklevkalar"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/start-shpaklevka-20kg/main.webp",
+    "expectedWebp": "/images/products/start-shpaklevka-20kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ozu-tegizdeluuchu-pol-25kg",
+    "titleKg": "Өзү тегизделүүчү пол 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "nalivnoi-pol"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/ozu-tegizdeluuchu-pol-25kg/main.webp",
+    "expectedWebp": "/images/products/ozu-tegizdeluuchu-pol-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "peskobeton-m300-40kg",
+    "titleKg": "Пескобетон М300 40 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "peskobeton"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/peskobeton-m300-40kg/main.webp",
+    "expectedWebp": "/images/products/peskobeton-m300-40kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "montazhdyk-aralashma-25kg",
+    "titleKg": "Монтаждык аралашма 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "montazhdyk-aralashmalar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/montazhdyk-aralashma-25kg/main.webp",
+    "expectedWebp": "/images/products/montazhdyk-aralashma-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "remonttuk-aralashma-25kg",
+    "titleKg": "Ремонттук аралашма 25 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "kurgak-aralashmalar",
+      "remonttuk-aralashmalar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/remonttuk-aralashma-25kg/main.webp",
+    "expectedWebp": "/images/products/remonttuk-aralashma-25kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "m400-cement-50kg",
+    "titleKg": "М400 цемент 50 кг",
+    "catalogPath": [
+      "stroymaterial",
+      "cement",
+      "m400-cement"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/m400-cement-50kg/main.webp",
+    "expectedWebp": "/images/products/m400-cement-50kg/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kurulush-blogu-200mm",
+    "titleKg": "Курулуш блогу 200 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "bloktor-zhana-kirpich"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kurulush-blogu-200mm/main.webp",
+    "expectedWebp": "/images/products/kurulush-blogu-200mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "bazalt-zhyluuloo-50mm",
+    "titleKg": "Базальт жылуулоо 50 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "izolyaciya"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/bazalt-zhyluuloo-50mm/main.webp",
+    "expectedWebp": "/images/products/bazalt-zhyluuloo-50mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kadimki-gipsokarton-125mm",
+    "titleKg": "Кадимки гипсокартон 12.5 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "gipsokarton",
+      "obychnyi-gipsokarton"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/kadimki-gipsokarton-125mm/main.webp",
+    "expectedWebp": "/images/products/kadimki-gipsokarton-125mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "shyp-uchun-gipsokarton-95mm",
+    "titleKg": "Шып үчүн гипсокартон 9.5 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "gipsokarton",
+      "potolochnyi-gipsokarton"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/shyp-uchun-gipsokarton-95mm/main.webp",
+    "expectedWebp": "/images/products/shyp-uchun-gipsokarton-95mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "osb-plita-9mm",
+    "titleKg": "OSB плита 9 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "osb-plitalar"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/osb-plita-9mm/main.webp",
+    "expectedWebp": "/images/products/osb-plita-9mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "fanera-10mm",
+    "titleKg": "Фанера 10 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "fanera"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/fanera-10mm/main.webp",
+    "expectedWebp": "/images/products/fanera-10mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "mdf-panel-6mm",
+    "titleKg": "МДФ панель 6 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "dvp-mdf"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/mdf-panel-6mm/main.webp",
+    "expectedWebp": "/images/products/mdf-panel-6mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "cementtik-plita-8mm",
+    "titleKg": "Цементтик плита 8 мм",
+    "catalogPath": [
+      "stroymaterial",
+      "listovye-materialdar",
+      "cementtik-plitalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/cementtik-plita-8mm/main.webp",
+    "expectedWebp": "/images/products/cementtik-plita-8mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-building-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "cirkulyaciyalyk-nasos-25-40",
+    "titleKg": "Циркуляциялык насос 25-40",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "otoplenie",
+      "cirkulyacionnye-nasosy"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/cirkulyaciyalyk-nasos-25-40/main.webp",
+    "expectedWebp": "/images/products/cirkulyaciyalyk-nasos-25-40/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "filtr-korpusu-kluch-komplekt",
+    "titleKg": "Фильтр корпусу үчүн ключ комплект",
+    "catalogPath": [
+      "inzhenerdik-santehnika",
+      "filtry-dlya-vody",
+      "komplektuyushchie-dlya-filtrov"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/filtr-korpusu-kluch-komplekt/main.webp",
+    "expectedWebp": "/images/products/filtr-korpusu-kluch-komplekt/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "dush-sistemasy-basic",
+    "titleKg": "Душ системасы Basic",
+    "catalogPath": [
+      "santehnika",
+      "dush-sistemalary"
+    ],
+    "status": "real image бар",
+    "missingLocalWebp": false,
+    "mainSrc": "/images/products/dush-sistemasy-basic/main.webp",
+    "expectedWebp": "/images/products/dush-sistemasy-basic/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "1-klavishaluu-ochurguch",
+    "titleKg": "1-клавишалуу өчүргүч",
+    "catalogPath": [
+      "elektrika",
+      "rozetka-vyklyuchatel",
+      "vyklyuchatelder"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/1-klavishaluu-ochurguch/main.webp",
+    "expectedWebp": "/images/products/1-klavishaluu-ochurguch/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "2-klavishaluu-ochurguch",
+    "titleKg": "2-клавишалуу өчүргүч",
+    "catalogPath": [
+      "elektrika",
+      "rozetka-vyklyuchatel",
+      "vyklyuchatelder"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/2-klavishaluu-ochurguch/main.webp",
+    "expectedWebp": "/images/products/2-klavishaluu-ochurguch/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "zherge-tutashtyrgychy-bar-rozetka",
+    "titleKg": "Жерге туташтыргычы бар розетка",
+    "catalogPath": [
+      "elektrika",
+      "rozetka-vyklyuchatel",
+      "rozetkalar"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/zherge-tutashtyrgychy-bar-rozetka/main.webp",
+    "expectedWebp": "/images/products/zherge-tutashtyrgychy-bar-rozetka/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kabel-kanal-16x16",
+    "titleKg": "Кабель канал 16x16",
+    "catalogPath": [
+      "elektrika",
+      "kabel-kanal"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kabel-kanal-16x16/main.webp",
+    "expectedWebp": "/images/products/kabel-kanal-16x16/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "kabel-kanal-25x16",
+    "titleKg": "Кабель канал 25x16",
+    "catalogPath": [
+      "elektrika",
+      "kabel-kanal"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/kabel-kanal-25x16/main.webp",
+    "expectedWebp": "/images/products/kabel-kanal-25x16/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "wago-tip-klemma-3-orun",
+    "titleKg": "WAGO тип клемма 3 орун",
+    "catalogPath": [
+      "elektrika",
+      "elektromontazh-materialdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/wago-tip-klemma-3-orun/main.webp",
+    "expectedWebp": "/images/products/wago-tip-klemma-3-orun/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "izolenta-kara",
+    "titleKg": "Изолента кара",
+    "catalogPath": [
+      "elektrika",
+      "elektromontazh-materialdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/izolenta-kara/main.webp",
+    "expectedWebp": "/images/products/izolenta-kara/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gofra-tutuk-16mm",
+    "titleKg": "Гофра түтүк 16 мм",
+    "catalogPath": [
+      "elektrika",
+      "elektromontazh-materialdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/gofra-tutuk-16mm/main.webp",
+    "expectedWebp": "/images/products/gofra-tutuk-16mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "gofra-tutuk-20mm",
+    "titleKg": "Гофра түтүк 20 мм",
+    "catalogPath": [
+      "elektrika",
+      "elektromontazh-materialdary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/gofra-tutuk-20mm/main.webp",
+    "expectedWebp": "/images/products/gofra-tutuk-20mm/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "internet-kabel-cat5e",
+    "titleKg": "Интернет кабель Cat5e",
+    "catalogPath": [
+      "elektrika",
+      "kabel-provod",
+      "internet-kabel"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/internet-kabel-cat5e/main.webp",
+    "expectedWebp": "/images/products/internet-kabel-cat5e/main.webp",
+    "fallbackSrc": "/images/placeholders/product-electrical-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "perforaciyalangan-montazh-lenta",
+    "titleKg": "Перфорацияланган монтаж лента",
+    "catalogPath": [
+      "krepezh",
+      "montazh-lentalary"
+    ],
+    "status": "placeholder гана",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/perforaciyalangan-montazh-lenta/main.webp",
+    "expectedWebp": "/images/products/perforaciyalangan-montazh-lenta/main.webp",
+    "fallbackSrc": "/images/placeholders/product-placeholder.svg",
+    "fallbackExists": true
+  },
+  {
+    "slug": "ppr-tutuk-keskich",
+    "titleKg": "ППР түтүк кескич",
+    "catalogPath": [
+      "instrument",
+      "santehnikalyk-instrumentter"
+    ],
+    "status": "branded placeholder",
+    "missingLocalWebp": true,
+    "mainSrc": "/images/products/ppr-tutuk-keskich/main.webp",
+    "expectedWebp": "/images/products/ppr-tutuk-keskich/main.webp",
+    "fallbackSrc": "/images/placeholders/product-plumbing-placeholder.svg",
+    "fallbackExists": true
+  }
+]

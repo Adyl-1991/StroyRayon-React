@@ -1,0 +1,190 @@
+# Product Image Status
+
+Generated: 2026-06-11T08:14:20.588Z
+
+## Summary
+- Products checked: 177
+- Real local WebP: 41
+- Branded placeholder: 86
+- Placeholder only: 50
+- Missing local WebP: 136
+- Broken image fallback: 0
+
+## Products
+- ppr-truba-pn20: real image бар; fallback ok; future /images/products/ppr-truba-pn20/main.webp
+- ppr-truba-pn20-25mm: real image бар; fallback ok; future /images/products/ppr-truba-pn20-25mm/main.webp
+- armirlengen-ppr-truba-32mm: real image бар; fallback ok; future /images/products/armirlengen-ppr-truba-32mm/main.webp
+- ppr-mufta-20mm: real image бар; fallback ok; future /images/products/ppr-mufta-20mm/main.webp
+- ppr-ugolok-90: real image бар; fallback ok; future /images/products/ppr-ugolok-90/main.webp
+- ppr-troynik-25mm: real image бар; fallback ok; future /images/products/ppr-troynik-25mm/main.webp
+- ppr-sharovyi-kran-25mm: real image бар; fallback ok; future /images/products/ppr-sharovyi-kran-25mm/main.webp
+- kanalizatsiya-truba-50mm: branded placeholder; missing local WebP; fallback ok; future /images/products/kanalizatsiya-truba-50mm/main.webp
+- kanalizatsiya-truba-110mm: branded placeholder; missing local WebP; fallback ok; future /images/products/kanalizatsiya-truba-110mm/main.webp
+- kanalizatsiya-ugolok-50mm-45: real image бар; fallback ok; future /images/products/kanalizatsiya-ugolok-50mm-45/main.webp
+- kanalizatsiya-troynik-110-50mm: real image бар; fallback ok; future /images/products/kanalizatsiya-troynik-110-50mm/main.webp
+- ashkana-smesiteli-basic: real image бар; fallback ok; future /images/products/ashkana-smesiteli-basic/main.webp
+- vanna-smesiteli-dush-komplekti: real image бар; fallback ok; future /images/products/vanna-smesiteli-dush-komplekti/main.webp
+- drel-650w-udarnyi: real image бар; fallback ok; future /images/products/drel-650w-udarnyi/main.webp
+- akkumulyatorduk-shurupovert-12v: branded placeholder; missing local WebP; fallback ok; future /images/products/akkumulyatorduk-shurupovert-12v/main.webp
+- molotok-500g: branded placeholder; missing local WebP; fallback ok; future /images/products/molotok-500g/main.webp
+- portlandcement-m500-50kg: real image бар; fallback ok; future /images/products/portlandcement-m500-50kg/main.webp
+- plitka-kleyi-standard-25kg: real image бар; fallback ok; future /images/products/plitka-kleyi-standard-25kg/main.webp
+- gips-shtukaturkasy-30kg: real image бар; fallback ok; future /images/products/gips-shtukaturkasy-30kg/main.webp
+- kabel-vvgng-3x2-5: real image бар; fallback ok; future /images/products/kabel-vvgng-3x2-5/main.webp
+- rozetka-ichki-montazh-ak: branded placeholder; missing local WebP; fallback ok; future /images/products/rozetka-ichki-montazh-ak/main.webp
+- avtomat-16a-1p: real image бар; fallback ok; future /images/products/avtomat-16a-1p/main.webp
+- samorez-gipsokarton-35x35: branded placeholder; missing local WebP; fallback ok; future /images/products/samorez-gipsokarton-35x35/main.webp
+- dyubel-6x40mm: branded placeholder; missing local WebP; fallback ok; future /images/products/dyubel-6x40mm/main.webp
+- anker-bolt-10x80mm: branded placeholder; missing local WebP; fallback ok; future /images/products/anker-bolt-10x80mm/main.webp
+- unitaz-kompakt-ak-standart: branded placeholder; missing local WebP; fallback ok; future /images/products/unitaz-kompakt-ak-standart/main.webp
+- rakovina-keramika-50sm: branded placeholder; missing local WebP; fallback ok; future /images/products/rakovina-keramika-50sm/main.webp
+- sifon-botolko-40mm: real image бар; fallback ok; future /images/products/sifon-botolko-40mm/main.webp
+- gibkaya-podvodka-60sm-12: branded placeholder; missing local WebP; fallback ok; future /images/products/gibkaya-podvodka-60sm-12/main.webp
+- sharovyi-kran-latun-12: branded placeholder; missing local WebP; fallback ok; future /images/products/sharovyi-kran-latun-12/main.webp
+- ichki-dubal-boyogu-ak-10l: branded placeholder; missing local WebP; fallback ok; future /images/products/ichki-dubal-boyogu-ak-10l/main.webp
+- fasad-boyogu-ak-10l: branded placeholder; missing local WebP; fallback ok; future /images/products/fasad-boyogu-ak-10l/main.webp
+- emal-ak-27kg: branded placeholder; missing local WebP; fallback ok; future /images/products/emal-ak-27kg/main.webp
+- valik-boyok-uchun-250mm: branded placeholder; missing local WebP; fallback ok; future /images/products/valik-boyok-uchun-250mm/main.webp
+- alyuminii-radiator-500mm-sekciya: branded placeholder; missing local WebP; fallback ok; future /images/products/alyuminii-radiator-500mm-sekciya/main.webp
+- radiator-termostatikalyk-bash: branded placeholder; missing local WebP; fallback ok; future /images/products/radiator-termostatikalyk-bash/main.webp
+- teplyi-pol-truba-16mm: branded placeholder; missing local WebP; fallback ok; future /images/products/teplyi-pol-truba-16mm/main.webp
+- sugat-shlangy-34-25m: branded placeholder; missing local WebP; fallback ok; future /images/products/sugat-shlangy-34-25m/main.webp
+- kurok-metall-saptuu: branded placeholder; missing local WebP; fallback ok; future /images/products/kurok-metall-saptuu/main.webp
+- sugaruu-nasadka-komplekti: branded placeholder; missing local WebP; fallback ok; future /images/products/sugaruu-nasadka-komplekti/main.webp
+- montazh-kobugu-750ml: placeholder гана; missing local WebP; fallback ok; future /images/products/montazh-kobugu-750ml/main.webp
+- eshik-tutkasy-komplekt: placeholder гана; missing local WebP; fallback ok; future /images/products/eshik-tutkasy-komplekt/main.webp
+- pvh-podokonnik-200mm: branded placeholder; missing local WebP; fallback ok; future /images/products/pvh-podokonnik-200mm/main.webp
+- finish-shpaklevka-25kg: real image бар; fallback ok; future /images/products/finish-shpaklevka-25kg/main.webp
+- gruntovka-tereng-singuu-10l: real image бар; fallback ok; future /images/products/gruntovka-tereng-singuu-10l/main.webp
+- vlagostoikii-gipsokarton-125mm: branded placeholder; missing local WebP; fallback ok; future /images/products/vlagostoikii-gipsokarton-125mm/main.webp
+- metall-plastik-truba-16mm: branded placeholder; missing local WebP; fallback ok; future /images/products/metall-plastik-truba-16mm/main.webp
+- pnd-truba-25mm: real image бар; fallback ok; future /images/products/pnd-truba-25mm/main.webp
+- elektr-shit-12-modul: branded placeholder; missing local WebP; fallback ok; future /images/products/elektr-shit-12-modul/main.webp
+- led-lampa-e27-12w: branded placeholder; missing local WebP; fallback ok; future /images/products/led-lampa-e27-12w/main.webp
+- shurup-po-derevu-4x50mm: placeholder гана; missing local WebP; fallback ok; future /images/products/shurup-po-derevu-4x50mm/main.webp
+- bolt-gaika-shaiba-m8-komplekt: branded placeholder; missing local WebP; fallback ok; future /images/products/bolt-gaika-shaiba-m8-komplekt/main.webp
+- metall-homut-20-32mm: branded placeholder; missing local WebP; fallback ok; future /images/products/metall-homut-20-32mm/main.webp
+- ventilyaciya-reshetkasy-150x150mm: real image бар; fallback ok; future /images/products/ventilyaciya-reshetkasy-150x150mm/main.webp
+- gidroizolyaciya-smes-20kg: real image бар; fallback ok; future /images/products/gidroizolyaciya-smes-20kg/main.webp
+- zatirka-dlya-plitki-2kg: real image бар; fallback ok; future /images/products/zatirka-dlya-plitki-2kg/main.webp
+- stroitelnyi-gips-25kg: branded placeholder; missing local WebP; fallback ok; future /images/products/stroitelnyi-gips-25kg/main.webp
+- profnastil-krovlya-08mm: branded placeholder; missing local WebP; fallback ok; future /images/products/profnastil-krovlya-08mm/main.webp
+- plastifikator-beton-1l: branded placeholder; missing local WebP; fallback ok; future /images/products/plastifikator-beton-1l/main.webp
+- ppr-perehodnik-25-20: real image бар; fallback ok; future /images/products/ppr-perehodnik-25-20/main.webp
+- ppr-kombinirovannaya-mufta-20-12: real image бар; fallback ok; future /images/products/ppr-kombinirovannaya-mufta-20-12/main.webp
+- ppr-klipsa-20: branded placeholder; missing local WebP; fallback ok; future /images/products/ppr-klipsa-20/main.webp
+- pnd-fiting-mufta-25: branded placeholder; missing local WebP; fallback ok; future /images/products/pnd-fiting-mufta-25/main.webp
+- kanalizaciya-truba-naruzhnaya-110: branded placeholder; missing local WebP; fallback ok; future /images/products/kanalizaciya-truba-naruzhnaya-110/main.webp
+- schetchik-vody-15: real image бар; fallback ok; future /images/products/schetchik-vody-15/main.webp
+- reduktor-davleniya-12: real image бар; fallback ok; future /images/products/reduktor-davleniya-12/main.webp
+- obratnyi-klapan-12: branded placeholder; missing local WebP; fallback ok; future /images/products/obratnyi-klapan-12/main.webp
+- manometr-6bar: branded placeholder; missing local WebP; fallback ok; future /images/products/manometr-6bar/main.webp
+- filtr-gruboi-ochistki-12: branded placeholder; missing local WebP; fallback ok; future /images/products/filtr-gruboi-ochistki-12/main.webp
+- filtr-korpus-10: branded placeholder; missing local WebP; fallback ok; future /images/products/filtr-korpus-10/main.webp
+- kartridzh-polipropilen-10: placeholder гана; missing local WebP; fallback ok; future /images/products/kartridzh-polipropilen-10/main.webp
+- rasshiritelnyi-bak-24l: real image бар; fallback ok; future /images/products/rasshiritelnyi-bak-24l/main.webp
+- rakovina-smesitel-basic: branded placeholder; missing local WebP; fallback ok; future /images/products/rakovina-smesitel-basic/main.webp
+- gigienicheskii-dush-komplekt: placeholder гана; missing local WebP; fallback ok; future /images/products/gigienicheskii-dush-komplekt/main.webp
+- trap-dushevoi-10x10: branded placeholder; missing local WebP; fallback ok; future /images/products/trap-dushevoi-10x10/main.webp
+- vanna-akril-170: branded placeholder; missing local WebP; fallback ok; future /images/products/vanna-akril-170/main.webp
+- vodonagrevatel-50l: real image бар; fallback ok; future /images/products/vodonagrevatel-50l/main.webp
+- aerator-smesitelya-m24: branded placeholder; missing local WebP; fallback ok; future /images/products/aerator-smesitelya-m24/main.webp
+- pvs-provod-3x1-5: real image бар; fallback ok; future /images/products/pvs-provod-3x1-5/main.webp
+- shvvp-provod-2x0-75: branded placeholder; missing local WebP; fallback ok; future /images/products/shvvp-provod-2x0-75/main.webp
+- sip-kabel-2x16: branded placeholder; missing local WebP; fallback ok; future /images/products/sip-kabel-2x16/main.webp
+- uzo-2p-40a: real image бар; fallback ok; future /images/products/uzo-2p-40a/main.webp
+- difavtomat-16a: branded placeholder; missing local WebP; fallback ok; future /images/products/difavtomat-16a/main.webp
+- led-svetilnik-18w: real image бар; fallback ok; future /images/products/led-svetilnik-18w/main.webp
+- ulichnyi-prozhektor-30w: placeholder гана; missing local WebP; fallback ok; future /images/products/ulichnyi-prozhektor-30w/main.webp
+- podrozetnik-plastik: branded placeholder; missing local WebP; fallback ok; future /images/products/podrozetnik-plastik/main.webp
+- raspredkorobka-80: branded placeholder; missing local WebP; fallback ok; future /images/products/raspredkorobka-80/main.webp
+- mat-teplyi-pol-1m2: branded placeholder; missing local WebP; fallback ok; future /images/products/mat-teplyi-pol-1m2/main.webp
+- ventilyaciya-reshetkasy-200x200mm: branded placeholder; missing local WebP; fallback ok; future /images/products/ventilyaciya-reshetkasy-200x200mm/main.webp
+- pvc-ventilyaciya-kanaly-55x110: real image бар; fallback ok; future /images/products/pvc-ventilyaciya-kanaly-55x110/main.webp
+- pvc-ventilyaciya-kanaly-60x120: branded placeholder; missing local WebP; fallback ok; future /images/products/pvc-ventilyaciya-kanaly-60x120/main.webp
+- ventilyaciya-burchu-90: branded placeholder; missing local WebP; fallback ok; future /images/products/ventilyaciya-burchu-90/main.webp
+- ventilyaciya-muftasy: branded placeholder; missing local WebP; fallback ok; future /images/products/ventilyaciya-muftasy/main.webp
+- vytyazhnoi-ventilyator-100mm: real image бар; fallback ok; future /images/products/vytyazhnoi-ventilyator-100mm/main.webp
+- vytyazhnoi-ventilyator-125mm: branded placeholder; missing local WebP; fallback ok; future /images/products/vytyazhnoi-ventilyator-125mm/main.webp
+- obratnyi-klapan-ventilyaciya: branded placeholder; missing local WebP; fallback ok; future /images/products/obratnyi-klapan-ventilyaciya/main.webp
+- perforator-800w: real image бар; fallback ok; future /images/products/perforator-800w/main.webp
+- bolgarka-125mm: placeholder гана; missing local WebP; fallback ok; future /images/products/bolgarka-125mm/main.webp
+- ruletka-5m: placeholder гана; missing local WebP; fallback ok; future /images/products/ruletka-5m/main.webp
+- uroven-60sm: placeholder гана; missing local WebP; fallback ok; future /images/products/uroven-60sm/main.webp
+- kurulush-bychagy: placeholder гана; missing local WebP; fallback ok; future /images/products/kurulush-bychagy/main.webp
+- shpatel-100mm: placeholder гана; missing local WebP; fallback ok; future /images/products/shpatel-100mm/main.webp
+- shpatel-250mm: placeholder гана; missing local WebP; fallback ok; future /images/products/shpatel-250mm/main.webp
+- mikser-nasadka-kurgak-aralashma: branded placeholder; missing local WebP; fallback ok; future /images/products/mikser-nasadka-kurgak-aralashma/main.webp
+- bur-sds-plus-6mm: placeholder гана; missing local WebP; fallback ok; future /images/products/bur-sds-plus-6mm/main.webp
+- bur-sds-plus-8mm: placeholder гана; missing local WebP; fallback ok; future /images/products/bur-sds-plus-8mm/main.webp
+- otreznoi-disk-125mm: branded placeholder; missing local WebP; fallback ok; future /images/products/otreznoi-disk-125mm/main.webp
+- mat-teplyi-pol-2m2: branded placeholder; missing local WebP; fallback ok; future /images/products/mat-teplyi-pol-2m2/main.webp
+- mat-teplyi-pol-3m2: branded placeholder; missing local WebP; fallback ok; future /images/products/mat-teplyi-pol-3m2/main.webp
+- kabeldik-teplyi-pol-10m: branded placeholder; missing local WebP; fallback ok; future /images/products/kabeldik-teplyi-pol-10m/main.webp
+- kabeldik-teplyi-pol-20m: branded placeholder; missing local WebP; fallback ok; future /images/products/kabeldik-teplyi-pol-20m/main.webp
+- mehanikalyk-termoregulyator: placeholder гана; missing local WebP; fallback ok; future /images/products/mehanikalyk-termoregulyator/main.webp
+- elektronduk-termoregulyator: placeholder гана; missing local WebP; fallback ok; future /images/products/elektronduk-termoregulyator/main.webp
+- pol-datchigi: placeholder гана; missing local WebP; fallback ok; future /images/products/pol-datchigi/main.webp
+- teplyi-pol-montazh-lenta: branded placeholder; missing local WebP; fallback ok; future /images/products/teplyi-pol-montazh-lenta/main.webp
+- teplyi-pol-kollektor-komplekt: branded placeholder; missing local WebP; fallback ok; future /images/products/teplyi-pol-kollektor-komplekt/main.webp
+- sugat-shlangy-12-25m: branded placeholder; missing local WebP; fallback ok; future /images/products/sugat-shlangy-12-25m/main.webp
+- shlang-konnektoru: branded placeholder; missing local WebP; fallback ok; future /images/products/shlang-konnektoru/main.webp
+- sugat-pistoleti: branded placeholder; missing local WebP; fallback ok; future /images/products/sugat-pistoleti/main.webp
+- bakcha-leykasy: placeholder гана; missing local WebP; fallback ok; future /images/products/bakcha-leykasy/main.webp
+- grabli: placeholder гана; missing local WebP; fallback ok; future /images/products/grabli/main.webp
+- metla: placeholder гана; missing local WebP; fallback ok; future /images/products/metla/main.webp
+- kurulush-chakasy-12l: placeholder гана; missing local WebP; fallback ok; future /images/products/kurulush-chakasy-12l/main.webp
+- plastik-taz: placeholder гана; missing local WebP; fallback ok; future /images/products/plastik-taz/main.webp
+- upakovka-skotch: placeholder гана; missing local WebP; fallback ok; future /images/products/upakovka-skotch/main.webp
+- tachka-araba-bakcha: branded placeholder; missing local WebP; fallback ok; future /images/products/tachka-araba-bakcha/main.webp
+- vodoemulsiyalyk-boyok-10l: branded placeholder; missing local WebP; fallback ok; future /images/products/vodoemulsiyalyk-boyok-10l/main.webp
+- emal-pf115-kara: branded placeholder; missing local WebP; fallback ok; future /images/products/emal-pf115-kara/main.webp
+- parket-lak: branded placeholder; missing local WebP; fallback ok; future /images/products/parket-lak/main.webp
+- universal-koler: placeholder гана; missing local WebP; fallback ok; future /images/products/universal-koler/main.webp
+- rastvoritel-646: branded placeholder; missing local WebP; fallback ok; future /images/products/rastvoritel-646/main.webp
+- kist-50mm: branded placeholder; missing local WebP; fallback ok; future /images/products/kist-50mm/main.webp
+- malyardyk-lenta: placeholder гана; missing local WebP; fallback ok; future /images/products/malyardyk-lenta/main.webp
+- boyok-vannochka: branded placeholder; missing local WebP; fallback ok; future /images/products/boyok-vannochka/main.webp
+- boyok-gruntovka-10l: branded placeholder; missing local WebP; fallback ok; future /images/products/boyok-gruntovka-10l/main.webp
+- flizelin-tush-kagaz: placeholder гана; missing local WebP; fallback ok; future /images/products/flizelin-tush-kagaz/main.webp
+- ud-profil-27x28: placeholder гана; missing local WebP; fallback ok; future /images/products/ud-profil-27x28/main.webp
+- cd-profil-60x27: placeholder гана; missing local WebP; fallback ok; future /images/products/cd-profil-60x27/main.webp
+- uw-profil-50: placeholder гана; missing local WebP; fallback ok; future /images/products/uw-profil-50/main.webp
+- cw-profil-50: placeholder гана; missing local WebP; fallback ok; future /images/products/cw-profil-50/main.webp
+- tuz-podves: placeholder гана; missing local WebP; fallback ok; future /images/products/tuz-podves/main.webp
+- krab-soedinitel: placeholder гана; missing local WebP; fallback ok; future /images/products/krab-soedinitel/main.webp
+- lenta-serpyanka: placeholder гана; missing local WebP; fallback ok; future /images/products/lenta-serpyanka/main.webp
+- perforaciyalangan-burchtuk: placeholder гана; missing local WebP; fallback ok; future /images/products/perforaciyalangan-burchtuk/main.webp
+- cementtuu-shtukaturka-25kg: real image бар; fallback ok; future /images/products/cementtuu-shtukaturka-25kg/main.webp
+- fasaddyk-shtukaturka-25kg: branded placeholder; missing local WebP; fallback ok; future /images/products/fasaddyk-shtukaturka-25kg/main.webp
+- dekorativdik-shtukaturka-25kg: branded placeholder; missing local WebP; fallback ok; future /images/products/dekorativdik-shtukaturka-25kg/main.webp
+- plitka-kleyi-usilennyi-25kg: branded placeholder; missing local WebP; fallback ok; future /images/products/plitka-kleyi-usilennyi-25kg/main.webp
+- start-shpaklevka-20kg: real image бар; fallback ok; future /images/products/start-shpaklevka-20kg/main.webp
+- ozu-tegizdeluuchu-pol-25kg: real image бар; fallback ok; future /images/products/ozu-tegizdeluuchu-pol-25kg/main.webp
+- peskobeton-m300-40kg: placeholder гана; missing local WebP; fallback ok; future /images/products/peskobeton-m300-40kg/main.webp
+- montazhdyk-aralashma-25kg: placeholder гана; missing local WebP; fallback ok; future /images/products/montazhdyk-aralashma-25kg/main.webp
+- remonttuk-aralashma-25kg: placeholder гана; missing local WebP; fallback ok; future /images/products/remonttuk-aralashma-25kg/main.webp
+- m400-cement-50kg: branded placeholder; missing local WebP; fallback ok; future /images/products/m400-cement-50kg/main.webp
+- kurulush-blogu-200mm: placeholder гана; missing local WebP; fallback ok; future /images/products/kurulush-blogu-200mm/main.webp
+- bazalt-zhyluuloo-50mm: placeholder гана; missing local WebP; fallback ok; future /images/products/bazalt-zhyluuloo-50mm/main.webp
+- kadimki-gipsokarton-125mm: real image бар; fallback ok; future /images/products/kadimki-gipsokarton-125mm/main.webp
+- shyp-uchun-gipsokarton-95mm: branded placeholder; missing local WebP; fallback ok; future /images/products/shyp-uchun-gipsokarton-95mm/main.webp
+- osb-plita-9mm: placeholder гана; missing local WebP; fallback ok; future /images/products/osb-plita-9mm/main.webp
+- fanera-10mm: placeholder гана; missing local WebP; fallback ok; future /images/products/fanera-10mm/main.webp
+- mdf-panel-6mm: placeholder гана; missing local WebP; fallback ok; future /images/products/mdf-panel-6mm/main.webp
+- cementtik-plita-8mm: branded placeholder; missing local WebP; fallback ok; future /images/products/cementtik-plita-8mm/main.webp
+- cirkulyaciyalyk-nasos-25-40: placeholder гана; missing local WebP; fallback ok; future /images/products/cirkulyaciyalyk-nasos-25-40/main.webp
+- filtr-korpusu-kluch-komplekt: branded placeholder; missing local WebP; fallback ok; future /images/products/filtr-korpusu-kluch-komplekt/main.webp
+- dush-sistemasy-basic: real image бар; fallback ok; future /images/products/dush-sistemasy-basic/main.webp
+- 1-klavishaluu-ochurguch: placeholder гана; missing local WebP; fallback ok; future /images/products/1-klavishaluu-ochurguch/main.webp
+- 2-klavishaluu-ochurguch: placeholder гана; missing local WebP; fallback ok; future /images/products/2-klavishaluu-ochurguch/main.webp
+- zherge-tutashtyrgychy-bar-rozetka: branded placeholder; missing local WebP; fallback ok; future /images/products/zherge-tutashtyrgychy-bar-rozetka/main.webp
+- kabel-kanal-16x16: branded placeholder; missing local WebP; fallback ok; future /images/products/kabel-kanal-16x16/main.webp
+- kabel-kanal-25x16: branded placeholder; missing local WebP; fallback ok; future /images/products/kabel-kanal-25x16/main.webp
+- wago-tip-klemma-3-orun: placeholder гана; missing local WebP; fallback ok; future /images/products/wago-tip-klemma-3-orun/main.webp
+- izolenta-kara: placeholder гана; missing local WebP; fallback ok; future /images/products/izolenta-kara/main.webp
+- gofra-tutuk-16mm: placeholder гана; missing local WebP; fallback ok; future /images/products/gofra-tutuk-16mm/main.webp
+- gofra-tutuk-20mm: placeholder гана; missing local WebP; fallback ok; future /images/products/gofra-tutuk-20mm/main.webp
+- internet-kabel-cat5e: branded placeholder; missing local WebP; fallback ok; future /images/products/internet-kabel-cat5e/main.webp
+- perforaciyalangan-montazh-lenta: placeholder гана; missing local WebP; fallback ok; future /images/products/perforaciyalangan-montazh-lenta/main.webp
+- ppr-tutuk-keskich: branded placeholder; missing local WebP; fallback ok; future /images/products/ppr-tutuk-keskich/main.webp

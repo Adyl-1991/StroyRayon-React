@@ -1,0 +1,145 @@
+[
+  {
+    "id": "home-desktop",
+    "path": "/",
+    "viewport": "1440x1200",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "home-mobile",
+    "path": "/",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "catalog-mobile",
+    "path": "/catalog",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "catalog-stroymaterial",
+    "path": "/catalog/stroymaterial",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "catalog-engineering",
+    "path": "/catalog/inzhenerdik-santehnika",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "catalog-elektrika",
+    "path": "/catalog/elektrika",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "product-ppr",
+    "path": "/product/ppr-truba-pn20",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": "ppr-truba-pn20",
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "legacy-kabel",
+    "path": "/product/kabel-vvgng",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": "kabel-vvgng-3x2-5",
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "legacy-gips",
+    "path": "/product/gips-shtukaturka",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": "gips-shtukaturkasy-30kg",
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "legacy-smesitel",
+    "path": "/product/smesitel-kuhnya",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": "ashkana-smesiteli-basic",
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "cart-mobile",
+    "path": "/cart",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "checkout-mobile",
+    "path": "/checkout",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  },
+  {
+    "id": "search-ppr",
+    "path": "/search?q=%D0%BF%D0%BF%D1%80",
+    "viewport": "390x844",
+    "status": 200,
+    "httpOk": true,
+    "screenshot": true,
+    "resolvedProductSlug": null,
+    "dataOk": true,
+    "pass": true
+  }
+]

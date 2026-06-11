@@ -1,42 +1,12 @@
 # StroyRayon Production Audit
 
-Generated: 2026-06-11T06:16:59.699Z
+Generated: 2026-06-11T08:14:20.588Z
 
 ## Critical Issues
 - None detected by automated checks
 
 ## Important Issues
 - Admin/CRM production readiness is not implemented in the React storefront scope and remains a launch TODO.
-- ppr-troynik-25mm: weak search aliases
-- ppr-sharovyi-kran-25mm: weak search aliases
-- kanalizatsiya-truba-50mm: short description
-- kanalizatsiya-ugolok-50mm-45: short description, weak search aliases
-- kanalizatsiya-troynik-110-50mm: weak search aliases
-- ashkana-smesiteli-basic: short description, weak search aliases
-- vanna-smesiteli-dush-komplekti: weak search aliases
-- drel-650w-udarnyi: short description, weak search aliases
-- akkumulyatorduk-shurupovert-12v: weak search aliases
-- molotok-500g: short description, weak search aliases
-- portlandcement-m500-50kg: short description, weak search aliases
-- plitka-kleyi-standard-25kg: weak search aliases
-- gips-shtukaturkasy-30kg: weak search aliases
-- kabel-vvgng-3x2-5: short description, weak search aliases
-- rozetka-ichki-montazh-ak: short description, weak search aliases
-- avtomat-16a-1p: short description, weak search aliases
-- samorez-gipsokarton-35x35: short description, weak search aliases
-- dyubel-6x40mm: short description, weak search aliases
-- anker-bolt-10x80mm: weak search aliases
-- unitaz-kompakt-ak-standart: weak search aliases
-- rakovina-keramika-50sm: weak search aliases
-- sifon-botolko-40mm: weak search aliases
-- sharovyi-kran-latun-12: weak search aliases
-- ichki-dubal-boyogu-ak-10l: weak search aliases
-- fasad-boyogu-ak-10l: weak search aliases
-- emal-ak-27kg: weak search aliases
-- valik-boyok-uchun-250mm: weak search aliases
-- alyuminii-radiator-500mm-sekciya: weak search aliases
-- radiator-termostatikalyk-bash: weak search aliases
-- sugat-shlangy-34-25m: weak search aliases
 
 ## Minor Issues
 - No local WebP product photo detected: kanalizatsiya-truba-50mm
@@ -91,7 +61,19 @@ Generated: 2026-06-11T06:16:59.699Z
 
 ## Content Blockers
 - 136 products still rely on placeholder, SVG, or planned image fallback instead of confirmed local WebP photo.
-- 166 products need manual content review for descriptions, aliases, specs, FAQ, or package details.
+
+## Content Readiness
+- Descriptions ready: 177/177
+- SEO title/meta ready: 177/177
+- FAQ ready: 177/177
+- Search aliases ready: 177/177
+
+## Product Image Status
+- Real local WebP: 41
+- Branded placeholder: 86
+- Placeholder only: 50
+- Missing local WebP: 136
+- Full list: reports/production-audit/product-image-status.md
 
 ## Route And Alias Checks
 - /product/kabel-vvgng -> /product/kabel-vvgng-3x2-5
@@ -103,15 +85,12 @@ Generated: 2026-06-11T06:16:59.699Z
 - Missing static routes: 0
 - Legacy alias URLs in sitemap: 0
 
-## Exact Files To Change
-- src/app/router.jsx
-- src/pages/InfoPages.jsx
-- src/components/layout/Footer.jsx
-- src/components/seo/Seo.jsx
-- src/services/whatsappService.js
-- src/scripts/generateSitemap.js
-- scripts/visual-audit-capture.mjs
+## Exact Files To Maintain Next
+- src/data/products.js
+- src/data/productAssets.js
+- public/images/products/{product-slug}/main.webp
 - scripts/production-audit.mjs
+- reports/production-audit/product-image-status.md
 
 ## Exact Routes Affected
 - /about
