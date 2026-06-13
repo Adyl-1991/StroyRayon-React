@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { ProductFaq } from '../components/product/ProductFaq'
 import { ProductGallery } from '../components/product/ProductGallery'
 import { ProductInfo } from '../components/product/ProductInfo'
@@ -21,6 +21,7 @@ import {
   getSelectedVariant,
   getStockLabel,
   getStockStatus,
+  resolveProductSlug,
   getSubcategory,
 } from '../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../services/whatsappService'
@@ -33,8 +34,9 @@ import {
 
 export function ProductPage() {
   const { productSlug } = useParams()
+  const canonicalProductSlug = resolveProductSlug(productSlug)
   const { nodes: catalogNodes } = useCatalogTree()
-  const { product, isLoading } = useProductBySlug(productSlug)
+  const { product, isLoading } = useProductBySlug(canonicalProductSlug)
   const [variantSelection, setVariantSelection] = useState({ productId: '', variantId: '' })
   const defaultVariant = useMemo(() => getDefaultVariant(product), [product])
   const selectedVariantId = variantSelection.productId === product?.id ? variantSelection.variantId : defaultVariant?.id || ''
@@ -46,6 +48,10 @@ export function ProductPage() {
 
   function handleVariantChange(variantId) {
     setVariantSelection({ productId: product?.id || '', variantId })
+  }
+
+  if (productSlug && canonicalProductSlug !== productSlug) {
+    return <Navigate to={`/product/${canonicalProductSlug}`} replace />
   }
 
   if (!product && isLoading) {
