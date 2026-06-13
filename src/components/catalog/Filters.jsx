@@ -49,6 +49,10 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
     setFilters(defaultCatalogFilters)
   }
 
+  function closeFilters() {
+    setIsOpen(false)
+  }
+
   const activeFilterLabels = getActiveFilterLabels(filters, safeOptions)
   const hasActiveFilters = activeFilterLabels.length > 0
   const hasBrands = safeOptions.brands.length > 0
@@ -153,6 +157,18 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
         </label>
 
         {showActiveChips && <ActiveFilterChips labels={activeFilterLabels} className="active-filters--body" />}
+
+        <div className="filters__actions">
+          <button className="text-button" type="button" onClick={clearFilters}>
+            Тазалоо
+          </button>
+          <button className="text-button" type="button" onClick={closeFilters}>
+            Жабуу
+          </button>
+          <button className="button button--secondary" type="button" onClick={closeFilters}>
+            {resultCount} товарды көрсөт
+          </button>
+        </div>
 
         <button className="text-button" type="button" onClick={clearFilters}>
           Фильтрди тазалоо

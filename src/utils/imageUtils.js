@@ -204,5 +204,7 @@ export function applyImageFallback(event, type = 'product', fallbackOverride = '
   if (!event?.currentTarget || event.currentTarget.src.endsWith(fallbackSrc)) return
 
   event.currentTarget.removeAttribute('srcset')
+  event.currentTarget.alt = event.currentTarget.dataset.fallbackAlt || event.currentTarget.alt || getImageAlt(null)
+  event.currentTarget.classList.add('is-fallback-image')
   event.currentTarget.src = fallbackSrc
 }

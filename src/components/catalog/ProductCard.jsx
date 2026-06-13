@@ -31,7 +31,7 @@ export function ProductCard({ product }) {
   const tags = product.tags || []
 
   return (
-    <article className="product-card">
+    <article className={`product-card product-card--image-${image.type || 'fallback'}`}>
       <Link to={`/product/${product.slug}`} className="product-card__image">
         <img
           src={image.src}
@@ -40,6 +40,8 @@ export function ProductCard({ product }) {
           width={image.width}
           height={image.height}
           data-fallback-src={image.fallbackSrc}
+          data-fallback-alt={image.alt || productName}
+          data-image-type={image.type || 'fallback'}
           onError={(event) => applyImageFallback(event, 'product')}
         />
         <div className="product-card__badges">
