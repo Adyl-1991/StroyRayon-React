@@ -455,6 +455,275 @@ function normalizeVisibleKg(value) {
   return visibleKgReplacements.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), compactText(value))
 }
 
+const unitRuLabels = {
+  'даана': 'шт.',
+  'кап': 'мешок',
+  'метр': 'метр',
+  'комплект': 'комплект',
+  'рулон': 'рулон',
+}
+
+const productTypeRules = [
+  [/ppr-truba|pnd-truba|metall-plastik-truba|kanalizaciya-truba|syrtky-kanalizaciya|teplyi-pol-truba/, 'Түтүк', 'Труба'],
+  [/ppr-mufta|pnd-fiting|kombinirovannye-fitingder/, 'Муфта', 'Муфта'],
+  [/ppr-ugolok|kanalizaciya-ugolok/, 'Бурчтук', 'Уголок'],
+  [/ppr-troynik|kanalizaciya-troynik/, 'Тройник', 'Тройник'],
+  [/ppr-kran|zapornaya-armatura/, 'Кран', 'Кран'],
+  [/smesitel|aerator/, 'Смеситель', 'Смеситель'],
+  [/sifon/, 'Сифон', 'Сифон'],
+  [/unitaz/, 'Унитаз', 'Унитаз'],
+  [/rakovina/, 'Раковина', 'Раковина'],
+  [/vanna/, 'Ванна', 'Ванна'],
+  [/dush|trap/, 'Душ комплекти', 'Душевой комплект'],
+  [/vodonagrevatel/, 'Суу жылыткыч', 'Водонагреватель'],
+  [/podvodka|shlang-podvodka|gibkaya/, 'Подводка', 'Подводка'],
+  [/schetchik/, 'Суу эсептегич', 'Счетчик воды'],
+  [/reduktor/, 'Басым редуктору', 'Редуктор давления'],
+  [/klapan/, 'Клапан', 'Клапан'],
+  [/manometr/, 'Манометр', 'Манометр'],
+  [/filtr|kartridzh/, 'Фильтр', 'Фильтр'],
+  [/rasshiritelnyi-bak/, 'Кеңейтүүчү бак', 'Расширительный бак'],
+  [/kabel|provod|sip|internet-kabel/, 'Кабель', 'Кабель'],
+  [/avtomat|uzo|difavtomat/, 'Электр коргоо аппараты', 'Электрозащита'],
+  [/rozetka|vyklyuchatel|podrozetnik|raspredkorobka/, 'Электромонтаж товары', 'Электромонтажное изделие'],
+  [/shit/, 'Электр щит', 'Электрический щит'],
+  [/lampa|svetilnik|zharyktandyruu/, 'Жарык берүү товары', 'Освещение'],
+  [/drel|shurupovert|perforator|elektroinstrument/, 'Электроинструмент', 'Электроинструмент'],
+  [/molotok|kurok|kol-instrument|olchoo-instrument|santehnikalyk-instrument/, 'Шайман', 'Инструмент'],
+  [/disk|bur|sverlo|nasadka|rashodnik/, 'Расходник', 'Расходный материал'],
+  [/cement/, 'Цемент', 'Цемент'],
+  [/shtukaturka/, 'Штукатурка', 'Штукатурка'],
+  [/shpaklevka/, 'Шпаклёвка', 'Шпаклевка'],
+  [/gruntovka/, 'Грунтовка', 'Грунтовка'],
+  [/gidroizolyaciya/, 'Гидроизоляция', 'Гидроизоляция'],
+  [/plitka-kleileri/, 'Плитка клейи', 'Плиточный клей'],
+  [/zatirka/, 'Затирка', 'Затирка'],
+  [/gipsokarton/, 'Гипсокартон', 'Гипсокартон'],
+  [/profil|ugolok-profil/, 'Профиль', 'Профиль'],
+  [/osb|fanera|dvp|mdf|plita|cementtik-plitalar/, 'Лист материалы', 'Листовой материал'],
+  [/pena|germetik/, 'Пена жана герметик', 'Пена и герметик'],
+  [/furnitura|tutka/, 'Фурнитура', 'Фурнитура'],
+  [/podokonnik|otkos/, 'Терезе материалы', 'Материал для окна'],
+  [/krovlya|profnastil/, 'Чатыр материалы', 'Кровельный материал'],
+  [/himiya|plastifikator/, 'Курулуш химиясы', 'Строительная химия'],
+  [/samorez|shurup|dyubel|anker|bolt|gaika|shaiba|homut/, 'Бекиткич', 'Крепеж'],
+  [/boyok|boyogu|kraska|emal|lak/, 'Боёк материалы', 'Лакокрасочный материал'],
+  [/valik|kist/, 'Боёк шайманы', 'Малярный инструмент'],
+  [/tush-kagaz/, 'Туш кагаз', 'Обои'],
+  [/radiator|termostat|teplyi-pol|cirkulyacionnye-nasosy/, 'Жылытуу товары', 'Товар для отопления'],
+  [/ventilyaciya|ventilyator/, 'Вентиляция товары', 'Вентиляционный товар'],
+  [/shlang|sugaruu|sugat|bakcha|charba|araba/, 'Бакча товары', 'Садовый товар'],
+  [/blok|kirpich/, 'Блок жана кирпич', 'Блок и кирпич'],
+  [/izolyaciya/, 'Изоляция', 'Изоляция'],
+]
+
+const ruTitleReplacements = [
+  [/Гипс штукатуркасы/gi, 'Гипсовая штукатурка'],
+  [/гипс штукатуркасы/gi, 'гипсовая штукатурка'],
+  [/машина гипс штукатуркасы/gi, 'машинная гипсовая штукатурка'],
+  [/ППР түтүк/gi, 'ППР труба'],
+  [/ПНД түтүк/gi, 'ПНД труба'],
+  [/Канализация түтүгү/gi, 'Канализационная труба'],
+  [/Сырткы канализация түтүгү/gi, 'Наружная канализационная труба'],
+  [/түтүгү/gi, 'труба'],
+  [/түтүк/gi, 'труба'],
+  [/бурчтугу/gi, 'уголок'],
+  [/бурчтук/gi, 'уголок'],
+  [/Ашкана смесители/gi, 'Смеситель для кухни'],
+  [/Раковина смесители/gi, 'Смеситель для раковины'],
+  [/Ванна смесители душ комплекти менен/gi, 'Смеситель для ванны с душевым комплектом'],
+  [/Ийкемдүү подводка/gi, 'Гибкая подводка'],
+  [/стандарт чыгаруу/gi, 'стандартный выпуск'],
+  [/бөтөлкө түрү/gi, 'бутылочного типа'],
+  [/термостатикалык баш/gi, 'термостатическая головка'],
+  [/ППР шар кран/gi, 'ППР шаровой кран'],
+  [/шар кран/gi, 'шаровой кран'],
+  [/Валик краска үчүн/gi, 'Малярный валик'],
+  [/Валик краска для/gi, 'Малярный валик'],
+  [/краска үчүн/gi, 'для краски'],
+  [/Радиатор для термостатическая головка/gi, 'Радиаторная термостатическая головка'],
+  [/үчүн/gi, 'для'],
+  [/Суу эсептегич/gi, 'Счетчик воды'],
+  [/Суу жылыткыч/gi, 'Водонагреватель'],
+  [/Басым редуктору/gi, 'Редуктор давления'],
+  [/Кайтарма клапан/gi, 'Обратный клапан'],
+  [/Ири тазалоо фильтри/gi, 'Фильтр грубой очистки'],
+  [/Кеңейтүүчү бак/gi, 'Расширительный бак'],
+  [/Ички дубал боёгу/gi, 'Краска для внутренних стен'],
+  [/Фасад боёгу/gi, 'Фасадная краска'],
+  [/боёгу/gi, 'краска'],
+  [/боёк/gi, 'краска'],
+  [/ак,/gi, 'белая,'],
+  [/ак$/gi, 'белая'],
+  [/Жылуу пол/gi, 'Теплый пол'],
+  [/Сугат шлангы/gi, 'Поливочный шланг'],
+  [/Сугаруу насадка комплекти/gi, 'Комплект насадок для полива'],
+  [/Күрөк металл саптуу/gi, 'Металлическая лопата с ручкой'],
+  [/Монтаж көбүгү/gi, 'Монтажная пена'],
+  [/Эшик туткасы комплект/gi, 'Комплект дверных ручек'],
+  [/ПВХ терезе алды тактайы/gi, 'ПВХ подоконник'],
+  [/Нымга туруктуу гипсокартон/gi, 'Влагостойкий гипсокартон'],
+  [/Курулуш гипси/gi, 'Строительный гипс'],
+  [/Чатыр үчүн профнастил/gi, 'Профнастил для кровли'],
+  [/Бетон үчүн пластификатор/gi, 'Пластификатор для бетона'],
+  [/Жыгач үчүн шуруп/gi, 'Шуруп по дереву'],
+  [/Вентиляция торчосу/gi, 'Вентиляционная решетка'],
+  [/Плитка клейи/gi, 'Плиточный клей'],
+  [/Плитка аралыгы үчүн затирка/gi, 'Затирка для плитки'],
+  [/Грунтовка терең сиңүүчү/gi, 'Грунтовка глубокого проникновения'],
+  [/Аккумулятордук/gi, 'Аккумуляторный'],
+  [/удар режими/gi, 'ударный режим'],
+  [/Ири тазалоо/gi, 'Грубая очистка'],
+  [/Суу менен жылытуучу/gi, 'Водяной'],
+  [/Суу/gi, 'Вода'],
+  [/суу/gi, 'вода'],
+  [/жылытуу/gi, 'отопление'],
+  [/жылуу/gi, 'теплый'],
+  [/линиялары/gi, 'линии'],
+  [/линиясына/gi, 'линии'],
+  [/линиясы/gi, 'линия'],
+  [/жана/gi, 'и'],
+  [/менен/gi, 'с'],
+  [/арналган/gi, 'для'],
+  [/күнүмдүк/gi, 'повседневный'],
+  [/колдонуу/gi, 'применение'],
+  [/ички/gi, 'внутренний'],
+  [/Ички/gi, 'Внутренний'],
+]
+
+const ruPackReplacements = [
+  [/кагаз кап/gi, 'бумажный мешок'],
+  [/кап/gi, 'мешок'],
+  [/даана/gi, 'шт.'],
+  [/Кутуда/gi, 'В коробке'],
+  [/кутуда/gi, 'в коробке'],
+  [/берилет/gi, 'поставляется'],
+  [/сатылат/gi, 'продается'],
+  [/менен/gi, 'с'],
+  [/жана/gi, 'и'],
+  [/кургак жерде сактоо керек/gi, 'хранить в сухом месте'],
+  [/жеткирүү/gi, 'доставка'],
+  [/унаасы/gi, 'транспорт'],
+  [/алдын ала такталат/gi, 'уточняется заранее'],
+  [/такталат/gi, 'уточняется'],
+  [/узун товар болгондуктан/gi, 'для длинномерного товара'],
+  [/Узун товар/gi, 'Длинномерный товар'],
+  [/Стандарт узундук/gi, 'Стандартная длина'],
+  [/кесүү шартын менеджер менен тактаңыз/gi, 'условия резки уточните с менеджером'],
+  [/чоң көлөмдө пакеттелет/gi, 'упаковывается крупными партиями'],
+  [/туткасы/gi, 'ручкой'],
+  [/шлангдар/gi, 'шланги'],
+  [/монтаж комплекти/gi, 'монтажный комплект'],
+  [/инструкция/gi, 'инструкция'],
+  [/поставкага жараша/gi, 'по комплектации поставки'],
+  [/Керамикалык товар болгондуктан кабыл алууда бүтүндүгүн текшерүү сунушталат/gi, 'Проверяйте целостность керамического изделия при получении'],
+  [/прокладка и гайкалар/gi, 'прокладки и гайки'],
+  [/гайкалар/gi, 'гайки'],
+  [/ведрода/gi, 'ведре'],
+  [/банкада/gi, 'банке'],
+  [/тон берүү мүмкүнчүлүгү менеджер с уточняется/gi, 'возможность колеровки уточняется у менеджера'],
+  [/комплектациясы/gi, 'комплектация'],
+  [/резинкасы/gi, 'резинка'],
+  [/лист/gi, 'лист'],
+  [/чака/gi, 'ведро'],
+  [/банка/gi, 'банка'],
+  [/канистра/gi, 'канистра'],
+  [/баллон/gi, 'баллон'],
+  [/коробка/gi, 'коробка'],
+  [/пакет/gi, 'пакет'],
+  [/секция/gi, 'секция'],
+]
+
+function localizeUnitTextRu(value) {
+  if (!value) return value
+
+  return String(value)
+    .replace(/даана/g, unitRuLabels.даана)
+    .replace(/кап/g, unitRuLabels.кап)
+    .replace(/метр/g, unitRuLabels.метр)
+    .replace(/комплект/g, unitRuLabels.комплект)
+    .replace(/рулон/g, unitRuLabels.рулон)
+    .replace(/чака/g, 'ведро')
+}
+
+function translateBasicRu(value) {
+  return ruTitleReplacements
+    .reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), compactText(value))
+    .replace(/Валик краска для/gi, 'Малярный валик')
+    .replace(/Радиатор для термостатическая головка/gi, 'Радиаторная термостатическая головка')
+}
+
+function translatePackRu(value) {
+  const translated = ruPackReplacements.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), compactText(value))
+  return localizeUnitTextRu(translated)
+    .replace(/кагаз мешок/gi, 'бумажный мешок')
+    .replace(/шт\. с поставляется/gi, 'поштучно')
+    .replace(/шт\. с продается/gi, 'поштучно')
+    .replace(/коробка с поставляется/gi, 'коробка')
+    .replace(/Комплект В коробке поставляется/gi, 'комплект в коробке')
+    .replace(/с поставляется/gi, 'поставляется')
+    .replace(/Пластик ведре поставляется/gi, 'пластиковое ведро')
+    .replace(/Пластик ведрода поставляется/gi, 'пластиковое ведро')
+    .replace(/ведрода/gi, 'ведре')
+    .replace(/ведро поставляется/gi, 'ведро')
+    .replace(/Металл банке поставляется/gi, 'металлическая банка')
+    .replace(/поштучно, ручка комплектация уточняется/gi, 'поштучно, комплектация ручки уточняется')
+    .replace(/шт\. с, ручкой поставляется/gi, 'поштучно, с ручкой')
+    .replace(/Комплект прокладки и гайки поставляется/gi, 'комплект с прокладками и гайками')
+}
+
+function getPackRu(data, pack, minOrderRu) {
+  if (data.packRu) return compactText(data.packRu)
+  const translatedPack = compactText(translatePackRu(pack))
+  const hasLeftoverKg = /(кесүү|тактаңыз|Узундугу|наличиеси|боюнча|Метраж|Даана|берилет|сатылат|куту|Куту|шайкеш|өзүнчө|текшерилет|чоң|көлөм|жерде|сактоо|Керамикалык|кабыл|алууда|бүтүндүгүн|сунушталат|гайкалар|берүү|мүмкүнчүлүгү|комплектациясы)/i.test(translatedPack)
+
+  return hasLeftoverKg ? minOrderRu : translatedPack
+}
+
+function looksLikeRussianAlias(value) {
+  const text = String(value || '')
+  if (!text || /^SR-/i.test(text)) return false
+  return /(труба|угол|смеситель|кран|душ|дрель|цемент|штукатур|шпаклев|клей|кабель|саморез|дюбель|анкер|унитаз|раковина|сифон|подводка|краска|радиатор|тепл|шланг|пена|ручк|подоконник|фильтр|клапан|счет|водонагрев|решетк|гипсокартон|профнастил|пластификатор|затирка|плитк)/i.test(text)
+}
+
+function getRuTitle(data, titleKg) {
+  if (data.titleRu) return compactText(data.titleRu)
+
+  const aliasTitle = [...(data.aliasesRu || []), ...(data.aliases || [])].find(looksLikeRussianAlias)
+  return compactText(aliasTitle || translateBasicRu(titleKg))
+}
+
+function getProductTypeFromPath(catalogPath, locale = 'kg') {
+  const leaf = String(catalogPath?.at(-1) || '').toLowerCase()
+  const match = productTypeRules.find(([pattern]) => pattern.test(leaf))
+  if (match) return locale === 'ru' ? match[2] : match[1]
+
+  return locale === 'ru' ? 'Товар' : 'Товар'
+}
+
+function getShortDescriptionRu(data, titleRu, productTypeRu, packRu) {
+  if (data.shortDescriptionRu) return compactText(data.shortDescriptionRu)
+  if (data.descriptionRu) return compactText(data.descriptionRu)
+
+  const alias = (data.aliases || []).find(looksLikeRussianAlias)
+  if (alias && alias !== titleRu) {
+    return compactText(`${titleRu} - ${productTypeRu.toLowerCase()} для строительных и ремонтных работ. Фасовка/размер: ${packRu}.`)
+  }
+
+  return compactText(`${titleRu} - ${productTypeRu.toLowerCase()} в каталоге StroyRayon. Наличие, цену и доставку уточняйте перед заказом.`)
+}
+
+function getAliasesRu(data, titleRu, productTypeRu) {
+  const aliases = [
+    ...(data.aliasesRu || []),
+    ...(data.aliases || []).filter(looksLikeRussianAlias),
+    titleRu,
+    productTypeRu,
+  ]
+
+  return [...new Set(aliases.map(compactText).filter(Boolean))]
+}
+
 function product(data) {
   const badges = data.badges || []
   const titleKg = normalizeVisibleKg(data.titleKg)
@@ -479,17 +748,22 @@ function product(data) {
   const price = variantPrices.length ? Math.min(...variantPrices) : Number(data.price || 0)
   const stockStatus = getAggregateStockStatus(variants, data.stockStatus)
   const descriptionKg = buildCommercialDescription(normalizedData, catalogPath, variants)
-  const titleRu = data.titleRu || titleKg
+  const titleRu = getRuTitle(data, titleKg)
   const shortDescriptionKg = data.shortDescriptionKg
     ? normalizeVisibleKg(data.shortDescriptionKg)
     : compactText(`${titleKg} - StroyRayon каталогундагы ${data.unit || 'даана'} менен сатылган товар.`)
-  const shortDescriptionRu = data.shortDescriptionRu || shortDescriptionKg
+  const minOrder = data.minOrder || `1 ${data.unit || 'даана'}`
+  const pack = data.pack || data.packageInfoKg || minOrder
+  const unitRu = data.unitRu || unitRuLabels[data.unit] || data.unit
+  const minOrderRu = data.minOrderRu || localizeUnitTextRu(minOrder)
+  const packRu = getPackRu(data, pack, minOrderRu)
+  const productTypeKg = data.productType || getProductTypeFromPath(catalogPath, 'kg')
+  const productTypeRu = data.productTypeRu || getProductTypeFromPath(catalogPath, 'ru')
+  const shortDescriptionRu = getShortDescriptionRu(data, titleRu, productTypeRu, packRu)
   const fullDescriptionKg = data.fullDescriptionKg || data.descriptionKg || descriptionKg
   const fullDescriptionRu = data.fullDescriptionRu || data.descriptionRu || shortDescriptionRu || fullDescriptionKg
   const specificationsKg = data.specificationsKg || data.specs || {}
   const specificationsRu = data.specificationsRu || data.specsRu || specificationsKg
-  const minOrder = data.minOrder || `1 ${data.unit || 'даана'}`
-  const pack = data.pack || data.packageInfoKg || minOrder
   const imageStatus = data.imageStatus || (imageAssets?.available ? 'ready' : 'planned')
   const faqKg = Array.isArray(data.faqKg) && data.faqKg.length >= 2
     ? data.faqKg.map((item) => ({
@@ -511,8 +785,8 @@ function product(data) {
     catalogPath,
     categoryId: data.categoryId || data.categorySlug || catalogPath[0],
     subcategoryId: data.subcategoryId || data.subcategorySlug || catalogPath.at(-1),
-    productType: data.productType || catalogPath.at(-1) || data.subcategorySlug,
-    productTypeRu: data.productTypeRu,
+    productType: productTypeKg,
+    productTypeRu,
     article: data.article || data.sku,
     imageAssets,
     variants,
@@ -521,10 +795,10 @@ function product(data) {
     titleKg,
     titleRu,
     minOrder,
-    minOrderRu: data.minOrderRu,
+    minOrderRu,
     pack,
-    packRu: data.packRu,
-    unitRu: data.unitRu,
+    packRu,
+    unitRu,
     weight: data.weight || specificationsKg.Салмак || specificationsKg.Салмагы,
     size: data.size || data.weight || pack,
     images: data.images || imageFor(titleKg, data.slug),
@@ -555,7 +829,7 @@ function product(data) {
     seoDescriptionRu: data.seoDescriptionRu || compactText(`${titleRu}: уточните цену, наличие и доставку через WhatsApp в StroyRayon.`),
     aliases,
     aliasesKg: data.aliasesKg || aliases,
-    aliasesRu: data.aliasesRu || data.aliases || [],
+    aliasesRu: getAliasesRu(data, titleRu, productTypeRu),
     recommendedUseKg,
     faqKg,
     faqRu: data.faqRu || [],
