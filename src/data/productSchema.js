@@ -1,14 +1,25 @@
 export const PRODUCT_REQUIRED_FIELDS = [
   'id',
-  'titleKg',
   'slug',
   'sku',
+  'titleKg',
+  'titleRu',
   'catalogPath',
+  'categoryId',
+  'categorySlug',
+  'subcategoryId',
+  'subcategorySlug',
   'brand',
+  'productType',
   'price',
-  'unit',
   'currency',
+  'unit',
   'stockStatus',
+  'minOrder',
+  'shortDescriptionKg',
+  'shortDescriptionRu',
+  'fullDescriptionKg',
+  'fullDescriptionRu',
 ]
 
 export const STOCK_STATUS_VALUES = ['in_stock', 'low_stock', 'pre_order', 'out_of_stock']

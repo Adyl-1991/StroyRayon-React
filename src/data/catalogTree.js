@@ -68,7 +68,7 @@ export const catalogTree = [
             descriptionKg: 'Ички жана сырткы дубалды тегиздөө үчүн штукатурка түрлөрү.',
             seoTextKg: 'Штукатурка негиздин түрүнө, нымдуулукка жана катмар калыңдыгына жараша тандалат.',
             children: [
-              leaf('gypsum-plaster', 'Гипстүү штукатурка', 'gipstuu-shtukaturka', 'wall', ['gypsum-plaster']),
+              leaf('gypsum-plaster', 'Гипстүү штукатурка', 'gipstuu-shtukaturka', 'wall', ['gypsum-plaster'], ['gipsuu-shtukaturka', 'гипсовая штукатурка']),
               leaf('cement-plaster', 'Цементтик штукатурка', 'cementtik-shtukaturka', 'wall', ['cement-plaster']),
               leaf('facade-plaster', 'Фасаддык штукатурка', 'fasaddyk-shtukaturka', 'facade'),
               leaf('decorative-plaster', 'Декоративдик штукатурка', 'dekorativdik-shtukaturka', 'decor'),

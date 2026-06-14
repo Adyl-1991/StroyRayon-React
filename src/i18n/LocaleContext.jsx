@@ -37,10 +37,13 @@ export function LocaleProvider({ children }) {
     function nodeText(node) {
       const bySlug = catalogTranslations[node?.slug]?.[locale]
       const fallback = catalogTranslations[node?.slug]?.kg
+      const localeTitle = locale === 'ru' ? node?.titleRu : node?.titleKg
+      const localeDescription = locale === 'ru' ? node?.descriptionRu : node?.descriptionKg
+      const localeSeoText = locale === 'ru' ? node?.seoTextRu : node?.seoTextKg
       return {
-        title: bySlug?.title || fallback?.title || node?.titleKg || node?.name || '',
-        description: bySlug?.description || fallback?.description || node?.descriptionKg || node?.description || '',
-        seoText: bySlug?.seoText || fallback?.seoText || node?.seoTextKg || node?.seoText || '',
+        title: bySlug?.title || fallback?.title || localeTitle || node?.titleKg || node?.name || '',
+        description: bySlug?.description || fallback?.description || localeDescription || node?.descriptionKg || node?.description || '',
+        seoText: bySlug?.seoText || fallback?.seoText || localeSeoText || node?.seoTextKg || node?.seoText || '',
       }
     }
 

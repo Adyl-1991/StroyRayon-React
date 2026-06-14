@@ -12,17 +12,21 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCatalogTree } from '../hooks/useCatalogTree'
 import { useProductBySlug } from '../hooks/useProducts'
+import { useLocale } from '../i18n/LocaleContext'
 import {
   getCatalogBreadcrumbs,
   getCatalogNodeUrl,
-  getCategoryBySlug,
   getDefaultVariant,
+  getProductFullDescription,
+  getProductListField,
+  getProductShortDescription,
+  getProductSpecs,
+  getProductTitle,
   getRelatedProducts,
   getSelectedVariant,
   getStockLabel,
   getStockStatus,
   resolveProductSlug,
-  getSubcategory,
 } from '../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../services/whatsappService'
 import {
@@ -32,9 +36,25 @@ import {
   getProductSeo,
 } from '../utils/seoUtils'
 
+function ProductTextList({ title, items }) {
+  if (!items.length) return null
+
+  return (
+    <section className="detail-panel">
+      <h2>{title}</h2>
+      <ul className="product-copy-list">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 export function ProductPage() {
   const { productSlug } = useParams()
   const canonicalProductSlug = resolveProductSlug(productSlug)
+  const { locale, nodeText, t } = useLocale()
   const { nodes: catalogNodes } = useCatalogTree()
   const { product, isLoading } = useProductBySlug(canonicalProductSlug)
   const [variantSelection, setVariantSelection] = useState({ productId: '', variantId: '' })
@@ -58,44 +78,44 @@ export function ProductPage() {
     return (
       <main className="page">
         <p className="microcopy" role="status">
-          Товар жүктөлүүдө...
+          {t('product.loading')}
         </p>
       </main>
     )
   }
 
   if (!product) {
-    return <EmptyState title="Товар табылган жок" text="Каталогдон башка товарды тандап көрүңүз." />
+    return <EmptyState title={t('product.notFoundTitle')} text={t('product.notFoundText')} />
   }
 
-  const category = getCategoryBySlug(product.categorySlug)
-  const subcategory = getSubcategory(product.categorySlug, product.subcategorySlug)
+  const productName = getProductTitle(product, locale)
+  const shortDescription = getProductShortDescription(product, locale)
+  const fullDescription = getProductFullDescription(product, locale)
+  const specifications = getProductSpecs(product, locale)
+  const applicationItems = getProductListField(product, 'application', locale)
+  const benefitItems = getProductListField(product, 'benefits', locale)
+  const instructionItems = getProductListField(product, 'instructions', locale)
+  const faqItems = getProductListField(product, 'faq', locale)
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
-  const variantSpecs = selectedVariant
-    ? {
-        ...product.specs,
-        Өлчөм: selectedVariant.size,
-        SKU: selectedVariant.sku,
-        Таңгак: selectedVariant.packageInfo || product.packageInfoKg || product.minOrder,
-        'Бар-жогу': getStockLabel(getStockStatus(selectedVariant)),
-      }
-    : product.specs
-  const packageInfo = selectedVariant?.packageInfo || product.packageInfoKg || 'Менеджер менен такталат'
+  const activeSku = selectedVariant?.sku || product.sku || product.article
+  const packageInfo = selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder
+  const stockStatus = selectedVariant ? getStockStatus(selectedVariant) : getStockStatus(product)
+  const variantSpecs = {
+    ...specifications,
+    ...(activeSku ? { [t('product.sku')]: activeSku } : {}),
+    ...(packageInfo ? { [t('product.pack')]: packageInfo } : {}),
+    [t('product.stock')]: getStockLabel(stockStatus, locale),
+  }
+  const workArea = specifications[t('product.workArea')] || specifications['Тип работ'] || specifications['Иш түрү']
+  const mainBenefit = benefitItems[0]
   const breadcrumbItems = [
-    { label: 'Каталог', to: '/catalog' },
-    ...(catalogBreadcrumbs.length
-      ? catalogBreadcrumbs.map((item) => ({ label: item.titleKg, to: getCatalogNodeUrl(item.path) }))
-      : [
-          category ? { label: category.name, to: `/catalog/${category.slug}` } : { label: 'Категория' },
-          subcategory && category
-            ? { label: subcategory.name, to: `/catalog/${category.slug}/${subcategory.slug}` }
-            : { label: 'Бөлүм' },
-        ]),
-    { label: product.name },
+    { label: t('common.catalog'), to: '/catalog' },
+    ...catalogBreadcrumbs.map((item) => ({ label: nodeText(item).title, to: getCatalogNodeUrl(item.path) })),
+    { label: productName },
   ]
-  const seo = getProductSeo(product)
-  const managerAskText = buildProductInquiryText({ product, variant: selectedVariant })
+  const seo = getProductSeo(product, locale)
+  const managerAskText = buildProductInquiryText({ product: { ...product, name: productName }, variant: selectedVariant, locale })
 
   return (
     <main className="page">
@@ -104,58 +124,82 @@ export function ProductPage() {
         description={seo.description}
         canonical={seo.canonical}
         structuredData={combineStructuredData(
-          buildProductStructuredData(product),
+          buildProductStructuredData(product, locale),
           buildBreadcrumbStructuredData(breadcrumbItems),
         )}
       />
       <Breadcrumbs items={breadcrumbItems} />
       {isLoading && (
         <p className="microcopy" role="status">
-          Товар жаңыланууда...
+          {t('product.updating')}
         </p>
       )}
-      {(!catalogBreadcrumbs.length && (!category || !subcategory)) && (
+      {!catalogBreadcrumbs.length && (
         <section className="notice" role="status">
-          Бул товардын категория маалыматтары толук эмес. Заказ берүү иштейт, бирок каталог байланышы кийин такталат.
+          {t('product.incompleteCatalogNotice')}
         </section>
       )}
+
       <div className="product-layout">
         <ProductGallery key={product.id} product={product} selectedVariant={selectedVariant} />
         <ProductInfo product={product} selectedVariant={selectedVariant} onVariantChange={handleVariantChange} />
       </div>
+
       <div className="product-details">
-        <ProductSpecs specs={variantSpecs} />
-        <section className="detail-panel">
-          <h2>Колдонуу боюнча кеңеш</h2>
-          <p>{product.recommendedUseKg || product.advice}</p>
-        </section>
-        <section className="detail-panel">
-          <h2>Жеткирүү жана кепилдик</h2>
+        <section className="detail-panel product-quick-info">
+          <h2>{t('product.quickInfo')}</h2>
           <dl className="specs">
             <div>
-              <dt>Таңгак</dt>
-              <dd>{packageInfo}</dd>
+              <dt>{t('product.purpose')}</dt>
+              <dd>{applicationItems[0] || shortDescription}</dd>
             </div>
-            <div>
-              <dt>Жеткирүү</dt>
-              <dd>{product.deliveryInfoKg || 'Регион жана көлөм боюнча эсептелет'}</dd>
-            </div>
-            <div>
-              <dt>Кепилдик</dt>
-              <dd>{product.warrantyInfoKg || 'Товар түрүнө жараша такталат'}</dd>
-            </div>
+            {workArea && (
+              <div>
+                <dt>{t('product.workArea')}</dt>
+                <dd>{workArea}</dd>
+              </div>
+            )}
+            {mainBenefit && (
+              <div>
+                <dt>{t('product.mainBenefit')}</dt>
+                <dd>{mainBenefit}</dd>
+              </div>
+            )}
           </dl>
         </section>
+
+        <section className="detail-panel product-description-panel">
+          <h2>{t('product.fullDescription')}</h2>
+          <p>{fullDescription}</p>
+        </section>
+
+        <ProductSpecs specs={variantSpecs} />
+        <ProductTextList title={t('product.application')} items={applicationItems} />
+        <ProductTextList title={t('product.benefits')} items={benefitItems} />
+        <ProductTextList title={t('product.instructions')} items={instructionItems} />
+
+        <section className="detail-panel">
+          <h2>{t('product.deliveryTitle')}</h2>
+          <ul className="product-copy-list">
+            <li>{t('product.delivery')}</li>
+            <li>{t('product.payment')}</li>
+            <li>{t('product.whatsappClarify')}</li>
+          </ul>
+          <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
+        </section>
+
         <section className="detail-panel manager-cta">
-          <h2>Бул товарды туура тандоо үчүн менеджерден кеңеш алыңыз</h2>
-          <p>Объекттин түрүн, көлөмүн жана колдонуу жерин айтсаңыз, туура марка же аналог сунуштайбыз.</p>
+          <h2>{t('product.managerTitle')}</h2>
+          <p>{t('product.managerText')}</p>
           <a href={getWhatsAppUrl(managerAskText)} target="_blank" rel="noreferrer">
-            WhatsApp аркылуу суроо берүү
+            {t('product.askWhatsApp')}
           </a>
         </section>
-        <ProductFaq items={product.faqKg} />
+
+        <ProductFaq items={faqItems} />
         <ProductReviews product={product} />
       </div>
+
       <RelatedProducts products={relatedProducts} />
       <ProductStickyCta product={product} selectedVariant={selectedVariant} />
     </main>

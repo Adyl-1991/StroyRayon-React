@@ -2,19 +2,39 @@ import { categories } from '../data/categories.js'
 import { catalogTree } from '../data/catalogTree.js'
 import { products } from '../data/products.js'
 
-export const STOCK_LABELS = {
-  in_stock: 'Бар',
-  low_stock: 'Аз калды',
-  pre_order: 'Заказ менен',
-  out_of_stock: 'Жок',
+export const STOCK_LABELS_BY_LOCALE = {
+  kg: {
+    in_stock: 'Бар',
+    low_stock: 'Аз калды',
+    pre_order: 'Заказ менен',
+    out_of_stock: 'Жок',
+  },
+  ru: {
+    in_stock: 'В наличии',
+    low_stock: 'Мало',
+    pre_order: 'Под заказ',
+    out_of_stock: 'Нет в наличии',
+  },
 }
 
-export const BADGE_LABELS = {
-  hit: 'Хит',
-  sale: 'Акция',
-  quality: 'Сапаттуу',
-  new: 'Жаңы',
+export const STOCK_LABELS = STOCK_LABELS_BY_LOCALE.kg
+
+export const BADGE_LABELS_BY_LOCALE = {
+  kg: {
+    hit: 'Хит',
+    sale: 'Акция',
+    quality: 'Сапаттуу',
+    new: 'Жаңы',
+  },
+  ru: {
+    hit: 'Хит',
+    sale: 'Акция',
+    quality: 'Качество',
+    new: 'Новинка',
+  },
 }
+
+export const BADGE_LABELS = BADGE_LABELS_BY_LOCALE.kg
 
 const CUSTOMER_BADGES = ['hit', 'sale', 'quality', 'new']
 
@@ -203,8 +223,79 @@ export function searchProducts(query, sourceProducts = products) {
   return sourceProducts.map(normalizeProduct).filter((product) => getSearchIndex(product).includes(normalizedQuery))
 }
 
-export function getStockLabel(stockStatus) {
-  return STOCK_LABELS[stockStatus] || 'Такталат'
+export function getStockLabel(stockStatus, locale = 'kg') {
+  return STOCK_LABELS_BY_LOCALE[locale]?.[stockStatus] || STOCK_LABELS_BY_LOCALE.kg[stockStatus] || (locale === 'ru' ? 'Уточняется' : 'Такталат')
+}
+
+export function getBadgeLabel(tag, locale = 'kg') {
+  return BADGE_LABELS_BY_LOCALE[locale]?.[tag] || BADGE_LABELS_BY_LOCALE.kg[tag] || tag
+}
+
+export function getProductTitle(product, locale = 'kg') {
+  if (!product) return ''
+  return locale === 'ru'
+    ? product.titleRu || product.name || product.titleKg || product.title || ''
+    : product.titleKg || product.name || product.title || ''
+}
+
+export function getUnitLabel(unit, locale = 'kg') {
+  if (locale !== 'ru') return unit
+  const labels = {
+    'даана': 'шт.',
+    'кап': 'мешок',
+    'метр': 'метр',
+    'комплект': 'комплект',
+    'рулон': 'рулон',
+  }
+  return labels[unit] || unit
+}
+
+export function getLocalizedUnitText(value, locale = 'kg') {
+  if (!value || locale !== 'ru') return value
+
+  return String(value)
+    .replace(/\bдаана\b/g, 'шт.')
+    .replace(/\bкап\b/g, 'мешок')
+    .replace(/\bметр\b/g, 'метр')
+    .replace(/\bкомплект\b/g, 'комплект')
+    .replace(/\bрулон\b/g, 'рулон')
+}
+
+export function getLocalizedProductValue(product, fieldBase, locale = 'kg') {
+  if (!product) return ''
+  if (locale === 'ru' && fieldBase === 'productType') return product.productTypeRu || product.typeRu || ''
+  if (locale === 'ru') return getLocalizedUnitText(product[`${fieldBase}Ru`] || product[fieldBase] || product[`${fieldBase}Kg`] || '', locale)
+  return product[`${fieldBase}Kg`] || product[fieldBase] || ''
+}
+
+export function getProductShortDescription(product, locale = 'kg') {
+  if (!product) return ''
+  return locale === 'ru'
+    ? product.shortDescriptionRu || product.shortDescription || product.descriptionRu || product.shortDescriptionKg || ''
+    : product.shortDescriptionKg || product.shortDescription || product.descriptionKg || ''
+}
+
+export function getProductFullDescription(product, locale = 'kg') {
+  if (!product) return ''
+  return locale === 'ru'
+    ? product.fullDescriptionRu || product.descriptionRu || product.description || product.fullDescriptionKg || ''
+    : product.fullDescriptionKg || product.descriptionKg || product.description || ''
+}
+
+export function getProductSpecs(product, locale = 'kg') {
+  if (!product) return {}
+  return locale === 'ru'
+    ? product.specificationsRu || product.specsRu || product.specificationsKg || product.specs || {}
+    : product.specificationsKg || product.specs || {}
+}
+
+export function getProductListField(product, fieldBase, locale = 'kg') {
+  if (!product) return []
+  const localizedField = `${fieldBase}${locale === 'ru' ? 'Ru' : 'Kg'}`
+  const fallbackField = `${fieldBase}${locale === 'ru' ? 'Kg' : 'Ru'}`
+  const value = product[localizedField] || product[fallbackField] || []
+  if (Array.isArray(value)) return value.filter(Boolean)
+  return value ? [value] : []
 }
 
 export function getStockStatus(product) {
@@ -226,7 +317,9 @@ export function getProductVariants(product) {
       size: String(variant.size || '').trim(),
       price: Number(variant.price ?? product.price ?? 0),
       unit: variant.unit || product.unit,
+      unitRu: variant.unitRu || product.unitRu,
       packageInfo: variant.packageInfo || variant.packageInfoKg || product.packageInfoKg || product.minOrder,
+      packageInfoRu: variant.packageInfoRu || product.packageInfoRu || product.minOrderRu,
       stockStatus: variant.stockStatus || product.stockStatus || 'in_stock',
       sku: variant.sku || `${product.sku || product.id}-${variant.id || variant.size || 'variant'}`,
     }))
@@ -305,10 +398,16 @@ function getSearchIndex(product) {
 
   return [
     normalizedProduct.name,
+    normalizedProduct.titleRu,
     normalizedProduct.shortDescription,
+    normalizedProduct.shortDescriptionRu,
     normalizedProduct.description,
+    normalizedProduct.descriptionRu,
+    normalizedProduct.fullDescriptionKg,
+    normalizedProduct.fullDescriptionRu,
     normalizedProduct.brand,
     normalizedProduct.sku,
+    normalizedProduct.article,
     normalizedProduct.categorySlug,
     normalizedProduct.subcategorySlug,
     normalizedProduct.catalogPath?.join(' '),
@@ -318,6 +417,8 @@ function getSearchIndex(product) {
     specs,
     normalizedProduct.tags?.join(' '),
     normalizedProduct.aliases?.join(' '),
+    normalizedProduct.aliasesKg?.join(' '),
+    normalizedProduct.aliasesRu?.join(' '),
   ]
     .filter(Boolean)
     .join(' ')
@@ -330,16 +431,49 @@ export function normalizeProduct(product) {
   const variants = getProductVariants({ ...product, brand: brandName })
   const stockStatus = getAggregateVariantStockStatus(variants) || getStockStatus({ ...product, brand: brandName })
   const tags = product.tags || product.badges || []
-  const aliases = Array.isArray(product.aliases) ? product.aliases : []
+  const aliasesKg = Array.isArray(product.aliasesKg) ? product.aliasesKg : []
+  const aliasesRu = Array.isArray(product.aliasesRu) ? product.aliasesRu : []
+  const aliases = Array.isArray(product.aliases) ? product.aliases : [...aliasesKg, ...aliasesRu]
   const rating = product.rating || 0
   const reviewsCount = product.reviewsCount || 0
+  const catalogPath = Array.isArray(product.catalogPath) ? product.catalogPath : getNodePathSegments(product.catalogNode)
+  const titleKg = product.titleKg || product.name || product.title || ''
+  const titleRu = product.titleRu || titleKg
+  const shortDescriptionKg = product.shortDescriptionKg || product.shortDescription || product.descriptionKg || product.description || ''
+  const shortDescriptionRu = product.shortDescriptionRu || product.descriptionRu || shortDescriptionKg
+  const fullDescriptionKg = product.fullDescriptionKg || product.descriptionKg || product.description || shortDescriptionKg
+  const fullDescriptionRu = product.fullDescriptionRu || product.descriptionRu || shortDescriptionRu || fullDescriptionKg
+  const specificationsKg = product.specificationsKg || product.specs || {}
+  const specificationsRu = product.specificationsRu || product.specsRu || specificationsKg
 
   return {
     ...product,
     brand: brandName,
-    name: product.name || product.titleKg,
-    description: product.description || product.descriptionKg,
-    shortDescription: product.shortDescription || product.shortDescriptionKg,
+    titleKg,
+    titleRu,
+    name: product.name || titleKg,
+    description: product.description || product.descriptionKg || fullDescriptionKg,
+    descriptionKg: product.descriptionKg || fullDescriptionKg,
+    descriptionRu: product.descriptionRu || fullDescriptionRu,
+    shortDescription: product.shortDescription || shortDescriptionKg,
+    shortDescriptionKg,
+    shortDescriptionRu,
+    fullDescriptionKg,
+    fullDescriptionRu,
+    specs: specificationsKg,
+    specificationsKg,
+    specificationsRu,
+    article: product.article || product.sku,
+    categoryId: product.categoryId || product.categorySlug || catalogPath[0],
+    subcategoryId: product.subcategoryId || product.subcategorySlug || catalogPath.at(-1),
+    productType: product.productType || product.type || catalogPath.at(-1) || product.subcategorySlug,
+    productTypeRu: product.productTypeRu || product.typeRu || '',
+    pack: product.pack || product.packageInfoKg || product.minOrder,
+    packRu: product.packRu || product.pack || product.packageInfoKg || product.minOrder,
+    minOrderRu: product.minOrderRu || product.minOrder,
+    unitRu: product.unitRu || getUnitLabel(product.unit, 'ru'),
+    weight: product.weight || specificationsKg.Салмак || specificationsKg.Салмагы,
+    size: product.size || product.weight || product.pack,
     variants,
     price: variants.length ? getProductPrice({ ...product, variants }) : Number(product.price || 0),
     oldPrice: product.oldPrice ? Number(product.oldPrice) : null,
@@ -347,12 +481,14 @@ export function normalizeProduct(product) {
     stock: product.stock,
     tags,
     aliases,
+    aliasesKg,
+    aliasesRu,
     badges: product.badges || tags,
     isSale: product.isSale ?? tags.includes('sale'),
     isPopular: product.isPopular ?? tags.includes('hit'),
     rating,
     reviewsCount,
-    catalogPath: Array.isArray(product.catalogPath) ? product.catalogPath : getNodePathSegments(product.catalogNode),
+    catalogPath,
   }
 }
 

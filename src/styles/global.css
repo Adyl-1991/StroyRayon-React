@@ -1073,6 +1073,24 @@ h3 {
   font-weight: var(--weight-medium);
 }
 
+.product-card__commercial-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.product-card__commercial-meta span {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 8px;
+  background: var(--color-surface-muted);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: var(--weight-semibold);
+}
+
 .product-card__stock {
   color: var(--color-primary);
   font-size: 0.88rem;
@@ -1558,11 +1576,13 @@ del {
 .product-layout {
   display: grid;
   gap: 24px;
+  min-width: 0;
 }
 
 .product-gallery {
   display: grid;
   gap: 10px;
+  min-width: 0;
 }
 
 .product-gallery__main {
@@ -1607,6 +1627,14 @@ del {
   display: grid;
   align-content: start;
   gap: 14px;
+  min-width: 0;
+}
+
+.product-info h1 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 2rem;
+  line-height: 1.12;
 }
 
 .product-facts {
@@ -1619,6 +1647,7 @@ del {
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border);
 }
@@ -1628,8 +1657,10 @@ del {
 }
 
 .product-facts dd {
+  min-width: 0;
   margin: 0;
   font-weight: var(--weight-semibold);
+  overflow-wrap: anywhere;
   text-align: right;
 }
 
@@ -1704,6 +1735,17 @@ del {
   display: grid;
   gap: 16px;
   margin-top: 28px;
+}
+
+.product-copy-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.product-copy-list li {
+  color: var(--color-muted);
 }
 
 .product-sticky-cta {
@@ -1878,6 +1920,13 @@ del {
 }
 
 @media (max-width: 420px) {
+  .product-info h1 {
+    max-width: 100%;
+    font-size: 1.45rem;
+    line-height: 1.18;
+    white-space: normal;
+  }
+
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2162,8 +2211,16 @@ del {
     align-items: start;
   }
 
+  .product-info h1 {
+    font-size: 3rem;
+  }
+
   .product-details {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-description-panel {
+    grid-column: span 2;
   }
 
   .product-sticky-cta {
@@ -2549,6 +2606,24 @@ del {
   .empty-state h1 {
     font-size: clamp(1.9rem, 9vw, 2.6rem);
     line-height: 1.08;
+  }
+
+  .product-info h1 {
+    max-width: 100%;
+    font-size: 1.45rem;
+    line-height: 1.18;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .product-facts div {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: 1fr;
+  }
+
+  .product-facts dd {
+    text-align: left;
   }
 
   .order-process,

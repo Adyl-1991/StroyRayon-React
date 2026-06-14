@@ -1,4 +1,5 @@
 import { formatPrice } from '../utils/formatPrice'
+import { getLocalizedProductValue, getUnitLabel } from './productService'
 
 export const contactConfig = {
   phone: '+996 553 12 19 91',
@@ -19,6 +20,8 @@ export const priceStockDisclaimer =
   'Баалар өзгөрүшү мүмкүн. Акыркы бааны жана товар бар-жогун WhatsApp аркылуу тактап беребиз.'
 
 export const shortPriceStockDisclaimer = priceStockDisclaimer
+export const priceStockDisclaimerRu =
+  'Цены могут измениться. Актуальную цену и наличие уточним через WhatsApp.'
 
 export const deliverySummary = 'Бишкек шаары ичинде жана аймактарга жеткирүү бар.'
 
@@ -32,21 +35,26 @@ function formatOrderItem(item, index) {
   )}`
 }
 
-export function buildProductInquiryText({ product, variant }) {
+export function buildProductInquiryText({ product, variant, locale = 'kg' }) {
   const variantText = variant?.size ? ` - ${variant.size}` : ''
   const skuText = variant?.sku || product?.sku ? `SKU: ${variant?.sku || product.sku}` : ''
-  const packageText = variant?.packageInfo || product?.packageInfoKg || product?.minOrder
   const price = variant?.price ?? product?.price
-  const unit = variant?.unit || product?.unit
-  const priceText = price ? `Баасы: ${formatPrice(price)}${unit ? ` / ${unit}` : ''}` : ''
+  const isRu = locale === 'ru'
+  const packageText = isRu
+    ? variant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || getLocalizedProductValue(product, 'minOrder', locale)
+    : variant?.packageInfo || product?.packageInfoKg || product?.minOrder
+  const unit = getUnitLabel(variant?.unit || product?.unit, locale)
+  const priceText = price ? `${isRu ? 'Цена' : 'Баасы'}: ${formatPrice(price)}${unit ? ` / ${unit}` : ''}` : ''
 
   return [
-    'Салам! StroyRayon сайтынан товар боюнча маалымат алгым келет.',
+    isRu
+      ? 'Здравствуйте! Хочу уточнить товар на сайте StroyRayon.'
+      : 'Салам! StroyRayon сайтынан товар боюнча маалымат алгым келет.',
     `${product?.name || 'Товар'}${variantText}`,
     skuText,
-    packageText ? `Таңгак: ${packageText}` : '',
+    packageText ? `${isRu ? 'Фасовка' : 'Таңгак'}: ${packageText}` : '',
     priceText,
-    priceStockDisclaimer,
+    isRu ? priceStockDisclaimerRu : priceStockDisclaimer,
   ]
     .filter(Boolean)
     .join('\n')

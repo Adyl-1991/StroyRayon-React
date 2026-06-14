@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useLocale } from '../../i18n/LocaleContext'
 
 export function Breadcrumbs({ items }) {
+  const { t } = useLocale()
+
   return (
-    <nav className="breadcrumbs" aria-label="Навигация жолу">
-      <Link className="breadcrumbs__home" to="/">Башкы бет</Link>
+    <nav className="breadcrumbs" aria-label={t('header.navLabel')}>
+      <Link className="breadcrumbs__home" to="/">{t('nav.home')}</Link>
       {items.map((item, index) => {
         const isLast = index === items.length - 1
 

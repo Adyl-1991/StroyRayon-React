@@ -1,24 +1,26 @@
 import { useState } from 'react'
-import { BADGE_LABELS, STOCK_LABELS } from '../../services/productService'
+import { useLocale } from '../../i18n/LocaleContext'
+import { getBadgeLabel, getStockLabel, getUnitLabel } from '../../services/productService'
 import { defaultCatalogFilters } from './filterDefaults'
 
 const stockOptions = [
-  { value: 'in_stock', label: STOCK_LABELS.in_stock },
-  { value: 'low_stock', label: STOCK_LABELS.low_stock },
-  { value: 'pre_order', label: STOCK_LABELS.pre_order },
-  { value: 'out_of_stock', label: STOCK_LABELS.out_of_stock },
+  { value: 'in_stock' },
+  { value: 'low_stock' },
+  { value: 'pre_order' },
+  { value: 'out_of_stock' },
 ]
 
 const sortOptions = [
-  { value: 'popular', label: 'Популярдуу' },
-  { value: 'price-asc', label: 'Арзанынан кымбатына' },
-  { value: 'price-desc', label: 'Кымбатынан арзанына' },
-  { value: 'rating', label: 'Рейтинги жогору' },
-  { value: 'sale', label: 'Акциядагылар' },
-  { value: 'new', label: 'Жаңы товарлар' },
+  { value: 'popular', labelKey: 'filters.sortOptions.popular' },
+  { value: 'price-asc', labelKey: 'filters.sortOptions.priceAsc' },
+  { value: 'price-desc', labelKey: 'filters.sortOptions.priceDesc' },
+  { value: 'rating', labelKey: 'filters.sortOptions.rating' },
+  { value: 'sale', labelKey: 'filters.sortOptions.sale' },
+  { value: 'new', labelKey: 'filters.sortOptions.new' },
 ]
 
 export function Filters({ filters, setFilters, options, resultCount, variant = 'inline', showActiveChips = true }) {
+  const { locale, t } = useLocale()
   const [isOpen, setIsOpen] = useState(() => {
     if (variant !== 'sidebar') return false
     if (typeof window === 'undefined' || !window.matchMedia) return true
@@ -53,7 +55,7 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
     setIsOpen(false)
   }
 
-  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions)
+  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions, locale, t)
   const hasActiveFilters = activeFilterLabels.length > 0
   const hasBrands = safeOptions.brands.length > 0
   const hasTags = safeOptions.tags.length > 0
@@ -62,15 +64,15 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
   return (
     <details className={`filters filters--${variant}`} open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
       <summary>
-        <span>{hasActiveFilters ? `Фильтрлер · ${activeFilterLabels.length}` : 'Фильтрлер'}</span>
-        <strong>{resultCount} товар</strong>
+        <span>{hasActiveFilters ? t('filters.activeTitle', { count: activeFilterLabels.length }) : t('filters.title')}</span>
+        <strong>{t('filters.resultCount', { count: resultCount })}</strong>
       </summary>
       {showActiveChips && <ActiveFilterChips labels={activeFilterLabels} className="active-filters--summary" />}
       <div className="filters__body">
         <div className="filter-group filter-group--price">
-          <span>Баа диапазону</span>
+          <span>{t('filters.priceRange')}</span>
           <label>
-            Минимум
+            {t('filters.min')}
             <input
               type="number"
               min="0"
@@ -80,7 +82,7 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
             />
           </label>
           <label>
-            Максимум
+            {t('filters.max')}
             <input
               type="number"
               min="0"
@@ -92,7 +94,7 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
         </div>
 
         <fieldset className="filter-group">
-          <legend>Бар-жогу</legend>
+          <legend>{t('filters.stock')}</legend>
           {stockOptions.map((option) => (
             <label key={option.value}>
               <input
@@ -100,14 +102,14 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
                 checked={filters.stockStatuses.includes(option.value)}
                 onChange={() => toggleArrayValue('stockStatuses', option.value)}
               />
-              {option.label}
+              {getStockLabel(option.value, locale)}
             </label>
           ))}
         </fieldset>
 
         {hasBrands && (
           <fieldset className="filter-group filter-group--scroll">
-            <legend>Бренд</legend>
+            <legend>{t('filters.brand')}</legend>
             {safeOptions.brands.map((brand) => (
               <label key={getOptionValue(brand)}>
                 <input
@@ -123,11 +125,11 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
 
         {hasTags && (
           <fieldset className="filter-group filter-group--scroll">
-            <legend>Белгилер</legend>
+            <legend>{t('filters.badges')}</legend>
             {safeOptions.tags.map((tag) => (
               <label key={getOptionValue(tag)}>
                 <input type="checkbox" checked={filters.tags.includes(getOptionValue(tag))} onChange={() => toggleArrayValue('tags', getOptionValue(tag))} />
-                {getOptionLabel(tag)}
+                {getOptionLabel(tag, locale)}
               </label>
             ))}
           </fieldset>
@@ -135,22 +137,22 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
 
         {hasUnits && (
           <fieldset className="filter-group filter-group--scroll">
-            <legend>Бирдик</legend>
+            <legend>{t('filters.unit')}</legend>
             {safeOptions.units.map((unit) => (
               <label key={getOptionValue(unit)}>
                 <input type="checkbox" checked={filters.units.includes(getOptionValue(unit))} onChange={() => toggleArrayValue('units', getOptionValue(unit))} />
-                {getOptionLabel(unit)}
+                {getOptionLabel(unit, locale, 'unit')}
               </label>
             ))}
           </fieldset>
         )}
 
         <label className="filter-group">
-          Сорттоо
+          {t('filters.sort')}
           <select value={filters.sort} onChange={(event) => updateField('sort', event.target.value)}>
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(option.labelKey)}
               </option>
             ))}
           </select>
@@ -160,18 +162,18 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
 
         <div className="filters__actions">
           <button className="text-button" type="button" onClick={clearFilters}>
-            Тазалоо
+            {t('filters.clear')}
           </button>
           <button className="text-button" type="button" onClick={closeFilters}>
-            Жабуу
+            {t('filters.close')}
           </button>
           <button className="button button--secondary" type="button" onClick={closeFilters}>
-            {resultCount} товарды көрсөт
+            {t('filters.showProducts', { count: resultCount })}
           </button>
         </div>
 
         <button className="text-button" type="button" onClick={clearFilters}>
-          Фильтрди тазалоо
+          {t('filters.clearFilters')}
         </button>
       </div>
     </details>
@@ -179,12 +181,13 @@ export function Filters({ filters, setFilters, options, resultCount, variant = '
 }
 
 export function CatalogActiveFilters({ filters, options, className = '' }) {
+  const { locale, t } = useLocale()
   const safeOptions = {
     brands: options?.brands || [],
     tags: options?.tags || [],
     units: options?.units || [],
   }
-  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions)
+  const activeFilterLabels = getActiveFilterLabels(filters, safeOptions, locale, t)
 
   return <ActiveFilterChips labels={activeFilterLabels} className={className} />
 }
@@ -201,14 +204,14 @@ function ActiveFilterChips({ labels, className = '' }) {
   )
 }
 
-function getActiveFilterLabels(filters, options) {
+function getActiveFilterLabels(filters, options, locale, t) {
   return [
-    filters.minPrice && `Мин: ${filters.minPrice} сом`,
-    filters.maxPrice && `Макс: ${filters.maxPrice} сом`,
-    ...(filters.stockStatuses || []).map((value) => STOCK_LABELS[value]),
+    filters.minPrice && t('filters.activeMin', { value: filters.minPrice }),
+    filters.maxPrice && t('filters.activeMax', { value: filters.maxPrice }),
+    ...(filters.stockStatuses || []).map((value) => getStockLabel(value, locale)),
     ...(filters.brands || []).map((value) => getSelectedLabel(options.brands, value)),
-    ...(filters.tags || []).map((value) => getSelectedLabel(options.tags, value) || BADGE_LABELS[value] || value),
-    ...(filters.units || []).map((value) => getSelectedLabel(options.units, value)),
+    ...(filters.tags || []).map((value) => getSelectedLabel(options.tags, value, locale) || getBadgeLabel(value, locale)),
+    ...(filters.units || []).map((value) => getSelectedLabel(options.units, value, locale, 'unit')),
   ].filter(Boolean)
 }
 
@@ -216,12 +219,14 @@ function getOptionValue(option) {
   return typeof option === 'object' ? option.value : option
 }
 
-function getOptionLabel(option) {
-  if (typeof option !== 'object') return BADGE_LABELS[option] || option
-  return option.count ? `${option.label} (${option.count})` : option.label
+function getOptionLabel(option, locale = 'kg', type = 'badge') {
+  if (typeof option !== 'object') return type === 'unit' ? getUnitLabel(option, locale) : getBadgeLabel(option, locale)
+  const label = type === 'unit' ? getUnitLabel(option.label, locale) : option.label
+  return option.count ? `${label} (${option.count})` : label
 }
 
-function getSelectedLabel(options, value) {
+function getSelectedLabel(options, value, locale = 'kg', type = 'badge') {
   const option = options.find((item) => getOptionValue(item) === value)
-  return option ? getOptionLabel(option) : value
+  if (option) return getOptionLabel(option, locale, type)
+  return type === 'unit' ? getUnitLabel(value, locale) : value
 }

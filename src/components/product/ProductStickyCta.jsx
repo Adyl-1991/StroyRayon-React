@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useCart } from '../../hooks/useCart'
-import { isPurchasable } from '../../services/productService'
+import { useLocale } from '../../i18n/LocaleContext'
+import { getProductTitle, getUnitLabel, isPurchasable } from '../../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Button } from '../ui/Button'
 
 export function ProductStickyCta({ product, selectedVariant }) {
   const { addToCart } = useCart()
+  const { locale, t } = useLocale()
   const [isVisible, setIsVisible] = useState(false)
   const canBuy = isPurchasable(product, selectedVariant)
   const activePrice = selectedVariant?.price ?? product.price
-  const activeUnit = selectedVariant?.unit || product.unit
-  const activeName = selectedVariant ? `${product.name} (${selectedVariant.size})` : product.name
-  const askText = buildProductInquiryText({ product, variant: selectedVariant })
+  const activeUnit = getUnitLabel(selectedVariant?.unit || product.unit, locale)
+  const productName = getProductTitle(product, locale)
+  const activeName = selectedVariant ? `${productName} (${selectedVariant.size})` : productName
+  const askText = buildProductInquiryText({ product: { ...product, name: productName }, variant: selectedVariant, locale })
 
   useEffect(() => {
     function handleScroll() {
@@ -26,17 +29,17 @@ export function ProductStickyCta({ product, selectedVariant }) {
   }, [])
 
   return (
-    <aside className={`product-sticky-cta${isVisible ? ' is-visible' : ''}`} aria-label="Товар боюнча тез аракеттер">
+    <aside className={`product-sticky-cta${isVisible ? ' is-visible' : ''}`} aria-label={t('product.stickyLabel')}>
       <div className="product-sticky-cta__info">
         <strong>
           {formatPrice(activePrice)} / {activeUnit}
         </strong>
         <span>{activeName}</span>
-        <small>Акыркы баа WhatsAppта такталат</small>
+        <small>{t('product.stickyDisclaimer')}</small>
       </div>
       <div className="product-sticky-cta__actions">
         <Button disabled={!canBuy} onClick={() => addToCart(product, 1, selectedVariant)}>
-          Себетке
+          {t('product.stickyCart')}
         </Button>
         <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">
           WhatsApp

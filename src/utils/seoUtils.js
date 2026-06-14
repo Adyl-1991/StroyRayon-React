@@ -1,4 +1,5 @@
 import { siteConfig } from '../config/site.js'
+import { getProductFullDescription, getProductTitle } from '../services/productService.js'
 import { getProductImage } from './imageUtils.js'
 
 const availabilityMap = {
@@ -33,24 +34,33 @@ export function getCatalogNodeSeo(node) {
   }
 }
 
-export function getProductSeo(product) {
+export function getProductSeo(product, locale = 'kg') {
   return {
-    title: product?.seoTitleKg || product?.titleKg || product?.name || 'Товар',
-    description: cleanText(product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
+    title: locale === 'ru'
+      ? product?.seoTitleRu || product?.titleRu || getProductTitle(product, locale) || 'Товар'
+      : product?.seoTitleKg || product?.titleKg || getProductTitle(product, locale) || 'Товар',
+    description: cleanText(
+      locale === 'ru'
+        ? product?.seoDescriptionRu || product?.descriptionRu || product?.shortDescriptionRu || siteConfig.defaultDescription
+        : product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription,
+    ),
     canonical: getPageCanonical(product?.slug ? `/product/${product.slug}` : '/catalog'),
   }
 }
 
-export function buildProductStructuredData(product) {
+export function buildProductStructuredData(product, locale = 'kg') {
   if (!product?.titleKg || !product?.price || !product?.currency) return null
 
   const image = getProductImage(product)
+  const productName = getProductTitle(product, locale)
 
   return stripUndefined({
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.titleKg,
-    description: product.seoDescriptionKg || product.descriptionKg || product.shortDescriptionKg,
+    name: productName,
+    description: locale === 'ru'
+      ? product.seoDescriptionRu || getProductFullDescription(product, locale) || product.shortDescriptionRu
+      : product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg,
     image: image?.src ? absoluteUrl(image.src) : undefined,
     sku: product.sku,
     brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,

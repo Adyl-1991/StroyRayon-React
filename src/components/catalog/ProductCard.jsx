@@ -1,22 +1,23 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getStockStatus, getVariantSizeSummary, hasProductVariants, isPurchasable } from '../../services/productService'
+import {
+  getBadgeLabel,
+  getLocalizedProductValue,
+  getProductShortDescription,
+  getProductTitle,
+  getStockLabel,
+  getStockStatus,
+  getUnitLabel,
+  getVariantSizeSummary,
+  hasProductVariants,
+  isPurchasable,
+} from '../../services/productService'
 import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { applyImageFallback, getProductImage } from '../../utils/imageUtils'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
-
-const stockLabels = {
-  kg: { in_stock: 'Бар', low_stock: 'Аз калды', pre_order: 'Заказ менен', out_of_stock: 'Жок' },
-  ru: { in_stock: 'В наличии', low_stock: 'Мало', pre_order: 'Под заказ', out_of_stock: 'Нет в наличии' },
-}
-
-const badgeLabels = {
-  kg: { hit: 'Хит', sale: 'Акция', quality: 'Сапаттуу', new: 'Жаңы' },
-  ru: { hit: 'Хит', sale: 'Акция', quality: 'Качество', new: 'Новинка' },
-}
 
 export function ProductCard({ product }) {
   const { addToCart } = useCart()
@@ -26,9 +27,14 @@ export function ProductCard({ product }) {
   const hasVariants = hasProductVariants(product)
   const sizeSummary = getVariantSizeSummary(product, 5)
   const image = getProductImage(product)
-  const productName = product.name || product.titleKg || product.title
+  const productName = getProductTitle(product, locale)
+  const shortDescription = getProductShortDescription(product, locale)
   const askText = t('productCard.askText', { name: productName })
-  const tags = product.tags || []
+  const tags = (product.tags || []).filter((tag) => ['hit', 'sale', 'quality', 'new'].includes(tag))
+  const activeUnit = getUnitLabel(product.unit, locale)
+  const packText = getLocalizedProductValue(product, 'pack', locale) || product.weight || product.size
+  const minOrderText = getLocalizedProductValue(product, 'minOrder', locale)
+  const commercialMeta = [packText, product.article || product.sku].filter(Boolean).slice(0, 2)
 
   return (
     <article className={`product-card product-card--image-${image.type || 'fallback'}`}>
@@ -47,7 +53,7 @@ export function ProductCard({ product }) {
         <div className="product-card__badges">
           {tags.slice(0, 2).map((tag) => (
             <Badge key={tag} tone={tag === 'sale' ? 'sale' : 'neutral'}>
-              {badgeLabels[locale][tag] || tag}
+              {getBadgeLabel(tag, locale)}
             </Badge>
           ))}
         </div>
@@ -55,29 +61,36 @@ export function ProductCard({ product }) {
       <div className="product-card__body">
         <div className="product-card__meta">
           <span>{product.brand || 'StroyRayon'}</span>
+          <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
         </div>
         <h3>
           <Link to={`/product/${product.slug}`}>{productName}</Link>
         </h3>
-        <p>{product.shortDescription || product.description}</p>
+        {commercialMeta.length > 0 && (
+          <div className="product-card__commercial-meta">
+            {commercialMeta.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        )}
+        <p>{shortDescription}</p>
         <div className="price-row">
-          <strong>{hasVariants ? `${locale === 'kg' ? 'баштап ' : 'от '}${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
+          <strong>{hasVariants ? `${t('common.from')} ${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
           {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
-          <span>/ {product.unit}</span>
+          <span>/ {activeUnit}</span>
         </div>
-        {hasVariants && sizeSummary && <p className="product-card__variants">Өлчөмдөр: {sizeSummary}</p>}
-        <span className={`stock-pill stock-pill--${stockStatus}`}>{stockLabels[locale][stockStatus] || stockStatus}</span>
+        {hasVariants && sizeSummary && <p className="product-card__variants">{t('productCard.variants')}: {sizeSummary}</p>}
         <div className="rating">
           {t('productCard.rating')} {product.rating} / 5 ({product.reviewsCount})
         </div>
-        {product.minOrder && (
+        {minOrderText && (
           <p className="microcopy">
-            {t('productCard.minOrder')}: {product.minOrder}
+            {t('productCard.minOrder')}: {minOrderText}
           </p>
         )}
         <div className="product-card__actions">
           {hasVariants ? (
-            <Button to={`/product/${product.slug}`}>Вариант тандоо</Button>
+            <Button to={`/product/${product.slug}`}>{t('productCard.chooseVariant')}</Button>
           ) : (
             <Button disabled={!canBuy} onClick={() => addToCart(product)}>
               {t('productCard.addToCart')}
