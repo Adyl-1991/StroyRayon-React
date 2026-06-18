@@ -726,7 +726,7 @@ function getAliasesRu(data, titleRu, productTypeRu) {
 }
 
 function product(data) {
-  data = applyStage16ALocalizationFixes(applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data))))))))))))))))))
+  data = applyStage16BPhotoAuditFixes(applyStage16ALocalizationFixes(applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data)))))))))))))))))))
   const badges = data.badges || []
   const titleKg = normalizeVisibleKg(data.titleKg)
   const normalizedData = {
@@ -11045,6 +11045,39 @@ function applyStage16ALocalizationFixes(data) {
     ...data,
     specificationsKg,
     specificationsRu,
+  }
+}
+
+const stage16BRejectedPackshotSlugs = new Set([
+  'portlandcement-m500-50kg',
+  'plitka-kleyi-standard-25kg',
+  'finish-shpaklevka-25kg',
+  'gruntovka-tereng-singuu-10l',
+  'zatirka-dlya-plitki-2kg',
+  'cementtuu-shtukaturka-25kg',
+  'start-shpaklevka-20kg',
+  'ozu-tegizdeluuchu-pol-25kg',
+])
+
+function applyStage16BPhotoAuditFixes(data) {
+  if (!stage16BRejectedPackshotSlugs.has(data.slug)) return data
+
+  return {
+    ...data,
+    imageStatus: 'needs-real-photo',
+    isPlaceholderImage: true,
+    images: [
+      {
+        src: buildingProductPlaceholder,
+        alt: `${data.titleKg} — так товар сүрөтү даярдалууда`,
+        width: 900,
+        height: 675,
+        type: 'placeholder',
+        fallbackSrc: buildingProductPlaceholder,
+        expectedSrc: `/images/products/${data.slug}/main.webp`,
+        futureSrc: `/images/products/${data.slug}/main.webp`,
+      },
+    ],
   }
 }
 
