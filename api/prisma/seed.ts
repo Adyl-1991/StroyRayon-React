@@ -33,6 +33,8 @@ type ProductAssetInput = {
 type ProductInput = {
   id: string
   titleKg: string
+  titleRu?: string | null
+  titleEn?: string | null
   slug: string
   sku: string
   catalogPath?: string[]
@@ -70,6 +72,7 @@ type SeedStats = {
   skippedProducts: string[]
   warnings: string[]
   staleCatalogNodes: number
+  staleProductsDeleted: number
 }
 
 const stockStatusMap: Record<string, ProductStockStatus> = {
@@ -256,6 +259,8 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         catalogNodeId: catalogNode.id,
         brandId: product.brand ? brandMap.get(product.brand) || null : null,
         titleKg: product.titleKg,
+        titleRu: product.titleRu || null,
+        titleEn: product.titleEn || null,
         sku: product.sku,
         price: new Prisma.Decimal(product.price),
         oldPrice: product.oldPrice ? new Prisma.Decimal(product.oldPrice) : null,
@@ -281,6 +286,8 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         catalogNodeId: catalogNode.id,
         brandId: product.brand ? brandMap.get(product.brand) || null : null,
         titleKg: product.titleKg,
+        titleRu: product.titleRu || null,
+        titleEn: product.titleEn || null,
         slug: product.slug,
         sku: product.sku,
         price: new Prisma.Decimal(product.price),
@@ -309,8 +316,6 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
     await prisma.stock.upsert({
       where: { productId: savedProduct.id },
       update: {
-        quantity: stockQuantityMap[stockStatus],
-        reservedQuantity: 0,
         lowStockThreshold: 5,
         warehouseName: 'Негизги склад',
       },
@@ -343,6 +348,17 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
   }
 
   return importedProducts
+}
+
+async function deleteStaleProducts(products: ProductInput[], stats: SeedStats) {
+  const activeSlugs = products.map((product) => product.slug)
+  const result = await prisma.product.deleteMany({
+    where: {
+      slug: { notIn: activeSlugs },
+    },
+  })
+
+  stats.staleProductsDeleted = result.count
 }
 
 async function seedProductRelations(products: ProductInput[], importedProducts: Map<string, string>, stats: SeedStats) {
@@ -383,12 +399,14 @@ async function main() {
     skippedProducts: [],
     warnings: [],
     staleCatalogNodes: 0,
+    staleProductsDeleted: 0,
   }
 
   console.log('Seed started')
   const { catalogTree, products } = await loadFrontendData()
   await seedCatalogNodes(catalogTree, stats)
   await deactivateStaleCatalogNodes(collectCatalogPaths(catalogTree), stats)
+  await deleteStaleProducts(products, stats)
   const brandMap = await seedBrands(products, stats)
   const importedProducts = await seedProducts(products, brandMap, stats)
   await seedProductRelations(products, importedProducts, stats)
@@ -403,6 +421,7 @@ async function main() {
         productRelations: stats.relations,
         stockRecords: stats.stock,
         staleCatalogNodes: stats.staleCatalogNodes,
+        staleProductsDeleted: stats.staleProductsDeleted,
         skippedProducts: stats.skippedProducts.length,
         warnings: stats.warnings,
       },

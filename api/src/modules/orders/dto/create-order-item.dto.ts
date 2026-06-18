@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min } from 'class-validator'
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min } from 'class-validator'
 
 export class CreateOrderItemDto {
   @IsOptional()
@@ -19,12 +19,13 @@ export class CreateOrderItemDto {
   sku?: string
 
   @Type(() => Number)
+  @IsOptional()
   @IsNumber()
   @Min(0)
-  price: number
+  price?: number
 
   @Type(() => Number)
-  @IsNumber()
+  @IsInt()
   @IsPositive()
   quantity: number
 

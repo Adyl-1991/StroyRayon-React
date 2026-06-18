@@ -1,5 +1,3 @@
-export function createOrderNumber(date = new Date()) {
-  const year = date.getFullYear()
-  const timestamp = date.getTime().toString().slice(-6)
-  return `SR-${year}-${timestamp}`
+export function formatOrderNumber(year: number, sequence: number) {
+  return `SR-${year}-${String(sequence).padStart(6, '0')}`
 }

@@ -5,6 +5,7 @@
   "description": "StroyRayon NestJS API foundation",
   "scripts": {
     "build": "nest build",
+    "test": "tsx --test \"src/**/*.spec.ts\"",
     "format": "prettier --write \"src/**/*.ts\" \"prisma/**/*.ts\"",
     "lint": "eslint \"{src,prisma}/**/*.ts\"",
     "start": "nest start",

@@ -1,20 +1,27 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '../../prisma/prisma.service'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class StockService {
-  constructor(private readonly prisma: PrismaService) {}
-
-  async reserveProduct(productId: string, quantity: number) {
-    // Backend v1 skeleton: next phase should wrap this in a transaction
-    // and check available quantity before reserving stock.
-    return this.prisma.stock.update({
-      where: { productId },
+  async reserveAvailableProduct(
+    tx: Prisma.TransactionClient,
+    productId: string,
+    requestedQuantity: number,
+    observedStock: { quantity: number; reservedQuantity: number },
+  ) {
+    const reservation = await tx.stock.updateMany({
+      where: {
+        productId,
+        quantity: observedStock.quantity,
+        reservedQuantity: observedStock.reservedQuantity,
+      },
       data: {
         reservedQuantity: {
-          increment: quantity,
+          increment: requestedQuantity,
         },
       },
     })
+
+    return reservation.count === 1
   }
 }

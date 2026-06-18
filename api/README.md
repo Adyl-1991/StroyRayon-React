@@ -112,12 +112,17 @@ The API:
 
 1. validates customer and item data;
 2. finds or creates a customer by phone;
-3. creates an order number;
-4. stores order item snapshots so history does not break when products change;
-5. builds Kyrgyz WhatsApp order text;
-6. returns totals, WhatsApp text, and a WhatsApp URL.
+3. resolves every item to an active database product;
+4. ignores client title, price, SKU and unit hints when calculating the order;
+5. creates a concurrency-safe yearly order number;
+6. reserves confirmed in-stock quantities inside the order transaction;
+7. stores authoritative product, price, availability and reservation snapshots;
+8. builds Kyrgyz WhatsApp order text;
+9. returns authoritative totals, item results, WhatsApp text, and a WhatsApp URL.
 
-Stock reservation is intentionally left for the next phase. Backend v1 creates the customer, order, and order item snapshots inside one Prisma transaction without blocking checkout on stock edge cases.
+`OUT_OF_STOCK` and inactive products are rejected. `PRE_ORDER`, missing stock rows,
+insufficient quantities, or concurrent stock changes keep the order valid but mark
+`availabilityCheckRequired: true`. Only items with `stockCheckStatus: "ok"` are reserved.
 
 Example request:
 
@@ -159,6 +164,17 @@ Example response:
   "status": "new",
   "total": 360,
   "currency": "KGS",
+  "availabilityCheckRequired": false,
+  "items": [
+    {
+      "slug": "ppr-truba-pn20-20mm",
+      "quantity": 3,
+      "unitPrice": 120,
+      "lineTotal": 360,
+      "stockCheckStatus": "ok",
+      "reservedQuantity": 3
+    }
+  ],
   "whatsappText": "Салам! StroyRayon сайтынан жаңы заказ...",
   "whatsappUrl": "https://wa.me/996700123456?text=..."
 }
@@ -205,6 +221,7 @@ GET http://localhost:4000/api/products/ppr-truba-pn20-20mm
 
 ```bash
 npm run build
+npm test
 npm run lint
 npm run prisma:validate
 npm run prisma:generate
