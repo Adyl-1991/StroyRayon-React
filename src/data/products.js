@@ -726,7 +726,7 @@ function getAliasesRu(data, titleRu, productTypeRu) {
 }
 
 function product(data) {
-  data = applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data)))))))))))))))))
+  data = applyStage16ALocalizationFixes(applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data))))))))))))))))))
   const badges = data.badges || []
   const titleKg = normalizeVisibleKg(data.titleKg)
   const normalizedData = {
@@ -10935,6 +10935,116 @@ function applyStage14CConstructionCompletionContent(data) {
     aliasesKg: [...new Set([...(data.aliasesKg || []), ...content.aliasesKg].filter(Boolean))],
     aliasesRu: [...new Set([...(data.aliasesRu || []), ...content.aliasesRu].filter(Boolean))],
     relatedProductIds: content.relatedProductIds,
+  }
+}
+
+const stage16AKgSpecificationSlugs = new Set([
+  'samorez-gipsokarton-35x35',
+  'dyubel-6x40mm',
+  'anker-bolt-10x80mm',
+  'ichki-dubal-boyogu-ak-10l',
+  'fasad-boyogu-ak-10l',
+  'emal-ak-27kg',
+  'valik-boyok-uchun-250mm',
+  'teplyi-pol-truba-16mm',
+  'shurup-po-derevu-4x50mm',
+  'bolt-gaika-shaiba-m8-komplekt',
+  'metall-homut-20-32mm',
+  'mat-teplyi-pol-1m2',
+  'mat-teplyi-pol-2m2',
+  'mat-teplyi-pol-3m2',
+  'kabeldik-teplyi-pol-10m',
+  'kabeldik-teplyi-pol-20m',
+  'mehanikalyk-termoregulyator',
+  'elektronduk-termoregulyator',
+  'pol-datchigi',
+  'teplyi-pol-montazh-lenta',
+  'teplyi-pol-kollektor-komplekt',
+  'vodoemulsiyalyk-boyok-10l',
+  'emal-pf115-kara',
+  'parket-lak',
+  'universal-koler',
+  'rastvoritel-646',
+  'kist-50mm',
+  'malyardyk-lenta',
+  'boyok-vannochka',
+  'boyok-gruntovka-10l',
+  'flizelin-tush-kagaz',
+  'perforaciyalangan-montazh-lenta',
+])
+
+const stage16ARuSpecificationOverrides = {
+  'ashkana-smesiteli-basic': {
+    'Размер / форма / диаметр': 'Basic, для кухни',
+    'Цвет / покрытие': 'хром; оттенок металла уточняется',
+  },
+  'vanna-smesiteli-dush-komplekti': {
+    'Размер / форма / диаметр': 'с душевым комплектом',
+    'Цвет / покрытие': 'хром; оттенок металла уточняется',
+  },
+  'rakovina-smesitel-basic': {
+    'Размер / форма / диаметр': 'Basic, для раковины',
+    'Цвет / покрытие': 'хром; оттенок металла уточняется',
+  },
+  'trap-dushevoi-10x10': {
+    'Цвет / покрытие': 'цвет решетки уточняется',
+  },
+  'vodonagrevatel-50l': {
+    Материал: 'Материал бака и корпуса уточняется по партии',
+    'Цвет / покрытие': 'белый; цвет корпуса уточняется',
+  },
+  'aerator-smesitelya-m24': {
+    'Цвет / покрытие': 'цвет металла уточняется',
+  },
+  'ventilyaciya-muftasy': {
+    'Размер / диаметр': 'уточняется по размеру канала',
+  },
+  'obratnyi-klapan-ventilyaciya': {
+    'Размер / диаметр': 'уточняется по размеру канала',
+  },
+  'filtr-korpusu-kluch-komplekt': {
+    'Размер / параметр': 'совместимость с корпусом 10″ уточняется',
+  },
+  'dush-sistemasy-basic': {
+    'Цвет / покрытие': 'хром; оттенок металла уточняется',
+  },
+}
+
+function applyStage16ALocalizationFixes(data) {
+  let specificationsKg = data.specificationsKg
+  if (stage16AKgSpecificationSlugs.has(data.slug) && specificationsKg?.Назначение) {
+    const { Назначение, ...restSpecificationsKg } = specificationsKg
+    specificationsKg = {
+      ...restSpecificationsKg,
+      Багыты: Назначение,
+    }
+  }
+
+  const specificationsRu = stage16ARuSpecificationOverrides[data.slug]
+    ? {
+        ...(data.specificationsRu || data.specsRu || {}),
+        ...stage16ARuSpecificationOverrides[data.slug],
+      }
+    : data.specificationsRu
+
+  if (data.slug === 'plastifikator-beton-1l') {
+    return {
+      ...data,
+      specificationsKg,
+      specificationsRu,
+      fullDescriptionKg:
+        'Бетон үчүн пластификатор, 1 л бетон же эритме аралашмасынын иштөө касиеттерин рецепт боюнча жөнгө салуу үчүн колдонулат. Материал же негиз: суюк химиялык кошулма. Товарды өзүнчө эмес, бүт конструкциянын курамында тандоо туура: сатып алардан мурун өндүрүүчү көрсөткөн дозаны, цемент менен шайкештикти, температураны жана аралаштыруу тартибин тактаңыз. Так чыгым жана иштөө режими объекттин шартына жана өндүрүүчүнүн нускамасына жараша эсептелет.',
+      seoTitleKg: 'Бетон үчүн пластификатор, 1 л — StroyRayon',
+      seoDescriptionKg:
+        'Бетон үчүн пластификатор, 1 л: бетон же эритме аралашмасынын иштөө касиеттерин жөнгө салууга. Дозасын, цемент менен шайкештигин жана керектүү көлөмдү тактаңыз.',
+      aliasesKg: ['Бетон үчүн пластификатор, 1 л', 'бетон пластификатору 1 л', 'бетон кошулмасы', 'эритме пластификатору'],
+    }
+  }
+
+  return {
+    ...data,
+    specificationsKg,
+    specificationsRu,
   }
 }
 
