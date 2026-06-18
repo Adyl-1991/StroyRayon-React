@@ -726,7 +726,7 @@ function getAliasesRu(data, titleRu, productTypeRu) {
 }
 
 function product(data) {
-  data = applyStage16BPhotoAuditFixes(applyStage16ALocalizationFixes(applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data)))))))))))))))))))
+  data = applyStage16CBatch1Images(applyStage16BPhotoAuditFixes(applyStage16ALocalizationFixes(applyStage14CConstructionCompletionContent(applyStage14BFinishingDrywallContent(applyStage14AConstructionCoreContent(applyStage13GardenYardContent(applyStage12WarmFloorContent(applyStage11VentilationContent(applyStage10FastenerContent(applyStage9PaintWallpaperContent(applyStage8ToolContent(applyStage7SanitaryContent(applyStage6BElectricalContent(applyStage6AElectricalContent(applyStage5DEngineeringContent(applyStage5CEngineeringContent(applyStage5BEngineeringContent(applyStage5PprContent(applyStage4PlasterContent(data))))))))))))))))))))
   const badges = data.badges || []
   const titleKg = normalizeVisibleKg(data.titleKg)
   const normalizedData = {
@@ -11076,6 +11076,54 @@ function applyStage16BPhotoAuditFixes(data) {
         fallbackSrc: buildingProductPlaceholder,
         expectedSrc: `/images/products/${data.slug}/main.webp`,
         futureSrc: `/images/products/${data.slug}/main.webp`,
+      },
+    ],
+  }
+}
+
+const stage16CBatch1ImageSlugs = new Set([
+  'kanalizatsiya-truba-50mm',
+  'kanalizatsiya-truba-110mm',
+  'ashkana-smesiteli-basic',
+  'vanna-smesiteli-dush-komplekti',
+  'molotok-500g',
+  'samorez-gipsokarton-35x35',
+  'sugat-shlangy-34-25m',
+  'kurok-metall-saptuu',
+  'shurup-po-derevu-4x50mm',
+  'ventilyaciya-reshetkasy-150x150mm',
+  'ppr-klipsa-20',
+  'aerator-smesitelya-m24',
+  'podrozetnik-plastik',
+  'raspredkorobka-80',
+  'ventilyaciya-reshetkasy-200x200mm',
+  'pvc-ventilyaciya-kanaly-60x120',
+  'ventilyaciya-burchu-90',
+  'ventilyaciya-muftasy',
+  'obratnyi-klapan-ventilyaciya',
+  'uroven-60sm',
+])
+
+function applyStage16CBatch1Images(data) {
+  if (!stage16CBatch1ImageSlugs.has(data.slug)) return data
+
+  const src = `/images/products/${data.slug}/main.webp`
+  const fallbackSrc = getProductAssetEntry(data.slug)?.fallback || productPlaceholder
+
+  return {
+    ...data,
+    imageStatus: 'ready',
+    isPlaceholderImage: false,
+    images: [
+      {
+        src,
+        alt: `${data.titleKg} — StroyRayon товар сүрөтү`,
+        width: 900,
+        height: 675,
+        type: 'product',
+        fallbackSrc,
+        expectedSrc: src,
+        futureSrc: src,
       },
     ],
   }
