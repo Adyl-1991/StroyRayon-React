@@ -152,6 +152,11 @@ export class OrdersService {
               reservedQuantity: item.reservedQuantity,
             })),
           },
+          statusHistory: {
+            create: {
+              toStatus: OrderStatus.NEW,
+            },
+          },
         },
         include: {
           customer: true,

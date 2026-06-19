@@ -6,6 +6,7 @@ import { CartProvider } from './hooks/useCart.jsx'
 import { LocaleProvider } from './i18n/LocaleContext.jsx'
 import './styles/variables.css'
 import './styles/global.css'
+import './styles/admin.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

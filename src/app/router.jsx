@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { App } from './App'
 import { BlogPage } from '../pages/BlogPage'
 import { CartPage } from '../pages/CartPage'
@@ -12,8 +12,32 @@ import { AboutPage, PaymentPage, PrivacyPage, ReturnPage } from '../pages/InfoPa
 import { ProductPage } from '../pages/ProductPage'
 import { SearchPage } from '../pages/SearchPage'
 import { RouteError } from '../components/ui/RouteError'
+import { AdminLayout } from '../admin/AdminLayout'
+import { AdminLoginPage } from '../admin/AdminLoginPage'
+import { AdminOrderDetailPage } from '../admin/AdminOrderDetailPage'
+import { AdminOrdersPage } from '../admin/AdminOrdersPage'
+import { AdminProtectedRoute } from '../admin/AdminProtectedRoute'
 
 export const router = createBrowserRouter([
+  {
+    path: '/admin/login',
+    element: <AdminLoginPage />,
+    errorElement: <RouteError />,
+  },
+  {
+    path: '/admin',
+    element: <AdminProtectedRoute />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <Navigate to="/admin/orders" replace /> },
+          { path: 'orders', element: <AdminOrdersPage /> },
+          { path: 'orders/:id', element: <AdminOrderDetailPage /> },
+        ],
+      },
+    ],
+  },
   {
     path: '/',
     element: <App />,

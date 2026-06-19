@@ -8,11 +8,15 @@ import { OrdersModule } from './modules/orders/orders.module'
 import { ProductsModule } from './modules/products/products.module'
 import { StockModule } from './modules/stock/stock.module'
 import { PrismaModule } from './prisma/prisma.module'
+import { AuthModule } from './modules/auth/auth.module'
+import { AdminOrdersModule } from './modules/admin-orders/admin-orders.module'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
+    AuthModule,
+    AdminOrdersModule,
     HealthModule,
     CatalogModule,
     ProductsModule,

@@ -1,5 +1,6 @@
 import { pathToFileURL } from 'node:url'
-import { Prisma, PrismaClient, ProductImageType, ProductStockStatus } from '@prisma/client'
+import { AdminRole, Prisma, PrismaClient, ProductImageType, ProductStockStatus } from '@prisma/client'
+import { hashPassword } from '../src/modules/auth/password.util'
 
 const prisma = new PrismaClient()
 
@@ -410,6 +411,7 @@ async function main() {
   const brandMap = await seedBrands(products, stats)
   const importedProducts = await seedProducts(products, brandMap, stats)
   await seedProductRelations(products, importedProducts, stats)
+  await seedInitialAdmin()
 
   console.log(
     JSON.stringify(
@@ -430,6 +432,41 @@ async function main() {
     ),
   )
   console.log('Seed finished')
+}
+
+async function seedInitialAdmin() {
+  const email = process.env.ADMIN_INITIAL_EMAIL?.trim().toLowerCase()
+  const password = process.env.ADMIN_INITIAL_PASSWORD
+  const name = process.env.ADMIN_INITIAL_NAME?.trim() || 'StroyRayon Owner'
+  if (!email && !password) {
+    console.log('Initial admin skipped: ADMIN_INITIAL_EMAIL and ADMIN_INITIAL_PASSWORD are not set')
+    return
+  }
+  if (!email || !password || password.length < 12) {
+    throw new Error('Initial admin requires ADMIN_INITIAL_EMAIL and ADMIN_INITIAL_PASSWORD (12+ characters)')
+  }
+
+  const roleValue = process.env.ADMIN_INITIAL_ROLE || 'OWNER'
+  if (!Object.values(AdminRole).includes(roleValue as AdminRole)) {
+    throw new Error(`Unsupported ADMIN_INITIAL_ROLE: ${roleValue}`)
+  }
+
+  await prisma.adminUser.upsert({
+    where: { email },
+    update: {
+      name,
+      role: roleValue as AdminRole,
+      isActive: true,
+    },
+    create: {
+      email,
+      name,
+      role: roleValue as AdminRole,
+      passwordHash: await hashPassword(password),
+      isActive: true,
+    },
+  })
+  console.log(`Initial admin is ready: ${email}`)
 }
 
 main()

@@ -10,6 +10,18 @@ export class ApiError extends Error {
 }
 
 export async function apiGet(path, options = {}) {
+  return apiRequest('GET', path, null, options)
+}
+
+export async function apiPost(path, payload, options = {}) {
+  return apiRequest('POST', path, payload, options)
+}
+
+export async function apiPatch(path, payload, options = {}) {
+  return apiRequest('PATCH', path, payload, options)
+}
+
+async function apiRequest(method, path, payload, options = {}) {
   const controller = new AbortController()
   const timeoutId = window.setTimeout(() => controller.abort(), options.timeout || API_TIMEOUT_MS)
 
@@ -21,43 +33,22 @@ export async function apiGet(path, options = {}) {
     })
 
     const response = await fetch(url, {
-      method: 'GET',
-      headers: { Accept: 'application/json' },
-      signal: controller.signal,
-    })
-
-    if (!response.ok) {
-      throw new ApiError(`API request failed: ${response.status}`, { status: response.status })
-    }
-
-    const text = await response.text()
-    return text ? JSON.parse(text) : null
-  } catch (error) {
-    if (error instanceof ApiError) throw error
-    throw new ApiError('API is unavailable', { cause: error })
-  } finally {
-    window.clearTimeout(timeoutId)
-  }
-}
-
-export async function apiPost(path, payload, options = {}) {
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(() => controller.abort(), options.timeout || API_TIMEOUT_MS)
-
-  try {
-    const url = new URL(`${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`)
-    const response = await fetch(url, {
-      method: 'POST',
+      method,
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        ...(payload === null ? {} : { 'Content-Type': 'application/json' }),
+        ...(options.headers || {}),
       },
-      body: JSON.stringify(payload),
+      ...(payload === null ? {} : { body: JSON.stringify(payload) }),
       signal: controller.signal,
     })
 
     if (!response.ok) {
-      throw new ApiError(`API request failed: ${response.status}`, { status: response.status })
+      const body = await response.json().catch(() => null)
+      const message = Array.isArray(body?.message)
+        ? body.message.join(', ')
+        : body?.message || `API request failed: ${response.status}`
+      throw new ApiError(message, { status: response.status })
     }
 
     const text = await response.text()

@@ -8,6 +8,10 @@ async function bootstrap() {
   const configService = app.get(ConfigService)
   const corsOrigin = configService.get<string>('CORS_ORIGIN') || 'http://localhost:5173'
   const port = Number(configService.get<string>('PORT') || 4000)
+  const adminJwtSecret = configService.get<string>('ADMIN_JWT_SECRET')
+  if (!adminJwtSecret || adminJwtSecret.length < 32) {
+    throw new Error('ADMIN_JWT_SECRET must contain at least 32 characters')
+  }
 
   app.setGlobalPrefix('api')
   app.enableCors({

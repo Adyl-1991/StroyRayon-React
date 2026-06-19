@@ -16,8 +16,9 @@ enum ProductStockStatus {
 
 enum OrderStatus {
   NEW
+  PENDING_CONFIRMATION
   CONFIRMED
-  PROCESSING
+  ASSEMBLING
   DELIVERED
   CANCELLED
 }
@@ -182,14 +183,30 @@ model Order {
   source          String      @default("website")
   whatsappText    String
   customerComment String?
+  adminNote       String?
   availabilityCheckRequired Boolean @default(false)
   items           OrderItem[]
+  statusHistory   OrderStatusHistory[]
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
   @@index([customerId])
   @@index([status])
   @@index([createdAt])
+}
+
+model OrderStatusHistory {
+  id          String      @id @default(cuid())
+  orderId     String
+  order       Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fromStatus  OrderStatus?
+  toStatus    OrderStatus
+  adminUserId String?
+  adminUser   AdminUser?  @relation(fields: [adminUserId], references: [id], onDelete: SetNull)
+  createdAt   DateTime    @default(now())
+
+  @@index([orderId, createdAt])
+  @@index([adminUserId])
 }
 
 model OrderSequence {
@@ -227,6 +244,7 @@ model AdminUser {
   isActive     Boolean   @default(true)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  statusChanges OrderStatusHistory[]
 }
 
 model BlogPost {

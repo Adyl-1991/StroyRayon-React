@@ -70,7 +70,26 @@ Frontend dev server remains on `5173`.
 DATABASE_URL="postgresql://user:password@localhost:5432/stroyrayon?schema=public"
 PORT=4000
 CORS_ORIGIN="http://localhost:5173"
+ADMIN_JWT_SECRET=replace-with-a-random-secret-at-least-32-characters
+ADMIN_JWT_EXPIRES_SECONDS=28800
+ADMIN_INITIAL_EMAIL=owner@example.com
+ADMIN_INITIAL_PASSWORD=replace-with-a-strong-password
+ADMIN_INITIAL_NAME=StroyRayon Owner
+ADMIN_INITIAL_ROLE=OWNER
 ```
+
+`ADMIN_JWT_SECRET` is required at API startup and must contain at least 32 characters.
+The initial password is read only by the seed process and stored as a salted `scrypt`
+hash. Do not commit real credentials.
+
+To bootstrap or update the first admin, set `ADMIN_INITIAL_EMAIL` and a password with
+at least 12 characters, then run:
+
+```bash
+npm run prisma:seed
+```
+
+Existing admin passwords are not overwritten by later catalog seeds.
 
 ## API Prefix
 
@@ -87,6 +106,30 @@ GET /api/products/:slug
 GET /api/brands
 POST /api/orders
 ```
+
+## Protected Admin API
+
+All CRM endpoints except login require:
+
+```http
+Authorization: Bearer <access-token>
+```
+
+```http
+POST  /api/admin/auth/login
+GET   /api/admin/auth/me
+POST  /api/admin/auth/logout
+GET   /api/admin/orders
+GET   /api/admin/orders/:id
+PATCH /api/admin/orders/:id/status
+PATCH /api/admin/orders/:id/note
+```
+
+Order list accepts `status`, `page`, and `limit`. Supported statuses are `NEW`,
+`PENDING_CONFIRMATION`, `CONFIRMED`, `ASSEMBLING`, `DELIVERED`, and `CANCELLED`.
+Status transitions are validated and stored in `OrderStatusHistory`. Cancelling
+releases reserved quantities atomically; delivering writes reserved quantities off
+stock atomically. The internal `adminNote` is available only through this protected API.
 
 ## Product Query Parameters
 
