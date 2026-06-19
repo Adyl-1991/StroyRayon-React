@@ -1,0 +1,49 @@
+services:
+  - type: web
+    runtime: node
+    name: stroyrayon-api
+    repo: https://github.com/Adyl-1991/StroyRayon-React.git
+    branch: main
+    region: frankfurt
+    plan: starter
+    autoDeployTrigger: commit
+    buildCommand: cd api && npm ci && npm run prisma:generate && npm run build
+    preDeployCommand: cd api && npx prisma migrate deploy
+    startCommand: cd api && npm run start:prod
+    initialDeployHook: cd api && npm run prisma:seed
+    healthCheckPath: /api/health
+    domains:
+      - api.stroyrayon.kg
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stroyrayon-postgres
+          property: connectionString
+      - key: CORS_ORIGIN
+        value: https://stroy-rayon-react.vercel.app,https://stroyrayon.kg,https://www.stroyrayon.kg
+      - key: ADMIN_JWT_SECRET
+        generateValue: true
+      - key: ADMIN_JWT_EXPIRES_SECONDS
+        value: 28800
+      - key: ADMIN_INITIAL_EMAIL
+        sync: false
+      - key: ADMIN_INITIAL_PASSWORD
+        sync: false
+      - key: ADMIN_INITIAL_NAME
+        sync: false
+      - key: ADMIN_INITIAL_ROLE
+        value: OWNER
+      - key: WHATSAPP_MANAGER_PHONE
+        sync: false
+
+databases:
+  - name: stroyrayon-postgres
+    databaseName: stroyrayon
+    user: stroyrayon
+    region: frankfurt
+    plan: basic-256mb
+    ipAllowList: []

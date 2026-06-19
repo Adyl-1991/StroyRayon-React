@@ -1,0 +1,10 @@
+# Frontend deployments do not need backend sources or audit artifacts.
+api
+docs
+reports
+scripts
+
+# Local and generated-only files.
+dist
+*.log
+*.zip
