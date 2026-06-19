@@ -68,6 +68,8 @@ Frontend dev server remains on `5173`.
 
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/stroyrayon?schema=public"
+NODE_ENV=development
+HOST=0.0.0.0
 PORT=4000
 CORS_ORIGIN="http://localhost:5173"
 ADMIN_JWT_SECRET=replace-with-a-random-secret-at-least-32-characters
@@ -90,6 +92,12 @@ npm run prisma:seed
 ```
 
 Existing admin passwords are not overwritten by later catalog seeds.
+
+For production, use `NODE_ENV=production`, a managed PostgreSQL URL, a unique JWT
+secret, and exact HTTPS origins in `CORS_ORIGIN`. Wildcard CORS is rejected at startup.
+Run `npx prisma migrate deploy` before starting the new API release. Run the seed once
+with the initial admin variables, then remove `ADMIN_INITIAL_PASSWORD` from the hosting
+environment.
 
 ## API Prefix
 
