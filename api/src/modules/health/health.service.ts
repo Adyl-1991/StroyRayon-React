@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, ServiceUnavailableException } from '@nestjs/common'
 import { PrismaService } from '../../prisma/prisma.service'
 
 @Injectable()
@@ -14,10 +14,10 @@ export class HealthService {
         database: 'ok',
       }
     } catch {
-      return {
-        status: 'ok',
+      throw new ServiceUnavailableException({
+        status: 'error',
         database: 'error',
-      }
+      })
     }
   }
 }
