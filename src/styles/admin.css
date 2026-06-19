@@ -85,13 +85,87 @@
 
 .admin-login-card input,
 .admin-card textarea,
-.admin-status-form select {
+.admin-status-form select,
+.admin-product-filters input,
+.admin-product-filters select,
+.admin-edit-form input,
+.admin-edit-form select {
   width: 100%;
   border: 1px solid #ccd4db;
   border-radius: 9px;
   padding: 11px 12px;
   font: inherit;
   background: #fff;
+}
+
+.admin-product-filters {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.5fr) repeat(3, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-search-form {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-search-form input {
+  min-width: 0;
+}
+
+.admin-products-table {
+  min-width: 1120px;
+}
+
+.admin-pagination {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-pagination button,
+.admin-danger-button {
+  border: 1px solid #cfd6dc;
+  border-radius: 9px;
+  padding: 10px 14px;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-pagination button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.admin-danger-button {
+  border-color: #c94444;
+  color: #a22626;
+}
+
+.admin-edit-form {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-edit-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-edit-form small {
+  color: #65727e;
+}
+
+.admin-readonly-note {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px dashed #bdc7cf;
+  border-radius: 10px;
+  color: #65727e;
 }
 
 .admin-eyebrow {
@@ -331,6 +405,10 @@
   }
 
   .admin-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-filters {
     grid-template-columns: 1fr;
   }
 

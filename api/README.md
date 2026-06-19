@@ -123,6 +123,12 @@ GET   /api/admin/orders
 GET   /api/admin/orders/:id
 PATCH /api/admin/orders/:id/status
 PATCH /api/admin/orders/:id/note
+GET   /api/admin/products
+GET   /api/admin/products/:id
+PATCH /api/admin/products/:id/price
+PATCH /api/admin/products/:id/stock
+PATCH /api/admin/products/:id/active
+PATCH /api/admin/products/:id/note
 ```
 
 Order list accepts `status`, `page`, and `limit`. Supported statuses are `NEW`,
@@ -130,6 +136,16 @@ Order list accepts `status`, `page`, and `limit`. Supported statuses are `NEW`,
 Status transitions are validated and stored in `OrderStatusHistory`. Cancelling
 releases reserved quantities atomically; delivering writes reserved quantities off
 stock atomically. The internal `adminNote` is available only through this protected API.
+
+Admin product list accepts `q`, `catalogPath`, `stockStatus`, `isActive`, `page`, and
+`limit`. Stage 20 intentionally permits editing only price, physical stock quantity,
+stock status, active state, and an internal product note. Slug, category, localized
+content, SEO, FAQ, and images remain read-only.
+
+Stock quantity cannot be negative or lower than already reserved quantity. Public
+product list/detail exclude inactive products, and order creation continues to resolve
+price and availability from the database. Existing order item snapshots never change
+when a product price is edited.
 
 ## Product Query Parameters
 

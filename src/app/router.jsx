@@ -17,6 +17,8 @@ import { AdminLoginPage } from '../admin/AdminLoginPage'
 import { AdminOrderDetailPage } from '../admin/AdminOrderDetailPage'
 import { AdminOrdersPage } from '../admin/AdminOrdersPage'
 import { AdminProtectedRoute } from '../admin/AdminProtectedRoute'
+import { AdminProductDetailPage } from '../admin/AdminProductDetailPage'
+import { AdminProductsPage } from '../admin/AdminProductsPage'
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +36,8 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="/admin/orders" replace /> },
           { path: 'orders', element: <AdminOrdersPage /> },
           { path: 'orders/:id', element: <AdminOrderDetailPage /> },
+          { path: 'products', element: <AdminProductsPage /> },
+          { path: 'products/:id', element: <AdminProductDetailPage /> },
         ],
       },
     ],

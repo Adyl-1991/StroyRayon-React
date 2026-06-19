@@ -144,7 +144,7 @@ export function useProductBySlug(slug) {
     fetchProductBySlug(slug)
       .then((product) => {
         if (!isActive) return
-        setState({ product: product ? normalizeProduct(product) : fallbackProduct, isLoading: false, error: null })
+        setState({ product: product ? normalizeProduct(product) : null, isLoading: false, error: null })
       })
       .catch((error) => {
         if (!isActive) return

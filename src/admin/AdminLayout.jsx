@@ -32,6 +32,7 @@ export function AdminLayout() {
         </div>
         <nav aria-label="Admin navigation">
           <NavLink to="/admin/orders">Заказы</NavLink>
+          <NavLink to="/admin/products">Товары</NavLink>
           <button type="button" onClick={handleLogout}>Выйти</button>
         </nav>
       </header>

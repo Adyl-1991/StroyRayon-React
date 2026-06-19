@@ -10,6 +10,7 @@ import { StockModule } from './modules/stock/stock.module'
 import { PrismaModule } from './prisma/prisma.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { AdminOrdersModule } from './modules/admin-orders/admin-orders.module'
+import { AdminProductsModule } from './modules/admin-products/admin-products.module'
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AdminOrdersModule } from './modules/admin-orders/admin-orders.module'
     PrismaModule,
     AuthModule,
     AdminOrdersModule,
+    AdminProductsModule,
     HealthModule,
     CatalogModule,
     ProductsModule,

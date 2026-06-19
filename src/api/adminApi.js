@@ -63,3 +63,35 @@ export function updateAdminOrderNote(id, note) {
     apiPatch(`/admin/orders/${id}/note`, { note }, authorizedOptions()),
   )
 }
+
+export function getAdminProducts(params = {}) {
+  return adminRequest(() => apiGet('/admin/products', authorizedOptions({ params })))
+}
+
+export function getAdminProduct(id) {
+  return adminRequest(() => apiGet(`/admin/products/${id}`, authorizedOptions()))
+}
+
+export function updateAdminProductPrice(id, price) {
+  return adminRequest(() =>
+    apiPatch(`/admin/products/${id}/price`, { price }, authorizedOptions()),
+  )
+}
+
+export function updateAdminProductStock(id, payload) {
+  return adminRequest(() =>
+    apiPatch(`/admin/products/${id}/stock`, payload, authorizedOptions()),
+  )
+}
+
+export function updateAdminProductActive(id, isActive) {
+  return adminRequest(() =>
+    apiPatch(`/admin/products/${id}/active`, { isActive }, authorizedOptions()),
+  )
+}
+
+export function updateAdminProductNote(id, note) {
+  return adminRequest(() =>
+    apiPatch(`/admin/products/${id}/note`, { note }, authorizedOptions()),
+  )
+}
