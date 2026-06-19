@@ -1,10 +1,12 @@
-# Frontend deployments do not need backend sources or audit artifacts.
-api
-docs
-reports
-scripts
+# Frontend deployments do not need root-level backend sources or audit artifacts.
+# Leading slashes are required: an unanchored "api" also removes src/api,
+# which contains the frontend API client modules.
+/api
+/docs
+/reports
+/scripts
 
 # Local and generated-only files.
-dist
+/dist
 *.log
 *.zip
