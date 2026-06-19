@@ -234,10 +234,17 @@ can also add non-secret frontend values after the exact backend URL is known.
 
 ## 11. Vercel redeploy status
 
-Status: **not run in Stage 27**.
+API connection redeploy status: **not run in Stage 27**.
 
 A redeploy without the API variables would not connect the frontend, so no
-meaningless production redeploy was triggered.
+manual API-connection redeploy was triggered.
+
+The report-only Stage 27 commit did trigger the repository's normal automatic
+Vercel deployment:
+
+- deployment ID: `5125500958`;
+- result: `success`;
+- no API environment variable changed.
 
 Required sequence:
 
