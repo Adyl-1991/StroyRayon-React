@@ -231,10 +231,10 @@ export const rootCategoryImages = {
     type: 'category',
   },
   santehnika: {
-    src: '/images/categories/santehnika-realistic.jpg',
+    src: '/images/categories/santehnika-modern-bathroom.jpg',
     alt: 'StroyRayon сантехника категориясы',
-    width: 800,
-    height: 450,
+    width: 1600,
+    height: 900,
     type: 'category',
   },
   elektrika: {
