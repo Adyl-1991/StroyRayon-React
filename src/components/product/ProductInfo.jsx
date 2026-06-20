@@ -10,6 +10,7 @@ import {
   getStockStatus,
   getUnitLabel,
   isPurchasable,
+  normalizeKgText,
 } from '../../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
@@ -29,7 +30,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
   const activeMinOrder =
     locale === 'ru'
       ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'minOrder', locale) || `1 ${activeUnit}`
-      : activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`
+      : normalizeKgText(activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`)
   const productName = getProductTitle(product, locale)
   const shortDescription = getProductShortDescription(product, locale)
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
@@ -42,7 +43,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
       value:
         locale === 'ru'
           ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || product.weight
-          : activeVariant?.packageInfo || product.pack || product.weight,
+          : normalizeKgText(activeVariant?.packageInfo || product.pack || product.weight),
     },
     { label: t('product.minOrder'), value: activeMinOrder },
   ].filter((item) => item.value)

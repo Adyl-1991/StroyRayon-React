@@ -105,18 +105,18 @@ export function CheckoutPage() {
   if (!items.length) {
     return (
       <main className="page page--checkout">
-        <Seo title="Заказ берүү" description="StroyRayon барагында товарларды тандап, заказды WhatsApp аркылуу менеджерге жөнөтүңүз." />
-        <EmptyState title="Заказ берүү үчүн товар жок" text="Адегенде себетке керектүү товарларды кошуңуз." />
+        <Seo title="Буйрутма берүү" description="StroyRayon барагында товарларды тандап, буйрутманы WhatsApp аркылуу менеджерге жөнөтүңүз." />
+        <EmptyState title="Буйрутма берүү үчүн товар жок" text="Адегенде себетке керектүү товарларды кошуңуз." />
       </main>
     )
   }
 
   return (
     <main className="page page--checkout">
-      <Seo title="Заказ берүү" description="StroyRayon барагында товарларды тандап, заказды WhatsApp аркылуу менеджерге жөнөтүңүз." />
-      <Breadcrumbs items={[{ label: 'Себет', to: '/cart' }, { label: 'Заказ берүү' }]} />
+      <Seo title="Буйрутма берүү" description="StroyRayon барагында товарларды тандап, буйрутманы WhatsApp аркылуу менеджерге жөнөтүңүз." />
+      <Breadcrumbs items={[{ label: 'Себет', to: '/cart' }, { label: 'Буйрутма берүү' }]} />
       <div className="page-heading">
-        <h1>Заказ берүү</h1>
+        <h1>Буйрутма берүү</h1>
         <p>Байланыш маалыматыңызды жазыңыз. Товарлар жана жеткирүү шарттары менеджер менен WhatsApp аркылуу такталат.</p>
         <p className="microcopy">{shortPriceStockDisclaimer}</p>
       </div>
@@ -173,28 +173,28 @@ export function CheckoutPage() {
             )}
           </label>
           <label>
-            Комментарий
+            Кошумча маалымат
             <textarea
               rows="4"
               value={customer.comment}
               onChange={(event) => updateField('comment', event.target.value)}
-              placeholder="Мисалы: жеткирүү убактысы, кабат, кошумча товар"
+              placeholder="Мисалы: жеткирүү убактысы, кабат же кошумча товар"
             />
           </label>
           {confirmation && (
             <div className="checkout-success" role="status">
-              <strong>Заказ даярдалды</strong>
-              {confirmation.orderNumber && <span>Заказ номери: {confirmation.orderNumber}</span>}
+              <strong>Буйрутма даярдалды</strong>
+              {confirmation.orderNumber && <span>Буйрутма номери: {confirmation.orderNumber}</span>}
               <span>WhatsApp аркылуу менеджерге жөнөтүңүз.</span>
               {confirmation.fallback && <span>Backend жеткиликсиз болгондуктан WhatsApp fallback колдонулду.</span>}
             </div>
           )}
           <div className="order-preview">
-            <h2>Заказдын курамы</h2>
+            <h2>Буйрутманын курамы</h2>
             <pre>{confirmation?.whatsappText || orderText}</pre>
           </div>
           <Button type="submit" variant="whatsapp" disabled={!isReady}>
-            {isSubmitting ? 'Жөнөтүлүүдө...' : 'WhatsApp аркылуу заказ жөнөтүү'}
+            {isSubmitting ? 'Жөнөтүлүүдө...' : 'WhatsApp аркылуу буйрутма жөнөтүү'}
           </Button>
           {confirmation?.whatsappUrl && (
             <Button href={confirmation.whatsappUrl} target="_blank" rel="noreferrer" variant="secondary">

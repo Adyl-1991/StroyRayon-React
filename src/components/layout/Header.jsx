@@ -6,13 +6,13 @@ import { getWhatsAppUrl } from '../../services/whatsappService'
 import { Logo } from './Logo'
 
 const quickNavItems = [
-  { labelKg: 'Курулуш', to: '/catalog/stroymaterial' },
+  { labelKg: 'Курулуш материалдары', to: '/catalog/stroymaterial' },
   { labelKg: 'Инженердик сантехника', to: '/catalog/inzhenerdik-santehnika' },
   { labelKg: 'Сантехника', to: '/catalog/santehnika' },
   { labelKg: 'Электрика', to: '/catalog/elektrika' },
   { labelKg: 'Шаймандар', to: '/catalog/instrument' },
   { labelKg: 'Бекиткич', to: '/catalog/krepezh' },
-  { labelKg: 'Боёк', to: '/catalog/boiok-tush-kagaz' },
+  { labelKg: 'Боёк, туш жана кагаз', to: '/catalog/boiok-tush-kagaz' },
   { labelKg: 'Вентиляция', to: '/catalog/ventilyaciya' },
   { labelKg: 'Жылуу пол', to: '/catalog/teplyi-pol' },
   { labelKg: 'Бак/чарба', to: '/catalog/bak-koroo' },

@@ -35,7 +35,7 @@ export function SubcategoryPage() {
       />
       <div className="page-heading">
         <h1>{subcategory.name}</h1>
-        <p>{category.name} ичиндеги товарлар. Бааны, наличиени жана колдонуу кеңешин салыштырып тандаңыз.</p>
+        <p>{category.name} ичиндеги товарлар. Бааны, бар-жогун жана колдонуу кеңешин салыштырып тандаңыз.</p>
       </div>
       <div className="catalog-layout">
         <CatalogSidebar activeCategorySlug={category.slug} />

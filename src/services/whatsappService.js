@@ -1,5 +1,5 @@
 import { formatPrice } from '../utils/formatPrice'
-import { getLocalizedProductValue, getUnitLabel } from './productService'
+import { getLocalizedProductValue, getUnitLabel, normalizeKgText } from './productService'
 
 export const contactConfig = {
   phone: '+996 553 12 19 91',
@@ -42,7 +42,7 @@ export function buildProductInquiryText({ product, variant, locale = 'kg' }) {
   const isRu = locale === 'ru'
   const packageText = isRu
     ? variant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || getLocalizedProductValue(product, 'minOrder', locale)
-    : variant?.packageInfo || product?.packageInfoKg || product?.minOrder
+    : normalizeKgText(variant?.packageInfo || product?.packageInfoKg || product?.minOrder)
   const unit = getUnitLabel(variant?.unit || product?.unit, locale)
   const priceText = price ? `${isRu ? 'Цена' : 'Баасы'}: ${formatPrice(price)}${unit ? ` / ${unit}` : ''}` : ''
 
@@ -63,7 +63,7 @@ export function buildProductInquiryText({ product, variant, locale = 'kg' }) {
 export function buildWhatsAppOrderText({ customer, items, total }) {
   const lines = [
     'Саламатсызбы, StroyRayon!',
-    'Заказ бергим келет.',
+    'Буйрутма бергим келет.',
     '',
     `Аты-жөнү: ${customer.name}`,
     `Телефон: ${customer.phone}`,
@@ -73,7 +73,7 @@ export function buildWhatsAppOrderText({ customer, items, total }) {
     ...items.map((item, index) => formatOrderItem(item, index)),
     '',
     `Жалпы сумма: ${formatPrice(total)}`,
-    `Комментарий: ${customer.comment || 'Жок'}`,
+    `Кошумча маалымат: ${customer.comment || 'Жок'}`,
     '',
     priceStockDisclaimer,
   ]

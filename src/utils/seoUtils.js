@@ -1,5 +1,5 @@
 import { siteConfig } from '../config/site.js'
-import { getProductFullDescription, getProductTitle } from '../services/productService.js'
+import { getProductFullDescription, getProductTitle, normalizeKgText } from '../services/productService.js'
 import { getProductImage } from './imageUtils.js'
 
 const availabilityMap = {
@@ -42,7 +42,7 @@ export function getProductSeo(product, locale = 'kg') {
     description: cleanText(
       locale === 'ru'
         ? product?.seoDescriptionRu || product?.descriptionRu || product?.shortDescriptionRu || siteConfig.defaultDescription
-        : product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription,
+        : normalizeKgText(product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
     ),
     canonical: getPageCanonical(product?.slug ? `/product/${product.slug}` : '/catalog'),
   }
@@ -60,7 +60,7 @@ export function buildProductStructuredData(product, locale = 'kg') {
     name: productName,
     description: locale === 'ru'
       ? product.seoDescriptionRu || getProductFullDescription(product, locale) || product.shortDescriptionRu
-      : product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg,
+      : normalizeKgText(product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg),
     image: image?.src ? absoluteUrl(image.src) : undefined,
     sku: product.sku,
     brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,

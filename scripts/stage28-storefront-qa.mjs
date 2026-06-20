@@ -16,18 +16,24 @@ const allViewports = [
   { key: '430', width: 430, height: 932, mobile: true },
   { key: '768', width: 768, height: 1024, mobile: false },
   { key: '1024', width: 1024, height: 900, mobile: false },
+  { key: '1366', width: 1366, height: 900, mobile: false },
   { key: '1440', width: 1440, height: 1000, mobile: false },
 ]
 
 const allRoutes = [
   { id: 'home', path: '/' },
   { id: 'catalog', path: '/catalog' },
-  { id: 'category', path: '/catalog/stroymaterial' },
-  { id: 'subcategory', path: '/catalog/inzhenerdik-santehnika/ppr-trubalar-fitingder' },
-  { id: 'product', path: '/product/ppr-truba-pn20' },
+  { id: 'category-building', path: '/catalog/kurulush' },
+  { id: 'category-engineering', path: '/catalog/inzhenerdik-santehnika' },
+  { id: 'category-plumbing', path: '/catalog/santehnika' },
+  { id: 'category-electrical', path: '/catalog/elektrika' },
+  { id: 'category-tools', path: '/catalog/shaimandar' },
+  { id: 'category-fasteners', path: '/catalog/bekitkich' },
+  { id: 'category-paint', path: '/catalog/boiok-tush-kagaz' },
+  { id: 'category-ventilation', path: '/catalog/ventilyaciya' },
   { id: 'cart', path: '/cart' },
   { id: 'checkout', path: '/checkout' },
-  { id: 'search', path: '/search?q=%D0%BF%D0%BF%D1%80' },
+  { id: 'search', path: '/search' },
   { id: 'contacts', path: '/contacts' },
   { id: 'delivery', path: '/delivery' },
   { id: 'about', path: '/about' },
@@ -42,7 +48,9 @@ const allRoutes = [
 const screenshotKeys = new Set([
   'home-360',
   'catalog-390',
-  'product-430',
+  'category-paint-390',
+  'category-building-1366',
+  'category-engineering-1440',
   'cart-390',
   'checkout-390',
   'admin-login-390',
@@ -192,15 +200,33 @@ async function inspect(cdp) {
       publicFooter: Boolean(document.querySelector('.site-footer')),
       adminShell: Boolean(document.querySelector('.admin-shell, .admin-login')),
       fatalText: /unexpected error|application error|cannot read properties|failed to fetch/i.test(text),
+      kgLeakage: Array.from(new Set(text.match(/Главная|Разделы|Товары в этом разделе|Краски и обои|Стройматериал|Корзина|Удалить|Открыть категорию|Комментарий|Заказ\w*|налич\w*/gi) || [])),
     };
   })()`)
 }
 
-async function capture(cdp, filename) {
+async function capture(cdp, filename, fullPage = false) {
+  const dimensions = fullPage
+    ? await evaluate(cdp, `(() => ({
+        width: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
+        height: Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+      }))()`)
+    : null
   const image = await cdp.send('Page.captureScreenshot', {
     format: 'png',
     fromSurface: true,
-    captureBeyondViewport: false,
+    captureBeyondViewport: fullPage,
+    ...(dimensions
+      ? {
+          clip: {
+            x: 0,
+            y: 0,
+            width: Math.min(dimensions.width, 2400),
+            height: Math.min(dimensions.height, 9000),
+            scale: 1,
+          },
+        }
+      : {}),
   })
   const output = path.join(screenshotDir, filename)
   await writeFile(output, Buffer.from(image.data, 'base64'))
@@ -236,13 +262,15 @@ async function buyerFlow(cdp) {
   })()`)
   await delay(250)
   const quantityAfter = await evaluate(cdp, `document.querySelector('.quantity-control span')?.textContent?.trim() || ''`)
+  const cartScreenshot = await capture(cdp, 'buyer-cart-filled.png', true)
   await navigate(cdp, '/checkout')
   const checkout = await evaluate(cdp, `(() => ({
     form: Boolean(document.querySelector('.checkout-form')),
     summary: Boolean(document.querySelector('.cart-summary')),
     disclaimer: /баа|налич|кампа|тактоо|акыркы/i.test(document.body.innerText)
   }))()`)
-  return { added, cartBefore, incremented, quantityAfter, checkout }
+  const checkoutScreenshot = await capture(cdp, 'buyer-checkout-filled.png', true)
+  return { added, cartBefore, incremented, quantityAfter, checkout, screenshots: [cartScreenshot, checkoutScreenshot] }
 }
 
 async function main() {
@@ -298,7 +326,8 @@ async function main() {
       }
     }
 
-    await setViewport(cdp, viewports.find((item) => item.width === 390) || viewports[0])
+    const buyerViewport = Number(process.env.STAGE28_BUYER_VIEWPORT || 390)
+    await setViewport(cdp, allViewports.find((item) => item.width === buyerViewport) || viewports[0])
     const buyer = await buyerFlow(cdp)
     const issues = results.flatMap((result) => {
       const found = []
@@ -313,6 +342,7 @@ async function main() {
       if (result.consoleErrors.length) found.push(`console errors: ${result.consoleErrors.join(' | ')}`)
       if (result.failedRequests.length) found.push(`failed requests: ${result.failedRequests.join(' | ')}`)
       if (result.fatalText) found.push('fatal error text visible')
+      if (!result.admin && result.kgLeakage.length) found.push(`KG UI leakage: ${result.kgLeakage.join(', ')}`)
       if (result.admin && (result.publicHeader || result.publicFooter)) found.push('public layout visible in admin')
       if (!result.admin && (!result.publicHeader || !result.publicFooter)) found.push('public layout missing')
       if (result.redirectsToLogin && !result.url.endsWith('/admin/login')) found.push('protected admin route did not redirect')

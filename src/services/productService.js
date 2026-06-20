@@ -6,7 +6,7 @@ export const STOCK_LABELS_BY_LOCALE = {
   kg: {
     in_stock: 'Бар',
     low_stock: 'Аз калды',
-    pre_order: 'Заказ менен',
+    pre_order: 'Буйрутма менен',
     out_of_stock: 'Жок',
   },
   ru: {
@@ -37,6 +37,32 @@ export const BADGE_LABELS_BY_LOCALE = {
 export const BADGE_LABELS = BADGE_LABELS_BY_LOCALE.kg
 
 const CUSTOMER_BADGES = ['hit', 'sale', 'quality', 'new']
+const KG_TERM_REPLACEMENTS = [
+  [/наличиеси/gi, 'бар-жогу'],
+  [/наличиеде/gi, 'кампада'],
+  [/наличие/gi, 'бар-жогу'],
+  [/заказдардын/gi, 'буйрутмалардын'],
+  [/заказдар/gi, 'буйрутмалар'],
+  [/заказдын/gi, 'буйрутманын'],
+  [/заказды/gi, 'буйрутманы'],
+  [/заказда/gi, 'буйрутмада'],
+  [/заказга/gi, 'буйрутмага'],
+  [/заказдан/gi, 'буйрутмадан'],
+  [/заказ/gi, 'буйрутма'],
+]
+
+export function normalizeKgText(value) {
+  if (typeof value !== 'string') return value
+  return KG_TERM_REPLACEMENTS.reduce(
+    (text, [pattern, replacement]) =>
+      text.replace(pattern, (match) =>
+        match[0] === match[0].toLocaleUpperCase('ky')
+          ? `${replacement[0].toLocaleUpperCase('ky')}${replacement.slice(1)}`
+          : replacement,
+      ),
+    value,
+  )
+}
 
 export function getCategories() {
   return categories
@@ -114,8 +140,8 @@ const HOME_POPULAR_GROUPS = [
   { key: 'elektrika', labelKg: 'Электрика', slugs: ['elektrika'], preferredIds: ['cable-vvg-3x2-5', 'socket-white-single'] },
   { key: 'santehnika', labelKg: 'Сантехника', slugs: ['santehnika'], preferredIds: ['kitchen-mixer-basic', 'bath-mixer-shower-set'] },
   { key: 'ventilyaciya', labelKg: 'Вентиляция', slugs: ['ventilyaciya'], preferredIds: ['ventilation-grille-150'] },
-  { key: 'krepezh', labelKg: 'Бекиткичтер', slugs: ['krepezh'], preferredIds: ['screw-black-35', 'wood-screw-4x50'] },
-  { key: 'boiok-tush-kagaz', labelKg: 'Боёктор/туш кагаздар', slugs: ['boiok-tush-kagaz'], preferredIds: ['interior-paint-white-10l'] },
+  { key: 'krepezh', labelKg: 'Бекиткич', slugs: ['krepezh'], preferredIds: ['screw-black-35', 'wood-screw-4x50'] },
+  { key: 'boiok-tush-kagaz', labelKg: 'Боёк, туш жана кагаз', slugs: ['boiok-tush-kagaz'], preferredIds: ['interior-paint-white-10l'] },
   { key: 'bak-koroo', labelKg: 'Бак жана короо', slugs: ['bak-koroo'], preferredIds: ['garden-hose-3-4-25m', 'garden-shovel-metal'] },
 ]
 
@@ -265,28 +291,33 @@ export function getLocalizedProductValue(product, fieldBase, locale = 'kg') {
   if (!product) return ''
   if (locale === 'ru' && fieldBase === 'productType') return product.productTypeRu || product.typeRu || ''
   if (locale === 'ru') return getLocalizedUnitText(product[`${fieldBase}Ru`] || product[fieldBase] || product[`${fieldBase}Kg`] || '', locale)
-  return product[`${fieldBase}Kg`] || product[fieldBase] || ''
+  return normalizeKgText(product[`${fieldBase}Kg`] || product[fieldBase] || '')
 }
 
 export function getProductShortDescription(product, locale = 'kg') {
   if (!product) return ''
   return locale === 'ru'
     ? product.shortDescriptionRu || product.shortDescription || product.descriptionRu || product.shortDescriptionKg || ''
-    : product.shortDescriptionKg || product.shortDescription || product.descriptionKg || ''
+    : normalizeKgText(product.shortDescriptionKg || product.shortDescription || product.descriptionKg || '')
 }
 
 export function getProductFullDescription(product, locale = 'kg') {
   if (!product) return ''
   return locale === 'ru'
     ? product.fullDescriptionRu || product.descriptionRu || product.description || product.fullDescriptionKg || ''
-    : product.fullDescriptionKg || product.descriptionKg || product.description || ''
+    : normalizeKgText(product.fullDescriptionKg || product.descriptionKg || product.description || '')
 }
 
 export function getProductSpecs(product, locale = 'kg') {
   if (!product) return {}
   return locale === 'ru'
     ? product.specificationsRu || product.specsRu || product.specificationsKg || product.specs || {}
-    : product.specificationsKg || product.specs || {}
+    : Object.fromEntries(
+        Object.entries(product.specificationsKg || product.specs || {}).map(([key, value]) => [
+          normalizeKgText(key),
+          normalizeKgText(value),
+        ]),
+      )
 }
 
 export function getProductListField(product, fieldBase, locale = 'kg') {
@@ -294,15 +325,26 @@ export function getProductListField(product, fieldBase, locale = 'kg') {
   const localizedField = `${fieldBase}${locale === 'ru' ? 'Ru' : 'Kg'}`
   const fallbackField = `${fieldBase}${locale === 'ru' ? 'Kg' : 'Ru'}`
   const value = product[localizedField] || product[fallbackField] || []
-  if (Array.isArray(value)) return value.filter(Boolean)
-  return value ? [value] : []
+  if (Array.isArray(value)) {
+    return value
+      .filter(Boolean)
+      .map((item) => {
+        if (locale === 'ru') return item
+        if (typeof item === 'string') return normalizeKgText(item)
+        if (item && typeof item === 'object') {
+          return Object.fromEntries(Object.entries(item).map(([key, field]) => [key, normalizeKgText(field)]))
+        }
+        return item
+      })
+  }
+  return value ? [locale === 'ru' ? value : normalizeKgText(value)] : []
 }
 
 export function getStockStatus(product) {
   if (!product) return 'out_of_stock'
   if (product.stockStatus) return product.stockStatus
   const stockText = typeof product.stock === 'string' ? product.stock.toLowerCase() : ''
-  if (stockText.includes('заказ')) return 'pre_order'
+  if (stockText.includes('заказ') || stockText.includes('буйрутма')) return 'pre_order'
   if (stockText.includes('жок')) return 'out_of_stock'
   return 'in_stock'
 }

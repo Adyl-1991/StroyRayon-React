@@ -26,6 +26,7 @@ import {
   getSelectedVariant,
   getStockLabel,
   getStockStatus,
+  normalizeKgText,
   resolveProductSlug,
 } from '../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../services/whatsappService'
@@ -99,7 +100,10 @@ export function ProductPage() {
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
   const activeSku = selectedVariant?.sku || product.sku || product.article
-  const packageInfo = selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder
+  const packageInfo =
+    locale === 'ru'
+      ? selectedVariant?.packageInfoRu || product.packRu || product.packageInfoRu || product.minOrderRu
+      : normalizeKgText(selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder)
   const stockStatus = selectedVariant ? getStockStatus(selectedVariant) : getStockStatus(product)
   const variantSpecs = {
     ...specifications,

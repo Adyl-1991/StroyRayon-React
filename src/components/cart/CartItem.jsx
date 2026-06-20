@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { normalizeKgText } from '../../services/productService'
 import { formatPrice } from '../../utils/formatPrice'
 import { applyImageFallback, resolveImage } from '../../utils/imageUtils'
 
@@ -17,7 +18,7 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
         data-fallback-src={image.fallbackSrc}
         onError={(event) => applyImageFallback(event, 'product')}
       />
-      <div>
+      <div className="cart-item__details">
         <h3>
           <Link to={`/product/${item.slug}`}>{item.name}</Link>
         </h3>
@@ -27,7 +28,7 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
             {item.variantSku ? ` · SKU: ${item.variantSku}` : ''}
           </p>
         )}
-        {item.packageInfo && <p className="cart-item__variant">Таңгак: {item.packageInfo}</p>}
+        {item.packageInfo && <p className="cart-item__variant">Таңгак: {normalizeKgText(item.packageInfo)}</p>}
         <p>
           {formatPrice(item.price)} / {item.unit}
         </p>
@@ -41,8 +42,8 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
           +
         </button>
       </div>
-      <strong>{formatPrice(item.price * item.quantity)}</strong>
-      <button className="text-button" type="button" onClick={() => removeFromCart(cartItemId)}>
+      <strong className="cart-item__total">{formatPrice(item.price * item.quantity)}</strong>
+      <button className="cart-item__remove" type="button" onClick={() => removeFromCart(cartItemId)}>
         Өчүрүү
       </button>
     </article>
