@@ -2,24 +2,27 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Seo } from '../components/seo/Seo'
 import { blogPosts } from '../data/blogPosts'
 import { getPageCanonical } from '../utils/seoUtils'
+import { useLocale } from '../i18n/LocaleContext'
 
 export function BlogPage() {
+  const { locale, t } = useLocale()
+
   return (
     <main className="page">
-      <Seo title="Кеңештер" description="StroyRayon блогунда курулуш материалдарын тандоо, сарптоо эсептөө жана жеткирүү боюнча пайдалуу кыргызча кеңештер." canonical={getPageCanonical('/blog')} />
-      <Breadcrumbs items={[{ label: 'Кеңештер' }]} />
+      <Seo title={t('home.adviceTitle')} description={t('home.adviceText')} canonical={getPageCanonical('/blog')} />
+      <Breadcrumbs items={[{ label: t('home.adviceTitle') }]} />
       <div className="page-heading">
-        <h1>Курулуш боюнча кеңештер</h1>
-        <p>Материал тандоо, сарптоо эсептөө жана жеткирүүнү пландоо боюнча пайдалуу макалалар.</p>
+        <h1>{t('home.adviceTitle')}</h1>
+        <p>{t('home.adviceText')}</p>
       </div>
       <section className="blog-grid">
         {blogPosts.map((post) => (
           <article className="blog-card" key={post.id}>
             <p className="eyebrow">
-              {post.category} · {post.date}
+              {locale === 'ru' ? post.categoryRu : post.category} · {post.date}
             </p>
-            <h2>{post.title}</h2>
-            <p>{post.excerpt}</p>
+            <h2>{locale === 'ru' ? post.titleRu : post.title}</h2>
+            <p>{locale === 'ru' ? post.excerptRu : post.excerpt}</p>
           </article>
         ))}
       </section>

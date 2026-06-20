@@ -7,10 +7,12 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Button } from '../components/ui/Button'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCart } from '../hooks/useCart'
-import { buildWhatsAppOrderText, getWhatsAppUrl, shortPriceStockDisclaimer } from '../services/whatsappService'
+import { useLocale } from '../i18n/LocaleContext'
+import { buildWhatsAppOrderText, getWhatsAppUrl } from '../services/whatsappService'
 
 export function CheckoutPage() {
   const { items, total, count } = useCart()
+  const { locale, t } = useLocale()
   const [customer, setCustomer] = useState({
     name: '',
     phone: '',
@@ -21,12 +23,12 @@ export function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [confirmation, setConfirmation] = useState(null)
 
-  const orderText = useMemo(() => buildWhatsAppOrderText({ customer, items, total }), [customer, items, total])
+  const orderText = useMemo(() => buildWhatsAppOrderText({ customer, items, total, locale }), [customer, items, locale, total])
   const fallbackWhatsappUrl = useMemo(() => getWhatsAppUrl(orderText), [orderText])
   const errors = {
-    name: customer.name.trim() ? '' : 'Атыңызды жазыңыз',
-    phone: customer.phone.trim() ? '' : 'Телефон номериңизди жазыңыз',
-    address: customer.address.trim() ? '' : 'Дарек же регионду жазыңыз',
+    name: customer.name.trim() ? '' : t('checkout.nameError'),
+    phone: customer.phone.trim() ? '' : t('checkout.phoneError'),
+    address: customer.address.trim() ? '' : t('checkout.addressError'),
   }
   const isReady = !errors.name && !errors.phone && !errors.address && items.length && !isSubmitting
   const visibleErrors = {
@@ -54,7 +56,7 @@ export function CheckoutPage() {
       items: items.map((item) => ({
         productId: item.productId,
         slug: item.slug,
-        title: item.name,
+        title: locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name,
         sku: item.sku,
         price: Number(item.price || 0),
         quantity: Number(item.quantity || 1),
@@ -105,26 +107,26 @@ export function CheckoutPage() {
   if (!items.length) {
     return (
       <main className="page page--checkout">
-        <Seo title="Буйрутма берүү" description="StroyRayon барагында товарларды тандап, буйрутманы WhatsApp аркылуу менеджерге жөнөтүңүз." />
-        <EmptyState title="Буйрутма берүү үчүн товар жок" text="Адегенде себетке керектүү товарларды кошуңуз." />
+        <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} />
+        <EmptyState title={t('checkout.emptyTitle')} text={t('checkout.emptyText')} />
       </main>
     )
   }
 
   return (
     <main className="page page--checkout">
-      <Seo title="Буйрутма берүү" description="StroyRayon барагында товарларды тандап, буйрутманы WhatsApp аркылуу менеджерге жөнөтүңүз." />
-      <Breadcrumbs items={[{ label: 'Себет', to: '/cart' }, { label: 'Буйрутма берүү' }]} />
+      <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} />
+      <Breadcrumbs items={[{ label: t('cart.title'), to: '/cart' }, { label: t('checkout.title') }]} />
       <div className="page-heading">
-        <h1>Буйрутма берүү</h1>
-        <p>Байланыш маалыматыңызды жазыңыз. Товарлар жана жеткирүү шарттары менеджер менен WhatsApp аркылуу такталат.</p>
-        <p className="microcopy">{shortPriceStockDisclaimer}</p>
+        <h1>{t('checkout.title')}</h1>
+        <p>{t('checkout.intro')}</p>
+        <p className="microcopy">{t('product.priceDisclaimer')}</p>
       </div>
       <div className="checkout-layout">
         <form className="checkout-form" onSubmit={handleSubmit}>
-          <h2>Байланыш маалыматы</h2>
+          <h2>{t('checkout.contactTitle')}</h2>
           <label>
-            Аты-жөнү
+            {t('checkout.name')}
             <input
               value={customer.name}
               onChange={(event) => updateField('name', event.target.value)}
@@ -140,7 +142,7 @@ export function CheckoutPage() {
             )}
           </label>
           <label>
-            Телефон
+            {t('checkout.phone')}
             <input
               value={customer.phone}
               onChange={(event) => updateField('phone', event.target.value)}
@@ -155,9 +157,9 @@ export function CheckoutPage() {
               </span>
             )}
           </label>
-          <h2>Жеткирүү дареги</h2>
+          <h2>{t('checkout.addressTitle')}</h2>
           <label>
-            Дарек/регион
+            {t('checkout.address')}
             <input
               value={customer.address}
               onChange={(event) => updateField('address', event.target.value)}
@@ -173,32 +175,32 @@ export function CheckoutPage() {
             )}
           </label>
           <label>
-            Кошумча маалымат
+            {t('checkout.comment')}
             <textarea
               rows="4"
               value={customer.comment}
               onChange={(event) => updateField('comment', event.target.value)}
-              placeholder="Мисалы: жеткирүү убактысы, кабат же кошумча товар"
+              placeholder={t('checkout.commentPlaceholder')}
             />
           </label>
           {confirmation && (
             <div className="checkout-success" role="status">
-              <strong>Буйрутма даярдалды</strong>
-              {confirmation.orderNumber && <span>Буйрутма номери: {confirmation.orderNumber}</span>}
-              <span>WhatsApp аркылуу менеджерге жөнөтүңүз.</span>
-              {confirmation.fallback && <span>Backend жеткиликсиз болгондуктан WhatsApp fallback колдонулду.</span>}
+              <strong>{t('checkout.ready')}</strong>
+              {confirmation.orderNumber && <span>{t('checkout.orderNumber', { number: confirmation.orderNumber })}</span>}
+              <span>{t('checkout.sendManager')}</span>
+              {confirmation.fallback && <span>{t('checkout.fallback')}</span>}
             </div>
           )}
           <div className="order-preview">
-            <h2>Буйрутманын курамы</h2>
+            <h2>{t('checkout.preview')}</h2>
             <pre>{confirmation?.whatsappText || orderText}</pre>
           </div>
           <Button type="submit" variant="whatsapp" disabled={!isReady}>
-            {isSubmitting ? 'Жөнөтүлүүдө...' : 'WhatsApp аркылуу буйрутма жөнөтүү'}
+            {isSubmitting ? t('checkout.submitting') : t('checkout.submit')}
           </Button>
           {confirmation?.whatsappUrl && (
             <Button href={confirmation.whatsappUrl} target="_blank" rel="noreferrer" variant="secondary">
-              WhatsApp шилтемесин кайра ачуу
+              {t('checkout.reopen')}
             </Button>
           )}
         </form>

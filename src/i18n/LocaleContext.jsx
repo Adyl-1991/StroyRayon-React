@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { catalogTranslations, translations } from './translations'
+import { getCatalogRuFallback } from './catalogRuFallbacks'
 
 const LocaleContext = createContext(null)
 const STORAGE_KEY = 'stroyrayon.locale'
@@ -37,13 +38,14 @@ export function LocaleProvider({ children }) {
     function nodeText(node) {
       const bySlug = catalogTranslations[node?.slug]?.[locale]
       const fallback = catalogTranslations[node?.slug]?.kg
+      const ruFallback = locale === 'ru' ? getCatalogRuFallback(node) : null
       const localeTitle = locale === 'ru' ? node?.titleRu : node?.titleKg
       const localeDescription = locale === 'ru' ? node?.descriptionRu : node?.descriptionKg
       const localeSeoText = locale === 'ru' ? node?.seoTextRu : node?.seoTextKg
       return {
-        title: bySlug?.title || fallback?.title || localeTitle || node?.titleKg || node?.name || '',
-        description: bySlug?.description || fallback?.description || localeDescription || node?.descriptionKg || node?.description || '',
-        seoText: bySlug?.seoText || fallback?.seoText || localeSeoText || node?.seoTextKg || node?.seoText || '',
+        title: bySlug?.title || localeTitle || ruFallback?.title || fallback?.title || node?.titleKg || node?.name || '',
+        description: bySlug?.description || localeDescription || ruFallback?.description || fallback?.description || node?.descriptionKg || node?.description || '',
+        seoText: bySlug?.seoText || localeSeoText || ruFallback?.seoText || fallback?.seoText || node?.seoTextKg || node?.seoText || '',
       }
     }
 

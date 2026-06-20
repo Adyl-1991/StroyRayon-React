@@ -6,16 +6,16 @@ import { getWhatsAppUrl } from '../../services/whatsappService'
 import { Logo } from './Logo'
 
 const quickNavItems = [
-  { labelKg: 'Курулуш материалдары', to: '/catalog/stroymaterial' },
-  { labelKg: 'Инженердик сантехника', to: '/catalog/inzhenerdik-santehnika' },
-  { labelKg: 'Сантехника', to: '/catalog/santehnika' },
-  { labelKg: 'Электрика', to: '/catalog/elektrika' },
-  { labelKg: 'Шаймандар', to: '/catalog/instrument' },
-  { labelKg: 'Бекиткич', to: '/catalog/krepezh' },
-  { labelKg: 'Боёк, туш жана кагаз', to: '/catalog/boiok-tush-kagaz' },
-  { labelKg: 'Вентиляция', to: '/catalog/ventilyaciya' },
-  { labelKg: 'Жылуу пол', to: '/catalog/teplyi-pol' },
-  { labelKg: 'Бак/чарба', to: '/catalog/bak-koroo' },
+  { kg: 'Курулуш', ru: 'Стройматериалы', to: '/catalog/stroymaterial' },
+  { kg: 'Инженердик сантехника', ru: 'Инженерная сантехника', to: '/catalog/inzhenerdik-santehnika' },
+  { kg: 'Сантехника', ru: 'Сантехника', to: '/catalog/santehnika' },
+  { kg: 'Электрика', ru: 'Электрика', to: '/catalog/elektrika' },
+  { kg: 'Шаймандар', ru: 'Инструменты', to: '/catalog/instrument' },
+  { kg: 'Бекиткич', ru: 'Крепёж', to: '/catalog/krepezh' },
+  { kg: 'Боёк', ru: 'Краски и обои', to: '/catalog/boiok-tush-kagaz' },
+  { kg: 'Вентиляция', ru: 'Вентиляция', to: '/catalog/ventilyaciya' },
+  { kg: 'Жылуу пол', ru: 'Тёплый пол', to: '/catalog/teplyi-pol' },
+  { kg: 'Бак/чарба', ru: 'Сад и хозяйство', to: '/catalog/bak-koroo' },
 ]
 
 export function Header() {
@@ -23,7 +23,7 @@ export function Header() {
   const { locale, setLocale, t } = useLocale()
   const [query, setQuery] = useState('')
   const navigate = useNavigate()
-  const whatsappMaterialsUrl = getWhatsAppUrl('Салам! StroyRayon сайты аркылуу материалдар тизмесин жөнөткүм келет.')
+  const whatsappMaterialsUrl = getWhatsAppUrl(t('header.materialsMessage'))
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -88,7 +88,7 @@ export function Header() {
         </div>
       </header>
 
-      <nav className="header-category-strip" aria-label="Негизги категориялар">
+      <nav className="header-category-strip" aria-label={t('header.categoryNavLabel')}>
         <div className="header-category-scroll">
           {quickNavItems.map((item) => (
             <NavLink
@@ -96,13 +96,13 @@ export function Header() {
               key={item.to}
               to={item.to}
             >
-              {item.labelKg}
+              {item[locale]}
             </NavLink>
           ))}
         </div>
         <a className="header-materials-cta" href={whatsappMaterialsUrl} target="_blank" rel="noreferrer">
-          <strong>Материалдар тизмеси?</strong>
-          <small>WhatsAppка жөнөтүңүз</small>
+          <strong>{t('header.materialsTitle')}</strong>
+          <small>{t('header.materialsCta')}</small>
         </a>
       </nav>
     </>

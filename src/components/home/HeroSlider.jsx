@@ -88,7 +88,7 @@ export function HeroSlider() {
             key={slide.id}
             type="button"
             onClick={() => goToSlide(index)}
-            aria-label={`${index + 1}-слайд`}
+            aria-label={t('hero.slide', { number: index + 1 })}
             aria-current={index === activeIndex ? 'true' : undefined}
           />
         ))}

@@ -1,5 +1,5 @@
 import { formatPrice } from '../utils/formatPrice'
-import { getLocalizedProductValue, getUnitLabel, normalizeKgText } from './productService'
+import { getLocalizedProductValue, getProductBySlug, getProductTitle, getUnitLabel, normalizeKgText } from './productService'
 
 export const contactConfig = {
   phone: '+996 553 12 19 91',
@@ -25,12 +25,33 @@ export const priceStockDisclaimerRu =
 
 export const deliverySummary = 'Бишкек шаары ичинде жана аймактарга жеткирүү бар.'
 
-function formatOrderItem(item, index) {
+const localizedContactDetails = {
+  kg: {
+    address: 'Бишкек шаары',
+    hours: ['Шейшемби - Жекшемби: 09:00 - 19:00', 'Дүйшөмбү: эс алуу күнү', 'Жума күнү: 13:00 - 14:00 тыныгуу'],
+    delivery: 'Бишкек шаары ичинде жана аймактарга жеткирүү бар.',
+  },
+  ru: {
+    address: 'город Бишкек',
+    hours: ['Вторник - Воскресенье: 09:00 - 19:00', 'Понедельник: выходной', 'Пятница: перерыв 13:00 - 14:00'],
+    delivery: 'Доставляем по Бишкеку и в регионы.',
+  },
+}
+
+export function getContactDetails(locale = 'kg') {
+  return localizedContactDetails[locale] || localizedContactDetails.kg
+}
+
+function formatOrderItem(item, index, locale) {
+  const product = getProductBySlug(item.slug)
+  const name = product ? getProductTitle(product, locale) : locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name
   const variantText = item.variantSize ? ` (${item.variantSize})` : ''
   const skuText = item.variantSku || item.sku ? `, SKU: ${item.variantSku || item.sku}` : ''
-  const packageText = item.packageInfo ? `, таңгак: ${item.packageInfo}` : ''
+  const packageInfo = locale === 'ru' ? item.packageInfoRu : item.packageInfo
+  const packageText = packageInfo ? `, ${locale === 'ru' ? 'фасовка' : 'таңгак'}: ${packageInfo}` : ''
+  const unit = getUnitLabel(item.unitKg || item.unit, locale)
 
-  return `${index + 1}. ${item.name}${variantText}${skuText}${packageText} - ${item.quantity} ${item.unit} x ${formatPrice(item.price)} = ${formatPrice(
+  return `${index + 1}. ${name}${variantText}${skuText}${packageText} - ${item.quantity} ${unit} x ${formatPrice(item.price)} = ${formatPrice(
     item.price * item.quantity,
   )}`
 }
@@ -60,22 +81,23 @@ export function buildProductInquiryText({ product, variant, locale = 'kg' }) {
     .join('\n')
 }
 
-export function buildWhatsAppOrderText({ customer, items, total }) {
+export function buildWhatsAppOrderText({ customer, items, total, locale = 'kg' }) {
+  const isRu = locale === 'ru'
   const lines = [
-    'Саламатсызбы, StroyRayon!',
-    'Буйрутма бергим келет.',
+    isRu ? 'Здравствуйте, StroyRayon!' : 'Саламатсызбы, StroyRayon!',
+    isRu ? 'Хочу оформить заказ.' : 'Буйрутма бергим келет.',
     '',
-    `Аты-жөнү: ${customer.name}`,
-    `Телефон: ${customer.phone}`,
-    `Дарек/регион: ${customer.address}`,
+    `${isRu ? 'Имя' : 'Аты-жөнү'}: ${customer.name}`,
+    `${isRu ? 'Телефон' : 'Телефон'}: ${customer.phone}`,
+    `${isRu ? 'Адрес/регион' : 'Дарек/регион'}: ${customer.address}`,
     '',
-    'Товарлар:',
-    ...items.map((item, index) => formatOrderItem(item, index)),
+    isRu ? 'Товары:' : 'Товарлар:',
+    ...items.map((item, index) => formatOrderItem(item, index, locale)),
     '',
-    `Жалпы сумма: ${formatPrice(total)}`,
-    `Кошумча маалымат: ${customer.comment || 'Жок'}`,
+    `${isRu ? 'Общая сумма' : 'Жалпы сумма'}: ${formatPrice(total)}`,
+    `${isRu ? 'Комментарий' : 'Кошумча маалымат'}: ${customer.comment || (isRu ? 'Нет' : 'Жок')}`,
     '',
-    priceStockDisclaimer,
+    isRu ? priceStockDisclaimerRu : priceStockDisclaimer,
   ]
 
   return lines.join('\n')

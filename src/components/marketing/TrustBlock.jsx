@@ -1,32 +1,14 @@
+import { useLocale } from '../../i18n/LocaleContext'
+
 export function TrustBlock() {
-  const items = [
-    {
-      title: 'Товарды туура тандоого жардам беребиз',
-      text: 'Диаметр, өлчөм, материал же комплектация боюнча күмөн санасаңыз, менеджерден кеңеш алыңыз.',
-    },
-    {
-      title: 'WhatsApp аркылуу тез байланыш',
-      text: 'Сурооңузду жөнөтүңүз — менеджер товарды, бааны жана бар-жогун тактап берет.',
-    },
-    {
-      title: 'Региондорго жөнөтүү мүмкүнчүлүгү',
-      text: 'Жеткирүү шарттары жана баасы буйрутмага жараша менеджер менен алдын ала такталат.',
-    },
-    {
-      title: 'Буйрутма жөнөтүүдөн мурун такталат',
-      text: 'Товар, саны, баасы жана жеткирүү жолу алдын ала сүйлөшүлүп, андан кийин гана жөнөтүлөт.',
-    },
-    {
-      title: 'Комплектацияны текшерүүгө жардам',
-      text: 'Түтүк, фитинг, бекиткич же аралашма туура келеби — тизмеңизди карап, тактап беребиз.',
-    },
-  ]
+  const { t } = useLocale()
+  const items = t('trust.items')
 
   return (
     <section className="trust-block" aria-labelledby="trust-title">
       <div>
-        <p className="eyebrow">Ишеним факторлору</p>
-        <h2 id="trust-title">Курулуш материалы туура тандалса, ашыкча чыгым азаят</h2>
+        <p className="eyebrow">{t('trust.eyebrow')}</p>
+        <h2 id="trust-title">{t('trust.title')}</h2>
       </div>
       <div className="trust-grid">
         {items.map((item) => (

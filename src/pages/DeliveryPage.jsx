@@ -2,51 +2,42 @@ import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Button } from '../components/ui/Button'
 import { Seo } from '../components/seo/Seo'
 import {
-  businessHours,
-  contactConfig,
-  deliverySummary,
+  getContactDetails,
   getWhatsAppUrl,
-  priceStockDisclaimer,
 } from '../services/whatsappService'
+import { useLocale } from '../i18n/LocaleContext'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function DeliveryPage() {
+  const { locale, t } = useLocale()
+  const details = getContactDetails(locale)
+  const cards = t('static.delivery.cards')
+  const tips = t('static.delivery.tips')
+
   return (
     <main className="page">
-      <Seo title="Жеткирүү жана төлөм" description="StroyRayon курулуш материалдарын Бишкекке, Чүйгө жана Кыргызстан региондоруна жеткирүү шарттарын менеджер менен тактайт." canonical={getPageCanonical('/delivery')} />
-      <Breadcrumbs items={[{ label: 'Жеткирүү жана төлөм' }]} />
+      <Seo title={t('static.delivery.title')} description={t('static.delivery.description')} canonical={getPageCanonical('/delivery')} />
+      <Breadcrumbs items={[{ label: t('static.delivery.title') }]} />
       <div className="page-heading">
-        <h1>Жеткирүү жана төлөм</h1>
-        <p>{deliverySummary} Курулуш материалы оор жана көлөмдүү болгондуктан, акыркы шарттар буйрутма боюнча такталат.</p>
+        <h1>{t('static.delivery.title')}</h1>
+        <p>{t('static.delivery.description')}</p>
       </div>
       <section className="info-grid">
+        {cards.map((card) => <article key={card.title}><h2>{card.title}</h2><p>{card.text}</p></article>)}
         <article>
-          <h2>Бишкек жана Чүй</h2>
-          <p>Көп товарлар ошол эле күнү же кийинки күнү жеткирилет. Түшүрүү дареги алдын ала такталат.</p>
-        </article>
-        <article>
-          <h2>Региондор</h2>
-          <p>Ош, Жалал-Абад, Баткен, Нарын, Ысык-Көл жана Талас багыттарына транспорт, такси же жүк жеткирүү аркылуу жөнөтүү мүмкүн.</p>
-        </article>
-        <article>
-          <h2>Төлөм</h2>
-          <p>Накталай жана онлайн которуу аркылуу төлөм кабыл алынат. Төлөм ыкмасы буйрутма такталгандан кийин менеджер менен макулдашылат.</p>
-        </article>
-        <article>
-          <h2>Иш убактысы</h2>
-          {businessHours.map((item) => (
+          <h2>{t('static.delivery.hours')}</h2>
+          {details.hours.map((item) => (
             <p key={item}>{item}</p>
           ))}
-          <p>Дарек: {contactConfig.address}</p>
+          <p>{t('static.delivery.address')}: {details.address}</p>
         </article>
       </section>
       <section className="seo-text">
-        <h2>Жеткирүүнү кантип тездетсе болот?</h2>
-        <p>Буйрутма бергенде товарлардын санын, регионду, так даректи жана түшүрүү шартын жазыңыз.</p>
-        <p>Оор жана көлөмдүү товарлар боюнча жеткирүү баасы буйрутманын көлөмүнө, салмагына жана дарекке жараша такталат.</p>
-        <p>{priceStockDisclaimer}</p>
-        <Button href={getWhatsAppUrl('Салам! StroyRayon жеткирүү жана төлөм шарттарын тактап бериңиз.')} target="_blank" rel="noreferrer" variant="whatsapp">
-          WhatsApp аркылуу шарттарды тактоо
+        <h2>{t('static.delivery.tipsTitle')}</h2>
+        {tips.map((tip) => <p key={tip}>{tip}</p>)}
+        <p>{t('product.priceDisclaimer')}</p>
+        <Button href={getWhatsAppUrl(t('header.materialsMessage'))} target="_blank" rel="noreferrer" variant="whatsapp">
+          {t('static.delivery.cta')}
         </Button>
       </section>
     </main>

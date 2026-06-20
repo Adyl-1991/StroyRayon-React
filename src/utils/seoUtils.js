@@ -26,10 +26,14 @@ export function getPageCanonical(path = '/') {
   return absoluteUrl(path)
 }
 
-export function getCatalogNodeSeo(node) {
+export function getCatalogNodeSeo(node, locale = 'kg') {
   return {
-    title: node?.titleKg || 'Каталог',
-    description: cleanText(node?.descriptionKg || node?.seoTextKg || siteConfig.defaultDescription),
+    title: locale === 'ru' ? node?.titleRu || node?.titleKg || 'Каталог' : node?.titleKg || 'Каталог',
+    description: cleanText(
+      locale === 'ru'
+        ? node?.descriptionRu || node?.seoTextRu || siteConfig.defaultDescription
+        : node?.descriptionKg || node?.seoTextKg || siteConfig.defaultDescription,
+    ),
     canonical: getPageCanonical(node?.path?.length ? `/catalog/${node.path.join('/')}` : '/catalog'),
   }
 }

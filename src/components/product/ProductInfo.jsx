@@ -70,7 +70,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
         <strong>{formatPrice(activePrice)}</strong>
         {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
         <span>/ {activeUnit}</span>
-        {product.isSale && <Badge tone="sale">Акция</Badge>}
+        {product.isSale && <Badge tone="sale">{t('product.sale')}</Badge>}
       </div>
       <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
       {variants.length > 0 && (

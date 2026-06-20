@@ -19,7 +19,7 @@ export function CatalogNodePage() {
   const pathSegments = (params['*'] || '').split('/').filter(Boolean)
   const { node, isLoading: isCatalogLoading } = useCatalogNode(pathSegments)
   const { filters, setFilters } = useCatalogFilters()
-  const { t, nodeText } = useLocale()
+  const { locale, t, nodeText } = useLocale()
   const { products, total, page, totalPages, filterOptions: apiFilterOptions, isLoading: isProductsLoading } = useProducts({
     ...filters,
     catalogNode: node,
@@ -46,7 +46,7 @@ export function CatalogNodePage() {
       to: index === node.breadcrumbs.length - 1 ? undefined : getCatalogNodeUrl(item.path),
     })),
   ]
-  const seo = getCatalogNodeSeo(node)
+  const seo = getCatalogNodeSeo(node, locale)
 
   return (
     <main className="page catalog-node-page">
@@ -85,7 +85,7 @@ export function CatalogNodePage() {
             </p>
           )}
           <div className="catalog-products-layout">
-            <aside className="catalog-products-layout__filters" aria-label="Фильтрлер">
+            <aside className="catalog-products-layout__filters" aria-label={t('filters.title')}>
               <Filters filters={filters} setFilters={setFilters} options={filterOptions} resultCount={total} variant="sidebar" showActiveChips={false} />
             </aside>
             <div className="catalog-products-layout__content">

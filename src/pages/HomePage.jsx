@@ -14,7 +14,7 @@ import { getWhatsAppUrl } from '../services/whatsappService'
 import { getPageCanonical } from '../utils/seoUtils'
 
 export function HomePage() {
-  const { t } = useLocale()
+  const { locale, t } = useLocale()
   const { products: homeProducts } = useProducts({ limit: 100, sort: 'popular' })
   const popularProducts = getHomePopularProducts(homeProducts)
   const saleProducts = getProducts({ sale: true }).slice(0, 4)
@@ -81,9 +81,9 @@ export function HomePage() {
         <div className="blog-grid">
           {blogPosts.slice(0, 3).map((post) => (
             <article className="blog-card" key={post.id}>
-              <p className="eyebrow">{post.category}</p>
-              <h3>{post.title}</h3>
-              <p>{post.excerpt}</p>
+              <p className="eyebrow">{locale === 'ru' ? post.categoryRu : post.category}</p>
+              <h3>{locale === 'ru' ? post.titleRu : post.title}</h3>
+              <p>{locale === 'ru' ? post.excerptRu : post.excerpt}</p>
               <Link to="/blog">{t('common.read')}</Link>
             </article>
           ))}
