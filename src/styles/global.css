@@ -2538,6 +2538,14 @@ del {
     word-break: normal;
   }
 
+  .seo-text .button {
+    width: 100%;
+    max-width: 100%;
+    min-height: 42px;
+    padding-block: 10px;
+    white-space: normal;
+  }
+
   .breadcrumbs {
     flex-wrap: nowrap;
     gap: 6px;
