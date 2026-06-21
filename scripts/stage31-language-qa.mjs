@@ -18,6 +18,7 @@ const viewports = [
   { width: 1024, height: 900, mobile: false },
   { width: 1366, height: 900, mobile: false },
   { width: 1440, height: 1000, mobile: false },
+  { width: 1707, height: 960, mobile: false },
 ]
 
 const routes = [
@@ -158,6 +159,12 @@ async function inspect(cdp) {
   return evaluate(cdp, `(() => {
     const root = document.documentElement;
     const body = document.body;
+    const categoryScroll = document.querySelector('.header-category-scroll');
+    const categoryChips = Array.from(document.querySelectorAll('.header-category-chip'));
+    const materialsCta = document.querySelector('.header-materials-cta');
+    const scrollRect = categoryScroll?.getBoundingClientRect();
+    const ctaRect = materialsCta?.getBoundingClientRect();
+    const ctaVisible = Boolean(materialsCta && getComputedStyle(materialsCta).display !== 'none');
     return {
       url: location.pathname,
       lang: root.lang,
@@ -168,10 +175,22 @@ async function inspect(cdp) {
       header: Boolean(document.querySelector('.site-header')),
       footer: Boolean(document.querySelector('.site-footer')),
       admin: Boolean(document.querySelector('.admin-shell, .admin-login')),
-      chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim()),
+      chips: categoryChips.map((item) => item.textContent.trim()),
       headerText: document.querySelector('.header-category-strip')?.innerText || '',
       ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
       ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || '',
+      categoryLayout: {
+        ctaVisible,
+        overlap: Boolean(ctaVisible && scrollRect && ctaRect && scrollRect.right > ctaRect.left - 8),
+        allChipsVisible: Boolean(
+          scrollRect
+          && categoryChips.length === 8
+          && categoryChips.every((chip) => {
+            const rect = chip.getBoundingClientRect();
+            return rect.left >= scrollRect.left - 1 && rect.right <= scrollRect.right + 1;
+          })
+        ),
+      },
     };
   })()`)
 }
@@ -211,7 +230,8 @@ async function main() {
           const expectedLang = locale === 'ru' ? 'ru' : 'ky'
           const expectedHeading = route[locale]
           const forbidden = forbiddenUi[locale].filter((text) => result.text.includes(text))
-          const chipMismatch = expectedChips[locale].some((text, index) => result.chips[index] !== text)
+          const chipMismatch = result.chips.length !== expectedChips[locale].length
+            || expectedChips[locale].some((text, index) => result.chips[index] !== text)
           const ctaMismatch = result.ctaTitle !== expectedCta[locale].title || result.ctaAction !== expectedCta[locale].action
           if (result.lang !== expectedLang) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `html lang ${result.lang}` })
           if (expectedHeading && result.h1 !== expectedHeading) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `h1 "${result.h1}" expected "${expectedHeading}"` })
@@ -220,6 +240,12 @@ async function main() {
           if (!result.header || !result.footer) issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'public layout missing' })
           if (chipMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `category chips mismatch: ${result.chips.join(' | ')}` })
           if (ctaMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header CTA mismatch: ${result.ctaTitle} | ${result.ctaAction}` })
+          if (result.categoryLayout.ctaVisible && result.categoryLayout.overlap) {
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'header category chips overlap WhatsApp CTA' })
+          }
+          if (result.categoryLayout.ctaVisible && !result.categoryLayout.allChipsVisible) {
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'header category chips are clipped beside WhatsApp CTA' })
+          }
           for (const forbiddenText of forbiddenUi[locale].filter((text) => result.headerText.includes(text))) {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header language leakage: ${forbiddenText}` })
           }

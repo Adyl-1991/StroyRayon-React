@@ -2308,6 +2308,22 @@ del {
   }
 }
 
+@media (min-width: 1451px) {
+  .header-category-strip,
+  .header-category-scroll {
+    gap: 8px;
+  }
+
+  .header-category-chip {
+    padding-inline: 12px;
+    font-size: 13px;
+  }
+
+  .header-materials-cta {
+    padding-inline: 10px;
+  }
+}
+
 @media (max-width: 1180px) {
   .header-category-strip {
     gap: 10px;
