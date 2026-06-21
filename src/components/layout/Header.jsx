@@ -6,16 +6,16 @@ import { getWhatsAppUrl } from '../../services/whatsappService'
 import { Logo } from './Logo'
 
 const quickNavItems = [
-  { kg: 'Курулуш', ru: 'Стройматериалы', to: '/catalog/stroymaterial' },
-  { kg: 'Инженердик сантехника', ru: 'Инженерная сантехника', to: '/catalog/inzhenerdik-santehnika' },
-  { kg: 'Сантехника', ru: 'Сантехника', to: '/catalog/santehnika' },
-  { kg: 'Электрика', ru: 'Электрика', to: '/catalog/elektrika' },
-  { kg: 'Шаймандар', ru: 'Инструменты', to: '/catalog/instrument' },
-  { kg: 'Бекиткич', ru: 'Крепёж', to: '/catalog/krepezh' },
-  { kg: 'Боёк', ru: 'Краски и обои', to: '/catalog/boiok-tush-kagaz' },
-  { kg: 'Вентиляция', ru: 'Вентиляция', to: '/catalog/ventilyaciya' },
-  { kg: 'Жылуу пол', ru: 'Тёплый пол', to: '/catalog/teplyi-pol' },
-  { kg: 'Бак/чарба', ru: 'Сад и хозяйство', to: '/catalog/bak-koroo' },
+  { key: 'building', to: '/catalog/stroymaterial' },
+  { key: 'engineering', to: '/catalog/inzhenerdik-santehnika' },
+  { key: 'plumbing', to: '/catalog/santehnika' },
+  { key: 'electrical', to: '/catalog/elektrika' },
+  { key: 'tools', to: '/catalog/instrument' },
+  { key: 'fasteners', to: '/catalog/krepezh' },
+  { key: 'paint', to: '/catalog/boiok-tush-kagaz' },
+  { key: 'ventilation', to: '/catalog/ventilyaciya' },
+  { key: 'heating', to: '/catalog/teplyi-pol' },
+  { key: 'garden', to: '/catalog/bak-koroo' },
 ]
 
 export function Header() {
@@ -96,7 +96,7 @@ export function Header() {
               key={item.to}
               to={item.to}
             >
-              {item[locale]}
+              {t(`header.categoryChips.${item.key}`)}
             </NavLink>
           ))}
         </div>

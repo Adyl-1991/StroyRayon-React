@@ -6,6 +6,7 @@ import { spawn } from 'node:child_process'
 const baseUrl = process.env.STAGE31_BASE_URL || 'http://127.0.0.1:4183'
 const chromePath = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 const debugPort = Number(process.env.STAGE31_DEBUG_PORT || 9381)
+const serverMode = process.env.STAGE31_SERVER === 'preview' ? 'preview' : 'dev'
 const tempRoot = path.join(process.env.TEMP || process.cwd(), 'stroyrayon-stage31-qa')
 const profileDir = path.join(tempRoot, `chrome-${Date.now()}`)
 
@@ -41,11 +42,19 @@ const routes = [
   { path: '/return', kg: 'Кайтаруу жана алмаштыруу', ru: 'Возврат и обмен' },
   { path: '/privacy', kg: 'Купуялык саясаты', ru: 'Политика конфиденциальности' },
 ]
+const routeFilter = process.env.STAGE31_ROUTE
+const viewportFilter = Number(process.env.STAGE31_VIEWPORT || 0)
+const selectedRoutes = routeFilter ? routes.filter((route) => route.path === routeFilter) : routes
+const selectedViewports = viewportFilter ? viewports.filter((viewport) => viewport.width === viewportFilter) : viewports
 
 const adminRoutes = ['/admin/login', '/admin/orders', '/admin/products']
 const expectedChips = {
   kg: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция'],
   ru: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция'],
+}
+const expectedCta = {
+  kg: { title: 'Материалдар тизмеси?', action: 'WhatsAppка жөнөтүү' },
+  ru: { title: 'Список материалов?', action: 'Отправить в WhatsApp' },
 }
 const forbiddenUi = {
   kg: ['Главная', 'Стройматериалы', 'Инженерная сантехника', 'Инструменты', 'Крепёж', 'Краски и обои', 'Корзина', 'Оформление заказа', 'Доставка и оплата', 'Контакты', 'Разделы', 'Товары в этом разделе', 'Удалить'],
@@ -160,6 +169,9 @@ async function inspect(cdp) {
       footer: Boolean(document.querySelector('.site-footer')),
       admin: Boolean(document.querySelector('.admin-shell, .admin-login')),
       chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim()),
+      headerText: document.querySelector('.header-category-strip')?.innerText || '',
+      ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
+      ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || '',
     };
   })()`)
 }
@@ -168,10 +180,10 @@ async function main() {
   if (!existsSync(chromePath)) throw new Error(`Chrome not found: ${chromePath}`)
   await mkdir(tempRoot, { recursive: true })
   const url = new URL(baseUrl)
-  const devServer = url.hostname === '127.0.0.1'
-    ? launch('npm.cmd', ['run', 'dev', '--', '--host', '127.0.0.1', '--port', url.port], { shell: true })
+  const localServer = url.hostname === '127.0.0.1'
+    ? launch('npm.cmd', ['run', serverMode, '--', '--host', '127.0.0.1', '--port', url.port], { shell: true })
     : null
-  if (devServer) await waitFor(baseUrl)
+  if (localServer) await waitFor(baseUrl)
   const chrome = launch(chromePath, [
     '--headless',
     '--disable-gpu',
@@ -189,10 +201,10 @@ async function main() {
     await Promise.all([cdp.send('Page.enable'), cdp.send('Runtime.enable')])
     await navigate(cdp, '/')
 
-    for (const viewport of viewports) {
+    for (const viewport of selectedViewports) {
       await cdp.send('Emulation.setDeviceMetricsOverride', { width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: viewport.mobile })
       for (const locale of ['kg', 'ru']) {
-        for (const route of routes) {
+        for (const route of selectedRoutes) {
           await setLocaleAndCart(cdp, locale, route.cart)
           await navigate(cdp, route.path)
           const result = await inspect(cdp)
@@ -200,12 +212,17 @@ async function main() {
           const expectedHeading = route[locale]
           const forbidden = forbiddenUi[locale].filter((text) => result.text.includes(text))
           const chipMismatch = expectedChips[locale].some((text, index) => result.chips[index] !== text)
+          const ctaMismatch = result.ctaTitle !== expectedCta[locale].title || result.ctaAction !== expectedCta[locale].action
           if (result.lang !== expectedLang) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `html lang ${result.lang}` })
           if (expectedHeading && result.h1 !== expectedHeading) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `h1 "${result.h1}" expected "${expectedHeading}"` })
           if (result.overflow > 1) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `horizontal overflow ${result.overflow}px` })
           if (result.brokenImages.length) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `broken images ${result.brokenImages.length}` })
           if (!result.header || !result.footer) issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'public layout missing' })
           if (chipMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `category chips mismatch: ${result.chips.join(' | ')}` })
+          if (ctaMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header CTA mismatch: ${result.ctaTitle} | ${result.ctaAction}` })
+          for (const forbiddenText of forbiddenUi[locale].filter((text) => result.headerText.includes(text))) {
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header language leakage: ${forbiddenText}` })
+          }
           if (forbidden.length) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `language leakage: ${forbidden.join(' | ')}` })
           checks.push({ route: route.path, viewport: viewport.width, locale })
         }
@@ -225,14 +242,21 @@ async function main() {
       document.querySelector('.language-switcher button:nth-child(2)')?.click();
       return new Promise((resolve) => setTimeout(() => resolve({
         lang: document.documentElement.lang,
-        chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim())
+        chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim()),
+        ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
+        ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || ''
       }), 100));
     })()`)
-    if (switchResult.lang !== 'ru' || expectedChips.ru.some((text, index) => switchResult.chips[index] !== text)) {
-      issues.push({ route: '/catalog', viewport: 390, locale: 'switch', issue: 'live KG → RU switch did not update chips' })
+    if (
+      switchResult.lang !== 'ru'
+      || expectedChips.ru.some((text, index) => switchResult.chips[index] !== text)
+      || switchResult.ctaTitle !== expectedCta.ru.title
+      || switchResult.ctaAction !== expectedCta.ru.action
+    ) {
+      issues.push({ route: '/catalog', viewport: 390, locale: 'switch', issue: 'live KG → RU switch did not update chips and CTA' })
     }
 
-    const summary = { baseUrl, checks: checks.length, viewports: viewports.map((item) => item.width), routes: routes.length, locales: ['kg', 'ru'], adminRoutes, issues }
+    const summary = { baseUrl, checks: checks.length, viewports: selectedViewports.map((item) => item.width), routes: selectedRoutes.length, locales: ['kg', 'ru'], adminRoutes, issues }
     const output = path.join(tempRoot, 'result.json')
     await writeFile(output, JSON.stringify(summary, null, 2), 'utf8')
     console.log(JSON.stringify({ ...summary, resultFile: output }, null, 2))
@@ -240,7 +264,7 @@ async function main() {
     if (issues.length) process.exitCode = 2
   } finally {
     chrome.kill()
-    devServer?.kill()
+    localServer?.kill()
     await rm(profileDir, { recursive: true, force: true }).catch(() => {})
   }
 }
