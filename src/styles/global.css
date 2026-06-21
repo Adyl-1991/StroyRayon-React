@@ -189,6 +189,7 @@ h3 {
 
 .header-category-strip {
   display: flex;
+  width: min(100% - 32px, 1440px);
   align-items: center;
   gap: 10px;
   margin: 10px auto 18px;
