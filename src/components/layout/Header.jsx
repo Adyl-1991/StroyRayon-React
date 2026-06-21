@@ -145,7 +145,9 @@ export function Header() {
             disabled={!categoryScrollState.canBack}
             onClick={() => scrollCategories(-1)}
           >
-            <span aria-hidden="true">‹</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="m12.5 4.5-5 5.5 5 5.5" />
+            </svg>
           </button>
           <div
             className="header-category-scroll"
@@ -170,7 +172,9 @@ export function Header() {
             disabled={!categoryScrollState.canForward}
             onClick={() => scrollCategories(1)}
           >
-            <span aria-hidden="true">›</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="m7.5 4.5 5 5.5-5 5.5" />
+            </svg>
           </button>
         </div>
         <a className="header-materials-cta" href={whatsappMaterialsUrl} target="_blank" rel="noreferrer">

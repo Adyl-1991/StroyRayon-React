@@ -238,10 +238,15 @@ h3 {
     transform 0.18s ease;
 }
 
-.header-category-arrow span {
-  margin-top: -2px;
-  font-size: 25px;
-  line-height: 1;
+.header-category-arrow svg {
+  width: 16px;
+  height: 16px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .header-category-arrow:hover:not(:disabled) {
