@@ -10,6 +10,8 @@
     "generate:sitemap": "node src/scripts/generateSitemap.js",
     "qa:stage21": "node scripts/stage21-e2e.mjs",
     "qa:stage31": "node scripts/stage31-language-qa.mjs",
+    "qa:customer": "node scripts/customer-storefront-qa.mjs",
+    "qa:customer:live": "node scripts/customer-storefront-qa.mjs --live",
     "lint": "eslint .",
     "preview": "vite preview"
   },
