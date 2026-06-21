@@ -26,12 +26,17 @@ const routes = [
   { path: '/catalog', kg: 'Каталог', ru: 'Каталог' },
   { path: '/catalog/kurulush', kg: 'Курулуш материалдары', ru: 'Стройматериалы' },
   { path: '/catalog/inzhenerdik-santehnika', kg: 'Инженердик сантехника', ru: 'Инженерная сантехника' },
+  { path: '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol', kg: 'Суу жылуу пол', ru: 'Водяной тёплый пол' },
+  { path: '/catalog/teplyi-pol/suu-teplyi-pol', kg: 'Суу жылуу пол', ru: 'Водяной тёплый пол' },
   { path: '/catalog/santehnika', kg: 'Сантехника', ru: 'Сантехника' },
   { path: '/catalog/elektrika', kg: 'Электрика', ru: 'Электрика' },
+  { path: '/catalog/elektrika/elektr-teplyi-pol', kg: 'Электр жылуу пол', ru: 'Электрический тёплый пол' },
+  { path: '/catalog/teplyi-pol/elektr-teplyi-pol', kg: 'Электр жылуу пол', ru: 'Электрический тёплый пол' },
   { path: '/catalog/shaimandar', kg: 'Шаймандар', ru: 'Инструменты' },
   { path: '/catalog/bekitkich', kg: 'Бекиткич', ru: 'Крепёж' },
   { path: '/catalog/boiok-tush-kagaz', kg: 'Боёк, туш жана кагаз', ru: 'Краски и обои' },
   { path: '/catalog/ventilyaciya', kg: 'Вентиляция', ru: 'Вентиляция' },
+  { path: '/catalog/bak-koroo', kg: 'Бак жана короо', ru: 'Сад и огород' },
   { path: '/product/ppr-truba-pn20', kg: null, ru: null },
   { path: '/cart', kg: 'Себет', ru: 'Корзина', cart: true },
   { path: '/checkout', kg: 'Буйрутма берүү', ru: 'Оформление заказа', cart: true },
@@ -50,8 +55,8 @@ const selectedViewports = viewportFilter ? viewports.filter((viewport) => viewpo
 
 const adminRoutes = ['/admin/login', '/admin/orders', '/admin/products']
 const expectedChips = {
-  kg: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция'],
-  ru: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция'],
+  kg: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция', 'Бак/чарба'],
+  ru: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция', 'Сад и хозяйство'],
 }
 const expectedCta = {
   kg: { title: 'Материалдар тизмеси?', action: 'WhatsAppка жөнөтүү' },
@@ -164,6 +169,7 @@ async function inspect(cdp) {
     const materialsCta = document.querySelector('.header-materials-cta');
     const scrollRect = categoryScroll?.getBoundingClientRect();
     const ctaRect = materialsCta?.getBoundingClientRect();
+    const lastChipRect = categoryChips.at(-1)?.getBoundingClientRect();
     const ctaVisible = Boolean(materialsCta && getComputedStyle(materialsCta).display !== 'none');
     return {
       url: location.pathname,
@@ -181,14 +187,13 @@ async function inspect(cdp) {
       ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || '',
       categoryLayout: {
         ctaVisible,
-        overlap: Boolean(ctaVisible && scrollRect && ctaRect && scrollRect.right > ctaRect.left - 8),
+        overlap: Boolean(ctaVisible && lastChipRect && ctaRect && lastChipRect.right > ctaRect.left - 1),
+        scrollClientWidth: categoryScroll?.clientWidth || 0,
+        scrollWidth: categoryScroll?.scrollWidth || 0,
         allChipsVisible: Boolean(
           scrollRect
-          && categoryChips.length === 8
-          && categoryChips.every((chip) => {
-            const rect = chip.getBoundingClientRect();
-            return rect.left >= scrollRect.left - 1 && rect.right <= scrollRect.right + 1;
-          })
+          && categoryChips.length === 9
+          && categoryScroll.scrollWidth <= categoryScroll.clientWidth + 1
         ),
       },
     };
@@ -241,10 +246,10 @@ async function main() {
           if (chipMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `category chips mismatch: ${result.chips.join(' | ')}` })
           if (ctaMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header CTA mismatch: ${result.ctaTitle} | ${result.ctaAction}` })
           if (result.categoryLayout.ctaVisible && result.categoryLayout.overlap) {
-            issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'header category chips overlap WhatsApp CTA' })
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header category chips overlap WhatsApp CTA (${result.categoryLayout.scrollWidth}/${result.categoryLayout.scrollClientWidth}px)` })
           }
           if (result.categoryLayout.ctaVisible && !result.categoryLayout.allChipsVisible) {
-            issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'header category chips are clipped beside WhatsApp CTA' })
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header category chips are clipped beside WhatsApp CTA (${result.categoryLayout.scrollWidth}/${result.categoryLayout.scrollClientWidth}px)` })
           }
           for (const forbiddenText of forbiddenUi[locale].filter((text) => result.headerText.includes(text))) {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header language leakage: ${forbiddenText}` })
@@ -268,7 +273,7 @@ async function main() {
       document.querySelector('.language-switcher button:nth-child(2)')?.click();
       return new Promise((resolve) => setTimeout(() => resolve({
         lang: document.documentElement.lang,
-        chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim()),
+        chips: Array.from(document.querySelectorAll('.header-category-chip')).map((item) => item.textContent.trim()),
         ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
         ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || ''
       }), 100));

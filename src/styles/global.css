@@ -2311,16 +2311,16 @@ del {
 @media (min-width: 1451px) {
   .header-category-strip,
   .header-category-scroll {
-    gap: 8px;
+    gap: 7px;
   }
 
   .header-category-chip {
-    padding-inline: 12px;
-    font-size: 13px;
+    padding-inline: 8px;
+    font-size: 12px;
   }
 
   .header-materials-cta {
-    padding-inline: 10px;
+    padding-inline: 8px;
   }
 }
 

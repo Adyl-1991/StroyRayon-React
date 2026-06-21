@@ -26,12 +26,15 @@ const categoryRoutes = [
   '/catalog',
   '/catalog/kurulush',
   '/catalog/inzhenerdik-santehnika',
+  '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
   '/catalog/santehnika',
   '/catalog/elektrika',
+  '/catalog/elektrika/elektr-teplyi-pol',
   '/catalog/shaimandar',
   '/catalog/bekitkich',
   '/catalog/boiok-tush-kagaz',
   '/catalog/ventilyaciya',
+  '/catalog/bak-koroo',
 ]
 
 const searchTerms = ['цемент', 'труба', 'насос', 'смеситель', 'кабель', 'автомат', 'боёк', 'вентиляция']
@@ -39,14 +42,14 @@ const searchTerms = ['цемент', 'труба', 'насос', 'смесите
 const expected = {
   kg: {
     lang: 'ky',
-    chips: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция'],
+    chips: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция', 'Бак/чарба'],
     cart: 'Себет',
     checkout: 'Буйрутма берүү',
     whatsapp: 'WhatsApp аркылуу буйрутма жөнөтүү',
   },
   ru: {
     lang: 'ru',
-    chips: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция'],
+    chips: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция', 'Сад и хозяйство'],
     cart: 'Корзина',
     checkout: 'Оформление заказа',
     whatsapp: 'Отправить заказ через WhatsApp',
@@ -180,7 +183,7 @@ async function inspectPage(cdp) {
       productCards: document.querySelectorAll('.product-card').length,
       productGrid: Boolean(document.querySelector('.product-grid')),
       emptyState: Boolean(document.querySelector('.empty-state')),
-      chips: Array.from(document.querySelectorAll('.header-category-chip')).slice(0, 8).map((item) => item.textContent.trim()),
+      chips: Array.from(document.querySelectorAll('.header-category-chip')).map((item) => item.textContent.trim()),
       overflow: Math.max(root.scrollWidth, body?.scrollWidth || 0) - root.clientWidth,
       brokenImages: Array.from(document.images)
         .filter((image) => image.complete && image.naturalWidth === 0)

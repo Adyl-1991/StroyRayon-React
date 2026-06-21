@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { CatalogNodeGrid } from '../components/catalog/CatalogNodeGrid'
 import { CatalogActiveFilters, Filters } from '../components/catalog/Filters'
 import { Pagination } from '../components/catalog/Pagination'
@@ -17,6 +17,13 @@ import { buildBreadcrumbStructuredData, getCatalogNodeSeo } from '../utils/seoUt
 export function CatalogNodePage() {
   const params = useParams()
   const pathSegments = (params['*'] || '').split('/').filter(Boolean)
+  const pathKey = pathSegments.join('/')
+  const movedWarmFloorRoutes = {
+    'teplyi-pol': '/catalog',
+    'teplyi-pol/suu-teplyi-pol': '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
+    'teplyi-pol/elektr-teplyi-pol': '/catalog/elektrika/elektr-teplyi-pol',
+    'teplyi-pol/kollektor-komplektter': '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
+  }
   const { node, isLoading: isCatalogLoading } = useCatalogNode(pathSegments)
   const { filters, setFilters } = useCatalogFilters()
   const { locale, t, nodeText } = useLocale()
@@ -24,6 +31,10 @@ export function CatalogNodePage() {
     ...filters,
     catalogNode: node,
   })
+
+  if (movedWarmFloorRoutes[pathKey]) {
+    return <Navigate to={movedWarmFloorRoutes[pathKey]} replace />
+  }
 
   if (!node) {
     return (

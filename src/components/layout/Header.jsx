@@ -14,6 +14,7 @@ const quickNavItems = [
   { key: 'fasteners', to: '/catalog/krepezh' },
   { key: 'paint', to: '/catalog/boiok-tush-kagaz' },
   { key: 'ventilation', to: '/catalog/ventilyaciya' },
+  { key: 'garden', to: '/catalog/bak-koroo' },
 ]
 
 export function Header() {
