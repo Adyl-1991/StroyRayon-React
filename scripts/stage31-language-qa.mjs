@@ -165,12 +165,14 @@ async function inspect(cdp) {
     const root = document.documentElement;
     const body = document.body;
     const categoryScroll = document.querySelector('.header-category-scroll');
+    const categoryCarousel = document.querySelector('.header-category-carousel');
     const categoryChips = Array.from(document.querySelectorAll('.header-category-chip'));
     const materialsCta = document.querySelector('.header-materials-cta');
-    const scrollRect = categoryScroll?.getBoundingClientRect();
+    const carouselRect = categoryCarousel?.getBoundingClientRect();
     const ctaRect = materialsCta?.getBoundingClientRect();
-    const lastChipRect = categoryChips.at(-1)?.getBoundingClientRect();
     const ctaVisible = Boolean(materialsCta && getComputedStyle(materialsCta).display !== 'none');
+    const backArrow = document.querySelector('.header-category-arrow--back');
+    const forwardArrow = document.querySelector('.header-category-arrow--forward');
     return {
       url: location.pathname,
       lang: root.lang,
@@ -187,14 +189,15 @@ async function inspect(cdp) {
       ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || '',
       categoryLayout: {
         ctaVisible,
-        overlap: Boolean(ctaVisible && lastChipRect && ctaRect && lastChipRect.right > ctaRect.left - 1),
+        carouselVisible: Boolean(categoryCarousel && getComputedStyle(categoryCarousel).display !== 'none'),
+        overlap: Boolean(ctaVisible && carouselRect && ctaRect && carouselRect.right > ctaRect.left - 1),
         scrollClientWidth: categoryScroll?.clientWidth || 0,
         scrollWidth: categoryScroll?.scrollWidth || 0,
-        allChipsVisible: Boolean(
-          scrollRect
-          && categoryChips.length === 9
-          && categoryScroll.scrollWidth <= categoryScroll.clientWidth + 1
-        ),
+        scrollLeft: categoryScroll?.scrollLeft || 0,
+        backArrow: Boolean(backArrow),
+        forwardArrow: Boolean(forwardArrow),
+        backDisabled: backArrow?.disabled ?? true,
+        forwardDisabled: forwardArrow?.disabled ?? true,
       },
     };
   })()`)
@@ -248,8 +251,9 @@ async function main() {
           if (result.categoryLayout.ctaVisible && result.categoryLayout.overlap) {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header category chips overlap WhatsApp CTA (${result.categoryLayout.scrollWidth}/${result.categoryLayout.scrollClientWidth}px)` })
           }
-          if (result.categoryLayout.ctaVisible && !result.categoryLayout.allChipsVisible) {
-            issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header category chips are clipped beside WhatsApp CTA (${result.categoryLayout.scrollWidth}/${result.categoryLayout.scrollClientWidth}px)` })
+          const categoryOverflow = result.categoryLayout.scrollWidth > result.categoryLayout.scrollClientWidth + 1
+          if (result.categoryLayout.carouselVisible && categoryOverflow && (!result.categoryLayout.backArrow || !result.categoryLayout.forwardArrow)) {
+            issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'overflowing category carousel controls are missing' })
           }
           for (const forbiddenText of forbiddenUi[locale].filter((text) => result.headerText.includes(text))) {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header language leakage: ${forbiddenText}` })
@@ -285,6 +289,29 @@ async function main() {
       || switchResult.ctaAction !== expectedCta.ru.action
     ) {
       issues.push({ route: '/catalog', viewport: 390, locale: 'switch', issue: 'live KG → RU switch did not update chips and CTA' })
+    }
+
+    await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1707, height: 960, deviceScaleFactor: 1, mobile: false })
+    await setLocaleAndCart(cdp, 'ru', false)
+    await navigate(cdp, '/catalog')
+    const carouselResult = await evaluate(cdp, `(() => {
+      const scroller = document.querySelector('.header-category-scroll');
+      const forward = document.querySelector('.header-category-arrow--forward');
+      const before = scroller?.scrollLeft || 0;
+      const overflow = Boolean(scroller && scroller.scrollWidth > scroller.clientWidth + 1);
+      forward?.click();
+      return new Promise((resolve) => setTimeout(() => resolve({
+        overflow,
+        before,
+        after: scroller?.scrollLeft || 0,
+        forwardDisabled: forward?.disabled ?? true,
+        backDisabled: document.querySelector('.header-category-arrow--back')?.disabled ?? true
+      }), 500));
+    })()`)
+    if (!carouselResult.overflow) {
+      issues.push({ route: '/catalog', viewport: 1707, locale: 'ru-carousel', issue: 'RU quick categories did not produce the expected carousel overflow' })
+    } else if (carouselResult.after <= carouselResult.before || carouselResult.backDisabled) {
+      issues.push({ route: '/catalog', viewport: 1707, locale: 'ru-carousel', issue: `category forward control did not move (${carouselResult.before} → ${carouselResult.after})` })
     }
 
     const summary = { baseUrl, checks: checks.length, viewports: selectedViewports.map((item) => item.width), routes: selectedRoutes.length, locales: ['kg', 'ru'], adminRoutes, issues }

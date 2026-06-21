@@ -196,11 +196,18 @@ h3 {
   overflow: visible;
 }
 
+.header-category-carousel {
+  display: grid;
+  min-width: 0;
+  flex: 1 1 auto;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 6px;
+}
+
 .header-category-scroll {
   display: flex;
-  flex: 0 1 auto;
   min-width: 0;
-  max-width: 100%;
   align-items: center;
   gap: 10px;
   overflow-x: auto;
@@ -210,6 +217,47 @@ h3 {
   scrollbar-width: none;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+}
+
+.header-category-arrow {
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid rgba(22, 91, 67, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #0f5b3f;
+  box-shadow: 0 5px 14px rgba(16, 45, 35, 0.08);
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.header-category-arrow span {
+  margin-top: -2px;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.header-category-arrow:hover:not(:disabled) {
+  border-color: rgba(22, 91, 67, 0.42);
+  background: #edf8f1;
+  transform: translateY(-1px);
+}
+
+.header-category-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.header-category-arrow:focus-visible {
+  outline: 3px solid rgba(22, 91, 67, 0.22);
+  outline-offset: 2px;
 }
 
 .header-category-scroll::-webkit-scrollbar {
@@ -2291,8 +2339,7 @@ del {
 }
 
 @media (max-width: 1279px) {
-  .header-category-scroll {
-    flex: 1 1 auto;
+  .header-category-carousel {
     flex-basis: 100%;
   }
 }
@@ -2309,18 +2356,17 @@ del {
 }
 
 @media (min-width: 1451px) {
-  .header-category-strip,
   .header-category-scroll {
-    gap: 7px;
+    gap: 10px;
   }
 
   .header-category-chip {
-    padding-inline: 8px;
-    font-size: 12px;
+    padding-inline: 16px;
+    font-size: 13px;
   }
 
   .header-materials-cta {
-    padding-inline: 8px;
+    padding-inline: 12px;
   }
 }
 
@@ -2346,6 +2392,16 @@ del {
     min-height: 32px;
     padding: 7px 13px;
     font-size: 12.5px;
+  }
+
+  .header-category-carousel {
+    grid-template-columns: 28px minmax(0, 1fr) 28px;
+    gap: 4px;
+  }
+
+  .header-category-arrow {
+    width: 28px;
+    height: 28px;
   }
 }
 

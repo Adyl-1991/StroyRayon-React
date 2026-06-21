@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCart } from '../../hooks/useCart'
 import { useLocale } from '../../i18n/LocaleContext'
 import { getWhatsAppUrl } from '../../services/whatsappService'
@@ -21,8 +21,57 @@ export function Header() {
   const { count } = useCart()
   const { locale, setLocale, t } = useLocale()
   const [query, setQuery] = useState('')
+  const [categoryScrollState, setCategoryScrollState] = useState({ canBack: false, canForward: false })
+  const categoryScrollRef = useRef(null)
+  const location = useLocation()
   const navigate = useNavigate()
   const whatsappMaterialsUrl = getWhatsAppUrl(t('header.materialsMessage'))
+
+  const updateCategoryScrollState = useCallback(() => {
+    const element = categoryScrollRef.current
+    if (!element) return
+    const maxScrollLeft = Math.max(0, element.scrollWidth - element.clientWidth)
+    setCategoryScrollState({
+      canBack: element.scrollLeft > 2,
+      canForward: element.scrollLeft < maxScrollLeft - 2,
+    })
+  }, [])
+
+  useEffect(() => {
+    const element = categoryScrollRef.current
+    if (!element) return undefined
+
+    const activeChip = element.querySelector('.header-category-chip.is-active')
+    activeChip?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+    const frame = window.requestAnimationFrame(updateCategoryScrollState)
+    const resizeObserver = new ResizeObserver(updateCategoryScrollState)
+    resizeObserver.observe(element)
+    window.addEventListener('resize', updateCategoryScrollState)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateCategoryScrollState)
+    }
+  }, [locale, location.pathname, updateCategoryScrollState])
+
+  function scrollCategories(direction) {
+    const element = categoryScrollRef.current
+    if (!element) return
+    element.scrollBy({
+      left: direction * Math.max(220, element.clientWidth * 0.72),
+      behavior: 'smooth',
+    })
+  }
+
+  function handleCategoryWheel(event) {
+    const element = categoryScrollRef.current
+    if (!element || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
+    const canMove = event.deltaY > 0 ? categoryScrollState.canForward : categoryScrollState.canBack
+    if (!canMove) return
+    event.preventDefault()
+    element.scrollBy({ left: event.deltaY, behavior: 'auto' })
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -88,16 +137,41 @@ export function Header() {
       </header>
 
       <nav className="header-category-strip" aria-label={t('header.categoryNavLabel')}>
-        <div className="header-category-scroll">
-          {quickNavItems.map((item) => (
-            <NavLink
-              className={({ isActive }) => `header-category-chip${isActive ? ' is-active' : ''}`}
-              key={item.to}
-              to={item.to}
-            >
-              {t(`header.categoryChips.${item.key}`)}
-            </NavLink>
-          ))}
+        <div className="header-category-carousel">
+          <button
+            type="button"
+            className="header-category-arrow header-category-arrow--back"
+            aria-label={t('common.previous')}
+            disabled={!categoryScrollState.canBack}
+            onClick={() => scrollCategories(-1)}
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div
+            className="header-category-scroll"
+            ref={categoryScrollRef}
+            onScroll={updateCategoryScrollState}
+            onWheel={handleCategoryWheel}
+          >
+            {quickNavItems.map((item) => (
+              <NavLink
+                className={({ isActive }) => `header-category-chip${isActive ? ' is-active' : ''}`}
+                key={item.to}
+                to={item.to}
+              >
+                {t(`header.categoryChips.${item.key}`)}
+              </NavLink>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="header-category-arrow header-category-arrow--forward"
+            aria-label={t('common.next')}
+            disabled={!categoryScrollState.canForward}
+            onClick={() => scrollCategories(1)}
+          >
+            <span aria-hidden="true">›</span>
+          </button>
         </div>
         <a className="header-materials-cta" href={whatsappMaterialsUrl} target="_blank" rel="noreferrer">
           <strong>{t('header.materialsTitle')}</strong>
