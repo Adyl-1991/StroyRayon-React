@@ -59,7 +59,10 @@ export function MobileNav() {
       </NavLink>
       <NavLink to="/cart">
         <NavIcon name="cart" />
-        {t('nav.cart')} {count > 0 ? `(${count})` : ''}
+        <span className="mobile-nav__label">
+          {t('nav.cart')}
+          {count > 0 && <span className="mobile-nav__badge">{count}</span>}
+        </span>
       </NavLink>
     </nav>
   )
