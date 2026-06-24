@@ -11,6 +11,15 @@ lerna-debug.log*
 /audit-*.png
 /after-*.png
 /mobile-*.png
+reports/visual-audit/**/*.png
+reports/visual-audit/**/*.jpg
+reports/visual-audit/**/*.jpeg
+reports/visual-audit/**/*.webp
+reports/visual-audit/**/screenshots/
+reports/visual-audit/storefront-screenshots/
+reports/visual-audit.zip
+reports/**/chrome-profile*/
+reports/**/chrome-debug-profile*/
 
 node_modules
 dist
