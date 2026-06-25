@@ -2,16 +2,24 @@ import { existsSync } from 'node:fs'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
+import net from 'node:net'
 
 const isLive = process.argv.includes('--live')
 const baseUrl = process.env.CUSTOMER_QA_BASE_URL || (isLive
   ? 'https://stroy-rayon-react.vercel.app'
   : 'http://127.0.0.1:4184')
 const chromePath = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-const debugPort = Number(process.env.CUSTOMER_QA_DEBUG_PORT || 9392)
+const debugPort = Number(process.env.CUSTOMER_QA_DEBUG_PORT || 9300 + Math.floor(Math.random() * 500))
 const tempRoot = path.join(process.env.TEMP || process.cwd(), 'stroyrayon-customer-qa')
 const profileDir = path.join(tempRoot, `chrome-${Date.now()}`)
 const resultFile = path.join(tempRoot, `result-${isLive ? 'live' : 'preview'}.json`)
+const viteCliPath = path.join(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js')
+const isWindows = process.platform === 'win32'
+const debugCdp = process.env.CUSTOMER_QA_DEBUG_CDP === '1'
+
+function logStep(message) {
+  console.log(`[qa:customer] ${message}`)
+}
 
 const viewports = [
   { width: 360, height: 800, mobile: true },
@@ -65,15 +73,89 @@ const customer = {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+async function fetchWithTimeout(url, timeoutMs = 2000, options = {}) {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), timeoutMs)
+
+  try {
+    return await fetch(url, { ...options, signal: controller.signal })
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+function withTimeout(promise, timeoutMs, label) {
+  let timer
+  return Promise.race([
+    promise.finally(() => clearTimeout(timer)),
+    new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs}ms`)), timeoutMs)
+    }),
+  ])
+}
+
+function waitForExit(child) {
+  if (!child || child.exitCode !== null || child.signalCode !== null) return Promise.resolve()
+
+  return new Promise((resolve) => {
+    child.once('exit', resolve)
+    child.once('error', resolve)
+  })
+}
+
+async function runProcess(command, args, timeoutMs) {
+  const child = spawn(command, args, { stdio: 'ignore', windowsHide: true })
+  await withTimeout(waitForExit(child), timeoutMs, `${command} ${args.join(' ')}`)
+}
+
+async function stopProcessTree(child, label, warnings, timeoutMs = 5000) {
+  if (!child?.pid || child.exitCode !== null || child.signalCode !== null) return
+
+  try {
+    if (isWindows) {
+      await runProcess('taskkill.exe', ['/pid', String(child.pid), '/T', '/F'], timeoutMs)
+    } else {
+      child.kill('SIGTERM')
+      await withTimeout(waitForExit(child), timeoutMs, `${label} graceful shutdown`)
+    }
+  } catch (error) {
+    warnings.push(`${label}: ${error.message}`)
+  }
+
+  if (child.exitCode === null && child.signalCode === null) {
+    try {
+      child.kill('SIGKILL')
+      await withTimeout(waitForExit(child), 2000, `${label} forced shutdown`)
+    } catch (error) {
+      warnings.push(`${label} forced shutdown: ${error.message}`)
+    }
+  }
+}
+
+function canConnect(url, timeoutMs = 1000) {
+  const target = new URL(url)
+  const port = Number(target.port || (target.protocol === 'https:' ? 443 : 80))
+  const host = target.hostname
+
+  return new Promise((resolve) => {
+    const socket = net.createConnection({ host, port })
+    const done = (value) => {
+      socket.removeAllListeners()
+      socket.destroy()
+      resolve(value)
+    }
+
+    socket.setTimeout(timeoutMs)
+    socket.once('connect', () => done(true))
+    socket.once('timeout', () => done(false))
+    socket.once('error', () => done(false))
+  })
+}
+
 async function waitFor(url, timeoutMs = 25000) {
   const started = Date.now()
   while (Date.now() - started < timeoutMs) {
-    try {
-      const response = await fetch(url)
-      if (response.ok) return
-    } catch {
-      // The local preview or Chrome is still starting.
-    }
+    if (await canConnect(url)) return
     await delay(250)
   }
   throw new Error(`Timed out waiting for ${url}`)
@@ -83,44 +165,157 @@ function launch(command, args, options = {}) {
   return spawn(command, args, { stdio: 'ignore', ...options })
 }
 
-async function connect() {
-  await waitFor(`http://127.0.0.1:${debugPort}/json/version`)
-  const targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json()
-  const page = targets.find((target) => target.type === 'page')
-  if (!page?.webSocketDebuggerUrl) throw new Error('Chrome page target not found')
+async function waitForEndpointOrProcessExit(url, child, label, timeoutMs = 25000) {
+  await withTimeout(Promise.race([
+    waitFor(url, timeoutMs),
+    waitForExit(child).then(() => {
+      throw new Error(`${label} exited before ${url} became available`)
+    }),
+  ]), timeoutMs + 1000, `${label} endpoint startup`)
+}
 
-  const ws = new WebSocket(page.webSocketDebuggerUrl)
-  await new Promise((resolve, reject) => {
-    ws.addEventListener('open', resolve, { once: true })
-    ws.addEventListener('error', reject, { once: true })
+async function waitForJsonEndpoint(url, label, timeoutMs = 25000) {
+  await withTimeout(fetchJsonWithRetry(url, timeoutMs), timeoutMs + 1000, `${label} JSON endpoint startup`)
+}
+
+async function fetchJsonWithRetry(url, timeoutMs = 25000) {
+  const started = Date.now()
+  let lastError = null
+
+  while (Date.now() - started < timeoutMs) {
+    try {
+      const response = await fetchWithTimeout(url)
+      if (response.ok) return response.json()
+      lastError = new Error(`HTTP ${response.status}`)
+    } catch (error) {
+      lastError = error
+    }
+    await delay(250)
+  }
+
+  throw lastError || new Error(`Timed out fetching ${url}`)
+}
+
+async function createPageTarget() {
+  const targetUrl = `http://127.0.0.1:${debugPort}/json/new?${encodeURIComponent(baseUrl)}`
+
+  try {
+    const response = await fetchWithTimeout(targetUrl, 3000, { method: 'PUT' })
+    if (response.ok) return response.json()
+  } catch {
+    // Fall back to the existing page target list below.
+  }
+
+  return null
+}
+
+function openWebSocket(url) {
+  const ws = new WebSocket(url)
+
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      ws.close()
+      reject(new Error('CDP websocket open timed out'))
+    }, 2500)
+    ws.addEventListener('open', () => {
+      clearTimeout(timer)
+      resolve(ws)
+    }, { once: true })
+    ws.addEventListener('error', () => {
+      clearTimeout(timer)
+      reject(new Error('CDP websocket open failed'))
+    }, { once: true })
   })
+}
 
+async function connect(timeoutMs = 25000) {
+  const started = Date.now()
+  let lastError = null
+
+  while (Date.now() - started < timeoutMs) {
+    try {
+      const createdPage = await createPageTarget()
+      const targets = createdPage ? [createdPage] : await fetchJsonWithRetry(`http://127.0.0.1:${debugPort}/json/list`, 3000)
+      const page = targets.find((target) => target.type === 'page') || createdPage
+      if (!page?.webSocketDebuggerUrl) throw new Error('Chrome page target not found')
+      logStep(`cdp target ${page.id || 'unknown'} ${page.type || 'unknown'} ${page.url || ''}`)
+      const ws = await openWebSocket(page.webSocketDebuggerUrl)
+      return createCdpClient(ws)
+    } catch (error) {
+      lastError = error
+      await delay(250)
+    }
+  }
+
+  throw lastError || new Error('Unable to connect to Chrome DevTools')
+}
+
+function createCdpClient(ws) {
   let nextId = 0
   const pending = new Map()
   const listeners = new Map()
-  ws.addEventListener('message', (event) => {
-    const message = JSON.parse(event.data)
+  const rejectPending = (error) => {
+    for (const [id, promise] of pending) {
+      clearTimeout(promise.timer)
+      promise.reject(error)
+      pending.delete(id)
+    }
+  }
+
+  ws.addEventListener('message', async (event) => {
+    const payload = typeof event.data === 'string'
+      ? event.data
+      : event.data instanceof Blob
+        ? await event.data.text()
+        : Buffer.from(event.data).toString('utf8')
+    if (debugCdp) logStep(`cdp recv ${payload.slice(0, 180)}`)
+    const message = JSON.parse(payload)
     if (message.id && pending.has(message.id)) {
       const promise = pending.get(message.id)
       pending.delete(message.id)
+      clearTimeout(promise.timer)
       if (message.error) promise.reject(new Error(message.error.message))
       else promise.resolve(message.result || {})
       return
     }
     for (const listener of listeners.get(message.method) || []) listener(message.params || {})
   })
+  ws.addEventListener('close', () => rejectPending(new Error('CDP websocket closed')))
+  ws.addEventListener('error', () => rejectPending(new Error('CDP websocket error')))
 
   return {
     ws,
     send(method, params = {}) {
+      if (ws.readyState !== WebSocket.OPEN) {
+        return Promise.reject(new Error(`CDP websocket is not open for ${method}`))
+      }
       nextId += 1
-      ws.send(JSON.stringify({ id: nextId, method, params }))
-      return new Promise((resolve, reject) => pending.set(nextId, { resolve, reject }))
+      const currentId = nextId
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => {
+          pending.delete(currentId)
+          reject(new Error(`CDP command timed out: ${method}`))
+        }, 30000)
+        pending.set(currentId, { resolve, reject, timer })
+        if (debugCdp) logStep(`cdp send ${currentId} ${method}`)
+        ws.send(JSON.stringify({ id: currentId, method, params }))
+      })
     },
     on(method, listener) {
       const current = listeners.get(method) || []
       current.push(listener)
       listeners.set(method, current)
+    },
+    close() {
+      if (ws.readyState === WebSocket.CLOSED) return Promise.resolve()
+
+      return new Promise((resolve) => {
+        const done = () => resolve()
+        ws.addEventListener('close', done, { once: true })
+        ws.addEventListener('error', done, { once: true })
+        ws.close()
+        setTimeout(done, 1000)
+      })
     },
   }
 }
@@ -162,6 +357,17 @@ async function navigate(cdp, pathname) {
 
 async function setLocale(cdp, locale) {
   await evaluate(cdp, `localStorage.setItem('stroyrayon.locale', ${JSON.stringify(locale)})`)
+}
+
+async function installWindowOpenInterceptor(cdp) {
+  await evaluate(cdp, `(() => {
+    window.__customerQaOpenedUrls = window.__customerQaOpenedUrls || [];
+    window.open = (url) => {
+      window.__customerQaOpenedUrls.push(String(url));
+      return { closed: false, close() {} };
+    };
+    return true;
+  })()`)
 }
 
 async function inspectPage(cdp) {
@@ -399,6 +605,7 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
       && !preview.text.includes('NaN'),
   )
 
+  await installWindowOpenInterceptor(cdp)
   await evaluate(cdp, `document.querySelector('.checkout-form')?.requestSubmit()`)
   await delay(300)
   const openedUrl = await evaluate(cdp, `window.__customerQaOpenedUrls?.at(-1) || ''`)
@@ -433,20 +640,11 @@ async function main() {
   if (!existsSync(chromePath)) throw new Error(`Chrome not found: ${chromePath}`)
   await mkdir(tempRoot, { recursive: true })
 
-  const localServer = isLive
-    ? null
-    : launch('npm.cmd', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', new URL(baseUrl).port], { shell: true })
-  if (localServer) await waitFor(baseUrl)
-
-  const chrome = launch(chromePath, [
-    '--headless',
-    '--disable-gpu',
-    '--no-first-run',
-    '--disable-background-networking',
-    `--remote-debugging-port=${debugPort}`,
-    `--user-data-dir=${profileDir}`,
-    'about:blank',
-  ])
+  const cleanupWarnings = []
+  const chromeOutput = []
+  let cdp = null
+  let localServer = null
+  let chrome = null
 
   const checks = []
   const issues = []
@@ -455,13 +653,48 @@ async function main() {
   const backendBlockers = []
 
   try {
-    const cdp = await connect()
-    await Promise.all([
-      cdp.send('Page.enable'),
-      cdp.send('Runtime.enable'),
-      cdp.send('Network.enable'),
-      cdp.send('Log.enable'),
-    ])
+    localServer = isLive
+      ? null
+      : launch(process.execPath, [viteCliPath, 'preview', '--host', '127.0.0.1', '--port', new URL(baseUrl).port])
+    if (localServer) logStep(`preview starting on ${baseUrl}`)
+    if (localServer) await waitForEndpointOrProcessExit(baseUrl, localServer, 'Vite preview')
+    if (localServer) logStep('preview ready')
+
+    logStep(`chrome starting on debug port ${debugPort}`)
+    chrome = spawn(chromePath, [
+      '--headless=new',
+      '--disable-gpu',
+      '--disable-gpu-compositing',
+      '--disable-gpu-sandbox',
+      '--no-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-accelerated-video-decode',
+      '--disable-extensions',
+      '--disable-component-extensions-with-background-pages',
+      '--disable-sync',
+      '--disable-default-apps',
+      '--disable-features=Vulkan,DefaultANGLEVulkan,VulkanFromANGLE,SkiaGraphite,DawnGraphiteCache,UseSkiaRenderer',
+      '--use-angle=swiftshader',
+      '--no-first-run',
+      '--no-default-browser-check',
+      '--disable-background-networking',
+      '--remote-allow-origins=*',
+      `--remote-debugging-port=${debugPort}`,
+      `--user-data-dir=${profileDir}`,
+      'about:blank',
+    ], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true })
+    chrome.stdout?.on('data', (data) => chromeOutput.push(String(data).trim()))
+    chrome.stderr?.on('data', (data) => chromeOutput.push(String(data).trim()))
+    await waitForJsonEndpoint(`http://127.0.0.1:${debugPort}/json/version`, 'Chrome')
+    logStep('chrome devtools ready')
+
+    cdp = await connect()
+    logStep('cdp connected')
+    await delay(500)
+    await cdp.send('Runtime.enable')
+    await cdp.send('Network.enable')
+    await cdp.send('Log.enable')
     await cdp.send('Page.addScriptToEvaluateOnNewDocument', {
       source: `window.__customerQaOpenedUrls = [];
         window.open = (url) => {
@@ -513,16 +746,38 @@ async function main() {
       consoleErrors: [...new Set(consoleErrors)],
       failedAssets: [...new Set(failedAssets)],
       knownBackendProductionBlockers: [...new Set(backendBlockers)],
+      cleanupWarnings,
       issues,
     }
     await writeFile(resultFile, JSON.stringify(summary, null, 2), 'utf8')
+    logStep(`result written to ${resultFile}`)
     console.log(JSON.stringify(summary, null, 2))
-    cdp.ws.close()
     if (issues.length) process.exitCode = 2
+  } catch (error) {
+    const chromeDiagnostics = chromeOutput.filter(Boolean).join(' | ')
+    if (chromeDiagnostics) console.error(`Chrome diagnostics: ${chromeDiagnostics}`)
+    throw error
   } finally {
-    chrome.kill()
-    localServer?.kill()
-    await rm(profileDir, { recursive: true, force: true }).catch(() => {})
+    if (cdp) {
+      await withTimeout(cdp.send('Browser.close'), 3000, 'Chrome browser close').catch((error) => {
+        cleanupWarnings.push(`Chrome browser close: ${error.message}`)
+      })
+      await withTimeout(cdp.close(), 2000, 'CDP websocket close').catch((error) => {
+        cleanupWarnings.push(`CDP websocket close: ${error.message}`)
+      })
+    }
+
+    await stopProcessTree(chrome, 'Chrome', cleanupWarnings)
+    await stopProcessTree(localServer, 'Vite preview', cleanupWarnings)
+    await delay(250)
+    await rm(profileDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 250 }).catch((error) => {
+      cleanupWarnings.push(`profile cleanup: ${error.message}`)
+    })
+
+    if (cleanupWarnings.length) {
+      console.warn(`Cleanup warnings: ${cleanupWarnings.join(' | ')}`)
+    }
+    logStep('cleanup complete')
   }
 }
 
