@@ -141,8 +141,51 @@ const plannedProductAssetSlugs = [
   'mat-teplyi-pol-1m2',
 ]
 
+const priorityProductImageSlugs = [
+  'difavtomat-16a',
+  'gofra-tutuk-16mm',
+  'gofra-tutuk-20mm',
+  'izolenta-kara',
+  'wago-tip-klemma-3-orun',
+  'kabel-kanal-16x16',
+  'kabel-kanal-25x16',
+  'internet-kabel-cat5e',
+  'shvvp-provod-2x0-75',
+  'sip-kabel-2x16',
+  'rozetka-ichki-montazh-ak',
+  'zherge-tutashtyrgychy-bar-rozetka',
+  '1-klavishaluu-ochurguch',
+  '2-klavishaluu-ochurguch',
+  'elektr-shit-12-modul',
+  'led-lampa-e27-12w',
+  'ulichnyi-prozhektor-30w',
+  'bur-sds-plus-6mm',
+  'bur-sds-plus-8mm',
+  'otreznoi-disk-125mm',
+  'akkumulyatorduk-shurupovert-12v',
+  'bolgarka-125mm',
+  'kurulush-bychagy',
+  'shpatel-100mm',
+  'shpatel-250mm',
+  'ruletka-5m',
+  'mikser-nasadka-kurgak-aralashma',
+  'ppr-tutuk-keskich',
+  'kanalizaciya-truba-naruzhnaya-110',
+  'rakovina-smesitel-basic',
+]
+
 const plannedProductAssets = Object.fromEntries(
   plannedProductAssetSlugs.map((slug) => [slug, createProductAssetEntry(slug)]),
+)
+
+const priorityProductAssets = Object.fromEntries(
+  priorityProductImageSlugs.map((slug) => [
+    slug,
+    createProductAssetEntry(slug, {
+      available: true,
+      galleryCount: 0,
+    }),
+  ]),
 )
 
 export function getProductAssetEntry(slug) {
@@ -164,6 +207,7 @@ export function getProductAssetEntry(slug) {
       localFallbackAvailable: true,
     }
   }
+  if (priorityProductAssets[slug]) return priorityProductAssets[slug]
   if (plannedProductAssets[slug]) return plannedProductAssets[slug]
 
   return createProductAssetEntry(slug)
