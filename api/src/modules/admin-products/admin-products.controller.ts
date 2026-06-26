@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { AdminAuthGuard } from '../auth/admin-auth.guard'
 import { AdminProductsService } from './admin-products.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
+import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { UpdateProductActiveDto } from './dto/update-product-active.dto'
 import { UpdateProductNoteDto } from './dto/update-product-note.dto'
 import { UpdateProductPriceDto } from './dto/update-product-price.dto'
@@ -15,6 +16,16 @@ export class AdminProductsController {
   @Get()
   list(@Query() query: AdminProductsQueryDto) {
     return this.adminProductsService.list(query)
+  }
+
+  @Get('options')
+  options() {
+    return this.adminProductsService.options()
+  }
+
+  @Post()
+  create(@Body() dto: CreateAdminProductDto) {
+    return this.adminProductsService.create(dto)
   }
 
   @Get(':id')

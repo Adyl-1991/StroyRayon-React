@@ -89,13 +89,30 @@
 .admin-product-filters input,
 .admin-product-filters select,
 .admin-edit-form input,
-.admin-edit-form select {
+.admin-edit-form select,
+.admin-edit-form textarea {
   width: 100%;
   border: 1px solid #ccd4db;
   border-radius: 9px;
   padding: 11px 12px;
   font: inherit;
   background: #fff;
+}
+
+.admin-heading-actions,
+.admin-create-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-heading-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.admin-heading-actions .admin-primary-button {
+  text-decoration: none;
 }
 
 .admin-product-filters {
@@ -154,6 +171,19 @@
 .admin-edit-form label {
   display: grid;
   gap: 7px;
+}
+
+.admin-checkbox-field {
+  display: flex !important;
+  align-items: center;
+  gap: 10px !important;
+  color: #17212b;
+}
+
+.admin-checkbox-field input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
 }
 
 .admin-edit-form small {
@@ -414,6 +444,8 @@
 
   .admin-page-heading,
   .admin-status-form,
+  .admin-heading-actions,
+  .admin-create-actions,
   .admin-totals {
     flex-direction: column;
   }

@@ -12,6 +12,7 @@
     "qa:stage31": "node scripts/stage31-language-qa.mjs",
     "qa:customer": "node scripts/customer-storefront-qa.mjs",
     "qa:customer:live": "node scripts/customer-storefront-qa.mjs --live",
+    "qa:admin-product-flow": "node scripts/admin-product-flow-qa.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

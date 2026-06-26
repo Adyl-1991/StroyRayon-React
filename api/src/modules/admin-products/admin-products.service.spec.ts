@@ -69,6 +69,114 @@ test('product detail with auth-facing service call returns launch-critical field
   assert.equal(result.isActive, true)
 })
 
+test('admin can create a local product with placeholder image and stock row', async () => {
+  let createArgs: Prisma.ProductCreateArgs | undefined
+  const prisma = {
+    catalogNode: {
+      findFirst: () => Promise.resolve({ id: 'category-1' }),
+    },
+    product: {
+      findUnique: () => Promise.resolve(null),
+      create: (args: Prisma.ProductCreateArgs) => {
+        createArgs = args
+        return Promise.resolve(
+          productFixture({
+            id: 'product-new',
+            titleKg: args.data.titleKg,
+            titleRu: args.data.titleRu,
+            slug: args.data.slug,
+            sku: args.data.sku,
+            price: args.data.price,
+            unit: args.data.unit,
+            stockStatus: args.data.stockStatus,
+            stock: {
+              ...productFixture().stock,
+              productId: 'product-new',
+              quantity: args.data.stock?.create?.quantity,
+              reservedQuantity: 0,
+            },
+            images: [
+              {
+                id: 'image-new',
+                src: '/images/placeholders/product-placeholder.svg',
+                sortOrder: 0,
+              },
+            ],
+            isActive: args.data.isActive,
+          }),
+        )
+      },
+    },
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).create({
+    catalogNodeId: 'category-1',
+    titleKg: 'Stage 37 KG товар',
+    titleRu: 'Stage 37 RU товар',
+    slug: 'stage-37-local-product',
+    sku: 'SR-STAGE37-001',
+    descriptionKg: 'Кыргызча сүрөттөмө',
+    descriptionRu: 'Русское описание',
+    price: 321.45,
+    stockQuantity: 7,
+    unit: 'даана',
+    stockStatus: ProductStockStatus.IN_STOCK,
+    isActive: true,
+  })
+
+  assert.equal(result.id, 'product-new')
+  assert.equal(result.slug, 'stage-37-local-product')
+  assert.equal(result.price, 321.45)
+  assert.equal(result.stock?.quantity, 7)
+  assert.equal(result.imageStatus, 'placeholder')
+  assert.equal(createArgs?.data.images?.create?.src, '/images/placeholders/product-placeholder.svg')
+  assert.equal(createArgs?.data.stock?.create?.reservedQuantity, 0)
+})
+
+test('admin product create rejects unavailable category and duplicate slug', async () => {
+  const invalidCategory = {
+    catalogNode: {
+      findFirst: () => Promise.resolve(null),
+    },
+  } as unknown as PrismaService
+  await assert.rejects(
+    () =>
+      new AdminProductsService(invalidCategory).create({
+        catalogNodeId: 'missing',
+        titleKg: 'Title KG',
+        titleRu: 'Title RU',
+        price: 1,
+        stockQuantity: 1,
+        unit: 'даана',
+        stockStatus: ProductStockStatus.IN_STOCK,
+      }),
+    BadRequestException,
+  )
+
+  const duplicateSlug = {
+    catalogNode: {
+      findFirst: () => Promise.resolve({ id: 'category-1' }),
+    },
+    product: {
+      findUnique: () => Promise.resolve({ id: 'existing-product' }),
+    },
+  } as unknown as PrismaService
+  await assert.rejects(
+    () =>
+      new AdminProductsService(duplicateSlug).create({
+        catalogNodeId: 'category-1',
+        titleKg: 'Title KG',
+        titleRu: 'Title RU',
+        slug: 'existing-product',
+        price: 1,
+        stockQuantity: 1,
+        unit: 'даана',
+        stockStatus: ProductStockStatus.IN_STOCK,
+      }),
+    /slug already exists/,
+  )
+})
+
 test('price update with auth-facing service call stores a database decimal', async () => {
   let savedPrice: Prisma.Decimal | undefined
   const prisma = {

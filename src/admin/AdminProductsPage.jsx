@@ -75,7 +75,10 @@ export function AdminProductsPage() {
           <h1>Товары</h1>
           <p>Цена, остаток и видимость в магазине.</p>
         </div>
-        {data && <span>{data.pagination.total} товаров</span>}
+        <div className="admin-heading-actions">
+          {data && <span>{data.pagination.total} товаров</span>}
+          <Link className="admin-primary-button" to="/admin/products/new">Новый товар</Link>
+        </div>
       </div>
 
       <div className="admin-product-filters">

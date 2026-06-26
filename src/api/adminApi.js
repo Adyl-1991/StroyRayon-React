@@ -68,6 +68,14 @@ export function getAdminProducts(params = {}) {
   return adminRequest(() => apiGet('/admin/products', authorizedOptions({ params })))
 }
 
+export function getAdminProductOptions() {
+  return adminRequest(() => apiGet('/admin/products/options', authorizedOptions()))
+}
+
+export function createAdminProduct(payload) {
+  return adminRequest(() => apiPost('/admin/products', payload, authorizedOptions()))
+}
+
 export function getAdminProduct(id) {
   return adminRequest(() => apiGet(`/admin/products/${id}`, authorizedOptions()))
 }

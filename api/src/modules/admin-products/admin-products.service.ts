@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Prisma, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
+import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 
 const adminProductInclude = {
   brand: { select: { id: true, name: true, slug: true } },
@@ -11,6 +12,9 @@ const adminProductInclude = {
 } satisfies Prisma.ProductInclude
 
 type AdminProduct = Prisma.ProductGetPayload<{ include: typeof adminProductInclude }>
+
+const placeholderImageSrc = '/images/placeholders/product-placeholder.svg'
+const defaultUnits = ['даана', 'метр', 'кг', 'м2', 'комплект', 'рулон', 'кап']
 
 @Injectable()
 export class AdminProductsService {
@@ -61,6 +65,107 @@ export class AdminProductsService {
         pages: Math.max(Math.ceil(total / query.limit), 1),
       },
     }
+  }
+
+  async options() {
+    const [categories, brands, units] = await Promise.all([
+      this.prisma.catalogNode.findMany({
+        where: { isActive: true },
+        orderBy: [{ path: 'asc' }],
+        select: { id: true, titleKg: true, titleRu: true, path: true, level: true },
+      }),
+      this.prisma.brand.findMany({
+        where: { isActive: true },
+        orderBy: { name: 'asc' },
+        select: { id: true, name: true, slug: true },
+      }),
+      this.prisma.product.groupBy({
+        by: ['unit'],
+        orderBy: { unit: 'asc' },
+      }),
+    ])
+
+    return {
+      categories,
+      brands,
+      units: [...new Set([...defaultUnits, ...units.map((item) => item.unit)])],
+      stockStatuses: Object.values(ProductStockStatus),
+    }
+  }
+
+  async create(dto: CreateAdminProductDto) {
+    const titleKg = dto.titleKg.trim()
+    const titleRu = dto.titleRu.trim()
+    if (!titleKg || !titleRu) {
+      throw new BadRequestException('Kyrgyz and Russian titles are required')
+    }
+
+    const category = await this.prisma.catalogNode.findFirst({
+      where: { id: dto.catalogNodeId, isActive: true },
+      select: { id: true },
+    })
+    if (!category) throw new BadRequestException('Category is unavailable')
+
+    const slug = normalizeSlug(dto.slug || titleRu || titleKg)
+    if (!slug) throw new BadRequestException('Slug is required')
+
+    const existingSlug = await this.prisma.product.findUnique({
+      where: { slug },
+      select: { id: true },
+    })
+    if (existingSlug) throw new BadRequestException('Product slug already exists')
+
+    const sku = (dto.sku?.trim() || `SR-LOCAL-${Date.now()}`).toUpperCase()
+    const existingSku = await this.prisma.product.findUnique({
+      where: { sku },
+      select: { id: true },
+    })
+    if (existingSku) throw new BadRequestException('Product SKU already exists')
+
+    const price = new Prisma.Decimal(Math.round(dto.price * 100) / 100)
+    const descriptionKg = dto.descriptionKg?.trim() || dto.shortDescriptionKg?.trim() || null
+    const shortDescriptionKg = dto.shortDescriptionKg?.trim() || descriptionKg
+    const descriptionRu = dto.descriptionRu?.trim()
+
+    const created = await this.prisma.product.create({
+      data: {
+        catalogNodeId: category.id,
+        titleKg,
+        titleRu,
+        slug,
+        sku,
+        price,
+        currency: 'KGS',
+        unit: dto.unit.trim(),
+        stockStatus: dto.stockStatus,
+        shortDescriptionKg,
+        descriptionKg,
+        specs: descriptionRu ? { descriptionRu } : undefined,
+        tags: [],
+        adminNote: dto.adminNote?.trim() || null,
+        isActive: dto.isActive,
+        images: {
+          create: {
+            src: placeholderImageSrc,
+            alt: `${titleKg} - StroyRayon placeholder`,
+            width: 900,
+            height: 700,
+            type: 'MAIN',
+            sortOrder: 0,
+          },
+        },
+        stock: {
+          create: {
+            quantity: dto.stockQuantity,
+            reservedQuantity: 0,
+            lowStockThreshold: 5,
+          },
+        },
+      },
+      include: adminProductInclude,
+    })
+
+    return this.mapProduct(created)
   }
 
   async detail(id: string) {
@@ -172,6 +277,15 @@ export class AdminProductsService {
       price: Number(product.price),
       currency: product.currency,
       unit: product.unit,
+      shortDescriptionKg: product.shortDescriptionKg,
+      descriptionKg: product.descriptionKg,
+      descriptionRu:
+        product.specs &&
+        typeof product.specs === 'object' &&
+        !Array.isArray(product.specs) &&
+        'descriptionRu' in product.specs
+          ? String(product.specs.descriptionRu || '')
+          : '',
       stockStatus: product.stockStatus.toLowerCase(),
       stock: product.stock
         ? {
@@ -193,4 +307,13 @@ export class AdminProductsService {
       updatedAt: product.updatedAt,
     }
   }
+}
+
+function normalizeSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 160)
 }
