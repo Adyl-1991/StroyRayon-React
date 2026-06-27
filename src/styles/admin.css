@@ -77,9 +77,9 @@
 
 .admin-login-card h1 {
   max-width: 100%;
-  font-size: clamp(2.1rem, 8vw, 3.1rem);
+  font-size: clamp(1.9rem, 6vw, 2.4rem);
   line-height: 1.08;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
 }
 
 .admin-login-card p,
@@ -485,6 +485,6 @@
   }
 
   .admin-login-card h1 {
-    font-size: clamp(1.95rem, 10vw, 2.55rem);
+    font-size: clamp(1.75rem, 8vw, 2.15rem);
   }
 }

@@ -27,7 +27,7 @@ export function AdminLoginPage() {
       setError(
         requestError.status === 401
           ? 'Неверный email или пароль.'
-          : requestError.message || 'Не удалось связаться с API.',
+          : requestError.message || 'API недоступен. Проверьте backend.',
       )
     } finally {
       setSubmitting(false)
@@ -39,11 +39,11 @@ export function AdminLoginPage() {
       <form className="admin-login-card" onSubmit={handleSubmit}>
         <div>
           <span className="admin-eyebrow">StroyRayon CRM</span>
-          <h1>Вход администратора</h1>
-          <p>Управление заказами доступно только авторизованным сотрудникам.</p>
+          <h1>Вход в CRM</h1>
+          <p>Управление заказами доступно только уполномоченным сотрудникам.</p>
         </div>
         <label>
-          Email
+          Электронная почта
           <input
             type="email"
             value={email}
