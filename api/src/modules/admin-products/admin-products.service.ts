@@ -126,6 +126,8 @@ export class AdminProductsService {
     const descriptionKg = dto.descriptionKg?.trim() || dto.shortDescriptionKg?.trim() || null
     const shortDescriptionKg = dto.shortDescriptionKg?.trim() || descriptionKg
     const descriptionRu = dto.descriptionRu?.trim()
+    const imageSrc = normalizeImageSrc(dto.imageSrc)
+    const imageAlt = dto.imageAlt?.trim() || `${titleKg} - StroyRayon`
 
     const created = await this.prisma.product.create({
       data: {
@@ -146,8 +148,8 @@ export class AdminProductsService {
         isActive: dto.isActive,
         images: {
           create: {
-            src: placeholderImageSrc,
-            alt: `${titleKg} - StroyRayon placeholder`,
+            src: imageSrc || placeholderImageSrc,
+            alt: imageSrc ? imageAlt : `${titleKg} - StroyRayon placeholder`,
             width: 900,
             height: 700,
             type: 'MAIN',
@@ -316,4 +318,12 @@ function normalizeSlug(value: string) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 160)
+}
+
+function normalizeImageSrc(value?: string) {
+  const imageSrc = value?.trim()
+  if (!imageSrc) return ''
+  if (imageSrc.startsWith('/images/')) return imageSrc
+  if (/^https?:\/\/.+/i.test(imageSrc)) return imageSrc
+  throw new BadRequestException('Image URL must start with https://, http:// or /images/')
 }

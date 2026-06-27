@@ -76,6 +76,8 @@ function createInitialForm() {
     stockStatus: 'IN_STOCK',
     isActive: true,
     adminNote: '',
+    imageSrc: '',
+    imageAlt: '',
   }
 }
 
@@ -151,6 +153,14 @@ export function AdminProductCreatePage() {
       setError('Остаток должен быть целым неотрицательным числом.')
       return
     }
+    if (
+      form.imageSrc.trim() &&
+      !form.imageSrc.trim().startsWith('/images/') &&
+      !/^https?:\/\/.+/i.test(form.imageSrc.trim())
+    ) {
+      setError('Фото URL должен начинаться с https://, http:// или /images/.')
+      return
+    }
 
     setSaving(true)
     try {
@@ -221,6 +231,25 @@ export function AdminProductCreatePage() {
                 value={form.sku}
                 onChange={(event) => updateField('sku', event.target.value)}
                 maxLength={80}
+              />
+            </label>
+            <label>
+              Фото URL
+              <input
+                data-qa="product-image-src"
+                value={form.imageSrc}
+                onChange={(event) => updateField('imageSrc', event.target.value)}
+                maxLength={500}
+                placeholder="/images/products/example/main.webp"
+              />
+            </label>
+            <label>
+              Alt для фото
+              <input
+                data-qa="product-image-alt"
+                value={form.imageAlt}
+                onChange={(event) => updateField('imageAlt', event.target.value)}
+                maxLength={180}
               />
             </label>
           </article>

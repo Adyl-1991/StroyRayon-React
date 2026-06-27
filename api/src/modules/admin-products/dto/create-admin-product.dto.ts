@@ -90,4 +90,16 @@ export class CreateAdminProductDto {
   @IsString()
   @MaxLength(2000)
   adminNote?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  imageSrc?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(180)
+  imageAlt?: string
 }

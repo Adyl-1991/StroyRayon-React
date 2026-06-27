@@ -98,7 +98,7 @@ test('admin can create a local product with placeholder image and stock row', as
             images: [
               {
                 id: 'image-new',
-                src: '/images/placeholders/product-placeholder.svg',
+                src: args.data.images?.create?.src,
                 sortOrder: 0,
               },
             ],
@@ -122,14 +122,17 @@ test('admin can create a local product with placeholder image and stock row', as
     unit: 'даана',
     stockStatus: ProductStockStatus.IN_STOCK,
     isActive: true,
+    imageSrc: '/images/products/stage37/main.webp',
+    imageAlt: 'Stage 37 photo',
   })
 
   assert.equal(result.id, 'product-new')
   assert.equal(result.slug, 'stage-37-local-product')
   assert.equal(result.price, 321.45)
   assert.equal(result.stock?.quantity, 7)
-  assert.equal(result.imageStatus, 'placeholder')
-  assert.equal(createArgs?.data.images?.create?.src, '/images/placeholders/product-placeholder.svg')
+  assert.equal(result.imageStatus, 'ready')
+  assert.equal(createArgs?.data.images?.create?.src, '/images/products/stage37/main.webp')
+  assert.equal(createArgs?.data.images?.create?.alt, 'Stage 37 photo')
   assert.equal(createArgs?.data.stock?.create?.reservedQuantity, 0)
 })
 
