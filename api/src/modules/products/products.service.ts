@@ -222,6 +222,8 @@ export class ProductsService {
       faqKg: product.faqKg,
       seoTitleKg: product.seoTitleKg,
       seoDescriptionKg: product.seoDescriptionKg,
+      seoTitleRu: product.seoTitleRu,
+      seoDescriptionRu: product.seoDescriptionRu,
       isActive: product.isActive,
       images: product.images,
       stock: product.stock,

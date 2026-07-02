@@ -345,6 +345,10 @@ function addCheck(checks, issues, name, passed, details = '') {
   if (!passed) issues.push({ name, details })
 }
 
+function authHeadersFromToken(token) {
+  return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+}
+
 async function setupLocalData(prisma) {
   const passwordHash = await hashPassword(adminPassword)
   await prisma.adminUser.upsert({
@@ -420,6 +424,14 @@ async function runBrowserFlow(cdp, checks, issues) {
     return preferred.textContent.trim();
   })()`)
   addCheck(checks, issues, 'Create form loads categories', Boolean(selectedCategory), selectedCategory)
+  const selectedBrand = await evaluate(cdp, `(() => {
+    const select = document.querySelector('[data-qa="product-brand"]');
+    if (!select || select.options.length <= 1) return '';
+    select.selectedIndex = 1;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    return select.options[select.selectedIndex].textContent.trim();
+  })()`)
+  addCheck(checks, issues, 'Create form supports brand select', true, selectedBrand || 'No active brands in local seed')
 
   await setValue(cdp, '[data-qa="product-title-kg"]', `Stage 37 KG товар ${runId}`)
   await setValue(cdp, '[data-qa="product-title-ru"]', `Stage 37 RU товар ${runId}`)
@@ -433,6 +445,15 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="product-unit"]', 'даана')
   await setValue(cdp, '[data-qa="product-stock-status"]', 'IN_STOCK')
   await setValue(cdp, '[data-qa="product-admin-note"]', 'Stage 37 local QA product')
+  await setValue(cdp, '[data-qa="product-spec-key"]', 'Stage 40C create spec')
+  await setValue(cdp, '[data-qa="product-spec-value"]', 'Stage 40C create value')
+  await setValue(cdp, '[data-qa="product-document-title"]', 'Stage 40C create document')
+  await setValue(cdp, '[data-qa="product-document-url"]', 'https://example.com/stage40c-create-document.pdf')
+  await setValue(cdp, '[data-qa="product-document-type"]', 'MANUAL')
+  await setValue(cdp, '[data-qa="product-seo-title-kg"]', `Stage 40C SEO KG ${runId}`)
+  await setValue(cdp, '[data-qa="product-seo-description-kg"]', 'Stage 40C SEO meta KG')
+  await setValue(cdp, '[data-qa="product-seo-title-ru"]', `Stage 40C SEO RU ${runId}`)
+  await setValue(cdp, '[data-qa="product-seo-description-ru"]', 'Stage 40C SEO meta RU')
   await setFileInput(cdp, '[data-qa="product-image-file"]', uploadFixturePath)
   await waitFor(cdp, "document.querySelector('[data-qa=\"product-image-src\"]')?.value.includes('/uploads/products/')", 15000)
   await waitFor(cdp, "Boolean(document.querySelector('.admin-image-preview img')?.naturalWidth)", 15000)
@@ -465,12 +486,27 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="product-unit"]', 'даана')
   await setValue(cdp, '[data-qa="product-stock-status"]', 'IN_STOCK')
   await setValue(cdp, '[data-qa="product-admin-note"]', 'Stage 37 local QA product')
+  await setValue(cdp, '[data-qa="product-spec-key"]', 'Stage 40C create spec')
+  await setValue(cdp, '[data-qa="product-spec-value"]', 'Stage 40C create value')
+  await setValue(cdp, '[data-qa="product-document-title"]', 'Stage 40C create document')
+  await setValue(cdp, '[data-qa="product-document-url"]', 'https://example.com/stage40c-create-document.pdf')
+  await setValue(cdp, '[data-qa="product-document-type"]', 'MANUAL')
+  await setValue(cdp, '[data-qa="product-seo-title-kg"]', `Stage 40C SEO KG ${runId}`)
+  await setValue(cdp, '[data-qa="product-seo-description-kg"]', 'Stage 40C SEO meta KG')
+  await setValue(cdp, '[data-qa="product-seo-title-ru"]', `Stage 40C SEO RU ${runId}`)
+  await setValue(cdp, '[data-qa="product-seo-description-ru"]', 'Stage 40C SEO meta RU')
   await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-create-form\"]').requestSubmit()")
   await waitFor(cdp, "location.pathname.startsWith('/admin/products/') && location.pathname !== '/admin/products/new'", 15000)
   await waitFor(cdp, "Boolean(document.querySelector('[data-qa=\"admin-product-edit-form\"]'))", 15000)
   const detailText = await evaluate(cdp, 'document.body.innerText')
   addCheck(checks, issues, 'Created product opens admin detail', detailText.includes(productSlug), productSlug)
   addCheck(checks, issues, 'Created product keeps uploaded image in admin detail', detailText.includes('Фото') && detailText.includes('Готово'), detailText.slice(0, 300))
+  const createdParity = await evaluate(cdp, `(() => ({
+    spec: document.querySelector('[data-qa="edit-spec-value"]')?.value || '',
+    documentTitle: document.querySelector('[data-qa="edit-document-title"]')?.value || '',
+    seoTitle: document.querySelector('[data-qa="edit-seo-title-kg"]')?.value || '',
+  }))()`)
+  addCheck(checks, issues, 'Create flow persists specs documents and SEO into edit form', createdParity.spec === 'Stage 40C create value' && createdParity.documentTitle === 'Stage 40C create document' && createdParity.seoTitle.includes('Stage 40C SEO KG'), JSON.stringify(createdParity))
 
   const updatedTitleKg = `Stage 40B KG товар ${runId}`
   const updatedTitleRu = `Stage 40B RU товар ${runId}`
@@ -484,6 +520,10 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="edit-document-title"]', 'Stage 40B certificate')
   await setValue(cdp, '[data-qa="edit-document-url"]', 'https://example.com/stage40b-certificate.pdf')
   await setValue(cdp, '[data-qa="edit-document-type"]', 'CERTIFICATE')
+  await setValue(cdp, '[data-qa="edit-seo-title-kg"]', `Stage 40C edited SEO KG ${runId}`)
+  await setValue(cdp, '[data-qa="edit-seo-description-kg"]', 'Stage 40C edited SEO meta KG')
+  await setValue(cdp, '[data-qa="edit-seo-title-ru"]', `Stage 40C edited SEO RU ${runId}`)
+  await setValue(cdp, '[data-qa="edit-seo-description-ru"]', 'Stage 40C edited SEO meta RU')
   await setFileInput(cdp, '[data-qa="edit-image-file"]', uploadFixturePath)
   await waitFor(cdp, "document.querySelectorAll('.admin-gallery-item').length >= 2", 15000)
   await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-edit-form\"]').requestSubmit()")
@@ -505,6 +545,12 @@ async function runBrowserFlow(cdp, checks, issues) {
   await waitFor(cdp, "Boolean(document.querySelector('.admin-products-table tbody tr'))")
   const listMatch = await evaluate(cdp, `document.body.innerText.includes(${JSON.stringify(productSlug)})`)
   addCheck(checks, issues, 'Created product appears in admin list search', listMatch, productSlug)
+  const listQualityState = await evaluate(cdp, `(() => ({
+    thumb: Boolean(document.querySelector('.admin-product-thumb')),
+    score: document.querySelector('.admin-quality-summary strong')?.textContent || '',
+    label: document.querySelector('.admin-quality-summary small')?.textContent || '',
+  }))()`)
+  addCheck(checks, issues, 'Product list shows thumbnail and quality summary', listQualityState.thumb && listQualityState.score.includes('%'), JSON.stringify(listQualityState))
 
   const publicProduct = await fetch(`${apiBaseUrl}/products/${productSlug}`).then((response) => response.json())
   addCheck(checks, issues, 'Created product appears in public API', publicProduct?.slug === productSlug)
@@ -512,6 +558,12 @@ async function runBrowserFlow(cdp, checks, issues) {
   addCheck(checks, issues, 'Public API includes uploaded image', publicProduct?.images?.[0]?.src?.includes('/uploads/products/'), publicProduct?.images?.[0]?.src)
   addCheck(checks, issues, 'Public API exposes edited admin title and descriptions', publicProduct?.titleKg === updatedTitleKg && publicProduct?.descriptionRu === 'Stage 40B full RU description', publicProduct?.titleKg)
   addCheck(checks, issues, 'Public API exposes edited specs and documents', publicProduct?.specs?.['Stage 40B spec'] === 'Stage 40B value' && publicProduct?.documents?.[0]?.title === 'Stage 40B certificate', JSON.stringify({ specs: publicProduct?.specs, documents: publicProduct?.documents }))
+  addCheck(checks, issues, 'Public API exposes edited SEO fields', publicProduct?.seoTitleKg?.includes('Stage 40C edited SEO KG') && publicProduct?.seoTitleRu?.includes('Stage 40C edited SEO RU'), JSON.stringify({ seoTitleKg: publicProduct?.seoTitleKg, seoTitleRu: publicProduct?.seoTitleRu }))
+
+  const qualityFilterResult = await fetch(`${apiBaseUrl}/admin/products?quality=missing_seo&limit=5`, {
+    headers: authHeadersFromToken(await evaluate(cdp, "sessionStorage.getItem('stroyrayon_admin_token')")),
+  }).then((response) => response.json())
+  addCheck(checks, issues, 'Admin product quality filter returns matching rows', (qualityFilterResult.items || []).every((item) => item.qualityFlags?.some((flag) => flag.code === 'missing_seo')), JSON.stringify({ total: qualityFilterResult.pagination?.total }))
 
   await navigate(cdp, `/catalog/${publicProduct.catalogPath.join('/')}`)
   addCheck(checks, issues, 'Created product has storefront category path', Boolean(publicProduct.catalogPath?.length), publicProduct.catalogPath.join('/'))

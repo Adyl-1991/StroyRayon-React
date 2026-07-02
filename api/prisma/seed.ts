@@ -59,6 +59,8 @@ type ProductInput = {
   faqKg?: Prisma.InputJsonValue
   seoTitleKg?: string | null
   seoDescriptionKg?: string | null
+  seoTitleRu?: string | null
+  seoDescriptionRu?: string | null
   images?: ProductImageInput[]
   imageAssets?: ProductAssetInput | null
   relatedProductIds?: string[]
@@ -282,6 +284,8 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         faqKg: product.faqKg || Prisma.JsonNull,
         seoTitleKg: product.seoTitleKg || `${product.titleKg} - StroyRayon`,
         seoDescriptionKg: product.seoDescriptionKg || product.shortDescriptionKg || product.descriptionKg || null,
+        seoTitleRu: product.seoTitleRu || (product.titleRu ? `${product.titleRu} - StroyRayon` : null),
+        seoDescriptionRu: product.seoDescriptionRu || product.descriptionRu || null,
         isActive: true,
       },
       create: {
@@ -311,6 +315,8 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         faqKg: product.faqKg || Prisma.JsonNull,
         seoTitleKg: product.seoTitleKg || `${product.titleKg} - StroyRayon`,
         seoDescriptionKg: product.seoDescriptionKg || product.shortDescriptionKg || product.descriptionKg || null,
+        seoTitleRu: product.seoTitleRu || (product.titleRu ? `${product.titleRu} - StroyRayon` : null),
+        seoDescriptionRu: product.seoDescriptionRu || product.descriptionRu || null,
         isActive: true,
       },
     })

@@ -9,6 +9,21 @@ const stockOptions = [
   ['OUT_OF_STOCK', 'Нет в наличии'],
 ]
 
+const documentTypeOptions = [
+  ['CERTIFICATE', 'Сертификат'],
+  ['MANUAL', 'Инструкция'],
+  ['PASSPORT', 'Паспорт товара'],
+  ['OTHER', 'Другое'],
+]
+
+function emptySpec() {
+  return { key: '', value: '' }
+}
+
+function emptyDocument() {
+  return { title: '', url: '', type: 'OTHER', sortOrder: 0 }
+}
+
 const cyrillicMap = {
   а: 'a',
   б: 'b',
@@ -63,6 +78,7 @@ function createInitialForm() {
   const stamp = Date.now().toString().slice(-6)
   return {
     catalogNodeId: '',
+    brandId: '',
     titleKg: '',
     titleRu: '',
     slug: `local-product-${stamp}`,
@@ -70,6 +86,10 @@ function createInitialForm() {
     shortDescriptionKg: '',
     descriptionKg: '',
     descriptionRu: '',
+    seoTitleKg: '',
+    seoDescriptionKg: '',
+    seoTitleRu: '',
+    seoDescriptionRu: '',
     price: '100',
     stockQuantity: '1',
     unit: 'даана',
@@ -78,7 +98,22 @@ function createInitialForm() {
     adminNote: '',
     imageSrc: '',
     imageAlt: '',
+    specs: [emptySpec()],
+    documents: [emptyDocument()],
+    images: [],
   }
+}
+
+function compactRows(rows, fields) {
+  return rows
+    .map((row, index) => ({ ...row, sortOrder: row.sortOrder ?? index }))
+    .filter((row) => fields.some((field) => String(row[field] || '').trim()))
+}
+
+function compactSpecs(rows) {
+  return rows
+    .map((row) => ({ key: row.key, value: row.value }))
+    .filter((row) => row.key.trim() || row.value.trim())
 }
 
 export function AdminProductCreatePage() {
@@ -116,6 +151,7 @@ export function AdminProductCreatePage() {
   }, [])
 
   const categoryOptions = useMemo(() => options?.categories || [], [options])
+  const brands = useMemo(() => options?.brands || [], [options])
   const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
 
   function updateField(name, value) {
@@ -125,7 +161,63 @@ export function AdminProductCreatePage() {
         const nextSlug = slugify(next.titleRu || next.titleKg)
         if (nextSlug) next.slug = nextSlug
       }
+      if (name === 'imageSrc') {
+        next.images = value
+          ? [
+              {
+                ...(current.images[0] || {}),
+                src: value,
+                alt: current.imageAlt || current.titleRu || current.titleKg,
+                type: 'MAIN',
+                sortOrder: 0,
+              },
+              ...current.images.slice(1),
+            ]
+          : current.images
+      }
+      if (name === 'imageAlt' && current.images.length) {
+        next.images = current.images.map((image, index) =>
+          index === 0 ? { ...image, alt: value } : image,
+        )
+      }
       return next
+    })
+  }
+
+  function updateRow(group, index, name, value) {
+    setForm((current) => ({
+      ...current,
+      [group]: current[group].map((row, rowIndex) =>
+        rowIndex === index ? { ...row, [name]: value } : row,
+      ),
+    }))
+  }
+
+  function addRow(group, row) {
+    setForm((current) => ({ ...current, [group]: [...current[group], row] }))
+  }
+
+  function removeRow(group, index, fallback) {
+    setForm((current) => {
+      const nextRows = current[group].filter((_, rowIndex) => rowIndex !== index)
+      return { ...current, [group]: nextRows.length ? nextRows : [fallback] }
+    })
+  }
+
+  function removeImage(index) {
+    setForm((current) => {
+      const nextImages = current.images.filter((_, imageIndex) => imageIndex !== index)
+      const mainImage = nextImages[0]
+      return {
+        ...current,
+        images: nextImages.map((image, imageIndex) => ({
+          ...image,
+          type: imageIndex === 0 ? 'MAIN' : 'GALLERY',
+          sortOrder: imageIndex,
+        })),
+        imageSrc: mainImage?.src || '',
+        imageAlt: mainImage?.alt || '',
+      }
     })
   }
 
@@ -144,11 +236,22 @@ export function AdminProductCreatePage() {
     setUploadingImage(true)
     try {
       const uploaded = await uploadAdminProductImage(file)
-      updateField('imageSrc', uploaded.src)
+      const nextAlt = form.imageAlt.trim() || form.titleRu || form.titleKg || file.name.replace(/\.[^.]+$/, '')
+      setForm((current) => ({
+        ...current,
+        imageSrc: uploaded.src,
+        imageAlt: current.imageAlt.trim() || nextAlt,
+        images: [
+          ...current.images,
+          {
+            src: uploaded.src,
+            alt: current.imageAlt.trim() || nextAlt,
+            type: current.images.length ? 'GALLERY' : 'MAIN',
+            sortOrder: current.images.length,
+          },
+        ],
+      }))
       setImageUploadMessage('Фото загружено. URL уже добавлен в форму.')
-      if (!form.imageAlt.trim()) {
-        updateField('imageAlt', form.titleRu || form.titleKg || file.name.replace(/\.[^.]+$/, ''))
-      }
     } catch (requestError) {
       setError(requestError.message || 'Не удалось загрузить фото.')
     } finally {
@@ -195,10 +298,19 @@ export function AdminProductCreatePage() {
 
     setSaving(true)
     try {
+      const images = form.images.length
+        ? form.images
+        : form.imageSrc.trim()
+          ? [{ src: form.imageSrc.trim(), alt: form.imageAlt.trim(), type: 'MAIN', sortOrder: 0 }]
+          : []
       const created = await createAdminProduct({
         ...form,
+        brandId: form.brandId || null,
         price,
         stockQuantity,
+        specs: compactSpecs(form.specs),
+        documents: compactRows(form.documents, ['title', 'url']),
+        images,
       })
       navigate(`/admin/products/${created.id}`)
     } catch (requestError) {
@@ -239,6 +351,19 @@ export function AdminProductCreatePage() {
                   <option key={category.id} value={category.id}>
                     {'— '.repeat(Math.max(category.level || 0, 0))}{category.titleKg} · {category.path}
                   </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Бренд
+              <select
+                data-qa="product-brand"
+                value={form.brandId}
+                onChange={(event) => updateField('brandId', event.target.value)}
+              >
+                <option value="">Без бренда</option>
+                {brands.map((brand) => (
+                  <option key={brand.id} value={brand.id}>{brand.name}</option>
                 ))}
               </select>
             </label>
@@ -300,6 +425,19 @@ export function AdminProductCreatePage() {
                 maxLength={180}
               />
             </label>
+            {form.images.length > 0 && (
+              <div className="admin-gallery-editor admin-gallery-editor-compact">
+                {form.images.map((image, index) => (
+                  <div className="admin-gallery-item" key={`${image.src}-${index}`}>
+                    <img src={image.src} alt={image.alt || form.titleKg || 'Фото товара'} />
+                    <small>{index === 0 ? 'Главное фото' : 'Галерея'}</small>
+                    <button type="button" className="admin-danger-button" onClick={() => removeImage(index)}>
+                      Убрать
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </article>
 
           <article className="admin-card admin-edit-form">
@@ -430,6 +568,67 @@ export function AdminProductCreatePage() {
             </label>
           </article>
         </div>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Характеристики</h2>
+            <button type="button" className="admin-secondary-button" onClick={() => addRow('specs', emptySpec())}>
+              Добавить характеристику
+            </button>
+          </div>
+          <div className="admin-repeat-list">
+            {form.specs.map((row, index) => (
+              <div className="admin-repeat-row admin-repeat-row-spec" key={`create-spec-${index}`}>
+                <input data-qa="product-spec-key" placeholder="Ключ" value={row.key} onChange={(event) => updateRow('specs', index, 'key', event.target.value)} maxLength={120} />
+                <input data-qa="product-spec-value" placeholder="Значение" value={row.value} onChange={(event) => updateRow('specs', index, 'value', event.target.value)} maxLength={500} />
+                <button type="button" className="admin-danger-button" onClick={() => removeRow('specs', index, emptySpec())}>Удалить</button>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Документы</h2>
+            <button type="button" className="admin-secondary-button" onClick={() => addRow('documents', emptyDocument())}>
+              Добавить документ
+            </button>
+          </div>
+          <div className="admin-repeat-list">
+            {form.documents.map((row, index) => (
+              <div className="admin-repeat-row admin-repeat-row-document" key={`create-document-${index}`}>
+                <input data-qa="product-document-title" placeholder="Название" value={row.title} onChange={(event) => updateRow('documents', index, 'title', event.target.value)} maxLength={180} />
+                <input data-qa="product-document-url" placeholder="https://... или /uploads/..." value={row.url} onChange={(event) => updateRow('documents', index, 'url', event.target.value)} maxLength={500} />
+                <select data-qa="product-document-type" value={row.type} onChange={(event) => updateRow('documents', index, 'type', event.target.value)}>
+                  {documentTypeOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+                <button type="button" className="admin-danger-button" onClick={() => removeRow('documents', index, emptyDocument())}>Удалить</button>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <h2>SEO</h2>
+          <div className="admin-detail-grid admin-detail-grid-compact">
+            <label>
+              SEO title KG
+              <input data-qa="product-seo-title-kg" value={form.seoTitleKg} onChange={(event) => updateField('seoTitleKg', event.target.value)} maxLength={180} />
+            </label>
+            <label>
+              SEO title RU
+              <input data-qa="product-seo-title-ru" value={form.seoTitleRu} onChange={(event) => updateField('seoTitleRu', event.target.value)} maxLength={180} />
+            </label>
+            <label>
+              SEO meta KG
+              <textarea data-qa="product-seo-description-kg" rows={3} value={form.seoDescriptionKg} onChange={(event) => updateField('seoDescriptionKg', event.target.value)} maxLength={500} />
+            </label>
+            <label>
+              SEO meta RU
+              <textarea data-qa="product-seo-description-ru" rows={3} value={form.seoDescriptionRu} onChange={(event) => updateField('seoDescriptionRu', event.target.value)} maxLength={500} />
+            </label>
+          </div>
+        </article>
 
         <div className="admin-create-actions">
           <button className="admin-primary-button" type="submit" disabled={saving}>

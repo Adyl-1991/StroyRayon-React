@@ -134,7 +134,7 @@
 
 .admin-product-filters {
   display: grid;
-  grid-template-columns: minmax(280px, 1.5fr) repeat(3, minmax(160px, 1fr));
+  grid-template-columns: minmax(280px, 1.5fr) repeat(4, minmax(150px, 1fr));
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -149,7 +149,73 @@
 }
 
 .admin-products-table {
-  min-width: 1120px;
+  min-width: 1320px;
+}
+
+.admin-product-thumb {
+  width: 62px;
+  height: 54px;
+  object-fit: contain;
+  display: block;
+  border: 1px solid #dce1e5;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.admin-product-thumb-placeholder {
+  display: grid;
+  place-items: center;
+  color: #65727e;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  background: #f3f6f8;
+}
+
+.admin-quality-summary {
+  display: grid;
+  gap: 2px;
+  min-width: 120px;
+}
+
+.admin-quality-summary strong {
+  color: #17212b;
+}
+
+.admin-quality-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 260px;
+  margin-top: 7px;
+}
+
+.admin-quality-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #e8edf1;
+  color: #465866;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-quality-chip-warning {
+  background: #fff0bd;
+  color: #7d5900;
+}
+
+.admin-quality-chip-danger {
+  background: #f8dddd;
+  color: #8f2626;
+}
+
+.admin-quality-chip-info {
+  background: #e8edf1;
+  color: #465866;
 }
 
 .admin-pagination {
@@ -418,6 +484,10 @@
   margin-bottom: 20px;
 }
 
+.admin-detail-grid-compact {
+  margin-bottom: 0;
+}
+
 .admin-card {
   padding: 22px;
   border: 1px solid #dce1e5;
@@ -469,6 +539,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
+}
+
+.admin-gallery-editor-compact {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .admin-gallery-item {

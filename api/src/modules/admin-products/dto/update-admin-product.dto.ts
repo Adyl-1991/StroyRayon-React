@@ -144,6 +144,30 @@ export class UpdateAdminProductDto {
   @IsOptional()
   @Transform(trimString)
   @IsString()
+  @MaxLength(180)
+  seoTitleKg?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  seoDescriptionKg?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(180)
+  seoTitleRu?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  seoDescriptionRu?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
   @MaxLength(40)
   unit?: string
 

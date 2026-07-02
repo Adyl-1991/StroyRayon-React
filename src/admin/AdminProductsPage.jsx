@@ -17,11 +17,27 @@ const activeOptions = [
   ['false', 'Неактивные'],
 ]
 
+const qualityOptions = [
+  ['', 'Все по качеству'],
+  ['missing_image', 'Нет фото'],
+  ['missing_description', 'Нет описания'],
+  ['missing_specs', 'Нет характеристик'],
+  ['missing_documents', 'Нет документов'],
+  ['missing_seo', 'Нет SEO'],
+  ['inactive', 'Скрытые'],
+  ['low_stock', 'Мало на складе'],
+  ['out_of_stock', 'Нет остатка'],
+]
+
 const stockLabels = {
   in_stock: 'В наличии',
   low_stock: 'Мало',
   pre_order: 'Предзаказ',
   out_of_stock: 'Нет в наличии',
+}
+
+function qualityClass(flag) {
+  return `admin-quality-chip admin-quality-chip-${flag.severity || 'info'}`
 }
 
 export function AdminProductsPage() {
@@ -118,6 +134,13 @@ export function AdminProductsPage() {
         >
           {activeOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
         </select>
+        <select
+          value={searchParams.get('quality') || ''}
+          onChange={(event) => updateParam('quality', event.target.value)}
+          aria-label="Качество заполнения товара"
+        >
+          {qualityOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+        </select>
       </div>
 
       {loading && <div className="admin-state">Загружаем товары…</div>}
@@ -131,19 +154,27 @@ export function AdminProductsPage() {
             <table className="admin-table admin-products-table">
               <thead>
                 <tr>
+                  <th>Фото</th>
                   <th>Товар</th>
                   <th>Категория</th>
                   <th>Бренд</th>
                   <th>Цена</th>
                   <th>Остаток</th>
+                  <th>Качество</th>
                   <th>Видимость</th>
-                  <th>Фото</th>
                   <th>Обновлён</th>
                 </tr>
               </thead>
               <tbody>
                 {data.items.map((product) => (
                   <tr key={product.id}>
+                    <td>
+                      {product.thumbnail?.src && product.imageStatus === 'ready' ? (
+                        <img className="admin-product-thumb" src={product.thumbnail.src} alt={product.thumbnail.alt || product.title} />
+                      ) : (
+                        <div className="admin-product-thumb admin-product-thumb-placeholder">Нет фото</div>
+                      )}
+                    </td>
                     <td>
                       <Link to={`/admin/products/${product.id}`}>{product.title}</Link>
                       <small>{product.slug} · {product.sku} · {product.unit}</small>
@@ -158,11 +189,24 @@ export function AdminProductsPage() {
                       </small>
                     </td>
                     <td>
+                      <div className="admin-quality-summary">
+                        <strong>{product.completenessScore ?? 0}%</strong>
+                        <small>{product.completenessLabel}</small>
+                      </div>
+                      <div className="admin-quality-chips">
+                        {(product.qualityFlags || []).slice(0, 4).map((flag) => (
+                          <span className={qualityClass(flag)} key={flag.code}>{flag.label}</span>
+                        ))}
+                        {(product.qualityFlags || []).length > 4 && (
+                          <span className="admin-quality-chip">+{product.qualityFlags.length - 4}</span>
+                        )}
+                      </div>
+                    </td>
+                    <td>
                       <span className={`admin-status ${product.isActive ? 'admin-status-confirmed' : 'admin-status-cancelled'}`}>
                         {product.isActive ? 'Активен' : 'Скрыт'}
                       </span>
                     </td>
-                    <td>{product.imageStatus === 'ready' ? 'Готово' : product.imageStatus === 'placeholder' ? 'Заглушка' : 'Нет'}</td>
                     <td>{new Date(product.updatedAt).toLocaleString('ru-RU')}</td>
                   </tr>
                 ))}

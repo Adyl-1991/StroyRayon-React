@@ -21,6 +21,10 @@ function productFixture(overrides: Record<string, unknown> = {}) {
     shortDescriptionKg: null,
     descriptionKg: null,
     descriptionRu: null,
+    seoTitleKg: null,
+    seoDescriptionKg: null,
+    seoTitleRu: null,
+    seoDescriptionRu: null,
     specs: {},
     stockStatus: ProductStockStatus.IN_STOCK,
     stock: {
@@ -70,6 +74,28 @@ test('product list with auth-facing service call returns admin product rows', as
   assert.equal(result.items[0].price, 100)
   assert.equal(result.items[0].stock?.availableQuantity, 8)
   assert.equal(result.items[0].imageStatus, 'ready')
+  assert.equal(typeof result.items[0].completenessScore, 'number')
+})
+
+test('product list can filter by computed quality flags', async () => {
+  const prisma = {
+    product: {
+      findMany: () => Promise.resolve([
+        productFixture({ id: 'complete', seoTitleKg: 'KG', seoDescriptionKg: 'KG desc', seoTitleRu: 'RU', seoDescriptionRu: 'RU desc' }),
+        productFixture({ id: 'missing-seo', slug: 'missing-seo' }),
+      ]),
+    },
+    catalogNode: {
+      findMany: () => Promise.resolve([{ path: 'tools/test', titleKg: 'Category' }]),
+    },
+    $transaction: (operations: Promise<unknown>[]) => Promise.all(operations),
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).list({ page: 1, limit: 30, quality: 'missing_seo' })
+
+  assert.equal(result.items.length, 1)
+  assert.equal(result.items[0].slug, 'missing-seo')
+  assert.equal(result.items[0].qualityFlags.some((flag) => flag.code === 'missing_seo'), true)
 })
 
 test('product detail with auth-facing service call returns launch-critical fields', async () => {
@@ -113,7 +139,9 @@ test('admin can create a local product with placeholder image and stock row', as
             images: [
               {
                 id: 'image-new',
-                src: args.data.images?.create?.src,
+                src: Array.isArray(args.data.images?.create)
+                  ? args.data.images?.create[0]?.src
+                  : args.data.images?.create?.src,
                 sortOrder: 0,
               },
             ],
@@ -139,6 +167,12 @@ test('admin can create a local product with placeholder image and stock row', as
     isActive: true,
     imageSrc: '/images/products/stage37/main.webp',
     imageAlt: 'Stage 37 photo',
+    specs: [{ key: 'Size', value: '20 mm' }],
+    documents: [{ title: 'Certificate', url: 'https://example.com/cert.pdf', type: ProductDocumentType.CERTIFICATE }],
+    seoTitleKg: 'Stage 37 SEO KG',
+    seoDescriptionKg: 'Stage 37 SEO description KG',
+    seoTitleRu: 'Stage 37 SEO RU',
+    seoDescriptionRu: 'Stage 37 SEO description RU',
   })
 
   assert.equal(result.id, 'product-new')
@@ -146,9 +180,13 @@ test('admin can create a local product with placeholder image and stock row', as
   assert.equal(result.price, 321.45)
   assert.equal(result.stock?.quantity, 7)
   assert.equal(result.imageStatus, 'ready')
-  assert.equal(createArgs?.data.images?.create?.src, '/images/products/stage37/main.webp')
-  assert.equal(createArgs?.data.images?.create?.alt, 'Stage 37 photo')
+  const createdImages = createArgs?.data.images?.create
+  const firstCreatedImage = Array.isArray(createdImages) ? createdImages[0] : createdImages
+  assert.equal(firstCreatedImage?.src, '/images/products/stage37/main.webp')
+  assert.equal(firstCreatedImage?.alt, 'Stage 37 photo')
   assert.equal(createArgs?.data.stock?.create?.reservedQuantity, 0)
+  assert.deepEqual(createArgs?.data.specs, { Size: '20 mm' })
+  assert.equal(createArgs?.data.seoTitleRu, 'Stage 37 SEO RU')
 })
 
 test('admin product create rejects unavailable category and duplicate slug', async () => {

@@ -25,6 +25,8 @@ export class AdminProductsService {
   async list(query: AdminProductsQueryDto) {
     const normalizedPath = query.catalogPath?.trim().replace(/^\/+|\/+$/g, '')
     const search = query.q?.trim()
+    const page = query.page
+    const limit = query.limit
     const where: Prisma.ProductWhereInput = {
       ...(search
         ? {
@@ -41,30 +43,34 @@ export class AdminProductsService {
       ...(query.isActive === undefined ? {} : { isActive: query.isActive }),
     }
 
-    const [products, total, categories] = await this.prisma.$transaction([
+    const [allProducts, categories] = await this.prisma.$transaction([
       this.prisma.product.findMany({
         where,
         include: adminProductInclude,
         orderBy: [{ updatedAt: 'desc' }, { titleKg: 'asc' }],
-        skip: (query.page - 1) * query.limit,
-        take: query.limit,
       }),
-      this.prisma.product.count({ where }),
       this.prisma.catalogNode.findMany({
         where: { products: { some: {} } },
         orderBy: { path: 'asc' },
         select: { path: true, titleKg: true },
       }),
     ])
+    const mappedProducts = allProducts.map((product) => this.mapProduct(product))
+    const qualityFilter = query.quality
+    const filteredProducts = qualityFilter
+      ? mappedProducts.filter((product) => productMatchesQuality(product, qualityFilter))
+      : mappedProducts
+    const total = filteredProducts.length
+    const products = filteredProducts.slice((page - 1) * limit, page * limit)
 
     return {
-      items: products.map((product) => this.mapProduct(product)),
+      items: products,
       filters: { categories },
       pagination: {
-        page: query.page,
-        limit: query.limit,
+        page,
+        limit,
         total,
-        pages: Math.max(Math.ceil(total / query.limit), 1),
+        pages: Math.max(Math.ceil(total / limit), 1),
       },
     }
   }
@@ -108,6 +114,15 @@ export class AdminProductsService {
     })
     if (!category) throw new BadRequestException('Category is unavailable')
 
+    const brandId = dto.brandId?.trim() || null
+    if (brandId) {
+      const brand = await this.prisma.brand.findFirst({
+        where: { id: brandId, isActive: true },
+        select: { id: true },
+      })
+      if (!brand) throw new BadRequestException('Brand is unavailable')
+    }
+
     const slug = normalizeSlug(dto.slug || titleRu || titleKg)
     if (!slug) throw new BadRequestException('Slug is required')
 
@@ -130,10 +145,19 @@ export class AdminProductsService {
     const descriptionRu = dto.descriptionRu?.trim()
     const imageSrc = normalizeImageSrc(dto.imageSrc)
     const imageAlt = dto.imageAlt?.trim() || `${titleKg} - StroyRayon`
+    const specs = dto.specs === undefined ? {} : normalizeSpecs(dto.specs)
+    const documents = dto.documents === undefined ? [] : normalizeDocuments(dto.documents)
+    const submittedImages = dto.images?.length
+      ? dto.images
+      : imageSrc
+        ? [{ src: imageSrc, alt: imageAlt, type: ProductImageType.MAIN, sortOrder: 0 }]
+        : []
+    const images = normalizeImages(submittedImages, titleKg)
 
     const created = await this.prisma.product.create({
       data: {
         catalogNodeId: category.id,
+        brandId,
         titleKg,
         titleRu,
         slug,
@@ -145,18 +169,40 @@ export class AdminProductsService {
         shortDescriptionKg,
         descriptionKg,
         descriptionRu: descriptionRu || null,
+        seoTitleKg: dto.seoTitleKg?.trim() || null,
+        seoDescriptionKg: dto.seoDescriptionKg?.trim() || null,
+        seoTitleRu: dto.seoTitleRu?.trim() || null,
+        seoDescriptionRu: dto.seoDescriptionRu?.trim() || null,
+        specs: Object.keys(specs).length ? specs : Prisma.JsonNull,
         tags: [],
         adminNote: dto.adminNote?.trim() || null,
         isActive: dto.isActive,
         images: {
-          create: {
-            src: imageSrc || placeholderImageSrc,
-            alt: imageSrc ? imageAlt : `${titleKg} - StroyRayon placeholder`,
-            width: 900,
-            height: 700,
-            type: 'MAIN',
-            sortOrder: 0,
-          },
+          create: images.length
+            ? images.map((image) => ({
+                src: image.src,
+                alt: image.alt,
+                width: 900,
+                height: 700,
+                type: image.type,
+                sortOrder: image.sortOrder,
+              }))
+            : {
+                src: placeholderImageSrc,
+                alt: `${titleKg} - StroyRayon placeholder`,
+                width: 900,
+                height: 700,
+                type: 'MAIN',
+                sortOrder: 0,
+              },
+        },
+        documents: {
+          create: documents.map((document, index) => ({
+            title: document.title,
+            url: document.url,
+            type: document.type,
+            sortOrder: document.sortOrder ?? index,
+          })),
         },
         stock: {
           create: {
@@ -260,6 +306,14 @@ export class AdminProductsService {
             : {}),
           ...(dto.descriptionRu !== undefined
             ? { descriptionRu: dto.descriptionRu?.trim() || null }
+            : {}),
+          ...(dto.seoTitleKg !== undefined ? { seoTitleKg: dto.seoTitleKg?.trim() || null } : {}),
+          ...(dto.seoDescriptionKg !== undefined
+            ? { seoDescriptionKg: dto.seoDescriptionKg?.trim() || null }
+            : {}),
+          ...(dto.seoTitleRu !== undefined ? { seoTitleRu: dto.seoTitleRu?.trim() || null } : {}),
+          ...(dto.seoDescriptionRu !== undefined
+            ? { seoDescriptionRu: dto.seoDescriptionRu?.trim() || null }
             : {}),
           ...(dto.unit !== undefined ? { unit: dto.unit.trim() } : {}),
           ...(dto.isActive !== undefined ? { isActive: dto.isActive } : {}),
@@ -409,6 +463,13 @@ export class AdminProductsService {
     const hasRealImage = product.images.some(
       (image) => !image.src.includes('/placeholders/'),
     )
+    const specs =
+      product.specs && typeof product.specs === 'object' && !Array.isArray(product.specs)
+        ? product.specs
+        : {}
+    const specsCount = Object.keys(specs).length
+    const documentCount = product.documents.length
+    const quality = buildProductQuality(product, hasRealImage, specsCount, documentCount)
     return {
       id: product.id,
       title: product.titleKg,
@@ -424,10 +485,11 @@ export class AdminProductsService {
       shortDescriptionKg: product.shortDescriptionKg,
       descriptionKg: product.descriptionKg,
       descriptionRu: product.descriptionRu || '',
-      specs:
-        product.specs && typeof product.specs === 'object' && !Array.isArray(product.specs)
-          ? product.specs
-          : {},
+      seoTitleKg: product.seoTitleKg || '',
+      seoDescriptionKg: product.seoDescriptionKg || '',
+      seoTitleRu: product.seoTitleRu || '',
+      seoDescriptionRu: product.seoDescriptionRu || '',
+      specs,
       documents: product.documents.map((document) => ({
         id: document.id,
         title: document.title,
@@ -450,12 +512,104 @@ export class AdminProductsService {
         : null,
       isActive: product.isActive,
       imageStatus: hasRealImage ? 'ready' : product.images.length ? 'placeholder' : 'missing',
+      thumbnail: product.images.find((image) => !image.src.includes('/placeholders/')) || product.images[0] || null,
       image: product.images[0] || null,
       images: product.images,
+      qualityFlags: quality.flags,
+      completenessScore: quality.score,
+      completenessLabel: quality.label,
+      documentCount,
+      specsCount,
+      seoStatus: quality.seoStatus,
       tags: product.tags,
       adminNote: product.adminNote,
       updatedAt: product.updatedAt,
     }
+  }
+}
+
+function buildProductQuality(
+  product: AdminProduct,
+  hasRealImage: boolean,
+  specsCount: number,
+  documentCount: number,
+) {
+  const hasKgDescription = Boolean(product.shortDescriptionKg?.trim() || product.descriptionKg?.trim())
+  const hasRuDescription = Boolean(product.descriptionRu?.trim())
+  const hasSeoTitle = Boolean(product.seoTitleKg?.trim() && product.seoTitleRu?.trim())
+  const hasSeoDescription = Boolean(product.seoDescriptionKg?.trim() && product.seoDescriptionRu?.trim())
+  const hasSeo = hasSeoTitle && hasSeoDescription
+  const hasStock = product.stockStatus !== ProductStockStatus.OUT_OF_STOCK && (product.stock?.quantity || 0) > 0
+  const hasTitlePair = Boolean(product.titleKg?.trim() && product.titleRu?.trim())
+  const hasPositivePrice = Number(product.price) > 0
+
+  const flags: Array<{ code: string; label: string; severity: 'info' | 'warning' | 'danger' }> = []
+  if (!hasRealImage) flags.push({ code: 'missing_image', label: 'Нет фото', severity: 'warning' })
+  if (!hasKgDescription) flags.push({ code: 'missing_description_kg', label: 'Нет KG описания', severity: 'warning' })
+  if (!hasRuDescription) flags.push({ code: 'missing_description_ru', label: 'Нет RU описания', severity: 'warning' })
+  if (!specsCount) flags.push({ code: 'missing_specs', label: 'Нет характеристик', severity: 'warning' })
+  if (!documentCount) flags.push({ code: 'missing_documents', label: 'Нет документов', severity: 'info' })
+  if (!hasSeo) flags.push({ code: 'missing_seo', label: 'SEO не заполнено', severity: 'warning' })
+  if (!product.isActive) flags.push({ code: 'inactive', label: 'Скрыт', severity: 'info' })
+  if (product.stockStatus === ProductStockStatus.LOW_STOCK) {
+    flags.push({ code: 'low_stock', label: 'Мало на складе', severity: 'warning' })
+  }
+  if (product.stockStatus === ProductStockStatus.OUT_OF_STOCK || (product.stock?.quantity || 0) <= 0) {
+    flags.push({ code: 'out_of_stock', label: 'Нет остатка', severity: 'danger' })
+  }
+
+  const checks = [
+    hasRealImage,
+    hasTitlePair,
+    hasKgDescription,
+    hasRuDescription,
+    hasPositivePrice,
+    hasStock,
+    specsCount > 0,
+    hasSeo,
+    documentCount > 0,
+  ]
+  const score = Math.round((checks.filter(Boolean).length / checks.length) * 100)
+
+  return {
+    flags,
+    score,
+    label: score >= 85 ? 'Хорошо заполнен' : score >= 60 ? 'Неполный' : 'Нужны данные',
+    seoStatus: {
+      hasTitleKg: Boolean(product.seoTitleKg?.trim()),
+      hasDescriptionKg: Boolean(product.seoDescriptionKg?.trim()),
+      hasTitleRu: Boolean(product.seoTitleRu?.trim()),
+      hasDescriptionRu: Boolean(product.seoDescriptionRu?.trim()),
+      complete: hasSeo,
+    },
+  }
+}
+
+function productMatchesQuality(
+  product: { qualityFlags: Array<{ code: string }> },
+  quality: string,
+) {
+  switch (quality) {
+    case 'missing_image':
+      return product.qualityFlags.some((flag) => flag.code === 'missing_image')
+    case 'missing_description':
+      return product.qualityFlags.some((flag) =>
+        flag.code === 'missing_description_kg' || flag.code === 'missing_description_ru',
+      )
+    case 'missing_specs':
+      return product.qualityFlags.some((flag) => flag.code === 'missing_specs')
+    case 'missing_documents':
+      return product.qualityFlags.some((flag) => flag.code === 'missing_documents')
+    case 'missing_seo':
+      return product.qualityFlags.some((flag) => flag.code === 'missing_seo')
+    case 'inactive':
+      return product.qualityFlags.some((flag) => flag.code === 'inactive')
+    case 'low_stock':
+      return product.qualityFlags.some((flag) => flag.code === 'low_stock')
+    case 'out_of_stock':
+      return product.qualityFlags.some((flag) => flag.code === 'out_of_stock')
+    default:
+      return true
   }
 }
 

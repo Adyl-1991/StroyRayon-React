@@ -1,6 +1,7 @@
 import { ProductStockStatus } from '@prisma/client'
 import { Transform, Type } from 'class-transformer'
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
   IsInt,
@@ -10,7 +11,9 @@ import {
   Max,
   MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator'
+import { AdminProductDocumentDto, AdminProductImageDto, AdminProductSpecDto } from './update-admin-product.dto'
 
 const trimString = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value
@@ -20,6 +23,12 @@ export class CreateAdminProductDto {
   @IsString()
   @MaxLength(80)
   catalogNodeId!: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(80)
+  brandId?: string | null
 
   @Transform(trimString)
   @IsString()
@@ -60,6 +69,30 @@ export class CreateAdminProductDto {
   @IsString()
   @MaxLength(5000)
   descriptionRu?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(180)
+  seoTitleKg?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  seoDescriptionKg?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(180)
+  seoTitleRu?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  seoDescriptionRu?: string
 
   @Type(() => Number)
   @IsNumber({ maxDecimalPlaces: 2 })
@@ -102,4 +135,22 @@ export class CreateAdminProductDto {
   @IsString()
   @MaxLength(180)
   imageAlt?: string
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductSpecDto)
+  specs?: AdminProductSpecDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductDocumentDto)
+  documents?: AdminProductDocumentDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductImageDto)
+  images?: AdminProductImageDto[]
 }

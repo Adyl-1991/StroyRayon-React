@@ -46,6 +46,10 @@ function createForm(product) {
     shortDescriptionKg: product.shortDescriptionKg || '',
     descriptionKg: product.descriptionKg || '',
     descriptionRu: product.descriptionRu || '',
+    seoTitleKg: product.seoTitleKg || '',
+    seoDescriptionKg: product.seoDescriptionKg || '',
+    seoTitleRu: product.seoTitleRu || '',
+    seoDescriptionRu: product.seoDescriptionRu || '',
     price: String(product.price || ''),
     quantity: String(product.stock?.quantity ?? 0),
     stockStatus: product.stockStatus?.toUpperCase() || 'IN_STOCK',
@@ -253,6 +257,10 @@ export function AdminProductDetailPage() {
         shortDescriptionKg: form.shortDescriptionKg,
         descriptionKg: form.descriptionKg,
         descriptionRu: form.descriptionRu,
+        seoTitleKg: form.seoTitleKg,
+        seoDescriptionKg: form.seoDescriptionKg,
+        seoTitleRu: form.seoTitleRu,
+        seoDescriptionRu: form.seoDescriptionRu,
         price,
         stockQuantity: quantity,
         stockStatus: form.stockStatus,
@@ -433,6 +441,28 @@ export function AdminProductDetailPage() {
                 <button type="button" className="admin-danger-button" onClick={() => removeRow('documents', index, emptyDocument())}>Удалить</button>
               </div>
             ))}
+          </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <h2>SEO</h2>
+          <div className="admin-detail-grid admin-detail-grid-compact">
+            <label>
+              SEO title KG
+              <input data-qa="edit-seo-title-kg" value={form.seoTitleKg} onChange={(event) => updateField('seoTitleKg', event.target.value)} maxLength={180} />
+            </label>
+            <label>
+              SEO title RU
+              <input data-qa="edit-seo-title-ru" value={form.seoTitleRu} onChange={(event) => updateField('seoTitleRu', event.target.value)} maxLength={180} />
+            </label>
+            <label>
+              SEO meta KG
+              <textarea data-qa="edit-seo-description-kg" rows={3} value={form.seoDescriptionKg} onChange={(event) => updateField('seoDescriptionKg', event.target.value)} maxLength={500} />
+            </label>
+            <label>
+              SEO meta RU
+              <textarea data-qa="edit-seo-description-ru" rows={3} value={form.seoDescriptionRu} onChange={(event) => updateField('seoDescriptionRu', event.target.value)} maxLength={500} />
+            </label>
           </div>
         </article>
 

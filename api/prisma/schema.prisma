@@ -116,6 +116,8 @@ model Product {
   faqKg              Json?
   seoTitleKg         String?
   seoDescriptionKg   String?
+  seoTitleRu         String?
+  seoDescriptionRu   String?
   adminNote          String?
   isActive           Boolean             @default(true)
   images             ProductImage[]
