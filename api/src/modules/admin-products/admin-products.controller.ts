@@ -20,6 +20,7 @@ import { AdminProductsService } from './admin-products.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { UpdateProductActiveDto } from './dto/update-product-active.dto'
+import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 import { UpdateProductNoteDto } from './dto/update-product-note.dto'
 import { UpdateProductPriceDto } from './dto/update-product-price.dto'
 import { UpdateProductStockDto } from './dto/update-product-stock.dto'
@@ -96,6 +97,11 @@ export class AdminProductsController {
   @Get(':id')
   detail(@Param('id') id: string) {
     return this.adminProductsService.detail(id)
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() dto: UpdateAdminProductDto) {
+    return this.adminProductsService.update(id, dto)
   }
 
   @Patch(':id/price')

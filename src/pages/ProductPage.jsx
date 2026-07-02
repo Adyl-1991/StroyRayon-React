@@ -168,9 +168,30 @@ function stripDocumentationSection(text) {
     .trim()
 }
 
-function extractDocumentation(specifications) {
+const documentTypeLabels = {
+  CERTIFICATE: 'Сертификат',
+  MANUAL: 'Инструкция',
+  PASSPORT: 'Паспорт товара',
+  OTHER: 'Документ',
+}
+
+function extractDocumentation(product, specifications) {
+  if (Array.isArray(product?.documents) && product.documents.length) {
+    return product.documents
+      .map((item) => ({
+        title: String(item.title || '').trim(),
+        url: String(item.url || '').trim(),
+        label: documentTypeLabels[item.type] || item.label || item.type || 'Документ',
+      }))
+      .filter((item) => item.title && item.url)
+  }
+
   const documents = specifications.documents || specifications.documentation || specifications['Документация']
-  if (Array.isArray(documents)) return documents.filter(Boolean).map((item) => String(item).trim())
+  if (Array.isArray(documents)) {
+    return documents
+      .filter(Boolean)
+      .map((item) => ({ title: String(item).trim(), url: '', label: 'Документ' }))
+  }
 
   const source = String(specifications.descriptionRu || specifications.description || '')
   const documentSection = source.match(/Документация[\s\S]*$/i)?.[0] || ''
@@ -178,6 +199,7 @@ function extractDocumentation(specifications) {
     .split('\n')
     .map((line) => line.replace(/^[-•]\s*/, '').trim())
     .filter((line) => line && !/^Документация/i.test(line))
+    .map((line) => ({ title: line, url: '', label: 'Документ' }))
 }
 
 export function ProductPage() {
@@ -229,7 +251,7 @@ export function ProductPage() {
   const benefitItems = getProductListField(product, 'benefits', locale)
   const instructionItems = getProductListField(product, 'instructions', locale)
   const faqItems = getProductListField(product, 'faq', locale)
-  const documents = extractDocumentation(specifications)
+  const documents = extractDocumentation(product, specifications)
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
   const activeSku = selectedVariant?.sku || product.sku || product.article
@@ -305,10 +327,16 @@ export function ProductPage() {
             <section id="product-documents" className="detail-panel product-section product-documents">
               <h2>Документация</h2>
               <div className="product-documents__list">
-                {documents.map((documentTitle) => (
-                  <div key={documentTitle} className="product-document-row">
-                    <span aria-hidden="true">PDF</span>
-                    <p>{documentTitle}</p>
+                {documents.map((documentItem) => (
+                  <div key={`${documentItem.url}-${documentItem.title}`} className="product-document-row">
+                    <span aria-hidden="true">{documentItem.label}</span>
+                    {documentItem.url ? (
+                      <a href={documentItem.url} target="_blank" rel="noreferrer">
+                        {documentItem.title}
+                      </a>
+                    ) : (
+                      <p>{documentItem.title}</p>
+                    )}
                   </div>
                 ))}
               </div>

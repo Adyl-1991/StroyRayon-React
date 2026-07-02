@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { BadRequestException } from '@nestjs/common'
-import { Prisma, ProductStockStatus } from '@prisma/client'
+import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { calculateLineTotal } from '../orders/order-pricing.util'
 import { AdminProductsService } from './admin-products.service'
@@ -18,6 +18,10 @@ function productFixture(overrides: Record<string, unknown> = {}) {
     price: new Prisma.Decimal(100),
     currency: 'KGS',
     unit: 'шт',
+    shortDescriptionKg: null,
+    descriptionKg: null,
+    descriptionRu: null,
+    specs: {},
     stockStatus: ProductStockStatus.IN_STOCK,
     stock: {
       id: 'stock-1',
@@ -29,7 +33,18 @@ function productFixture(overrides: Record<string, unknown> = {}) {
       updatedAt: new Date('2026-06-19T10:00:00Z'),
     },
     isActive: true,
-    images: [{ id: 'image-1', src: '/images/product.webp', sortOrder: 0 }],
+    images: [
+      {
+        id: 'image-1',
+        src: '/images/product.webp',
+        alt: 'Product image',
+        width: 900,
+        height: 700,
+        type: ProductImageType.MAIN,
+        sortOrder: 0,
+      },
+    ],
+    documents: [],
     tags: [],
     adminNote: null,
     updatedAt: new Date('2026-06-19T10:00:00Z'),
@@ -178,6 +193,99 @@ test('admin product create rejects unavailable category and duplicate slug', asy
       }),
     /slug already exists/,
   )
+})
+
+test('admin can update core product content, specs, documents and images', async () => {
+  let productState = productFixture()
+  let savedSpecs: Prisma.InputJsonValue | undefined
+  let savedDocuments: Array<{ title: string; url: string; type: ProductDocumentType }> = []
+  let savedImages: Array<{ src: string; alt: string; type: ProductImageType }> = []
+
+  const tx = {
+    product: {
+      update: (args: any) => {
+        productState = productFixture({
+          ...productState,
+          ...args.data,
+          titleKg: args.data.titleKg || productState.titleKg,
+          titleRu: args.data.titleRu || productState.titleRu,
+          slug: args.data.slug || productState.slug,
+          sku: args.data.sku || productState.sku,
+          price: args.data.price || productState.price,
+          unit: args.data.unit || productState.unit,
+          descriptionRu: args.data.descriptionRu || productState.descriptionRu,
+          specs: args.data.specs || productState.specs,
+        })
+        savedSpecs = args.data.specs as Prisma.InputJsonValue
+        return Promise.resolve(productState)
+      },
+    },
+    stock: {
+      upsert: () => Promise.resolve({}),
+    },
+    productDocument: {
+      deleteMany: () => Promise.resolve({ count: 0 }),
+      createMany: (args: { data: Array<{ title: string; url: string; type: ProductDocumentType }> }) => {
+        savedDocuments = args.data
+        return Promise.resolve({ count: args.data.length })
+      },
+    },
+    productImage: {
+      deleteMany: () => Promise.resolve({ count: 0 }),
+      createMany: (args: { data: Array<{ src: string; alt: string; type: ProductImageType }> }) => {
+        savedImages = args.data
+        return Promise.resolve({ count: args.data.length })
+      },
+    },
+  }
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve(productState),
+      findFirst: () => Promise.resolve(null),
+    },
+    catalogNode: {
+      findFirst: () => Promise.resolve({ id: 'category-1' }),
+    },
+    brand: {
+      findFirst: () => Promise.resolve({ id: 'brand-1' }),
+    },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).update('product-1', {
+    catalogNodeId: 'category-1',
+    brandId: 'brand-1',
+    titleKg: 'Updated KG',
+    titleRu: 'Updated RU',
+    slug: 'updated-product',
+    sku: 'updated-sku',
+    descriptionRu: 'Updated Russian description',
+    price: 250,
+    stockQuantity: 8,
+    stockStatus: ProductStockStatus.LOW_STOCK,
+    unit: 'метр',
+    isActive: true,
+    specs: [
+      { key: 'Диаметр', value: '20 мм' },
+      { key: '', value: 'ignored' },
+    ],
+    documents: [
+      {
+        title: 'Сертификат',
+        url: 'https://example.com/cert.pdf',
+        type: ProductDocumentType.CERTIFICATE,
+      },
+    ],
+    images: [
+      { src: '/uploads/products/new.png', alt: 'Updated photo', type: ProductImageType.MAIN },
+    ],
+  })
+
+  assert.equal(result.slug, 'updated-product')
+  assert.deepEqual(savedSpecs, { Диаметр: '20 мм' })
+  assert.equal(savedDocuments.length, 1)
+  assert.equal(savedDocuments[0].type, ProductDocumentType.CERTIFICATE)
+  assert.equal(savedImages[0].type, ProductImageType.MAIN)
 })
 
 test('price update with auth-facing service call stores a database decimal', async () => {

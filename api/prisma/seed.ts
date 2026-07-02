@@ -48,6 +48,7 @@ type ProductInput = {
   minOrder?: string | null
   shortDescriptionKg?: string | null
   descriptionKg?: string | null
+  descriptionRu?: string | null
   packageInfoKg?: string | null
   deliveryInfoKg?: string | null
   warrantyInfoKg?: string | null
@@ -271,6 +272,7 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         minOrder: product.minOrder || null,
         shortDescriptionKg: product.shortDescriptionKg || null,
         descriptionKg: product.descriptionKg || null,
+        descriptionRu: product.descriptionRu || null,
         packageInfoKg: product.packageInfoKg || null,
         deliveryInfoKg: product.deliveryInfoKg || null,
         warrantyInfoKg: product.warrantyInfoKg || null,
@@ -299,6 +301,7 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         minOrder: product.minOrder || null,
         shortDescriptionKg: product.shortDescriptionKg || null,
         descriptionKg: product.descriptionKg || null,
+        descriptionRu: product.descriptionRu || null,
         packageInfoKg: product.packageInfoKg || null,
         deliveryInfoKg: product.deliveryInfoKg || null,
         warrantyInfoKg: product.warrantyInfoKg || null,

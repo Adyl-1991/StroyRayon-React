@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   getAdminProduct,
-  updateAdminProductActive,
-  updateAdminProductNote,
-  updateAdminProductPrice,
-  updateAdminProductStock,
+  getAdminProductOptions,
+  updateAdminProduct,
+  uploadAdminProductImage,
 } from '../api/adminApi'
 import { formatPrice } from '../utils/formatPrice'
 
@@ -16,32 +15,96 @@ const stockOptions = [
   ['OUT_OF_STOCK', 'Нет в наличии'],
 ]
 
+const documentTypeOptions = [
+  ['CERTIFICATE', 'Сертификат'],
+  ['MANUAL', 'Инструкция'],
+  ['PASSPORT', 'Паспорт товара'],
+  ['OTHER', 'Другое'],
+]
+
+function emptySpec() {
+  return { key: '', value: '' }
+}
+
+function emptyDocument() {
+  return { title: '', url: '', type: 'OTHER', sortOrder: 0 }
+}
+
+function specsToRows(specs = {}) {
+  return Object.entries(specs || {}).map(([key, value]) => ({ key, value: String(value ?? '') }))
+}
+
+function createForm(product) {
+  const specs = specsToRows(product.specs)
+  return {
+    catalogNodeId: product.category?.id || '',
+    brandId: product.brand?.id || '',
+    titleKg: product.title || '',
+    titleRu: product.titleRu || '',
+    slug: product.slug || '',
+    sku: product.sku || '',
+    shortDescriptionKg: product.shortDescriptionKg || '',
+    descriptionKg: product.descriptionKg || '',
+    descriptionRu: product.descriptionRu || '',
+    price: String(product.price || ''),
+    quantity: String(product.stock?.quantity ?? 0),
+    stockStatus: product.stockStatus?.toUpperCase() || 'IN_STOCK',
+    unit: product.unit || '',
+    isActive: Boolean(product.isActive),
+    adminNote: product.adminNote || '',
+    specs: specs.length ? specs : [emptySpec()],
+    documents: product.documents?.length
+      ? product.documents.map((document, index) => ({
+          id: document.id,
+          title: document.title || '',
+          url: document.url || '',
+          type: document.type || 'OTHER',
+          sortOrder: document.sortOrder ?? index,
+        }))
+      : [emptyDocument()],
+    images: product.images?.length
+      ? product.images.map((image, index) => ({
+          id: image.id,
+          src: image.src || '',
+          alt: image.alt || '',
+          type: index === 0 ? 'MAIN' : 'GALLERY',
+          sortOrder: image.sortOrder ?? index,
+        }))
+      : [],
+  }
+}
+
+function compactRows(rows, fields) {
+  return rows
+    .map((row, index) => ({ ...row, sortOrder: row.sortOrder ?? index }))
+    .filter((row) => fields.some((field) => String(row[field] || '').trim()))
+}
+
+function compactSpecs(rows) {
+  return rows
+    .map((row) => ({ key: row.key, value: row.value }))
+    .filter((row) => row.key.trim() || row.value.trim())
+}
+
 export function AdminProductDetailPage() {
   const { id } = useParams()
   const [product, setProduct] = useState(null)
-  const [price, setPrice] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [stockStatus, setStockStatus] = useState('IN_STOCK')
-  const [note, setNote] = useState('')
+  const [options, setOptions] = useState(null)
+  const [form, setForm] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
-  function applyProduct(data) {
-    setProduct(data)
-    setPrice(String(data.price))
-    setQuantity(String(data.stock?.quantity ?? 0))
-    setStockStatus(data.stockStatus.toUpperCase())
-    setNote(data.adminNote || '')
-  }
-
   useEffect(() => {
     let active = true
-    getAdminProduct(id)
-      .then((data) => {
+    Promise.all([getAdminProduct(id), getAdminProductOptions()])
+      .then(([productData, optionsData]) => {
         if (!active) return
-        applyProduct(data)
+        setProduct(productData)
+        setOptions(optionsData)
+        setForm(createForm(productData))
       })
       .catch((requestError) => {
         if (active) setError(requestError.message || 'Не удалось загрузить товар.')
@@ -54,164 +117,366 @@ export function AdminProductDetailPage() {
     }
   }, [id])
 
-  async function performSave(kind, action, successMessage) {
-    setSaving(kind)
+  const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
+  const categories = useMemo(() => options?.categories || [], [options])
+  const brands = useMemo(() => options?.brands || [], [options])
+
+  function updateField(name, value) {
+    setForm((current) => ({ ...current, [name]: value }))
+  }
+
+  function updateRow(group, index, name, value) {
+    setForm((current) => ({
+      ...current,
+      [group]: current[group].map((row, rowIndex) =>
+        rowIndex === index ? { ...row, [name]: value } : row,
+      ),
+    }))
+  }
+
+  function addRow(group, row) {
+    setForm((current) => ({ ...current, [group]: [...current[group], row] }))
+  }
+
+  function removeRow(group, index, fallback) {
+    setForm((current) => {
+      const nextRows = current[group].filter((_, rowIndex) => rowIndex !== index)
+      return { ...current, [group]: nextRows.length ? nextRows : [fallback] }
+    })
+  }
+
+  async function handleImageUpload(event) {
+    const file = event.target.files?.[0]
+    if (!file) return
+    if (!file.type.startsWith('image/')) {
+      setError('Выберите файл изображения.')
+      event.target.value = ''
+      return
+    }
+
+    setUploadingImage(true)
     setError('')
     setMessage('')
     try {
-      const updated = await action()
-      applyProduct(updated)
-      setMessage(successMessage)
+      const uploaded = await uploadAdminProductImage(file)
+      setForm((current) => ({
+        ...current,
+        images: [
+          ...current.images,
+          {
+            src: uploaded.src,
+            alt: current.titleRu || current.titleKg || file.name.replace(/\.[^.]+$/, ''),
+            type: current.images.length ? 'GALLERY' : 'MAIN',
+            sortOrder: current.images.length,
+          },
+        ],
+      }))
+      setMessage('Фото загружено. Нажмите "Сохранить", чтобы прикрепить его к товару.')
     } catch (requestError) {
-      setError(requestError.message || 'Не удалось сохранить изменения.')
+      setError(requestError.message || 'Не удалось загрузить фото.')
     } finally {
-      setSaving('')
+      setUploadingImage(false)
+      event.target.value = ''
     }
   }
 
-  function savePrice(event) {
+  function makeMainImage(index) {
+    setForm((current) => {
+      const images = [...current.images]
+      const [selected] = images.splice(index, 1)
+      return {
+        ...current,
+        images: [selected, ...images].map((image, imageIndex) => ({
+          ...image,
+          type: imageIndex === 0 ? 'MAIN' : 'GALLERY',
+          sortOrder: imageIndex,
+        })),
+      }
+    })
+  }
+
+  function removeImage(index) {
+    setForm((current) => ({
+      ...current,
+      images: current.images
+        .filter((_, imageIndex) => imageIndex !== index)
+        .map((image, imageIndex) => ({
+          ...image,
+          type: imageIndex === 0 ? 'MAIN' : 'GALLERY',
+          sortOrder: imageIndex,
+        })),
+    }))
+  }
+
+  async function handleSave(event) {
     event.preventDefault()
-    const numericPrice = Number(price)
-    if (!Number.isFinite(numericPrice) || numericPrice <= 0) {
+    setSaving(true)
+    setError('')
+    setMessage('')
+
+    const price = Number(form.price)
+    const quantity = Number(form.quantity)
+    if (!form.titleKg.trim()) {
+      setError('Заполните название KG.')
+      setSaving(false)
+      return
+    }
+    if (!form.slug.trim()) {
+      setError('Заполните slug.')
+      setSaving(false)
+      return
+    }
+    if (!Number.isFinite(price) || price <= 0) {
       setError('Цена должна быть положительным числом.')
+      setSaving(false)
       return
     }
-    performSave('price', () => updateAdminProductPrice(id, numericPrice), 'Цена обновлена.')
-  }
-
-  function saveStock(event) {
-    event.preventDefault()
-    const numericQuantity = Number(quantity)
-    if (!Number.isInteger(numericQuantity) || numericQuantity < 0) {
+    if (!Number.isInteger(quantity) || quantity < 0) {
       setError('Остаток должен быть целым неотрицательным числом.')
+      setSaving(false)
       return
     }
-    if (numericQuantity < (product.stock?.reservedQuantity || 0)) {
+    if (product?.stock?.reservedQuantity && quantity < product.stock.reservedQuantity) {
       setError(`Остаток не может быть меньше резерва (${product.stock.reservedQuantity}).`)
+      setSaving(false)
       return
     }
-    performSave(
-      'stock',
-      () => updateAdminProductStock(id, { quantity: numericQuantity, stockStatus }),
-      'Остаток и статус обновлены.',
-    )
+
+    try {
+      const updated = await updateAdminProduct(id, {
+        catalogNodeId: form.catalogNodeId,
+        brandId: form.brandId || null,
+        titleKg: form.titleKg,
+        titleRu: form.titleRu,
+        slug: form.slug,
+        sku: form.sku,
+        shortDescriptionKg: form.shortDescriptionKg,
+        descriptionKg: form.descriptionKg,
+        descriptionRu: form.descriptionRu,
+        price,
+        stockQuantity: quantity,
+        stockStatus: form.stockStatus,
+        unit: form.unit,
+        isActive: form.isActive,
+        adminNote: form.adminNote,
+        specs: compactSpecs(form.specs),
+        documents: compactRows(form.documents, ['title', 'url']),
+        images: form.images.filter((image) => image.src.trim()),
+      })
+      setProduct(updated)
+      setForm(createForm(updated))
+      setMessage('Товар сохранен.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось сохранить товар.')
+    } finally {
+      setSaving(false)
+    }
   }
 
-  function toggleActive() {
-    const nextValue = !product.isActive
-    performSave(
-      'active',
-      () => updateAdminProductActive(id, nextValue),
-      nextValue ? 'Товар снова виден в магазине.' : 'Товар скрыт из магазина.',
-    )
-  }
-
-  function saveNote(event) {
-    event.preventDefault()
-    performSave(
-      'note',
-      () => updateAdminProductNote(id, note),
-      note.trim() ? 'Внутренняя заметка сохранена.' : 'Внутренняя заметка удалена.',
-    )
-  }
-
-  if (loading) return <div className="admin-state">Загружаем товар…</div>
-  if (!product) return <div className="admin-alert admin-alert-error">{error || 'Товар не найден.'}</div>
+  if (loading) return <div className="admin-state">Загружаем товар...</div>
+  if (!form || !product) return <div className="admin-alert admin-alert-error">{error || 'Товар не найден.'}</div>
 
   return (
     <section>
       <Link className="admin-back-link" to="/admin/products">← К списку товаров</Link>
-      <div className="admin-page-heading">
-        <div>
-          <span className="admin-eyebrow">Товар</span>
-          <h1>{product.title}</h1>
-          <p>{product.slug} · {product.sku}</p>
+      <form className="admin-product-editor" data-qa="admin-product-edit-form" onSubmit={handleSave}>
+        <div className="admin-page-heading">
+          <div>
+            <span className="admin-eyebrow">Товар</span>
+            <h1>{form.titleKg || product.title}</h1>
+            <p>{form.slug} · {form.sku || 'без SKU'}</p>
+          </div>
+          <div className="admin-heading-actions">
+            <a className="admin-secondary-button" href={`/product/${form.slug}`} target="_blank" rel="noreferrer">
+              Открыть на сайте
+            </a>
+            <button className="admin-primary-button" type="submit" disabled={saving}>
+              {saving ? 'Сохраняем...' : 'Сохранить'}
+            </button>
+          </div>
         </div>
-        <span className={`admin-status ${product.isActive ? 'admin-status-confirmed' : 'admin-status-cancelled'}`}>
-          {product.isActive ? 'Активен' : 'Скрыт'}
-        </span>
-      </div>
 
-      {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
-      {message && <div className="admin-alert admin-alert-success" role="status">{message}</div>}
+        {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
+        {message && <div className="admin-alert admin-alert-success" role="status">{message}</div>}
 
-      <div className="admin-detail-grid">
-        <article className="admin-card">
-          <h2>Сводка</h2>
+        <div className="admin-detail-grid">
+          <article className="admin-card admin-edit-form">
+            <h2>Основное</h2>
+            <label>
+              Название KG
+              <input data-qa="edit-title-kg" value={form.titleKg} onChange={(event) => updateField('titleKg', event.target.value)} maxLength={180} required />
+            </label>
+            <label>
+              Название RU
+              <input data-qa="edit-title-ru" value={form.titleRu} onChange={(event) => updateField('titleRu', event.target.value)} maxLength={180} />
+            </label>
+            <label>
+              Slug
+              <input data-qa="edit-slug" value={form.slug} onChange={(event) => updateField('slug', event.target.value)} maxLength={180} required />
+            </label>
+            <label>
+              SKU
+              <input data-qa="edit-sku" value={form.sku} onChange={(event) => updateField('sku', event.target.value)} maxLength={80} required />
+            </label>
+            <label>
+              Категория
+              <select data-qa="edit-category" value={form.catalogNodeId} onChange={(event) => updateField('catalogNodeId', event.target.value)} required>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {'- '.repeat(Math.max(category.level || 0, 0))}{category.titleKg} · {category.path}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Бренд
+              <select data-qa="edit-brand" value={form.brandId} onChange={(event) => updateField('brandId', event.target.value)}>
+                <option value="">Без бренда</option>
+                {brands.map((brand) => (
+                  <option key={brand.id} value={brand.id}>{brand.name}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Единица
+              <select data-qa="edit-unit" value={form.unit} onChange={(event) => updateField('unit', event.target.value)}>
+                {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
+              </select>
+            </label>
+            <label className="admin-checkbox-field">
+              <input data-qa="edit-active" type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} />
+              Показывать товар в магазине
+            </label>
+          </article>
+
+          <article className="admin-card admin-edit-form">
+            <h2>Цена и остаток</h2>
+            <label>
+              Цена, KGS
+              <input data-qa="edit-price" type="number" min="0.01" max="9999999999.99" step="0.01" value={form.price} onChange={(event) => updateField('price', event.target.value)} required />
+            </label>
+            <label>
+              Остаток
+              <input data-qa="edit-stock" type="number" min={product.stock?.reservedQuantity || 0} step="1" value={form.quantity} onChange={(event) => updateField('quantity', event.target.value)} required />
+            </label>
+            <label>
+              Статус наличия
+              <select data-qa="edit-stock-status" value={form.stockStatus} onChange={(event) => updateField('stockStatus', event.target.value)}>
+                {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
+            </label>
+            <small>
+              Текущая цена: {formatPrice(product.price)}. Зарезервировано: {product.stock?.reservedQuantity || 0}.
+            </small>
+          </article>
+        </div>
+
+        <div className="admin-detail-grid">
+          <article className="admin-card admin-edit-form">
+            <h2>Описание KG</h2>
+            <label>
+              Короткое описание
+              <textarea data-qa="edit-short-description-kg" rows={3} value={form.shortDescriptionKg} onChange={(event) => updateField('shortDescriptionKg', event.target.value)} maxLength={1200} />
+            </label>
+            <label>
+              Полное описание KG
+              <textarea data-qa="edit-description-kg" rows={8} value={form.descriptionKg} onChange={(event) => updateField('descriptionKg', event.target.value)} maxLength={5000} />
+            </label>
+          </article>
+
+          <article className="admin-card admin-edit-form">
+            <h2>Описание RU</h2>
+            <label>
+              Полное описание RU
+              <textarea data-qa="edit-description-ru" rows={8} value={form.descriptionRu} onChange={(event) => updateField('descriptionRu', event.target.value)} maxLength={5000} />
+            </label>
+            <label>
+              Внутренняя заметка
+              <textarea data-qa="edit-admin-note" rows={5} value={form.adminNote} onChange={(event) => updateField('adminNote', event.target.value)} maxLength={2000} />
+            </label>
+          </article>
+        </div>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Характеристики</h2>
+            <button type="button" className="admin-secondary-button" onClick={() => addRow('specs', emptySpec())}>
+              Добавить характеристику
+            </button>
+          </div>
+          <div className="admin-repeat-list">
+            {form.specs.map((row, index) => (
+              <div className="admin-repeat-row admin-repeat-row-spec" key={`spec-${index}`}>
+                <input data-qa="edit-spec-key" placeholder="Ключ" value={row.key} onChange={(event) => updateRow('specs', index, 'key', event.target.value)} maxLength={120} />
+                <input data-qa="edit-spec-value" placeholder="Значение" value={row.value} onChange={(event) => updateRow('specs', index, 'value', event.target.value)} maxLength={500} />
+                <button type="button" className="admin-danger-button" onClick={() => removeRow('specs', index, emptySpec())}>Удалить</button>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Документы</h2>
+            <button type="button" className="admin-secondary-button" onClick={() => addRow('documents', emptyDocument())}>
+              Добавить документ
+            </button>
+          </div>
+          <div className="admin-repeat-list">
+            {form.documents.map((row, index) => (
+              <div className="admin-repeat-row admin-repeat-row-document" key={`document-${index}`}>
+                <input data-qa="edit-document-title" placeholder="Название" value={row.title} onChange={(event) => updateRow('documents', index, 'title', event.target.value)} maxLength={180} />
+                <input data-qa="edit-document-url" placeholder="https://... или /uploads/..." value={row.url} onChange={(event) => updateRow('documents', index, 'url', event.target.value)} maxLength={500} />
+                <select data-qa="edit-document-type" value={row.type} onChange={(event) => updateRow('documents', index, 'type', event.target.value)}>
+                  {documentTypeOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+                <button type="button" className="admin-danger-button" onClick={() => removeRow('documents', index, emptyDocument())}>Удалить</button>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Фото</h2>
+            <label className="admin-file-upload admin-inline-upload">
+              Загрузить фото
+              <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" disabled={uploadingImage} onChange={handleImageUpload} />
+              <span>{uploadingImage ? 'Загружаем...' : 'JPG, PNG, WEBP или GIF до 5 MB'}</span>
+            </label>
+          </div>
+          {form.images.length === 0 ? (
+            <div className="admin-state">У товара нет прикрепленных фото. На сайте будет использована заглушка.</div>
+          ) : (
+            <div className="admin-gallery-editor">
+              {form.images.map((image, index) => (
+                <div className="admin-gallery-item" key={`${image.src}-${index}`}>
+                  <img src={image.src} alt={image.alt || form.titleKg} />
+                  <input data-qa="edit-image-alt" value={image.alt} onChange={(event) => updateRow('images', index, 'alt', event.target.value)} maxLength={180} placeholder="Alt text" />
+                  <div className="admin-gallery-actions">
+                    <button type="button" className="admin-secondary-button" disabled={index === 0} onClick={() => makeMainImage(index)}>
+                      Сделать главным
+                    </button>
+                    <button type="button" className="admin-danger-button" onClick={() => removeImage(index)}>
+                      Убрать
+                    </button>
+                  </div>
+                  {index === 0 && <small>Главное фото</small>}
+                </div>
+              ))}
+            </div>
+          )}
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <h2>Служебные данные</h2>
           <dl>
-            <div><dt>Категория</dt><dd>{product.catalogPath}</dd></div>
-            <div><dt>Бренд</dt><dd>{product.brand?.name || '—'}</dd></div>
-            <div><dt>Единица</dt><dd>{product.unit}</dd></div>
-            <div><dt>Текущая цена</dt><dd>{formatPrice(product.price)}</dd></div>
+            <div><dt>ID</dt><dd>{product.id}</dd></div>
+            <div><dt>Обновлен</dt><dd>{new Date(product.updatedAt).toLocaleString('ru-RU')}</dd></div>
             <div><dt>Фото</dt><dd>{product.imageStatus === 'ready' ? 'Готово' : product.imageStatus === 'placeholder' ? 'Заглушка' : 'Нет'}</dd></div>
-            <div><dt>Обновлён</dt><dd>{new Date(product.updatedAt).toLocaleString('ru-RU')}</dd></div>
           </dl>
         </article>
-
-        <article className="admin-card">
-          <h2>Видимость</h2>
-          <p>
-            Неактивный товар исчезает из публичного каталога и страницы товара,
-            а создание нового заказа с ним блокируется сервером.
-          </p>
-          <button
-            type="button"
-            className={product.isActive ? 'admin-danger-button' : 'admin-primary-button'}
-            disabled={saving === 'active'}
-            onClick={toggleActive}
-          >
-            {saving === 'active' ? 'Сохраняем…' : product.isActive ? 'Скрыть товар' : 'Активировать товар'}
-          </button>
-        </article>
-      </div>
-
-      <div className="admin-detail-grid">
-        <form className="admin-card admin-edit-form" onSubmit={savePrice}>
-          <h2>Цена</h2>
-          <label>
-            Цена, KGS
-            <input type="number" min="0.01" max="9999999999.99" step="0.01" value={price} onChange={(event) => setPrice(event.target.value)} required />
-          </label>
-          <small>Новые заказы используют эту цену. Старые snapshots не пересчитываются.</small>
-          <button className="admin-primary-button" type="submit" disabled={saving === 'price'}>
-            {saving === 'price' ? 'Сохраняем…' : 'Обновить цену'}
-          </button>
-        </form>
-
-        <form className="admin-card admin-edit-form" onSubmit={saveStock}>
-          <h2>Остаток</h2>
-          <label>
-            Физическое количество
-            <input type="number" min={product.stock?.reservedQuantity || 0} step="1" value={quantity} onChange={(event) => setQuantity(event.target.value)} required />
-          </label>
-          <label>
-            Статус наличия
-            <select value={stockStatus} onChange={(event) => setStockStatus(event.target.value)}>
-              {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-            </select>
-          </label>
-          <small>
-            Зарезервировано: {product.stock?.reservedQuantity || 0}. Доступно:
-            {' '}{product.stock?.availableQuantity || 0}.
-          </small>
-          <button className="admin-primary-button" type="submit" disabled={saving === 'stock'}>
-            {saving === 'stock' ? 'Сохраняем…' : 'Обновить остаток'}
-          </button>
-        </form>
-      </div>
-
-      <form className="admin-card admin-edit-form" onSubmit={saveNote}>
-        <h2>Внутренняя заметка</h2>
-        <textarea rows={5} maxLength={2000} value={note} onChange={(event) => setNote(event.target.value)} placeholder="Не видна покупателям." />
-        <button className="admin-primary-button" type="submit" disabled={saving === 'note'}>
-          {saving === 'note' ? 'Сохраняем…' : 'Сохранить заметку'}
-        </button>
       </form>
-
-      <div className="admin-readonly-note">
-        Название, slug, категория, описания, SEO, FAQ и изображения на этом этапе доступны
-        только для просмотра и защищены от случайного редактирования.
-      </div>
     </section>
   )
 }

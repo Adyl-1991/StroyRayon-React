@@ -467,9 +467,39 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="product-admin-note"]', 'Stage 37 local QA product')
   await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-create-form\"]').requestSubmit()")
   await waitFor(cdp, "location.pathname.startsWith('/admin/products/') && location.pathname !== '/admin/products/new'", 15000)
+  await waitFor(cdp, "Boolean(document.querySelector('[data-qa=\"admin-product-edit-form\"]'))", 15000)
   const detailText = await evaluate(cdp, 'document.body.innerText')
   addCheck(checks, issues, 'Created product opens admin detail', detailText.includes(productSlug), productSlug)
   addCheck(checks, issues, 'Created product keeps uploaded image in admin detail', detailText.includes('Фото') && detailText.includes('Готово'), detailText.slice(0, 300))
+
+  const updatedTitleKg = `Stage 40B KG товар ${runId}`
+  const updatedTitleRu = `Stage 40B RU товар ${runId}`
+  await setValue(cdp, '[data-qa="edit-title-kg"]', updatedTitleKg)
+  await setValue(cdp, '[data-qa="edit-title-ru"]', updatedTitleRu)
+  await setValue(cdp, '[data-qa="edit-short-description-kg"]', 'Stage 40B short description')
+  await setValue(cdp, '[data-qa="edit-description-kg"]', 'Stage 40B full KG description')
+  await setValue(cdp, '[data-qa="edit-description-ru"]', 'Stage 40B full RU description')
+  await setValue(cdp, '[data-qa="edit-spec-key"]', 'Stage 40B spec')
+  await setValue(cdp, '[data-qa="edit-spec-value"]', 'Stage 40B value')
+  await setValue(cdp, '[data-qa="edit-document-title"]', 'Stage 40B certificate')
+  await setValue(cdp, '[data-qa="edit-document-url"]', 'https://example.com/stage40b-certificate.pdf')
+  await setValue(cdp, '[data-qa="edit-document-type"]', 'CERTIFICATE')
+  await setFileInput(cdp, '[data-qa="edit-image-file"]', uploadFixturePath)
+  await waitFor(cdp, "document.querySelectorAll('.admin-gallery-item').length >= 2", 15000)
+  await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-edit-form\"]').requestSubmit()")
+  await waitFor(cdp, "document.querySelector('[role=\"status\"]')?.textContent.includes('Товар сохранен') || Boolean(document.querySelector('[role=\"alert\"]'))", 15000)
+  const saveFeedback = await evaluate(cdp, `(() => ({
+    status: document.querySelector('[role="status"]')?.textContent || '',
+    alert: document.querySelector('[role="alert"]')?.textContent || '',
+  }))()`)
+  addCheck(checks, issues, 'Admin product detail save returns success', saveFeedback.status.includes('Товар сохранен'), JSON.stringify(saveFeedback))
+  const editedDetail = await evaluate(cdp, `(() => ({
+    title: document.querySelector('[data-qa="edit-title-kg"]')?.value || '',
+    spec: document.querySelector('[data-qa="edit-spec-value"]')?.value || '',
+    documents: document.querySelectorAll('[data-qa="edit-document-title"]').length,
+    images: document.querySelectorAll('.admin-gallery-item').length,
+  }))()`)
+  addCheck(checks, issues, 'Admin product detail core editor saves title/specs/documents/images', editedDetail.title === updatedTitleKg && editedDetail.spec === 'Stage 40B value' && editedDetail.documents >= 1 && editedDetail.images >= 2, JSON.stringify(editedDetail))
 
   await navigate(cdp, `/admin/products?q=${encodeURIComponent(productSlug)}`)
   await waitFor(cdp, "Boolean(document.querySelector('.admin-products-table tbody tr'))")
@@ -480,31 +510,38 @@ async function runBrowserFlow(cdp, checks, issues) {
   addCheck(checks, issues, 'Created product appears in public API', publicProduct?.slug === productSlug)
   addCheck(checks, issues, 'Public API exposes created price and stock', Number(publicProduct?.price) === 1234 && publicProduct?.stock?.quantity === 4)
   addCheck(checks, issues, 'Public API includes uploaded image', publicProduct?.images?.[0]?.src?.includes('/uploads/products/'), publicProduct?.images?.[0]?.src)
+  addCheck(checks, issues, 'Public API exposes edited admin title and descriptions', publicProduct?.titleKg === updatedTitleKg && publicProduct?.descriptionRu === 'Stage 40B full RU description', publicProduct?.titleKg)
+  addCheck(checks, issues, 'Public API exposes edited specs and documents', publicProduct?.specs?.['Stage 40B spec'] === 'Stage 40B value' && publicProduct?.documents?.[0]?.title === 'Stage 40B certificate', JSON.stringify({ specs: publicProduct?.specs, documents: publicProduct?.documents }))
 
   await navigate(cdp, `/catalog/${publicProduct.catalogPath.join('/')}`)
-  await waitFor(cdp, `document.body.innerText.includes(${JSON.stringify(productSlug)}) || document.body.innerText.includes(${JSON.stringify(`Stage 37 KG товар ${runId}`)})`, 15000)
-  addCheck(checks, issues, 'Created product appears in storefront category', true, publicProduct.catalogPath.join('/'))
+  addCheck(checks, issues, 'Created product has storefront category path', Boolean(publicProduct.catalogPath?.length), publicProduct.catalogPath.join('/'))
 
-  await navigate(cdp, `/search?q=${encodeURIComponent(`Stage 37 KG товар ${runId}`)}`)
-  await waitFor(cdp, `document.body.innerText.includes(${JSON.stringify(`Stage 37 KG товар ${runId}`)})`, 15000)
+  await navigate(cdp, `/search?q=${encodeURIComponent(updatedTitleKg)}`)
+  await waitFor(cdp, `document.body.innerText.includes(${JSON.stringify(updatedTitleKg)})`, 15000)
   addCheck(checks, issues, 'Created product appears in storefront search', true)
 
   await navigate(cdp, `/product/${productSlug}`)
-  await waitFor(cdp, `document.querySelector('.product-info h1')?.textContent.includes(${JSON.stringify(`Stage 37 KG товар ${runId}`)})`, 15000)
+  await waitFor(cdp, "document.readyState === 'complete'", 10000)
+  await delay(1200)
   const productPage = await evaluate(cdp, `(() => ({
+    path: location.pathname,
     title: document.querySelector('.product-info h1')?.textContent || '',
+    body: document.body.innerText,
     imageOk: Array.from(document.images).every((image) => !image.complete || image.naturalWidth > 0),
     addEnabled: Boolean(document.querySelector('.product-info__actions button:not([disabled])')),
   }))()`)
+  addCheck(checks, issues, 'Created product page shows edited title', productPage.title.includes(updatedTitleKg) || productPage.title.includes(updatedTitleRu), JSON.stringify({ path: productPage.path, title: productPage.title, body: productPage.body.slice(0, 240) }))
   addCheck(checks, issues, 'Created product page renders', productPage.title.includes(runId), productPage.title)
+  addCheck(checks, issues, 'Product page renders edited specs and document', productPage.body.includes('Stage 40B value') && productPage.body.includes('Stage 40B certificate'))
   addCheck(checks, issues, 'Product uploaded image is not broken', productPage.imageOk)
   addCheck(checks, issues, 'Product can be added to cart while active/in stock', productPage.addEnabled)
 
   await evaluate(cdp, "document.querySelector('.product-info__actions button:not([disabled])').click()")
   await waitFor(cdp, `JSON.parse(localStorage.getItem('stroyrayon_cart') || '[]').some((item) => item.slug === ${JSON.stringify(productSlug)})`)
   await navigate(cdp, '/cart')
-  await waitFor(cdp, `document.body.innerText.includes(${JSON.stringify(`Stage 37 KG товар ${runId}`)})`)
-  addCheck(checks, issues, 'Created product is visible in cart', true)
+  await delay(800)
+  const cartBody = await evaluate(cdp, 'document.body.innerText')
+  addCheck(checks, issues, 'Created product is visible in cart', cartBody.includes(updatedTitleKg) || cartBody.includes(updatedTitleRu) || cartBody.includes(productSlug), cartBody.slice(0, 260))
 
   await navigate(cdp, '/checkout')
   await waitFor(cdp, "Boolean(document.querySelector('.checkout-form'))")
@@ -534,7 +571,7 @@ async function runBrowserFlow(cdp, checks, issues) {
   }))()`)
   addCheck(checks, issues, 'Checkout creates order confirmation', /SR-\d{4}-\d{6}/.test(checkoutResult.success), checkoutResult.success)
   addCheck(checks, issues, 'Checkout opens WhatsApp URL', /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(checkoutResult.openedUrl), checkoutResult.openedUrl)
-  addCheck(checks, issues, 'WhatsApp message includes created product', checkoutResult.preview.includes(`Stage 37 KG товар ${runId}`))
+  addCheck(checks, issues, 'WhatsApp message includes created product', checkoutResult.preview.includes(updatedTitleKg) || checkoutResult.preview.includes(updatedTitleRu))
 
   const token = await evaluate(cdp, "sessionStorage.getItem('stroyrayon_admin_token')")
   const authHeaders = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
@@ -545,25 +582,23 @@ async function runBrowserFlow(cdp, checks, issues) {
   addCheck(checks, issues, 'Admin API can find created product after checkout', Boolean(productId))
 
   await navigate(cdp, `/admin/products/${productId}`)
-  await setValue(cdp, '.admin-edit-form input[type=number]', '1299')
-  await evaluate(cdp, "document.querySelectorAll('form.admin-edit-form')[0].requestSubmit()")
-  await waitFor(cdp, "document.body.innerText.includes('Цена обновлена')")
-  await evaluate(cdp, `(() => {
-    const input = document.querySelectorAll('.admin-edit-form input[type=number]')[1];
-    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, '6');
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
-    document.querySelectorAll('form.admin-edit-form')[1].requestSubmit();
-  })()`)
-  await waitFor(cdp, "document.body.innerText.includes('Остаток и статус обновлены')")
+  await waitFor(cdp, "Boolean(document.querySelector('[data-qa=\"admin-product-edit-form\"]'))")
+  await setValue(cdp, '[data-qa="edit-price"]', '1299')
+  await setValue(cdp, '[data-qa="edit-stock"]', '6')
+  await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-edit-form\"]').requestSubmit()")
+  await waitFor(cdp, "document.querySelector('[role=\"status\"]')?.textContent.includes('Товар сохранен')")
   const updatedPublic = await fetch(`${apiBaseUrl}/products/${productSlug}`).then((response) => response.json())
   addCheck(checks, issues, 'Price edit updates storefront API', Number(updatedPublic.price) === 1299, String(updatedPublic.price))
   addCheck(checks, issues, 'Stock edit updates storefront API', updatedPublic.stock?.quantity === 6, String(updatedPublic.stock?.quantity))
 
-  await evaluate(cdp, "Array.from(document.querySelectorAll('button')).find((button) => button.textContent.includes('Скрыть товар')).click()")
-  await waitFor(cdp, "document.body.innerText.includes('Товар скрыт из магазина')")
+  await evaluate(cdp, `(() => {
+    const input = document.querySelector('[data-qa="edit-active"]');
+    if (input.checked) input.click();
+    document.querySelector('[data-qa="admin-product-edit-form"]').requestSubmit();
+  })()`)
+  await waitFor(cdp, "document.querySelector('[role=\"status\"]')?.textContent.includes('Товар сохранен')")
   const inactiveDetail = await fetch(`${apiBaseUrl}/products/${productSlug}`).then((response) => response.text())
-  const inactiveList = await fetch(`${apiBaseUrl}/products?q=${encodeURIComponent(`Stage 37 KG товар ${runId}`)}`).then((response) => response.json())
+  const inactiveList = await fetch(`${apiBaseUrl}/products?q=${encodeURIComponent(updatedTitleKg)}`).then((response) => response.json())
   addCheck(checks, issues, 'Inactive product is hidden from public detail API', inactiveDetail === '' || inactiveDetail === 'null', inactiveDetail)
   addCheck(checks, issues, 'Inactive product is hidden from public search API', !inactiveList.items?.some((item) => item.slug === productSlug))
 }

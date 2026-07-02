@@ -28,6 +28,13 @@ enum ProductImageType {
   GALLERY
 }
 
+enum ProductDocumentType {
+  CERTIFICATE
+  MANUAL
+  PASSPORT
+  OTHER
+}
+
 enum OrderItemStockCheckStatus {
   OK
   NEEDS_CONFIRMATION
@@ -99,6 +106,7 @@ model Product {
   minOrder           String?
   shortDescriptionKg String?
   descriptionKg      String?
+  descriptionRu      String?
   packageInfoKg      String?
   deliveryInfoKg     String?
   warrantyInfoKg     String?
@@ -111,6 +119,7 @@ model Product {
   adminNote          String?
   isActive           Boolean             @default(true)
   images             ProductImage[]
+  documents          ProductDocument[]
   stock              Stock?
   orderItems         OrderItem[]
   relatedFrom        ProductRelation[]   @relation("RelatedFrom")
@@ -135,6 +144,20 @@ model ProductImage {
   type      ProductImageType @default(GALLERY)
   sortOrder Int              @default(0)
   createdAt DateTime         @default(now())
+
+  @@index([productId, sortOrder])
+}
+
+model ProductDocument {
+  id        String              @id @default(cuid())
+  productId String
+  product   Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  title     String
+  url       String
+  type      ProductDocumentType @default(OTHER)
+  sortOrder Int                 @default(0)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
 
   @@index([productId, sortOrder])
 }
