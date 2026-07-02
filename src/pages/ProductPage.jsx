@@ -3,7 +3,6 @@ import { Navigate, useParams } from 'react-router-dom'
 import { ProductFaq } from '../components/product/ProductFaq'
 import { ProductGallery } from '../components/product/ProductGallery'
 import { ProductInfo } from '../components/product/ProductInfo'
-import { ProductReviews } from '../components/product/ProductReviews'
 import { ProductSpecs } from '../components/product/ProductSpecs'
 import { ProductStickyCta } from '../components/product/ProductStickyCta'
 import { RelatedProducts } from '../components/product/RelatedProducts'
@@ -37,6 +36,39 @@ import {
   getProductSeo,
 } from '../utils/seoUtils'
 
+const ignoredSpecKeys = new Set([
+  'descriptionru',
+  'descriptionkg',
+  'description',
+  'documents',
+  'documentation',
+  'документация',
+])
+
+const specLabelMap = {
+  article: { kg: 'Артикул', ru: 'Артикул' },
+  material: { kg: 'Материал', ru: 'Материал' },
+  nominalPressure: { kg: 'Басым', ru: 'Давление' },
+  color: { kg: 'Түсү', ru: 'Цвет' },
+  warranty: { kg: 'Кепилдик', ru: 'Гарантия' },
+  packageQty: { kg: 'Таңгак', ru: 'Упаковка' },
+  length: { kg: 'Узундугу', ru: 'Длина' },
+  diameter: { kg: 'Диаметри', ru: 'Диаметр' },
+  wallThickness: { kg: 'Дубал калыңдыгы', ru: 'Толщина стенки' },
+  монтаж: { kg: 'Монтаж', ru: 'Монтаж' },
+  максимальнаяТемпература: { kg: 'Макс. температура', ru: 'Макс. температура' },
+  эксплуатация: { kg: 'Класс эксплуатации', ru: 'Класс эксплуатации' },
+}
+
+const summarySpecKeys = [
+  'diameter',
+  'wallThickness',
+  'nominalPressure',
+  'material',
+  'length',
+  'color',
+]
+
 function ProductTextList({ title, items }) {
   if (!items.length) return null
 
@@ -50,6 +82,102 @@ function ProductTextList({ title, items }) {
       </ul>
     </section>
   )
+}
+
+function ProductParagraphs({ text }) {
+  const sections = String(text || '')
+    .split(/\n{2,}/)
+    .map((section) => section.trim())
+    .filter(Boolean)
+
+  if (!sections.length) return null
+
+  return sections.map((section) => {
+    const lines = section.split('\n').map((line) => line.trim()).filter(Boolean)
+    const listItems = lines.filter((line) => /^[-•]\s+/.test(line))
+    if (listItems.length) {
+      const intro = lines.filter((line) => !/^[-•]\s+/.test(line)).join(' ')
+      return (
+        <div className="product-rich-text" key={section}>
+          {intro && <p>{intro}</p>}
+          <ul className="product-copy-list">
+            {listItems.map((line) => (
+              <li key={line}>{line.replace(/^[-•]\s+/, '')}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    return <p key={section}>{lines.join(' ')}</p>
+  })
+}
+
+function getLocalizedSpecLabel(key, locale) {
+  const mapped = specLabelMap[key]
+  if (mapped) return mapped[locale] || mapped.ru || mapped.kg
+
+  return String(key)
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/^./, (char) => char.toUpperCase())
+}
+
+function formatSpecValue(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).join(', ')
+  if (value && typeof value === 'object') return ''
+  return String(value || '').trim()
+}
+
+function isCleanSpec(key, value) {
+  const normalizedKey = String(key).toLowerCase()
+  const formattedValue = formatSpecValue(value)
+  return (
+    formattedValue &&
+    !ignoredSpecKeys.has(normalizedKey) &&
+    !normalizedKey.includes('description') &&
+    !normalizedKey.includes('документ') &&
+    formattedValue.length <= 180 &&
+    !formattedValue.includes('\n')
+  )
+}
+
+function buildCleanSpecs(specifications, locale, extraSpecs = {}) {
+  const rows = {}
+
+  Object.entries({ ...specifications, ...extraSpecs }).forEach(([key, value]) => {
+    if (!isCleanSpec(key, value)) return
+    rows[getLocalizedSpecLabel(key, locale)] = formatSpecValue(value)
+  })
+
+  return rows
+}
+
+function buildSummarySpecs(specifications, locale) {
+  return summarySpecKeys
+    .map((key) => {
+      const value = specifications[key]
+      return value ? { label: getLocalizedSpecLabel(key, locale), value: formatSpecValue(value) } : null
+    })
+    .filter(Boolean)
+    .slice(0, 6)
+}
+
+function stripDocumentationSection(text) {
+  return String(text || '')
+    .replace(/\n*Документация[\s\S]*$/i, '')
+    .trim()
+}
+
+function extractDocumentation(specifications) {
+  const documents = specifications.documents || specifications.documentation || specifications['Документация']
+  if (Array.isArray(documents)) return documents.filter(Boolean).map((item) => String(item).trim())
+
+  const source = String(specifications.descriptionRu || specifications.description || '')
+  const documentSection = source.match(/Документация[\s\S]*$/i)?.[0] || ''
+  return documentSection
+    .split('\n')
+    .map((line) => line.replace(/^[-•]\s*/, '').trim())
+    .filter((line) => line && !/^Документация/i.test(line))
 }
 
 export function ProductPage() {
@@ -91,12 +219,17 @@ export function ProductPage() {
 
   const productName = getProductTitle(product, locale)
   const shortDescription = getProductShortDescription(product, locale)
-  const fullDescription = getProductFullDescription(product, locale)
   const specifications = getProductSpecs(product, locale)
+  const fullDescription = stripDocumentationSection(
+    locale === 'ru'
+      ? specifications.descriptionRu || getProductFullDescription(product, locale)
+      : getProductFullDescription(product, locale),
+  )
   const applicationItems = getProductListField(product, 'application', locale)
   const benefitItems = getProductListField(product, 'benefits', locale)
   const instructionItems = getProductListField(product, 'instructions', locale)
   const faqItems = getProductListField(product, 'faq', locale)
+  const documents = extractDocumentation(specifications)
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
   const activeSku = selectedVariant?.sku || product.sku || product.article
@@ -105,14 +238,12 @@ export function ProductPage() {
       ? selectedVariant?.packageInfoRu || product.packRu || product.packageInfoRu || product.minOrderRu
       : normalizeKgText(selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder)
   const stockStatus = selectedVariant ? getStockStatus(selectedVariant) : getStockStatus(product)
-  const variantSpecs = {
-    ...specifications,
+  const variantSpecs = buildCleanSpecs(specifications, locale, {
     ...(activeSku ? { [t('product.sku')]: activeSku } : {}),
     ...(packageInfo ? { [t('product.pack')]: packageInfo } : {}),
     [t('product.stock')]: getStockLabel(stockStatus, locale),
-  }
-  const workArea = specifications[t('product.workArea')] || specifications['Тип работ'] || specifications['Иш түрү']
-  const mainBenefit = benefitItems[0]
+  })
+  const summarySpecs = buildSummarySpecs(specifications, locale)
   const breadcrumbItems = [
     { label: t('common.catalog'), to: '/catalog' },
     ...catalogBreadcrumbs.map((item) => ({ label: nodeText(item).title, to: getCatalogNodeUrl(item.path) })),
@@ -146,62 +277,69 @@ export function ProductPage() {
 
       <div className="product-layout">
         <ProductGallery key={product.id} product={product} selectedVariant={selectedVariant} />
-        <ProductInfo product={product} selectedVariant={selectedVariant} onVariantChange={handleVariantChange} />
+        <ProductInfo
+          product={product}
+          selectedVariant={selectedVariant}
+          onVariantChange={handleVariantChange}
+          summarySpecs={summarySpecs}
+        />
       </div>
 
-      <div className="product-details">
-        <section className="detail-panel product-quick-info">
-          <h2>{t('product.quickInfo')}</h2>
-          <dl className="specs">
-            <div>
-              <dt>{t('product.purpose')}</dt>
-              <dd>{applicationItems[0] || shortDescription}</dd>
-            </div>
-            {workArea && (
-              <div>
-                <dt>{t('product.workArea')}</dt>
-                <dd>{workArea}</dd>
+      <nav className="product-section-nav" aria-label="Разделы товара">
+        <a href="#product-description">{t('product.fullDescription')}</a>
+        <a href="#product-specs">{t('product.specifications')}</a>
+        {documents.length > 0 && <a href="#product-documents">Документация</a>}
+        <a href="#product-delivery">{t('product.deliveryTitle')}</a>
+      </nav>
+
+      <div className="product-content-layout">
+        <div className="product-content-main">
+          <section id="product-description" className="detail-panel product-section product-description-panel">
+            <h2>{t('product.fullDescription')}</h2>
+            <ProductParagraphs text={fullDescription || shortDescription} />
+          </section>
+
+          <ProductSpecs id="product-specs" className="product-section product-spec-section" specs={variantSpecs} />
+
+          {documents.length > 0 && (
+            <section id="product-documents" className="detail-panel product-section product-documents">
+              <h2>Документация</h2>
+              <div className="product-documents__list">
+                {documents.map((documentTitle) => (
+                  <div key={documentTitle} className="product-document-row">
+                    <span aria-hidden="true">PDF</span>
+                    <p>{documentTitle}</p>
+                  </div>
+                ))}
               </div>
-            )}
-            {mainBenefit && (
-              <div>
-                <dt>{t('product.mainBenefit')}</dt>
-                <dd>{mainBenefit}</dd>
-              </div>
-            )}
-          </dl>
-        </section>
+            </section>
+          )}
 
-        <section className="detail-panel product-description-panel">
-          <h2>{t('product.fullDescription')}</h2>
-          <p>{fullDescription}</p>
-        </section>
+          <ProductTextList title={t('product.application')} items={applicationItems} />
+          <ProductTextList title={t('product.benefits')} items={benefitItems} />
+          <ProductTextList title={t('product.instructions')} items={instructionItems} />
+          <ProductFaq items={faqItems} />
+        </div>
 
-        <ProductSpecs specs={variantSpecs} />
-        <ProductTextList title={t('product.application')} items={applicationItems} />
-        <ProductTextList title={t('product.benefits')} items={benefitItems} />
-        <ProductTextList title={t('product.instructions')} items={instructionItems} />
+        <aside className="product-content-side">
+          <section id="product-delivery" className="detail-panel product-section">
+            <h2>{t('product.deliveryTitle')}</h2>
+            <ul className="product-copy-list">
+              <li>{t('product.delivery')}</li>
+              <li>{t('product.payment')}</li>
+              <li>{t('product.whatsappClarify')}</li>
+            </ul>
+            <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
+          </section>
 
-        <section className="detail-panel">
-          <h2>{t('product.deliveryTitle')}</h2>
-          <ul className="product-copy-list">
-            <li>{t('product.delivery')}</li>
-            <li>{t('product.payment')}</li>
-            <li>{t('product.whatsappClarify')}</li>
-          </ul>
-          <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
-        </section>
-
-        <section className="detail-panel manager-cta">
-          <h2>{t('product.managerTitle')}</h2>
-          <p>{t('product.managerText')}</p>
-          <a href={getWhatsAppUrl(managerAskText)} target="_blank" rel="noreferrer">
-            {t('product.askWhatsApp')}
-          </a>
-        </section>
-
-        <ProductFaq items={faqItems} />
-        <ProductReviews product={product} />
+          <section className="detail-panel manager-cta product-section">
+            <h2>{t('product.managerTitle')}</h2>
+            <p>{t('product.managerText')}</p>
+            <a href={getWhatsAppUrl(managerAskText)} target="_blank" rel="noreferrer">
+              {t('product.askWhatsApp')}
+            </a>
+          </section>
+        </aside>
       </div>
 
       <RelatedProducts products={relatedProducts} />

@@ -17,7 +17,7 @@ import { formatPrice } from '../../utils/formatPrice'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 
-export function ProductInfo({ product, selectedVariant, onVariantChange }) {
+export function ProductInfo({ product, selectedVariant, onVariantChange, summarySpecs = [] }) {
   const { addToCart } = useCart()
   const { locale, t } = useLocale()
   const variants = getProductVariants(product)
@@ -63,9 +63,16 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
           </div>
         ))}
       </dl>
-      <div className="rating">
-        {t('product.ratingText', { rating: product.rating, count: product.reviewsCount })}
-      </div>
+      {summarySpecs.length > 0 && (
+        <div className="product-key-specs" aria-label={t('product.specifications')}>
+          {summarySpecs.map((item) => (
+            <div key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="product-price">
         <strong>{formatPrice(activePrice)}</strong>
         {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
@@ -100,7 +107,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange }) {
           </div>
         </fieldset>
       )}
-      <p>{shortDescription}</p>
+      {shortDescription && <p>{shortDescription}</p>}
       <div className="product-info__actions">
         <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>
           {t('product.addToCart')}

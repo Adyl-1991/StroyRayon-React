@@ -1,4 +1,4 @@
-import { apiGet, apiPatch, apiPost } from './client'
+import { apiGet, apiPatch, apiPost, apiPostForm } from './client'
 import { clearAdminToken, getAdminToken, setAdminToken } from '../admin/adminSession'
 
 function authorizedOptions(options = {}) {
@@ -74,6 +74,12 @@ export function getAdminProductOptions() {
 
 export function createAdminProduct(payload) {
   return adminRequest(() => apiPost('/admin/products', payload, authorizedOptions()))
+}
+
+export function uploadAdminProductImage(file) {
+  const formData = new FormData()
+  formData.append('file', file)
+  return adminRequest(() => apiPostForm('/admin/products/images', formData, authorizedOptions()))
 }
 
 export function getAdminProduct(id) {

@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs'
-import { mkdir, rm } from 'node:fs/promises'
+import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
 import crypto from 'node:crypto'
@@ -25,6 +25,7 @@ const apiBaseUrl = process.env.STAGE37_API_URL || `http://127.0.0.1:${apiPort}/a
 const siteBaseUrl = process.env.STAGE37_SITE_URL || `http://127.0.0.1:${sitePort}`
 const tempRoot = path.join(process.env.TEMP || rootDir, 'stroyrayon-stage37-qa')
 const profileDir = path.join(tempRoot, `chrome-${runId}`)
+const uploadFixturePath = path.join(tempRoot, `stage38-product-upload-${runId}.png`)
 const startApi = process.env.STAGE37_START_API !== '0' && !process.env.STAGE37_API_URL
 const startSite = process.env.STAGE37_START_SITE !== '0' && !process.env.STAGE37_SITE_URL
 const adminEmail = process.env.STAGE37_ADMIN_EMAIL || 'stage37-admin@example.local'
@@ -34,6 +35,11 @@ const productSku = `SR-STAGE37-${runId}`
 const customerPhone = `+99670037${runId.slice(-4)}`
 const scrypt = promisify(crypto.scrypt)
 const KEY_LENGTH = 64
+const tinyPng = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQz0AEYBxVSFIAIfoGAXZ3w4cAAAAASUVORK5CYII=',
+  'base64',
+)
+let uploadedProductImagePath = ''
 
 function logStep(message) {
   console.log(`[qa:admin-product-flow] ${message}`)
@@ -321,6 +327,19 @@ async function setValue(cdp, selector, value) {
   if (!ok) throw new Error(`Element not found: ${selector}`)
 }
 
+async function setFileInput(cdp, selector, filePath) {
+  const documentResult = await cdp.send('DOM.getDocument', { depth: -1, pierce: true })
+  const queryResult = await cdp.send('DOM.querySelector', {
+    nodeId: documentResult.root.nodeId,
+    selector,
+  })
+  if (!queryResult.nodeId) throw new Error(`File input not found: ${selector}`)
+  await cdp.send('DOM.setFileInputFiles', {
+    nodeId: queryResult.nodeId,
+    files: [filePath],
+  })
+}
+
 function addCheck(checks, issues, name, passed, details = '') {
   checks.push({ name, passed, details })
   if (!passed) issues.push({ name, details })
@@ -352,6 +371,13 @@ async function cleanupLocalData(prisma) {
   }
   await prisma.product.deleteMany({ where: { OR: [{ slug: productSlug }, { sku: productSku }] } })
   await prisma.adminUser.deleteMany({ where: { email: adminEmail } })
+  if (uploadedProductImagePath?.startsWith('/uploads/products/')) {
+    const uploadRoot = path.resolve(apiDir, 'uploads', 'products')
+    const uploadPath = path.resolve(apiDir, uploadedProductImagePath.replace(/^\/+/, ''))
+    if (uploadPath.startsWith(`${uploadRoot}${path.sep}`)) {
+      await rm(uploadPath, { force: true })
+    }
+  }
 }
 
 async function runBrowserFlow(cdp, checks, issues) {
@@ -407,11 +433,43 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="product-unit"]', 'даана')
   await setValue(cdp, '[data-qa="product-stock-status"]', 'IN_STOCK')
   await setValue(cdp, '[data-qa="product-admin-note"]', 'Stage 37 local QA product')
+  await setFileInput(cdp, '[data-qa="product-image-file"]', uploadFixturePath)
+  await waitFor(cdp, "document.querySelector('[data-qa=\"product-image-src\"]')?.value.includes('/uploads/products/')", 15000)
+  await waitFor(cdp, "Boolean(document.querySelector('.admin-image-preview img')?.naturalWidth)", 15000)
+  const uploadState = await evaluate(cdp, `(() => {
+    const imageSrc = document.querySelector('[data-qa="product-image-src"]')?.value || '';
+    const preview = document.querySelector('.admin-image-preview img');
+    return {
+      imageSrc,
+      imageAlt: document.querySelector('[data-qa="product-image-alt"]')?.value || '',
+      status: document.querySelector('.admin-upload-status')?.textContent || '',
+      previewReady: Boolean(preview && preview.complete && preview.naturalWidth > 0),
+    };
+  })()`)
+  uploadedProductImagePath = new URL(uploadState.imageSrc).pathname
+  const staticUploadResponse = await fetch(uploadState.imageSrc)
+  addCheck(checks, issues, 'Product image file upload populates URL', uploadedProductImagePath.startsWith('/uploads/products/'), uploadState.imageSrc)
+  addCheck(checks, issues, 'Product image upload sets alt fallback', Boolean(uploadState.imageAlt), uploadState.imageAlt)
+  addCheck(checks, issues, 'Product image upload shows admin success status', uploadState.status.includes('URL'), uploadState.status)
+  addCheck(checks, issues, 'Product image upload preview renders', uploadState.previewReady)
+  addCheck(checks, issues, 'Uploaded product image is served statically', staticUploadResponse.ok, `${staticUploadResponse.status} ${uploadState.imageSrc}`)
+  await setValue(cdp, '[data-qa="product-title-kg"]', `Stage 37 KG товар ${runId}`)
+  await setValue(cdp, '[data-qa="product-title-ru"]', `Stage 37 RU товар ${runId}`)
+  await setValue(cdp, '[data-qa="product-slug"]', productSlug)
+  await setValue(cdp, '[data-qa="product-sku"]', productSku)
+  await setValue(cdp, '[data-qa="product-short-description-kg"]', 'Stage 37 кыска сүрөттөмө')
+  await setValue(cdp, '[data-qa="product-description-kg"]', 'Stage 37 кыргызча толук сүрөттөмө')
+  await setValue(cdp, '[data-qa="product-description-ru"]', 'Stage 37 русское полное описание')
+  await setValue(cdp, '[data-qa="product-price"]', '1234')
+  await setValue(cdp, '[data-qa="product-stock"]', '4')
+  await setValue(cdp, '[data-qa="product-unit"]', 'даана')
+  await setValue(cdp, '[data-qa="product-stock-status"]', 'IN_STOCK')
+  await setValue(cdp, '[data-qa="product-admin-note"]', 'Stage 37 local QA product')
   await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-create-form\"]').requestSubmit()")
   await waitFor(cdp, "location.pathname.startsWith('/admin/products/') && location.pathname !== '/admin/products/new'", 15000)
   const detailText = await evaluate(cdp, 'document.body.innerText')
   addCheck(checks, issues, 'Created product opens admin detail', detailText.includes(productSlug), productSlug)
-  addCheck(checks, issues, 'Placeholder image fallback is visible in admin', detailText.includes('Заглушка'), detailText.slice(0, 200))
+  addCheck(checks, issues, 'Created product keeps uploaded image in admin detail', detailText.includes('Фото') && detailText.includes('Готово'), detailText.slice(0, 300))
 
   await navigate(cdp, `/admin/products?q=${encodeURIComponent(productSlug)}`)
   await waitFor(cdp, "Boolean(document.querySelector('.admin-products-table tbody tr'))")
@@ -421,7 +479,7 @@ async function runBrowserFlow(cdp, checks, issues) {
   const publicProduct = await fetch(`${apiBaseUrl}/products/${productSlug}`).then((response) => response.json())
   addCheck(checks, issues, 'Created product appears in public API', publicProduct?.slug === productSlug)
   addCheck(checks, issues, 'Public API exposes created price and stock', Number(publicProduct?.price) === 1234 && publicProduct?.stock?.quantity === 4)
-  addCheck(checks, issues, 'Public API includes placeholder image', publicProduct?.images?.[0]?.src?.includes('/placeholders/'), publicProduct?.images?.[0]?.src)
+  addCheck(checks, issues, 'Public API includes uploaded image', publicProduct?.images?.[0]?.src?.includes('/uploads/products/'), publicProduct?.images?.[0]?.src)
 
   await navigate(cdp, `/catalog/${publicProduct.catalogPath.join('/')}`)
   await waitFor(cdp, `document.body.innerText.includes(${JSON.stringify(productSlug)}) || document.body.innerText.includes(${JSON.stringify(`Stage 37 KG товар ${runId}`)})`, 15000)
@@ -439,7 +497,7 @@ async function runBrowserFlow(cdp, checks, issues) {
     addEnabled: Boolean(document.querySelector('.product-info__actions button:not([disabled])')),
   }))()`)
   addCheck(checks, issues, 'Created product page renders', productPage.title.includes(runId), productPage.title)
-  addCheck(checks, issues, 'Product placeholder image is not broken', productPage.imageOk)
+  addCheck(checks, issues, 'Product uploaded image is not broken', productPage.imageOk)
   addCheck(checks, issues, 'Product can be added to cart while active/in stock', productPage.addEnabled)
 
   await evaluate(cdp, "document.querySelector('.product-info__actions button:not([disabled])').click()")
@@ -516,6 +574,7 @@ async function main() {
   assertLocalDatabase()
   if (!existsSync(chromePath)) throw new Error(`Chrome not found: ${chromePath}`)
   await mkdir(tempRoot, { recursive: true })
+  await writeFile(uploadFixturePath, tinyPng)
 
   const prisma = new PrismaClient()
   const cleanupWarnings = []

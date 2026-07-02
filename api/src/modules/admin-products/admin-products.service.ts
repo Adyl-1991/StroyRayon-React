@@ -323,7 +323,7 @@ function normalizeSlug(value: string) {
 function normalizeImageSrc(value?: string) {
   const imageSrc = value?.trim()
   if (!imageSrc) return ''
-  if (imageSrc.startsWith('/images/')) return imageSrc
+  if (imageSrc.startsWith('/images/') || imageSrc.startsWith('/uploads/')) return imageSrc
   if (/^https?:\/\/.+/i.test(imageSrc)) return imageSrc
-  throw new BadRequestException('Image URL must start with https://, http:// or /images/')
+  throw new BadRequestException('Image URL must start with https://, http://, /images/ or /uploads/')
 }

@@ -17,6 +17,10 @@ export async function apiPost(path, payload, options = {}) {
   return apiRequest('POST', path, payload, options)
 }
 
+export async function apiPostForm(path, formData, options = {}) {
+  return apiRequest('POST', path, formData, options)
+}
+
 export async function apiPatch(path, payload, options = {}) {
   return apiRequest('PATCH', path, payload, options)
 }
@@ -32,14 +36,15 @@ async function apiRequest(method, path, payload, options = {}) {
       url.searchParams.set(key, Array.isArray(value) ? value.join(',') : String(value))
     })
 
+    const isFormData = typeof FormData !== 'undefined' && payload instanceof FormData
     const response = await fetch(url, {
       method,
       headers: {
         Accept: 'application/json',
-        ...(payload === null ? {} : { 'Content-Type': 'application/json' }),
+        ...(payload === null || isFormData ? {} : { 'Content-Type': 'application/json' }),
         ...(options.headers || {}),
       },
-      ...(payload === null ? {} : { body: JSON.stringify(payload) }),
+      ...(payload === null ? {} : { body: isFormData ? payload : JSON.stringify(payload) }),
       signal: controller.signal,
     })
 

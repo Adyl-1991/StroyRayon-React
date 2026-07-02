@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { createAdminProduct, getAdminProductOptions } from '../api/adminApi'
+import { createAdminProduct, getAdminProductOptions, uploadAdminProductImage } from '../api/adminApi'
 
 const stockOptions = [
   ['IN_STOCK', 'В наличии'],
@@ -88,6 +88,8 @@ export function AdminProductCreatePage() {
   const [slugTouched, setSlugTouched] = useState(false)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [imageUploadMessage, setImageUploadMessage] = useState('')
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -127,6 +129,34 @@ export function AdminProductCreatePage() {
     })
   }
 
+  async function handleImageFileChange(event) {
+    const file = event.target.files?.[0]
+    setImageUploadMessage('')
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setError('Выберите файл изображения.')
+      event.target.value = ''
+      return
+    }
+
+    setError('')
+    setUploadingImage(true)
+    try {
+      const uploaded = await uploadAdminProductImage(file)
+      updateField('imageSrc', uploaded.src)
+      setImageUploadMessage('Фото загружено. URL уже добавлен в форму.')
+      if (!form.imageAlt.trim()) {
+        updateField('imageAlt', form.titleRu || form.titleKg || file.name.replace(/\.[^.]+$/, ''))
+      }
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось загрузить фото.')
+    } finally {
+      setUploadingImage(false)
+      event.target.value = ''
+    }
+  }
+
   async function submitForm(event) {
     event.preventDefault()
     setError('')
@@ -156,9 +186,10 @@ export function AdminProductCreatePage() {
     if (
       form.imageSrc.trim() &&
       !form.imageSrc.trim().startsWith('/images/') &&
+      !form.imageSrc.trim().startsWith('/uploads/') &&
       !/^https?:\/\/.+/i.test(form.imageSrc.trim())
     ) {
-      setError('Фото URL должен начинаться с https://, http:// или /images/.')
+      setError('Фото URL должен начинаться с https://, http://, /images/ или /uploads/.')
       return
     }
 
@@ -243,6 +274,23 @@ export function AdminProductCreatePage() {
                 placeholder="/images/products/example/main.webp"
               />
             </label>
+            <label className="admin-file-upload">
+              Загрузить фото с компьютера
+              <input
+                data-qa="product-image-file"
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                disabled={uploadingImage}
+                onChange={handleImageFileChange}
+              />
+              <span>{uploadingImage ? 'Загружаем фото...' : 'JPG, PNG, WEBP или GIF до 5 MB'}</span>
+            </label>
+            {imageUploadMessage && <small className="admin-upload-status">{imageUploadMessage}</small>}
+            {form.imageSrc && (
+              <div className="admin-image-preview">
+                <img src={form.imageSrc} alt={form.imageAlt || 'Превью фото товара'} />
+              </div>
+            )}
             <label>
               Alt для фото
               <input
