@@ -86,6 +86,10 @@ export function getAdminProduct(id) {
   return adminRequest(() => apiGet(`/admin/products/${id}`, authorizedOptions()))
 }
 
+export function getAdminProductAuditLog(id, params = {}) {
+  return adminRequest(() => apiGet(`/admin/products/${id}/audit-log`, authorizedOptions({ params })))
+}
+
 export function updateAdminProduct(id, payload) {
   return adminRequest(() => apiPatch(`/admin/products/${id}`, payload, authorizedOptions()))
 }

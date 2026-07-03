@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common'
 import { AdminAuthGuard } from '../auth/admin-auth.guard'
+import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { CurrentAdmin } from '../auth/current-admin.decorator'
 import { AdminOrdersService } from './admin-orders.service'
 import { AdminOrdersQueryDto } from './dto/admin-orders-query.dto'
@@ -12,12 +13,14 @@ export class AdminOrdersController {
   constructor(private readonly adminOrdersService: AdminOrdersService) {}
 
   @Get()
-  list(@Query() query: AdminOrdersQueryDto) {
+  list(@Query() query: AdminOrdersQueryDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'orders:view')
     return this.adminOrdersService.list(query)
   }
 
   @Get(':id')
-  detail(@Param('id') id: string) {
+  detail(@Param('id') id: string, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'orders:view')
     return this.adminOrdersService.detail(id)
   }
 
@@ -25,13 +28,15 @@ export class AdminOrdersController {
   updateStatus(
     @Param('id') id: string,
     @Body() dto: UpdateOrderStatusDto,
-    @CurrentAdmin() admin: { id: string },
+    @CurrentAdmin() admin: AdminIdentity,
   ) {
+    assertAdminPermission(admin, 'orders:update')
     return this.adminOrdersService.updateStatus(id, dto.status, admin.id)
   }
 
   @Patch(':id/note')
-  updateNote(@Param('id') id: string, @Body() dto: UpdateOrderNoteDto) {
+  updateNote(@Param('id') id: string, @Body() dto: UpdateOrderNoteDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'orders:update')
     return this.adminOrdersService.updateNote(id, dto.note)
   }
 }

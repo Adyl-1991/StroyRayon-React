@@ -45,6 +45,7 @@ enum AdminRole {
   OWNER
   MANAGER
   CONTENT
+  VIEWER
 }
 
 model CatalogNode {
@@ -122,6 +123,7 @@ model Product {
   isActive           Boolean             @default(true)
   images             ProductImage[]
   documents          ProductDocument[]
+  auditLogs          ProductAuditLog[]
   stock              Stock?
   orderItems         OrderItem[]
   relatedFrom        ProductRelation[]   @relation("RelatedFrom")
@@ -162,6 +164,24 @@ model ProductDocument {
   updatedAt DateTime            @updatedAt
 
   @@index([productId, sortOrder])
+}
+
+model ProductAuditLog {
+  id            String    @id @default(cuid())
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  adminId       String?
+  admin         AdminUser? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+  action        String
+  changedFields String[]
+  beforeSnapshot Json?
+  afterSnapshot  Json?
+  metadata      Json?
+  createdAt     DateTime  @default(now())
+
+  @@index([productId, createdAt])
+  @@index([adminId, createdAt])
+  @@index([action])
 }
 
 model ProductRelation {
@@ -271,6 +291,7 @@ model AdminUser {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   statusChanges OrderStatusHistory[]
+  productAuditLogs ProductAuditLog[]
 }
 
 model BlogPost {

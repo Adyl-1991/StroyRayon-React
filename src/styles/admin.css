@@ -621,6 +621,49 @@
   margin-top: 3px;
 }
 
+.admin-audit-history {
+  padding-left: 20px;
+}
+
+.admin-audit-history > li {
+  border-bottom: 1px solid #edf0f2;
+  margin-bottom: 14px;
+}
+
+.admin-audit-history > li:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.admin-audit-fields {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.admin-audit-fields li {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f7f9f8;
+}
+
+.admin-audit-fields span {
+  font-weight: 700;
+  color: #1f2a24;
+  margin: 0;
+}
+
+.admin-audit-fields small {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
 @media (max-width: 760px) {
   .admin-header,
   .admin-header > div {
@@ -657,6 +700,10 @@
   .admin-card dl div {
     grid-template-columns: 1fr;
     gap: 3px;
+  }
+
+  .admin-audit-fields li {
+    grid-template-columns: 1fr;
   }
 
   .admin-repeat-row-spec,

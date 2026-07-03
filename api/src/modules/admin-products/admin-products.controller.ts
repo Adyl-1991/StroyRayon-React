@@ -16,6 +16,8 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { AdminAuthGuard } from '../auth/admin-auth.guard'
+import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
+import { CurrentAdmin } from '../auth/current-admin.decorator'
 import { AdminProductsService } from './admin-products.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
@@ -51,18 +53,21 @@ export class AdminProductsController {
   constructor(private readonly adminProductsService: AdminProductsService) {}
 
   @Get()
-  list(@Query() query: AdminProductsQueryDto) {
+  list(@Query() query: AdminProductsQueryDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:view')
     return this.adminProductsService.list(query)
   }
 
   @Get('options')
-  options() {
+  options(@CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:view')
     return this.adminProductsService.options()
   }
 
   @Post()
-  create(@Body() dto: CreateAdminProductDto) {
-    return this.adminProductsService.create(dto)
+  create(@Body() dto: CreateAdminProductDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:create')
+    return this.adminProductsService.create(dto, admin)
   }
 
   @Post('images')
@@ -70,7 +75,9 @@ export class AdminProductsController {
   async uploadImage(
     @UploadedFile() file: { buffer?: Buffer; mimetype: string; originalname: string; size: number },
     @Req() request: { protocol: string; get(name: string): string | undefined },
+    @CurrentAdmin() admin: AdminIdentity,
   ) {
+    assertAdminPermission(admin, 'products:upload')
     if (!file?.buffer) throw new BadRequestException('Image file is required')
 
     const extension = productImageMimeTypes[file.mimetype]
@@ -94,33 +101,52 @@ export class AdminProductsController {
     }
   }
 
+  @Get(':id/audit-log')
+  auditLog(
+    @Param('id') id: string,
+    @Query('page') page: string | undefined,
+    @Query('limit') limit: string | undefined,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    assertAdminPermission(admin, 'products:audit:view')
+    return this.adminProductsService.auditLog(id, {
+      page: Number(page) || 1,
+      limit: Number(limit) || 20,
+    })
+  }
+
   @Get(':id')
-  detail(@Param('id') id: string) {
+  detail(@Param('id') id: string, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:view')
     return this.adminProductsService.detail(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateAdminProductDto) {
-    return this.adminProductsService.update(id, dto)
+  update(@Param('id') id: string, @Body() dto: UpdateAdminProductDto, @CurrentAdmin() admin: AdminIdentity) {
+    return this.adminProductsService.update(id, dto, admin)
   }
 
   @Patch(':id/price')
-  updatePrice(@Param('id') id: string, @Body() dto: UpdateProductPriceDto) {
-    return this.adminProductsService.updatePrice(id, dto.price)
+  updatePrice(@Param('id') id: string, @Body() dto: UpdateProductPriceDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:commercial')
+    return this.adminProductsService.updatePrice(id, dto.price, admin)
   }
 
   @Patch(':id/stock')
-  updateStock(@Param('id') id: string, @Body() dto: UpdateProductStockDto) {
-    return this.adminProductsService.updateStock(id, dto.quantity, dto.stockStatus)
+  updateStock(@Param('id') id: string, @Body() dto: UpdateProductStockDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:commercial')
+    return this.adminProductsService.updateStock(id, dto.quantity, dto.stockStatus, admin)
   }
 
   @Patch(':id/active')
-  updateActive(@Param('id') id: string, @Body() dto: UpdateProductActiveDto) {
-    return this.adminProductsService.updateActive(id, dto.isActive)
+  updateActive(@Param('id') id: string, @Body() dto: UpdateProductActiveDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:active')
+    return this.adminProductsService.updateActive(id, dto.isActive, admin)
   }
 
   @Patch(':id/note')
-  updateNote(@Param('id') id: string, @Body() dto: UpdateProductNoteDto) {
-    return this.adminProductsService.updateNote(id, dto.note)
+  updateNote(@Param('id') id: string, @Body() dto: UpdateProductNoteDto, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    return this.adminProductsService.updateNote(id, dto.note, admin)
   }
 }

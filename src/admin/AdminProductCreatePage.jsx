@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import { createAdminProduct, getAdminProductOptions, uploadAdminProductImage } from '../api/adminApi'
+import { hasAdminPermission } from './adminPermissions'
 
 const stockOptions = [
   ['IN_STOCK', 'В наличии'],
@@ -118,6 +119,7 @@ function compactSpecs(rows) {
 
 export function AdminProductCreatePage() {
   const navigate = useNavigate()
+  const { admin } = useOutletContext()
   const [options, setOptions] = useState(null)
   const [form, setForm] = useState(createInitialForm)
   const [slugTouched, setSlugTouched] = useState(false)
@@ -153,6 +155,8 @@ export function AdminProductCreatePage() {
   const categoryOptions = useMemo(() => options?.categories || [], [options])
   const brands = useMemo(() => options?.brands || [], [options])
   const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
+  const canCreate = hasAdminPermission(admin, 'products:create')
+  const canUpload = hasAdminPermission(admin, 'products:upload')
 
   function updateField(name, value) {
     setForm((current) => {
@@ -222,6 +226,11 @@ export function AdminProductCreatePage() {
   }
 
   async function handleImageFileChange(event) {
+    if (!canUpload) {
+      setError('Недостаточно прав для загрузки фото.')
+      event.target.value = ''
+      return
+    }
     const file = event.target.files?.[0]
     setImageUploadMessage('')
     if (!file) return
@@ -263,6 +272,10 @@ export function AdminProductCreatePage() {
   async function submitForm(event) {
     event.preventDefault()
     setError('')
+    if (!canCreate) {
+      setError('Недостаточно прав для создания товара.')
+      return
+    }
 
     const price = Number(form.price)
     const stockQuantity = Number(form.stockQuantity)
@@ -334,6 +347,11 @@ export function AdminProductCreatePage() {
       </div>
 
       {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
+      {!canCreate && (
+        <div className="admin-alert admin-alert-error" role="status">
+          У вашей роли нет права создавать товары.
+        </div>
+      )}
 
       <form className="admin-create-form" data-qa="admin-product-create-form" onSubmit={submitForm}>
         <div className="admin-detail-grid">
@@ -405,7 +423,7 @@ export function AdminProductCreatePage() {
                 data-qa="product-image-file"
                 type="file"
                 accept="image/png,image/jpeg,image/webp,image/gif"
-                disabled={uploadingImage}
+                disabled={uploadingImage || !canUpload || !canCreate}
                 onChange={handleImageFileChange}
               />
               <span>{uploadingImage ? 'Загружаем фото...' : 'JPG, PNG, WEBP или GIF до 5 MB'}</span>
@@ -631,7 +649,7 @@ export function AdminProductCreatePage() {
         </article>
 
         <div className="admin-create-actions">
-          <button className="admin-primary-button" type="submit" disabled={saving}>
+          <button className="admin-primary-button" type="submit" disabled={saving || !canCreate}>
             {saving ? 'Создаём…' : 'Создать товар'}
           </button>
         </div>

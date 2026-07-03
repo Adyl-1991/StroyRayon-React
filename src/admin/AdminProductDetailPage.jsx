@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useOutletContext, useParams } from 'react-router-dom'
 import {
   getAdminProduct,
+  getAdminProductAuditLog,
   getAdminProductOptions,
   updateAdminProduct,
   uploadAdminProductImage,
 } from '../api/adminApi'
+import { hasAdminPermission } from './adminPermissions'
 import { formatPrice } from '../utils/formatPrice'
 
 const stockOptions = [
@@ -21,6 +23,31 @@ const documentTypeOptions = [
   ['PASSPORT', 'Паспорт товара'],
   ['OTHER', 'Другое'],
 ]
+
+const auditActionLabels = {
+  product_created: 'Товар создан',
+  product_updated: 'Товар обновлен',
+  price_changed: 'Цена изменена',
+  stock_changed: 'Остаток изменен',
+  active_changed: 'Видимость изменена',
+  note_changed: 'Заметка изменена',
+}
+
+function formatAuditValue(value) {
+  if (value === null || value === undefined || value === '') return '—'
+  if (typeof value === 'boolean') return value ? 'Да' : 'Нет'
+  if (Array.isArray(value)) return `${value.length} строк`
+  if (typeof value === 'object') return JSON.stringify(value).slice(0, 140)
+  return String(value)
+}
+
+function auditFieldValue(snapshot, field) {
+  if (!snapshot || typeof snapshot !== 'object') return undefined
+  if (field === 'stock') return snapshot.stockQuantity
+  if (field === 'description') return snapshot.descriptionKg || snapshot.descriptionRu || snapshot.shortDescriptionKg
+  if (field === 'seo') return snapshot.seoTitleKg || snapshot.seoTitleRu || snapshot.seoDescriptionKg || snapshot.seoDescriptionRu
+  return snapshot[field]
+}
 
 function emptySpec() {
   return { key: '', value: '' }
@@ -92,9 +119,11 @@ function compactSpecs(rows) {
 
 export function AdminProductDetailPage() {
   const { id } = useParams()
+  const { admin } = useOutletContext()
   const [product, setProduct] = useState(null)
   const [options, setOptions] = useState(null)
   const [form, setForm] = useState(null)
+  const [auditLog, setAuditLog] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
@@ -103,11 +132,12 @@ export function AdminProductDetailPage() {
 
   useEffect(() => {
     let active = true
-    Promise.all([getAdminProduct(id), getAdminProductOptions()])
-      .then(([productData, optionsData]) => {
+    Promise.all([getAdminProduct(id), getAdminProductOptions(), getAdminProductAuditLog(id, { limit: 20 })])
+      .then(([productData, optionsData, auditData]) => {
         if (!active) return
         setProduct(productData)
         setOptions(optionsData)
+        setAuditLog(auditData)
         setForm(createForm(productData))
       })
       .catch((requestError) => {
@@ -124,6 +154,11 @@ export function AdminProductDetailPage() {
   const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
   const categories = useMemo(() => options?.categories || [], [options])
   const brands = useMemo(() => options?.brands || [], [options])
+  const canEditContent = hasAdminPermission(admin, 'products:content')
+  const canEditCommercial = hasAdminPermission(admin, 'products:commercial')
+  const canEditActive = hasAdminPermission(admin, 'products:active')
+  const canUpload = hasAdminPermission(admin, 'products:upload')
+  const canSave = canEditContent || canEditCommercial || canEditActive
 
   function updateField(name, value) {
     setForm((current) => ({ ...current, [name]: value }))
@@ -150,6 +185,11 @@ export function AdminProductDetailPage() {
   }
 
   async function handleImageUpload(event) {
+    if (!canUpload) {
+      setError('Недостаточно прав для загрузки фото.')
+      event.target.value = ''
+      return
+    }
     const file = event.target.files?.[0]
     if (!file) return
     if (!file.type.startsWith('image/')) {
@@ -214,6 +254,10 @@ export function AdminProductDetailPage() {
 
   async function handleSave(event) {
     event.preventDefault()
+    if (!canSave) {
+      setError('Недостаточно прав для изменения товара.')
+      return
+    }
     setSaving(true)
     setError('')
     setMessage('')
@@ -247,33 +291,43 @@ export function AdminProductDetailPage() {
     }
 
     try {
-      const updated = await updateAdminProduct(id, {
-        catalogNodeId: form.catalogNodeId,
-        brandId: form.brandId || null,
-        titleKg: form.titleKg,
-        titleRu: form.titleRu,
-        slug: form.slug,
-        sku: form.sku,
-        shortDescriptionKg: form.shortDescriptionKg,
-        descriptionKg: form.descriptionKg,
-        descriptionRu: form.descriptionRu,
-        seoTitleKg: form.seoTitleKg,
-        seoDescriptionKg: form.seoDescriptionKg,
-        seoTitleRu: form.seoTitleRu,
-        seoDescriptionRu: form.seoDescriptionRu,
-        price,
-        stockQuantity: quantity,
-        stockStatus: form.stockStatus,
-        unit: form.unit,
-        isActive: form.isActive,
-        adminNote: form.adminNote,
-        specs: compactSpecs(form.specs),
-        documents: compactRows(form.documents, ['title', 'url']),
-        images: form.images.filter((image) => image.src.trim()),
-      })
+      const payload = {
+        ...(canEditContent
+          ? {
+              catalogNodeId: form.catalogNodeId,
+              brandId: form.brandId || null,
+              titleKg: form.titleKg,
+              titleRu: form.titleRu,
+              slug: form.slug,
+              sku: form.sku,
+              shortDescriptionKg: form.shortDescriptionKg,
+              descriptionKg: form.descriptionKg,
+              descriptionRu: form.descriptionRu,
+              seoTitleKg: form.seoTitleKg,
+              seoDescriptionKg: form.seoDescriptionKg,
+              seoTitleRu: form.seoTitleRu,
+              seoDescriptionRu: form.seoDescriptionRu,
+              unit: form.unit,
+              adminNote: form.adminNote,
+              specs: compactSpecs(form.specs),
+              documents: compactRows(form.documents, ['title', 'url']),
+              images: form.images.filter((image) => image.src.trim()),
+            }
+          : {}),
+        ...(canEditCommercial
+          ? {
+              price,
+              stockQuantity: quantity,
+              stockStatus: form.stockStatus,
+            }
+          : {}),
+        ...(canEditActive ? { isActive: form.isActive } : {}),
+      }
+      const updated = await updateAdminProduct(id, payload)
       setProduct(updated)
       setForm(createForm(updated))
       setMessage('Товар сохранен.')
+      getAdminProductAuditLog(id, { limit: 20 }).then(setAuditLog).catch(() => {})
     } catch (requestError) {
       setError(requestError.message || 'Не удалось сохранить товар.')
     } finally {
@@ -298,7 +352,7 @@ export function AdminProductDetailPage() {
             <a className="admin-secondary-button" href={`/product/${form.slug}`} target="_blank" rel="noreferrer">
               Открыть на сайте
             </a>
-            <button className="admin-primary-button" type="submit" disabled={saving}>
+            <button className="admin-primary-button" type="submit" disabled={saving || !canSave}>
               {saving ? 'Сохраняем...' : 'Сохранить'}
             </button>
           </div>
@@ -306,29 +360,34 @@ export function AdminProductDetailPage() {
 
         {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
         {message && <div className="admin-alert admin-alert-success" role="status">{message}</div>}
+        {!canSave && (
+          <div className="admin-alert admin-alert-error" role="status">
+            У вашей роли есть только просмотр этого товара.
+          </div>
+        )}
 
         <div className="admin-detail-grid">
           <article className="admin-card admin-edit-form">
             <h2>Основное</h2>
             <label>
               Название KG
-              <input data-qa="edit-title-kg" value={form.titleKg} onChange={(event) => updateField('titleKg', event.target.value)} maxLength={180} required />
+              <input data-qa="edit-title-kg" value={form.titleKg} onChange={(event) => updateField('titleKg', event.target.value)} maxLength={180} required disabled={!canEditContent} />
             </label>
             <label>
               Название RU
-              <input data-qa="edit-title-ru" value={form.titleRu} onChange={(event) => updateField('titleRu', event.target.value)} maxLength={180} />
+              <input data-qa="edit-title-ru" value={form.titleRu} onChange={(event) => updateField('titleRu', event.target.value)} maxLength={180} disabled={!canEditContent} />
             </label>
             <label>
               Slug
-              <input data-qa="edit-slug" value={form.slug} onChange={(event) => updateField('slug', event.target.value)} maxLength={180} required />
+              <input data-qa="edit-slug" value={form.slug} onChange={(event) => updateField('slug', event.target.value)} maxLength={180} required disabled={!canEditContent} />
             </label>
             <label>
               SKU
-              <input data-qa="edit-sku" value={form.sku} onChange={(event) => updateField('sku', event.target.value)} maxLength={80} required />
+              <input data-qa="edit-sku" value={form.sku} onChange={(event) => updateField('sku', event.target.value)} maxLength={80} required disabled={!canEditContent} />
             </label>
             <label>
               Категория
-              <select data-qa="edit-category" value={form.catalogNodeId} onChange={(event) => updateField('catalogNodeId', event.target.value)} required>
+              <select data-qa="edit-category" value={form.catalogNodeId} onChange={(event) => updateField('catalogNodeId', event.target.value)} required disabled={!canEditContent}>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {'- '.repeat(Math.max(category.level || 0, 0))}{category.titleKg} · {category.path}
@@ -338,7 +397,7 @@ export function AdminProductDetailPage() {
             </label>
             <label>
               Бренд
-              <select data-qa="edit-brand" value={form.brandId} onChange={(event) => updateField('brandId', event.target.value)}>
+              <select data-qa="edit-brand" value={form.brandId} onChange={(event) => updateField('brandId', event.target.value)} disabled={!canEditContent}>
                 <option value="">Без бренда</option>
                 {brands.map((brand) => (
                   <option key={brand.id} value={brand.id}>{brand.name}</option>
@@ -347,12 +406,12 @@ export function AdminProductDetailPage() {
             </label>
             <label>
               Единица
-              <select data-qa="edit-unit" value={form.unit} onChange={(event) => updateField('unit', event.target.value)}>
+              <select data-qa="edit-unit" value={form.unit} onChange={(event) => updateField('unit', event.target.value)} disabled={!canEditContent}>
                 {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
               </select>
             </label>
             <label className="admin-checkbox-field">
-              <input data-qa="edit-active" type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} />
+              <input data-qa="edit-active" type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} disabled={!canEditActive} />
               Показывать товар в магазине
             </label>
           </article>
@@ -361,15 +420,15 @@ export function AdminProductDetailPage() {
             <h2>Цена и остаток</h2>
             <label>
               Цена, KGS
-              <input data-qa="edit-price" type="number" min="0.01" max="9999999999.99" step="0.01" value={form.price} onChange={(event) => updateField('price', event.target.value)} required />
+              <input data-qa="edit-price" type="number" min="0.01" max="9999999999.99" step="0.01" value={form.price} onChange={(event) => updateField('price', event.target.value)} required disabled={!canEditCommercial} />
             </label>
             <label>
               Остаток
-              <input data-qa="edit-stock" type="number" min={product.stock?.reservedQuantity || 0} step="1" value={form.quantity} onChange={(event) => updateField('quantity', event.target.value)} required />
+              <input data-qa="edit-stock" type="number" min={product.stock?.reservedQuantity || 0} step="1" value={form.quantity} onChange={(event) => updateField('quantity', event.target.value)} required disabled={!canEditCommercial} />
             </label>
             <label>
               Статус наличия
-              <select data-qa="edit-stock-status" value={form.stockStatus} onChange={(event) => updateField('stockStatus', event.target.value)}>
+              <select data-qa="edit-stock-status" value={form.stockStatus} onChange={(event) => updateField('stockStatus', event.target.value)} disabled={!canEditCommercial}>
                 {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
               </select>
             </label>
@@ -384,11 +443,11 @@ export function AdminProductDetailPage() {
             <h2>Описание KG</h2>
             <label>
               Короткое описание
-              <textarea data-qa="edit-short-description-kg" rows={3} value={form.shortDescriptionKg} onChange={(event) => updateField('shortDescriptionKg', event.target.value)} maxLength={1200} />
+              <textarea data-qa="edit-short-description-kg" rows={3} value={form.shortDescriptionKg} onChange={(event) => updateField('shortDescriptionKg', event.target.value)} maxLength={1200} disabled={!canEditContent} />
             </label>
             <label>
               Полное описание KG
-              <textarea data-qa="edit-description-kg" rows={8} value={form.descriptionKg} onChange={(event) => updateField('descriptionKg', event.target.value)} maxLength={5000} />
+              <textarea data-qa="edit-description-kg" rows={8} value={form.descriptionKg} onChange={(event) => updateField('descriptionKg', event.target.value)} maxLength={5000} disabled={!canEditContent} />
             </label>
           </article>
 
@@ -396,11 +455,11 @@ export function AdminProductDetailPage() {
             <h2>Описание RU</h2>
             <label>
               Полное описание RU
-              <textarea data-qa="edit-description-ru" rows={8} value={form.descriptionRu} onChange={(event) => updateField('descriptionRu', event.target.value)} maxLength={5000} />
+              <textarea data-qa="edit-description-ru" rows={8} value={form.descriptionRu} onChange={(event) => updateField('descriptionRu', event.target.value)} maxLength={5000} disabled={!canEditContent} />
             </label>
             <label>
               Внутренняя заметка
-              <textarea data-qa="edit-admin-note" rows={5} value={form.adminNote} onChange={(event) => updateField('adminNote', event.target.value)} maxLength={2000} />
+              <textarea data-qa="edit-admin-note" rows={5} value={form.adminNote} onChange={(event) => updateField('adminNote', event.target.value)} maxLength={2000} disabled={!canEditContent} />
             </label>
           </article>
         </div>
@@ -408,16 +467,16 @@ export function AdminProductDetailPage() {
         <article className="admin-card admin-edit-form">
           <div className="admin-section-header">
             <h2>Характеристики</h2>
-            <button type="button" className="admin-secondary-button" onClick={() => addRow('specs', emptySpec())}>
+            <button type="button" className="admin-secondary-button" disabled={!canEditContent} onClick={() => addRow('specs', emptySpec())}>
               Добавить характеристику
             </button>
           </div>
           <div className="admin-repeat-list">
             {form.specs.map((row, index) => (
               <div className="admin-repeat-row admin-repeat-row-spec" key={`spec-${index}`}>
-                <input data-qa="edit-spec-key" placeholder="Ключ" value={row.key} onChange={(event) => updateRow('specs', index, 'key', event.target.value)} maxLength={120} />
-                <input data-qa="edit-spec-value" placeholder="Значение" value={row.value} onChange={(event) => updateRow('specs', index, 'value', event.target.value)} maxLength={500} />
-                <button type="button" className="admin-danger-button" onClick={() => removeRow('specs', index, emptySpec())}>Удалить</button>
+                <input data-qa="edit-spec-key" placeholder="Ключ" value={row.key} onChange={(event) => updateRow('specs', index, 'key', event.target.value)} maxLength={120} disabled={!canEditContent} />
+                <input data-qa="edit-spec-value" placeholder="Значение" value={row.value} onChange={(event) => updateRow('specs', index, 'value', event.target.value)} maxLength={500} disabled={!canEditContent} />
+                <button type="button" className="admin-danger-button" disabled={!canEditContent} onClick={() => removeRow('specs', index, emptySpec())}>Удалить</button>
               </div>
             ))}
           </div>
@@ -426,19 +485,19 @@ export function AdminProductDetailPage() {
         <article className="admin-card admin-edit-form">
           <div className="admin-section-header">
             <h2>Документы</h2>
-            <button type="button" className="admin-secondary-button" onClick={() => addRow('documents', emptyDocument())}>
+            <button type="button" className="admin-secondary-button" disabled={!canEditContent} onClick={() => addRow('documents', emptyDocument())}>
               Добавить документ
             </button>
           </div>
           <div className="admin-repeat-list">
             {form.documents.map((row, index) => (
               <div className="admin-repeat-row admin-repeat-row-document" key={`document-${index}`}>
-                <input data-qa="edit-document-title" placeholder="Название" value={row.title} onChange={(event) => updateRow('documents', index, 'title', event.target.value)} maxLength={180} />
-                <input data-qa="edit-document-url" placeholder="https://... или /uploads/..." value={row.url} onChange={(event) => updateRow('documents', index, 'url', event.target.value)} maxLength={500} />
-                <select data-qa="edit-document-type" value={row.type} onChange={(event) => updateRow('documents', index, 'type', event.target.value)}>
+                <input data-qa="edit-document-title" placeholder="Название" value={row.title} onChange={(event) => updateRow('documents', index, 'title', event.target.value)} maxLength={180} disabled={!canEditContent} />
+                <input data-qa="edit-document-url" placeholder="https://... или /uploads/..." value={row.url} onChange={(event) => updateRow('documents', index, 'url', event.target.value)} maxLength={500} disabled={!canEditContent} />
+                <select data-qa="edit-document-type" value={row.type} onChange={(event) => updateRow('documents', index, 'type', event.target.value)} disabled={!canEditContent}>
                   {documentTypeOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
-                <button type="button" className="admin-danger-button" onClick={() => removeRow('documents', index, emptyDocument())}>Удалить</button>
+                <button type="button" className="admin-danger-button" disabled={!canEditContent} onClick={() => removeRow('documents', index, emptyDocument())}>Удалить</button>
               </div>
             ))}
           </div>
@@ -449,19 +508,19 @@ export function AdminProductDetailPage() {
           <div className="admin-detail-grid admin-detail-grid-compact">
             <label>
               SEO title KG
-              <input data-qa="edit-seo-title-kg" value={form.seoTitleKg} onChange={(event) => updateField('seoTitleKg', event.target.value)} maxLength={180} />
+              <input data-qa="edit-seo-title-kg" value={form.seoTitleKg} onChange={(event) => updateField('seoTitleKg', event.target.value)} maxLength={180} disabled={!canEditContent} />
             </label>
             <label>
               SEO title RU
-              <input data-qa="edit-seo-title-ru" value={form.seoTitleRu} onChange={(event) => updateField('seoTitleRu', event.target.value)} maxLength={180} />
+              <input data-qa="edit-seo-title-ru" value={form.seoTitleRu} onChange={(event) => updateField('seoTitleRu', event.target.value)} maxLength={180} disabled={!canEditContent} />
             </label>
             <label>
               SEO meta KG
-              <textarea data-qa="edit-seo-description-kg" rows={3} value={form.seoDescriptionKg} onChange={(event) => updateField('seoDescriptionKg', event.target.value)} maxLength={500} />
+              <textarea data-qa="edit-seo-description-kg" rows={3} value={form.seoDescriptionKg} onChange={(event) => updateField('seoDescriptionKg', event.target.value)} maxLength={500} disabled={!canEditContent} />
             </label>
             <label>
               SEO meta RU
-              <textarea data-qa="edit-seo-description-ru" rows={3} value={form.seoDescriptionRu} onChange={(event) => updateField('seoDescriptionRu', event.target.value)} maxLength={500} />
+              <textarea data-qa="edit-seo-description-ru" rows={3} value={form.seoDescriptionRu} onChange={(event) => updateField('seoDescriptionRu', event.target.value)} maxLength={500} disabled={!canEditContent} />
             </label>
           </div>
         </article>
@@ -471,7 +530,7 @@ export function AdminProductDetailPage() {
             <h2>Фото</h2>
             <label className="admin-file-upload admin-inline-upload">
               Загрузить фото
-              <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" disabled={uploadingImage} onChange={handleImageUpload} />
+              <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" disabled={uploadingImage || !canUpload} onChange={handleImageUpload} />
               <span>{uploadingImage ? 'Загружаем...' : 'JPG, PNG, WEBP или GIF до 5 MB'}</span>
             </label>
           </div>
@@ -482,12 +541,12 @@ export function AdminProductDetailPage() {
               {form.images.map((image, index) => (
                 <div className="admin-gallery-item" key={`${image.src}-${index}`}>
                   <img src={image.src} alt={image.alt || form.titleKg} />
-                  <input data-qa="edit-image-alt" value={image.alt} onChange={(event) => updateRow('images', index, 'alt', event.target.value)} maxLength={180} placeholder="Alt text" />
+                  <input data-qa="edit-image-alt" value={image.alt} onChange={(event) => updateRow('images', index, 'alt', event.target.value)} maxLength={180} placeholder="Alt text" disabled={!canEditContent} />
                   <div className="admin-gallery-actions">
-                    <button type="button" className="admin-secondary-button" disabled={index === 0} onClick={() => makeMainImage(index)}>
+                    <button type="button" className="admin-secondary-button" disabled={index === 0 || !canEditContent} onClick={() => makeMainImage(index)}>
                       Сделать главным
                     </button>
-                    <button type="button" className="admin-danger-button" onClick={() => removeImage(index)}>
+                    <button type="button" className="admin-danger-button" disabled={!canEditContent} onClick={() => removeImage(index)}>
                       Убрать
                     </button>
                   </div>
@@ -505,6 +564,39 @@ export function AdminProductDetailPage() {
             <div><dt>Обновлен</dt><dd>{new Date(product.updatedAt).toLocaleString('ru-RU')}</dd></div>
             <div><dt>Фото</dt><dd>{product.imageStatus === 'ready' ? 'Готово' : product.imageStatus === 'placeholder' ? 'Заглушка' : 'Нет'}</dd></div>
           </dl>
+        </article>
+
+        <article className="admin-card admin-edit-form admin-card-wide">
+          <h2>История изменений</h2>
+          {!auditLog?.items?.length ? (
+            <div className="admin-state">История изменений пока пустая.</div>
+          ) : (
+            <ol className="admin-history admin-audit-history" data-qa="product-audit-log">
+              {auditLog.items.map((item) => (
+                <li key={item.id}>
+                  <div>
+                    <strong>{auditActionLabels[item.action] || item.action}</strong>
+                    <span>{new Date(item.createdAt).toLocaleString('ru-RU')}</span>
+                    {item.admin && <small>{item.admin.name || item.admin.email} · {item.admin.role}</small>}
+                  </div>
+                  {item.changedFields.length > 0 && (
+                    <ul className="admin-audit-fields">
+                      {item.changedFields.slice(0, 10).map((field) => (
+                        <li key={`${item.id}-${field}`}>
+                          <span>{field}</span>
+                          <small>
+                            {formatAuditValue(auditFieldValue(item.beforeSnapshot, field))}
+                            {' -> '}
+                            {formatAuditValue(auditFieldValue(item.afterSnapshot, field))}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+          )}
         </article>
       </form>
     </section>

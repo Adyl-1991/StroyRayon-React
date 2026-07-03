@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
+import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
@@ -101,7 +102,7 @@ export class AdminProductsService {
     }
   }
 
-  async create(dto: CreateAdminProductDto) {
+  async create(dto: CreateAdminProductDto, admin?: AdminIdentity) {
     const titleKg = dto.titleKg.trim()
     const titleRu = dto.titleRu.trim()
     if (!titleKg || !titleRu) {
@@ -154,65 +155,80 @@ export class AdminProductsService {
         : []
     const images = normalizeImages(submittedImages, titleKg)
 
-    const created = await this.prisma.product.create({
-      data: {
-        catalogNodeId: category.id,
-        brandId,
-        titleKg,
-        titleRu,
-        slug,
-        sku,
-        price,
-        currency: 'KGS',
-        unit: dto.unit.trim(),
-        stockStatus: dto.stockStatus,
-        shortDescriptionKg,
-        descriptionKg,
-        descriptionRu: descriptionRu || null,
-        seoTitleKg: dto.seoTitleKg?.trim() || null,
-        seoDescriptionKg: dto.seoDescriptionKg?.trim() || null,
-        seoTitleRu: dto.seoTitleRu?.trim() || null,
-        seoDescriptionRu: dto.seoDescriptionRu?.trim() || null,
-        specs: Object.keys(specs).length ? specs : Prisma.JsonNull,
-        tags: [],
-        adminNote: dto.adminNote?.trim() || null,
-        isActive: dto.isActive,
-        images: {
-          create: images.length
-            ? images.map((image) => ({
-                src: image.src,
-                alt: image.alt,
-                width: 900,
-                height: 700,
-                type: image.type,
-                sortOrder: image.sortOrder,
-              }))
-            : {
-                src: placeholderImageSrc,
-                alt: `${titleKg} - StroyRayon placeholder`,
-                width: 900,
-                height: 700,
-                type: 'MAIN',
-                sortOrder: 0,
-              },
-        },
-        documents: {
-          create: documents.map((document, index) => ({
-            title: document.title,
-            url: document.url,
-            type: document.type,
-            sortOrder: document.sortOrder ?? index,
-          })),
-        },
-        stock: {
-          create: {
-            quantity: dto.stockQuantity,
-            reservedQuantity: 0,
-            lowStockThreshold: 5,
+    const created = await this.prisma.$transaction(async (tx) => {
+      const product = await tx.product.create({
+        data: {
+          catalogNodeId: category.id,
+          brandId,
+          titleKg,
+          titleRu,
+          slug,
+          sku,
+          price,
+          currency: 'KGS',
+          unit: dto.unit.trim(),
+          stockStatus: dto.stockStatus,
+          shortDescriptionKg,
+          descriptionKg,
+          descriptionRu: descriptionRu || null,
+          seoTitleKg: dto.seoTitleKg?.trim() || null,
+          seoDescriptionKg: dto.seoDescriptionKg?.trim() || null,
+          seoTitleRu: dto.seoTitleRu?.trim() || null,
+          seoDescriptionRu: dto.seoDescriptionRu?.trim() || null,
+          specs: Object.keys(specs).length ? specs : Prisma.JsonNull,
+          tags: [],
+          adminNote: dto.adminNote?.trim() || null,
+          isActive: dto.isActive,
+          images: {
+            create: images.length
+              ? images.map((image) => ({
+                  src: image.src,
+                  alt: image.alt,
+                  width: 900,
+                  height: 700,
+                  type: image.type,
+                  sortOrder: image.sortOrder,
+                }))
+              : {
+                  src: placeholderImageSrc,
+                  alt: `${titleKg} - StroyRayon placeholder`,
+                  width: 900,
+                  height: 700,
+                  type: 'MAIN',
+                  sortOrder: 0,
+                },
+          },
+          documents: {
+            create: documents.map((document, index) => ({
+              title: document.title,
+              url: document.url,
+              type: document.type,
+              sortOrder: document.sortOrder ?? index,
+            })),
+          },
+          stock: {
+            create: {
+              quantity: dto.stockQuantity,
+              reservedQuantity: 0,
+              lowStockThreshold: 5,
+            },
           },
         },
-      },
-      include: adminProductInclude,
+        include: adminProductInclude,
+      })
+      await writeProductAuditLog(tx, product.id, admin, 'product_created', [
+        'titleKg',
+        'titleRu',
+        'slug',
+        'sku',
+        'price',
+        'stock',
+        'images',
+        'documents',
+        'specs',
+        'seo',
+      ], null, snapshotProduct(product))
+      return product
     })
 
     return this.mapProduct(created)
@@ -227,10 +243,11 @@ export class AdminProductsService {
     return this.mapProduct(product)
   }
 
-  async update(id: string, dto: UpdateAdminProductDto) {
+  async update(id: string, dto: UpdateAdminProductDto, admin?: AdminIdentity) {
+    assertProductUpdatePermissions(dto, admin)
     const existing = await this.prisma.product.findUnique({
       where: { id },
-      include: { stock: true },
+      include: adminProductInclude,
     })
     if (!existing) throw new NotFoundException('Product not found')
 
@@ -287,6 +304,9 @@ export class AdminProductsService {
     const specs = dto.specs === undefined ? undefined : normalizeSpecs(dto.specs)
     const documents = dto.documents === undefined ? undefined : normalizeDocuments(dto.documents)
     const images = dto.images === undefined ? undefined : normalizeImages(dto.images, titleKg)
+
+    const changedFields = changedFieldsFromUpdateDto(dto)
+    const beforeSnapshot = snapshotProduct(existing)
 
     await this.prisma.$transaction(async (tx) => {
       await tx.product.update({
@@ -370,24 +390,47 @@ export class AdminProductsService {
           })
         }
       }
+
+      const updated = await tx.product.findUnique({
+        where: { id },
+        include: adminProductInclude,
+      })
+      if (updated && changedFields.length) {
+        await writeProductAuditLog(
+          tx,
+          id,
+          admin,
+          'product_updated',
+          changedFields,
+          beforeSnapshot,
+          snapshotProduct(updated),
+        )
+      }
     })
 
     return this.detail(id)
   }
 
-  async updatePrice(id: string, price: number) {
+  async updatePrice(id: string, price: number, admin?: AdminIdentity) {
     if (!Number.isFinite(price) || price <= 0 || price > 9999999999.99) {
       throw new BadRequestException('Price must be a positive number')
     }
-    await this.ensureProduct(id)
-    await this.prisma.product.update({
-      where: { id },
-      data: { price: new Prisma.Decimal(Math.round(price * 100) / 100) },
+    await this.prisma.$transaction(async (tx) => {
+      const existing = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (!existing) throw new NotFoundException('Product not found')
+      await tx.product.update({
+        where: { id },
+        data: { price: new Prisma.Decimal(Math.round(price * 100) / 100) },
+      })
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'price_changed', ['price'], snapshotProduct(existing), snapshotProduct(updated))
+      }
     })
     return this.detail(id)
   }
 
-  async updateStock(id: string, quantity?: number, stockStatus?: ProductStockStatus) {
+  async updateStock(id: string, quantity?: number, stockStatus?: ProductStockStatus, admin?: AdminIdentity) {
     if (quantity === undefined && stockStatus === undefined) {
       throw new BadRequestException('Quantity or stock status is required')
     }
@@ -398,7 +441,7 @@ export class AdminProductsService {
     return this.prisma.$transaction(async (tx) => {
       const product = await tx.product.findUnique({
         where: { id },
-        select: { id: true, stockStatus: true, stock: true },
+        include: adminProductInclude,
       })
       if (!product) throw new NotFoundException('Product not found')
 
@@ -435,23 +478,81 @@ export class AdminProductsService {
         include: adminProductInclude,
       })
       if (!updated) throw new NotFoundException('Product not found')
+      await writeProductAuditLog(
+        tx,
+        id,
+        admin,
+        'stock_changed',
+        ['stock', 'stockStatus'],
+        snapshotProduct(product),
+        snapshotProduct(updated),
+      )
       return this.mapProduct(updated)
     })
   }
 
-  async updateActive(id: string, isActive: boolean) {
-    await this.ensureProduct(id)
-    await this.prisma.product.update({ where: { id }, data: { isActive } })
+  async updateActive(id: string, isActive: boolean, admin?: AdminIdentity) {
+    await this.prisma.$transaction(async (tx) => {
+      const existing = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (!existing) throw new NotFoundException('Product not found')
+      await tx.product.update({ where: { id }, data: { isActive } })
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'active_changed', ['isActive'], snapshotProduct(existing), snapshotProduct(updated))
+      }
+    })
     return this.detail(id)
   }
 
-  async updateNote(id: string, note: string) {
-    await this.ensureProduct(id)
-    await this.prisma.product.update({
-      where: { id },
-      data: { adminNote: note.trim() || null },
+  async updateNote(id: string, note: string, admin?: AdminIdentity) {
+    await this.prisma.$transaction(async (tx) => {
+      const existing = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (!existing) throw new NotFoundException('Product not found')
+      await tx.product.update({
+        where: { id },
+        data: { adminNote: note.trim() || null },
+      })
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'note_changed', ['adminNote'], snapshotProduct(existing), snapshotProduct(updated))
+      }
     })
     return this.detail(id)
+  }
+
+  async auditLog(id: string, query: { page: number; limit: number }) {
+    await this.ensureProduct(id)
+    const page = Math.max(query.page || 1, 1)
+    const limit = Math.min(Math.max(query.limit || 20, 1), 100)
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.productAuditLog.findMany({
+        where: { productId: id },
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+        include: { admin: { select: { id: true, name: true, email: true, role: true } } },
+      }),
+      this.prisma.productAuditLog.count({ where: { productId: id } }),
+    ])
+
+    return {
+      items: items.map((item) => ({
+        id: item.id,
+        action: item.action,
+        changedFields: item.changedFields,
+        beforeSnapshot: item.beforeSnapshot,
+        afterSnapshot: item.afterSnapshot,
+        metadata: item.metadata,
+        createdAt: item.createdAt,
+        admin: item.admin,
+      })),
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.max(Math.ceil(total / limit), 1),
+      },
+    }
   }
 
   private async ensureProduct(id: string) {
@@ -526,6 +627,143 @@ export class AdminProductsService {
       updatedAt: product.updatedAt,
     }
   }
+}
+
+function assertProductUpdatePermissions(dto: UpdateAdminProductDto, admin?: AdminIdentity) {
+  if (
+    dto.price !== undefined ||
+    dto.stockQuantity !== undefined ||
+    dto.stockStatus !== undefined
+  ) {
+    assertAdminPermission(admin, 'products:commercial')
+  }
+  if (dto.isActive !== undefined) {
+    assertAdminPermission(admin, 'products:active')
+  }
+  if (
+    dto.catalogNodeId !== undefined ||
+    dto.brandId !== undefined ||
+    dto.titleKg !== undefined ||
+    dto.titleRu !== undefined ||
+    dto.slug !== undefined ||
+    dto.sku !== undefined ||
+    dto.shortDescriptionKg !== undefined ||
+    dto.descriptionKg !== undefined ||
+    dto.descriptionRu !== undefined ||
+    dto.seoTitleKg !== undefined ||
+    dto.seoDescriptionKg !== undefined ||
+    dto.seoTitleRu !== undefined ||
+    dto.seoDescriptionRu !== undefined ||
+    dto.unit !== undefined ||
+    dto.adminNote !== undefined ||
+    dto.specs !== undefined ||
+    dto.documents !== undefined ||
+    dto.images !== undefined
+  ) {
+    assertAdminPermission(admin, 'products:content')
+  }
+}
+
+function changedFieldsFromUpdateDto(dto: UpdateAdminProductDto) {
+  const fields: string[] = []
+  const add = (field: string, changed: boolean) => {
+    if (changed && !fields.includes(field)) fields.push(field)
+  }
+  add('catalogNodeId', dto.catalogNodeId !== undefined)
+  add('brandId', dto.brandId !== undefined)
+  add('titleKg', dto.titleKg !== undefined)
+  add('titleRu', dto.titleRu !== undefined)
+  add('slug', dto.slug !== undefined)
+  add('sku', dto.sku !== undefined)
+  add('unit', dto.unit !== undefined)
+  add('price', dto.price !== undefined)
+  add('stock', dto.stockQuantity !== undefined)
+  add('stockStatus', dto.stockStatus !== undefined)
+  add('isActive', dto.isActive !== undefined)
+  add('adminNote', dto.adminNote !== undefined)
+  add('description', dto.shortDescriptionKg !== undefined || dto.descriptionKg !== undefined || dto.descriptionRu !== undefined)
+  add('seo', dto.seoTitleKg !== undefined || dto.seoDescriptionKg !== undefined || dto.seoTitleRu !== undefined || dto.seoDescriptionRu !== undefined)
+  add('specs', dto.specs !== undefined)
+  add('documents', dto.documents !== undefined)
+  add('images', dto.images !== undefined)
+  return fields
+}
+
+function snapshotProduct(product: AdminProduct) {
+  const specs =
+    product.specs && typeof product.specs === 'object' && !Array.isArray(product.specs)
+      ? product.specs
+      : {}
+
+  return stripUndefined({
+    titleKg: product.titleKg,
+    titleRu: product.titleRu,
+    slug: product.slug,
+    sku: product.sku,
+    catalogPath: product.catalogNode?.path,
+    brand: product.brand?.name || null,
+    price: Number(product.price),
+    unit: product.unit,
+    stockStatus: product.stockStatus,
+    stockQuantity: product.stock?.quantity ?? null,
+    reservedQuantity: product.stock?.reservedQuantity ?? null,
+    isActive: product.isActive,
+    shortDescriptionKg: product.shortDescriptionKg,
+    descriptionKg: product.descriptionKg,
+    descriptionRu: product.descriptionRu,
+    seoTitleKg: product.seoTitleKg,
+    seoDescriptionKg: product.seoDescriptionKg,
+    seoTitleRu: product.seoTitleRu,
+    seoDescriptionRu: product.seoDescriptionRu,
+    specs,
+    documents: product.documents.map((document) => ({
+      title: document.title,
+      url: document.url,
+      type: document.type,
+      sortOrder: document.sortOrder,
+    })),
+    images: product.images.map((image) => ({
+      src: image.src,
+      alt: image.alt,
+      type: image.type,
+      sortOrder: image.sortOrder,
+    })),
+    adminNote: product.adminNote,
+  })
+}
+
+async function writeProductAuditLog(
+  tx: Prisma.TransactionClient,
+  productId: string,
+  admin: AdminIdentity | undefined,
+  action: string,
+  changedFields: string[],
+  beforeSnapshot: Prisma.InputJsonValue | null,
+  afterSnapshot: Prisma.InputJsonValue | null,
+) {
+  const client = tx as Prisma.TransactionClient & {
+    productAuditLog?: {
+      create(args: unknown): Promise<unknown>
+    }
+  }
+  if (!client.productAuditLog || changedFields.length === 0) return
+  await client.productAuditLog.create({
+    data: {
+      productId,
+      adminId: admin?.id || null,
+      action,
+      changedFields,
+      beforeSnapshot: beforeSnapshot ?? Prisma.JsonNull,
+      afterSnapshot: afterSnapshot ?? Prisma.JsonNull,
+      metadata: admin ? { adminEmail: admin.email, adminRole: admin.role } : Prisma.JsonNull,
+    },
+  })
+}
+
+function stripUndefined(value: Record<string, unknown>): Prisma.InputJsonValue {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, item]) => item !== undefined),
+  ) as Prisma.InputJsonValue
 }
 
 function buildProductQuality(

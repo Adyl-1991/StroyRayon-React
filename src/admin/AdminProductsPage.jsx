@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useOutletContext, useSearchParams } from 'react-router-dom'
 import { getAdminProducts } from '../api/adminApi'
 import { formatPrice } from '../utils/formatPrice'
+import { hasAdminPermission } from './adminPermissions'
 
 const stockOptions = [
   ['', 'Все остатки'],
@@ -41,6 +42,7 @@ function qualityClass(flag) {
 }
 
 export function AdminProductsPage() {
+  const { admin } = useOutletContext()
   const [searchParams, setSearchParams] = useSearchParams()
   const queryKey = searchParams.toString()
   const [search, setSearch] = useState(searchParams.get('q') || '')
@@ -69,6 +71,7 @@ export function AdminProductsPage() {
 
   const loading = state.queryKey !== queryKey
   const data = state.data
+  const canCreate = hasAdminPermission(admin, 'products:create')
 
   function updateParam(key, value) {
     const next = new URLSearchParams(searchParams)
@@ -93,7 +96,7 @@ export function AdminProductsPage() {
         </div>
         <div className="admin-heading-actions">
           {data && <span>{data.pagination.total} товаров</span>}
-          <Link className="admin-primary-button" to="/admin/products/new">Новый товар</Link>
+          {canCreate && <Link className="admin-primary-button" to="/admin/products/new">Новый товар</Link>}
         </div>
       </div>
 

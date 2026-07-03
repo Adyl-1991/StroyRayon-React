@@ -4,6 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service'
 import { AdminLoginDto } from './dto/admin-login.dto'
 import { signAdminToken } from './jwt.util'
 import { verifyPassword } from './password.util'
+import { permissionsForRole } from './admin-permissions'
 
 @Injectable()
 export class AuthService {
@@ -51,6 +52,12 @@ export class AuthService {
   }
 
   private publicProfile(admin: { id: string; email: string; name: string; role: string }) {
-    return { id: admin.id, email: admin.email, name: admin.name, role: admin.role }
+    return {
+      id: admin.id,
+      email: admin.email,
+      name: admin.name,
+      role: admin.role,
+      permissions: permissionsForRole(admin.role),
+    }
   }
 }

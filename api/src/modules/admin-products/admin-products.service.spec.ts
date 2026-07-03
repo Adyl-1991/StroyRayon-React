@@ -4,7 +4,12 @@ import { BadRequestException } from '@nestjs/common'
 import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { calculateLineTotal } from '../orders/order-pricing.util'
+import { AdminIdentity } from '../auth/admin-permissions'
 import { AdminProductsService } from './admin-products.service'
+
+const ownerAdmin: AdminIdentity = { id: 'admin-owner', email: 'owner@test.local', role: 'OWNER' }
+const contentAdmin: AdminIdentity = { id: 'admin-content', email: 'content@test.local', role: 'CONTENT' }
+const managerAdmin: AdminIdentity = { id: 'admin-manager', email: 'manager@test.local', role: 'MANAGER' }
 
 function productFixture(overrides: Record<string, unknown> = {}) {
   return {
@@ -112,6 +117,7 @@ test('product detail with auth-facing service call returns launch-critical field
 
 test('admin can create a local product with placeholder image and stock row', async () => {
   let createArgs: Prisma.ProductCreateArgs | undefined
+  let auditAction = ''
   const prisma = {
     catalogNode: {
       findFirst: () => Promise.resolve({ id: 'category-1' }),
@@ -150,6 +156,13 @@ test('admin can create a local product with placeholder image and stock row', as
         )
       },
     },
+    productAuditLog: {
+      create: (args: { data: { action: string } }) => {
+        auditAction = args.data.action
+        return Promise.resolve({})
+      },
+    },
+    $transaction: (callback: (client: unknown) => Promise<unknown>) => callback(prisma),
   } as unknown as PrismaService
 
   const result = await new AdminProductsService(prisma).create({
@@ -173,7 +186,7 @@ test('admin can create a local product with placeholder image and stock row', as
     seoDescriptionKg: 'Stage 37 SEO description KG',
     seoTitleRu: 'Stage 37 SEO RU',
     seoDescriptionRu: 'Stage 37 SEO description RU',
-  })
+  }, ownerAdmin)
 
   assert.equal(result.id, 'product-new')
   assert.equal(result.slug, 'stage-37-local-product')
@@ -187,6 +200,7 @@ test('admin can create a local product with placeholder image and stock row', as
   assert.equal(createArgs?.data.stock?.create?.reservedQuantity, 0)
   assert.deepEqual(createArgs?.data.specs, { Size: '20 mm' })
   assert.equal(createArgs?.data.seoTitleRu, 'Stage 37 SEO RU')
+  assert.equal(auditAction, 'product_created')
 })
 
 test('admin product create rejects unavailable category and duplicate slug', async () => {
@@ -238,9 +252,12 @@ test('admin can update core product content, specs, documents and images', async
   let savedSpecs: Prisma.InputJsonValue | undefined
   let savedDocuments: Array<{ title: string; url: string; type: ProductDocumentType }> = []
   let savedImages: Array<{ src: string; alt: string; type: ProductImageType }> = []
+  let auditAction = ''
+  let auditFields: string[] = []
 
   const tx = {
     product: {
+      findUnique: () => Promise.resolve(productState),
       update: (args: any) => {
         productState = productFixture({
           ...productState,
@@ -273,6 +290,13 @@ test('admin can update core product content, specs, documents and images', async
       createMany: (args: { data: Array<{ src: string; alt: string; type: ProductImageType }> }) => {
         savedImages = args.data
         return Promise.resolve({ count: args.data.length })
+      },
+    },
+    productAuditLog: {
+      create: (args: { data: { action: string; changedFields: string[] } }) => {
+        auditAction = args.data.action
+        auditFields = args.data.changedFields
+        return Promise.resolve({})
       },
     },
   }
@@ -317,30 +341,54 @@ test('admin can update core product content, specs, documents and images', async
     images: [
       { src: '/uploads/products/new.png', alt: 'Updated photo', type: ProductImageType.MAIN },
     ],
-  })
+  }, ownerAdmin)
 
   assert.equal(result.slug, 'updated-product')
   assert.deepEqual(savedSpecs, { Диаметр: '20 мм' })
   assert.equal(savedDocuments.length, 1)
   assert.equal(savedDocuments[0].type, ProductDocumentType.CERTIFICATE)
   assert.equal(savedImages[0].type, ProductImageType.MAIN)
+  assert.equal(auditAction, 'product_updated')
+  assert.equal(auditFields.includes('documents'), true)
+  assert.equal(auditFields.includes('images'), true)
+})
+
+test('product update permissions separate content and commercial roles', async () => {
+  const service = new AdminProductsService({} as PrismaService)
+
+  await assert.rejects(
+    () => service.update('product-1', { titleKg: 'Blocked' }, managerAdmin),
+    /Insufficient permissions/,
+  )
+  await assert.rejects(
+    () => service.update('product-1', { price: 55 }, contentAdmin),
+    /Insufficient permissions/,
+  )
 })
 
 test('price update with auth-facing service call stores a database decimal', async () => {
   let savedPrice: Prisma.Decimal | undefined
-  const prisma = {
+  let productState = productFixture()
+  const tx = {
     product: {
-      findUnique: () => Promise.resolve({ id: 'product-1' }),
+      findUnique: () => Promise.resolve(productState),
       update: (args: { data: { price: Prisma.Decimal } }) => {
         savedPrice = args.data.price
-        return Promise.resolve({})
+        productState = productFixture({ ...productState, price: args.data.price })
+        return Promise.resolve(productState)
       },
     },
+    productAuditLog: {
+      create: () => Promise.resolve({}),
+    },
+  }
+  const prisma = {
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
   } as unknown as PrismaService
   const service = new AdminProductsService(prisma)
   service.detail = async () => ({ id: 'product-1', price: 125.5 }) as never
 
-  const result = await service.updatePrice('product-1', 125.5)
+  const result = await service.updatePrice('product-1', 125.5, ownerAdmin)
 
   assert.equal(Number(savedPrice), 125.5)
   assert.equal(result.price, 125.5)
@@ -422,38 +470,89 @@ test('negative stock and quantity below existing reservations are rejected', asy
 
 test('active and inactive state can be updated', async () => {
   let isActive = true
-  const prisma = {
+  let productState = productFixture({ isActive })
+  const tx = {
     product: {
-      findUnique: () => Promise.resolve({ id: 'product-1' }),
+      findUnique: () => Promise.resolve(productState),
       update: (args: { data: { isActive: boolean } }) => {
         isActive = args.data.isActive
-        return Promise.resolve({})
+        productState = productFixture({ ...productState, isActive })
+        return Promise.resolve(productState)
       },
     },
+    productAuditLog: {
+      create: () => Promise.resolve({}),
+    },
+  }
+  const prisma = {
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
   } as unknown as PrismaService
   const service = new AdminProductsService(prisma)
   service.detail = async () => ({ id: 'product-1', isActive }) as never
 
-  assert.equal((await service.updateActive('product-1', false)).isActive, false)
-  assert.equal((await service.updateActive('product-1', true)).isActive, true)
+  assert.equal((await service.updateActive('product-1', false, ownerAdmin)).isActive, false)
+  assert.equal((await service.updateActive('product-1', true, ownerAdmin)).isActive, true)
+})
+
+test('product audit log returns admin identity and pagination metadata', async () => {
+  const createdAt = new Date('2026-07-03T09:00:00Z')
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve({ id: 'product-1' }),
+    },
+    productAuditLog: {
+      findMany: () =>
+        Promise.resolve([
+          {
+            id: 'audit-1',
+            productId: 'product-1',
+            adminId: 'admin-owner',
+            action: 'product_updated',
+            changedFields: ['titleKg'],
+            beforeSnapshot: { titleKg: 'Old' },
+            afterSnapshot: { titleKg: 'New' },
+            metadata: { adminRole: 'OWNER' },
+            createdAt,
+            admin: { id: 'admin-owner', name: 'Owner', email: 'owner@test.local', role: 'OWNER' },
+          },
+        ]),
+      count: () => Promise.resolve(1),
+    },
+    $transaction: (operations: Promise<unknown>[]) => Promise.all(operations),
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).auditLog('product-1', { page: 1, limit: 20 })
+
+  assert.equal(result.items.length, 1)
+  assert.equal(result.items[0].action, 'product_updated')
+  assert.equal(result.items[0].admin?.email, 'owner@test.local')
+  assert.equal(result.pagination.total, 1)
 })
 
 test('order created after admin price update uses new DB price while old snapshot stays unchanged', async () => {
   const databaseProduct = { price: 100 }
   const oldOrderSnapshot = 100
-  const prisma = {
+  let productState = productFixture({ price: new Prisma.Decimal(databaseProduct.price) })
+  const tx = {
     product: {
-      findUnique: () => Promise.resolve({ id: 'product-1' }),
+      findUnique: () => Promise.resolve(productState),
       update: (args: { data: { price: Prisma.Decimal } }) => {
         databaseProduct.price = Number(args.data.price)
-        return Promise.resolve({})
+        productState = productFixture({ ...productState, price: args.data.price })
+        return Promise.resolve(productState)
       },
     },
+    productAuditLog: {
+      create: () => Promise.resolve({}),
+    },
+  }
+  const prisma = {
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
   } as unknown as PrismaService
   const service = new AdminProductsService(prisma)
   service.detail = async () => ({ id: 'product-1', price: databaseProduct.price }) as never
 
-  await service.updatePrice('product-1', 175)
+  await service.updatePrice('product-1', 175, ownerAdmin)
   const newOrderLineTotal = calculateLineTotal(databaseProduct.price, 2)
 
   assert.equal(newOrderLineTotal, 350)

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useOutletContext, useParams } from 'react-router-dom'
 import { getAdminOrder, updateAdminOrderNote, updateAdminOrderStatus } from '../api/adminApi'
 import { formatPrice } from '../utils/formatPrice'
+import { hasAdminPermission } from './adminPermissions'
 
 const statusOptions = [
   ['NEW', 'Новый'],
@@ -27,6 +28,7 @@ function labelStatus(status) {
 
 export function AdminOrderDetailPage() {
   const { id } = useParams()
+  const { admin } = useOutletContext()
   const [order, setOrder] = useState(null)
   const [note, setNote] = useState('')
   const [nextStatus, setNextStatus] = useState('')
@@ -55,6 +57,10 @@ export function AdminOrderDetailPage() {
   }, [id])
 
   async function handleStatusUpdate() {
+    if (!hasAdminPermission(admin, 'orders:update')) {
+      setError('Недостаточно прав для изменения заказа.')
+      return
+    }
     if (!nextStatus || !allowedNext[order.status]?.includes(nextStatus)) {
       setError('Выберите допустимый следующий статус.')
       return
@@ -76,6 +82,10 @@ export function AdminOrderDetailPage() {
 
   async function handleNoteSave(event) {
     event.preventDefault()
+    if (!hasAdminPermission(admin, 'orders:update')) {
+      setError('Недостаточно прав для изменения заказа.')
+      return
+    }
     setSaving('note')
     setError('')
     setMessage('')
@@ -95,6 +105,7 @@ export function AdminOrderDetailPage() {
   if (!order) return <div className="admin-alert admin-alert-error">{error || 'Заказ не найден.'}</div>
 
   const availableStatuses = allowedNext[order.status] || []
+  const canUpdateOrder = hasAdminPermission(admin, 'orders:update')
 
   return (
     <section>
@@ -129,7 +140,9 @@ export function AdminOrderDetailPage() {
             <div><dt>Резерв</dt><dd>{order.stockStatus === 'reserved' ? 'Зарезервирован' : order.stockStatus === 'needs_confirmation' ? 'Нужна проверка' : 'Подтверждён'}</dd></div>
             <div><dt>Обновлён</dt><dd>{new Date(order.updatedAt).toLocaleString('ru-RU')}</dd></div>
           </dl>
-          {availableStatuses.length > 0 ? (
+          {!canUpdateOrder ? (
+            <p>У вашей роли есть только просмотр заказа.</p>
+          ) : availableStatuses.length > 0 ? (
             <div className="admin-status-form">
               <select value={nextStatus} onChange={(event) => setNextStatus(event.target.value)}>
                 <option value="">Следующий статус</option>
@@ -173,8 +186,8 @@ export function AdminOrderDetailPage() {
       <div className="admin-detail-grid">
         <form className="admin-card" onSubmit={handleNoteSave}>
           <h2>Внутренняя заметка</h2>
-          <textarea maxLength={2000} rows={6} value={note} onChange={(event) => setNote(event.target.value)} placeholder="Эта заметка не видна покупателю." />
-          <button className="admin-primary-button" type="submit" disabled={saving === 'note'}>
+          <textarea maxLength={2000} rows={6} value={note} onChange={(event) => setNote(event.target.value)} placeholder="Эта заметка не видна покупателю." disabled={!canUpdateOrder} />
+          <button className="admin-primary-button" type="submit" disabled={saving === 'note' || !canUpdateOrder}>
             {saving === 'note' ? 'Сохраняем…' : 'Сохранить заметку'}
           </button>
         </form>

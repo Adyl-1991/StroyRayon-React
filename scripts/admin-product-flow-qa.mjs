@@ -29,6 +29,8 @@ const uploadFixturePath = path.join(tempRoot, `stage38-product-upload-${runId}.p
 const startApi = process.env.STAGE37_START_API !== '0' && !process.env.STAGE37_API_URL
 const startSite = process.env.STAGE37_START_SITE !== '0' && !process.env.STAGE37_SITE_URL
 const adminEmail = process.env.STAGE37_ADMIN_EMAIL || 'stage37-admin@example.local'
+const contentEmail = process.env.STAGE37_CONTENT_EMAIL || 'stage37-content@example.local'
+const viewerEmail = process.env.STAGE37_VIEWER_EMAIL || 'stage37-viewer@example.local'
 const adminPassword = process.env.STAGE37_ADMIN_PASSWORD || 'stage37-local-admin-password'
 const productSlug = `stage-37-local-product-${runId}`
 const productSku = `SR-STAGE37-${runId}`
@@ -349,12 +351,34 @@ function authHeadersFromToken(token) {
   return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
 }
 
+async function loginAs(email) {
+  const response = await fetch(`${apiBaseUrl}/admin/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: adminPassword }),
+  })
+  if (!response.ok) {
+    throw new Error(`Admin login failed for ${email}: ${response.status} ${await response.text()}`)
+  }
+  return response.json()
+}
+
 async function setupLocalData(prisma) {
   const passwordHash = await hashPassword(adminPassword)
   await prisma.adminUser.upsert({
     where: { email: adminEmail },
     update: { passwordHash, name: 'Stage 37 Admin', role: AdminRole.OWNER, isActive: true },
     create: { email: adminEmail, passwordHash, name: 'Stage 37 Admin', role: AdminRole.OWNER, isActive: true },
+  })
+  await prisma.adminUser.upsert({
+    where: { email: contentEmail },
+    update: { passwordHash, name: 'Stage 40D Content', role: AdminRole.CONTENT, isActive: true },
+    create: { email: contentEmail, passwordHash, name: 'Stage 40D Content', role: AdminRole.CONTENT, isActive: true },
+  })
+  await prisma.adminUser.upsert({
+    where: { email: viewerEmail },
+    update: { passwordHash, name: 'Stage 40D Viewer', role: AdminRole.VIEWER, isActive: true },
+    create: { email: viewerEmail, passwordHash, name: 'Stage 40D Viewer', role: AdminRole.VIEWER, isActive: true },
   })
   await prisma.product.deleteMany({
     where: { OR: [{ slug: productSlug }, { sku: productSku }] },
@@ -374,7 +398,7 @@ async function cleanupLocalData(prisma) {
     await prisma.customer.deleteMany({ where: { id: { in: customerIds } } })
   }
   await prisma.product.deleteMany({ where: { OR: [{ slug: productSlug }, { sku: productSku }] } })
-  await prisma.adminUser.deleteMany({ where: { email: adminEmail } })
+  await prisma.adminUser.deleteMany({ where: { email: { in: [adminEmail, contentEmail, viewerEmail] } } })
   if (uploadedProductImagePath?.startsWith('/uploads/products/')) {
     const uploadRoot = path.resolve(apiDir, 'uploads', 'products')
     const uploadPath = path.resolve(apiDir, uploadedProductImagePath.replace(/^\/+/, ''))
@@ -540,6 +564,25 @@ async function runBrowserFlow(cdp, checks, issues) {
     images: document.querySelectorAll('.admin-gallery-item').length,
   }))()`)
   addCheck(checks, issues, 'Admin product detail core editor saves title/specs/documents/images', editedDetail.title === updatedTitleKg && editedDetail.spec === 'Stage 40B value' && editedDetail.documents >= 1 && editedDetail.images >= 2, JSON.stringify(editedDetail))
+  const editedProductId = await evaluate(cdp, "location.pathname.split('/').filter(Boolean).at(-1)")
+  await waitFor(cdp, "document.querySelectorAll('[data-qa=\"product-audit-log\"] > li').length >= 1", 15000)
+  const auditUiState = await evaluate(cdp, `(() => ({
+    rows: document.querySelectorAll('[data-qa="product-audit-log"] > li').length,
+    text: document.querySelector('[data-qa="product-audit-log"]')?.innerText || '',
+  }))()`)
+  addCheck(checks, issues, 'Admin product detail shows product change history', auditUiState.rows >= 1, JSON.stringify(auditUiState))
+  const ownerTokenAfterEdit = await evaluate(cdp, "sessionStorage.getItem('stroyrayon_admin_token')")
+  const auditAfterEdit = await fetch(`${apiBaseUrl}/admin/products/${editedProductId}/audit-log?limit=10`, {
+    headers: authHeadersFromToken(ownerTokenAfterEdit),
+  }).then((response) => response.json())
+  const auditAfterEditActions = auditAfterEdit.items?.map((item) => item.action) || []
+  addCheck(
+    checks,
+    issues,
+    'Admin product audit API records create and content update',
+    auditAfterEditActions.includes('product_created') && auditAfterEditActions.includes('product_updated'),
+    JSON.stringify(auditAfterEditActions),
+  )
 
   await navigate(cdp, `/admin/products?q=${encodeURIComponent(productSlug)}`)
   await waitFor(cdp, "Boolean(document.querySelector('.admin-products-table tbody tr'))")
@@ -653,6 +696,54 @@ async function runBrowserFlow(cdp, checks, issues) {
   const inactiveList = await fetch(`${apiBaseUrl}/products?q=${encodeURIComponent(updatedTitleKg)}`).then((response) => response.json())
   addCheck(checks, issues, 'Inactive product is hidden from public detail API', inactiveDetail === '' || inactiveDetail === 'null', inactiveDetail)
   addCheck(checks, issues, 'Inactive product is hidden from public search API', !inactiveList.items?.some((item) => item.slug === productSlug))
+
+  const auditAfterCommercialChanges = await fetch(`${apiBaseUrl}/admin/products/${productId}/audit-log?limit=20`, {
+    headers: authHeaders,
+  }).then((response) => response.json())
+  const commercialAuditActions = auditAfterCommercialChanges.items?.map((item) => item.action) || []
+  const commercialAuditFields = new Set((auditAfterCommercialChanges.items || []).flatMap((item) => item.changedFields || []))
+  addCheck(
+    checks,
+    issues,
+    'Admin product audit API records price stock and visibility fields',
+    commercialAuditActions.includes('product_updated') && commercialAuditFields.has('price') && commercialAuditFields.has('stock') && commercialAuditFields.has('isActive'),
+    JSON.stringify({ actions: commercialAuditActions, fields: [...commercialAuditFields] }),
+  )
+
+  const contentLogin = await loginAs(contentEmail)
+  const viewerLogin = await loginAs(viewerEmail)
+  const contentPriceResponse = await fetch(`${apiBaseUrl}/admin/products/${productId}`, {
+    method: 'PATCH',
+    headers: authHeadersFromToken(contentLogin.accessToken),
+    body: JSON.stringify({ price: 77 }),
+  })
+  const viewerUpdateResponse = await fetch(`${apiBaseUrl}/admin/products/${productId}`, {
+    method: 'PATCH',
+    headers: authHeadersFromToken(viewerLogin.accessToken),
+    body: JSON.stringify({ titleKg: 'Viewer must not edit' }),
+  })
+  const viewerListResponse = await fetch(`${apiBaseUrl}/admin/products?limit=1`, {
+    headers: authHeadersFromToken(viewerLogin.accessToken),
+  })
+  addCheck(checks, issues, 'Content role is blocked from commercial product update', contentPriceResponse.status === 403, String(contentPriceResponse.status))
+  addCheck(checks, issues, 'Viewer role is blocked from product update', viewerUpdateResponse.status === 403, String(viewerUpdateResponse.status))
+  addCheck(checks, issues, 'Viewer role can still view product list', viewerListResponse.ok, String(viewerListResponse.status))
+
+  await evaluate(cdp, `sessionStorage.setItem('stroyrayon_admin_token', ${JSON.stringify(viewerLogin.accessToken)})`)
+  await navigate(cdp, `/admin/products/${productId}`)
+  await waitFor(cdp, "Boolean(document.querySelector('[data-qa=\"admin-product-edit-form\"]'))", 15000)
+  const viewerUiState = await evaluate(cdp, `(() => ({
+    saveDisabled: Boolean(document.querySelector('[data-qa="admin-product-edit-form"] button[type="submit"]')?.disabled),
+    createLink: Boolean(document.querySelector('a[href="/admin/products/new"]')),
+    uploadDisabled: Boolean(document.querySelector('[data-qa="edit-image-file"]')?.disabled),
+  }))()`)
+  addCheck(
+    checks,
+    issues,
+    'Viewer UI disables product edit actions',
+    viewerUiState.saveDisabled && viewerUiState.uploadDisabled && !viewerUiState.createLink,
+    JSON.stringify(viewerUiState),
+  )
 }
 
 async function main() {
