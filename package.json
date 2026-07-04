@@ -13,6 +13,9 @@
     "qa:customer": "node scripts/customer-storefront-qa.mjs",
     "qa:customer:live": "node scripts/customer-storefront-qa.mjs --live",
     "qa:admin-product-flow": "node scripts/admin-product-flow-qa.mjs",
+    "production:check-env": "node scripts/production-env-check.mjs",
+    "production:smoke": "node scripts/production-live-smoke.mjs",
+    "production:smoke:upload": "node scripts/production-upload-smoke.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
