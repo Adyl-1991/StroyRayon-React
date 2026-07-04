@@ -2,12 +2,15 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useOutletContext, useParams } from 'react-router-dom'
 import {
   createAdminProductVariant,
+  deleteAdminProductImage,
   getAdminProduct,
   getAdminProductAuditLog,
   getAdminProductOptions,
+  reorderAdminProductImages,
+  updateAdminProductImage,
   updateAdminProductVariant,
   updateAdminProduct,
-  uploadAdminProductImage,
+  uploadAdminProductGalleryImage,
 } from '../api/adminApi'
 import { hasAdminPermission } from './adminPermissions'
 import { formatPrice } from '../utils/formatPrice'
@@ -119,6 +122,10 @@ function createForm(product) {
           alt: image.alt || '',
           type: index === 0 ? 'MAIN' : 'GALLERY',
           sortOrder: image.sortOrder ?? index,
+          storageKey: image.storageKey || '',
+          storageDriver: image.storageDriver || 'legacy',
+          originalName: image.originalName || '',
+          size: image.size || 0,
         }))
       : [],
     variants: product.variants?.length
@@ -163,6 +170,7 @@ export function AdminProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
+  const [galleryBusy, setGalleryBusy] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
@@ -226,10 +234,10 @@ export function AdminProductDetailPage() {
       event.target.value = ''
       return
     }
-    const file = event.target.files?.[0]
-    if (!file) return
-    if (!file.type.startsWith('image/')) {
-      setError('Выберите файл изображения.')
+    const files = Array.from(event.target.files || [])
+    if (!files.length) return
+    if (files.some((file) => !['image/jpeg', 'image/png', 'image/webp'].includes(file.type))) {
+      setError('Выберите JPG, PNG или WEBP файл.')
       event.target.value = ''
       return
     }
@@ -238,20 +246,17 @@ export function AdminProductDetailPage() {
     setError('')
     setMessage('')
     try {
-      const uploaded = await uploadAdminProductImage(file)
-      setForm((current) => ({
-        ...current,
-        images: [
-          ...current.images,
-          {
-            src: uploaded.src,
-            alt: current.titleRu || current.titleKg || file.name.replace(/\.[^.]+$/, ''),
-            type: current.images.length ? 'GALLERY' : 'MAIN',
-            sortOrder: current.images.length,
-          },
-        ],
-      }))
-      setMessage('Фото загружено. Нажмите "Сохранить", чтобы прикрепить его к товару.')
+      for (const file of files) {
+        await uploadAdminProductGalleryImage(id, file)
+      }
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage(files.length > 1 ? 'Фото загружены и прикреплены к товару.' : 'Фото загружено и прикреплено к товару.')
     } catch (requestError) {
       setError(requestError.message || 'Не удалось загрузить фото.')
     } finally {
@@ -260,34 +265,103 @@ export function AdminProductDetailPage() {
     }
   }
 
-  function makeMainImage(index) {
-    setForm((current) => {
-      const images = [...current.images]
-      const [selected] = images.splice(index, 1)
-      return {
-        ...current,
-        images: [selected, ...images].map((image, imageIndex) => ({
-          ...image,
-          type: imageIndex === 0 ? 'MAIN' : 'GALLERY',
-          sortOrder: imageIndex,
-        })),
-      }
-    })
+  async function saveImageMeta(index) {
+    const image = form.images[index]
+    if (!image?.id) return
+    setGalleryBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      await updateAdminProductImage(id, image.id, { alt: image.alt })
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage('Данные фото сохранены.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось сохранить фото.')
+    } finally {
+      setGalleryBusy(false)
+    }
   }
 
-  function removeImage(index) {
-    setForm((current) => ({
-      ...current,
-      images: current.images
-        .filter((_, imageIndex) => imageIndex !== index)
-        .map((image, imageIndex) => ({
-          ...image,
-          type: imageIndex === 0 ? 'MAIN' : 'GALLERY',
-          sortOrder: imageIndex,
-        })),
-    }))
+  async function makeMainImage(index) {
+    const image = form.images[index]
+    if (!image?.id) return
+    setGalleryBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      await updateAdminProductImage(id, image.id, { isMain: true })
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage('Главное фото обновлено.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось назначить главное фото.')
+    } finally {
+      setGalleryBusy(false)
+    }
   }
 
+  async function moveImage(index, direction) {
+    const nextIndex = index + direction
+    if (nextIndex < 0 || nextIndex >= form.images.length) return
+    const images = [...form.images]
+    const [selected] = images.splice(index, 1)
+    images.splice(nextIndex, 0, selected)
+    setGalleryBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      await reorderAdminProductImages(id, {
+        images: images.map((image, imageIndex) => ({ id: image.id, sortOrder: imageIndex })),
+        mainImageId: images[0]?.id,
+      })
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage('Порядок фото обновлен.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось изменить порядок фото.')
+    } finally {
+      setGalleryBusy(false)
+    }
+  }
+
+  async function removeImage(index) {
+    const image = form.images[index]
+    if (!image?.id) return
+    setGalleryBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      await deleteAdminProductImage(id, image.id)
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage('Фото откреплено от товара.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось убрать фото.')
+    } finally {
+      setGalleryBusy(false)
+    }
+  }
   function addVariant() {
     setForm((current) => ({
       ...current,
@@ -481,7 +555,6 @@ export function AdminProductDetailPage() {
               adminNote: form.adminNote,
               specs: compactSpecs(form.specs),
               documents: compactRows(form.documents, ['title', 'url']),
-              images: form.images.filter((image) => image.src.trim()),
             }
           : {}),
         ...(canEditCommercial
@@ -758,8 +831,8 @@ export function AdminProductDetailPage() {
             <h2>Фото</h2>
             <label className="admin-file-upload admin-inline-upload">
               Загрузить фото
-              <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" disabled={uploadingImage || !canUpload} onChange={handleImageUpload} />
-              <span>{uploadingImage ? 'Загружаем...' : 'JPG, PNG, WEBP или GIF до 5 MB'}</span>
+              <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp" multiple disabled={uploadingImage || galleryBusy || !canUpload} onChange={handleImageUpload} />
+              <span>{uploadingImage ? 'Загружаем...' : 'JPG, PNG или WEBP до 5 MB'}</span>
             </label>
           </div>
           {form.images.length === 0 ? (
@@ -769,16 +842,25 @@ export function AdminProductDetailPage() {
               {form.images.map((image, index) => (
                 <div className="admin-gallery-item" key={`${image.src}-${index}`}>
                   <img src={image.src} alt={image.alt || form.titleKg} />
-                  <input data-qa="edit-image-alt" value={image.alt} onChange={(event) => updateRow('images', index, 'alt', event.target.value)} maxLength={180} placeholder="Alt text" disabled={!canEditContent} />
+                  <input data-qa="edit-image-alt" value={image.alt} onChange={(event) => updateRow('images', index, 'alt', event.target.value)} maxLength={180} placeholder="Alt text" disabled={!canEditContent || galleryBusy} />
                   <div className="admin-gallery-actions">
-                    <button type="button" className="admin-secondary-button" disabled={index === 0 || !canEditContent} onClick={() => makeMainImage(index)}>
+                    <button type="button" className="admin-secondary-button" data-qa="edit-image-save" disabled={!canEditContent || galleryBusy} onClick={() => saveImageMeta(index)}>
+                      Сохранить alt
+                    </button>
+                    <button type="button" className="admin-secondary-button" data-qa="edit-image-main" disabled={index === 0 || !canEditContent || galleryBusy} onClick={() => makeMainImage(index)}>
                       Сделать главным
                     </button>
-                    <button type="button" className="admin-danger-button" disabled={!canEditContent} onClick={() => removeImage(index)}>
+                    <button type="button" className="admin-secondary-button" data-qa="edit-image-up" disabled={index === 0 || !canEditContent || galleryBusy} onClick={() => moveImage(index, -1)}>
+                      Вверх
+                    </button>
+                    <button type="button" className="admin-secondary-button" data-qa="edit-image-down" disabled={index === form.images.length - 1 || !canEditContent || galleryBusy} onClick={() => moveImage(index, 1)}>
+                      Вниз
+                    </button>
+                    <button type="button" className="admin-danger-button" data-qa="edit-image-delete" disabled={!canEditContent || galleryBusy} onClick={() => removeImage(index)}>
                       Убрать
                     </button>
                   </div>
-                  {index === 0 && <small>Главное фото</small>}
+                  <small>{index === 0 ? 'Главное фото' : `${image.storageDriver || 'legacy'} · ${image.originalName || image.storageKey || 'gallery'}`}</small>
                 </div>
               ))}
             </div>

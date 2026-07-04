@@ -25,6 +25,10 @@ export async function apiPatch(path, payload, options = {}) {
   return apiRequest('PATCH', path, payload, options)
 }
 
+export async function apiDelete(path, options = {}) {
+  return apiRequest('DELETE', path, null, options)
+}
+
 async function apiRequest(method, path, payload, options = {}) {
   const controller = new AbortController()
   const timeoutId = window.setTimeout(() => controller.abort(), options.timeout || API_TIMEOUT_MS)

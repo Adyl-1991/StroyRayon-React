@@ -52,6 +52,12 @@ function productFixture(overrides: Record<string, unknown> = {}) {
         height: 700,
         type: ProductImageType.MAIN,
         sortOrder: 0,
+        storageKey: null,
+        storageDriver: 'legacy',
+        originalName: null,
+        size: null,
+        createdAt: new Date('2026-06-19T10:00:00Z'),
+        updatedAt: new Date('2026-06-19T10:00:00Z'),
       },
     ],
     documents: [],
@@ -366,6 +372,167 @@ test('product update permissions separate content and commercial roles', async (
     () => service.update('product-1', { price: 55 }, contentAdmin),
     /Insufficient permissions/,
   )
+})
+
+test('admin gallery upload creates product image record and audit log', async () => {
+  let productState = productFixture({ images: [] })
+  let createdImage: Record<string, unknown> | undefined
+  let auditAction = ''
+  const uploadedImage = {
+    ...productFixture().images[0],
+    id: 'image-uploaded',
+    src: 'http://127.0.0.1:4027/uploads/products/uploaded.webp',
+    storageKey: 'products/uploaded.webp',
+    storageDriver: 'local',
+  }
+  const tx = {
+    productImage: {
+      create: (args: { data: Record<string, unknown> }) => {
+        createdImage = args.data
+        productState = productFixture({ images: [uploadedImage] })
+        return Promise.resolve({})
+      },
+      updateMany: () => Promise.resolve({ count: 0 }),
+    },
+    product: {
+      findUnique: () => Promise.resolve(productState),
+    },
+    productAuditLog: {
+      create: (args: { data: { action: string } }) => {
+        auditAction = args.data.action
+        return Promise.resolve({})
+      },
+    },
+  }
+  const prisma = {
+    product: { findUnique: () => Promise.resolve(productState) },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).addImage(
+    'product-1',
+    {
+      driver: 'local',
+      key: 'products/uploaded.webp',
+      src: 'http://127.0.0.1:4027/uploads/products/uploaded.webp',
+      path: '/uploads/products/uploaded.webp',
+      filename: 'uploaded.webp',
+      originalName: 'original.webp',
+      size: 120,
+      mimeType: 'image/webp',
+    },
+    ownerAdmin,
+  )
+
+  assert.equal(createdImage?.type, ProductImageType.MAIN)
+  assert.equal(createdImage?.storageKey, 'products/uploaded.webp')
+  assert.equal(createdImage?.storageDriver, 'local')
+  assert.equal(auditAction, 'image_added')
+  assert.equal(result.images.length, 1)
+})
+
+test('admin gallery can set main image, reorder images and detach safely', async () => {
+  const imageA = { ...productFixture().images[0], id: 'image-a', sortOrder: 0, type: ProductImageType.MAIN }
+  const imageB = {
+    ...productFixture().images[0],
+    id: 'image-b',
+    src: 'http://127.0.0.1:4027/uploads/products/b.webp',
+    sortOrder: 1,
+    type: ProductImageType.GALLERY,
+    storageKey: 'products/b.webp',
+    storageDriver: 'local',
+  }
+  let updateManyArgs: unknown
+  const updates: Array<{ id: string; data: Record<string, unknown> }> = []
+  let deletedObject = false
+  let currentProduct = productFixture({ images: [imageA, imageB] })
+  const tx = {
+    productImage: {
+      updateMany: (args: unknown) => {
+        updateManyArgs = args
+        return Promise.resolve({ count: 1 })
+      },
+      update: (args: { where: { id: string }; data: Record<string, unknown> }) => {
+        updates.push({ id: args.where.id, data: args.data })
+        return Promise.resolve({})
+      },
+      delete: () => Promise.resolve({}),
+      findMany: () => Promise.resolve([imageA]),
+    },
+    product: {
+      findUnique: () => Promise.resolve(currentProduct),
+    },
+    productAuditLog: {
+      create: () => Promise.resolve({}),
+    },
+  }
+  const prisma = {
+    product: { findUnique: () => Promise.resolve(currentProduct) },
+    productImage: { count: () => Promise.resolve(0) },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+  const service = new AdminProductsService(prisma)
+
+  await service.updateImage('product-1', 'image-b', { isMain: true }, ownerAdmin)
+  assert.deepEqual(updateManyArgs, {
+    where: { productId: 'product-1', id: { not: 'image-b' } },
+    data: { type: ProductImageType.GALLERY },
+  })
+
+  await service.reorderImages(
+    'product-1',
+    { images: [{ id: 'image-b', sortOrder: 0 }, { id: 'image-a', sortOrder: 1 }], mainImageId: 'image-b' },
+    ownerAdmin,
+  )
+  assert.equal(updates.some((item) => item.id === 'image-b' && item.data.type === ProductImageType.MAIN), true)
+
+  currentProduct = productFixture({ images: [imageB, imageA] })
+  await service.deleteImage(
+    'product-1',
+    'image-b',
+    { deleteObject: async () => { deletedObject = true; return { deleted: true, reason: 'local-deleted' } } } as never,
+    ownerAdmin,
+  )
+  assert.equal(deletedObject, true)
+})
+
+test('admin gallery blocks viewer role and protects legacy static assets from physical delete', async () => {
+  const service = new AdminProductsService({} as PrismaService)
+  await assert.rejects(
+    () => service.updateImage('product-1', 'image-1', { alt: 'Blocked' }, viewerAdmin),
+    /Insufficient permissions/,
+  )
+
+  const staticImage = {
+    ...productFixture().images[0],
+    id: 'image-static',
+    src: '/images/products/static.webp',
+    storageKey: null,
+    storageDriver: 'legacy',
+  }
+  const tx = {
+    productImage: {
+      delete: () => Promise.resolve({}),
+      findMany: () => Promise.resolve([]),
+      update: () => Promise.resolve({}),
+    },
+    product: { findUnique: () => Promise.resolve(productFixture({ images: [] })) },
+    productAuditLog: { create: () => Promise.resolve({}) },
+  }
+  const prisma = {
+    product: { findUnique: () => Promise.resolve(productFixture({ images: [staticImage] })) },
+    productImage: { count: () => Promise.resolve(0) },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+  let deletedObject = false
+  const result = await new AdminProductsService(prisma).deleteImage(
+    'product-1',
+    'image-static',
+    { deleteObject: async () => { deletedObject = true; return { deleted: true, reason: 'unexpected' } } } as never,
+    ownerAdmin,
+  )
+  assert.equal(deletedObject, false)
+  assert.equal(result.storageDelete.deleted, false)
 })
 
 test('admin can create and audit a product variant', async () => {

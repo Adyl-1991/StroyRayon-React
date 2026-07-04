@@ -2,9 +2,11 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
+import { StoredObject, StorageService } from '../storage/storage.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
+import { ReorderProductImagesDto, UpdateProductImageDto } from './dto/product-image-gallery.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 
 const adminProductInclude = {
@@ -378,7 +380,7 @@ export class AdminProductsService {
 
       if (images !== undefined) {
         await tx.productImage.deleteMany({ where: { productId: id } })
-        if (images.length) {
+      if (images.length) {
           await tx.productImage.createMany({
             data: images.map((image, index) => ({
               productId: id,
@@ -388,6 +390,10 @@ export class AdminProductsService {
               height: 700,
               type: image.type,
               sortOrder: image.sortOrder ?? index,
+              storageKey: image.storageKey || null,
+              storageDriver: image.storageDriver || 'legacy',
+              originalName: image.originalName || null,
+              size: image.size || null,
             })),
           })
         }
@@ -520,6 +526,148 @@ export class AdminProductsService {
       }
     })
     return this.detail(id)
+  }
+
+  async addImage(id: string, stored: StoredObject, admin?: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    const existing = await this.prisma.product.findUnique({ where: { id }, include: adminProductInclude })
+    if (!existing) throw new NotFoundException('Product not found')
+
+    const hasRealImage = existing.images.some((image) => !isPlaceholderOrStaticImage(image.src))
+    await this.prisma.$transaction(async (tx) => {
+      if (!hasRealImage) {
+        await tx.productImage.updateMany({
+          where: { productId: id },
+          data: { type: ProductImageType.GALLERY, sortOrder: { increment: 1 } },
+        })
+      }
+      await tx.productImage.create({
+        data: {
+          productId: id,
+          src: stored.src,
+          alt: `${existing.titleKg} - StroyRayon`,
+          width: 900,
+          height: 700,
+          type: hasRealImage ? ProductImageType.GALLERY : ProductImageType.MAIN,
+          sortOrder: hasRealImage ? existing.images.length : 0,
+          storageKey: stored.key,
+          storageDriver: stored.driver,
+          originalName: stored.originalName,
+          size: stored.size,
+        },
+      })
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'image_added', ['images'], snapshotProduct(existing), snapshotProduct(updated))
+      }
+    })
+
+    return this.detail(id)
+  }
+
+  async updateImage(id: string, imageId: string, dto: UpdateProductImageDto, admin?: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    const existing = await this.prisma.product.findUnique({ where: { id }, include: adminProductInclude })
+    if (!existing) throw new NotFoundException('Product not found')
+    const image = existing.images.find((item) => item.id === imageId)
+    if (!image) throw new NotFoundException('Image not found')
+
+    await this.prisma.$transaction(async (tx) => {
+      const makeMain = dto.isMain || dto.type === ProductImageType.MAIN
+      if (makeMain) {
+        await tx.productImage.updateMany({
+          where: { productId: id, id: { not: imageId } },
+          data: { type: ProductImageType.GALLERY },
+        })
+      }
+      await tx.productImage.update({
+        where: { id: imageId },
+        data: {
+          ...(dto.alt !== undefined ? { alt: dto.alt.trim() || `${existing.titleKg} - StroyRayon` } : {}),
+          ...(dto.sortOrder !== undefined ? { sortOrder: dto.sortOrder } : {}),
+          ...(dto.type !== undefined || dto.isMain !== undefined
+            ? { type: makeMain ? ProductImageType.MAIN : dto.type || image.type }
+            : {}),
+        },
+      })
+      if (makeMain) await normalizeImageOrdering(tx, id, imageId)
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'image_updated', ['images'], snapshotProduct(existing), snapshotProduct(updated))
+      }
+    })
+
+    return this.detail(id)
+  }
+
+  async reorderImages(id: string, dto: ReorderProductImagesDto, admin?: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    const existing = await this.prisma.product.findUnique({ where: { id }, include: adminProductInclude })
+    if (!existing) throw new NotFoundException('Product not found')
+    const existingIds = new Set(existing.images.map((image) => image.id))
+    if (dto.images.some((image) => !existingIds.has(image.id))) {
+      throw new BadRequestException('Image order contains an image from another product')
+    }
+    const sorted = [...dto.images].sort((a, b) => a.sortOrder - b.sortOrder)
+    const mainImageId = dto.mainImageId && existingIds.has(dto.mainImageId)
+      ? dto.mainImageId
+      : sorted[0]?.id || existing.images[0]?.id
+
+    await this.prisma.$transaction(async (tx) => {
+      await Promise.all(sorted.map((image, index) =>
+        tx.productImage.update({
+          where: { id: image.id },
+          data: {
+            sortOrder: index,
+            type: image.id === mainImageId ? ProductImageType.MAIN : ProductImageType.GALLERY,
+          },
+        }),
+      ))
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'image_reordered', ['images'], snapshotProduct(existing), snapshotProduct(updated))
+      }
+    })
+
+    return this.detail(id)
+  }
+
+  async deleteImage(id: string, imageId: string, storageService: StorageService, admin?: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    const existing = await this.prisma.product.findUnique({ where: { id }, include: adminProductInclude })
+    if (!existing) throw new NotFoundException('Product not found')
+    const image = existing.images.find((item) => item.id === imageId)
+    if (!image) throw new NotFoundException('Image not found')
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.productImage.delete({ where: { id: imageId } })
+      const remaining = await tx.productImage.findMany({
+        where: { productId: id },
+        orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+      })
+      await Promise.all(remaining.map((item, index) =>
+        tx.productImage.update({
+          where: { id: item.id },
+          data: { sortOrder: index, type: index === 0 ? ProductImageType.MAIN : ProductImageType.GALLERY },
+        }),
+      ))
+      const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
+      if (updated) {
+        await writeProductAuditLog(tx, id, admin, 'image_deleted', ['images'], snapshotProduct(existing), snapshotProduct(updated))
+      }
+    })
+
+    const remainingRefs = image.storageKey
+      ? await this.prisma.productImage.count({ where: { storageKey: image.storageKey } })
+      : 1
+    const canDeletePhysical = remainingRefs === 0 && canPhysicallyDeleteImage(image)
+    const storageDelete = canDeletePhysical
+      ? await storageService.deleteObject(image.storageDriver, image.storageKey)
+      : {
+          deleted: false,
+          reason: image.storageKey ? 'image-still-referenced-or-protected' : 'legacy-or-static-image',
+        }
+    return { ...(await this.detail(id)), storageDelete }
   }
 
   async createVariant(productId: string, dto: CreateAdminProductVariantDto, admin?: AdminIdentity) {
@@ -786,9 +934,9 @@ export class AdminProductsService {
         : null,
       isActive: product.isActive,
       imageStatus: hasRealImage ? 'ready' : product.images.length ? 'placeholder' : 'missing',
-      thumbnail: product.images.find((image) => !image.src.includes('/placeholders/')) || product.images[0] || null,
-      image: product.images[0] || null,
-      images: product.images,
+      thumbnail: this.mapImage(product.images.find((image) => !image.src.includes('/placeholders/')) || product.images[0] || null),
+      image: this.mapImage(product.images[0] || null),
+      images: product.images.map((image) => this.mapImage(image)),
       qualityFlags: quality.flags,
       completenessScore: quality.score,
       completenessLabel: quality.label,
@@ -825,6 +973,25 @@ export class AdminProductsService {
       specs,
       createdAt: variant.createdAt,
       updatedAt: variant.updatedAt,
+    }
+  }
+
+  private mapImage(image: AdminProduct['images'][number] | null) {
+    if (!image) return null
+    return {
+      id: image.id,
+      src: image.src,
+      alt: image.alt,
+      width: image.width,
+      height: image.height,
+      type: image.type,
+      sortOrder: image.sortOrder,
+      storageKey: image.storageKey || '',
+      storageDriver: image.storageDriver,
+      originalName: image.originalName || '',
+      size: image.size || 0,
+      createdAt: image.createdAt,
+      updatedAt: image.updatedAt,
     }
   }
 }
@@ -969,10 +1136,13 @@ function snapshotProduct(product: AdminProduct) {
       sortOrder: document.sortOrder,
     })),
     images: product.images.map((image) => ({
+      id: image.id,
       src: image.src,
       alt: image.alt,
       type: image.type,
       sortOrder: image.sortOrder,
+      storageKey: image.storageKey,
+      storageDriver: image.storageDriver,
     })),
     variants: product.variants.map((variant) => ({
       id: variant.id,
@@ -1124,6 +1294,42 @@ function productMatchesQuality(
   }
 }
 
+async function normalizeImageOrdering(tx: Prisma.TransactionClient, productId: string, mainImageId: string) {
+  const images = await tx.productImage.findMany({
+    where: { productId },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  })
+  const main = images.find((image) => image.id === mainImageId)
+  const ordered = [
+    ...(main ? [main] : []),
+    ...images.filter((image) => image.id !== mainImageId),
+  ]
+  await Promise.all(ordered.map((image, index) =>
+    tx.productImage.update({
+      where: { id: image.id },
+      data: {
+        sortOrder: index,
+        type: index === 0 ? ProductImageType.MAIN : ProductImageType.GALLERY,
+      },
+    }),
+  ))
+}
+
+function isPlaceholderOrStaticImage(src: string) {
+  return src.includes('/placeholders/') || src.startsWith('/images/') || src.includes('/images/')
+}
+
+function canPhysicallyDeleteImage(image: {
+  src: string
+  storageKey: string | null
+  storageDriver: string
+}) {
+  if (!image.storageKey) return false
+  if (image.storageDriver === 'legacy') return false
+  if (isPlaceholderOrStaticImage(image.src)) return false
+  return true
+}
+
 function normalizeSlug(value: string) {
   return value
     .trim()
@@ -1178,7 +1384,16 @@ function normalizeDocumentUrl(value: string) {
 }
 
 function normalizeImages(
-  rows: Array<{ src: string; alt: string; type?: ProductImageType; sortOrder?: number }>,
+  rows: Array<{
+    src: string
+    alt: string
+    type?: ProductImageType
+    sortOrder?: number
+    storageKey?: string | null
+    storageDriver?: string | null
+    originalName?: string | null
+    size?: number | null
+  }>,
   fallbackAlt: string,
 ) {
   const normalized = rows
@@ -1187,6 +1402,10 @@ function normalizeImages(
       alt: row.alt?.trim() || `${fallbackAlt} - StroyRayon`,
       type: row.type || ProductImageType.GALLERY,
       sortOrder: row.sortOrder ?? index,
+      storageKey: row.storageKey || null,
+      storageDriver: row.storageDriver || 'legacy',
+      originalName: row.originalName || null,
+      size: row.size || null,
     }))
     .filter((row) => row.src)
     .sort((a, b) => a.sortOrder - b.sortOrder)

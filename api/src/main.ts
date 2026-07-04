@@ -30,8 +30,10 @@ async function bootstrap() {
     throw new Error('Production CORS_ORIGIN must contain explicit HTTPS frontend origins')
   }
 
+  const storageLocalRoot = configService.get<string>('STORAGE_LOCAL_ROOT') || 'uploads'
+
   app.setGlobalPrefix('api')
-  app.useStaticAssets(join(process.cwd(), 'uploads'), { prefix: '/uploads/' })
+  app.useStaticAssets(join(process.cwd(), storageLocalRoot), { prefix: '/uploads/' })
   app.enableCors({
     origin: corsOrigins,
     credentials: true,

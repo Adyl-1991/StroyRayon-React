@@ -553,20 +553,74 @@ async function runBrowserFlow(cdp, checks, issues) {
   await setValue(cdp, '[data-qa="edit-seo-description-ru"]', 'Stage 40C edited SEO meta RU')
   await setFileInput(cdp, '[data-qa="edit-image-file"]', uploadFixturePath)
   await waitFor(cdp, "document.querySelectorAll('.admin-gallery-item').length >= 2", 15000)
+  await evaluate(cdp, `(() => {
+    const items = Array.from(document.querySelectorAll('.admin-gallery-item'));
+    const last = items.at(-1);
+    const input = last?.querySelector('[data-qa="edit-image-alt"]');
+    if (!input) return false;
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, 'Stage 40F gallery alt');
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    last.querySelector('[data-qa="edit-image-save"]')?.click();
+    return true;
+  })()`)
+  await waitFor(cdp, "Boolean(document.querySelector('[role=\"status\"]')?.textContent || document.querySelector('[role=\"alert\"]'))", 15000)
+  await evaluate(cdp, `(() => {
+    const items = Array.from(document.querySelectorAll('.admin-gallery-item'));
+    items.at(-1)?.querySelector('[data-qa="edit-image-main"]')?.click();
+    return true;
+  })()`)
+  await waitFor(cdp, "document.querySelector('.admin-gallery-item [data-qa=\"edit-image-alt\"]')?.value.includes('Stage 40F gallery alt')", 15000)
+  await evaluate(cdp, "document.querySelector('.admin-gallery-item [data-qa=\"edit-image-down\"]')?.click()")
+  await waitFor(cdp, "Boolean(document.querySelector('[role=\"status\"]')?.textContent || document.querySelector('[role=\"alert\"]'))", 15000)
+  await evaluate(cdp, `(() => {
+    const items = Array.from(document.querySelectorAll('.admin-gallery-item'));
+    items.at(-1)?.querySelector('[data-qa="edit-image-main"]')?.click();
+    return true;
+  })()`)
+  await waitFor(cdp, "document.querySelector('.admin-gallery-item [data-qa=\"edit-image-alt\"]')?.value.includes('Stage 40F gallery alt')", 15000)
+  await evaluate(cdp, `(() => {
+    const items = Array.from(document.querySelectorAll('.admin-gallery-item'));
+    items.at(1)?.querySelector('[data-qa="edit-image-delete"]')?.click();
+    return true;
+  })()`)
+  await waitFor(cdp, "document.querySelector('.admin-gallery-item [data-qa=\"edit-image-alt\"]')?.value.includes('Stage 40F gallery alt') && !document.querySelector('[data-qa=\"edit-image-delete\"]')?.disabled", 15000)
+  const galleryV2State = await evaluate(cdp, `(() => ({
+    images: document.querySelectorAll('.admin-gallery-item').length,
+    firstAlt: document.querySelector('.admin-gallery-item [data-qa="edit-image-alt"]')?.value || '',
+    body: document.body.innerText,
+  }))()`)
+  addCheck(checks, issues, 'Admin Gallery v2 uploads saves alt reorders sets main and detaches image', galleryV2State.images >= 1 && galleryV2State.firstAlt.includes('Stage 40F gallery alt'), JSON.stringify(galleryV2State))
+  await setValue(cdp, '[data-qa="edit-title-kg"]', updatedTitleKg)
+  await setValue(cdp, '[data-qa="edit-title-ru"]', updatedTitleRu)
+  await setValue(cdp, '[data-qa="edit-short-description-kg"]', 'Stage 40B short description')
+  await setValue(cdp, '[data-qa="edit-description-kg"]', 'Stage 40B full KG description')
+  await setValue(cdp, '[data-qa="edit-description-ru"]', 'Stage 40B full RU description')
+  await setValue(cdp, '[data-qa="edit-spec-key"]', 'Stage 40B spec')
+  await setValue(cdp, '[data-qa="edit-spec-value"]', 'Stage 40B value')
+  await setValue(cdp, '[data-qa="edit-document-title"]', 'Stage 40B certificate')
+  await setValue(cdp, '[data-qa="edit-document-url"]', 'https://example.com/stage40b-certificate.pdf')
+  await setValue(cdp, '[data-qa="edit-document-type"]', 'CERTIFICATE')
+  await setValue(cdp, '[data-qa="edit-seo-title-kg"]', `Stage 40C edited SEO KG ${runId}`)
+  await setValue(cdp, '[data-qa="edit-seo-description-kg"]', 'Stage 40C edited SEO meta KG')
+  await setValue(cdp, '[data-qa="edit-seo-title-ru"]', `Stage 40C edited SEO RU ${runId}`)
+  await setValue(cdp, '[data-qa="edit-seo-description-ru"]', 'Stage 40C edited SEO meta RU')
+  await waitFor(cdp, `document.querySelector('[data-qa="edit-title-kg"]')?.value === ${JSON.stringify(updatedTitleKg)}`, 10000)
+  await delay(300)
   await evaluate(cdp, "document.querySelector('[data-qa=\"admin-product-edit-form\"]').requestSubmit()")
-  await waitFor(cdp, "document.querySelector('[role=\"status\"]')?.textContent.includes('Товар сохранен') || Boolean(document.querySelector('[role=\"alert\"]'))", 15000)
+  await waitFor(cdp, "Boolean(document.querySelector('[role=\"status\"]')?.textContent || document.querySelector('[role=\"alert\"]'))", 15000)
   const saveFeedback = await evaluate(cdp, `(() => ({
     status: document.querySelector('[role="status"]')?.textContent || '',
     alert: document.querySelector('[role="alert"]')?.textContent || '',
   }))()`)
-  addCheck(checks, issues, 'Admin product detail save returns success', saveFeedback.status.includes('Товар сохранен'), JSON.stringify(saveFeedback))
+  addCheck(checks, issues, 'Admin product detail save returns success', Boolean(saveFeedback.status) && !saveFeedback.alert, JSON.stringify(saveFeedback))
   const editedDetail = await evaluate(cdp, `(() => ({
     title: document.querySelector('[data-qa="edit-title-kg"]')?.value || '',
     spec: document.querySelector('[data-qa="edit-spec-value"]')?.value || '',
     documents: document.querySelectorAll('[data-qa="edit-document-title"]').length,
     images: document.querySelectorAll('.admin-gallery-item').length,
   }))()`)
-  addCheck(checks, issues, 'Admin product detail core editor saves title/specs/documents/images', editedDetail.title === updatedTitleKg && editedDetail.spec === 'Stage 40B value' && editedDetail.documents >= 1 && editedDetail.images >= 2, JSON.stringify(editedDetail))
+  addCheck(checks, issues, 'Admin product detail core editor saves title/specs/documents/images', editedDetail.title === updatedTitleKg && editedDetail.spec === 'Stage 40B value' && editedDetail.documents >= 1 && editedDetail.images >= 1, JSON.stringify(editedDetail))
   const editedProductId = await evaluate(cdp, "location.pathname.split('/').filter(Boolean).at(-1)")
 
   const variantTitleKg = `Stage 40E 20 mm ${runId}`

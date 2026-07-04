@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -13,35 +14,26 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { mkdir, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { AdminAuthGuard } from '../auth/admin-auth.guard'
 import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { CurrentAdmin } from '../auth/current-admin.decorator'
+import { getMaxProductImageSize, isProductImageMimeType, StorageService } from '../storage/storage.service'
 import { AdminProductsService } from './admin-products.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
+import { ReorderProductImagesDto, UpdateProductImageDto } from './dto/product-image-gallery.dto'
 import { UpdateProductActiveDto } from './dto/update-product-active.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 import { UpdateProductNoteDto } from './dto/update-product-note.dto'
 import { UpdateProductPriceDto } from './dto/update-product-price.dto'
 import { UpdateProductStockDto } from './dto/update-product-stock.dto'
 
-const productUploadDir = join(process.cwd(), 'uploads', 'products')
-const maxProductImageSize = 5 * 1024 * 1024
-const productImageMimeTypes: Record<string, string> = {
-  'image/jpeg': '.jpg',
-  'image/png': '.png',
-  'image/webp': '.webp',
-  'image/gif': '.gif',
-}
-
 const productImageUpload = FileInterceptor('file', {
-  limits: { fileSize: maxProductImageSize },
+  limits: { fileSize: getMaxProductImageSize() },
   fileFilter: (_request, file, callback) => {
-    if (!productImageMimeTypes[file.mimetype]) {
-      callback(new BadRequestException('Only JPG, PNG, WEBP and GIF images are allowed'), false)
+    if (!isProductImageMimeType(file.mimetype)) {
+      callback(new BadRequestException('Only JPG, PNG and WEBP images are allowed'), false)
       return
     }
     callback(null, true)
@@ -51,7 +43,10 @@ const productImageUpload = FileInterceptor('file', {
 @Controller('admin/products')
 @UseGuards(AdminAuthGuard)
 export class AdminProductsController {
-  constructor(private readonly adminProductsService: AdminProductsService) {}
+  constructor(
+    private readonly adminProductsService: AdminProductsService,
+    private readonly storageService: StorageService,
+  ) {}
 
   @Get()
   list(@Query() query: AdminProductsQueryDto, @CurrentAdmin() admin: AdminIdentity) {
@@ -79,27 +74,54 @@ export class AdminProductsController {
     @CurrentAdmin() admin: AdminIdentity,
   ) {
     assertAdminPermission(admin, 'products:upload')
-    if (!file?.buffer) throw new BadRequestException('Image file is required')
-
-    const extension = productImageMimeTypes[file.mimetype]
-    if (!extension) {
-      throw new BadRequestException('Only JPG, PNG, WEBP and GIF images are allowed')
-    }
-
-    await mkdir(productUploadDir, { recursive: true })
-    const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}${extension}`
-    await writeFile(join(productUploadDir, filename), file.buffer)
-
-    const publicPath = `/uploads/products/${filename}`
-    const configuredOrigin = process.env.PUBLIC_API_ORIGIN?.replace(/\/+$/g, '')
     const requestOrigin = `${request.protocol}://${request.get('host')}`
-    return {
-      src: `${configuredOrigin || requestOrigin}${publicPath}`,
-      path: publicPath,
-      filename,
-      originalName: file.originalname,
-      size: file.size,
-    }
+    return this.storageService.uploadProductImage(file, requestOrigin)
+  }
+
+  @Post(':id/images')
+  @UseInterceptors(productImageUpload)
+  async uploadProductImage(
+    @Param('id') id: string,
+    @UploadedFile() file: { buffer?: Buffer; mimetype: string; originalname: string; size: number },
+    @Req() request: { protocol: string; get(name: string): string | undefined },
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    assertAdminPermission(admin, 'products:upload')
+    assertAdminPermission(admin, 'products:content')
+    const requestOrigin = `${request.protocol}://${request.get('host')}`
+    const stored = await this.storageService.uploadProductImage(file, requestOrigin)
+    return this.adminProductsService.addImage(id, stored, admin)
+  }
+
+  @Patch(':id/images/reorder')
+  reorderProductImages(
+    @Param('id') id: string,
+    @Body() dto: ReorderProductImagesDto,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    assertAdminPermission(admin, 'products:content')
+    return this.adminProductsService.reorderImages(id, dto, admin)
+  }
+
+  @Patch(':id/images/:imageId')
+  updateProductImage(
+    @Param('id') id: string,
+    @Param('imageId') imageId: string,
+    @Body() dto: UpdateProductImageDto,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    assertAdminPermission(admin, 'products:content')
+    return this.adminProductsService.updateImage(id, imageId, dto, admin)
+  }
+
+  @Delete(':id/images/:imageId')
+  deleteProductImage(
+    @Param('id') id: string,
+    @Param('imageId') imageId: string,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    assertAdminPermission(admin, 'products:content')
+    return this.adminProductsService.deleteImage(id, imageId, this.storageService, admin)
   }
 
   @Get(':id/audit-log')
