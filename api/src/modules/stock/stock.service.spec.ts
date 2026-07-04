@@ -52,3 +52,36 @@ test('reservation reports a concurrent stock change instead of over-reserving', 
 
   assert.equal(reserved, false)
 })
+
+test('variant reservation uses variant stock snapshot atomically', async () => {
+  let receivedArgs: unknown
+  const tx = {
+    productVariant: {
+      updateMany: (args: unknown) => {
+        receivedArgs = args
+        return Promise.resolve({ count: 1 })
+      },
+    },
+  } as unknown as Prisma.TransactionClient
+
+  const reserved = await new StockService().reserveAvailableVariant(
+    tx,
+    'variant-1',
+    4,
+    { stockQuantity: 20, reservedQuantity: 3 },
+  )
+
+  assert.equal(reserved, true)
+  assert.deepEqual(receivedArgs, {
+    where: {
+      id: 'variant-1',
+      stockQuantity: 20,
+      reservedQuantity: 3,
+    },
+    data: {
+      reservedQuantity: {
+        increment: 4,
+      },
+    },
+  })
+})

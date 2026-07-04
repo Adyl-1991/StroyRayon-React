@@ -96,7 +96,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
                   disabled={variantStock === 'out_of_stock'}
                   onClick={() => onVariantChange?.(variant.id)}
                 >
-                  <span>{variant.size}</span>
+                  <span>{locale === 'ru' ? variant.titleRu || variant.size : variant.titleKg || variant.size}</span>
                   <small>
                     {formatPrice(variant.price)} / {getUnitLabel(variant.unit, locale)}
                   </small>

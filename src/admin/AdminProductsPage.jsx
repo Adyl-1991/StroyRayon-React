@@ -204,6 +204,15 @@ export function AdminProductsPage() {
                           <span className="admin-quality-chip">+{product.qualityFlags.length - 4}</span>
                         )}
                       </div>
+                      {product.variantCount > 0 && (
+                        <div className="admin-quality-chips">
+                          <span className="admin-quality-chip">Варианты: {product.activeVariantCount}/{product.variantCount}</span>
+                          {product.inactiveVariantCount > 0 && <span className="admin-quality-chip admin-quality-chip-info">Скрыто: {product.inactiveVariantCount}</span>}
+                          {(product.variantIssues || []).slice(0, 1).map((issue) => (
+                            <span className="admin-quality-chip admin-quality-chip-warning" key={issue.code}>{issue.label}</span>
+                          ))}
+                        </div>
+                      )}
                     </td>
                     <td>
                       <span className={`admin-status ${product.isActive ? 'admin-status-confirmed' : 'admin-status-cancelled'}`}>

@@ -356,7 +356,9 @@ export function getProductVariants(product) {
     .map((variant) => ({
       ...variant,
       id: String(variant.id || variant.sku || variant.size || '').trim(),
-      size: String(variant.size || '').trim(),
+      titleKg: variant.titleKg || variant.size || '',
+      titleRu: variant.titleRu || variant.size || variant.titleKg || '',
+      size: String(variant.size || variant.titleKg || variant.titleRu || '').trim(),
       price: Number(variant.price ?? product.price ?? 0),
       unit: variant.unit || product.unit,
       unitRu: variant.unitRu || product.unitRu,

@@ -44,11 +44,15 @@ export class OrdersService {
       const orderNumber = await this.createOrderNumber(tx)
       const normalizedItems = await Promise.all(
         dto.items.map(async (item) => {
-          const product = await this.findProductForOrderItem(tx, item)
+          const { product, variant } = await this.findProductForOrderItem(tx, item)
           const quantity = Number(item.quantity)
-          const price = Number(product.price)
-          const stockCheckStatus = product.isActive
-            ? getStockCheckStatus(product.stockStatus, product.stock, quantity)
+          const price = Number(variant?.price ?? product.price)
+          const stockStatus = variant?.stockStatus ?? product.stockStatus
+          const stock = variant
+            ? { quantity: variant.stockQuantity, reservedQuantity: variant.reservedQuantity }
+            : product.stock
+          const stockCheckStatus = product.isActive && (!variant || variant.isActive)
+            ? getStockCheckStatus(stockStatus, stock, quantity)
             : OrderItemStockCheckStatus.UNAVAILABLE
 
           if (stockCheckStatus === OrderItemStockCheckStatus.UNAVAILABLE) {
@@ -57,10 +61,14 @@ export class OrdersService {
 
           return {
             product,
+            variant,
             title: product.titleKg,
-            sku: product.sku,
+            variantTitle: variant?.titleKg || null,
+            sku: variant?.sku || product.sku,
+            productSku: product.sku,
+            variantSku: variant?.sku || null,
             slug: product.slug,
-            unit: product.unit,
+            unit: variant?.unit || product.unit,
             price,
             quantity,
             total: calculateLineTotal(price, quantity),
@@ -70,8 +78,53 @@ export class OrdersService {
         }),
       )
 
+      const itemsByVariant = new Map<string, typeof normalizedItems>()
+      normalizedItems.filter((item) => item.variant).forEach((item) => {
+        const variantItems = itemsByVariant.get(item.variant!.id) || []
+        variantItems.push(item)
+        itemsByVariant.set(item.variant!.id, variantItems)
+      })
+      for (const variantItems of itemsByVariant.values()) {
+        const firstItem = variantItems[0]
+        const requestedQuantity = variantItems.reduce((sum, item) => sum + item.quantity, 0)
+        const variantStock = {
+          quantity: firstItem.variant!.stockQuantity,
+          reservedQuantity: firstItem.variant!.reservedQuantity,
+        }
+        const stockCheckStatus = getStockCheckStatus(
+          firstItem.variant!.stockStatus,
+          variantStock,
+          requestedQuantity,
+        )
+
+        if (stockCheckStatus === OrderItemStockCheckStatus.UNAVAILABLE) {
+          throw new BadRequestException(`Product variant is unavailable: ${firstItem.product.slug}`)
+        }
+
+        if (stockCheckStatus !== OrderItemStockCheckStatus.OK) {
+          variantItems.forEach((item) => {
+            item.stockCheckStatus = OrderItemStockCheckStatus.NEEDS_CONFIRMATION
+          })
+          continue
+        }
+
+        const reserved = await this.stockService.reserveAvailableVariant(
+          tx,
+          firstItem.variant!.id,
+          requestedQuantity,
+          firstItem.variant!,
+        )
+
+        variantItems.forEach((item) => {
+          item.stockCheckStatus = reserved
+            ? OrderItemStockCheckStatus.OK
+            : OrderItemStockCheckStatus.NEEDS_CONFIRMATION
+          item.reservedQuantity = reserved ? item.quantity : 0
+        })
+      }
+
       const itemsByProduct = new Map<string, typeof normalizedItems>()
-      normalizedItems.forEach((item) => {
+      normalizedItems.filter((item) => !item.variant).forEach((item) => {
         const productItems = itemsByProduct.get(item.product.id) || []
         productItems.push(item)
         itemsByProduct.set(item.product.id, productItems)
@@ -141,9 +194,12 @@ export class OrdersService {
           items: {
             create: normalizedItems.map((item) => ({
               productId: item.product.id,
+              variantId: item.variant?.id || null,
               productSlugSnapshot: item.slug,
               productTitleSnapshot: item.title,
-              productSkuSnapshot: item.sku,
+              productSkuSnapshot: item.productSku,
+              variantTitleSnapshot: item.variantTitle,
+              variantSkuSnapshot: item.variantSku,
               productUnitSnapshot: item.unit,
               unitPriceSnapshot: new Prisma.Decimal(item.price),
               quantity: item.quantity,
@@ -182,6 +238,9 @@ export class OrdersService {
         slug: item.productSlugSnapshot,
         title: item.productTitleSnapshot,
         sku: item.productSkuSnapshot,
+        variantId: item.variantId,
+        variantTitle: item.variantTitleSnapshot,
+        variantSku: item.variantSkuSnapshot,
         unit: item.productUnitSnapshot,
         quantity: item.quantity,
         unitPrice: Number(item.unitPriceSnapshot),
@@ -209,7 +268,7 @@ export class OrdersService {
   }
 
   private async findProductForOrderItem(tx: Prisma.TransactionClient, item: CreateOrderItemDto) {
-    const select = {
+    const productSelect = {
       id: true,
       sku: true,
       slug: true,
@@ -226,24 +285,39 @@ export class OrdersService {
       },
     } satisfies Prisma.ProductSelect
 
+    if (item.variantId) {
+      const variant = await tx.productVariant.findUnique({
+        where: { id: item.variantId },
+        include: { product: { select: productSelect } },
+      })
+      if (!variant) throw new BadRequestException(`Product variant not found: ${item.variantId}`)
+      if (item.productId && item.productId !== variant.productId) {
+        throw new BadRequestException(`Product identifier mismatch: ${item.productId}`)
+      }
+      if (item.slug && item.slug !== variant.product.slug) {
+        throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
+      }
+      return { product: variant.product, variant }
+    }
+
     if (item.productId) {
-      const product = await tx.product.findUnique({ where: { id: item.productId }, select })
+      const product = await tx.product.findUnique({ where: { id: item.productId }, select: productSelect })
       if (product) {
         if (item.slug && item.slug !== product.slug) {
           throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
         }
-        return product
+        return { product, variant: null }
       }
     }
 
     if (item.slug) {
-      const product = await tx.product.findUnique({ where: { slug: item.slug }, select })
-      if (product) return product
+      const product = await tx.product.findUnique({ where: { slug: item.slug }, select: productSelect })
+      if (product) return { product, variant: null }
     }
 
     if (item.sku) {
-      const product = await tx.product.findUnique({ where: { sku: item.sku }, select })
-      if (product) return product
+      const product = await tx.product.findUnique({ where: { sku: item.sku }, select: productSelect })
+      if (product) return { product, variant: null }
     }
 
     throw new BadRequestException(`Product not found: ${item.slug || item.productId || item.sku || 'unknown'}`)

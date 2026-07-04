@@ -24,4 +24,26 @@ export class StockService {
 
     return reservation.count === 1
   }
+
+  async reserveAvailableVariant(
+    tx: Prisma.TransactionClient,
+    variantId: string,
+    requestedQuantity: number,
+    observedStock: { stockQuantity: number; reservedQuantity: number },
+  ) {
+    const reservation = await tx.productVariant.updateMany({
+      where: {
+        id: variantId,
+        stockQuantity: observedStock.stockQuantity,
+        reservedQuantity: observedStock.reservedQuantity,
+      },
+      data: {
+        reservedQuantity: {
+          increment: requestedQuantity,
+        },
+      },
+    })
+
+    return reservation.count === 1
+  }
 }

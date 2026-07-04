@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useOutletContext, useParams } from 'react-router-dom'
 import {
+  createAdminProductVariant,
   getAdminProduct,
   getAdminProductAuditLog,
   getAdminProductOptions,
+  updateAdminProductVariant,
   updateAdminProduct,
   uploadAdminProductImage,
 } from '../api/adminApi'
@@ -57,6 +59,23 @@ function emptyDocument() {
   return { title: '', url: '', type: 'OTHER', sortOrder: 0 }
 }
 
+function emptyVariant(index = 0, product = {}) {
+  return {
+    id: '',
+    titleKg: '',
+    titleRu: '',
+    sku: '',
+    price: String(product.price || ''),
+    unit: product.unit || '',
+    stockQuantity: '0',
+    stockStatus: 'IN_STOCK',
+    isActive: true,
+    sortOrder: index,
+    specs: [emptySpec()],
+    isNew: true,
+  }
+}
+
 function specsToRows(specs = {}) {
   return Object.entries(specs || {}).map(([key, value]) => ({ key, value: String(value ?? '') }))
 }
@@ -100,6 +119,23 @@ function createForm(product) {
           alt: image.alt || '',
           type: index === 0 ? 'MAIN' : 'GALLERY',
           sortOrder: image.sortOrder ?? index,
+        }))
+      : [],
+    variants: product.variants?.length
+      ? product.variants.map((variant, index) => ({
+          id: variant.id,
+          titleKg: variant.titleKg || variant.size || '',
+          titleRu: variant.titleRu || '',
+          sku: variant.sku || '',
+          price: String(variant.price || ''),
+          unit: variant.unit || product.unit || '',
+          stockQuantity: String(variant.stockQuantity ?? 0),
+          reservedQuantity: variant.reservedQuantity || 0,
+          stockStatus: variant.stockStatus?.toUpperCase() || 'IN_STOCK',
+          isActive: Boolean(variant.isActive),
+          sortOrder: variant.sortOrder ?? index,
+          specs: specsToRows(variant.specs).length ? specsToRows(variant.specs) : [emptySpec()],
+          isNew: false,
         }))
       : [],
   }
@@ -250,6 +286,140 @@ export function AdminProductDetailPage() {
           sortOrder: imageIndex,
         })),
     }))
+  }
+
+  function addVariant() {
+    setForm((current) => ({
+      ...current,
+      variants: [...current.variants, emptyVariant(current.variants.length, current)],
+    }))
+  }
+
+  function updateVariantField(index, name, value) {
+    setForm((current) => ({
+      ...current,
+      variants: current.variants.map((variant, variantIndex) =>
+        variantIndex === index ? { ...variant, [name]: value } : variant,
+      ),
+    }))
+  }
+
+  function updateVariantSpec(index, specIndex, name, value) {
+    setForm((current) => ({
+      ...current,
+      variants: current.variants.map((variant, variantIndex) =>
+        variantIndex === index
+          ? {
+              ...variant,
+              specs: variant.specs.map((spec, currentSpecIndex) =>
+                currentSpecIndex === specIndex ? { ...spec, [name]: value } : spec,
+              ),
+            }
+          : variant,
+      ),
+    }))
+  }
+
+  function addVariantSpec(index) {
+    setForm((current) => ({
+      ...current,
+      variants: current.variants.map((variant, variantIndex) =>
+        variantIndex === index ? { ...variant, specs: [...variant.specs, emptySpec()] } : variant,
+      ),
+    }))
+  }
+
+  function removeVariantSpec(index, specIndex) {
+    setForm((current) => ({
+      ...current,
+      variants: current.variants.map((variant, variantIndex) => {
+        if (variantIndex !== index) return variant
+        const specs = variant.specs.filter((_, currentSpecIndex) => currentSpecIndex !== specIndex)
+        return { ...variant, specs: specs.length ? specs : [emptySpec()] }
+      }),
+    }))
+  }
+
+  async function saveVariant(index, forceActive) {
+    const variant = form.variants[index]
+    if (!variant) return
+    if (!canEditContent && !canEditCommercial && !canEditActive) {
+      setError('Недостаточно прав для изменения варианта.')
+      return
+    }
+    const price = Number(variant.price)
+    const stockQuantity = Number(variant.stockQuantity)
+    if (!variant.titleKg.trim()) {
+      setError('Заполните название варианта KG.')
+      return
+    }
+    if (!Number.isFinite(price) || price <= 0) {
+      setError('Цена варианта должна быть положительным числом.')
+      return
+    }
+    if (!Number.isInteger(stockQuantity) || stockQuantity < 0) {
+      setError('Остаток варианта должен быть целым неотрицательным числом.')
+      return
+    }
+    if (variant.reservedQuantity && stockQuantity < variant.reservedQuantity) {
+      setError(`Остаток варианта не может быть меньше резерва (${variant.reservedQuantity}).`)
+      return
+    }
+
+    setSaving(true)
+    setError('')
+    setMessage('')
+    const payload = {
+      ...(canEditContent
+        ? {
+            titleKg: variant.titleKg,
+            titleRu: variant.titleRu,
+            sku: variant.sku || null,
+            unit: variant.unit,
+            sortOrder: Number(variant.sortOrder) || 0,
+            specs: compactSpecs(variant.specs),
+          }
+        : {}),
+      ...(canEditCommercial
+        ? {
+            price,
+            stockQuantity,
+            stockStatus: variant.stockStatus,
+          }
+        : {}),
+      ...(canEditActive ? { isActive: forceActive ?? variant.isActive } : {}),
+    }
+
+    try {
+      if (variant.isNew) {
+        await createAdminProductVariant(id, {
+          titleKg: variant.titleKg,
+          titleRu: variant.titleRu,
+          sku: variant.sku || null,
+          price,
+          unit: variant.unit,
+          stockQuantity,
+          stockStatus: variant.stockStatus,
+          isActive: forceActive ?? variant.isActive,
+          sortOrder: Number(variant.sortOrder) || 0,
+          specs: compactSpecs(variant.specs),
+        })
+      } else {
+        await updateAdminProductVariant(id, variant.id, payload)
+      }
+      const [updatedProduct, updatedAudit] = await Promise.all([
+        getAdminProduct(id),
+        getAdminProductAuditLog(id, { limit: 20 }),
+      ])
+      setProduct(updatedProduct)
+      setForm(createForm(updatedProduct))
+      setAuditLog(updatedAudit)
+      setMessage('Вариант сохранен.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось сохранить вариант.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   async function handleSave(event) {
@@ -501,6 +671,64 @@ export function AdminProductDetailPage() {
               </div>
             ))}
           </div>
+        </article>
+
+        <article className="admin-card admin-edit-form">
+          <div className="admin-section-header">
+            <h2>Варианты / типоразмеры</h2>
+            <button type="button" className="admin-secondary-button" data-qa="edit-variant-add" disabled={!canEditContent || !canEditCommercial} onClick={addVariant}>
+              Добавить вариант
+            </button>
+          </div>
+          {form.variants.length === 0 ? (
+            <div className="admin-state">У товара пока нет отдельных типоразмеров. Старый product-level price/stock продолжает работать.</div>
+          ) : (
+            <div className="admin-variant-editor">
+              {form.variants.map((variant, index) => (
+                <div className="admin-variant-row" key={variant.id || `new-variant-${index}`}>
+                  <div className="admin-repeat-row admin-repeat-row-variant">
+                    <input data-qa="edit-variant-title-kg" placeholder="Название KG" value={variant.titleKg} onChange={(event) => updateVariantField(index, 'titleKg', event.target.value)} disabled={!canEditContent} maxLength={180} />
+                    <input data-qa="edit-variant-title-ru" placeholder="Название RU" value={variant.titleRu} onChange={(event) => updateVariantField(index, 'titleRu', event.target.value)} disabled={!canEditContent} maxLength={180} />
+                    <input data-qa="edit-variant-sku" placeholder="SKU" value={variant.sku} onChange={(event) => updateVariantField(index, 'sku', event.target.value)} disabled={!canEditContent} maxLength={80} />
+                    <input data-qa="edit-variant-price" type="number" min="0.01" step="0.01" placeholder="Цена" value={variant.price} onChange={(event) => updateVariantField(index, 'price', event.target.value)} disabled={!canEditCommercial} />
+                    <select data-qa="edit-variant-unit" value={variant.unit} onChange={(event) => updateVariantField(index, 'unit', event.target.value)} disabled={!canEditContent}>
+                      {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
+                    </select>
+                    <input data-qa="edit-variant-stock" type="number" min={variant.reservedQuantity || 0} step="1" value={variant.stockQuantity} onChange={(event) => updateVariantField(index, 'stockQuantity', event.target.value)} disabled={!canEditCommercial} />
+                    <select data-qa="edit-variant-stock-status" value={variant.stockStatus} onChange={(event) => updateVariantField(index, 'stockStatus', event.target.value)} disabled={!canEditCommercial}>
+                      {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                    </select>
+                    <input data-qa="edit-variant-sort-order" type="number" min="0" step="1" value={variant.sortOrder} onChange={(event) => updateVariantField(index, 'sortOrder', event.target.value)} disabled={!canEditContent} />
+                  </div>
+                  <label className="admin-checkbox-field">
+                    <input data-qa="edit-variant-active" type="checkbox" checked={variant.isActive} onChange={(event) => updateVariantField(index, 'isActive', event.target.checked)} disabled={!canEditActive} />
+                    Активен на сайте
+                  </label>
+                  <div className="admin-repeat-list">
+                    {variant.specs.map((spec, specIndex) => (
+                      <div className="admin-repeat-row admin-repeat-row-spec" key={`${variant.id || index}-spec-${specIndex}`}>
+                        <input data-qa="edit-variant-spec-key" placeholder="Ключ" value={spec.key} onChange={(event) => updateVariantSpec(index, specIndex, 'key', event.target.value)} disabled={!canEditContent} maxLength={120} />
+                        <input data-qa="edit-variant-spec-value" placeholder="Значение" value={spec.value} onChange={(event) => updateVariantSpec(index, specIndex, 'value', event.target.value)} disabled={!canEditContent} maxLength={500} />
+                        <button type="button" className="admin-danger-button" disabled={!canEditContent} onClick={() => removeVariantSpec(index, specIndex)}>Удалить</button>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="admin-heading-actions">
+                    <button type="button" className="admin-secondary-button" data-qa="edit-variant-spec-add" disabled={!canEditContent} onClick={() => addVariantSpec(index)}>Добавить характеристику</button>
+                    <button type="button" className="admin-primary-button" data-qa="edit-variant-save" disabled={saving || (!canEditContent && !canEditCommercial && !canEditActive)} onClick={() => saveVariant(index)}>
+                      {variant.isNew ? 'Создать вариант' : 'Сохранить вариант'}
+                    </button>
+                    {!variant.isNew && variant.isActive && (
+                      <button type="button" className="admin-danger-button" data-qa="edit-variant-deactivate" disabled={saving || !canEditActive} onClick={() => saveVariant(index, false)}>
+                        Деактивировать
+                      </button>
+                    )}
+                  </div>
+                  {variant.reservedQuantity > 0 && <small>Зарезервировано: {variant.reservedQuantity}</small>}
+                </div>
+              ))}
+            </div>
+          )}
         </article>
 
         <article className="admin-card admin-edit-form">

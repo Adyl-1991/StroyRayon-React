@@ -8,6 +8,8 @@ export class WhatsappOrderService {
     items: Array<{
       title: string
       sku?: string | null
+      variantTitle?: string | null
+      variantSku?: string | null
       price: number
       quantity: number
       unit?: string | null
@@ -27,10 +29,11 @@ export class WhatsappOrderService {
       location ? `Дарек/регион: ${location}` : null,
       '',
       'Товарлар:',
-      ...items.map(
-        (item, index) =>
-          `${index + 1}) ${item.title}${item.sku ? ` (${item.sku})` : ''} - ${item.quantity}${item.unit ? ` ${item.unit}` : ''} x ${item.price} = ${item.total} ${currency}`,
-      ),
+      ...items.map((item, index) => {
+        const variantText = item.variantTitle ? ` - ${item.variantTitle}` : ''
+        const sku = item.variantSku || item.sku
+        return `${index + 1}) ${item.title}${variantText}${sku ? ` (${sku})` : ''} - ${item.quantity}${item.unit ? ` ${item.unit}` : ''} x ${item.price} = ${item.total} ${currency}`
+      }),
       '',
       `Жалпы сумма: ${total} ${currency}`,
       comment ? `Комментарий: ${comment}` : null,

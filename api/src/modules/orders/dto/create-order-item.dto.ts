@@ -8,6 +8,10 @@ export class CreateOrderItemDto {
 
   @IsOptional()
   @IsString()
+  variantId?: string
+
+  @IsOptional()
+  @IsString()
   slug?: string
 
   @IsString()

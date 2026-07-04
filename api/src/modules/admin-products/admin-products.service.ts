@@ -3,6 +3,7 @@ import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } fro
 import { PrismaService } from '../../prisma/prisma.service'
 import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
+import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 
@@ -12,6 +13,7 @@ const adminProductInclude = {
   stock: true,
   images: { orderBy: { sortOrder: 'asc' as const } },
   documents: { orderBy: { sortOrder: 'asc' as const } },
+  variants: { orderBy: [{ sortOrder: 'asc' as const }, { titleKg: 'asc' as const }] },
 } satisfies Prisma.ProductInclude
 
 type AdminProduct = Prisma.ProductGetPayload<{ include: typeof adminProductInclude }>
@@ -520,6 +522,114 @@ export class AdminProductsService {
     return this.detail(id)
   }
 
+  async createVariant(productId: string, dto: CreateAdminProductVariantDto, admin?: AdminIdentity) {
+    assertAdminPermission(admin, 'products:content')
+    assertAdminPermission(admin, 'products:commercial')
+    if (dto.isActive !== undefined) assertAdminPermission(admin, 'products:active')
+
+    const product = await this.prisma.product.findUnique({
+      where: { id: productId },
+      include: adminProductInclude,
+    })
+    if (!product) throw new NotFoundException('Product not found')
+
+    const normalized = await this.normalizeVariantInput(dto, productId)
+    const created = await this.prisma.$transaction(async (tx) => {
+      const variant = await tx.productVariant.create({
+        data: {
+          productId,
+          titleKg: normalized.titleKg,
+          titleRu: normalized.titleRu,
+          sku: normalized.sku,
+          price: normalized.price,
+          currency: 'KGS',
+          unit: normalized.unit,
+          stockQuantity: normalized.stockQuantity,
+          reservedQuantity: 0,
+          stockStatus: normalized.stockStatus,
+          isActive: normalized.isActive,
+          sortOrder: normalized.sortOrder,
+          specs: Object.keys(normalized.specs).length ? normalized.specs : Prisma.JsonNull,
+        },
+      })
+      const updatedProduct = await tx.product.findUnique({ where: { id: productId }, include: adminProductInclude })
+      if (updatedProduct) {
+        await writeProductAuditLog(
+          tx,
+          productId,
+          admin,
+          'variant_created',
+          ['variants'],
+          snapshotProduct(product),
+          snapshotProduct(updatedProduct),
+        )
+      }
+      return variant
+    })
+
+    return this.mapVariant(created)
+  }
+
+  async updateVariant(
+    productId: string,
+    variantId: string,
+    dto: UpdateAdminProductVariantDto,
+    admin?: AdminIdentity,
+  ) {
+    assertVariantUpdatePermissions(dto, admin)
+    const product = await this.prisma.product.findUnique({
+      where: { id: productId },
+      include: adminProductInclude,
+    })
+    if (!product) throw new NotFoundException('Product not found')
+
+    const existing = product.variants.find((variant) => variant.id === variantId)
+    if (!existing) throw new NotFoundException('Variant not found')
+    if (dto.stockQuantity !== undefined && dto.stockQuantity < existing.reservedQuantity) {
+      throw new BadRequestException(
+        `Variant stock cannot be lower than reserved quantity (${existing.reservedQuantity})`,
+      )
+    }
+
+    const normalized = await this.normalizeVariantInput(dto, productId, variantId, existing)
+    const changedFields = changedFieldsFromVariantDto(dto)
+    const action = variantAuditAction(dto)
+    const variant = await this.prisma.$transaction(async (tx) => {
+      const updatedVariant = await tx.productVariant.update({
+        where: { id: variantId },
+        data: {
+          ...(dto.titleKg !== undefined ? { titleKg: normalized.titleKg } : {}),
+          ...(dto.titleRu !== undefined ? { titleRu: normalized.titleRu } : {}),
+          ...(dto.sku !== undefined ? { sku: normalized.sku } : {}),
+          ...(dto.price !== undefined ? { price: normalized.price } : {}),
+          ...(dto.unit !== undefined ? { unit: normalized.unit } : {}),
+          ...(dto.stockQuantity !== undefined ? { stockQuantity: normalized.stockQuantity } : {}),
+          ...(dto.stockStatus !== undefined ? { stockStatus: normalized.stockStatus } : {}),
+          ...(dto.isActive !== undefined ? { isActive: normalized.isActive } : {}),
+          ...(dto.sortOrder !== undefined ? { sortOrder: normalized.sortOrder } : {}),
+          ...(dto.specs !== undefined
+            ? { specs: Object.keys(normalized.specs).length ? normalized.specs : Prisma.JsonNull }
+            : {}),
+        },
+      })
+      const updatedProduct = await tx.product.findUnique({ where: { id: productId }, include: adminProductInclude })
+      if (updatedProduct && changedFields.length) {
+        await writeProductAuditLog(
+          tx,
+          productId,
+          admin,
+          action,
+          changedFields,
+          snapshotProduct(product),
+          snapshotProduct(updatedProduct),
+        )
+      }
+      return updatedVariant
+    })
+
+    return this.mapVariant(variant)
+  }
+
   async auditLog(id: string, query: { page: number; limit: number }) {
     await this.ensureProduct(id)
     const page = Math.max(query.page || 1, 1)
@@ -555,6 +665,63 @@ export class AdminProductsService {
     }
   }
 
+  private async normalizeVariantInput(
+    dto: CreateAdminProductVariantDto | UpdateAdminProductVariantDto,
+    productId: string,
+    variantId?: string,
+    existing?: AdminProduct['variants'][number],
+  ) {
+    const titleKg = dto.titleKg !== undefined ? dto.titleKg.trim() : existing?.titleKg || ''
+    if (!titleKg) throw new BadRequestException('Variant title KG is required')
+    const titleRu = dto.titleRu !== undefined ? dto.titleRu?.trim() || null : existing?.titleRu || null
+    const unit = dto.unit !== undefined ? dto.unit.trim() : existing?.unit || ''
+    if (!unit) throw new BadRequestException('Variant unit is required')
+    const priceValue = dto.price !== undefined ? dto.price : existing ? Number(existing.price) : undefined
+    if (priceValue === undefined || !Number.isFinite(priceValue) || priceValue <= 0 || priceValue > 9999999999.99) {
+      throw new BadRequestException('Variant price must be a positive number')
+    }
+    const stockQuantity = dto.stockQuantity !== undefined ? dto.stockQuantity : existing?.stockQuantity ?? 0
+    if (!Number.isInteger(stockQuantity) || stockQuantity < 0) {
+      throw new BadRequestException('Variant stock quantity cannot be negative')
+    }
+    const sku = dto.sku !== undefined ? dto.sku?.trim().toUpperCase() || null : existing?.sku || null
+    if (sku) {
+      const duplicateSku = await this.prisma.productVariant.findFirst({
+        where: { sku, productId: { not: productId }, ...(variantId ? { id: { not: variantId } } : {}) },
+        select: { id: true },
+      })
+      const sameProductDuplicate = await this.prisma.productVariant.findFirst({
+        where: { sku, productId, ...(variantId ? { id: { not: variantId } } : {}) },
+        select: { id: true },
+      })
+      const duplicateProductSku = await this.prisma.product.findFirst({
+        where: { sku },
+        select: { id: true },
+      })
+      if (duplicateSku || sameProductDuplicate || duplicateProductSku) {
+        throw new BadRequestException('Variant SKU already exists')
+      }
+    }
+    const specs = dto.specs === undefined
+      ? existing?.specs && typeof existing.specs === 'object' && !Array.isArray(existing.specs)
+        ? existing.specs as Record<string, string>
+        : {}
+      : normalizeSpecs(dto.specs)
+
+    return {
+      titleKg,
+      titleRu,
+      sku,
+      price: new Prisma.Decimal(Math.round(priceValue * 100) / 100),
+      unit,
+      stockQuantity,
+      stockStatus: dto.stockStatus || existing?.stockStatus || ProductStockStatus.IN_STOCK,
+      isActive: dto.isActive ?? existing?.isActive ?? true,
+      sortOrder: dto.sortOrder ?? existing?.sortOrder ?? 0,
+      specs,
+    }
+  }
+
   private async ensureProduct(id: string) {
     const product = await this.prisma.product.findUnique({ where: { id }, select: { id: true } })
     if (!product) throw new NotFoundException('Product not found')
@@ -570,6 +737,7 @@ export class AdminProductsService {
         : {}
     const specsCount = Object.keys(specs).length
     const documentCount = product.documents.length
+    const variantSummary = buildVariantSummary(product.variants)
     const quality = buildProductQuality(product, hasRealImage, specsCount, documentCount)
     return {
       id: product.id,
@@ -598,6 +766,11 @@ export class AdminProductsService {
         type: document.type,
         sortOrder: document.sortOrder,
       })),
+      variants: product.variants.map((variant) => this.mapVariant(variant)),
+      variantCount: variantSummary.total,
+      activeVariantCount: variantSummary.active,
+      inactiveVariantCount: variantSummary.inactive,
+      variantIssues: variantSummary.issues,
       stockStatus: product.stockStatus.toLowerCase(),
       stock: product.stock
         ? {
@@ -625,6 +798,33 @@ export class AdminProductsService {
       tags: product.tags,
       adminNote: product.adminNote,
       updatedAt: product.updatedAt,
+    }
+  }
+
+  private mapVariant(variant: AdminProduct['variants'][number]) {
+    const specs =
+      variant.specs && typeof variant.specs === 'object' && !Array.isArray(variant.specs)
+        ? variant.specs
+        : {}
+    return {
+      id: variant.id,
+      productId: variant.productId,
+      titleKg: variant.titleKg,
+      titleRu: variant.titleRu || '',
+      size: variant.titleKg,
+      sku: variant.sku || '',
+      price: Number(variant.price),
+      currency: variant.currency,
+      unit: variant.unit,
+      stockQuantity: variant.stockQuantity,
+      reservedQuantity: variant.reservedQuantity,
+      availableQuantity: Math.max(variant.stockQuantity - variant.reservedQuantity, 0),
+      stockStatus: variant.stockStatus.toLowerCase(),
+      isActive: variant.isActive,
+      sortOrder: variant.sortOrder,
+      specs,
+      createdAt: variant.createdAt,
+      updatedAt: variant.updatedAt,
     }
   }
 }
@@ -664,6 +864,25 @@ function assertProductUpdatePermissions(dto: UpdateAdminProductDto, admin?: Admi
   }
 }
 
+function assertVariantUpdatePermissions(dto: UpdateAdminProductVariantDto, admin?: AdminIdentity) {
+  if (dto.price !== undefined || dto.stockQuantity !== undefined || dto.stockStatus !== undefined) {
+    assertAdminPermission(admin, 'products:commercial')
+  }
+  if (dto.isActive !== undefined) {
+    assertAdminPermission(admin, 'products:active')
+  }
+  if (
+    dto.titleKg !== undefined ||
+    dto.titleRu !== undefined ||
+    dto.sku !== undefined ||
+    dto.unit !== undefined ||
+    dto.sortOrder !== undefined ||
+    dto.specs !== undefined
+  ) {
+    assertAdminPermission(admin, 'products:content')
+  }
+}
+
 function changedFieldsFromUpdateDto(dto: UpdateAdminProductDto) {
   const fields: string[] = []
   const add = (field: string, changed: boolean) => {
@@ -687,6 +906,33 @@ function changedFieldsFromUpdateDto(dto: UpdateAdminProductDto) {
   add('documents', dto.documents !== undefined)
   add('images', dto.images !== undefined)
   return fields
+}
+
+function changedFieldsFromVariantDto(dto: UpdateAdminProductVariantDto) {
+  const fields: string[] = []
+  const add = (field: string, changed: boolean) => {
+    if (changed && !fields.includes(field)) fields.push(field)
+  }
+  add('variants', true)
+  add('variantTitle', dto.titleKg !== undefined || dto.titleRu !== undefined)
+  add('variantSku', dto.sku !== undefined)
+  add('variantPrice', dto.price !== undefined)
+  add('variantUnit', dto.unit !== undefined)
+  add('variantStock', dto.stockQuantity !== undefined || dto.stockStatus !== undefined)
+  add('variantActive', dto.isActive !== undefined)
+  add('variantSortOrder', dto.sortOrder !== undefined)
+  add('variantSpecs', dto.specs !== undefined)
+  return fields
+}
+
+function variantAuditAction(dto: UpdateAdminProductVariantDto) {
+  if (dto.isActive === true) return 'variant_activated'
+  if (dto.isActive === false) return 'variant_deactivated'
+  if (dto.price !== undefined && Object.keys(dto).length === 1) return 'variant_price_changed'
+  if ((dto.stockQuantity !== undefined || dto.stockStatus !== undefined) && Object.keys(dto).every((key) => ['stockQuantity', 'stockStatus'].includes(key))) {
+    return 'variant_stock_changed'
+  }
+  return 'variant_updated'
 }
 
 function snapshotProduct(product: AdminProduct) {
@@ -727,6 +973,20 @@ function snapshotProduct(product: AdminProduct) {
       alt: image.alt,
       type: image.type,
       sortOrder: image.sortOrder,
+    })),
+    variants: product.variants.map((variant) => ({
+      id: variant.id,
+      titleKg: variant.titleKg,
+      titleRu: variant.titleRu,
+      sku: variant.sku,
+      price: Number(variant.price),
+      unit: variant.unit,
+      stockQuantity: variant.stockQuantity,
+      reservedQuantity: variant.reservedQuantity,
+      stockStatus: variant.stockStatus,
+      isActive: variant.isActive,
+      sortOrder: variant.sortOrder,
+      specs: variant.specs,
     })),
     adminNote: product.adminNote,
   })
@@ -821,6 +1081,19 @@ function buildProductQuality(
       complete: hasSeo,
     },
   }
+}
+
+function buildVariantSummary(variants: AdminProduct['variants']) {
+  const total = variants.length
+  const active = variants.filter((variant) => variant.isActive).length
+  const inactive = total - active
+  const missingPrice = variants.filter((variant) => Number(variant.price) <= 0).length
+  const missingStock = variants.filter((variant) => variant.stockStatus !== ProductStockStatus.OUT_OF_STOCK && variant.stockQuantity <= 0).length
+  const issues = [
+    ...(missingPrice ? [{ code: 'variant_missing_price', label: `${missingPrice} variant price issue` }] : []),
+    ...(missingStock ? [{ code: 'variant_missing_stock', label: `${missingStock} variant stock issue` }] : []),
+  ]
+  return { total, active, inactive, issues }
 }
 
 function productMatchesQuality(

@@ -97,9 +97,12 @@ export class AdminOrdersService {
       items: order.items.map((item) => ({
         id: item.id,
         productId: item.productId,
+        variantId: item.variantId,
         slug: item.productSlugSnapshot,
         title: item.productTitleSnapshot,
         sku: item.productSkuSnapshot,
+        variantTitle: item.variantTitleSnapshot,
+        variantSku: item.variantSkuSnapshot,
         unit: item.productUnitSnapshot,
         unitPrice: Number(item.unitPriceSnapshot),
         quantity: item.quantity,
@@ -175,17 +178,27 @@ export class AdminOrdersService {
 
   private async releaseReservations(
     tx: Prisma.TransactionClient,
-    items: Array<{ productId: string | null; reservedQuantity: number; id: string }>,
+    items: Array<{ productId: string | null; variantId?: string | null; reservedQuantity: number; id: string }>,
   ) {
     for (const item of items) {
-      if (!item.productId || item.reservedQuantity <= 0) continue
-      const result = await tx.stock.updateMany({
-        where: {
-          productId: item.productId,
-          reservedQuantity: { gte: item.reservedQuantity },
-        },
-        data: { reservedQuantity: { decrement: item.reservedQuantity } },
-      })
+      if (item.reservedQuantity <= 0) continue
+      const result = item.variantId
+        ? await tx.productVariant.updateMany({
+            where: {
+              id: item.variantId,
+              reservedQuantity: { gte: item.reservedQuantity },
+            },
+            data: { reservedQuantity: { decrement: item.reservedQuantity } },
+          })
+        : item.productId
+          ? await tx.stock.updateMany({
+              where: {
+                productId: item.productId,
+                reservedQuantity: { gte: item.reservedQuantity },
+              },
+              data: { reservedQuantity: { decrement: item.reservedQuantity } },
+            })
+          : { count: 0 }
       if (result.count !== 1) {
         throw new BadRequestException('Stock reservation could not be released safely')
       }
@@ -198,21 +211,35 @@ export class AdminOrdersService {
 
   private async fulfillReservations(
     tx: Prisma.TransactionClient,
-    items: Array<{ productId: string | null; reservedQuantity: number; id: string }>,
+    items: Array<{ productId: string | null; variantId?: string | null; reservedQuantity: number; id: string }>,
   ) {
     for (const item of items) {
-      if (!item.productId || item.reservedQuantity <= 0) continue
-      const result = await tx.stock.updateMany({
-        where: {
-          productId: item.productId,
-          quantity: { gte: item.reservedQuantity },
-          reservedQuantity: { gte: item.reservedQuantity },
-        },
-        data: {
-          quantity: { decrement: item.reservedQuantity },
-          reservedQuantity: { decrement: item.reservedQuantity },
-        },
-      })
+      if (item.reservedQuantity <= 0) continue
+      const result = item.variantId
+        ? await tx.productVariant.updateMany({
+            where: {
+              id: item.variantId,
+              stockQuantity: { gte: item.reservedQuantity },
+              reservedQuantity: { gte: item.reservedQuantity },
+            },
+            data: {
+              stockQuantity: { decrement: item.reservedQuantity },
+              reservedQuantity: { decrement: item.reservedQuantity },
+            },
+          })
+        : item.productId
+          ? await tx.stock.updateMany({
+              where: {
+                productId: item.productId,
+                quantity: { gte: item.reservedQuantity },
+                reservedQuantity: { gte: item.reservedQuantity },
+              },
+              data: {
+                quantity: { decrement: item.reservedQuantity },
+                reservedQuantity: { decrement: item.reservedQuantity },
+              },
+            })
+          : { count: 0 }
       if (result.count !== 1) {
         throw new BadRequestException('Reserved stock could not be fulfilled safely')
       }

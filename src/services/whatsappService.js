@@ -57,7 +57,8 @@ function formatOrderItem(item, index, locale) {
 }
 
 export function buildProductInquiryText({ product, variant, locale = 'kg' }) {
-  const variantText = variant?.size ? ` - ${variant.size}` : ''
+  const variantTitle = locale === 'ru' ? variant?.titleRu || variant?.size : variant?.titleKg || variant?.size
+  const variantText = variantTitle ? ` - ${variantTitle}` : ''
   const skuText = variant?.sku || product?.sku ? `SKU: ${variant?.sku || product.sku}` : ''
   const price = variant?.price ?? product?.price
   const isRu = locale === 'ru'

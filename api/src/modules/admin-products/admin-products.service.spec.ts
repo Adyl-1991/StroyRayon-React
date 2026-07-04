@@ -10,6 +10,7 @@ import { AdminProductsService } from './admin-products.service'
 const ownerAdmin: AdminIdentity = { id: 'admin-owner', email: 'owner@test.local', role: 'OWNER' }
 const contentAdmin: AdminIdentity = { id: 'admin-content', email: 'content@test.local', role: 'CONTENT' }
 const managerAdmin: AdminIdentity = { id: 'admin-manager', email: 'manager@test.local', role: 'MANAGER' }
+const viewerAdmin: AdminIdentity = { id: 'admin-viewer', email: 'viewer@test.local', role: 'VIEWER' }
 
 function productFixture(overrides: Record<string, unknown> = {}) {
   return {
@@ -54,6 +55,7 @@ function productFixture(overrides: Record<string, unknown> = {}) {
       },
     ],
     documents: [],
+    variants: [],
     tags: [],
     adminNote: null,
     updatedAt: new Date('2026-06-19T10:00:00Z'),
@@ -363,6 +365,195 @@ test('product update permissions separate content and commercial roles', async (
   await assert.rejects(
     () => service.update('product-1', { price: 55 }, contentAdmin),
     /Insufficient permissions/,
+  )
+})
+
+test('admin can create and audit a product variant', async () => {
+  const productState = productFixture()
+  const createdAt = new Date('2026-07-03T11:00:00Z')
+  let createArgs: { data: Record<string, unknown> } | undefined
+  let auditAction = ''
+  const createdVariant = {
+    id: 'variant-1',
+    productId: 'product-1',
+    titleKg: '20 мм',
+    titleRu: '20 мм',
+    sku: 'VAR-20',
+    price: new Prisma.Decimal(75),
+    currency: 'KGS',
+    unit: 'метр',
+    stockQuantity: 12,
+    reservedQuantity: 0,
+    stockStatus: ProductStockStatus.IN_STOCK,
+    isActive: true,
+    sortOrder: 1,
+    specs: { Диаметр: '20 мм' },
+    createdAt,
+    updatedAt: createdAt,
+  }
+  const tx = {
+    productVariant: {
+      create: (args: { data: Record<string, unknown> }) => {
+        createArgs = args
+        return Promise.resolve(createdVariant)
+      },
+    },
+    product: {
+      findUnique: () => Promise.resolve(productFixture({ variants: [createdVariant] })),
+    },
+    productAuditLog: {
+      create: (args: { data: { action: string } }) => {
+        auditAction = args.data.action
+        return Promise.resolve({})
+      },
+    },
+  }
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve(productState),
+      findFirst: () => Promise.resolve(null),
+    },
+    productVariant: {
+      findFirst: () => Promise.resolve(null),
+    },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).createVariant(
+    'product-1',
+    {
+      titleKg: '20 мм',
+      titleRu: '20 мм',
+      sku: 'var-20',
+      price: 75,
+      unit: 'метр',
+      stockQuantity: 12,
+      stockStatus: ProductStockStatus.IN_STOCK,
+      isActive: true,
+      sortOrder: 1,
+      specs: [{ key: 'Диаметр', value: '20 мм' }],
+    },
+    ownerAdmin,
+  )
+
+  assert.equal(result.id, 'variant-1')
+  assert.equal(result.sku, 'VAR-20')
+  assert.equal(result.price, 75)
+  assert.deepEqual(createArgs?.data.specs, { Диаметр: '20 мм' })
+  assert.equal(auditAction, 'variant_created')
+})
+
+test('admin can update variant commercial fields without lowering below reserved quantity', async () => {
+  const existingVariant = {
+    id: 'variant-1',
+    productId: 'product-1',
+    titleKg: '20 мм',
+    titleRu: '20 мм',
+    sku: 'VAR-20',
+    price: new Prisma.Decimal(75),
+    currency: 'KGS',
+    unit: 'метр',
+    stockQuantity: 12,
+    reservedQuantity: 2,
+    stockStatus: ProductStockStatus.IN_STOCK,
+    isActive: true,
+    sortOrder: 1,
+    specs: { Диаметр: '20 мм' },
+    createdAt: new Date('2026-07-03T11:00:00Z'),
+    updatedAt: new Date('2026-07-03T11:00:00Z'),
+  }
+  const updatedVariant = { ...existingVariant, price: new Prisma.Decimal(80), stockQuantity: 10 }
+  let updateArgs: { data: Record<string, unknown> } | undefined
+  let auditFields: string[] = []
+  const tx = {
+    productVariant: {
+      update: (args: { data: Record<string, unknown> }) => {
+        updateArgs = args
+        return Promise.resolve(updatedVariant)
+      },
+    },
+    product: {
+      findUnique: () => Promise.resolve(productFixture({ variants: [updatedVariant] })),
+    },
+    productAuditLog: {
+      create: (args: { data: { changedFields: string[] } }) => {
+        auditFields = args.data.changedFields
+        return Promise.resolve({})
+      },
+    },
+  }
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve(productFixture({ variants: [existingVariant] })),
+      findFirst: () => Promise.resolve(null),
+    },
+    productVariant: {
+      findFirst: () => Promise.resolve(null),
+    },
+    $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
+  } as unknown as PrismaService
+
+  const service = new AdminProductsService(prisma)
+  const result = await service.updateVariant(
+    'product-1',
+    'variant-1',
+    { price: 80, stockQuantity: 10 },
+    managerAdmin,
+  )
+
+  assert.equal(result.price, 80)
+  assert.equal(result.stockQuantity, 10)
+  assert.equal(Number(updateArgs?.data.price), 80)
+  assert.equal(updateArgs?.data.stockQuantity, 10)
+  assert.equal(auditFields.includes('variantPrice'), true)
+  assert.equal(auditFields.includes('variantStock'), true)
+
+  await assert.rejects(
+    () => service.updateVariant('product-1', 'variant-1', { stockQuantity: 1 }, managerAdmin),
+    /reserved quantity/,
+  )
+})
+
+test('variant permissions and SKU uniqueness are enforced', async () => {
+  const service = new AdminProductsService({} as PrismaService)
+
+  await assert.rejects(
+    () => service.updateVariant('product-1', 'variant-1', { price: 80 }, contentAdmin),
+    /Insufficient permissions/,
+  )
+  await assert.rejects(
+    () => service.updateVariant('product-1', 'variant-1', { titleKg: 'Blocked' }, managerAdmin),
+    /Insufficient permissions/,
+  )
+  await assert.rejects(
+    () => service.updateVariant('product-1', 'variant-1', { isActive: false }, viewerAdmin),
+    /Insufficient permissions/,
+  )
+
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve(productFixture({ variants: [] })),
+      findFirst: () => Promise.resolve({ id: 'product-1' }),
+    },
+    productVariant: {
+      findFirst: () => Promise.resolve(null),
+    },
+  } as unknown as PrismaService
+
+  await assert.rejects(
+    () => new AdminProductsService(prisma).createVariant(
+      'product-1',
+      {
+        titleKg: 'Duplicate SKU',
+        sku: 'TEST-1',
+        price: 10,
+        unit: 'шт',
+        stockQuantity: 1,
+        stockStatus: ProductStockStatus.IN_STOCK,
+      },
+      ownerAdmin,
+    ),
+    /Variant SKU already exists/,
   )
 })
 

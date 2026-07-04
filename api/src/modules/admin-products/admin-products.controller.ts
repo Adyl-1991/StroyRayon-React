@@ -20,6 +20,7 @@ import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { CurrentAdmin } from '../auth/current-admin.decorator'
 import { AdminProductsService } from './admin-products.service'
 import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
+import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { UpdateProductActiveDto } from './dto/update-product-active.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
@@ -124,6 +125,25 @@ export class AdminProductsController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateAdminProductDto, @CurrentAdmin() admin: AdminIdentity) {
     return this.adminProductsService.update(id, dto, admin)
+  }
+
+  @Post(':id/variants')
+  createVariant(
+    @Param('id') id: string,
+    @Body() dto: CreateAdminProductVariantDto,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    return this.adminProductsService.createVariant(id, dto, admin)
+  }
+
+  @Patch(':id/variants/:variantId')
+  updateVariant(
+    @Param('id') id: string,
+    @Param('variantId') variantId: string,
+    @Body() dto: UpdateAdminProductVariantDto,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    return this.adminProductsService.updateVariant(id, variantId, dto, admin)
   }
 
   @Patch(':id/price')

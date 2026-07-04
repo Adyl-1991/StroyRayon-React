@@ -94,6 +94,14 @@ export function updateAdminProduct(id, payload) {
   return adminRequest(() => apiPatch(`/admin/products/${id}`, payload, authorizedOptions()))
 }
 
+export function createAdminProductVariant(productId, payload) {
+  return adminRequest(() => apiPost(`/admin/products/${productId}/variants`, payload, authorizedOptions()))
+}
+
+export function updateAdminProductVariant(productId, variantId, payload) {
+  return adminRequest(() => apiPatch(`/admin/products/${productId}/variants/${variantId}`, payload, authorizedOptions()))
+}
+
 export function updateAdminProductPrice(id, price) {
   return adminRequest(() =>
     apiPatch(`/admin/products/${id}/price`, { price }, authorizedOptions()),

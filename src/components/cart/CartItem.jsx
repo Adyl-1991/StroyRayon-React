@@ -9,6 +9,9 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
   const cartItemId = item.cartItemId || item.productId
   const product = getProductBySlug(item.slug)
   const name = product ? getProductTitle(product, locale) : locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name
+  const variantTitle = locale === 'ru'
+    ? item.variantTitleRu || item.variantSize
+    : item.variantTitleKg || item.variantSize
   const unit = getUnitLabel(item.unitKg || item.unit, locale)
   const packageInfo = locale === 'ru' ? item.packageInfoRu : normalizeKgText(item.packageInfo)
   const image = resolveImage(item.image, { alt: name, src: '/images/placeholders/product-placeholder.svg', width: 82, height: 82 })
@@ -28,9 +31,9 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
         <h3>
           <Link to={`/product/${item.slug}`}>{name}</Link>
         </h3>
-        {item.variantSize && (
+        {variantTitle && (
           <p className="cart-item__variant">
-            {t('cart.size')}: {item.variantSize}
+            {t('cart.size')}: {variantTitle}
             {item.variantSku ? ` · SKU: ${item.variantSku}` : ''}
           </p>
         )}

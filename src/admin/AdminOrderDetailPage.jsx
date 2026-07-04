@@ -166,7 +166,11 @@ export function AdminOrderDetailPage() {
             <tbody>
               {order.items.map((item) => (
                 <tr key={item.id}>
-                  <td><strong>{item.title}</strong><small>{item.slug} · {item.sku}</small></td>
+                  <td>
+                    <strong>{item.title}</strong>
+                    {item.variantTitle && <small>Вариант: {item.variantTitle}{item.variantSku ? ` · SKU: ${item.variantSku}` : ''}</small>}
+                    <small>{item.slug} · {item.sku}</small>
+                  </td>
                   <td>{item.quantity} {item.unit}</td>
                   <td>{formatPrice(item.unitPrice)}</td>
                   <td>{formatPrice(item.lineTotal)}</td>

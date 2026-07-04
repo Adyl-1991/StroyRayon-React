@@ -34,6 +34,7 @@ const viewerEmail = process.env.STAGE37_VIEWER_EMAIL || 'stage37-viewer@example.
 const adminPassword = process.env.STAGE37_ADMIN_PASSWORD || 'stage37-local-admin-password'
 const productSlug = `stage-37-local-product-${runId}`
 const productSku = `SR-STAGE37-${runId}`
+const productVariantSku = `SR-STAGE40E-VAR-${runId}`
 const customerPhone = `+99670037${runId.slice(-4)}`
 const scrypt = promisify(crypto.scrypt)
 const KEY_LENGTH = 64
@@ -383,6 +384,7 @@ async function setupLocalData(prisma) {
   await prisma.product.deleteMany({
     where: { OR: [{ slug: productSlug }, { sku: productSku }] },
   })
+  await prisma.productVariant.deleteMany({ where: { sku: productVariantSku } })
   const categories = await prisma.catalogNode.count({ where: { isActive: true } })
   if (!categories) throw new Error('No active catalog categories found. Run the local API seed before Stage 37 QA.')
 }
@@ -397,6 +399,7 @@ async function cleanupLocalData(prisma) {
     await prisma.order.deleteMany({ where: { customerId: { in: customerIds } } })
     await prisma.customer.deleteMany({ where: { id: { in: customerIds } } })
   }
+  await prisma.productVariant.deleteMany({ where: { sku: productVariantSku } })
   await prisma.product.deleteMany({ where: { OR: [{ slug: productSlug }, { sku: productSku }] } })
   await prisma.adminUser.deleteMany({ where: { email: { in: [adminEmail, contentEmail, viewerEmail] } } })
   if (uploadedProductImagePath?.startsWith('/uploads/products/')) {
@@ -565,6 +568,32 @@ async function runBrowserFlow(cdp, checks, issues) {
   }))()`)
   addCheck(checks, issues, 'Admin product detail core editor saves title/specs/documents/images', editedDetail.title === updatedTitleKg && editedDetail.spec === 'Stage 40B value' && editedDetail.documents >= 1 && editedDetail.images >= 2, JSON.stringify(editedDetail))
   const editedProductId = await evaluate(cdp, "location.pathname.split('/').filter(Boolean).at(-1)")
+
+  const variantTitleKg = `Stage 40E 20 mm ${runId}`
+  const variantTitleRu = `Stage 40E 20 мм ${runId}`
+  await evaluate(cdp, "document.querySelector('[data-qa=\"edit-variant-add\"]').click()")
+  await waitFor(cdp, "document.querySelectorAll('.admin-variant-row').length >= 1", 15000)
+  await setValue(cdp, '[data-qa="edit-variant-title-kg"]', variantTitleKg)
+  await setValue(cdp, '[data-qa="edit-variant-title-ru"]', variantTitleRu)
+  await setValue(cdp, '[data-qa="edit-variant-sku"]', productVariantSku)
+  await setValue(cdp, '[data-qa="edit-variant-price"]', '777')
+  await setValue(cdp, '[data-qa="edit-variant-unit"]', 'метр')
+  await setValue(cdp, '[data-qa="edit-variant-stock"]', '5')
+  await setValue(cdp, '[data-qa="edit-variant-stock-status"]', 'IN_STOCK')
+  await setValue(cdp, '[data-qa="edit-variant-sort-order"]', '1')
+  await setValue(cdp, '[data-qa="edit-variant-spec-key"]', 'Диаметр')
+  await setValue(cdp, '[data-qa="edit-variant-spec-value"]', '20 мм')
+  await evaluate(cdp, "document.querySelector('[data-qa=\"edit-variant-save\"]').click()")
+  await waitFor(cdp, "document.querySelector('[role=\"status\"]')?.textContent.includes('Вариант сохранен') || Boolean(document.querySelector('[role=\"alert\"]'))", 15000)
+  const variantUiState = await evaluate(cdp, `(() => ({
+    status: document.querySelector('[role="status"]')?.textContent || '',
+    alert: document.querySelector('[role="alert"]')?.textContent || '',
+    rows: document.querySelectorAll('.admin-variant-row').length,
+    sku: document.querySelector('[data-qa="edit-variant-sku"]')?.value || '',
+    price: document.querySelector('[data-qa="edit-variant-price"]')?.value || '',
+  }))()`)
+  addCheck(checks, issues, 'Admin product detail creates variant', variantUiState.status.includes('Вариант сохранен') && variantUiState.sku === productVariantSku && Number(variantUiState.price) === 777, JSON.stringify(variantUiState))
+
   await waitFor(cdp, "document.querySelectorAll('[data-qa=\"product-audit-log\"] > li').length >= 1", 15000)
   const auditUiState = await evaluate(cdp, `(() => ({
     rows: document.querySelectorAll('[data-qa="product-audit-log"] > li').length,
@@ -580,7 +609,7 @@ async function runBrowserFlow(cdp, checks, issues) {
     checks,
     issues,
     'Admin product audit API records create and content update',
-    auditAfterEditActions.includes('product_created') && auditAfterEditActions.includes('product_updated'),
+    auditAfterEditActions.includes('product_created') && auditAfterEditActions.includes('product_updated') && auditAfterEditActions.includes('variant_created'),
     JSON.stringify(auditAfterEditActions),
   )
 
@@ -602,6 +631,8 @@ async function runBrowserFlow(cdp, checks, issues) {
   addCheck(checks, issues, 'Public API exposes edited admin title and descriptions', publicProduct?.titleKg === updatedTitleKg && publicProduct?.descriptionRu === 'Stage 40B full RU description', publicProduct?.titleKg)
   addCheck(checks, issues, 'Public API exposes edited specs and documents', publicProduct?.specs?.['Stage 40B spec'] === 'Stage 40B value' && publicProduct?.documents?.[0]?.title === 'Stage 40B certificate', JSON.stringify({ specs: publicProduct?.specs, documents: publicProduct?.documents }))
   addCheck(checks, issues, 'Public API exposes edited SEO fields', publicProduct?.seoTitleKg?.includes('Stage 40C edited SEO KG') && publicProduct?.seoTitleRu?.includes('Stage 40C edited SEO RU'), JSON.stringify({ seoTitleKg: publicProduct?.seoTitleKg, seoTitleRu: publicProduct?.seoTitleRu }))
+  const publicVariant = publicProduct?.variants?.find((variant) => variant.sku === productVariantSku)
+  addCheck(checks, issues, 'Public API exposes active product variant', publicVariant?.titleKg === variantTitleKg && Number(publicVariant?.price) === 777 && publicVariant?.stock?.quantity === 5, JSON.stringify(publicVariant))
 
   const qualityFilterResult = await fetch(`${apiBaseUrl}/admin/products?quality=missing_seo&limit=5`, {
     headers: authHeadersFromToken(await evaluate(cdp, "sessionStorage.getItem('stroyrayon_admin_token')")),
@@ -624,19 +655,29 @@ async function runBrowserFlow(cdp, checks, issues) {
     body: document.body.innerText,
     imageOk: Array.from(document.images).every((image) => !image.complete || image.naturalWidth > 0),
     addEnabled: Boolean(document.querySelector('.product-info__actions button:not([disabled])')),
+    variantText: document.querySelector('.variant-selector')?.innerText || '',
   }))()`)
   addCheck(checks, issues, 'Created product page shows edited title', productPage.title.includes(updatedTitleKg) || productPage.title.includes(updatedTitleRu), JSON.stringify({ path: productPage.path, title: productPage.title, body: productPage.body.slice(0, 240) }))
   addCheck(checks, issues, 'Created product page renders', productPage.title.includes(runId), productPage.title)
   addCheck(checks, issues, 'Product page renders edited specs and document', productPage.body.includes('Stage 40B value') && productPage.body.includes('Stage 40B certificate'))
+  addCheck(checks, issues, 'Product page renders variant selector', productPage.variantText.includes(variantTitleKg) && productPage.variantText.includes('777'), productPage.variantText)
   addCheck(checks, issues, 'Product uploaded image is not broken', productPage.imageOk)
   addCheck(checks, issues, 'Product can be added to cart while active/in stock', productPage.addEnabled)
 
+  await evaluate(cdp, `(() => {
+    const buttons = Array.from(document.querySelectorAll('.variant-option'));
+    const button = buttons.find((item) => item.innerText.includes(${JSON.stringify(variantTitleKg)}));
+    if (button) button.click();
+    return Boolean(button);
+  })()`)
+  await waitFor(cdp, `document.querySelector('.variant-option.is-active')?.innerText.includes(${JSON.stringify(variantTitleKg)})`, 10000)
   await evaluate(cdp, "document.querySelector('.product-info__actions button:not([disabled])').click()")
-  await waitFor(cdp, `JSON.parse(localStorage.getItem('stroyrayon_cart') || '[]').some((item) => item.slug === ${JSON.stringify(productSlug)})`)
+  await waitFor(cdp, `JSON.parse(localStorage.getItem('stroyrayon_cart') || '[]').some((item) => item.slug === ${JSON.stringify(productSlug)} && item.variantSku === ${JSON.stringify(productVariantSku)})`)
   await navigate(cdp, '/cart')
   await delay(800)
   const cartBody = await evaluate(cdp, 'document.body.innerText')
   addCheck(checks, issues, 'Created product is visible in cart', cartBody.includes(updatedTitleKg) || cartBody.includes(updatedTitleRu) || cartBody.includes(productSlug), cartBody.slice(0, 260))
+  addCheck(checks, issues, 'Cart preserves selected product variant', cartBody.includes(variantTitleKg) && cartBody.includes(productVariantSku), cartBody.slice(0, 320))
 
   await navigate(cdp, '/checkout')
   await waitFor(cdp, "Boolean(document.querySelector('.checkout-form'))")
@@ -667,6 +708,7 @@ async function runBrowserFlow(cdp, checks, issues) {
   addCheck(checks, issues, 'Checkout creates order confirmation', /SR-\d{4}-\d{6}/.test(checkoutResult.success), checkoutResult.success)
   addCheck(checks, issues, 'Checkout opens WhatsApp URL', /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(checkoutResult.openedUrl), checkoutResult.openedUrl)
   addCheck(checks, issues, 'WhatsApp message includes created product', checkoutResult.preview.includes(updatedTitleKg) || checkoutResult.preview.includes(updatedTitleRu))
+  addCheck(checks, issues, 'WhatsApp message includes selected variant', checkoutResult.preview.includes(variantTitleKg) && checkoutResult.preview.includes(productVariantSku), checkoutResult.preview)
 
   const token = await evaluate(cdp, "sessionStorage.getItem('stroyrayon_admin_token')")
   const authHeaders = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
