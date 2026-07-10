@@ -455,27 +455,29 @@ async function seedInitialAdmin() {
     throw new Error('Initial admin requires ADMIN_INITIAL_EMAIL and ADMIN_INITIAL_PASSWORD (12+ characters)')
   }
 
-  const roleValue = process.env.ADMIN_INITIAL_ROLE || 'OWNER'
+  const roleValue = process.env.ADMIN_INITIAL_ROLE?.trim() || 'OWNER'
   if (!Object.values(AdminRole).includes(roleValue as AdminRole)) {
     throw new Error(`Unsupported ADMIN_INITIAL_ROLE: ${roleValue}`)
   }
 
+  const passwordHash = await hashPassword(password)
   await prisma.adminUser.upsert({
     where: { email },
     update: {
       name,
       role: roleValue as AdminRole,
+      passwordHash,
       isActive: true,
     },
     create: {
       email,
       name,
       role: roleValue as AdminRole,
-      passwordHash: await hashPassword(password),
+      passwordHash,
       isActive: true,
     },
   })
-  console.log(`Initial admin is ready: ${email}`)
+  console.log('Initial admin is ready')
 }
 
 main()
