@@ -5,7 +5,11 @@ import { rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { BadRequestException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { StorageService } from './storage.service'
+import {
+  buildPublicObjectUrl,
+  createS3ClientConfig,
+  StorageService,
+} from './storage.service'
 
 function config(values: Record<string, string | undefined>) {
   return {
@@ -73,5 +77,34 @@ test('S3 storage fails fast when credentials are incomplete', () => {
     S3_REGION: 'us-east-1',
   }))
 
-  assert.throws(() => service.onModuleInit(), /STORAGE_DRIVER=s3 requires/)
+  assert.throws(
+    () => service.onModuleInit(),
+    /STORAGE_DRIVER=s3 requires S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY, S3_PUBLIC_BASE_URL/,
+  )
+})
+
+test('R2 S3 client config uses the account endpoint with path-style access', () => {
+  const clientConfig = createS3ClientConfig({
+    endpoint: 'https://account-id.r2.cloudflarestorage.com',
+    region: 'auto',
+    bucket: 'stroyrayon-products',
+    accessKeyId: 'test-access-key',
+    secretAccessKey: 'test-secret-key',
+    publicBaseUrl: 'https://public-bucket.example.test',
+  })
+
+  assert.equal(clientConfig.endpoint, 'https://account-id.r2.cloudflarestorage.com')
+  assert.equal(clientConfig.region, 'auto')
+  assert.equal(clientConfig.forcePathStyle, true)
+  assert.deepEqual(clientConfig.credentials, {
+    accessKeyId: 'test-access-key',
+    secretAccessKey: 'test-secret-key',
+  })
+})
+
+test('R2 public URL joins the configured base URL and persistent object key', () => {
+  assert.equal(
+    buildPublicObjectUrl('https://public-bucket.example.test/', '/products/example.webp'),
+    'https://public-bucket.example.test/products/example.webp',
+  )
 })

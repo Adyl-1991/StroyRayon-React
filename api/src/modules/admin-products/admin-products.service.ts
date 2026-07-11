@@ -534,7 +534,7 @@ export class AdminProductsService {
     if (!existing) throw new NotFoundException('Product not found')
 
     const hasRealImage = existing.images.some((image) => !isPlaceholderOrStaticImage(image.src))
-    await this.prisma.$transaction(async (tx) => {
+    return this.prisma.$transaction(async (tx) => {
       if (!hasRealImage) {
         await tx.productImage.updateMany({
           where: { productId: id },
@@ -557,12 +557,10 @@ export class AdminProductsService {
         },
       })
       const updated = await tx.product.findUnique({ where: { id }, include: adminProductInclude })
-      if (updated) {
-        await writeProductAuditLog(tx, id, admin, 'image_added', ['images'], snapshotProduct(existing), snapshotProduct(updated))
-      }
+      if (!updated) throw new NotFoundException('Product not found')
+      await writeProductAuditLog(tx, id, admin, 'image_added', ['images'], snapshotProduct(existing), snapshotProduct(updated))
+      return this.mapProduct(updated)
     })
-
-    return this.detail(id)
   }
 
   async updateImage(id: string, imageId: string, dto: UpdateProductImageDto, admin?: AdminIdentity) {

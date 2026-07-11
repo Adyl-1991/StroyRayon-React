@@ -90,7 +90,12 @@ export class AdminProductsController {
     assertAdminPermission(admin, 'products:content')
     const requestOrigin = `${request.protocol}://${request.get('host')}`
     const stored = await this.storageService.uploadProductImage(file, requestOrigin)
-    return this.adminProductsService.addImage(id, stored, admin)
+    try {
+      return await this.adminProductsService.addImage(id, stored, admin)
+    } catch (error) {
+      await this.storageService.deleteObject(stored.driver, stored.key).catch(() => undefined)
+      throw error
+    }
   }
 
   @Patch(':id/images/reorder')

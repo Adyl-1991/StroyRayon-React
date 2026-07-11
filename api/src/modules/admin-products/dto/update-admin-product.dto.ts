@@ -84,6 +84,31 @@ export class AdminProductImageDto {
   @Min(0)
   @Max(10000)
   sortOrder?: number
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  storageKey?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(20)
+  storageDriver?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(255)
+  originalName?: string | null
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(5 * 1024 * 1024)
+  size?: number | null
 }
 
 export class UpdateAdminProductDto {

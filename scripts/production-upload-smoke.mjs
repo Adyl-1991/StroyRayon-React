@@ -9,6 +9,10 @@ const rawBaseUrl =
 const adminEmail = process.env.PRODUCTION_ADMIN_EMAIL || process.env.ADMIN_EMAIL || ''
 const adminPassword = process.env.PRODUCTION_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || ''
 const productId = process.env.PRODUCTION_SMOKE_PRODUCT_ID || process.env.SMOKE_PRODUCT_ID || ''
+const expectedImageBaseUrl = (
+  process.env.PRODUCTION_EXPECTED_IMAGE_BASE_URL ||
+  'https://pub-f9c20e9a8b41477593b4d90d78a6fc3b.r2.dev'
+).replace(/\/+$/g, '')
 
 const checks = []
 const issues = []
@@ -91,6 +95,24 @@ async function main() {
   const uploadedImage = (upload.body?.images || []).find((image) => !beforeImageIds.has(image.id))
   addCheck('Gallery upload attaches a new image', upload.response.ok && Boolean(uploadedImage?.id), `HTTP ${upload.response.status}`)
   addCheck('Uploaded image has public src', Boolean(uploadedImage?.src), uploadedImage?.src || 'missing')
+  addCheck(
+    'Uploaded image uses expected public storage base URL',
+    uploadedImage?.src?.startsWith(`${expectedImageBaseUrl}/`) === true,
+    uploadedImage?.src || 'missing',
+  )
+  addCheck(
+    'Uploaded image retains persistent storage metadata',
+    uploadedImage?.storageDriver === 's3' && Boolean(uploadedImage?.storageKey),
+    `${uploadedImage?.storageDriver || 'missing'} / ${uploadedImage?.storageKey || 'missing'}`,
+  )
+
+  const persisted = await fetchJson(`${apiBaseUrl}/admin/products/${encodeURIComponent(productId)}`, { headers: authHeaders })
+  const persistedImage = (persisted.body?.images || []).find((image) => image.id === uploadedImage?.id)
+  addCheck(
+    'Uploaded image record persists in product detail',
+    persisted.response.ok && persistedImage?.src === uploadedImage?.src,
+    `HTTP ${persisted.response.status}`,
+  )
 
   if (uploadedImage?.src && /^https?:\/\//.test(uploadedImage.src)) {
     const imageResponse = await fetch(uploadedImage.src)

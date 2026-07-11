@@ -12,8 +12,10 @@ import {
   updateAdminProduct,
   uploadAdminProductGalleryImage,
 } from '../api/adminApi'
-import { hasAdminPermission } from './adminPermissions'
 import { formatPrice } from '../utils/formatPrice'
+import { hasAdminPermission } from './adminPermissions'
+
+const MAX_PRODUCT_IMAGE_SIZE = 5 * 1024 * 1024
 
 const stockOptions = [
   ['IN_STOCK', 'В наличии'],
@@ -238,6 +240,11 @@ export function AdminProductDetailPage() {
     if (!files.length) return
     if (files.some((file) => !['image/jpeg', 'image/png', 'image/webp'].includes(file.type))) {
       setError('Выберите JPG, PNG или WEBP файл.')
+      event.target.value = ''
+      return
+    }
+    if (files.some((file) => file.size > MAX_PRODUCT_IMAGE_SIZE)) {
+      setError('Размер каждого изображения не должен превышать 5 MB.')
       event.target.value = ''
       return
     }

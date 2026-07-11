@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, OnModuleInit } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { createHash, createHmac, randomBytes } from 'node:crypto'
+import { DeleteObjectCommand, PutObjectCommand, S3Client, S3ClientConfig } from '@aws-sdk/client-s3'
+import { randomBytes } from 'node:crypto'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { extname, join, posix } from 'node:path'
 
@@ -18,7 +19,7 @@ type UploadableFile = {
   size: number
 }
 
-type S3Config = {
+export type S3Config = {
   endpoint: string
   region: string
   bucket: string
@@ -40,6 +41,8 @@ export type StoredObject = {
 
 @Injectable()
 export class StorageService implements OnModuleInit {
+  private s3Client?: S3Client
+
   constructor(private readonly configService: ConfigService) {}
 
   onModuleInit() {
@@ -75,7 +78,7 @@ export class StorageService implements OnModuleInit {
       return {
         driver: 's3',
         key,
-        src: joinUrl(this.getS3Config().publicBaseUrl, key),
+        src: buildPublicObjectUrl(this.getS3Config().publicBaseUrl, key),
         path: key,
         filename,
         originalName: file.originalname,
@@ -94,7 +97,7 @@ export class StorageService implements OnModuleInit {
     return {
       driver: 'local',
       key,
-      src: publicBaseUrl ? joinUrl(publicBaseUrl, key) : `${publicApiOrigin || requestOrigin || ''}${publicPath}`,
+      src: publicBaseUrl ? buildPublicObjectUrl(publicBaseUrl, key) : `${publicApiOrigin || requestOrigin || ''}${publicPath}`,
       path: publicPath,
       filename,
       originalName: file.originalname,
@@ -120,35 +123,59 @@ export class StorageService implements OnModuleInit {
   }
 
   private getS3Config(): S3Config {
-    const config = {
-      endpoint: this.configService.get<string>('S3_ENDPOINT') || '',
-      region: this.configService.get<string>('S3_REGION') || '',
-      bucket: this.configService.get<string>('S3_BUCKET') || '',
-      accessKeyId: this.configService.get<string>('S3_ACCESS_KEY_ID') || '',
-      secretAccessKey: this.configService.get<string>('S3_SECRET_ACCESS_KEY') || '',
-      publicBaseUrl: this.configService.get<string>('S3_PUBLIC_BASE_URL') || '',
+    const envNames = {
+      endpoint: 'S3_ENDPOINT',
+      region: 'S3_REGION',
+      bucket: 'S3_BUCKET',
+      accessKeyId: 'S3_ACCESS_KEY_ID',
+      secretAccessKey: 'S3_SECRET_ACCESS_KEY',
+      publicBaseUrl: 'S3_PUBLIC_BASE_URL',
+    } as const
+    const config: S3Config = {
+      endpoint: (this.configService.get<string>(envNames.endpoint) || '').trim().replace(/\/+$/g, ''),
+      region: (this.configService.get<string>(envNames.region) || '').trim(),
+      bucket: (this.configService.get<string>(envNames.bucket) || '').trim(),
+      accessKeyId: (this.configService.get<string>(envNames.accessKeyId) || '').trim(),
+      secretAccessKey: (this.configService.get<string>(envNames.secretAccessKey) || '').trim(),
+      publicBaseUrl: (this.configService.get<string>(envNames.publicBaseUrl) || '').trim().replace(/\/+$/g, ''),
     }
-    const missing = Object.entries(config).filter(([, value]) => !value).map(([key]) => key)
+    const missing = (Object.keys(envNames) as Array<keyof S3Config>)
+      .filter((key) => !config[key])
+      .map((key) => envNames[key])
     if (missing.length) {
       throw new Error(`STORAGE_DRIVER=s3 requires ${missing.join(', ')}`)
     }
+    assertHttpUrl('S3_ENDPOINT', config.endpoint)
+    assertHttpUrl('S3_PUBLIC_BASE_URL', config.publicBaseUrl)
     return config
+  }
+
+  private getS3Client(config: S3Config) {
+    this.s3Client ||= new S3Client(createS3ClientConfig(config))
+    return this.s3Client
   }
 
   private async putS3Object(key: string, body: Buffer, contentType: string) {
     const config = this.getS3Config()
-    const url = buildS3Url(config, key)
-    const headers = signS3Request('PUT', url, config, body, contentType)
-    const response = await fetch(url, { method: 'PUT', headers, body: new Uint8Array(body) })
-    if (!response.ok) throw new Error(`S3 upload failed with HTTP ${response.status}`)
+    try {
+      await this.getS3Client(config).send(new PutObjectCommand({
+        Bucket: config.bucket,
+        Key: key,
+        Body: body,
+        ContentType: contentType,
+      }))
+    } catch {
+      throw new Error('S3 upload failed')
+    }
   }
 
   private async deleteS3Object(key: string) {
     const config = this.getS3Config()
-    const url = buildS3Url(config, key)
-    const headers = signS3Request('DELETE', url, config, Buffer.alloc(0))
-    const response = await fetch(url, { method: 'DELETE', headers })
-    if (!response.ok && response.status !== 404) throw new Error(`S3 delete failed with HTTP ${response.status}`)
+    try {
+      await this.getS3Client(config).send(new DeleteObjectCommand({ Bucket: config.bucket, Key: key }))
+    } catch {
+      throw new Error('S3 delete failed')
+    }
   }
 }
 
@@ -172,7 +199,7 @@ function normalizeFilename(originalName: string) {
   return ascii || 'product-image'
 }
 
-function joinUrl(baseUrl: string, key: string) {
+export function buildPublicObjectUrl(baseUrl: string, key: string) {
   return `${baseUrl.replace(/\/+$/g, '')}/${key.replace(/^\/+/g, '')}`
 }
 
@@ -180,50 +207,25 @@ function isSafeStorageKey(key: string) {
   return key.startsWith('products/') && !key.includes('..') && !key.startsWith('/')
 }
 
-function buildS3Url(config: S3Config, key: string) {
-  return `${config.endpoint.replace(/\/+$/g, '')}/${encodeURIComponent(config.bucket)}/${key.split('/').map(encodeURIComponent).join('/')}`
-}
-
-function signS3Request(method: 'PUT' | 'DELETE', url: string, config: S3Config, body: Buffer, contentType?: string) {
-  const parsed = new URL(url)
-  const now = new Date()
-  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, '')
-  const dateStamp = amzDate.slice(0, 8)
-  const payloadHash = createHash('sha256').update(body).digest('hex')
-  const headers: Record<string, string> = {
-    host: parsed.host,
-    'x-amz-content-sha256': payloadHash,
-    'x-amz-date': amzDate,
-  }
-  if (contentType) headers['content-type'] = contentType
-  const signedHeaders = Object.keys(headers).sort().join(';')
-  const canonicalHeaders = Object.keys(headers).sort().map((key) => `${key}:${headers[key]}\n`).join('')
-  const canonicalRequest = [
-    method,
-    parsed.pathname,
-    parsed.searchParams.toString(),
-    canonicalHeaders,
-    signedHeaders,
-    payloadHash,
-  ].join('\n')
-  const credentialScope = `${dateStamp}/${config.region}/s3/aws4_request`
-  const stringToSign = [
-    'AWS4-HMAC-SHA256',
-    amzDate,
-    credentialScope,
-    createHash('sha256').update(canonicalRequest).digest('hex'),
-  ].join('\n')
-  const signingKey = getSignatureKey(config.secretAccessKey, dateStamp, config.region, 's3')
-  const signature = createHmac('sha256', signingKey).update(stringToSign).digest('hex')
+export function createS3ClientConfig(config: S3Config): S3ClientConfig {
   return {
-    ...headers,
-    authorization: `AWS4-HMAC-SHA256 Credential=${config.accessKeyId}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`,
+    endpoint: config.endpoint,
+    region: config.region,
+    credentials: {
+      accessKeyId: config.accessKeyId,
+      secretAccessKey: config.secretAccessKey,
+    },
+    // R2 uses the account endpoint and expects the bucket in the request path.
+    forcePathStyle: true,
   }
 }
 
-function getSignatureKey(secretAccessKey: string, dateStamp: string, region: string, service: string) {
-  const kDate = createHmac('sha256', `AWS4${secretAccessKey}`).update(dateStamp).digest()
-  const kRegion = createHmac('sha256', kDate).update(region).digest()
-  const kService = createHmac('sha256', kRegion).update(service).digest()
-  return createHmac('sha256', kService).update('aws4_request').digest()
+function assertHttpUrl(name: string, value: string) {
+  try {
+    const parsed = new URL(value)
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') return
+  } catch {
+    // Fall through to the environment-specific error below.
+  }
+  throw new Error(`${name} must be an absolute HTTP(S) URL`)
 }
