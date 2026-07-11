@@ -65,7 +65,13 @@ h3 {
 
 .app-shell {
   min-height: 100vh;
-  padding-bottom: 126px;
+  padding-bottom: calc(
+    var(--mobile-nav-height) + var(--mobile-nav-content-gap) + env(safe-area-inset-bottom)
+  );
+}
+
+html {
+  scroll-padding-bottom: calc(var(--mobile-nav-height) + 16px + env(safe-area-inset-bottom));
 }
 
 .page,
@@ -592,6 +598,7 @@ h3 {
   bottom: 0;
   z-index: 30;
   display: grid;
+  min-height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   padding-bottom: env(safe-area-inset-bottom);
@@ -2423,6 +2430,10 @@ del {
 }
 
 @media (min-width: 940px) {
+  html {
+    scroll-padding-bottom: 0;
+  }
+
   .app-shell {
     padding-bottom: 0;
   }

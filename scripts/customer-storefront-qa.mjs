@@ -434,6 +434,23 @@ function pageHealth(checks, issues, label, result, { breadcrumb = true, content 
   }
 }
 
+async function inspectMobileFooterClearance(cdp) {
+  return evaluate(cdp, `new Promise((resolve) => {
+    window.scrollTo(0, document.documentElement.scrollHeight);
+    setTimeout(() => {
+      const nav = document.querySelector('.mobile-nav');
+      const footer = document.querySelector('.site-footer');
+      const lastFooterAction = footer?.querySelector('a:last-of-type');
+      const navRect = nav?.getBoundingClientRect();
+      const actionRect = lastFooterAction?.getBoundingClientRect();
+      resolve({
+        visible: Boolean(nav && getComputedStyle(nav).display !== 'none'),
+        clearance: navRect && actionRect ? navRect.top - actionRect.bottom : null,
+      });
+    }, 180);
+  })`)
+}
+
 async function runRouteAudit(cdp, checks, issues) {
   for (const viewport of viewports) {
     await setViewport(cdp, viewport)
@@ -454,6 +471,16 @@ async function runRouteAudit(cdp, checks, issues) {
           expected[locale].chips.every((chip, index) => result.chips[index] === chip),
           result.chips.join(' | '),
         )
+        if (viewport.mobile && route === '/delivery') {
+          const footerClearance = await inspectMobileFooterClearance(cdp)
+          addCheck(
+            checks,
+            issues,
+            `${label}: footer clears fixed mobile navigation`,
+            footerClearance.visible && footerClearance.clearance >= 16,
+            `${footerClearance.clearance ?? 'unknown'}px`,
+          )
+        }
       }
     }
   }
