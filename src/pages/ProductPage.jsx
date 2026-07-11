@@ -35,6 +35,7 @@ import {
   combineStructuredData,
   getProductSeo,
 } from '../utils/seoUtils'
+import { getProductImage } from '../utils/imageUtils'
 
 const ignoredSpecKeys = new Set([
   'descriptionru',
@@ -280,6 +281,8 @@ export function ProductPage() {
         title={seo.title}
         description={seo.description}
         canonical={seo.canonical}
+        image={getProductImage(product)?.src}
+        type="product"
         structuredData={combineStructuredData(
           buildProductStructuredData(product, locale),
           buildBreadcrumbStructuredData(breadcrumbItems),

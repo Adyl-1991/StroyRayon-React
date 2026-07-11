@@ -13,7 +13,7 @@ export function CartPage() {
   if (!items.length) {
     return (
       <main className="page page--cart">
-        <Seo title={t('cart.title')} description={t('cart.seoDescription')} />
+        <Seo title={t('cart.title')} description={t('cart.seoDescription')} noIndex />
         <EmptyState title={t('cart.emptyTitle')} text={t('cart.emptyText')} />
       </main>
     )
@@ -21,7 +21,7 @@ export function CartPage() {
 
   return (
     <main className="page page--cart">
-      <Seo title={t('cart.title')} description={t('cart.seoDescription')} />
+      <Seo title={t('cart.title')} description={t('cart.seoDescription')} noIndex />
       <Breadcrumbs items={[{ label: t('cart.title') }]} />
       <div className="page-heading">
         <h1>{t('cart.title')}</h1>

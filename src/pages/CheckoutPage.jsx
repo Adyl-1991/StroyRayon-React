@@ -108,7 +108,7 @@ export function CheckoutPage() {
   if (!items.length) {
     return (
       <main className="page page--checkout">
-        <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} />
+        <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} noIndex />
         <EmptyState title={t('checkout.emptyTitle')} text={t('checkout.emptyText')} />
       </main>
     )
@@ -116,7 +116,7 @@ export function CheckoutPage() {
 
   return (
     <main className="page page--checkout">
-      <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} />
+      <Seo title={t('checkout.title')} description={t('checkout.seoDescription')} noIndex />
       <Breadcrumbs items={[{ label: t('cart.title'), to: '/cart' }, { label: t('checkout.title') }]} />
       <div className="page-heading">
         <h1>{t('checkout.title')}</h1>

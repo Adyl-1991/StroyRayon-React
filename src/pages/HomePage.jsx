@@ -11,7 +11,7 @@ import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
 import { getHomePopularProducts, getProducts } from '../services/productService'
 import { getWhatsAppUrl } from '../services/whatsappService'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildOrganizationStructuredData, getPageCanonical } from '../utils/seoUtils'
 
 export function HomePage() {
   const { locale, t } = useLocale()
@@ -21,7 +21,11 @@ export function HomePage() {
 
   return (
     <>
-      <Seo title="StroyRayon" canonical={getPageCanonical('/')} />
+      <Seo
+        title="StroyRayon"
+        canonical={getPageCanonical('/')}
+        structuredData={buildOrganizationStructuredData()}
+      />
       <HeroSlider />
       <OrderProcessBlock />
 

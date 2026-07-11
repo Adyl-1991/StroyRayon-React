@@ -8,6 +8,7 @@
     "build": "vite build",
     "validate:catalog": "node src/scripts/validateCatalogData.js",
     "generate:sitemap": "node src/scripts/generateSitemap.js",
+    "test:seo": "node --test scripts/seo-regression.test.mjs",
     "qa:stage21": "node scripts/stage21-e2e.mjs",
     "qa:stage31": "node scripts/stage31-language-qa.mjs",
     "qa:customer": "node scripts/customer-storefront-qa.mjs",

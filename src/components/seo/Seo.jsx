@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { siteConfig } from '../../config/site'
+import { formatSeoTitle, getCanonicalUrl, getRobotsContent } from '../../utils/seoMeta'
 
 function upsertMeta(name, content) {
   if (typeof document === 'undefined' || !content) return
@@ -59,20 +60,28 @@ export function Seo({
   title = siteConfig.name,
   description = siteConfig.defaultDescription,
   canonical,
+  image,
+  noIndex = false,
+  type = 'website',
   structuredData,
 }) {
   useEffect(() => {
-    const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`
-    const canonicalUrl = canonical || window.location.href
-    const ogImage = `${siteConfig.siteUrl}/images/brand/stroyrayon-logo.png`
+    const fullTitle = formatSeoTitle(title)
+    const canonicalUrl = getCanonicalUrl(canonical, window.location)
+    const ogImage = image
+      ? new URL(image, siteConfig.siteUrl).href
+      : `${siteConfig.siteUrl}/images/brand/stroyrayon-logo.png`
+    const robots = getRobotsContent(noIndex)
 
     document.title = fullTitle
     upsertMeta('description', description)
+    upsertMeta('robots', robots)
+    upsertMeta('googlebot', robots)
     upsertMetaProperty('og:title', fullTitle)
     upsertMetaProperty('og:description', description)
     upsertMetaProperty('og:url', canonicalUrl)
     upsertMetaProperty('og:site_name', siteConfig.name)
-    upsertMetaProperty('og:type', 'website')
+    upsertMetaProperty('og:type', type)
     upsertMetaProperty('og:image', ogImage)
     upsertMeta('twitter:card', 'summary_large_image')
     upsertMeta('twitter:title', fullTitle)
@@ -80,7 +89,7 @@ export function Seo({
     upsertMeta('twitter:image', ogImage)
     upsertLink('canonical', canonicalUrl)
     upsertJsonLd('stroyrayon-jsonld', structuredData)
-  }, [canonical, description, structuredData, title])
+  }, [canonical, description, image, noIndex, structuredData, title, type])
 
   return null
 }

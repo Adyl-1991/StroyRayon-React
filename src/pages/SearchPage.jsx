@@ -23,6 +23,7 @@ export function SearchPage() {
       <Seo
         title={query ? t('search.queryHeading', { query }) : t('search.title')}
         description={t('search.seoDescription')}
+        noIndex
       />
       <Breadcrumbs items={[{ label: t('search.title') }]} />
       <div className="page-heading">

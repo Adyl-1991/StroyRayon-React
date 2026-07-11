@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { adminLogin } from '../api/adminApi'
+import { Seo } from '../components/seo/Seo'
 import { hasAdminToken } from './adminSession'
 
 export function AdminLoginPage() {
@@ -36,6 +37,7 @@ export function AdminLoginPage() {
 
   return (
     <main className="admin-login">
+      <Seo title="StroyRayon CRM" description="StroyRayon CRM" noIndex />
       <form className="admin-login-card" onSubmit={handleSubmit}>
         <div>
           <span className="admin-eyebrow">StroyRayon CRM</span>

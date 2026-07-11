@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { adminLogout, getAdminProfile } from '../api/adminApi'
+import { Seo } from '../components/seo/Seo'
 import { roleLabel } from './adminPermissions'
 
 export function AdminLayout() {
@@ -32,6 +33,7 @@ export function AdminLayout() {
 
   return (
     <div className="admin-shell">
+      <Seo title="StroyRayon CRM" description="StroyRayon CRM" noIndex />
       <header className="admin-header">
         <div>
           <strong>StroyRayon CRM</strong>

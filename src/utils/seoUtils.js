@@ -26,6 +26,22 @@ export function getPageCanonical(path = '/') {
   return absoluteUrl(path)
 }
 
+export function buildOrganizationStructuredData() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${siteConfig.siteUrl}/#organization`,
+    name: siteConfig.name,
+    alternateName: siteConfig.alternateNames,
+    url: siteConfig.siteUrl,
+    logo: absoluteUrl('/images/brand/stroyrayon-logo.png'),
+    areaServed: {
+      '@type': 'Country',
+      name: 'Kyrgyzstan',
+    },
+  }
+}
+
 export function getCatalogNodeSeo(node, locale = 'kg') {
   return {
     title: locale === 'ru' ? node?.titleRu || node?.titleKg || 'Каталог' : node?.titleKg || 'Каталог',
