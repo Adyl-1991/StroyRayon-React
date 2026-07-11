@@ -172,6 +172,7 @@ export function AdminProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
+  const [imageUploadError, setImageUploadError] = useState('')
   const [galleryBusy, setGalleryBusy] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
@@ -231,20 +232,27 @@ export function AdminProductDetailPage() {
   }
 
   async function handleImageUpload(event) {
+    setImageUploadError('')
     if (!canUpload) {
-      setError('Недостаточно прав для загрузки фото.')
+      const uploadError = 'Недостаточно прав для загрузки фото.'
+      setError(uploadError)
+      setImageUploadError(uploadError)
       event.target.value = ''
       return
     }
     const files = Array.from(event.target.files || [])
     if (!files.length) return
     if (files.some((file) => !['image/jpeg', 'image/png', 'image/webp'].includes(file.type))) {
-      setError('Выберите JPG, PNG или WEBP файл.')
+      const uploadError = 'Выберите JPG, PNG или WEBP файл.'
+      setError(uploadError)
+      setImageUploadError(uploadError)
       event.target.value = ''
       return
     }
     if (files.some((file) => file.size > MAX_PRODUCT_IMAGE_SIZE)) {
-      setError('Размер каждого изображения не должен превышать 5 MB.')
+      const uploadError = 'Размер каждого изображения не должен превышать 5 MB.'
+      setError(uploadError)
+      setImageUploadError(uploadError)
       event.target.value = ''
       return
     }
@@ -265,7 +273,10 @@ export function AdminProductDetailPage() {
       setAuditLog(updatedAudit)
       setMessage(files.length > 1 ? 'Фото загружены и прикреплены к товару.' : 'Фото загружено и прикреплено к товару.')
     } catch (requestError) {
-      setError(requestError.message || 'Не удалось загрузить фото.')
+      const status = requestError.status ? ` (${requestError.status})` : ''
+      const uploadError = `${requestError.message || 'Не удалось загрузить фото.'}${status}`
+      setError(uploadError)
+      setImageUploadError(uploadError)
     } finally {
       setUploadingImage(false)
       event.target.value = ''
@@ -841,6 +852,7 @@ export function AdminProductDetailPage() {
               <input data-qa="edit-image-file" type="file" accept="image/png,image/jpeg,image/webp" multiple disabled={uploadingImage || galleryBusy || !canUpload} onChange={handleImageUpload} />
               <span>{uploadingImage ? 'Загружаем...' : 'JPG, PNG или WEBP до 5 MB'}</span>
             </label>
+            {imageUploadError && <div className="admin-alert admin-alert-error" role="alert">{imageUploadError}</div>}
           </div>
           {form.images.length === 0 ? (
             <div className="admin-state">У товара нет прикрепленных фото. На сайте будет использована заглушка.</div>

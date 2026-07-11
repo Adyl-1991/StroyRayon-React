@@ -1,4 +1,10 @@
-import { BadRequestException, Injectable, OnModuleInit } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  OnModuleInit,
+  ServiceUnavailableException,
+} from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { DeleteObjectCommand, PutObjectCommand, S3Client, S3ClientConfig } from '@aws-sdk/client-s3'
 import { randomBytes } from 'node:crypto'
@@ -41,6 +47,7 @@ export type StoredObject = {
 
 @Injectable()
 export class StorageService implements OnModuleInit {
+  private readonly logger = new Logger(StorageService.name)
   private s3Client?: S3Client
 
   constructor(private readonly configService: ConfigService) {}
@@ -164,8 +171,11 @@ export class StorageService implements OnModuleInit {
         Body: body,
         ContentType: contentType,
       }))
-    } catch {
-      throw new Error('S3 upload failed')
+    } catch (error) {
+      this.logger.error(formatS3Failure('upload', error))
+      throw new ServiceUnavailableException(
+        'Image storage upload failed. Check R2 credentials, bucket write permission and S3 endpoint configuration.',
+      )
     }
   }
 
@@ -228,4 +238,19 @@ function assertHttpUrl(name: string, value: string) {
     // Fall through to the environment-specific error below.
   }
   throw new Error(`${name} must be an absolute HTTP(S) URL`)
+}
+
+function formatS3Failure(operation: string, error: unknown) {
+  const safeError = error as {
+    name?: unknown
+    $metadata?: { httpStatusCode?: unknown; requestId?: unknown }
+  }
+  const name = typeof safeError?.name === 'string' ? safeError.name : 'UnknownError'
+  const status = typeof safeError?.$metadata?.httpStatusCode === 'number'
+    ? safeError.$metadata.httpStatusCode
+    : 'unknown'
+  const requestId = typeof safeError?.$metadata?.requestId === 'string'
+    ? safeError.$metadata.requestId
+    : 'unavailable'
+  return `S3 ${operation} failed: ${name}; HTTP ${status}; request ${requestId}`
 }
