@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { ArrayMinSize, IsArray, IsDefined, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
+import { ArrayMinSize, IsArray, IsDefined, IsIn, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { CreateOrderItemDto } from './create-order-item.dto'
 
 class CreateOrderCustomerDto {
@@ -39,4 +39,8 @@ export class CreateOrderDto {
   @IsOptional()
   @IsString()
   source?: string
+
+  @IsOptional()
+  @IsIn(['kg', 'ru'])
+  locale?: 'kg' | 'ru'
 }

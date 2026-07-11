@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { buildCheckoutOrderPayload } from '../src/services/checkoutService.js'
+
+const customer = {
+  name: ' Test Buyer ',
+  phone: ' +996 700 000 000 ',
+  address: ' Bishkek ',
+  comment: ' QA order ',
+}
+
+const items = [{
+  productId: 'product-1',
+  variantId: 'variant-1',
+  slug: 'ppr-pipe',
+  name: 'ППР түтүк',
+  titleKg: 'ППР түтүк',
+  titleRu: 'ППР труба',
+  sku: 'PPR-20',
+  price: '45',
+  quantity: 2,
+  unit: 'метр',
+}]
+
+test('checkout payload carries the selected locale and canonical product identifiers', () => {
+  const payload = buildCheckoutOrderPayload({ customer, items, locale: 'ru' })
+
+  assert.equal(payload.locale, 'ru')
+  assert.equal(payload.customer.name, 'Test Buyer')
+  assert.equal(payload.customer.phone, '+996 700 000 000')
+  assert.equal(payload.items[0].productId, 'product-1')
+  assert.equal(payload.items[0].variantId, 'variant-1')
+  assert.equal(payload.items[0].slug, 'ppr-pipe')
+  assert.equal(payload.items[0].title, 'ППР труба')
+  assert.equal(payload.items[0].price, 45)
+  assert.equal(payload.items[0].quantity, 2)
+})
+
+test('checkout payload defaults to Kyrgyz and omits an empty comment', () => {
+  const payload = buildCheckoutOrderPayload({
+    customer: { ...customer, comment: '   ' },
+    items,
+  })
+
+  assert.equal(payload.locale, 'kg')
+  assert.equal(payload.items[0].title, 'ППР түтүк')
+  assert.equal(payload.comment, undefined)
+})

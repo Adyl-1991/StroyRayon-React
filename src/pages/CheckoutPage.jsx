@@ -8,6 +8,7 @@ import { Button } from '../components/ui/Button'
 import { EmptyState } from '../components/ui/EmptyState'
 import { useCart } from '../hooks/useCart'
 import { useLocale } from '../i18n/LocaleContext'
+import { buildCheckoutOrderPayload } from '../services/checkoutService'
 import { buildWhatsAppOrderText, getWhatsAppUrl } from '../services/whatsappService'
 
 export function CheckoutPage() {
@@ -47,29 +48,12 @@ export function CheckoutPage() {
   }
 
   function buildOrderPayload() {
-    return {
-      customer: {
-        name: customer.name.trim(),
-        phone: customer.phone.trim(),
-        address: customer.address.trim(),
-      },
-      items: items.map((item) => ({
-        productId: item.productId,
-        variantId: item.variantId,
-        slug: item.slug,
-        title: locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name,
-        sku: item.variantSku || item.sku,
-        price: Number(item.price || 0),
-        quantity: Number(item.quantity || 1),
-        unit: item.unit,
-      })),
-      comment: customer.comment.trim() || undefined,
-      source: 'website',
-    }
+    return buildCheckoutOrderPayload({ customer, items, locale })
   }
 
   function openWhatsApp(url) {
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const popup = window.open(url, '_blank', 'noopener,noreferrer')
+    if (!popup) window.location.assign(url)
   }
 
   async function handleSubmit(event) {

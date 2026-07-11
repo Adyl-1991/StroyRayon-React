@@ -26,6 +26,7 @@ export class OrdersService {
     const currency = 'KGS'
     const deliveryPrice = 0
     const source = dto.source || 'website'
+    const locale = dto.locale === 'ru' ? 'ru' : 'kg'
     const order = await this.prisma.$transaction(async (tx) => {
       const customer = await tx.customer.upsert({
         where: { phone: dto.customer.phone },
@@ -62,8 +63,10 @@ export class OrdersService {
           return {
             product,
             variant,
-            title: product.titleKg,
-            variantTitle: variant?.titleKg || null,
+            title: locale === 'ru' ? product.titleRu || product.titleKg : product.titleKg,
+            variantTitle: variant
+              ? locale === 'ru' ? variant.titleRu || variant.titleKg : variant.titleKg
+              : null,
             sku: variant?.sku || product.sku,
             productSku: product.sku,
             variantSku: variant?.sku || null,
@@ -176,6 +179,7 @@ export class OrdersService {
         total,
         currency,
         comment: dto.comment,
+        locale,
       })
 
       return tx.order.create({
@@ -273,6 +277,7 @@ export class OrdersService {
       sku: true,
       slug: true,
       titleKg: true,
+      titleRu: true,
       price: true,
       unit: true,
       isActive: true,

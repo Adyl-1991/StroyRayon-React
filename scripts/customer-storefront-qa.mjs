@@ -21,13 +21,25 @@ function logStep(message) {
   console.log(`[qa:customer] ${message}`)
 }
 
-const viewports = [
+const allViewports = [
   { width: 360, height: 800, mobile: true },
   { width: 390, height: 844, mobile: true },
   { width: 768, height: 1024, mobile: false },
   { width: 1024, height: 900, mobile: false },
   { width: 1366, height: 900, mobile: false },
 ]
+const requestedViewportWidths = String(process.env.CUSTOMER_QA_VIEWPORTS || '')
+  .split(',')
+  .map((value) => Number(value.trim()))
+  .filter(Number.isFinite)
+const viewports = requestedViewportWidths.length
+  ? allViewports.filter((viewport) => requestedViewportWidths.includes(viewport.width))
+  : allViewports
+const requestedLocales = String(process.env.CUSTOMER_QA_LOCALES || 'kg,ru')
+  .split(',')
+  .map((value) => value.trim().toLowerCase())
+  .filter((value) => value === 'kg' || value === 'ru')
+const locales = requestedLocales.length ? [...new Set(requestedLocales)] : ['kg', 'ru']
 
 const categoryRoutes = [
   '/',
@@ -448,7 +460,7 @@ async function runRouteAudit(cdp, checks, issues) {
 }
 
 async function runSearchAudit(cdp, checks, issues) {
-  await setViewport(cdp, viewports[1])
+  await setViewport(cdp, viewports[Math.min(1, viewports.length - 1)])
   for (const locale of ['kg', 'ru']) {
     await navigate(cdp, '/')
     await setLocale(cdp, locale)
@@ -607,8 +619,20 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
 
   await installWindowOpenInterceptor(cdp)
   await evaluate(cdp, `document.querySelector('.checkout-form')?.requestSubmit()`)
-  await delay(300)
-  const openedUrl = await evaluate(cdp, `window.__customerQaOpenedUrls?.at(-1) || ''`)
+  const submission = await evaluate(cdp, `new Promise((resolve) => {
+    const started = Date.now();
+    const read = () => ({
+      openedUrl: window.__customerQaOpenedUrls?.at(-1) || '',
+      confirmationText: document.querySelector('.checkout-success')?.textContent?.trim() || '',
+    });
+    const tick = () => {
+      const result = read();
+      if (result.openedUrl || Date.now() - started > 10000) return resolve(result);
+      setTimeout(tick, 100);
+    };
+    tick();
+  })`)
+  const openedUrl = submission.openedUrl
   let message = ''
   try {
     const parsed = new URL(openedUrl)
@@ -619,6 +643,15 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
   addCheck(checks, issues, `${prefix}: WhatsApp navigation intercepted`, Boolean(openedUrl), openedUrl)
   addCheck(checks, issues, `${prefix}: WhatsApp host`, /^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(openedUrl), openedUrl)
   addCheck(checks, issues, `${prefix}: WhatsApp message URL encoded`, /[?&]text=.+%/.test(openedUrl), openedUrl)
+  if (isLive) {
+    addCheck(
+      checks,
+      issues,
+      `${prefix}: order persisted to CRM`,
+      /SR-\d{4}-\d+/.test(submission.confirmationText),
+      submission.confirmationText,
+    )
+  }
   addCheck(
     checks,
     issues,
@@ -725,7 +758,7 @@ async function main() {
     await runRouteAudit(cdp, checks, issues)
     await runSearchAudit(cdp, checks, issues)
     for (const viewport of viewports) {
-      for (const locale of ['kg', 'ru']) {
+      for (const locale of locales) {
         await runCustomerFlow(cdp, locale, viewport, checks, issues)
       }
     }
@@ -740,7 +773,7 @@ async function main() {
       checks: checks.length,
       failedChecks: issues.length,
       viewports: viewports.map((viewport) => viewport.width),
-      locales: ['kg', 'ru'],
+      locales,
       routes: categoryRoutes,
       searchTerms,
       consoleErrors: [...new Set(consoleErrors)],
