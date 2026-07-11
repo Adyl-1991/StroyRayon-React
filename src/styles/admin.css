@@ -132,6 +132,12 @@
   text-decoration: none;
 }
 
+.admin-editor-footer-actions {
+  justify-content: flex-end;
+  margin-top: 4px;
+  padding: 8px 0 4px;
+}
+
 .admin-product-filters {
   display: grid;
   grid-template-columns: minmax(280px, 1.5fr) repeat(4, minmax(150px, 1fr));

@@ -927,6 +927,15 @@ export function AdminProductDetailPage() {
             </ol>
           )}
         </article>
+
+        <div className="admin-heading-actions admin-editor-footer-actions">
+          <a className="admin-secondary-button" href={`/product/${form.slug}`} target="_blank" rel="noreferrer">
+            Открыть на сайте
+          </a>
+          <button className="admin-primary-button" data-qa="edit-save-bottom" type="submit" disabled={saving || !canSave}>
+            {saving ? 'Сохраняем...' : 'Сохранить'}
+          </button>
+        </div>
       </form>
     </section>
   )
