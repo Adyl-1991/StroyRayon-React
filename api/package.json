@@ -10,6 +10,7 @@
     "lint": "eslint \"{src,prisma}/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "prestart:prod": "prisma migrate deploy",
     "start:prod": "node dist/main.js",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",

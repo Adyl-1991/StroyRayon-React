@@ -234,6 +234,7 @@ export function AdminProductDetailPage() {
   const [message, setMessage] = useState('')
   const [draft, setDraft] = useState(null)
   const [draftStatus, setDraftStatus] = useState('idle')
+  const [draftServiceReady, setDraftServiceReady] = useState(false)
   const draftVersionRef = useRef(0)
   const savedDraftFingerprintRef = useRef('')
   const latestDraftFingerprintRef = useRef('')
@@ -243,15 +244,20 @@ export function AdminProductDetailPage() {
 
   useEffect(() => {
     let active = true
+    draftReadyRef.current = false
     Promise.all([
       getAdminProduct(id),
       getAdminProductOptions(),
       getAdminProductAuditLog(id, { limit: 20 }),
-      getAdminProductDraft(id),
+      getAdminProductDraft(id).catch((requestError) => ({
+        loadError: requestError.message || 'Сервис черновиков временно недоступен.',
+      })),
     ])
       .then(([productData, optionsData, auditData, draftData]) => {
         if (!active) return
-        const nextForm = applyDraftToForm(productData, draftData)
+        const draftLoadError = draftData?.loadError
+        const loadedDraft = draftLoadError ? null : draftData
+        const nextForm = applyDraftToForm(productData, loadedDraft)
         const permissions = {
           content: hasAdminPermission(admin, 'products:content'),
           commercial: hasAdminPermission(admin, 'products:commercial'),
@@ -261,13 +267,15 @@ export function AdminProductDetailPage() {
         setProduct(productData)
         setOptions(optionsData)
         setAuditLog(auditData)
-        setDraft(draftData)
+        setDraft(loadedDraft)
         setForm(nextForm)
-        draftVersionRef.current = draftData?.version || 0
+        draftVersionRef.current = loadedDraft?.version || 0
         savedDraftFingerprintRef.current = fingerprint
         latestDraftFingerprintRef.current = fingerprint
-        draftReadyRef.current = true
-        setDraftStatus(draftData ? 'saved' : 'idle')
+        draftReadyRef.current = !draftLoadError
+        setDraftServiceReady(!draftLoadError)
+        setDraftStatus(draftLoadError ? 'error' : loadedDraft ? 'saved' : 'idle')
+        if (draftLoadError) setError(`${draftLoadError} Редактор загружен, но публикация временно отключена.`)
       })
       .catch((requestError) => {
         if (active) setError(requestError.message || 'Не удалось загрузить товар.')
@@ -645,6 +653,10 @@ export function AdminProductDetailPage() {
 
   async function handleSave(event) {
     event.preventDefault()
+    if (!draftReadyRef.current) {
+      setError('Сервис черновиков временно недоступен. Обновите страницу после завершения обновления сервера.')
+      return
+    }
     if (!canSave) {
       setError('Недостаточно прав для изменения товара.')
       return
@@ -785,7 +797,7 @@ export function AdminProductDetailPage() {
                 Отменить черновик
               </button>
             )}
-            <button className="admin-primary-button" type="submit" disabled={saving || !canSave}>
+            <button className="admin-primary-button" type="submit" disabled={saving || !canSave || !draftServiceReady}>
               {saving ? 'Публикуем...' : 'Опубликовать'}
             </button>
           </div>
@@ -1114,7 +1126,7 @@ export function AdminProductDetailPage() {
               Отменить черновик
             </button>
           )}
-          <button className="admin-primary-button" data-qa="edit-save-bottom" type="submit" disabled={saving || !canSave}>
+          <button className="admin-primary-button" data-qa="edit-save-bottom" type="submit" disabled={saving || !canSave || !draftServiceReady}>
             {saving ? 'Публикуем...' : 'Опубликовать'}
           </button>
         </div>
