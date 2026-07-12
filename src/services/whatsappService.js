@@ -1,14 +1,8 @@
 import { formatPrice } from '../utils/formatPrice'
 import { getLocalizedProductValue, getProductBySlug, getProductTitle, getUnitLabel, normalizeKgText } from './productService'
+import { contactConfig, getWhatsAppUrl } from '../config/contact'
 
-export const contactConfig = {
-  phone: '+996 553 12 19 91',
-  phoneDigits: '996553121991',
-  whatsapp: '996553121991',
-  telegram: '+996 553 12 19 91',
-  telegramUrl: 'tg://resolve?phone=996553121991',
-  address: 'Бишкек шаары',
-}
+export { contactConfig, getWhatsAppUrl }
 
 export const businessHours = [
   'Шейшемби - Жекшемби: 09:00 - 19:00',
@@ -102,8 +96,4 @@ export function buildWhatsAppOrderText({ customer, items, total, locale = 'kg' }
   ]
 
   return lines.join('\n')
-}
-
-export function getWhatsAppUrl(text) {
-  return `https://wa.me/${contactConfig.whatsapp}?text=${encodeURIComponent(text)}`
 }

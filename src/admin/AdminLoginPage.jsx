@@ -3,6 +3,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { adminLogin } from '../api/adminApi'
 import { Seo } from '../components/seo/Seo'
 import { hasAdminToken } from './adminSession'
+import '../styles/admin.css'
 
 export function AdminLoginPage() {
   const navigate = useNavigate()

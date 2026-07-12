@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { adminLogout, getAdminProfile } from '../api/adminApi'
 import { Seo } from '../components/seo/Seo'
 import { roleLabel } from './adminPermissions'
+import '../styles/admin.css'
 
 export function AdminLayout() {
   const navigate = useNavigate()

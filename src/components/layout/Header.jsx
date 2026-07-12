@@ -2,7 +2,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCart } from '../../hooks/useCart'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getWhatsAppUrl } from '../../services/whatsappService'
+import { getWhatsAppUrl } from '../../config/contact'
 import { Logo } from './Logo'
 
 const quickNavItems = [

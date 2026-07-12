@@ -1,45 +1,33 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { App } from './App'
-import { BlogPage } from '../pages/BlogPage'
-import { CartPage } from '../pages/CartPage'
-import { CatalogNodePage } from '../pages/CatalogNodePage'
-import { CatalogPage } from '../pages/CatalogPage'
-import { CheckoutPage } from '../pages/CheckoutPage'
-import { ContactsPage } from '../pages/ContactsPage'
-import { DeliveryPage } from '../pages/DeliveryPage'
-import { HomePage } from '../pages/HomePage'
-import { AboutPage, PaymentPage, PrivacyPage, ReturnPage } from '../pages/InfoPages'
-import { ProductPage } from '../pages/ProductPage'
-import { SearchPage } from '../pages/SearchPage'
 import { RouteError } from '../components/ui/RouteError'
-import { AdminLayout } from '../admin/AdminLayout'
-import { AdminLoginPage } from '../admin/AdminLoginPage'
-import { AdminOrderDetailPage } from '../admin/AdminOrderDetailPage'
-import { AdminOrdersPage } from '../admin/AdminOrdersPage'
-import { AdminProtectedRoute } from '../admin/AdminProtectedRoute'
-import { AdminProductCreatePage } from '../admin/AdminProductCreatePage'
-import { AdminProductDetailPage } from '../admin/AdminProductDetailPage'
-import { AdminProductsPage } from '../admin/AdminProductsPage'
+
+function lazyNamed(importer, exportName) {
+  return async () => {
+    const module = await importer()
+    return { Component: module[exportName] }
+  }
+}
 
 export const router = createBrowserRouter([
   {
     path: '/admin/login',
-    element: <AdminLoginPage />,
+    lazy: lazyNamed(() => import('../admin/AdminLoginPage'), 'AdminLoginPage'),
     errorElement: <RouteError />,
   },
   {
     path: '/admin',
-    element: <AdminProtectedRoute />,
+    lazy: lazyNamed(() => import('../admin/AdminProtectedRoute'), 'AdminProtectedRoute'),
     children: [
       {
-        element: <AdminLayout />,
+        lazy: lazyNamed(() => import('../admin/AdminLayout'), 'AdminLayout'),
         children: [
           { index: true, element: <Navigate to="/admin/orders" replace /> },
-          { path: 'orders', element: <AdminOrdersPage /> },
-          { path: 'orders/:id', element: <AdminOrderDetailPage /> },
-          { path: 'products', element: <AdminProductsPage /> },
-          { path: 'products/new', element: <AdminProductCreatePage /> },
-          { path: 'products/:id', element: <AdminProductDetailPage /> },
+          { path: 'orders', lazy: lazyNamed(() => import('../admin/AdminOrdersPage'), 'AdminOrdersPage') },
+          { path: 'orders/:id', lazy: lazyNamed(() => import('../admin/AdminOrderDetailPage'), 'AdminOrderDetailPage') },
+          { path: 'products', lazy: lazyNamed(() => import('../admin/AdminProductsPage'), 'AdminProductsPage') },
+          { path: 'products/new', lazy: lazyNamed(() => import('../admin/AdminProductCreatePage'), 'AdminProductCreatePage') },
+          { path: 'products/:id', lazy: lazyNamed(() => import('../admin/AdminProductDetailPage'), 'AdminProductDetailPage') },
         ],
       },
     ],
@@ -49,20 +37,20 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <RouteError />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'catalog', element: <CatalogPage /> },
-      { path: 'catalog/*', element: <CatalogNodePage /> },
-      { path: 'search', element: <SearchPage /> },
-      { path: 'product/:productSlug', element: <ProductPage /> },
-      { path: 'cart', element: <CartPage /> },
-      { path: 'checkout', element: <CheckoutPage /> },
-      { path: 'contacts', element: <ContactsPage /> },
-      { path: 'delivery', element: <DeliveryPage /> },
-      { path: 'payment', element: <PaymentPage /> },
-      { path: 'return', element: <ReturnPage /> },
-      { path: 'about', element: <AboutPage /> },
-      { path: 'privacy', element: <PrivacyPage /> },
-      { path: 'blog', element: <BlogPage /> },
+      { index: true, lazy: lazyNamed(() => import('../pages/HomePage'), 'HomePage') },
+      { path: 'catalog', lazy: lazyNamed(() => import('../pages/CatalogPage'), 'CatalogPage') },
+      { path: 'catalog/*', lazy: lazyNamed(() => import('../pages/CatalogNodePage'), 'CatalogNodePage') },
+      { path: 'search', lazy: lazyNamed(() => import('../pages/SearchPage'), 'SearchPage') },
+      { path: 'product/:productSlug', lazy: lazyNamed(() => import('../pages/ProductPage'), 'ProductPage') },
+      { path: 'cart', lazy: lazyNamed(() => import('../pages/CartPage'), 'CartPage') },
+      { path: 'checkout', lazy: lazyNamed(() => import('../pages/CheckoutPage'), 'CheckoutPage') },
+      { path: 'contacts', lazy: lazyNamed(() => import('../pages/ContactsPage'), 'ContactsPage') },
+      { path: 'delivery', lazy: lazyNamed(() => import('../pages/DeliveryPage'), 'DeliveryPage') },
+      { path: 'payment', lazy: lazyNamed(() => import('../pages/InfoPages'), 'PaymentPage') },
+      { path: 'return', lazy: lazyNamed(() => import('../pages/InfoPages'), 'ReturnPage') },
+      { path: 'about', lazy: lazyNamed(() => import('../pages/InfoPages'), 'AboutPage') },
+      { path: 'privacy', lazy: lazyNamed(() => import('../pages/InfoPages'), 'PrivacyPage') },
+      { path: 'blog', lazy: lazyNamed(() => import('../pages/BlogPage'), 'BlogPage') },
     ],
   },
 ])

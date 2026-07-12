@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../i18n/LocaleContext'
-import { contactConfig } from '../../services/whatsappService'
+import { contactConfig } from '../../config/contact'
 import { Logo } from './Logo'
 
 export function Footer() {
