@@ -104,6 +104,26 @@ export function getAdminProduct(id) {
   return adminRequest(() => apiGet(`/admin/products/${id}`, authorizedOptions()))
 }
 
+export function getAdminProductDraft(id) {
+  return adminRequest(() => apiGet(`/admin/products/${id}/draft`, authorizedOptions()))
+}
+
+export function saveAdminProductDraft(id, payload, expectedVersion) {
+  return adminRequest(() => apiPatch(
+    `/admin/products/${id}/draft`,
+    { payload, ...(expectedVersion === undefined ? {} : { expectedVersion }) },
+    authorizedOptions(),
+  ))
+}
+
+export function publishAdminProductDraft(id) {
+  return adminRequest(() => apiPost(`/admin/products/${id}/draft/publish`, {}, authorizedOptions()))
+}
+
+export function discardAdminProductDraft(id) {
+  return adminRequest(() => apiDelete(`/admin/products/${id}/draft`, authorizedOptions()))
+}
+
 export function getAdminProductAuditLog(id, params = {}) {
   return adminRequest(() => apiGet(`/admin/products/${id}/audit-log`, authorizedOptions({ params })))
 }

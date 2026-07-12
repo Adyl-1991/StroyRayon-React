@@ -378,6 +378,36 @@
   border: 1px solid #bfe2c7;
 }
 
+.admin-draft-status {
+  padding: 12px 16px;
+  margin: 14px 0 18px;
+  border: 1px solid #c9d5df;
+  border-radius: 10px;
+  background: #f5f8fa;
+  color: #334655;
+}
+
+.admin-draft-status-dirty,
+.admin-draft-status-saving,
+.admin-draft-status-publishing {
+  border-color: #ead49b;
+  background: #fff9e8;
+  color: #76570a;
+}
+
+.admin-draft-status-saved,
+.admin-draft-status-published {
+  border-color: #bfe2c7;
+  background: #edf9f0;
+  color: #246b37;
+}
+
+.admin-draft-status-error {
+  border-color: #f2c2c2;
+  background: #fff0f0;
+  color: #9f2323;
+}
+
 .admin-state {
   background: #fff;
   color: #65727e;

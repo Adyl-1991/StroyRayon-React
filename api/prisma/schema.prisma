@@ -125,6 +125,7 @@ model Product {
   documents          ProductDocument[]
   variants           ProductVariant[]
   auditLogs          ProductAuditLog[]
+  draft              ProductDraft?
   stock              Stock?
   orderItems         OrderItem[]
   relatedFrom        ProductRelation[]   @relation("RelatedFrom")
@@ -136,6 +137,21 @@ model Product {
   @@index([brandId])
   @@index([stockStatus])
   @@index([isActive])
+}
+
+model ProductDraft {
+  productId            String    @id
+  product              Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  payload              Json
+  baseProductUpdatedAt DateTime
+  version              Int       @default(1)
+  updatedById          String?
+  updatedBy            AdminUser? @relation(fields: [updatedById], references: [id], onDelete: SetNull)
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+
+  @@index([updatedById])
+  @@index([updatedAt])
 }
 
 model ProductVariant {
@@ -329,6 +345,7 @@ model AdminUser {
   updatedAt    DateTime  @updatedAt
   statusChanges OrderStatusHistory[]
   productAuditLogs ProductAuditLog[]
+  productDrafts ProductDraft[]
 }
 
 model BlogPost {

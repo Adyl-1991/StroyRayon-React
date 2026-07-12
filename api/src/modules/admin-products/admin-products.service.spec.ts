@@ -123,6 +123,93 @@ test('product detail with auth-facing service call returns launch-critical field
   assert.equal(result.isActive, true)
 })
 
+test('product draft autosave stores changes without updating the published product', async () => {
+  const updatedAt = new Date('2026-07-12T10:00:00Z')
+  let savedPayload: Prisma.InputJsonValue | undefined
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve({ id: 'product-1', updatedAt }),
+    },
+    productDraft: {
+      findUnique: () => Promise.resolve(null),
+      create: (args: { data: { payload: Prisma.InputJsonValue } }) => {
+        savedPayload = args.data.payload
+        return Promise.resolve({
+          productId: 'product-1',
+          payload: args.data.payload,
+          baseProductUpdatedAt: updatedAt,
+          version: 1,
+          createdAt: updatedAt,
+          updatedAt,
+          updatedBy: { id: ownerAdmin.id, name: 'Owner', email: ownerAdmin.email },
+        })
+      },
+    },
+  } as unknown as PrismaService
+
+  const result = await new AdminProductsService(prisma).saveDraft(
+    'product-1',
+    { payload: { titleKg: 'Draft title', price: '150.50' }, expectedVersion: 0 },
+    ownerAdmin,
+  )
+
+  assert.deepEqual(savedPayload, { titleKg: 'Draft title', price: '150.50' })
+  assert.equal(result.version, 1)
+  assert.equal(result.payload.titleKg, 'Draft title')
+})
+
+test('publishing a product draft validates, updates the product and removes the draft', async () => {
+  const updatedAt = new Date('2026-07-12T10:00:00Z')
+  let clearsDraftAtomically = false
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve({ id: 'product-1', updatedAt }),
+    },
+    productDraft: {
+      findUnique: () => Promise.resolve({
+        productId: 'product-1',
+        payload: { titleKg: 'Published draft', price: '175.25', stockQuantity: '9' },
+        baseProductUpdatedAt: updatedAt,
+      }),
+    },
+  } as unknown as PrismaService
+  const service = new AdminProductsService(prisma)
+  let publishedDto: Record<string, unknown> | undefined
+  service.update = async (_id, dto, _admin, clearDraft) => {
+    publishedDto = dto as unknown as Record<string, unknown>
+    clearsDraftAtomically = clearDraft
+    return { id: 'product-1', title: dto.titleKg, price: dto.price } as never
+  }
+
+  const result = await service.publishDraft('product-1', ownerAdmin)
+
+  assert.equal(publishedDto?.titleKg, 'Published draft')
+  assert.equal(publishedDto?.price, 175.25)
+  assert.equal(publishedDto?.stockQuantity, 9)
+  assert.equal(clearsDraftAtomically, true)
+  assert.equal(result.price, 175.25)
+})
+
+test('publishing rejects a draft based on an outdated product version', async () => {
+  const prisma = {
+    product: {
+      findUnique: () => Promise.resolve({ id: 'product-1', updatedAt: new Date('2026-07-12T11:00:00Z') }),
+    },
+    productDraft: {
+      findUnique: () => Promise.resolve({
+        productId: 'product-1',
+        payload: { titleKg: 'Stale draft' },
+        baseProductUpdatedAt: new Date('2026-07-12T10:00:00Z'),
+      }),
+    },
+  } as unknown as PrismaService
+
+  await assert.rejects(
+    () => new AdminProductsService(prisma).publishDraft('product-1', ownerAdmin),
+    /changed after this draft was created/,
+  )
+})
+
 test('admin can create a local product with placeholder image and stock row', async () => {
   let createArgs: Prisma.ProductCreateArgs | undefined
   let auditAction = ''

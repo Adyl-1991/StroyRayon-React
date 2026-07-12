@@ -23,6 +23,7 @@ import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { ReorderProductImagesDto, UpdateProductImageDto } from './dto/product-image-gallery.dto'
+import { SaveProductDraftDto } from './dto/product-draft.dto'
 import { UpdateProductActiveDto } from './dto/update-product-active.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 import { UpdateProductNoteDto } from './dto/update-product-note.dto'
@@ -141,6 +142,31 @@ export class AdminProductsController {
       page: Number(page) || 1,
       limit: Number(limit) || 20,
     })
+  }
+
+  @Get(':id/draft')
+  draft(@Param('id') id: string, @CurrentAdmin() admin: AdminIdentity) {
+    assertAdminPermission(admin, 'products:view')
+    return this.adminProductsService.draft(id)
+  }
+
+  @Patch(':id/draft')
+  saveDraft(
+    @Param('id') id: string,
+    @Body() dto: SaveProductDraftDto,
+    @CurrentAdmin() admin: AdminIdentity,
+  ) {
+    return this.adminProductsService.saveDraft(id, dto, admin)
+  }
+
+  @Post(':id/draft/publish')
+  publishDraft(@Param('id') id: string, @CurrentAdmin() admin: AdminIdentity) {
+    return this.adminProductsService.publishDraft(id, admin)
+  }
+
+  @Delete(':id/draft')
+  discardDraft(@Param('id') id: string, @CurrentAdmin() admin: AdminIdentity) {
+    return this.adminProductsService.discardDraft(id, admin)
   }
 
   @Get(':id')

@@ -1,5 +1,7 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { Prisma, ProductDocumentType, ProductImageType, ProductStockStatus } from '@prisma/client'
+import { plainToInstance } from 'class-transformer'
+import { validate } from 'class-validator'
 import { PrismaService } from '../../prisma/prisma.service'
 import { AdminIdentity, assertAdminPermission } from '../auth/admin-permissions'
 import { StoredObject, StorageService } from '../storage/storage.service'
@@ -7,6 +9,7 @@ import { AdminProductsQueryDto } from './dto/admin-products-query.dto'
 import { CreateAdminProductVariantDto, UpdateAdminProductVariantDto } from './dto/admin-product-variant.dto'
 import { CreateAdminProductDto } from './dto/create-admin-product.dto'
 import { ReorderProductImagesDto, UpdateProductImageDto } from './dto/product-image-gallery.dto'
+import { SaveProductDraftDto } from './dto/product-draft.dto'
 import { UpdateAdminProductDto } from './dto/update-admin-product.dto'
 
 const adminProductInclude = {
@@ -19,6 +22,14 @@ const adminProductInclude = {
 } satisfies Prisma.ProductInclude
 
 type AdminProduct = Prisma.ProductGetPayload<{ include: typeof adminProductInclude }>
+
+const maxDraftBytes = 128 * 1024
+const draftFields = new Set([
+  'catalogNodeId', 'brandId', 'titleKg', 'titleRu', 'slug', 'sku',
+  'shortDescriptionKg', 'descriptionKg', 'descriptionRu', 'seoTitleKg',
+  'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit', 'isActive',
+  'adminNote', 'price', 'stockQuantity', 'stockStatus', 'specs', 'documents',
+])
 
 const placeholderImageSrc = '/images/placeholders/product-placeholder.svg'
 const defaultUnits = ['даана', 'метр', 'кг', 'м2', 'комплект', 'рулон', 'кап']
@@ -247,7 +258,116 @@ export class AdminProductsService {
     return this.mapProduct(product)
   }
 
-  async update(id: string, dto: UpdateAdminProductDto, admin?: AdminIdentity) {
+  async draft(id: string) {
+    const product = await this.prisma.product.findUnique({ where: { id }, select: { id: true } })
+    if (!product) throw new NotFoundException('Product not found')
+    const draft = await this.prisma.productDraft.findUnique({
+      where: { productId: id },
+      include: { updatedBy: { select: { id: true, name: true, email: true } } },
+    })
+    return draft ? mapDraft(draft) : null
+  }
+
+  async saveDraft(id: string, dto: SaveProductDraftDto, admin?: AdminIdentity) {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+      select: { id: true, updatedAt: true },
+    })
+    if (!product) throw new NotFoundException('Product not found')
+
+    const incomingPayload = sanitizeDraftPayload(dto.payload)
+    assertProductUpdatePermissions(incomingPayload as UpdateAdminProductDto, admin)
+    const existing = await this.prisma.productDraft.findUnique({ where: { productId: id } })
+    if (dto.expectedVersion !== undefined && (existing?.version || 0) !== dto.expectedVersion) {
+      throw new ConflictException('Draft was changed in another session. Reload the product before continuing.')
+    }
+    const existingPayload = existing?.payload && typeof existing.payload === 'object' && !Array.isArray(existing.payload)
+      ? existing.payload as Record<string, unknown>
+      : {}
+    const payload = sanitizeDraftPayload({ ...existingPayload, ...incomingPayload })
+
+    let draft
+    if (existing) {
+      const updated = await this.prisma.productDraft.updateMany({
+        where: { productId: id, version: existing.version },
+        data: {
+          payload: payload as Prisma.InputJsonValue,
+          updatedById: admin?.id,
+          version: { increment: 1 },
+        },
+      })
+      if (updated.count !== 1) {
+        throw new ConflictException('Draft was changed in another session. Reload the product before continuing.')
+      }
+      draft = await this.prisma.productDraft.findUnique({
+        where: { productId: id },
+        include: { updatedBy: { select: { id: true, name: true, email: true } } },
+      })
+    } else {
+      try {
+        draft = await this.prisma.productDraft.create({
+          data: {
+            productId: id,
+            payload: payload as Prisma.InputJsonValue,
+            baseProductUpdatedAt: product.updatedAt,
+            updatedById: admin?.id,
+          },
+          include: { updatedBy: { select: { id: true, name: true, email: true } } },
+        })
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+          throw new ConflictException('Draft was created in another session. Reload the product before continuing.')
+        }
+        throw error
+      }
+    }
+    if (!draft) throw new ConflictException('Draft changed while it was being saved')
+    return mapDraft(draft)
+  }
+
+  async publishDraft(id: string, admin?: AdminIdentity) {
+    const [product, draft] = await Promise.all([
+      this.prisma.product.findUnique({ where: { id }, select: { id: true, updatedAt: true } }),
+      this.prisma.productDraft.findUnique({ where: { productId: id } }),
+    ])
+    if (!product) throw new NotFoundException('Product not found')
+    if (!draft) throw new BadRequestException('There is no saved draft to publish')
+    if (product.updatedAt.getTime() !== draft.baseProductUpdatedAt.getTime()) {
+      throw new ConflictException('Published product changed after this draft was created. Reload and review it again.')
+    }
+
+    const updateDto = plainToInstance(UpdateAdminProductDto, draft.payload)
+    const validationErrors = await validate(updateDto, {
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      validationError: { target: false, value: false },
+    })
+    if (validationErrors.length) {
+      throw new BadRequestException({
+        message: 'Draft contains invalid or incomplete product fields',
+        errors: validationErrors.map((error) => ({ field: error.property, constraints: error.constraints })),
+      })
+    }
+
+    return this.update(id, updateDto, admin, true)
+  }
+
+  async discardDraft(id: string, admin?: AdminIdentity) {
+    const [product, draft] = await Promise.all([
+      this.prisma.product.findUnique({ where: { id }, select: { id: true } }),
+      this.prisma.productDraft.findUnique({ where: { productId: id }, select: { payload: true } }),
+    ])
+    if (!product) throw new NotFoundException('Product not found')
+    if (draft?.payload && typeof draft.payload === 'object' && !Array.isArray(draft.payload)) {
+      assertProductUpdatePermissions(draft.payload as unknown as UpdateAdminProductDto, admin)
+    } else {
+      assertAdminPermission(admin, 'products:view')
+    }
+    const result = await this.prisma.productDraft.deleteMany({ where: { productId: id } })
+    return { discarded: result.count > 0 }
+  }
+
+  async update(id: string, dto: UpdateAdminProductDto, admin?: AdminIdentity, clearDraft = false) {
     assertProductUpdatePermissions(dto, admin)
     const existing = await this.prisma.product.findUnique({
       where: { id },
@@ -413,6 +533,9 @@ export class AdminProductsService {
           beforeSnapshot,
           snapshotProduct(updated),
         )
+      }
+      if (clearDraft) {
+        await tx.productDraft.deleteMany({ where: { productId: id } })
       }
     })
 
@@ -1026,6 +1149,38 @@ function assertProductUpdatePermissions(dto: UpdateAdminProductDto, admin?: Admi
     dto.images !== undefined
   ) {
     assertAdminPermission(admin, 'products:content')
+  }
+}
+
+function sanitizeDraftPayload(payload: Record<string, unknown>) {
+  const invalidFields = Object.keys(payload).filter((field) => !draftFields.has(field))
+  if (invalidFields.length) {
+    throw new BadRequestException(`Unsupported draft fields: ${invalidFields.join(', ')}`)
+  }
+  const serialized = JSON.stringify(payload)
+  if (Buffer.byteLength(serialized, 'utf8') > maxDraftBytes) {
+    throw new BadRequestException('Product draft is too large')
+  }
+  return JSON.parse(serialized) as Record<string, unknown>
+}
+
+function mapDraft(draft: {
+  productId: string
+  payload: Prisma.JsonValue
+  baseProductUpdatedAt: Date
+  version: number
+  createdAt: Date
+  updatedAt: Date
+  updatedBy?: { id: string; name: string; email: string } | null
+}) {
+  return {
+    productId: draft.productId,
+    payload: draft.payload,
+    baseProductUpdatedAt: draft.baseProductUpdatedAt.toISOString(),
+    version: draft.version,
+    createdAt: draft.createdAt.toISOString(),
+    updatedAt: draft.updatedAt.toISOString(),
+    updatedBy: draft.updatedBy || null,
   }
 }
 

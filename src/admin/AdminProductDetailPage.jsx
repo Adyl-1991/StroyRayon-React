@@ -1,15 +1,18 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useOutletContext, useParams } from 'react-router-dom'
 import {
   createAdminProductVariant,
   deleteAdminProductImage,
+  discardAdminProductDraft,
   getAdminProduct,
+  getAdminProductDraft,
   getAdminProductAuditLog,
   getAdminProductOptions,
+  publishAdminProductDraft,
   reorderAdminProductImages,
+  saveAdminProductDraft,
   updateAdminProductImage,
   updateAdminProductVariant,
-  updateAdminProduct,
   uploadAdminProductGalleryImage,
 } from '../api/adminApi'
 import { formatPrice } from '../utils/formatPrice'
@@ -162,6 +165,59 @@ function compactSpecs(rows) {
     .filter((row) => row.key.trim() || row.value.trim())
 }
 
+function applyDraftToForm(product, draft) {
+  const next = createForm(product)
+  const payload = draft?.payload
+  if (!payload || typeof payload !== 'object') return next
+  for (const field of [
+    'catalogNodeId', 'brandId', 'titleKg', 'titleRu', 'slug', 'sku',
+    'shortDescriptionKg', 'descriptionKg', 'descriptionRu', 'seoTitleKg',
+    'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit', 'isActive',
+    'adminNote', 'stockStatus',
+  ]) {
+    if (Object.prototype.hasOwnProperty.call(payload, field)) next[field] = payload[field] ?? ''
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'price')) next.price = String(payload.price ?? '')
+  if (Object.prototype.hasOwnProperty.call(payload, 'stockQuantity')) next.quantity = String(payload.stockQuantity ?? '')
+  if (Array.isArray(payload.specs)) next.specs = payload.specs.length ? payload.specs : [emptySpec()]
+  if (Array.isArray(payload.documents)) next.documents = payload.documents.length ? payload.documents : [emptyDocument()]
+  return next
+}
+
+function buildDraftPayload(form, permissions) {
+  return {
+    ...(permissions.content
+      ? {
+          catalogNodeId: form.catalogNodeId,
+          brandId: form.brandId || null,
+          titleKg: form.titleKg,
+          titleRu: form.titleRu,
+          slug: form.slug,
+          sku: form.sku,
+          shortDescriptionKg: form.shortDescriptionKg,
+          descriptionKg: form.descriptionKg,
+          descriptionRu: form.descriptionRu,
+          seoTitleKg: form.seoTitleKg,
+          seoDescriptionKg: form.seoDescriptionKg,
+          seoTitleRu: form.seoTitleRu,
+          seoDescriptionRu: form.seoDescriptionRu,
+          unit: form.unit,
+          adminNote: form.adminNote,
+          specs: compactSpecs(form.specs),
+          documents: compactRows(form.documents, ['title', 'url']),
+        }
+      : {}),
+    ...(permissions.commercial
+      ? { price: form.price, stockQuantity: form.quantity, stockStatus: form.stockStatus }
+      : {}),
+    ...(permissions.active ? { isActive: form.isActive } : {}),
+  }
+}
+
+function draftFingerprint(payload) {
+  return JSON.stringify(payload)
+}
+
 export function AdminProductDetailPage() {
   const { id } = useParams()
   const { admin } = useOutletContext()
@@ -176,16 +232,42 @@ export function AdminProductDetailPage() {
   const [galleryBusy, setGalleryBusy] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
+  const [draft, setDraft] = useState(null)
+  const [draftStatus, setDraftStatus] = useState('idle')
+  const draftVersionRef = useRef(0)
+  const savedDraftFingerprintRef = useRef('')
+  const latestDraftFingerprintRef = useRef('')
+  const draftReadyRef = useRef(false)
+  const saveDraftQueueRef = useRef(Promise.resolve())
+  const publishingRef = useRef(false)
 
   useEffect(() => {
     let active = true
-    Promise.all([getAdminProduct(id), getAdminProductOptions(), getAdminProductAuditLog(id, { limit: 20 })])
-      .then(([productData, optionsData, auditData]) => {
+    Promise.all([
+      getAdminProduct(id),
+      getAdminProductOptions(),
+      getAdminProductAuditLog(id, { limit: 20 }),
+      getAdminProductDraft(id),
+    ])
+      .then(([productData, optionsData, auditData, draftData]) => {
         if (!active) return
+        const nextForm = applyDraftToForm(productData, draftData)
+        const permissions = {
+          content: hasAdminPermission(admin, 'products:content'),
+          commercial: hasAdminPermission(admin, 'products:commercial'),
+          active: hasAdminPermission(admin, 'products:active'),
+        }
+        const fingerprint = draftFingerprint(buildDraftPayload(nextForm, permissions))
         setProduct(productData)
         setOptions(optionsData)
         setAuditLog(auditData)
-        setForm(createForm(productData))
+        setDraft(draftData)
+        setForm(nextForm)
+        draftVersionRef.current = draftData?.version || 0
+        savedDraftFingerprintRef.current = fingerprint
+        latestDraftFingerprintRef.current = fingerprint
+        draftReadyRef.current = true
+        setDraftStatus(draftData ? 'saved' : 'idle')
       })
       .catch((requestError) => {
         if (active) setError(requestError.message || 'Не удалось загрузить товар.')
@@ -196,7 +278,7 @@ export function AdminProductDetailPage() {
     return () => {
       active = false
     }
-  }, [id])
+  }, [id, admin])
 
   const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
   const categories = useMemo(() => options?.categories || [], [options])
@@ -206,6 +288,49 @@ export function AdminProductDetailPage() {
   const canEditActive = hasAdminPermission(admin, 'products:active')
   const canUpload = hasAdminPermission(admin, 'products:upload')
   const canSave = canEditContent || canEditCommercial || canEditActive
+
+  useEffect(() => {
+    if (!draftReadyRef.current || !form || !canSave) return undefined
+    const payload = buildDraftPayload(form, {
+      content: canEditContent,
+      commercial: canEditCommercial,
+      active: canEditActive,
+    })
+    const fingerprint = draftFingerprint(payload)
+    latestDraftFingerprintRef.current = fingerprint
+    if (fingerprint === savedDraftFingerprintRef.current) return undefined
+
+    setDraftStatus('dirty')
+    const timer = window.setTimeout(() => {
+      if (publishingRef.current) return
+      setDraftStatus('saving')
+      saveDraftQueueRef.current = saveDraftQueueRef.current
+        .catch(() => undefined)
+        .then(() => saveAdminProductDraft(id, payload, draftVersionRef.current))
+        .then((savedDraft) => {
+          draftVersionRef.current = savedDraft.version
+          savedDraftFingerprintRef.current = fingerprint
+          setDraft(savedDraft)
+          setDraftStatus(latestDraftFingerprintRef.current === fingerprint ? 'saved' : 'dirty')
+          setError('')
+        })
+        .catch((requestError) => {
+          setDraftStatus('error')
+          setError(requestError.message || 'Не удалось автоматически сохранить черновик.')
+        })
+    }, 1800)
+    return () => window.clearTimeout(timer)
+  }, [form, id, canSave, canEditContent, canEditCommercial, canEditActive])
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (!['dirty', 'saving', 'error'].includes(draftStatus)) return
+      event.preventDefault()
+      event.returnValue = ''
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [draftStatus])
 
   function updateField(name, value) {
     setForm((current) => ({ ...current, [name]: value }))
@@ -229,6 +354,16 @@ export function AdminProductDetailPage() {
       const nextRows = current[group].filter((_, rowIndex) => rowIndex !== index)
       return { ...current, [group]: nextRows.length ? nextRows : [fallback] }
     })
+  }
+
+  function mergeOperationalProduct(updatedProduct) {
+    const freshForm = createForm(updatedProduct)
+    setProduct(updatedProduct)
+    setForm((current) => ({
+      ...current,
+      images: freshForm.images,
+      variants: freshForm.variants,
+    }))
   }
 
   async function handleImageUpload(event) {
@@ -268,8 +403,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage(files.length > 1 ? 'Фото загружены и прикреплены к товару.' : 'Фото загружено и прикреплено к товару.')
     } catch (requestError) {
@@ -295,8 +429,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage('Данные фото сохранены.')
     } catch (requestError) {
@@ -318,8 +451,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage('Главное фото обновлено.')
     } catch (requestError) {
@@ -347,8 +479,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage('Порядок фото обновлен.')
     } catch (requestError) {
@@ -370,8 +501,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage('Фото откреплено от товара.')
     } catch (requestError) {
@@ -503,8 +633,7 @@ export function AdminProductDetailPage() {
         getAdminProduct(id),
         getAdminProductAuditLog(id, { limit: 20 }),
       ])
-      setProduct(updatedProduct)
-      setForm(createForm(updatedProduct))
+      mergeOperationalProduct(updatedProduct)
       setAuditLog(updatedAudit)
       setMessage('Вариант сохранен.')
     } catch (requestError) {
@@ -552,49 +681,87 @@ export function AdminProductDetailPage() {
       return
     }
 
+    publishingRef.current = true
     try {
-      const payload = {
-        ...(canEditContent
-          ? {
-              catalogNodeId: form.catalogNodeId,
-              brandId: form.brandId || null,
-              titleKg: form.titleKg,
-              titleRu: form.titleRu,
-              slug: form.slug,
-              sku: form.sku,
-              shortDescriptionKg: form.shortDescriptionKg,
-              descriptionKg: form.descriptionKg,
-              descriptionRu: form.descriptionRu,
-              seoTitleKg: form.seoTitleKg,
-              seoDescriptionKg: form.seoDescriptionKg,
-              seoTitleRu: form.seoTitleRu,
-              seoDescriptionRu: form.seoDescriptionRu,
-              unit: form.unit,
-              adminNote: form.adminNote,
-              specs: compactSpecs(form.specs),
-              documents: compactRows(form.documents, ['title', 'url']),
-            }
-          : {}),
-        ...(canEditCommercial
-          ? {
-              price,
-              stockQuantity: quantity,
-              stockStatus: form.stockStatus,
-            }
-          : {}),
-        ...(canEditActive ? { isActive: form.isActive } : {}),
+      await saveDraftQueueRef.current.catch(() => undefined)
+      const payload = buildDraftPayload(form, {
+        content: canEditContent,
+        commercial: canEditCommercial,
+        active: canEditActive,
+      })
+      if (canEditCommercial) {
+        payload.price = price
+        payload.stockQuantity = quantity
       }
-      const updated = await updateAdminProduct(id, payload)
+      const fingerprint = draftFingerprint(payload)
+      if (!draft || fingerprint !== savedDraftFingerprintRef.current) {
+        const savedDraft = await saveAdminProductDraft(id, payload, draftVersionRef.current)
+        draftVersionRef.current = savedDraft.version
+        savedDraftFingerprintRef.current = fingerprint
+        setDraft(savedDraft)
+      }
+      setDraftStatus('publishing')
+      const updated = await publishAdminProductDraft(id)
+      const publishedForm = createForm(updated)
+      const publishedFingerprint = draftFingerprint(buildDraftPayload(publishedForm, {
+        content: canEditContent,
+        commercial: canEditCommercial,
+        active: canEditActive,
+      }))
+      savedDraftFingerprintRef.current = publishedFingerprint
+      latestDraftFingerprintRef.current = publishedFingerprint
+      draftVersionRef.current = 0
       setProduct(updated)
-      setForm(createForm(updated))
-      setMessage('Товар сохранен.')
+      setForm(publishedForm)
+      setDraft(null)
+      setDraftStatus('published')
+      setMessage('Товар опубликован. Изменения уже доступны на сайте.')
       getAdminProductAuditLog(id, { limit: 20 }).then(setAuditLog).catch(() => {})
     } catch (requestError) {
-      setError(requestError.message || 'Не удалось сохранить товар.')
+      setDraftStatus('error')
+      setError(requestError.message || 'Не удалось опубликовать товар.')
     } finally {
+      publishingRef.current = false
       setSaving(false)
     }
   }
+
+  async function handleDiscardDraft() {
+    if (saving) return
+    setSaving(true)
+    publishingRef.current = true
+    setError('')
+    try {
+      if (draft) await discardAdminProductDraft(id)
+      const publishedForm = createForm(product)
+      const fingerprint = draftFingerprint(buildDraftPayload(publishedForm, {
+        content: canEditContent,
+        commercial: canEditCommercial,
+        active: canEditActive,
+      }))
+      savedDraftFingerprintRef.current = fingerprint
+      latestDraftFingerprintRef.current = fingerprint
+      draftVersionRef.current = 0
+      setForm(publishedForm)
+      setDraft(null)
+      setDraftStatus('idle')
+      setMessage('Черновик удалён. Восстановлена опубликованная версия.')
+    } catch (requestError) {
+      setError(requestError.message || 'Не удалось удалить черновик.')
+    } finally {
+      publishingRef.current = false
+      setSaving(false)
+    }
+  }
+
+  const draftStatusText = {
+    dirty: 'Есть неопубликованные изменения. Автосохранение начнётся через пару секунд…',
+    saving: 'Сохраняем черновик автоматически…',
+    saved: `Черновик сохранён${draft?.updatedAt ? ` · ${new Date(draft.updatedAt).toLocaleString('ru-RU')}` : ''}. На сайте пока старая версия.`,
+    error: 'Черновик не сохранён. Проверьте сообщение об ошибке и соединение.',
+    publishing: 'Публикуем изменения на сайте…',
+    published: 'Все изменения опубликованы.',
+  }[draftStatus]
 
   if (loading) return <div className="admin-state">Загружаем товар...</div>
   if (!form || !product) return <div className="admin-alert admin-alert-error">{error || 'Товар не найден.'}</div>
@@ -610,17 +777,27 @@ export function AdminProductDetailPage() {
             <p>{form.slug} · {form.sku || 'без SKU'}</p>
           </div>
           <div className="admin-heading-actions">
-            <a className="admin-secondary-button" href={`/product/${form.slug}`} target="_blank" rel="noreferrer">
+            <a className="admin-secondary-button" href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
               Открыть на сайте
             </a>
+            {(draft || ['dirty', 'error'].includes(draftStatus)) && (
+              <button className="admin-secondary-button" type="button" disabled={saving} onClick={handleDiscardDraft}>
+                Отменить черновик
+              </button>
+            )}
             <button className="admin-primary-button" type="submit" disabled={saving || !canSave}>
-              {saving ? 'Сохраняем...' : 'Сохранить'}
+              {saving ? 'Публикуем...' : 'Опубликовать'}
             </button>
           </div>
         </div>
 
         {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
         {message && <div className="admin-alert admin-alert-success" role="status">{message}</div>}
+        {draftStatusText && (
+          <div className={`admin-draft-status admin-draft-status-${draftStatus}`} role="status" data-qa="product-draft-status">
+            <strong>Черновик:</strong> {draftStatusText}
+          </div>
+        )}
         {!canSave && (
           <div className="admin-alert admin-alert-error" role="status">
             У вашей роли есть только просмотр этого товара.
@@ -929,11 +1106,16 @@ export function AdminProductDetailPage() {
         </article>
 
         <div className="admin-heading-actions admin-editor-footer-actions">
-          <a className="admin-secondary-button" href={`/product/${form.slug}`} target="_blank" rel="noreferrer">
+          <a className="admin-secondary-button" href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
             Открыть на сайте
           </a>
+          {(draft || ['dirty', 'error'].includes(draftStatus)) && (
+            <button className="admin-secondary-button" type="button" disabled={saving} onClick={handleDiscardDraft}>
+              Отменить черновик
+            </button>
+          )}
           <button className="admin-primary-button" data-qa="edit-save-bottom" type="submit" disabled={saving || !canSave}>
-            {saving ? 'Сохраняем...' : 'Сохранить'}
+            {saving ? 'Публикуем...' : 'Опубликовать'}
           </button>
         </div>
       </form>
