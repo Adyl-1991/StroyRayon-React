@@ -182,6 +182,16 @@ export class OrderPdfService {
       }
 
       const drawPageHeader = () => {
+        const orderTitle = `${labels.document} № ${input.orderNumber}`
+        const orderTitleWidth = right - 290
+        let orderTitleFontSize = 18
+
+        doc.font('NotoSansBold').fontSize(orderTitleFontSize)
+        while (doc.widthOfString(orderTitle) > orderTitleWidth && orderTitleFontSize > 12) {
+          orderTitleFontSize -= 0.5
+          doc.fontSize(orderTitleFontSize)
+        }
+
         doc.rect(0, 0, 595.28, 14).fill(green)
         doc.font('NotoSansBold').fontSize(17).fillColor(green).text('StroyRayon', left, 34)
         doc
@@ -191,11 +201,12 @@ export class OrderPdfService {
           .text('Курулуш материалдары • Строительные материалы', left, 57)
         doc
           .font('NotoSansBold')
-          .fontSize(20)
+          .fontSize(orderTitleFontSize)
           .fillColor(dark)
-          .text(`${labels.document} № ${input.orderNumber}`, 290, 34, {
-            width: right - 290,
+          .text(orderTitle, 290, 36, {
+            width: orderTitleWidth,
             align: 'right',
+            lineBreak: false,
           })
         doc
           .font('NotoSans')
@@ -207,8 +218,8 @@ export class OrderPdfService {
               timeStyle: 'short',
             }).format(input.createdAt)}`,
             290,
-            62,
-            { width: right - 290, align: 'right' },
+            64,
+            { width: orderTitleWidth, align: 'right', lineBreak: false },
           )
       }
 
