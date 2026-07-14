@@ -263,6 +263,7 @@ export const translations = {
       submitting: 'Жөнөтүлүүдө...',
       submit: 'WhatsApp аркылуу буйрутма жөнөтүү',
       reopen: 'WhatsApp шилтемесин кайра ачуу',
+      openPdf: 'Буйрутманын PDF файлын ачуу',
     },
     search: {
       title: 'Издөө',
@@ -620,6 +621,7 @@ export const translations = {
       submitting: 'Отправка...',
       submit: 'Отправить заказ через WhatsApp',
       reopen: 'Снова открыть ссылку WhatsApp',
+      openPdf: 'Открыть PDF заказа',
     },
     search: {
       title: 'Поиск',

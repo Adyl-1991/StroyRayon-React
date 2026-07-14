@@ -75,6 +75,7 @@ export function CheckoutPage() {
         orderNumber: response?.orderNumber,
         whatsappUrl,
         whatsappText: response?.whatsappText,
+        pdfUrl: response?.pdfUrl,
       })
       openWhatsApp(whatsappUrl)
     } catch (error) {
@@ -176,13 +177,20 @@ export function CheckoutPage() {
               {confirmation.fallback && <span>{t('checkout.fallback')}</span>}
             </div>
           )}
-          <div className="order-preview">
-            <h2>{t('checkout.preview')}</h2>
-            <pre>{confirmation?.whatsappText || orderText}</pre>
-          </div>
+          {!confirmation?.pdfUrl && (
+            <div className="order-preview">
+              <h2>{t('checkout.preview')}</h2>
+              <pre>{confirmation?.whatsappText || orderText}</pre>
+            </div>
+          )}
           <Button type="submit" variant="whatsapp" disabled={!isReady}>
             {isSubmitting ? t('checkout.submitting') : t('checkout.submit')}
           </Button>
+          {confirmation?.pdfUrl && (
+            <Button href={confirmation.pdfUrl} target="_blank" rel="noreferrer" variant="primary">
+              {t('checkout.openPdf')}
+            </Button>
+          )}
           {confirmation?.whatsappUrl && (
             <Button href={confirmation.whatsappUrl} target="_blank" rel="noreferrer" variant="secondary">
               {t('checkout.reopen')}

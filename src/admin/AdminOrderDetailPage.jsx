@@ -116,7 +116,14 @@ export function AdminOrderDetailPage() {
           <h1>{order.orderNumber}</h1>
           <p>{new Date(order.createdAt).toLocaleString('ru-RU')}</p>
         </div>
-        <span className={`admin-status admin-status-${order.status}`}>{labelStatus(order.status)}</span>
+        <div className="admin-heading-actions">
+          {order.pdfUrl && (
+            <a className="admin-secondary-button" href={order.pdfUrl} target="_blank" rel="noreferrer">
+              Открыть PDF заказа
+            </a>
+          )}
+          <span className={`admin-status admin-status-${order.status}`}>{labelStatus(order.status)}</span>
+        </div>
       </div>
 
       {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}

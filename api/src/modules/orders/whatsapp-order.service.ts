@@ -19,33 +19,32 @@ export class WhatsappOrderService {
     currency: string
     comment?: string | null
     locale?: 'kg' | 'ru'
+    pdfUrl?: string
   }) {
-    const { orderNumber, customer, items, total, currency, comment } = input
+    const { orderNumber, customer, items, total, currency, pdfUrl } = input
     const isRu = input.locale === 'ru'
-    const location = [customer.region, customer.address].filter(Boolean).join(', ')
+    const amount = new Intl.NumberFormat(isRu ? 'ru-RU' : 'ky-KG', {
+      maximumFractionDigits: 2,
+    }).format(total)
+    const currencyLabel = currency === 'KGS' ? 'сом' : currency
+
     const lines = [
-      isRu ? 'Здравствуйте! Новый заказ с сайта StroyRayon.' : 'Салам! StroyRayon сайтынан жаңы заказ.',
-      `${isRu ? 'Номер заказа' : 'Заказ номери'}: ${orderNumber}`,
-      `${isRu ? 'Имя клиента' : 'Кардар аты'}: ${customer.name}`,
+      isRu ? 'Здравствуйте! Новый заказ с сайта StroyRayon.' : 'Саламатсызбы! StroyRayon сайтынан жаңы буйрутма.',
+      '',
+      `${isRu ? 'Заказ' : 'Буйрутма'} № ${orderNumber}`,
+      `${isRu ? 'Покупатель' : 'Кардар'}: ${customer.name}`,
       `${isRu ? 'Телефон' : 'Телефон'}: ${customer.phone}`,
-      location ? `${isRu ? 'Адрес/регион' : 'Дарек/регион'}: ${location}` : null,
+      `${isRu ? 'Позиций' : 'Позициялар'}: ${items.length}`,
+      `${isRu ? 'Итого' : 'Жалпы сумма'}: ${amount} ${currencyLabel}`,
       '',
-      isRu ? 'Товары:' : 'Товарлар:',
-      ...items.map((item, index) => {
-        const variantText = item.variantTitle ? ` - ${item.variantTitle}` : ''
-        const sku = item.variantSku || item.sku
-        return `${index + 1}) ${item.title}${variantText}${sku ? ` (${sku})` : ''} - ${item.quantity}${item.unit ? ` ${item.unit}` : ''} x ${item.price} = ${item.total} ${currency}`
-      }),
-      '',
-      `${isRu ? 'Общая сумма' : 'Жалпы сумма'}: ${total} ${currency}`,
-      comment ? `${isRu ? 'Комментарий' : 'Комментарий'}: ${comment}` : null,
+      pdfUrl ? `${isRu ? 'PDF заказа' : 'Буйрутманын PDF файлы'}: ${pdfUrl}` : null,
       '',
       isRu
         ? 'Пожалуйста, подтвердите наличие и условия доставки.'
-        : 'Жеткирүү жана товар бар-жогун тактап бериңиз.',
+        : 'Товардын бар-жогун жана жеткирүү шарттарын тактап бериңиз.',
     ]
 
-    return lines.filter(Boolean).join('\n')
+    return lines.filter((line) => line !== null).join('\n')
   }
 
   buildWhatsappUrl(text: string, managerPhone?: string) {

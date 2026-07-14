@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { randomUUID } from 'node:crypto'
 import {
   OrderItemStockCheckStatus,
   OrderStatus,
@@ -10,6 +11,7 @@ import { PrismaService } from '../../prisma/prisma.service'
 import { StockService } from '../stock/stock.service'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { CreateOrderItemDto } from './dto/create-order-item.dto'
+import { OrderPdfService } from './order-pdf.service'
 import { calculateLineTotal, getStockCheckStatus } from './order-pricing.util'
 import { WhatsappOrderService } from './whatsapp-order.service'
 
@@ -18,6 +20,7 @@ export class OrdersService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
+    private readonly orderPdfService: OrderPdfService,
     private readonly whatsappOrderService: WhatsappOrderService,
     private readonly stockService: StockService,
   ) {}
@@ -27,6 +30,8 @@ export class OrdersService {
     const deliveryPrice = 0
     const source = dto.source || 'website'
     const locale = dto.locale === 'ru' ? 'ru' : 'kg'
+    const orderId = randomUUID()
+    const pdfUrl = this.orderPdfService.createPublicPdfUrl(orderId, locale)
     const order = await this.prisma.$transaction(async (tx) => {
       const customer = await tx.customer.upsert({
         where: { phone: dto.customer.phone },
@@ -180,10 +185,12 @@ export class OrdersService {
         currency,
         comment: dto.comment,
         locale,
+        pdfUrl,
       })
 
       return tx.order.create({
         data: {
+          id: orderId,
           orderNumber,
           customerId: customer.id,
           status: OrderStatus.NEW,
@@ -254,6 +261,7 @@ export class OrdersService {
       })),
       whatsappText: order.whatsappText,
       whatsappUrl,
+      pdfUrl,
     }
   }
 

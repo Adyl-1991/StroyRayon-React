@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { OrderStatus, Prisma } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
+import { OrderPdfService } from '../orders/order-pdf.service'
 import { AdminOrdersQueryDto } from './dto/admin-orders-query.dto'
 
 const allowedTransitions: Record<OrderStatus, OrderStatus[]> = {
@@ -18,7 +19,10 @@ const allowedTransitions: Record<OrderStatus, OrderStatus[]> = {
 
 @Injectable()
 export class AdminOrdersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly orderPdfService: OrderPdfService,
+  ) {}
 
   async list(query: AdminOrdersQueryDto) {
     const where = query.status ? { status: query.status } : {}
@@ -92,6 +96,7 @@ export class AdminOrdersService {
       deliveryPrice: Number(order.deliveryPrice),
       total: Number(order.total),
       currency: order.currency,
+      pdfUrl: this.orderPdfService.createPublicPdfUrl(order.id, 'ru'),
       availabilityCheckRequired: order.availabilityCheckRequired,
       stockStatus: this.stockSummary(order.items),
       items: order.items.map((item) => ({

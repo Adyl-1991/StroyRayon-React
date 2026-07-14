@@ -41,6 +41,10 @@ services:
         sync: false
       - key: PUBLIC_API_ORIGIN
         value: https://api.stroyrayon.kg
+      - key: ORDER_PDF_SECRET
+        generateValue: true
+      - key: ORDER_PDF_LINK_TTL_SECONDS
+        value: 604800
       - key: STORAGE_DRIVER
         sync: false
       - key: STORAGE_LOCAL_ROOT

@@ -10,40 +10,43 @@ function buildInput(locale: 'kg' | 'ru') {
     customer: {
       name: locale === 'ru' ? 'Тестовый клиент' : 'Тест кардар',
       phone: '+996 700 000 000',
-      address: locale === 'ru' ? 'Бишкек' : 'Бишкек',
+      address: 'Бишкек',
     },
-    items: [{
-      title: locale === 'ru' ? 'ППР труба' : 'ППР түтүк',
-      sku: 'PPR-20',
-      price: 45,
-      quantity: 2,
-      unit: locale === 'ru' ? 'метр' : 'метр',
-      total: 90,
-    }],
+    items: [
+      {
+        title: locale === 'ru' ? 'ППР труба' : 'ППР түтүк',
+        sku: 'PPR-20',
+        price: 45,
+        quantity: 2,
+        unit: 'метр',
+        total: 90,
+      },
+    ],
     total: 90,
     currency: 'KGS',
-    comment: locale === 'ru' ? 'Тестовый заказ' : 'Тест буйрутма',
     locale,
+    pdfUrl: 'https://api.stroyrayon.kg/api/orders/order-1/pdf?token=signed',
   }
 }
 
-test('Russian checkout produces a complete Russian WhatsApp order', () => {
+test('Russian checkout produces a short PDF-first WhatsApp order', () => {
   const text = service.buildWhatsappOrderText(buildInput('ru'))
 
   assert.match(text, /Новый заказ с сайта StroyRayon/)
-  assert.match(text, /Номер заказа: SR-2026-000007/)
-  assert.match(text, /ППР труба/)
-  assert.match(text, /Общая сумма: 90 KGS/)
-  assert.match(text, /подтвердите наличие и условия доставки/)
-  assert.doesNotMatch(text, /Жалпы сумма|ППР түтүк/)
+  assert.match(text, /Заказ № SR-2026-000007/)
+  assert.match(text, /Позиций: 1/)
+  assert.match(text, /Итого: 90 сом/)
+  assert.match(text, /PDF заказа: https:\/\/api\.stroyrayon\.kg/)
+  assert.doesNotMatch(text, /ППР труба|45/)
 })
 
-test('Kyrgyz checkout preserves the Kyrgyz WhatsApp order', () => {
+test('Kyrgyz checkout produces a short PDF-first WhatsApp order', () => {
   const text = service.buildWhatsappOrderText(buildInput('kg'))
 
-  assert.match(text, /StroyRayon сайтынан жаңы заказ/)
-  assert.match(text, /Заказ номери: SR-2026-000007/)
-  assert.match(text, /ППР түтүк/)
-  assert.match(text, /Жалпы сумма: 90 KGS/)
-  assert.match(text, /товар бар-жогун тактап бериңиз/)
+  assert.match(text, /StroyRayon сайтынан жаңы буйрутма/)
+  assert.match(text, /Буйрутма № SR-2026-000007/)
+  assert.match(text, /Позициялар: 1/)
+  assert.match(text, /Жалпы сумма: 90 сом/)
+  assert.match(text, /Буйрутманын PDF файлы: https:\/\/api\.stroyrayon\.kg/)
+  assert.doesNotMatch(text, /ППР түтүк|45/)
 })

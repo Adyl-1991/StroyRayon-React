@@ -2,7 +2,12 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { OrderStatus } from '@prisma/client'
 import { PrismaService as AppPrismaService } from '../../prisma/prisma.service'
+import { OrderPdfService } from '../orders/order-pdf.service'
 import { AdminOrdersService } from './admin-orders.service'
+
+const orderPdfService = {
+  createPublicPdfUrl: (id: string) => `https://api.stroyrayon.kg/api/orders/${id}/pdf?token=signed`,
+} as OrderPdfService
 
 test('orders list with authorized service call returns CRM rows', async () => {
   const prisma = {
@@ -27,7 +32,7 @@ test('orders list with authorized service call returns CRM rows', async () => {
     $transaction: (operations: Promise<unknown>[]) => Promise.all(operations),
   } as unknown as AppPrismaService
 
-  const result = await new AdminOrdersService(prisma).list({ page: 1, limit: 25 })
+  const result = await new AdminOrdersService(prisma, orderPdfService).list({ page: 1, limit: 25 })
 
   assert.equal(result.items.length, 1)
   assert.equal(result.items[0].orderNumber, 'SR-2026-000001')
@@ -53,7 +58,7 @@ test('status update with auth records history and updates the order', async () =
   const prisma = {
     $transaction: (callback: (client: typeof tx) => Promise<unknown>) => callback(tx),
   } as unknown as AppPrismaService
-  const service = new AdminOrdersService(prisma)
+  const service = new AdminOrdersService(prisma, orderPdfService)
   service.detail = async () => ({ id: 'order-1', status: 'confirmed' }) as never
 
   const result = await service.updateStatus('order-1', OrderStatus.CONFIRMED, 'admin-1')
@@ -85,7 +90,7 @@ test('admin note update with auth supports saving and clearing internal text', a
       },
     },
   } as unknown as AppPrismaService
-  const service = new AdminOrdersService(prisma)
+  const service = new AdminOrdersService(prisma, orderPdfService)
   service.detail = async () => ({ id: 'order-1' }) as never
 
   await service.updateNote('order-1', '  Call before delivery  ')
