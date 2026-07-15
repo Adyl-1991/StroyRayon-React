@@ -101,7 +101,12 @@ export class AdminProductsService {
       this.prisma.brand.findMany({
         where: { isActive: true },
         orderBy: { name: 'asc' },
-        select: { id: true, name: true, slug: true },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          _count: { select: { products: true } },
+        },
       }),
       this.prisma.product.groupBy({
         by: ['unit'],

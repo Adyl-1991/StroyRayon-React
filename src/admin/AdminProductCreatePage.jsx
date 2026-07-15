@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import { createAdminProduct, getAdminProductOptions, uploadAdminProductImage } from '../api/adminApi'
+import { AdminBrandEditor } from './AdminBrandEditor'
 import { hasAdminPermission } from './adminPermissions'
 
 const MAX_PRODUCT_IMAGE_SIZE = 5 * 1024 * 1024
@@ -160,6 +161,11 @@ export function AdminProductCreatePage() {
   const units = useMemo(() => options?.units || ['даана', 'метр', 'кг'], [options])
   const canCreate = hasAdminPermission(admin, 'products:create')
   const canUpload = hasAdminPermission(admin, 'products:upload')
+  const canManageBrands = hasAdminPermission(admin, 'products:content')
+
+  function updateBrands(brands) {
+    setOptions((current) => ({ ...current, brands }))
+  }
 
   function updateField(name, value) {
     setForm((current) => {
@@ -384,19 +390,13 @@ export function AdminProductCreatePage() {
                 ))}
               </select>
             </label>
-            <label>
-              Бренд
-              <select
-                data-qa="product-brand"
-                value={form.brandId}
-                onChange={(event) => updateField('brandId', event.target.value)}
-              >
-                <option value="">Без бренда</option>
-                {brands.map((brand) => (
-                  <option key={brand.id} value={brand.id}>{brand.name}</option>
-                ))}
-              </select>
-            </label>
+            <AdminBrandEditor
+              brands={brands}
+              value={form.brandId}
+              onChange={(brandId) => updateField('brandId', brandId)}
+              onBrandsChange={updateBrands}
+              disabled={!canManageBrands}
+            />
             <label>
               Slug
               <input

@@ -252,6 +252,11 @@
   color: #a22626;
 }
 
+.admin-danger-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
 .admin-edit-form {
   display: grid;
   gap: 14px;
@@ -277,6 +282,37 @@
 
 .admin-edit-form small {
   color: #65727e;
+}
+
+.admin-brand-editor,
+.admin-brand-manager {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-brand-manager {
+  padding: 12px;
+  border: 1px solid #dce1e5;
+  border-radius: 9px;
+  background: #f8fafc;
+}
+
+.admin-brand-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-brand-actions button {
+  padding: 9px 11px;
+}
+
+.admin-inline-error {
+  color: #a22626 !important;
+}
+
+.admin-inline-success {
+  color: #246b37 !important;
 }
 
 .admin-file-upload input[type="file"] {

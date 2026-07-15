@@ -16,6 +16,7 @@ import {
   uploadAdminProductGalleryImage,
 } from '../api/adminApi'
 import { formatPrice } from '../utils/formatPrice'
+import { AdminBrandEditor } from './AdminBrandEditor'
 import { hasAdminPermission } from './adminPermissions'
 
 const MAX_PRODUCT_IMAGE_SIZE = 5 * 1024 * 1024
@@ -296,6 +297,10 @@ export function AdminProductDetailPage() {
   const canEditActive = hasAdminPermission(admin, 'products:active')
   const canUpload = hasAdminPermission(admin, 'products:upload')
   const canSave = canEditContent || canEditCommercial || canEditActive
+
+  function updateBrands(brands) {
+    setOptions((current) => ({ ...current, brands }))
+  }
 
   useEffect(() => {
     if (!draftReadyRef.current || !form || !canSave) return undefined
@@ -729,6 +734,7 @@ export function AdminProductDetailPage() {
       setDraftStatus('published')
       setMessage('Товар опубликован. Изменения уже доступны на сайте.')
       getAdminProductAuditLog(id, { limit: 20 }).then(setAuditLog).catch(() => {})
+      getAdminProductOptions().then(setOptions).catch(() => {})
     } catch (requestError) {
       setDraftStatus('error')
       setError(requestError.message || 'Не удалось опубликовать товар.')
@@ -845,15 +851,14 @@ export function AdminProductDetailPage() {
                 ))}
               </select>
             </label>
-            <label>
-              Бренд
-              <select data-qa="edit-brand" value={form.brandId} onChange={(event) => updateField('brandId', event.target.value)} disabled={!canEditContent}>
-                <option value="">Без бренда</option>
-                {brands.map((brand) => (
-                  <option key={brand.id} value={brand.id}>{brand.name}</option>
-                ))}
-              </select>
-            </label>
+            <AdminBrandEditor
+              brands={brands}
+              value={form.brandId}
+              onChange={(brandId) => updateField('brandId', brandId)}
+              onBrandsChange={updateBrands}
+              disabled={!canEditContent}
+              selectQa="edit-brand"
+            />
             <label>
               Единица
               <select data-qa="edit-unit" value={form.unit} onChange={(event) => updateField('unit', event.target.value)} disabled={!canEditContent}>

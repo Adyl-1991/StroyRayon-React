@@ -72,6 +72,18 @@ export function getAdminProductOptions() {
   return adminRequest(() => apiGet('/admin/products/options', authorizedOptions()))
 }
 
+export function createAdminBrand(name) {
+  return adminRequest(() => apiPost('/admin/brands', { name }, authorizedOptions()))
+}
+
+export function updateAdminBrand(id, name) {
+  return adminRequest(() => apiPatch(`/admin/brands/${id}`, { name }, authorizedOptions()))
+}
+
+export function deleteAdminBrand(id) {
+  return adminRequest(() => apiDelete(`/admin/brands/${id}`, authorizedOptions()))
+}
+
 export function createAdminProduct(payload) {
   return adminRequest(() => apiPost('/admin/products', payload, authorizedOptions()))
 }
