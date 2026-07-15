@@ -603,6 +603,10 @@
   grid-template-columns: minmax(160px, .8fr) minmax(220px, 1.4fr) auto;
 }
 
+.admin-repeat-row-faq {
+  grid-template-columns: minmax(160px, .8fr) minmax(220px, 1.4fr) auto;
+}
+
 .admin-repeat-row-document {
   grid-template-columns: minmax(160px, .9fr) minmax(220px, 1.4fr) minmax(140px, .6fr) auto;
 }
@@ -800,6 +804,7 @@
   }
 
   .admin-repeat-row-spec,
+  .admin-repeat-row-faq,
   .admin-repeat-row-document,
   .admin-repeat-row-variant {
     grid-template-columns: 1fr;

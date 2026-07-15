@@ -64,6 +64,10 @@ function emptySpec() {
   return { key: '', value: '' }
 }
 
+function emptyFaq() {
+  return { question: '', answer: '' }
+}
+
 function emptyDocument() {
   return { title: '', url: '', type: 'OTHER', sortOrder: 0 }
 }
@@ -89,8 +93,19 @@ function specsToRows(specs = {}) {
   return Object.entries(specs || {}).map(([key, value]) => ({ key, value: String(value ?? '') }))
 }
 
+function faqToRows(faq = []) {
+  if (!Array.isArray(faq)) return []
+  return faq.map((item) => ({
+    question: String(item?.question ?? ''),
+    answer: String(item?.answer ?? ''),
+  }))
+}
+
 function createForm(product) {
   const specs = specsToRows(product.specs)
+  const specsRu = specsToRows(product.specsRu)
+  const faqKg = faqToRows(product.faqKg)
+  const faqRu = faqToRows(product.faqRu)
   return {
     catalogNodeId: product.category?.id || '',
     brandId: product.brand?.id || '',
@@ -99,6 +114,7 @@ function createForm(product) {
     slug: product.slug || '',
     sku: product.sku || '',
     shortDescriptionKg: product.shortDescriptionKg || '',
+    shortDescriptionRu: product.shortDescriptionRu || '',
     descriptionKg: product.descriptionKg || '',
     descriptionRu: product.descriptionRu || '',
     seoTitleKg: product.seoTitleKg || '',
@@ -109,9 +125,17 @@ function createForm(product) {
     quantity: String(product.stock?.quantity ?? 0),
     stockStatus: product.stockStatus?.toUpperCase() || 'IN_STOCK',
     unit: product.unit || '',
+    unitRu: product.unitRu || '',
+    minOrder: product.minOrder || '',
+    minOrderRu: product.minOrderRu || '',
+    packageInfoKg: product.packageInfoKg || '',
+    packageInfoRu: product.packageInfoRu || '',
     isActive: Boolean(product.isActive),
     adminNote: product.adminNote || '',
     specs: specs.length ? specs : [emptySpec()],
+    specsRu: specsRu.length ? specsRu : [emptySpec()],
+    faqKg: faqKg.length ? faqKg : [emptyFaq()],
+    faqRu: faqRu.length ? faqRu : [emptyFaq()],
     documents: product.documents?.length
       ? product.documents.map((document, index) => ({
           id: document.id,
@@ -166,21 +190,31 @@ function compactSpecs(rows) {
     .filter((row) => row.key.trim() || row.value.trim())
 }
 
+function compactFaq(rows) {
+  return rows
+    .map((row) => ({ question: row.question, answer: row.answer }))
+    .filter((row) => row.question.trim() || row.answer.trim())
+}
+
 function applyDraftToForm(product, draft) {
   const next = createForm(product)
   const payload = draft?.payload
   if (!payload || typeof payload !== 'object') return next
   for (const field of [
     'catalogNodeId', 'brandId', 'titleKg', 'titleRu', 'slug', 'sku',
-    'shortDescriptionKg', 'descriptionKg', 'descriptionRu', 'seoTitleKg',
-    'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit', 'isActive',
-    'adminNote', 'stockStatus',
+    'shortDescriptionKg', 'shortDescriptionRu', 'descriptionKg', 'descriptionRu',
+    'seoTitleKg', 'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit',
+    'unitRu', 'minOrder', 'minOrderRu', 'packageInfoKg', 'packageInfoRu',
+    'isActive', 'adminNote', 'stockStatus',
   ]) {
     if (Object.prototype.hasOwnProperty.call(payload, field)) next[field] = payload[field] ?? ''
   }
   if (Object.prototype.hasOwnProperty.call(payload, 'price')) next.price = String(payload.price ?? '')
   if (Object.prototype.hasOwnProperty.call(payload, 'stockQuantity')) next.quantity = String(payload.stockQuantity ?? '')
   if (Array.isArray(payload.specs)) next.specs = payload.specs.length ? payload.specs : [emptySpec()]
+  if (Array.isArray(payload.specsRu)) next.specsRu = payload.specsRu.length ? payload.specsRu : [emptySpec()]
+  if (Array.isArray(payload.faqKg)) next.faqKg = payload.faqKg.length ? payload.faqKg : [emptyFaq()]
+  if (Array.isArray(payload.faqRu)) next.faqRu = payload.faqRu.length ? payload.faqRu : [emptyFaq()]
   if (Array.isArray(payload.documents)) next.documents = payload.documents.length ? payload.documents : [emptyDocument()]
   return next
 }
@@ -196,6 +230,7 @@ function buildDraftPayload(form, permissions) {
           slug: form.slug,
           sku: form.sku,
           shortDescriptionKg: form.shortDescriptionKg,
+          shortDescriptionRu: form.shortDescriptionRu,
           descriptionKg: form.descriptionKg,
           descriptionRu: form.descriptionRu,
           seoTitleKg: form.seoTitleKg,
@@ -203,8 +238,16 @@ function buildDraftPayload(form, permissions) {
           seoTitleRu: form.seoTitleRu,
           seoDescriptionRu: form.seoDescriptionRu,
           unit: form.unit,
+          unitRu: form.unitRu,
+          minOrder: form.minOrder,
+          minOrderRu: form.minOrderRu,
+          packageInfoKg: form.packageInfoKg,
+          packageInfoRu: form.packageInfoRu,
           adminNote: form.adminNote,
           specs: compactSpecs(form.specs),
+          specsRu: compactSpecs(form.specsRu),
+          faqKg: compactFaq(form.faqKg),
+          faqRu: compactFaq(form.faqRu),
           documents: compactRows(form.documents, ['title', 'url']),
         }
       : {}),
@@ -860,10 +903,14 @@ export function AdminProductDetailPage() {
               selectQa="edit-brand"
             />
             <label>
-              Единица
+              Единица KG
               <select data-qa="edit-unit" value={form.unit} onChange={(event) => updateField('unit', event.target.value)} disabled={!canEditContent}>
                 {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
               </select>
+            </label>
+            <label>
+              Единица RU
+              <input data-qa='edit-unit-ru' value={form.unitRu} onChange={(event) => updateField('unitRu', event.target.value)} maxLength={80} placeholder='шт., метр, кг' disabled={!canEditContent} />
             </label>
             <label className="admin-checkbox-field">
               <input data-qa="edit-active" type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} disabled={!canEditActive} />
@@ -893,6 +940,32 @@ export function AdminProductDetailPage() {
           </article>
         </div>
 
+        <div className='admin-detail-grid'>
+          <article className='admin-card admin-edit-form'>
+            <h2>Продажа и фасовка KG</h2>
+            <label>
+              Фасовка KG
+              <input data-qa='edit-package-info-kg' value={form.packageInfoKg} onChange={(event) => updateField('packageInfoKg', event.target.value)} maxLength={500} placeholder='Мисалы: 1 даана' disabled={!canEditContent} />
+            </label>
+            <label>
+              Минималдуу заказ KG
+              <input data-qa='edit-min-order-kg' value={form.minOrder} onChange={(event) => updateField('minOrder', event.target.value)} maxLength={180} placeholder='Мисалы: 1 метр' disabled={!canEditContent} />
+            </label>
+          </article>
+
+          <article className='admin-card admin-edit-form'>
+            <h2>Продажа и фасовка RU</h2>
+            <label>
+              Фасовка RU
+              <input data-qa='edit-package-info-ru' value={form.packageInfoRu} onChange={(event) => updateField('packageInfoRu', event.target.value)} maxLength={500} placeholder='Например: 1 шт.' disabled={!canEditContent} />
+            </label>
+            <label>
+              Минимальный заказ RU
+              <input data-qa='edit-min-order-ru' value={form.minOrderRu} onChange={(event) => updateField('minOrderRu', event.target.value)} maxLength={180} placeholder='Например: 1 метр' disabled={!canEditContent} />
+            </label>
+          </article>
+        </div>
+
         <div className="admin-detail-grid">
           <article className="admin-card admin-edit-form">
             <h2>Описание KG</h2>
@@ -909,6 +982,10 @@ export function AdminProductDetailPage() {
           <article className="admin-card admin-edit-form">
             <h2>Описание RU</h2>
             <label>
+              Короткое описание RU
+              <textarea data-qa='edit-short-description-ru' rows={3} value={form.shortDescriptionRu} onChange={(event) => updateField('shortDescriptionRu', event.target.value)} maxLength={1200} disabled={!canEditContent} />
+            </label>
+            <label>
               Полное описание RU
               <textarea data-qa="edit-description-ru" rows={8} value={form.descriptionRu} onChange={(event) => updateField('descriptionRu', event.target.value)} maxLength={5000} disabled={!canEditContent} />
             </label>
@@ -921,7 +998,7 @@ export function AdminProductDetailPage() {
 
         <article className="admin-card admin-edit-form">
           <div className="admin-section-header">
-            <h2>Характеристики</h2>
+            <h2>Характеристики KG</h2>
             <button type="button" className="admin-secondary-button" disabled={!canEditContent} onClick={() => addRow('specs', emptySpec())}>
               Добавить характеристику
             </button>
@@ -936,6 +1013,58 @@ export function AdminProductDetailPage() {
             ))}
           </div>
         </article>
+
+        <article className='admin-card admin-edit-form'>
+          <div className='admin-section-header'>
+            <h2>Характеристики RU</h2>
+            <button type='button' className='admin-secondary-button' disabled={!canEditContent} onClick={() => addRow('specsRu', emptySpec())}>
+              Добавить характеристику RU
+            </button>
+          </div>
+          <div className='admin-repeat-list'>
+            {form.specsRu.map((row, index) => (
+              <div className='admin-repeat-row admin-repeat-row-spec' key={`spec-ru-${index}`}>
+                <input data-qa='edit-spec-ru-key' placeholder='Название RU' value={row.key} onChange={(event) => updateRow('specsRu', index, 'key', event.target.value)} maxLength={120} disabled={!canEditContent} />
+                <input data-qa='edit-spec-ru-value' placeholder='Значение RU' value={row.value} onChange={(event) => updateRow('specsRu', index, 'value', event.target.value)} maxLength={500} disabled={!canEditContent} />
+                <button type='button' className='admin-danger-button' disabled={!canEditContent} onClick={() => removeRow('specsRu', index, emptySpec())}>Удалить</button>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <div className='admin-detail-grid'>
+          <article className='admin-card admin-edit-form'>
+            <div className='admin-section-header'>
+              <h2>Частые вопросы KG</h2>
+              <button type='button' className='admin-secondary-button' disabled={!canEditContent} onClick={() => addRow('faqKg', emptyFaq())}>Добавить</button>
+            </div>
+            <div className='admin-repeat-list'>
+              {form.faqKg.map((row, index) => (
+                <div className='admin-repeat-row admin-repeat-row-faq' key={`faq-kg-${index}`}>
+                  <input data-qa='edit-faq-kg-question' placeholder='Суроо KG' value={row.question} onChange={(event) => updateRow('faqKg', index, 'question', event.target.value)} maxLength={500} disabled={!canEditContent} />
+                  <textarea data-qa='edit-faq-kg-answer' placeholder='Жооп KG' rows={3} value={row.answer} onChange={(event) => updateRow('faqKg', index, 'answer', event.target.value)} maxLength={2000} disabled={!canEditContent} />
+                  <button type='button' className='admin-danger-button' disabled={!canEditContent} onClick={() => removeRow('faqKg', index, emptyFaq())}>Удалить</button>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className='admin-card admin-edit-form'>
+            <div className='admin-section-header'>
+              <h2>Частые вопросы RU</h2>
+              <button type='button' className='admin-secondary-button' disabled={!canEditContent} onClick={() => addRow('faqRu', emptyFaq())}>Добавить</button>
+            </div>
+            <div className='admin-repeat-list'>
+              {form.faqRu.map((row, index) => (
+                <div className='admin-repeat-row admin-repeat-row-faq' key={`faq-ru-${index}`}>
+                  <input data-qa='edit-faq-ru-question' placeholder='Вопрос RU' value={row.question} onChange={(event) => updateRow('faqRu', index, 'question', event.target.value)} maxLength={500} disabled={!canEditContent} />
+                  <textarea data-qa='edit-faq-ru-answer' placeholder='Ответ RU' rows={3} value={row.answer} onChange={(event) => updateRow('faqRu', index, 'answer', event.target.value)} maxLength={2000} disabled={!canEditContent} />
+                  <button type='button' className='admin-danger-button' disabled={!canEditContent} onClick={() => removeRow('faqRu', index, emptyFaq())}>Удалить</button>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
 
         <article className="admin-card admin-edit-form">
           <div className="admin-section-header">
