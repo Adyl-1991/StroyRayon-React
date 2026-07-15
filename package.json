@@ -10,6 +10,7 @@
     "generate:sitemap": "node src/scripts/generateSitemap.js",
     "test:seo": "node --test scripts/seo-regression.test.mjs",
     "test:checkout": "node --test scripts/checkout-regression.test.mjs",
+    "test:localization": "node --test scripts/product-localization-regression.test.mjs",
     "test:pwa": "node --test scripts/pwa-regression.test.mjs",
     "qa:pwa": "node scripts/pwa-browser-qa.mjs",
     "qa:stage21": "node scripts/stage21-e2e.mjs",

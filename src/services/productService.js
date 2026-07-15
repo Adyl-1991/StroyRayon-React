@@ -280,11 +280,9 @@ export function getLocalizedUnitText(value, locale = 'kg') {
   if (!value || locale !== 'ru') return value
 
   return String(value)
-    .replace(/\bдаана\b/g, 'шт.')
-    .replace(/\bкап\b/g, 'мешок')
-    .replace(/\bметр\b/g, 'метр')
-    .replace(/\bкомплект\b/g, 'комплект')
-    .replace(/\bрулон\b/g, 'рулон')
+    .replace(/Метраж менен кесилип берилет\.?/giu, 'Отрезается по метражу.')
+    .replace(/(?<![\p{L}\p{N}_])даана(?![\p{L}\p{N}_])/giu, 'шт.')
+    .replace(/(?<![\p{L}\p{N}_])кап(?![\p{L}\p{N}_])/giu, 'мешок')
 }
 
 export function getLocalizedProductValue(product, fieldBase, locale = 'kg') {
@@ -311,7 +309,7 @@ export function getProductFullDescription(product, locale = 'kg') {
 export function getProductSpecs(product, locale = 'kg') {
   if (!product) return {}
   return locale === 'ru'
-    ? product.specificationsRu || product.specsRu || product.specificationsKg || product.specs || {}
+    ? product.specificationsRu || product.specsRu || {}
     : Object.fromEntries(
         Object.entries(product.specificationsKg || product.specs || {}).map(([key, value]) => [
           normalizeKgText(key),
@@ -324,7 +322,7 @@ export function getProductListField(product, fieldBase, locale = 'kg') {
   if (!product) return []
   const localizedField = `${fieldBase}${locale === 'ru' ? 'Ru' : 'Kg'}`
   const fallbackField = `${fieldBase}${locale === 'ru' ? 'Kg' : 'Ru'}`
-  const value = product[localizedField] || product[fallbackField] || []
+  const value = product[localizedField] || (locale === 'ru' ? [] : product[fallbackField] || [])
   if (Array.isArray(value)) {
     return value
       .filter(Boolean)
@@ -363,7 +361,10 @@ export function getProductVariants(product) {
       unit: variant.unit || product.unit,
       unitRu: variant.unitRu || product.unitRu,
       packageInfo: variant.packageInfo || variant.packageInfoKg || product.packageInfoKg || product.minOrder,
-      packageInfoRu: variant.packageInfoRu || product.packageInfoRu || product.minOrderRu,
+      packageInfoRu: getLocalizedUnitText(
+        variant.packageInfoRu || product.packageInfoRu || product.minOrderRu || product.minOrder,
+        'ru',
+      ),
       stockStatus: variant.stockStatus || product.stockStatus || 'in_stock',
       sku: variant.sku || `${product.sku || product.id}-${variant.id || variant.size || 'variant'}`,
     }))
@@ -488,7 +489,7 @@ export function normalizeProduct(product) {
   const fullDescriptionKg = product.fullDescriptionKg || product.descriptionKg || product.description || shortDescriptionKg
   const fullDescriptionRu = product.fullDescriptionRu || product.descriptionRu || shortDescriptionRu || fullDescriptionKg
   const specificationsKg = product.specificationsKg || product.specs || {}
-  const specificationsRu = product.specificationsRu || product.specsRu || specificationsKg
+  const specificationsRu = product.specificationsRu || product.specsRu || {}
 
   return {
     ...product,
@@ -513,8 +514,8 @@ export function normalizeProduct(product) {
     productType: product.productType || product.type || catalogPath.at(-1) || product.subcategorySlug,
     productTypeRu: product.productTypeRu || product.typeRu || '',
     pack: product.pack || product.packageInfoKg || product.minOrder,
-    packRu: product.packRu || product.pack || product.packageInfoKg || product.minOrder,
-    minOrderRu: product.minOrderRu || product.minOrder,
+    packRu: getLocalizedUnitText(product.packRu || product.pack || product.packageInfoKg || product.minOrder, 'ru'),
+    minOrderRu: getLocalizedUnitText(product.minOrderRu || product.minOrder, 'ru'),
     unitRu: product.unitRu || getUnitLabel(product.unit, 'ru'),
     weight: product.weight || specificationsKg.Салмак || specificationsKg.Салмагы,
     size: product.size || product.weight || product.pack,
