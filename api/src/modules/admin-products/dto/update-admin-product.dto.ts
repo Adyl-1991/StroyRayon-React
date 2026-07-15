@@ -29,6 +29,18 @@ export class AdminProductSpecDto {
   value!: string
 }
 
+export class AdminProductFaqDto {
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(500)
+  question!: string
+
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(2000)
+  answer!: string
+}
+
 export class AdminProductDocumentDto {
   @IsOptional()
   @Transform(trimString)
@@ -157,6 +169,12 @@ export class UpdateAdminProductDto {
   @IsOptional()
   @Transform(trimString)
   @IsString()
+  @MaxLength(1200)
+  shortDescriptionRu?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
   @MaxLength(5000)
   descriptionKg?: string | null
 
@@ -197,6 +215,36 @@ export class UpdateAdminProductDto {
   unit?: string
 
   @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(40)
+  unitRu?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(120)
+  minOrder?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(120)
+  minOrderRu?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(240)
+  packageInfoKg?: string | null
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(240)
+  packageInfoRu?: string | null
+
+  @IsOptional()
   @IsBoolean()
   isActive?: boolean
 
@@ -229,6 +277,24 @@ export class UpdateAdminProductDto {
   @ValidateNested({ each: true })
   @Type(() => AdminProductSpecDto)
   specs?: AdminProductSpecDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductSpecDto)
+  specsRu?: AdminProductSpecDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductFaqDto)
+  faqKg?: AdminProductFaqDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductFaqDto)
+  faqRu?: AdminProductFaqDto[]
 
   @IsOptional()
   @IsArray()

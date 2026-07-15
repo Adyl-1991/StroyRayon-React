@@ -13,7 +13,7 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator'
-import { AdminProductDocumentDto, AdminProductImageDto, AdminProductSpecDto } from './update-admin-product.dto'
+import { AdminProductDocumentDto, AdminProductFaqDto, AdminProductImageDto, AdminProductSpecDto } from './update-admin-product.dto'
 
 const trimString = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value
@@ -57,6 +57,12 @@ export class CreateAdminProductDto {
   @IsString()
   @MaxLength(1200)
   shortDescriptionKg?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(1200)
+  shortDescriptionRu?: string
 
   @IsOptional()
   @Transform(trimString)
@@ -111,6 +117,36 @@ export class CreateAdminProductDto {
   @MaxLength(40)
   unit!: string
 
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(40)
+  unitRu?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(120)
+  minOrder?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(120)
+  minOrderRu?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(240)
+  packageInfoKg?: string
+
+  @IsOptional()
+  @Transform(trimString)
+  @IsString()
+  @MaxLength(240)
+  packageInfoRu?: string
+
   @IsEnum(ProductStockStatus)
   stockStatus!: ProductStockStatus
 
@@ -141,6 +177,24 @@ export class CreateAdminProductDto {
   @ValidateNested({ each: true })
   @Type(() => AdminProductSpecDto)
   specs?: AdminProductSpecDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductSpecDto)
+  specsRu?: AdminProductSpecDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductFaqDto)
+  faqKg?: AdminProductFaqDto[]
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AdminProductFaqDto)
+  faqRu?: AdminProductFaqDto[]
 
   @IsOptional()
   @IsArray()

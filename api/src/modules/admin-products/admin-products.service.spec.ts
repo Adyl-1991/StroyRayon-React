@@ -345,6 +345,7 @@ test('admin product create rejects unavailable category and duplicate slug', asy
 test('admin can update core product content, specs, documents and images', async () => {
   let productState = productFixture()
   let savedSpecs: Prisma.InputJsonValue | undefined
+  let savedUpdateData: Record<string, any> = {}
   let savedDocuments: Array<{ title: string; url: string; type: ProductDocumentType }> = []
   let savedImages: Array<{ src: string; alt: string; type: ProductImageType }> = []
   let auditAction = ''
@@ -354,6 +355,7 @@ test('admin can update core product content, specs, documents and images', async
     product: {
       findUnique: () => Promise.resolve(productState),
       update: (args: any) => {
+        savedUpdateData = args.data
         productState = productFixture({
           ...productState,
           ...args.data,
@@ -417,15 +419,24 @@ test('admin can update core product content, specs, documents and images', async
     slug: 'updated-product',
     sku: 'updated-sku',
     descriptionRu: 'Updated Russian description',
+    shortDescriptionRu: 'Краткое описание',
     price: 250,
     stockQuantity: 8,
     stockStatus: ProductStockStatus.LOW_STOCK,
     unit: 'метр',
+    unitRu: 'метр',
+    minOrder: '1 метр',
+    minOrderRu: '1 метр',
+    packageInfoKg: '2 метр',
+    packageInfoRu: '2 метра',
     isActive: true,
     specs: [
       { key: 'Диаметр', value: '20 мм' },
       { key: '', value: 'ignored' },
     ],
+    specsRu: [{ key: 'Цвет', value: 'белый' }],
+    faqKg: [{ question: 'Суроо?', answer: 'Жооп.' }],
+    faqRu: [{ question: 'Вопрос?', answer: 'Ответ.' }],
     documents: [
       {
         title: 'Сертификат',
@@ -440,12 +451,17 @@ test('admin can update core product content, specs, documents and images', async
 
   assert.equal(result.slug, 'updated-product')
   assert.deepEqual(savedSpecs, { Диаметр: '20 мм' })
+  assert.deepEqual(savedUpdateData.specsRu, { Цвет: 'белый' })
+  assert.deepEqual(savedUpdateData.faqRu, [{ question: 'Вопрос?', answer: 'Ответ.' }])
+  assert.equal(savedUpdateData.shortDescriptionRu, 'Краткое описание')
+  assert.equal(savedUpdateData.packageInfoRu, '2 метра')
   assert.equal(savedDocuments.length, 1)
   assert.equal(savedDocuments[0].type, ProductDocumentType.CERTIFICATE)
   assert.equal(savedImages[0].type, ProductImageType.MAIN)
   assert.equal(auditAction, 'product_updated')
   assert.equal(auditFields.includes('documents'), true)
   assert.equal(auditFields.includes('images'), true)
+  assert.equal(auditFields.includes('faq'), true)
 })
 
 test('product update permissions separate content and commercial roles', async () => {

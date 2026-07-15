@@ -26,9 +26,11 @@ type AdminProduct = Prisma.ProductGetPayload<{ include: typeof adminProductInclu
 const maxDraftBytes = 128 * 1024
 const draftFields = new Set([
   'catalogNodeId', 'brandId', 'titleKg', 'titleRu', 'slug', 'sku',
-  'shortDescriptionKg', 'descriptionKg', 'descriptionRu', 'seoTitleKg',
-  'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit', 'isActive',
-  'adminNote', 'price', 'stockQuantity', 'stockStatus', 'specs', 'documents',
+  'shortDescriptionKg', 'shortDescriptionRu', 'descriptionKg', 'descriptionRu',
+  'seoTitleKg', 'seoDescriptionKg', 'seoTitleRu', 'seoDescriptionRu', 'unit',
+  'unitRu', 'minOrder', 'minOrderRu', 'packageInfoKg', 'packageInfoRu', 'isActive',
+  'adminNote', 'price', 'stockQuantity', 'stockStatus', 'specs', 'specsRu',
+  'faqKg', 'faqRu', 'documents',
 ])
 
 const placeholderImageSrc = '/images/placeholders/product-placeholder.svg'
@@ -167,6 +169,9 @@ export class AdminProductsService {
     const imageSrc = normalizeImageSrc(dto.imageSrc)
     const imageAlt = dto.imageAlt?.trim() || `${titleKg} - StroyRayon`
     const specs = dto.specs === undefined ? {} : normalizeSpecs(dto.specs)
+    const specsRu = dto.specsRu === undefined ? {} : normalizeSpecs(dto.specsRu)
+    const faqKg = normalizeFaq(dto.faqKg || [])
+    const faqRu = normalizeFaq(dto.faqRu || [])
     const documents = dto.documents === undefined ? [] : normalizeDocuments(dto.documents)
     const submittedImages = dto.images?.length
       ? dto.images
@@ -187,16 +192,25 @@ export class AdminProductsService {
           price,
           currency: 'KGS',
           unit: dto.unit.trim(),
+          unitRu: dto.unitRu?.trim() || null,
           stockStatus: dto.stockStatus,
+          minOrder: dto.minOrder?.trim() || null,
+          minOrderRu: dto.minOrderRu?.trim() || null,
           shortDescriptionKg,
+          shortDescriptionRu: dto.shortDescriptionRu?.trim() || null,
           descriptionKg,
           descriptionRu: descriptionRu || null,
+          packageInfoKg: dto.packageInfoKg?.trim() || null,
+          packageInfoRu: dto.packageInfoRu?.trim() || null,
           seoTitleKg: dto.seoTitleKg?.trim() || null,
           seoDescriptionKg: dto.seoDescriptionKg?.trim() || null,
           seoTitleRu: dto.seoTitleRu?.trim() || null,
           seoDescriptionRu: dto.seoDescriptionRu?.trim() || null,
           specs: Object.keys(specs).length ? specs : Prisma.JsonNull,
+          specsRu: Object.keys(specsRu).length ? specsRu : Prisma.JsonNull,
           tags: [],
+          faqKg: faqKg.length ? faqKg : Prisma.JsonNull,
+          faqRu: faqRu.length ? faqRu : Prisma.JsonNull,
           adminNote: dto.adminNote?.trim() || null,
           isActive: dto.isActive,
           images: {
@@ -431,6 +445,9 @@ export class AdminProductsService {
     }
 
     const specs = dto.specs === undefined ? undefined : normalizeSpecs(dto.specs)
+    const specsRu = dto.specsRu === undefined ? undefined : normalizeSpecs(dto.specsRu)
+    const faqKg = dto.faqKg === undefined ? undefined : normalizeFaq(dto.faqKg)
+    const faqRu = dto.faqRu === undefined ? undefined : normalizeFaq(dto.faqRu)
     const documents = dto.documents === undefined ? undefined : normalizeDocuments(dto.documents)
     const images = dto.images === undefined ? undefined : normalizeImages(dto.images, titleKg)
 
@@ -450,6 +467,9 @@ export class AdminProductsService {
           ...(dto.shortDescriptionKg !== undefined
             ? { shortDescriptionKg: dto.shortDescriptionKg?.trim() || null }
             : {}),
+          ...(dto.shortDescriptionRu !== undefined
+            ? { shortDescriptionRu: dto.shortDescriptionRu?.trim() || null }
+            : {}),
           ...(dto.descriptionKg !== undefined
             ? { descriptionKg: dto.descriptionKg?.trim() || null }
             : {}),
@@ -465,6 +485,15 @@ export class AdminProductsService {
             ? { seoDescriptionRu: dto.seoDescriptionRu?.trim() || null }
             : {}),
           ...(dto.unit !== undefined ? { unit: dto.unit.trim() } : {}),
+          ...(dto.unitRu !== undefined ? { unitRu: dto.unitRu?.trim() || null } : {}),
+          ...(dto.minOrder !== undefined ? { minOrder: dto.minOrder?.trim() || null } : {}),
+          ...(dto.minOrderRu !== undefined ? { minOrderRu: dto.minOrderRu?.trim() || null } : {}),
+          ...(dto.packageInfoKg !== undefined
+            ? { packageInfoKg: dto.packageInfoKg?.trim() || null }
+            : {}),
+          ...(dto.packageInfoRu !== undefined
+            ? { packageInfoRu: dto.packageInfoRu?.trim() || null }
+            : {}),
           ...(dto.isActive !== undefined ? { isActive: dto.isActive } : {}),
           ...(dto.adminNote !== undefined ? { adminNote: dto.adminNote?.trim() || null } : {}),
           ...(dto.price !== undefined
@@ -472,6 +501,11 @@ export class AdminProductsService {
             : {}),
           ...(dto.stockStatus !== undefined ? { stockStatus: dto.stockStatus } : {}),
           ...(specs !== undefined ? { specs: Object.keys(specs).length ? specs : Prisma.JsonNull } : {}),
+          ...(specsRu !== undefined
+            ? { specsRu: Object.keys(specsRu).length ? specsRu : Prisma.JsonNull }
+            : {}),
+          ...(faqKg !== undefined ? { faqKg: faqKg.length ? faqKg : Prisma.JsonNull } : {}),
+          ...(faqRu !== undefined ? { faqRu: faqRu.length ? faqRu : Prisma.JsonNull } : {}),
         },
       })
 
@@ -1009,6 +1043,10 @@ export class AdminProductsService {
       product.specs && typeof product.specs === 'object' && !Array.isArray(product.specs)
         ? product.specs
         : {}
+    const specsRu =
+      product.specsRu && typeof product.specsRu === 'object' && !Array.isArray(product.specsRu)
+        ? product.specsRu
+        : {}
     const specsCount = Object.keys(specs).length
     const documentCount = product.documents.length
     const variantSummary = buildVariantSummary(product.variants)
@@ -1025,7 +1063,13 @@ export class AdminProductsService {
       price: Number(product.price),
       currency: product.currency,
       unit: product.unit,
+      unitRu: product.unitRu || '',
+      minOrder: product.minOrder || '',
+      minOrderRu: product.minOrderRu || '',
+      packageInfoKg: product.packageInfoKg || '',
+      packageInfoRu: product.packageInfoRu || '',
       shortDescriptionKg: product.shortDescriptionKg,
+      shortDescriptionRu: product.shortDescriptionRu || '',
       descriptionKg: product.descriptionKg,
       descriptionRu: product.descriptionRu || '',
       seoTitleKg: product.seoTitleKg || '',
@@ -1033,6 +1077,9 @@ export class AdminProductsService {
       seoTitleRu: product.seoTitleRu || '',
       seoDescriptionRu: product.seoDescriptionRu || '',
       specs,
+      specsRu,
+      faqKg: Array.isArray(product.faqKg) ? product.faqKg : [],
+      faqRu: Array.isArray(product.faqRu) ? product.faqRu : [],
       documents: product.documents.map((document) => ({
         id: document.id,
         title: document.title,
@@ -1141,6 +1188,7 @@ function assertProductUpdatePermissions(dto: UpdateAdminProductDto, admin?: Admi
     dto.slug !== undefined ||
     dto.sku !== undefined ||
     dto.shortDescriptionKg !== undefined ||
+    dto.shortDescriptionRu !== undefined ||
     dto.descriptionKg !== undefined ||
     dto.descriptionRu !== undefined ||
     dto.seoTitleKg !== undefined ||
@@ -1148,8 +1196,16 @@ function assertProductUpdatePermissions(dto: UpdateAdminProductDto, admin?: Admi
     dto.seoTitleRu !== undefined ||
     dto.seoDescriptionRu !== undefined ||
     dto.unit !== undefined ||
+    dto.unitRu !== undefined ||
+    dto.minOrder !== undefined ||
+    dto.minOrderRu !== undefined ||
+    dto.packageInfoKg !== undefined ||
+    dto.packageInfoRu !== undefined ||
     dto.adminNote !== undefined ||
     dto.specs !== undefined ||
+    dto.specsRu !== undefined ||
+    dto.faqKg !== undefined ||
+    dto.faqRu !== undefined ||
     dto.documents !== undefined ||
     dto.images !== undefined
   ) {
@@ -1220,14 +1276,17 @@ function changedFieldsFromUpdateDto(dto: UpdateAdminProductDto) {
   add('slug', dto.slug !== undefined)
   add('sku', dto.sku !== undefined)
   add('unit', dto.unit !== undefined)
+  add('unitRu', dto.unitRu !== undefined)
   add('price', dto.price !== undefined)
   add('stock', dto.stockQuantity !== undefined)
   add('stockStatus', dto.stockStatus !== undefined)
   add('isActive', dto.isActive !== undefined)
   add('adminNote', dto.adminNote !== undefined)
-  add('description', dto.shortDescriptionKg !== undefined || dto.descriptionKg !== undefined || dto.descriptionRu !== undefined)
+  add('description', dto.shortDescriptionKg !== undefined || dto.shortDescriptionRu !== undefined || dto.descriptionKg !== undefined || dto.descriptionRu !== undefined)
+  add('commercialText', dto.minOrder !== undefined || dto.minOrderRu !== undefined || dto.packageInfoKg !== undefined || dto.packageInfoRu !== undefined)
   add('seo', dto.seoTitleKg !== undefined || dto.seoDescriptionKg !== undefined || dto.seoTitleRu !== undefined || dto.seoDescriptionRu !== undefined)
-  add('specs', dto.specs !== undefined)
+  add('specs', dto.specs !== undefined || dto.specsRu !== undefined)
+  add('faq', dto.faqKg !== undefined || dto.faqRu !== undefined)
   add('documents', dto.documents !== undefined)
   add('images', dto.images !== undefined)
   return fields
@@ -1275,11 +1334,17 @@ function snapshotProduct(product: AdminProduct) {
     brand: product.brand?.name || null,
     price: Number(product.price),
     unit: product.unit,
+    unitRu: product.unitRu,
+    minOrder: product.minOrder,
+    minOrderRu: product.minOrderRu,
+    packageInfoKg: product.packageInfoKg,
+    packageInfoRu: product.packageInfoRu,
     stockStatus: product.stockStatus,
     stockQuantity: product.stock?.quantity ?? null,
     reservedQuantity: product.stock?.reservedQuantity ?? null,
     isActive: product.isActive,
     shortDescriptionKg: product.shortDescriptionKg,
+    shortDescriptionRu: product.shortDescriptionRu,
     descriptionKg: product.descriptionKg,
     descriptionRu: product.descriptionRu,
     seoTitleKg: product.seoTitleKg,
@@ -1287,6 +1352,9 @@ function snapshotProduct(product: AdminProduct) {
     seoTitleRu: product.seoTitleRu,
     seoDescriptionRu: product.seoDescriptionRu,
     specs,
+    specsRu: product.specsRu,
+    faqKg: product.faqKg,
+    faqRu: product.faqRu,
     documents: product.documents.map((document) => ({
       title: document.title,
       url: document.url,
@@ -1513,6 +1581,15 @@ function normalizeSpecs(rows: Array<{ key: string; value: string }>) {
     result[key] = value
     return result
   }, {})
+}
+
+function normalizeFaq(rows: Array<{ question: string; answer: string }>) {
+  return rows
+    .map((row) => ({
+      question: row.question?.trim(),
+      answer: row.answer?.trim(),
+    }))
+    .filter((row) => row.question && row.answer)
 }
 
 function normalizeDocuments(
