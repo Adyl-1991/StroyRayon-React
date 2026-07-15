@@ -1,0 +1,46 @@
+{
+  "id": "/",
+  "name": "StroyRayon — курулуш материалдары",
+  "short_name": "StroyRayon",
+  "description": "Курулуш материалдарын тандоо жана заказ берүү үчүн StroyRayon каталогу.",
+  "lang": "ky",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f5ef",
+  "theme_color": "#1f6b4f",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "/icons/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/pwa-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Каталог",
+      "short_name": "Каталог",
+      "url": "/catalog?source=pwa-shortcut"
+    },
+    {
+      "name": "Себет",
+      "short_name": "Себет",
+      "url": "/cart?source=pwa-shortcut"
+    }
+  ]
+}
