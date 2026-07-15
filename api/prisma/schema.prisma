@@ -103,18 +103,24 @@ model Product {
   oldPrice           Decimal?            @db.Decimal(12, 2)
   currency           String              @default("KGS")
   unit               String
+  unitRu             String?
   stockStatus        ProductStockStatus  @default(IN_STOCK)
   minOrder           String?
+  minOrderRu         String?
   shortDescriptionKg String?
+  shortDescriptionRu String?
   descriptionKg      String?
   descriptionRu      String?
   packageInfoKg      String?
+  packageInfoRu      String?
   deliveryInfoKg     String?
   warrantyInfoKg     String?
   recommendedUseKg   String?
   specs              Json?
+  specsRu            Json?
   tags               String[]
   faqKg              Json?
+  faqRu              Json?
   seoTitleKg         String?
   seoDescriptionKg   String?
   seoTitleRu         String?

@@ -44,19 +44,26 @@ type ProductInput = {
   oldPrice?: number | null
   currency?: string
   unit: string
+  unitRu?: string | null
   stockStatus?: string
   minOrder?: string | null
+  minOrderRu?: string | null
   shortDescriptionKg?: string | null
+  shortDescriptionRu?: string | null
   descriptionKg?: string | null
   descriptionRu?: string | null
   packageInfoKg?: string | null
+  packageInfoRu?: string | null
   deliveryInfoKg?: string | null
   warrantyInfoKg?: string | null
   recommendedUseKg?: string | null
   specs?: Prisma.InputJsonValue
+  specsRu?: Prisma.InputJsonValue
+  specificationsRu?: Prisma.InputJsonValue
   tags?: string[]
   badges?: string[]
   faqKg?: Prisma.InputJsonValue
+  faqRu?: Prisma.InputJsonValue
   seoTitleKg?: string | null
   seoDescriptionKg?: string | null
   seoTitleRu?: string | null
@@ -270,18 +277,24 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         oldPrice: product.oldPrice ? new Prisma.Decimal(product.oldPrice) : null,
         currency: product.currency || 'KGS',
         unit: product.unit,
+        unitRu: product.unitRu || null,
         stockStatus,
         minOrder: product.minOrder || null,
+        minOrderRu: product.minOrderRu || null,
         shortDescriptionKg: product.shortDescriptionKg || null,
+        shortDescriptionRu: product.shortDescriptionRu || null,
         descriptionKg: product.descriptionKg || null,
         descriptionRu: product.descriptionRu || null,
         packageInfoKg: product.packageInfoKg || null,
+        packageInfoRu: product.packageInfoRu || null,
         deliveryInfoKg: product.deliveryInfoKg || null,
         warrantyInfoKg: product.warrantyInfoKg || null,
         recommendedUseKg: product.recommendedUseKg || null,
         specs: product.specs || Prisma.JsonNull,
+        specsRu: product.specificationsRu || product.specsRu || Prisma.JsonNull,
         tags: product.tags || product.badges || [],
         faqKg: product.faqKg || Prisma.JsonNull,
+        faqRu: product.faqRu || Prisma.JsonNull,
         seoTitleKg: product.seoTitleKg || `${product.titleKg} - StroyRayon`,
         seoDescriptionKg: product.seoDescriptionKg || product.shortDescriptionKg || product.descriptionKg || null,
         seoTitleRu: product.seoTitleRu || (product.titleRu ? `${product.titleRu} - StroyRayon` : null),
@@ -301,18 +314,24 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
         oldPrice: product.oldPrice ? new Prisma.Decimal(product.oldPrice) : null,
         currency: product.currency || 'KGS',
         unit: product.unit,
+        unitRu: product.unitRu || null,
         stockStatus,
         minOrder: product.minOrder || null,
+        minOrderRu: product.minOrderRu || null,
         shortDescriptionKg: product.shortDescriptionKg || null,
+        shortDescriptionRu: product.shortDescriptionRu || null,
         descriptionKg: product.descriptionKg || null,
         descriptionRu: product.descriptionRu || null,
         packageInfoKg: product.packageInfoKg || null,
+        packageInfoRu: product.packageInfoRu || null,
         deliveryInfoKg: product.deliveryInfoKg || null,
         warrantyInfoKg: product.warrantyInfoKg || null,
         recommendedUseKg: product.recommendedUseKg || null,
         specs: product.specs || Prisma.JsonNull,
+        specsRu: product.specificationsRu || product.specsRu || Prisma.JsonNull,
         tags: product.tags || product.badges || [],
         faqKg: product.faqKg || Prisma.JsonNull,
+        faqRu: product.faqRu || Prisma.JsonNull,
         seoTitleKg: product.seoTitleKg || `${product.titleKg} - StroyRayon`,
         seoDescriptionKg: product.seoDescriptionKg || product.shortDescriptionKg || product.descriptionKg || null,
         seoTitleRu: product.seoTitleRu || (product.titleRu ? `${product.titleRu} - StroyRayon` : null),
