@@ -16,6 +16,7 @@ export function AdminBrandEditor({ brands, value, onChange, onBrandsChange, disa
   }))
   const name = nameState.brandId === value ? nameState.name : selectedBrand?.name || ''
   const [busy, setBusy] = useState(false)
+  const [mode, setMode] = useState('idle')
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
@@ -24,7 +25,29 @@ export function AdminBrandEditor({ brands, value, onChange, onBrandsChange, disa
     setNameState({ brandId, name: nextBrand?.name || '' })
     setError('')
     setMessage('')
+    setMode('idle')
     onChange(brandId)
+  }
+
+  function startCreate() {
+    setNameState({ brandId: value, name: '' })
+    setError('')
+    setMessage('')
+    setMode('create')
+  }
+
+  function startRename() {
+    if (!selectedBrand) return
+    setNameState({ brandId: value, name: selectedBrand.name })
+    setError('')
+    setMessage('')
+    setMode('rename')
+  }
+
+  function cancelEditing() {
+    setNameState({ brandId: value, name: selectedBrand?.name || '' })
+    setError('')
+    setMode('idle')
   }
 
   const applyBrands = (nextBrands) => onBrandsChange(sortBrands(nextBrands))
@@ -40,6 +63,7 @@ export function AdminBrandEditor({ brands, value, onChange, onBrandsChange, disa
       applyBrands([...brands, created])
       onChange(created.id)
       setNameState({ brandId: created.id, name: created.name })
+      setMode('idle')
       setMessage(`Бренд «${created.name}» добавлен и выбран.`)
     } catch (requestError) {
       setError(requestError.message || 'Не удалось добавить бренд.')
@@ -57,6 +81,8 @@ export function AdminBrandEditor({ brands, value, onChange, onBrandsChange, disa
     try {
       const updated = await updateAdminBrand(selectedBrand.id, nextName)
       applyBrands(brands.map((brand) => (brand.id === updated.id ? updated : brand)))
+      setNameState({ brandId: updated.id, name: updated.name })
+      setMode('idle')
       setMessage(`Название изменено на «${updated.name}».`)
     } catch (requestError) {
       setError(requestError.message || 'Не удалось переименовать бренд.')
@@ -95,14 +121,25 @@ export function AdminBrandEditor({ brands, value, onChange, onBrandsChange, disa
       </label>
       {!disabled && (
         <div className='admin-brand-manager'>
-          <label>
-            Название бренда
-            <input data-qa='brand-name' value={name} onChange={(event) => setNameState({ brandId: value, name: event.target.value })} maxLength={120} placeholder='Например, Bosch' disabled={busy} />
-          </label>
+          {mode !== 'idle' && (
+            <label>
+              {mode === 'create' ? 'Новый бренд' : 'Новое название бренда'}
+              <input data-qa='brand-name' value={name} onChange={(event) => setNameState({ brandId: value, name: event.target.value })} maxLength={120} placeholder='Например, Bosch' disabled={busy} autoFocus />
+            </label>
+          )}
           <div className='admin-brand-actions'>
-            <button type='button' className='admin-secondary-button' onClick={handleCreate} disabled={busy || !name.trim()}>Добавить новый</button>
-            <button type='button' className='admin-secondary-button' onClick={handleRename} disabled={busy || !selectedBrand || !name.trim() || name.trim() === selectedBrand.name}>Переименовать</button>
-            <button type='button' className='admin-danger-button' onClick={handleDelete} disabled={busy || !selectedBrand || productCount > 0}>Удалить</button>
+            {mode === 'idle' ? (
+              <>
+                <button type='button' className='admin-secondary-button' onClick={startCreate} disabled={busy}>Добавить бренд</button>
+                <button type='button' className='admin-secondary-button' onClick={startRename} disabled={busy || !selectedBrand}>Переименовать</button>
+                <button type='button' className='admin-danger-button' onClick={handleDelete} disabled={busy || !selectedBrand || productCount > 0}>Удалить</button>
+              </>
+            ) : (
+              <>
+                <button type='button' className='admin-secondary-button' onClick={mode === 'create' ? handleCreate : handleRename} disabled={busy || !name.trim() || (mode === 'rename' && name.trim() === selectedBrand?.name)}>Сохранить</button>
+                <button type='button' className='admin-secondary-button' onClick={cancelEditing} disabled={busy}>Отмена</button>
+              </>
+            )}
           </div>
           {selectedBrand && productCount > 0 && <small>Бренд используется в товарах: {productCount}. Сначала смените бренд у этих товаров.</small>}
           {error && <small className='admin-inline-error' role='alert'>{error}</small>}
