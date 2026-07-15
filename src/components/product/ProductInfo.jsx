@@ -36,7 +36,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
   const facts = [
     { label: t('product.sku'), value: activeSku || product.article },
-    { label: t('product.brand'), value: product.brand || 'StroyRayon' },
+    { label: t('product.brand'), value: product.brand },
     { label: t('product.productType'), value: getLocalizedProductValue(product, 'productType', locale) },
     {
       label: t('product.pack'),
@@ -51,7 +51,7 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
   return (
     <section className="product-info">
       <div className="product-card__meta">
-        <span>{product.brand || 'StroyRayon'}</span>
+        {product.brand && <span>{product.brand}</span>}
         <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
       </div>
       <h1>{productName}</h1>

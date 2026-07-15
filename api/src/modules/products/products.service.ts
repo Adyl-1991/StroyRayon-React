@@ -13,7 +13,11 @@ const productInclude = {
     orderBy: [{ sortOrder: 'asc' as const }, { titleKg: 'asc' as const }],
   },
   stock: true,
-  relatedFrom: { include: { relatedProduct: true } },
+  relatedFrom: {
+    include: {
+      relatedProduct: { include: { brand: true } },
+    },
+  },
 } satisfies Prisma.ProductInclude
 
 type ProductRecord = Prisma.ProductGetPayload<{ include: typeof productInclude }>

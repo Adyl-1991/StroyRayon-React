@@ -60,7 +60,7 @@ export function ProductCard({ product }) {
       </Link>
       <div className="product-card__body">
         <div className="product-card__meta">
-          <span>{product.brand || 'StroyRayon'}</span>
+          {product.brand && <span>{product.brand}</span>}
           <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
         </div>
         <h3>
