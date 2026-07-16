@@ -314,14 +314,19 @@ export function getProductFullDescription(product, locale = 'kg') {
 
 export function getProductSpecs(product, locale = 'kg') {
   if (!product) return {}
-  return locale === 'ru'
-    ? product.specificationsRu || product.specsRu || {}
-    : Object.fromEntries(
-        Object.entries(product.specificationsKg || product.specs || {}).map(([key, value]) => [
-          normalizeKgText(key),
-          normalizeKgText(value),
-        ]),
-      )
+  if (locale === 'ru') {
+    return {
+      ...(product.specsRu || {}),
+      ...(product.specificationsRu || {}),
+    }
+  }
+
+  return Object.fromEntries(
+    Object.entries({ ...(product.specs || {}), ...(product.specificationsKg || {}) }).map(([key, value]) => [
+      normalizeKgText(key),
+      normalizeKgText(value),
+    ]),
+  )
 }
 
 export function getProductListField(product, fieldBase, locale = 'kg') {

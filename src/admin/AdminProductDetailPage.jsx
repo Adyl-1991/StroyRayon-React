@@ -838,6 +838,9 @@ export function AdminProductDetailPage() {
             <p>{form.slug} · {form.sku || 'без SKU'}</p>
           </div>
           <div className="admin-heading-actions">
+            <a className="admin-secondary-button" href="#admin-product-variants">
+              Варианты: {form.variants.length}
+            </a>
             <a className="admin-secondary-button" href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
               Открыть на сайте
             </a>
@@ -853,6 +856,12 @@ export function AdminProductDetailPage() {
         </div>
 
         {error && <div className="admin-alert admin-alert-error" role="alert">{error}</div>}
+        {id === 'cable-channel-16x16' && (
+          <div className="admin-alert" role="status">
+            Типоразмеры перенесены в объединённую карточку.{' '}
+            <Link to="/admin/products/cable-channel-25x16">Открыть карточку с 29 вариантами</Link>
+          </div>
+        )}
         {message && <div className="admin-alert admin-alert-success" role="status">{message}</div>}
         {draftStatusText && (
           <div className={`admin-draft-status admin-draft-status-${draftStatus}`} role="status" data-qa="product-draft-status">
@@ -1087,7 +1096,7 @@ export function AdminProductDetailPage() {
           </div>
         </article>
 
-        <article className="admin-card admin-edit-form">
+        <article className="admin-card admin-edit-form" id="admin-product-variants">
           <div className="admin-section-header">
             <h2>Варианты / типоразмеры</h2>
             <button type="button" className="admin-secondary-button" data-qa="edit-variant-add" disabled={!canEditContent || !canEditCommercial} onClick={addVariant}>

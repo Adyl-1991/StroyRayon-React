@@ -4,6 +4,7 @@ import {
   getDefaultVariant,
   getLocalizedProductValue,
   getProductShortDescription,
+  getProductSpecs,
   getProductTitle,
   getProductVariants,
   getStockLabel,
@@ -21,6 +22,13 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
   const { addToCart } = useCart()
   const { locale, t } = useLocale()
   const variants = getProductVariants(product)
+  const localizedSpecs = getProductSpecs(product, locale)
+  const orderSizesText = locale === 'ru'
+    ? localizedSpecs['Размеры под заказ']
+    : localizedSpecs['Заказ өлчөмдөрү']
+  const orderSizes = typeof orderSizesText === 'string'
+    ? orderSizesText.split(';').map((size) => size.trim()).filter(Boolean)
+    : []
   const activeVariant = selectedVariant || getDefaultVariant(product)
   const stockStatus = activeVariant ? getStockStatus(activeVariant) : getStockStatus(product)
   const canBuy = isPurchasable(product, activeVariant)
@@ -106,6 +114,19 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
             })}
           </div>
         </fieldset>
+      )}
+      {orderSizes.length > 0 && (
+        <section className="variant-order-sizes" aria-label={locale === 'ru' ? 'Размеры под заказ' : 'Заказ менен өлчөмдөр'}>
+          <strong>{locale === 'ru' ? `Другие размеры под заказ (${orderSizes.length})` : `Заказ менен башка өлчөмдөр (${orderSizes.length})`}</strong>
+          <div className="variant-order-sizes__list">
+            {orderSizes.map((size) => <span key={size}>{size}</span>)}
+          </div>
+          <small>
+            {locale === 'ru'
+              ? 'Все белые, длина 2 м. Цену и наличие уточняйте у менеджера.'
+              : 'Баары ак, узундугу 2 м. Баасын жана бар-жогун менеджерден тактаңыз.'}
+          </small>
+        </section>
       )}
       {shortDescription && <p>{shortDescription}</p>}
       <div className="product-info__actions">
