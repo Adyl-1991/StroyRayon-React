@@ -69,6 +69,7 @@ test('white 2 m cable channel exposes all existing sizes as variants', () => {
   assert.equal(product.specificationsRu['Единица продажи'], 'шт.')
   assert.equal(product.specificationsRu.Цвет, 'белый')
   assert.equal(product.faqRu.length, 4)
+  assert.equal(product.orderSizesKg.split(';').length, 27)
   assert.equal(getProductSpecs(product, 'ru')['Размеры под заказ'].split(';').length, 27)
   assert.equal(product.variants.length, 2)
   assert.deepEqual(

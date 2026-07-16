@@ -24,8 +24,8 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
   const variants = getProductVariants(product)
   const localizedSpecs = getProductSpecs(product, locale)
   const orderSizesText = locale === 'ru'
-    ? localizedSpecs['Размеры под заказ']
-    : localizedSpecs['Заказ өлчөмдөрү']
+    ? localizedSpecs['Размеры под заказ'] || product.orderSizesRu
+    : localizedSpecs['Буйрутма өлчөмдөрү'] || localizedSpecs['Заказ өлчөмдөрү'] || product.orderSizesKg
   const orderSizes = typeof orderSizesText === 'string'
     ? orderSizesText.split(';').map((size) => size.trim()).filter(Boolean)
     : []
