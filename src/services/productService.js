@@ -390,7 +390,11 @@ export function getProductPrice(product) {
   const variants = getProductVariants(product)
   if (!variants.length) return Number(product?.price || 0)
 
-  return Math.min(...variants.map((variant) => Number(variant.price || 0)))
+  const knownPrices = variants
+    .map((variant) => Number(variant.price || 0))
+    .filter((price) => Number.isFinite(price) && price > 0)
+
+  return knownPrices.length ? Math.min(...knownPrices) : Number(product?.price || 0)
 }
 
 export function getDefaultVariant(product) {

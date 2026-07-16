@@ -4,7 +4,6 @@ import {
   getDefaultVariant,
   getLocalizedProductValue,
   getProductShortDescription,
-  getProductSpecs,
   getProductTitle,
   getProductVariants,
   getStockLabel,
@@ -22,17 +21,11 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
   const { addToCart } = useCart()
   const { locale, t } = useLocale()
   const variants = getProductVariants(product)
-  const localizedSpecs = getProductSpecs(product, locale)
-  const orderSizesText = locale === 'ru'
-    ? localizedSpecs['Размеры под заказ'] || product.orderSizesRu
-    : localizedSpecs['Буйрутма өлчөмдөрү'] || localizedSpecs['Заказ өлчөмдөрү'] || product.orderSizesKg
-  const orderSizes = typeof orderSizesText === 'string'
-    ? orderSizesText.split(';').map((size) => size.trim()).filter(Boolean)
-    : []
   const activeVariant = selectedVariant || getDefaultVariant(product)
   const stockStatus = activeVariant ? getStockStatus(activeVariant) : getStockStatus(product)
   const canBuy = isPurchasable(product, activeVariant)
   const activePrice = activeVariant?.price ?? product.price
+  const hasActivePrice = Number(activePrice) > 0
   const activeUnit = getUnitLabel(activeVariant?.unit || product.unit, locale)
   const activeSku = activeVariant?.sku || product.sku
   const activeMinOrder =
@@ -82,9 +75,9 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
         </div>
       )}
       <div className="product-price">
-        <strong>{formatPrice(activePrice)}</strong>
-        {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
-        <span>/ {activeUnit}</span>
+        <strong>{hasActivePrice ? formatPrice(activePrice) : t('product.priceNotSet')}</strong>
+        {hasActivePrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
+        {hasActivePrice && <span>/ {activeUnit}</span>}
         {product.isSale && <Badge tone="sale">{t('product.sale')}</Badge>}
       </div>
       <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
@@ -95,18 +88,20 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
             {variants.map((variant) => {
               const variantStock = getStockStatus(variant)
               const isActive = activeVariant?.id === variant.id
+              const hasVariantPrice = Number(variant.price) > 0
 
               return (
                 <button
                   key={variant.id}
                   type="button"
                   className={`variant-option${isActive ? ' is-active' : ''}`}
-                  disabled={variantStock === 'out_of_stock'}
                   onClick={() => onVariantChange?.(variant.id)}
                 >
                   <span>{locale === 'ru' ? variant.titleRu || variant.size : variant.titleKg || variant.size}</span>
                   <small>
-                    {formatPrice(variant.price)} / {getUnitLabel(variant.unit, locale)}
+                    {hasVariantPrice
+                      ? `${formatPrice(variant.price)} / ${getUnitLabel(variant.unit, locale)}`
+                      : t('product.priceNotSet')}
                   </small>
                   <em>{getStockLabel(variantStock, locale)}</em>
                 </button>
@@ -114,19 +109,6 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
             })}
           </div>
         </fieldset>
-      )}
-      {orderSizes.length > 0 && (
-        <section className="variant-order-sizes" aria-label={locale === 'ru' ? 'Размеры под заказ' : 'Заказ менен өлчөмдөр'}>
-          <strong>{locale === 'ru' ? `Другие размеры под заказ (${orderSizes.length})` : `Заказ менен башка өлчөмдөр (${orderSizes.length})`}</strong>
-          <div className="variant-order-sizes__list">
-            {orderSizes.map((size) => <span key={size}>{size}</span>)}
-          </div>
-          <small>
-            {locale === 'ru'
-              ? 'Все белые, длина 2 м. Цену и наличие уточняйте у менеджера.'
-              : 'Баары ак, узундугу 2 м. Баасын жана бар-жогун менеджерден тактаңыз.'}
-          </small>
-        </section>
       )}
       {shortDescription && <p>{shortDescription}</p>}
       <div className="product-info__actions">

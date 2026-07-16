@@ -69,16 +69,19 @@ test('white 2 m cable channel exposes all existing sizes as variants', () => {
   assert.equal(product.specificationsRu['Единица продажи'], 'шт.')
   assert.equal(product.specificationsRu.Цвет, 'белый')
   assert.equal(product.faqRu.length, 4)
-  assert.equal(product.orderSizesKg.split(';').length, 27)
-  assert.equal(getProductSpecs(product, 'ru')['Размеры под заказ'].split(';').length, 27)
-  assert.equal(product.variants.length, 2)
+  assert.equal(getProductSpecs(product, 'ru').Размеры, '29 типоразмеров')
+  assert.equal(getProductSpecs(product, 'ru')['Размеры под заказ'], undefined)
+  assert.equal(product.variants.length, 29)
   assert.deepEqual(
-    product.variants.map((variant) => [variant.size, variant.titleRu, variant.sku, variant.price, variant.specs.Цвет]),
+    product.variants.slice(0, 2).map((variant) => [variant.size, variant.titleRu, variant.sku, variant.price, variant.specs.Цвет]),
     [
       ['16x16 мм', '16x16 мм, 2 м, белый', 'SR-ELC-CHN-1616-2M', 38, 'белый'],
       ['25x16 мм', '25x16 мм, 2 м, белый', 'SR-ELC-CHN-2516-2M', 59.97, 'белый'],
     ],
   )
+  assert.equal(product.variants.filter((variant) => variant.price === 0).length, 27)
+  assert.equal(product.variants.filter((variant) => variant.stockStatus === 'out_of_stock').length, 27)
+  assert.ok(product.variants.every((variant) => variant.sku && variant.specs.Цвет === 'белый'))
   assert.equal(getProductPrice(product), 38)
   assert.equal(getDefaultVariant(product).id, 'cable-channel-white-2m-16x16')
   assert.equal(getSelectedVariant(product, 'cable-channel-white-2m-25x16').price, 59.97)
