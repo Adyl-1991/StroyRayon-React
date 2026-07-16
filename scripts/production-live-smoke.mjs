@@ -86,7 +86,18 @@ async function main() {
 
     const variants = Array.isArray(productDetail?.variants) ? productDetail.variants : []
     if (variants.length) {
-      addCheck('Product detail exposes active variants', variants.every((variant) => variant.id && variant.titleKg && Number(variant.price) > 0), JSON.stringify(variants[0]))
+      addCheck(
+        'Product detail exposes commercially valid active variants',
+        variants.every(
+          (variant) =>
+            variant.id &&
+            variant.titleKg &&
+            variant.sku &&
+            variant.stockStatus &&
+            (Number(variant.price) > 0 || variant.stockStatus === 'out_of_stock'),
+        ),
+        `${variants.length} variants; first: ${JSON.stringify(variants[0])}`,
+      )
     }
 
     const images = Array.isArray(productDetail?.images) ? productDetail.images : []
