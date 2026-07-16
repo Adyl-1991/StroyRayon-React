@@ -109,6 +109,7 @@ export function getProductsByCatalogNode(node, sourceProducts = products) {
   const nodeTags = node.productTags || []
 
   return sourceProducts.map(normalizeProduct).filter((product) => {
+    if (product.isActive === false) return false
     const pathMatch = product.catalogPath?.some((slug) => descendantSlugs.includes(slug))
     const tagMatch = nodeTags.some((tag) => product.tags?.includes(tag))
     return pathMatch || tagMatch
@@ -126,6 +127,7 @@ export function getSubcategory(categorySlug, subcategorySlug) {
 
 export function getProducts(filters = {}) {
   return products.filter((product) => {
+    if (product.isActive === false) return false
     if (filters.categorySlug && product.categorySlug !== filters.categorySlug) return false
     if (filters.subcategorySlug && product.subcategorySlug !== filters.subcategorySlug) return false
     if (filters.sale && !product.isSale) return false
@@ -147,6 +149,7 @@ const HOME_POPULAR_GROUPS = [
 
 export const legacyProductSlugAliases = {
   'kabel-vvgng': 'kabel-vvgng-3x2-5',
+  'kabel-kanal-16x16': 'kabel-kanal-25x16-2',
   'gips-shtukaturka': 'gips-shtukaturkasy-30kg',
   'smesitel-kuhnya': 'ashkana-smesiteli-basic',
 }
@@ -156,8 +159,8 @@ export function resolveProductSlug(productSlug) {
 }
 
 export function getHomePopularProducts(sourceProducts = products) {
-  const normalizedSource = sourceProducts.map(normalizeProduct)
-  const normalizedFallback = products.map(normalizeProduct)
+  const normalizedSource = sourceProducts.map(normalizeProduct).filter((product) => product.isActive !== false)
+  const normalizedFallback = products.map(normalizeProduct).filter((product) => product.isActive !== false)
   const selected = []
 
   for (const group of HOME_POPULAR_GROUPS) {
@@ -199,6 +202,7 @@ export function sortProducts(productsToSort, sort = 'popular') {
 
 export function filterProducts(productsToFilter, filters = {}) {
   return productsToFilter.map(normalizeProduct).filter((product) => {
+    if (product.isActive === false) return false
     if (filters.categorySlug && product.categorySlug !== filters.categorySlug) return false
     if (filters.subcategorySlug && product.subcategorySlug !== filters.subcategorySlug) return false
     if (filters.minPrice && product.price < Number(filters.minPrice)) return false
@@ -225,7 +229,7 @@ export function getFilteredProducts(filters = {}, sourceProducts = products) {
 
 export function getProductBySlug(productSlug) {
   const resolvedSlug = resolveProductSlug(productSlug)
-  const product = products.find((product) => product.slug === resolvedSlug)
+  const product = products.find((product) => product.slug === resolvedSlug && product.isActive !== false)
   return product ? normalizeProduct(product) : undefined
 }
 
@@ -238,7 +242,7 @@ export function getRelatedProducts(product, limit = 4, sourceProducts = products
   const categoryProducts = normalizedProducts.filter((item) => item.id !== product.id && item.categorySlug === product.categorySlug)
 
   return [...apiRelatedProducts, ...preferredProducts, ...categoryProducts]
-    .filter((item, index, list) => item.id !== product.id && list.findIndex((candidate) => candidate.id === item.id) === index)
+    .filter((item, index, list) => item.isActive !== false && item.id !== product.id && list.findIndex((candidate) => candidate.id === item.id) === index)
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit)
 }
@@ -246,7 +250,9 @@ export function getRelatedProducts(product, limit = 4, sourceProducts = products
 export function searchProducts(query, sourceProducts = products) {
   const normalizedQuery = query.trim().toLowerCase()
   if (!normalizedQuery) return []
-  return sourceProducts.map(normalizeProduct).filter((product) => getSearchIndex(product).includes(normalizedQuery))
+  return sourceProducts
+    .map(normalizeProduct)
+    .filter((product) => product.isActive !== false && getSearchIndex(product).includes(normalizedQuery))
 }
 
 export function getStockLabel(stockStatus, locale = 'kg') {

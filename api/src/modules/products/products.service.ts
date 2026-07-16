@@ -14,6 +14,7 @@ const productInclude = {
   },
   stock: true,
   relatedFrom: {
+    where: { relatedProduct: { isActive: true } },
     include: {
       relatedProduct: { include: { brand: true } },
     },

@@ -164,7 +164,7 @@ function createForm(product) {
           titleKg: variant.titleKg || variant.size || '',
           titleRu: variant.titleRu || '',
           sku: variant.sku || '',
-          price: String(variant.price || ''),
+          price: String(variant.price ?? ''),
           unit: variant.unit || product.unit || '',
           stockQuantity: String(variant.stockQuantity ?? 0),
           reservedQuantity: variant.reservedQuantity || 0,
@@ -1101,18 +1101,42 @@ export function AdminProductDetailPage() {
               {form.variants.map((variant, index) => (
                 <div className="admin-variant-row" key={variant.id || `new-variant-${index}`}>
                   <div className="admin-repeat-row admin-repeat-row-variant">
-                    <input data-qa="edit-variant-title-kg" placeholder="Название KG" value={variant.titleKg} onChange={(event) => updateVariantField(index, 'titleKg', event.target.value)} disabled={!canEditContent} maxLength={180} />
-                    <input data-qa="edit-variant-title-ru" placeholder="Название RU" value={variant.titleRu} onChange={(event) => updateVariantField(index, 'titleRu', event.target.value)} disabled={!canEditContent} maxLength={180} />
-                    <input data-qa="edit-variant-sku" placeholder="SKU" value={variant.sku} onChange={(event) => updateVariantField(index, 'sku', event.target.value)} disabled={!canEditContent} maxLength={80} />
-                    <input data-qa="edit-variant-price" type="number" min="0.01" step="0.01" placeholder="Цена" value={variant.price} onChange={(event) => updateVariantField(index, 'price', event.target.value)} disabled={!canEditCommercial} />
-                    <select data-qa="edit-variant-unit" value={variant.unit} onChange={(event) => updateVariantField(index, 'unit', event.target.value)} disabled={!canEditContent}>
-                      {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
-                    </select>
-                    <input data-qa="edit-variant-stock" type="number" min={variant.reservedQuantity || 0} step="1" value={variant.stockQuantity} onChange={(event) => updateVariantField(index, 'stockQuantity', event.target.value)} disabled={!canEditCommercial} />
-                    <select data-qa="edit-variant-stock-status" value={variant.stockStatus} onChange={(event) => updateVariantField(index, 'stockStatus', event.target.value)} disabled={!canEditCommercial}>
-                      {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-                    </select>
-                    <input data-qa="edit-variant-sort-order" type="number" min="0" step="1" value={variant.sortOrder} onChange={(event) => updateVariantField(index, 'sortOrder', event.target.value)} disabled={!canEditContent} />
+                    <label>
+                      <span>Название KG</span>
+                      <input data-qa="edit-variant-title-kg" value={variant.titleKg} onChange={(event) => updateVariantField(index, 'titleKg', event.target.value)} disabled={!canEditContent} maxLength={180} />
+                    </label>
+                    <label>
+                      <span>Название RU</span>
+                      <input data-qa="edit-variant-title-ru" value={variant.titleRu} onChange={(event) => updateVariantField(index, 'titleRu', event.target.value)} disabled={!canEditContent} maxLength={180} />
+                    </label>
+                    <label>
+                      <span>SKU</span>
+                      <input data-qa="edit-variant-sku" value={variant.sku} onChange={(event) => updateVariantField(index, 'sku', event.target.value)} disabled={!canEditContent} maxLength={80} />
+                    </label>
+                    <label>
+                      <span>Цена, KGS</span>
+                      <input data-qa="edit-variant-price" type="number" min="0.01" step="0.01" value={variant.price} onChange={(event) => updateVariantField(index, 'price', event.target.value)} disabled={!canEditCommercial} />
+                    </label>
+                    <label>
+                      <span>Единица</span>
+                      <select data-qa="edit-variant-unit" value={variant.unit} onChange={(event) => updateVariantField(index, 'unit', event.target.value)} disabled={!canEditContent}>
+                        {units.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Остаток</span>
+                      <input data-qa="edit-variant-stock" type="number" min={variant.reservedQuantity || 0} step="1" value={variant.stockQuantity} onChange={(event) => updateVariantField(index, 'stockQuantity', event.target.value)} disabled={!canEditCommercial} />
+                    </label>
+                    <label>
+                      <span>Статус</span>
+                      <select data-qa="edit-variant-stock-status" value={variant.stockStatus} onChange={(event) => updateVariantField(index, 'stockStatus', event.target.value)} disabled={!canEditCommercial}>
+                        {stockOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span>Порядок</span>
+                      <input data-qa="edit-variant-sort-order" type="number" min="0" step="1" value={variant.sortOrder} onChange={(event) => updateVariantField(index, 'sortOrder', event.target.value)} disabled={!canEditContent} />
+                    </label>
                   </div>
                   <label className="admin-checkbox-field">
                     <input data-qa="edit-variant-active" type="checkbox" checked={variant.isActive} onChange={(event) => updateVariantField(index, 'isActive', event.target.checked)} disabled={!canEditActive} />
@@ -1138,6 +1162,9 @@ export function AdminProductDetailPage() {
                       </button>
                     )}
                   </div>
+                  {!variant.isActive && Number(variant.price) <= 0 && (
+                    <small>Черновик: укажите цену и остаток, затем включите вариант на сайте.</small>
+                  )}
                   {variant.reservedQuantity > 0 && <small>Зарезервировано: {variant.reservedQuantity}</small>}
                 </div>
               ))}

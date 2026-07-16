@@ -54,6 +54,13 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/product/kabel-kanal-16x16",
+      "destination": "/product/kabel-kanal-25x16-2",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

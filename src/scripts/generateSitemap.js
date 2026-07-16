@@ -51,7 +51,7 @@ function validateRoutes(routes) {
 
 export function getSitemapRoutes() {
   const catalogRoutes = collectCatalogRoutes(catalogTree)
-  const productRoutes = products.map((product) => `/product/${product.slug}`)
+  const productRoutes = products.filter((product) => product.isActive !== false).map((product) => `/product/${product.slug}`)
   return [...new Set([...staticRoutes, ...catalogRoutes, ...productRoutes].map(normalizePath))]
 }
 

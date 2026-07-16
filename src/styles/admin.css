@@ -761,6 +761,11 @@
   grid-template-columns: minmax(140px, 1.2fr) minmax(140px, 1.2fr) minmax(110px, 0.9fr) minmax(90px, 0.7fr) minmax(90px, 0.7fr) minmax(90px, 0.7fr) minmax(120px, 0.9fr) minmax(70px, 0.5fr);
 }
 
+.admin-repeat-row-variant label > span {
+  color: #65727e;
+  font-size: 12px;
+}
+
 @media (max-width: 760px) {
   .admin-header,
   .admin-header > div {

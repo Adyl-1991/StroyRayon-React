@@ -52,6 +52,8 @@ test('generated crawler files use only the final www host', async () => {
   assert.doesNotMatch(robots, /https:\/\/stroyrayon\.kg/)
   assert.match(sitemap, /<loc>https:\/\/www\.stroyrayon\.kg/)
   assert.doesNotMatch(sitemap, /<loc>https:\/\/stroyrayon\.kg/)
+  assert.match(sitemap, /\/product\/kabel-kanal-25x16-2<\/loc>/)
+  assert.doesNotMatch(sitemap, /\/product\/kabel-kanal-16x16<\/loc>/)
 })
 
 test('Vercel sends noindex headers for private and transactional routes', async () => {
