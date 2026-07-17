@@ -5,7 +5,6 @@ import {
   getLocalizedProductValue,
   getProductShortDescription,
   getProductTitle,
-  getProductVariants,
   getStockLabel,
   getStockStatus,
   getUnitLabel,
@@ -17,10 +16,9 @@ import { formatPrice } from '../../utils/formatPrice'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 
-export function ProductInfo({ product, selectedVariant, onVariantChange, summarySpecs = [] }) {
+export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
   const { addToCart } = useCart()
   const { locale, t } = useLocale()
-  const variants = getProductVariants(product)
   const activeVariant = selectedVariant || getDefaultVariant(product)
   const stockStatus = activeVariant ? getStockStatus(activeVariant) : getStockStatus(product)
   const canBuy = isPurchasable(product, activeVariant)
@@ -33,6 +31,9 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
       ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'minOrder', locale) || `1 ${activeUnit}`
       : normalizeKgText(activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`)
   const productName = getProductTitle(product, locale)
+  const activeVariantTitle = locale === 'ru'
+    ? activeVariant?.titleRu || activeVariant?.size
+    : activeVariant?.titleKg || activeVariant?.size
   const shortDescription = getProductShortDescription(product, locale)
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
   const facts = [
@@ -56,6 +57,11 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
         <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
       </div>
       <h1>{productName}</h1>
+      {activeVariantTitle && (
+        <p className="product-info__selected-variant" aria-live="polite">
+          {activeVariantTitle}
+        </p>
+      )}
       <dl className="product-facts">
         {facts.map((item) => (
           <div key={item.label}>
@@ -81,35 +87,6 @@ export function ProductInfo({ product, selectedVariant, onVariantChange, summary
         {product.isSale && <Badge tone="sale">{t('product.sale')}</Badge>}
       </div>
       <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
-      {variants.length > 0 && (
-        <fieldset className="variant-selector">
-          <legend>{t('product.selectVariant')}</legend>
-          <div className="variant-selector__grid">
-            {variants.map((variant) => {
-              const variantStock = getStockStatus(variant)
-              const isActive = activeVariant?.id === variant.id
-              const hasVariantPrice = Number(variant.price) > 0
-
-              return (
-                <button
-                  key={variant.id}
-                  type="button"
-                  className={`variant-option${isActive ? ' is-active' : ''}`}
-                  onClick={() => onVariantChange?.(variant.id)}
-                >
-                  <span>{locale === 'ru' ? variant.titleRu || variant.size : variant.titleKg || variant.size}</span>
-                  <small>
-                    {hasVariantPrice
-                      ? `${formatPrice(variant.price)} / ${getUnitLabel(variant.unit, locale)}`
-                      : t('product.priceNotSet')}
-                  </small>
-                  <em>{getStockLabel(variantStock, locale)}</em>
-                </button>
-              )
-            })}
-          </div>
-        </fieldset>
-      )}
       {shortDescription && <p>{shortDescription}</p>}
       <div className="product-info__actions">
         <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>

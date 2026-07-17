@@ -4,7 +4,7 @@ import { ProductFaq } from '../components/product/ProductFaq'
 import { ProductGallery } from '../components/product/ProductGallery'
 import { ProductInfo } from '../components/product/ProductInfo'
 import { ProductSpecs } from '../components/product/ProductSpecs'
-import { ProductStickyCta } from '../components/product/ProductStickyCta'
+import { ProductVariants } from '../components/product/ProductVariants'
 import { RelatedProducts } from '../components/product/RelatedProducts'
 import { Seo } from '../components/seo/Seo'
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
@@ -153,14 +153,33 @@ function buildCleanSpecs(specifications, locale, extraSpecs = {}) {
   return rows
 }
 
-function buildSummarySpecs(specifications, locale) {
-  return summarySpecKeys
-    .map((key) => {
-      const value = specifications[key]
-      return value ? { label: getLocalizedSpecLabel(key, locale), value: formatSpecValue(value) } : null
-    })
-    .filter(Boolean)
-    .slice(0, 6)
+function buildSummarySpecs(specifications, locale, variantSpecifications = {}) {
+  const rows = []
+  const seenLabels = new Set()
+
+  function addSpec(key, value) {
+    if (!isCleanSpec(key, value)) return
+
+    const label = getLocalizedSpecLabel(key, locale)
+    const normalizedLabel = label.toLocaleLowerCase()
+    if (seenLabels.has(normalizedLabel)) return
+
+    seenLabels.add(normalizedLabel)
+    rows.push({ label, value: formatSpecValue(value) })
+  }
+
+  Object.entries(variantSpecifications || {}).forEach(([key, value]) => addSpec(key, value))
+  summarySpecKeys.forEach((key) => addSpec(key, specifications[key]))
+
+  Object.entries(specifications).forEach(([key, value]) => {
+    const normalizedKey = String(key).toLocaleLowerCase()
+    const isVariantCount = Object.keys(variantSpecifications || {}).length > 0
+      && /^(размеры|өлчөмдөр|sizes)$/.test(normalizedKey)
+
+    if (!isVariantCount) addSpec(key, value)
+  })
+
+  return rows.slice(0, 6)
 }
 
 function stripDocumentationSection(text) {
@@ -262,11 +281,12 @@ export function ProductPage() {
       : normalizeKgText(selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder)
   const stockStatus = selectedVariant ? getStockStatus(selectedVariant) : getStockStatus(product)
   const variantSpecs = buildCleanSpecs(specifications, locale, {
+    ...(selectedVariant?.specs || {}),
     ...(activeSku ? { [t('product.sku')]: activeSku } : {}),
     ...(packageInfo ? { [t('product.pack')]: packageInfo } : {}),
     [t('product.stock')]: getStockLabel(stockStatus, locale),
   })
-  const summarySpecs = buildSummarySpecs(specifications, locale)
+  const summarySpecs = buildSummarySpecs(specifications, locale, selectedVariant?.specs)
   const breadcrumbItems = [
     { label: t('common.catalog'), to: '/catalog' },
     ...catalogBreadcrumbs.map((item) => ({ label: nodeText(item).title, to: getCatalogNodeUrl(item.path) })),
@@ -305,10 +325,15 @@ export function ProductPage() {
         <ProductInfo
           product={product}
           selectedVariant={selectedVariant}
-          onVariantChange={handleVariantChange}
           summarySpecs={summarySpecs}
         />
       </div>
+
+      <ProductVariants
+        product={product}
+        selectedVariant={selectedVariant}
+        onVariantChange={handleVariantChange}
+      />
 
       <nav className="product-section-nav" aria-label="Разделы товара">
         <a href="#product-description">{t('product.fullDescription')}</a>
@@ -374,7 +399,6 @@ export function ProductPage() {
       </div>
 
       <RelatedProducts products={relatedProducts} />
-      <ProductStickyCta product={product} selectedVariant={selectedVariant} />
     </main>
   )
 }

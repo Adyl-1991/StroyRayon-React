@@ -1799,6 +1799,16 @@ del {
   color: var(--color-muted);
 }
 
+.product-info__selected-variant {
+  width: fit-content;
+  margin: -4px 0 0;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: #edf7f1;
+  color: var(--color-primary-dark) !important;
+  font-weight: var(--weight-bold);
+}
+
 .product-info {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -1814,23 +1824,55 @@ del {
   line-height: 1.42;
 }
 
-.variant-selector {
+.product-variants {
+  display: grid;
+  gap: 16px;
   min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
+  margin-top: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(31, 43, 37, 0.05);
 }
 
-.variant-selector legend {
-  margin-bottom: 9px;
-  color: var(--color-text);
-  font-weight: var(--weight-semibold);
+.product-variants__heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.product-variants__heading h2,
+.product-variants__heading p {
+  margin: 0;
+}
+
+.product-variants__heading h2 {
+  font-size: 1.35rem;
+}
+
+.product-variants__heading p {
+  margin-top: 4px;
+  color: var(--color-muted);
+}
+
+.product-variants__heading > span {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 999px;
+  background: #edf7f1;
+  color: var(--color-primary-dark);
+  font-weight: var(--weight-bold);
 }
 
 .variant-selector__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
 }
 
 .variant-option {
@@ -1850,6 +1892,12 @@ del {
 .variant-option.is-active {
   border-color: rgba(45, 106, 79, 0.55);
   background: #f2faf5;
+}
+
+.variant-option.is-active {
+  border-width: 2px;
+  padding: 9px;
+  box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.08);
 }
 
 .variant-option span {
@@ -2634,7 +2682,6 @@ del {
     align-items: start;
   }
 
-  .product-info,
   .product-content-side {
     position: sticky;
     top: 96px;
@@ -3354,6 +3401,16 @@ del {
 
   .variant-selector__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-variants {
+    gap: 12px;
+    margin-top: 16px;
+    padding: 14px;
+  }
+
+  .product-variants__heading h2 {
+    font-size: 1.18rem;
   }
 
   .variant-option {
