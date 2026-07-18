@@ -403,6 +403,10 @@ async function inspectPage(cdp) {
       productCards: document.querySelectorAll('.product-card').length,
       productGrid: Boolean(document.querySelector('.product-grid')),
       emptyState: Boolean(document.querySelector('.empty-state')),
+      languageSwitcherVisible: (() => {
+        const switcher = document.querySelector('.language-switcher');
+        return Boolean(switcher && getComputedStyle(switcher).display !== 'none' && switcher.getBoundingClientRect().width > 0);
+      })(),
       chips: Array.from(document.querySelectorAll('.header-category-chip')).map((item) => item.textContent.trim()),
       overflow: Math.max(root.scrollWidth, body?.scrollWidth || 0) - root.clientWidth,
       brokenImages: Array.from(document.images)
@@ -466,6 +470,9 @@ async function runRouteAudit(cdp, checks, issues) {
         pageHealth(checks, issues, label, result, { breadcrumb: route !== '/', content: true })
         addCheck(checks, issues, `${label}: page title`, Boolean(result.h1 || result.title), result.h1 || result.title)
         addCheck(checks, issues, `${label}: document language`, result.lang === expected[locale].lang, result.lang)
+        if (viewport.mobile) {
+          addCheck(checks, issues, `${label}: mobile language switcher visible`, result.languageSwitcherVisible)
+        }
         addCheck(
           checks,
           issues,
@@ -489,7 +496,8 @@ async function runRouteAudit(cdp, checks, issues) {
 }
 
 async function runSearchAudit(cdp, checks, issues) {
-  await setViewport(cdp, viewports[Math.min(1, viewports.length - 1)])
+  const auditViewport = viewports[Math.min(1, viewports.length - 1)]
+  await setViewport(cdp, auditViewport)
   for (const locale of ['kg', 'ru']) {
     await navigate(cdp, '/')
     await setLocale(cdp, locale)
@@ -511,6 +519,28 @@ async function runSearchAudit(cdp, checks, issues) {
       addCheck(checks, issues, `${label}: submitted`, result.submitted)
       addCheck(checks, issues, `${label}: query preserved`, new URL(`${baseUrl}${page.path}`).searchParams.get('q') === term, page.path)
       addCheck(checks, issues, `${label}: clean result or empty state`, page.productCards > 0 || page.emptyState, `products ${page.productCards}`)
+      if (term === 'AlinEX' && page.productCards > 0) {
+        const catalogCtas = await evaluate(cdp, `(() => ({
+          zeroRatings: Array.from(document.querySelectorAll('.product-card .rating')).filter((item) => (item.textContent || '').replaceAll(' ', '').includes('0/5')).length,
+          priceInquiries: document.querySelectorAll('.product-card__inquiry').length,
+          inquiryHref: document.querySelector('.product-card:has(.product-card__inquiry) .product-card__image')?.getAttribute('href') || '',
+        }))()`)
+        addCheck(checks, issues, `${label}: no artificial zero rating`, catalogCtas.zeroRatings === 0, String(catalogCtas.zeroRatings))
+        addCheck(checks, issues, `${label}: products without price have inquiry CTA`, catalogCtas.priceInquiries > 0, String(catalogCtas.priceInquiries))
+        if (catalogCtas.inquiryHref) {
+          await navigate(cdp, catalogCtas.inquiryHref)
+          const inquiryProduct = await evaluate(cdp, `(() => ({
+            price: document.querySelector('.product-price strong')?.textContent?.trim() || '',
+            whatsapp: document.querySelector('.product-info__actions a[href*="wa.me"], .product-info__actions a[href*="whatsapp.com"]')?.href || '',
+            disabledCart: Boolean(document.querySelector('.product-info__actions button[disabled]')),
+            actionTop: document.querySelector('.product-info__actions')?.getBoundingClientRect().top ?? null,
+          }))()`)
+          addCheck(checks, issues, `${label}: inquiry product explains price`, Boolean(inquiryProduct.price), inquiryProduct.price)
+          addCheck(checks, issues, `${label}: inquiry product opens WhatsApp`, Boolean(inquiryProduct.whatsapp), inquiryProduct.whatsapp)
+          addCheck(checks, issues, `${label}: inquiry product has no dead cart CTA`, !inquiryProduct.disabledCart)
+          addCheck(checks, issues, `${label}: inquiry CTA visible in first screen`, inquiryProduct.actionTop !== null && inquiryProduct.actionTop < auditViewport.height, `${inquiryProduct.actionTop}px`)
+        }
+      }
       pageHealth(checks, issues, label, page, { content: true })
     }
   }
@@ -540,13 +570,21 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
     price: document.querySelector('.product-price strong')?.textContent?.trim() || '',
     unit: document.querySelector('.product-price span')?.textContent?.trim() || '',
     imageSrc: document.querySelector('.product-gallery__main')?.currentSrc || '',
+    imageReady: (document.querySelector('.product-gallery__main')?.naturalWidth || 0) > 0,
     breadcrumbs: Boolean(document.querySelector('.breadcrumbs')),
     addButton: Boolean(document.querySelector('.product-info__actions button:not([disabled])')),
+    priceTop: document.querySelector('.product-price')?.getBoundingClientRect().top ?? null,
+    actionTop: document.querySelector('.product-info__actions')?.getBoundingClientRect().top ?? null,
   }))()`)
   addCheck(checks, issues, `${prefix}: product title`, Boolean(product.title), product.title)
   addCheck(checks, issues, `${prefix}: product price`, Boolean(product.price) && !/NaN/.test(product.price), product.price)
   addCheck(checks, issues, `${prefix}: product unit`, Boolean(product.unit), product.unit)
   addCheck(checks, issues, `${prefix}: product breadcrumbs`, product.breadcrumbs)
+  addCheck(checks, issues, `${prefix}: product image loaded`, product.imageReady, product.imageSrc)
+  if (viewport.mobile) {
+    addCheck(checks, issues, `${prefix}: price visible in first screen`, product.priceTop !== null && product.priceTop < viewport.height, `${product.priceTop}px`)
+    addCheck(checks, issues, `${prefix}: primary action visible in first screen`, product.actionTop !== null && product.actionTop < viewport.height, `${product.actionTop}px`)
+  }
   if (flowProductPath.includes('/alinex-')) {
     addCheck(checks, issues, `${prefix}: optimized AlinEX image selected`, /\.webp(?:\?|$)/i.test(product.imageSrc), product.imageSrc)
   }

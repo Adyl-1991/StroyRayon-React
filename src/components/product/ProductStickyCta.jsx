@@ -20,7 +20,7 @@ export function ProductStickyCta({ product, selectedVariant }) {
 
   useEffect(() => {
     function handleScroll() {
-      setIsVisible(window.scrollY > 260)
+      setIsVisible(window.scrollY > 200)
     }
 
     handleScroll()
@@ -38,12 +38,14 @@ export function ProductStickyCta({ product, selectedVariant }) {
         <span>{activeName}</span>
         <small>{t('product.stickyDisclaimer')}</small>
       </div>
-      <div className="product-sticky-cta__actions">
-        <Button disabled={!canBuy} onClick={() => addToCart(product, 1, selectedVariant)}>
-          {t('product.stickyCart')}
-        </Button>
+      <div className={`product-sticky-cta__actions${hasActivePrice ? '' : ' product-sticky-cta__actions--inquiry'}`}>
+        {hasActivePrice && (
+          <Button disabled={!canBuy} onClick={() => addToCart(product, 1, selectedVariant)}>
+            {t('product.stickyCart')}
+          </Button>
+        )}
         <Button href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="whatsapp">
-          WhatsApp
+          {hasActivePrice ? 'WhatsApp' : t('product.stickyAskPrice')}
         </Button>
       </div>
     </aside>

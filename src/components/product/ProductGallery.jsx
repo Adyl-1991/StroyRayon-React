@@ -32,36 +32,38 @@ export function ProductGallery({ product, selectedVariant }) {
         data-placeholder-src={active.placeholderSrc}
         onError={(event) => applyImageFallback(event, 'product')}
       />
-      <div className="product-gallery__thumbs">
-        {images.map((image, index) => {
-          const resolved = resolveImage(image, getProductImage(product))
-          const displayImage = getOptimizedProductImage(resolved, 'thumb')
-          const isActive = resolved.src === activeSource.src
+      {images.length > 1 && (
+        <div className="product-gallery__thumbs">
+          {images.map((image, index) => {
+            const resolved = resolveImage(image, getProductImage(product))
+            const displayImage = getOptimizedProductImage(resolved, 'thumb')
+            const isActive = resolved.src === activeSource.src
 
-          return (
-            <button
-              className={isActive ? 'active' : ''}
-              key={`${resolved.src}-${index}`}
-              type="button"
-              onClick={() => setActiveImageSrc(resolved.src)}
-            >
-              <img
-                src={displayImage.src}
-                srcSet={displayImage.srcSet || undefined}
-                sizes={displayImage.sizes || undefined}
-                alt={displayImage.alt}
-                loading="lazy"
-                decoding="async"
-                width="180"
-                height="180"
-                data-fallback-src={displayImage.fallbackSrc}
-                data-placeholder-src={displayImage.placeholderSrc}
-                onError={(event) => applyImageFallback(event, 'product')}
-              />
-            </button>
-          )
-        })}
-      </div>
+            return (
+              <button
+                className={isActive ? 'active' : ''}
+                key={`${resolved.src}-${index}`}
+                type="button"
+                onClick={() => setActiveImageSrc(resolved.src)}
+              >
+                <img
+                  src={displayImage.src}
+                  srcSet={displayImage.srcSet || undefined}
+                  sizes={displayImage.sizes || undefined}
+                  alt={displayImage.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width="180"
+                  height="180"
+                  data-fallback-src={displayImage.fallbackSrc}
+                  data-placeholder-src={displayImage.placeholderSrc}
+                  onError={(event) => applyImageFallback(event, 'product')}
+                />
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

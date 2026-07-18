@@ -62,6 +62,30 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
           {activeVariantTitle}
         </p>
       )}
+      <div className="product-price">
+        <strong>{hasActivePrice ? formatPrice(activePrice) : t('product.priceNotSet')}</strong>
+        {hasActivePrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
+        {hasActivePrice && <span>/ {activeUnit}</span>}
+        {product.isSale && <Badge tone="sale">{t('product.sale')}</Badge>}
+      </div>
+      <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
+      <div className={`product-info__actions${hasActivePrice ? '' : ' product-info__actions--inquiry'}`}>
+        {hasActivePrice && (
+          <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>
+            {t('product.addToCart')}
+          </Button>
+        )}
+        <Button href={getWhatsAppUrl(quickText)} target="_blank" rel="noreferrer" variant="whatsapp">
+          {hasActivePrice ? t('product.askWhatsApp') : t('product.askPriceWhatsApp')}
+        </Button>
+      </div>
+      {hasActivePrice && !canBuy && <p className="form-error">{t('product.unavailable')}</p>}
+      <ul className="product-assurance-list" aria-label={t('product.assurancesLabel')}>
+        <li>{t('product.assurances.price')}</li>
+        <li>{t('product.assurances.calculation')}</li>
+        <li>{t('product.assurances.delivery')}</li>
+      </ul>
+      {shortDescription && <p className="product-info__description">{shortDescription}</p>}
       <dl className="product-facts">
         {facts.map((item) => (
           <div key={item.label}>
@@ -80,23 +104,6 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
           ))}
         </div>
       )}
-      <div className="product-price">
-        <strong>{hasActivePrice ? formatPrice(activePrice) : t('product.priceNotSet')}</strong>
-        {hasActivePrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
-        {hasActivePrice && <span>/ {activeUnit}</span>}
-        {product.isSale && <Badge tone="sale">{t('product.sale')}</Badge>}
-      </div>
-      <p className="price-disclaimer">{t('product.priceDisclaimer')}</p>
-      {shortDescription && <p>{shortDescription}</p>}
-      <div className="product-info__actions">
-        <Button disabled={!canBuy} onClick={() => addToCart(product, 1, activeVariant)}>
-          {t('product.addToCart')}
-        </Button>
-        <Button href={getWhatsAppUrl(quickText)} target="_blank" rel="noreferrer" variant="whatsapp">
-          {t('product.askWhatsApp')}
-        </Button>
-      </div>
-      {!canBuy && <p className="form-error">{t('product.unavailable')}</p>}
       <p className="microcopy">{t('product.volumeHelp')}</p>
     </section>
   )

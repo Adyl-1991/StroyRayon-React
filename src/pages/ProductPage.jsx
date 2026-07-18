@@ -4,6 +4,7 @@ import { ProductFaq } from '../components/product/ProductFaq'
 import { ProductGallery } from '../components/product/ProductGallery'
 import { ProductInfo } from '../components/product/ProductInfo'
 import { ProductSpecs } from '../components/product/ProductSpecs'
+import { ProductStickyCta } from '../components/product/ProductStickyCta'
 import { ProductVariants } from '../components/product/ProductVariants'
 import { RelatedProducts } from '../components/product/RelatedProducts'
 import { Seo } from '../components/seo/Seo'
@@ -399,6 +400,7 @@ export function ProductPage() {
       </div>
 
       <RelatedProducts products={relatedProducts} />
+      <ProductStickyCta product={product} selectedVariant={selectedVariant} />
     </main>
   )
 }

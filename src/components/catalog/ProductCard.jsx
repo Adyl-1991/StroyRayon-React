@@ -36,6 +36,8 @@ export function ProductCard({ product }) {
   const packText = getLocalizedProductValue(product, 'pack', locale) || product.weight || product.size
   const minOrderText = getLocalizedProductValue(product, 'minOrder', locale)
   const commercialMeta = [packText, product.article || product.sku].filter(Boolean).slice(0, 2)
+  const hasReviews = Number(product.rating) > 0 && Number(product.reviewsCount) > 0
+  const isNew = tags.includes('new')
 
   return (
     <article className={`product-card product-card--image-${image.type || 'fallback'}`}>
@@ -85,28 +87,43 @@ export function ProductCard({ product }) {
           {hasPrice && <span>/ {activeUnit}</span>}
         </div>
         {hasVariants && sizeSummary && <p className="product-card__variants">{t('productCard.variants')}: {sizeSummary}</p>}
-        <div className="rating">
-          {t('productCard.rating')} {product.rating} / 5 ({product.reviewsCount})
-        </div>
+        {hasReviews && (
+          <div className="rating">
+            {t('productCard.rating')} {product.rating} / 5 ({product.reviewsCount})
+          </div>
+        )}
+        {!hasReviews && isNew && <div className="product-card__new-note">{t('productCard.newProduct')}</div>}
         {minOrderText && (
           <p className="microcopy">
             {t('productCard.minOrder')}: {minOrderText}
           </p>
         )}
         <div className="product-card__actions">
-          {hasVariants ? (
+          {!hasPrice ? (
+            <Button
+              className="product-card__inquiry"
+              href={getWhatsAppUrl(askText)}
+              target="_blank"
+              rel="noreferrer"
+              variant="whatsapp"
+            >
+              {t('productCard.askPrice')}
+            </Button>
+          ) : hasVariants ? (
             <Button to={`/product/${product.slug}`}>{t('productCard.chooseVariant')}</Button>
           ) : (
             <Button disabled={!canBuy} onClick={() => addToCart(product)}>
               {t('productCard.addToCart')}
             </Button>
           )}
-          <Button to={`/product/${product.slug}`} variant="secondary">
+          <Button className="product-card__details" to={`/product/${product.slug}`} variant="secondary">
             {t('productCard.details')}
           </Button>
-          <Button className="product-card__whatsapp" href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="secondary">
-            {t('productCard.checkStock')}
-          </Button>
+          {hasPrice && (
+            <Button className="product-card__whatsapp" href={getWhatsAppUrl(askText)} target="_blank" rel="noreferrer" variant="secondary">
+              {t('productCard.checkStock')}
+            </Button>
+          )}
         </div>
       </div>
     </article>
