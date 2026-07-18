@@ -1,4 +1,5 @@
 import { getProductAssetEntry } from './productAssets.js'
+import { alinexProducts } from './alinexProducts.generated.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
 const buildingProductPlaceholder = '/images/placeholders/product-building-placeholder.svg'
@@ -15140,5 +15141,6 @@ export const products = [
     specs: { Аянт: '1 м²', Түрү: 'Электр мат', Монтаж: 'Плитка астына', Бирдик: 'комплект' },
     relatedProductIds: ['underfloor-heating-pipe-16'],
   }),
+  ...alinexProducts,
   ...assortmentGapProducts.map(matrixProduct),
 ]

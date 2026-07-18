@@ -52,6 +52,37 @@ export function normalizeImage(image, fallback = productFallback) {
 
 export const resolveImage = normalizeImage
 
+const alinexMainImagePattern = /^(\/images\/products\/alinex-[^/]+)\/main\.png(?:\?.*)?$/i
+
+const productImageSizes = {
+  thumb: '82px',
+  card: '(max-width: 560px) calc(100vw - 32px), (max-width: 1024px) 45vw, 280px',
+  detail: '(max-width: 760px) calc(100vw - 52px), (max-width: 1200px) 48vw, 560px',
+}
+
+export function getOptimizedProductImage(image, usage = 'card') {
+  const normalized = normalizeImage(image)
+  const match = normalized.src.match(alinexMainImagePattern)
+  if (!match) return normalized
+
+  const directory = match[1]
+  const sources = {
+    thumb: `${directory}/thumb-320.webp`,
+    card: `${directory}/card-640.webp`,
+    detail: `${directory}/detail-900.webp`,
+  }
+
+  return {
+    ...normalized,
+    src: sources[usage] || sources.card,
+    srcSet: `${sources.thumb} 320w, ${sources.card} 640w, ${sources.detail} 900w`,
+    sizes: productImageSizes[usage] || productImageSizes.card,
+    fallbackSrc: normalized.src,
+    placeholderSrc: normalized.fallbackSrc || productFallback.src,
+    type: 'optimized-product',
+  }
+}
+
 const productPlaceholderTypeByCatalogRoot = {
   stroymaterial: 'building',
   'inzhenerdik-santehnika': 'plumbing',
@@ -201,7 +232,13 @@ export function getImageFallbackSrc(type = 'product') {
 
 export function applyImageFallback(event, type = 'product', fallbackOverride = '') {
   const fallbackSrc = fallbackOverride || event?.currentTarget?.dataset?.fallbackSrc || getImageFallbackSrc(type)
-  if (!event?.currentTarget || event.currentTarget.src.endsWith(fallbackSrc)) return
+  if (!event?.currentTarget) return
+
+  if (event.currentTarget.src.endsWith(fallbackSrc)) {
+    const placeholderSrc = event.currentTarget.dataset?.placeholderSrc || getImageFallbackSrc(type)
+    if (!event.currentTarget.src.endsWith(placeholderSrc)) event.currentTarget.src = placeholderSrc
+    return
+  }
 
   event.currentTarget.removeAttribute('srcset')
   event.currentTarget.alt = event.currentTarget.dataset.fallbackAlt || event.currentTarget.alt || getImageAlt(null)

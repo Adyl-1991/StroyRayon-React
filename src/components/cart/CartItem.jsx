@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useLocale } from '../../i18n/LocaleContext'
 import { getProductBySlug, getProductTitle, getUnitLabel, normalizeKgText } from '../../services/productService'
 import { formatPrice } from '../../utils/formatPrice'
-import { applyImageFallback, resolveImage } from '../../utils/imageUtils'
+import { applyImageFallback, getOptimizedProductImage, resolveImage } from '../../utils/imageUtils'
 
 export function CartItem({ item, setQuantity, removeFromCart }) {
   const { locale, t } = useLocale()
@@ -14,17 +14,24 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
     : item.variantTitleKg || item.variantSize
   const unit = getUnitLabel(item.unitKg || item.unit, locale)
   const packageInfo = locale === 'ru' ? item.packageInfoRu : normalizeKgText(item.packageInfo)
-  const image = resolveImage(item.image, { alt: name, src: '/images/placeholders/product-placeholder.svg', width: 82, height: 82 })
+  const image = getOptimizedProductImage(
+    resolveImage(item.image, { alt: name, src: '/images/placeholders/product-placeholder.svg', width: 82, height: 82 }),
+    'thumb',
+  )
 
   return (
     <article className="cart-item">
       <img
         src={image.src}
+        srcSet={image.srcSet || undefined}
+        sizes={image.sizes || undefined}
         alt={image.alt}
         loading="lazy"
+        decoding="async"
         width="82"
         height="82"
         data-fallback-src={image.fallbackSrc}
+        data-placeholder-src={image.placeholderSrc}
         onError={(event) => applyImageFallback(event, 'product')}
       />
       <div className="cart-item__details">

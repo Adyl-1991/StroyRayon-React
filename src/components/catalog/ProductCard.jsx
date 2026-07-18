@@ -15,7 +15,7 @@ import {
 } from '../../services/productService'
 import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
-import { applyImageFallback, getProductImage } from '../../utils/imageUtils'
+import { applyImageFallback, getOptimizedProductImage, getProductImage } from '../../utils/imageUtils'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 
@@ -25,8 +25,9 @@ export function ProductCard({ product }) {
   const stockStatus = getStockStatus(product)
   const canBuy = isPurchasable(product)
   const hasVariants = hasProductVariants(product)
+  const hasPrice = Number(product.price) > 0
   const sizeSummary = getVariantSizeSummary(product, 5)
-  const image = getProductImage(product)
+  const image = getOptimizedProductImage(getProductImage(product), 'card')
   const productName = getProductTitle(product, locale)
   const shortDescription = getProductShortDescription(product, locale)
   const askText = t('productCard.askText', { name: productName })
@@ -41,11 +42,15 @@ export function ProductCard({ product }) {
       <Link to={`/product/${product.slug}`} className="product-card__image">
         <img
           src={image.src}
+          srcSet={image.srcSet || undefined}
+          sizes={image.sizes || undefined}
           alt={image.alt}
           loading="lazy"
+          decoding="async"
           width={image.width}
           height={image.height}
           data-fallback-src={image.fallbackSrc}
+          data-placeholder-src={image.placeholderSrc}
           data-fallback-alt={image.alt || productName}
           data-image-type={image.type || 'fallback'}
           onError={(event) => applyImageFallback(event, 'product')}
@@ -75,9 +80,9 @@ export function ProductCard({ product }) {
         )}
         <p>{shortDescription}</p>
         <div className="price-row">
-          <strong>{hasVariants ? `${t('common.from')} ${formatPrice(product.price)}` : formatPrice(product.price)}</strong>
-          {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
-          <span>/ {activeUnit}</span>
+          <strong>{hasPrice ? (hasVariants ? `${t('common.from')} ${formatPrice(product.price)}` : formatPrice(product.price)) : t('product.priceNotSet')}</strong>
+          {hasPrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
+          {hasPrice && <span>/ {activeUnit}</span>}
         </div>
         {hasVariants && sizeSummary && <p className="product-card__variants">{t('productCard.variants')}: {sizeSummary}</p>}
         <div className="rating">

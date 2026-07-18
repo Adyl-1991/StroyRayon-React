@@ -12,6 +12,7 @@ export function ProductStickyCta({ product, selectedVariant }) {
   const [isVisible, setIsVisible] = useState(false)
   const canBuy = isPurchasable(product, selectedVariant)
   const activePrice = selectedVariant?.price ?? product.price
+  const hasActivePrice = Number(activePrice) > 0
   const activeUnit = getUnitLabel(selectedVariant?.unit || product.unit, locale)
   const productName = getProductTitle(product, locale)
   const activeName = selectedVariant ? `${productName} (${selectedVariant.size})` : productName
@@ -32,7 +33,7 @@ export function ProductStickyCta({ product, selectedVariant }) {
     <aside className={`product-sticky-cta${isVisible ? ' is-visible' : ''}`} aria-label={t('product.stickyLabel')}>
       <div className="product-sticky-cta__info">
         <strong>
-          {formatPrice(activePrice)} / {activeUnit}
+          {hasActivePrice ? `${formatPrice(activePrice)} / ${activeUnit}` : t('product.priceNotSet')}
         </strong>
         <span>{activeName}</span>
         <small>{t('product.stickyDisclaimer')}</small>

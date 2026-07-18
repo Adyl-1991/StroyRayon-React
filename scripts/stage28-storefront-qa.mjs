@@ -34,6 +34,7 @@ const allRoutes = [
   { id: 'cart', path: '/cart' },
   { id: 'checkout', path: '/checkout' },
   { id: 'search', path: '/search' },
+  { id: 'product-alinex-grender', path: '/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender' },
   { id: 'contacts', path: '/contacts' },
   { id: 'delivery', path: '/delivery' },
   { id: 'about', path: '/about' },
@@ -55,6 +56,7 @@ const screenshotKeys = new Set([
   'checkout-390',
   'admin-login-390',
   'home-1440',
+  'product-alinex-grender-390',
 ])
 
 const routeFilter = process.env.STAGE28_ROUTE
@@ -160,8 +162,9 @@ async function navigate(cdp, pathname) {
   await delay(350)
   await evaluate(cdp, `new Promise((resolve) => {
     const started = Date.now();
-    const ready = () => document.readyState === 'complete';
-    const tick = () => ready() || Date.now() - started > 1200
+    const ready = () => document.readyState === 'complete'
+      && Boolean(document.body?.innerText?.trim() || document.querySelector('#root')?.children.length);
+    const tick = () => ready() || Date.now() - started > 6000
       ? setTimeout(() => resolve(true), 100)
       : setTimeout(tick, 100);
     tick();

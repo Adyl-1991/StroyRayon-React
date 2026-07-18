@@ -113,6 +113,16 @@ export const catalogTree = [
           leaf('floor-mixes', 'Өзү тегизделүүчү пол', 'nalivnoi-pol', 'floor', [], ['pol-uchun-aralashmalar', 'наливной пол', 'nalivnoy pol']),
           leaf('waterproofing-mixes', 'Гидроизоляция', 'gidroizolyaciya', 'insulation'),
           leaf('tile-adhesives', 'Плитка клейи', 'plitka-kleileri', 'tile', ['tile-adhesive'], ['плиточный клей']),
+          leaf('adhesive-plasters', 'Клей-штукатурка', 'klei-shtukaturka', 'mix', [], ['клей-штукатурка'], {
+            titleRu: 'Клей-штукатурка',
+            descriptionKg: 'Жылуулоо системаларын бекитүү жана штукатуркалоо үчүн универсалдуу аралашмалар.',
+            descriptionRu: 'Универсальные смеси для крепления и оштукатуривания систем теплоизоляции.',
+          }),
+          leaf('building-adhesives', 'Курулуш клейи', 'klei', 'mix', [], ['строительный клей'], {
+            titleRu: 'Строительный клей',
+            descriptionKg: 'Гипсокартон жана курулуш плиталарын монтаждоого арналган клейлер.',
+            descriptionRu: 'Клеи для монтажа гипсокартона и строительных плит.',
+          }),
           leaf('grouts', 'Плитка аралыгы үчүн затирка', 'zatirka', 'finish', [], ['затирка', 'затирка для плитки']),
           leaf('building-gypsum', 'Курулуш гипси', 'stroitelnyi-gips', 'mix', [], ['строительный гипс']),
           leaf('sand-concrete', 'Пескобетон', 'peskobeton', 'mix'),

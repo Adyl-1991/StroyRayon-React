@@ -420,11 +420,11 @@ export function getVariantSizeSummary(product, limit = 4) {
 }
 
 export function isPurchasable(product, selectedVariant) {
-  if (selectedVariant) return getStockStatus(selectedVariant) !== 'out_of_stock'
+  if (selectedVariant) return Number(selectedVariant.price) > 0 && getStockStatus(selectedVariant) !== 'out_of_stock'
   const variants = getProductVariants(product)
-  if (variants.length) return variants.some((variant) => getStockStatus(variant) !== 'out_of_stock')
+  if (variants.length) return variants.some((variant) => Number(variant.price) > 0 && getStockStatus(variant) !== 'out_of_stock')
 
-  return getStockStatus(product) !== 'out_of_stock'
+  return Number(product?.price) > 0 && getStockStatus(product) !== 'out_of_stock'
 }
 
 export function hasTag(product, tag) {

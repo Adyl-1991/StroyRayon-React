@@ -32,9 +32,10 @@ const requestedViewportWidths = String(process.env.CUSTOMER_QA_VIEWPORTS || '')
   .split(',')
   .map((value) => Number(value.trim()))
   .filter(Number.isFinite)
-const viewports = requestedViewportWidths.length
+const matchedViewports = requestedViewportWidths.length
   ? allViewports.filter((viewport) => requestedViewportWidths.includes(viewport.width))
-  : allViewports
+  : []
+const viewports = matchedViewports.length ? matchedViewports : allViewports
 const requestedLocales = String(process.env.CUSTOMER_QA_LOCALES || 'kg,ru')
   .split(',')
   .map((value) => value.trim().toLowerCase())
@@ -57,7 +58,8 @@ const categoryRoutes = [
   '/catalog/bak-koroo',
 ]
 
-const searchTerms = ['цемент', 'труба', 'насос', 'смеситель', 'кабель', 'автомат', 'боёк', 'вентиляция']
+const searchTerms = ['цемент', 'труба', 'насос', 'смеситель', 'кабель', 'автомат', 'боёк', 'вентиляция', 'AlinEX']
+const flowProductPath = String(process.env.CUSTOMER_QA_FLOW_PRODUCT || '').trim()
 
 const expected = {
   kg: {
@@ -524,9 +526,11 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
     localStorage.setItem('stroyrayon.locale', ${JSON.stringify(locale)});
     return true;
   })()`)
-  await navigate(cdp, '/catalog/inzhenerdik-santehnika')
-
-  const productHref = await evaluate(cdp, `document.querySelector('.product-card__image, .product-card h3 a')?.getAttribute('href') || ''`)
+  let productHref = flowProductPath
+  if (!productHref) {
+    await navigate(cdp, '/catalog/inzhenerdik-santehnika')
+    productHref = await evaluate(cdp, `document.querySelector('.product-card__image, .product-card h3 a')?.getAttribute('href') || ''`)
+  }
   addCheck(checks, issues, `${prefix}: product card clickable`, productHref.startsWith('/product/'), productHref)
   if (!productHref) return
 
@@ -535,6 +539,7 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
     title: document.querySelector('.product-info h1')?.textContent?.trim() || '',
     price: document.querySelector('.product-price strong')?.textContent?.trim() || '',
     unit: document.querySelector('.product-price span')?.textContent?.trim() || '',
+    imageSrc: document.querySelector('.product-gallery__main')?.currentSrc || '',
     breadcrumbs: Boolean(document.querySelector('.breadcrumbs')),
     addButton: Boolean(document.querySelector('.product-info__actions button:not([disabled])')),
   }))()`)
@@ -542,6 +547,9 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
   addCheck(checks, issues, `${prefix}: product price`, Boolean(product.price) && !/NaN/.test(product.price), product.price)
   addCheck(checks, issues, `${prefix}: product unit`, Boolean(product.unit), product.unit)
   addCheck(checks, issues, `${prefix}: product breadcrumbs`, product.breadcrumbs)
+  if (flowProductPath.includes('/alinex-')) {
+    addCheck(checks, issues, `${prefix}: optimized AlinEX image selected`, /\.webp(?:\?|$)/i.test(product.imageSrc), product.imageSrc)
+  }
 
   const added = await evaluate(cdp, `(() => {
     const variant = document.querySelector('.variant-option:not([disabled])');
