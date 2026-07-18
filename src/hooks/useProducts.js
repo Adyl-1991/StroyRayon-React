@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { fetchProductBySlug, fetchProducts } from '../api/productsApi'
 import { USE_API } from '../config/api'
 import { getFilteredProducts, getFilterOptions, getProductBySlug, normalizeProduct } from '../services/productService'
+import { isBundledAlinexProduct, shouldUseBundledAlinex } from '../utils/alinexCatalogMode'
 
 export function useProducts(filters) {
   const categorySlug = filters?.categorySlug
@@ -19,6 +20,34 @@ export function useProducts(filters) {
   const limit = Number(filters?.limit || 24)
 
   const catalogPath = filters?.catalogNode?.path?.join('/')
+  const preferBundledCatalog = useMemo(
+    () => shouldUseBundledAlinex({
+      catalogNode,
+      categorySlug,
+      subcategorySlug,
+      minPrice,
+      maxPrice,
+      stockStatuses,
+      brands,
+      tags,
+      units,
+      search,
+      sort,
+    }),
+    [
+      brands,
+      catalogNode,
+      categorySlug,
+      maxPrice,
+      minPrice,
+      search,
+      sort,
+      stockStatuses,
+      subcategorySlug,
+      tags,
+      units,
+    ],
+  )
   const fallbackAllProducts = useMemo(
     () =>
       getFilteredProducts({
@@ -71,7 +100,7 @@ export function useProducts(filters) {
   const [state, setState] = useState({ ...fallbackResult, isLoading: USE_API, isApiMode: USE_API, isFallback: false })
 
   useEffect(() => {
-    if (!USE_API) return
+    if (!USE_API || preferBundledCatalog) return
 
     let isActive = true
 
@@ -122,6 +151,7 @@ export function useProducts(filters) {
     maxPrice,
     minPrice,
     page,
+    preferBundledCatalog,
     search,
     sort,
     stockStatuses,
@@ -129,15 +159,16 @@ export function useProducts(filters) {
     units,
   ])
 
-  return USE_API ? state : fallbackResult
+  return USE_API && !preferBundledCatalog ? state : fallbackResult
 }
 
 export function useProductBySlug(slug) {
   const fallbackProduct = useMemo(() => getProductBySlug(slug), [slug])
+  const preferBundledProduct = isBundledAlinexProduct(fallbackProduct)
   const [state, setState] = useState({ product: fallbackProduct, isLoading: USE_API, error: null })
 
   useEffect(() => {
-    if (!USE_API || !slug) return
+    if (!USE_API || !slug || preferBundledProduct) return
 
     let isActive = true
 
@@ -155,9 +186,9 @@ export function useProductBySlug(slug) {
     return () => {
       isActive = false
     }
-  }, [fallbackProduct, slug])
+  }, [fallbackProduct, preferBundledProduct, slug])
 
-  return USE_API ? state : { product: fallbackProduct, isLoading: false, error: null }
+  return USE_API && !preferBundledProduct ? state : { product: fallbackProduct, isLoading: false, error: null }
 }
 
 function normalizeFilterOptions(filters) {
