@@ -9,6 +9,7 @@ import {
   getStockStatus,
   getUnitLabel,
   isPurchasable,
+  isRedundantProductText,
   normalizeKgText,
 } from '../../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
@@ -35,20 +36,37 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
     ? activeVariant?.titleRu || activeVariant?.size
     : activeVariant?.titleKg || activeVariant?.size
   const shortDescription = getProductShortDescription(product, locale)
+  const visibleVariantTitle = isRedundantProductText(activeVariantTitle, productName) ? '' : activeVariantTitle
+  const visibleDescription = isRedundantProductText(shortDescription, productName, visibleVariantTitle) ? '' : shortDescription
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
+  const packValue =
+    locale === 'ru'
+      ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || product.weight
+      : normalizeKgText(activeVariant?.packageInfo || product.pack || product.weight)
+  const visiblePackValue = isRedundantProductText(packValue, productName, visibleVariantTitle, visibleDescription) ? '' : packValue
+  const visibleMinOrder = isRedundantProductText(
+    activeMinOrder,
+    productName,
+    visibleVariantTitle,
+    visiblePackValue,
+    visibleDescription,
+  ) ? '' : activeMinOrder
   const facts = [
     { label: t('product.sku'), value: activeSku || product.article },
     { label: t('product.brand'), value: product.brand },
     { label: t('product.productType'), value: getLocalizedProductValue(product, 'productType', locale) },
-    {
-      label: t('product.pack'),
-      value:
-        locale === 'ru'
-          ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || product.weight
-          : normalizeKgText(activeVariant?.packageInfo || product.pack || product.weight),
-    },
-    { label: t('product.minOrder'), value: activeMinOrder },
+    { label: t('product.pack'), value: visiblePackValue },
+    { label: t('product.minOrder'), value: visibleMinOrder },
   ].filter((item) => item.value)
+  const visibleSummarySpecs = summarySpecs.filter((item) =>
+    !isRedundantProductText(
+      item.value,
+      productName,
+      visibleVariantTitle,
+      visibleDescription,
+      ...facts.map((fact) => fact.value),
+    ),
+  )
 
   return (
     <section className="product-info">
@@ -57,9 +75,9 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
         <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
       </div>
       <h1>{productName}</h1>
-      {activeVariantTitle && (
+      {visibleVariantTitle && (
         <p className="product-info__selected-variant" aria-live="polite">
-          {activeVariantTitle}
+          {visibleVariantTitle}
         </p>
       )}
       <div className="product-price">
@@ -85,7 +103,7 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
         <li>{t('product.assurances.calculation')}</li>
         <li>{t('product.assurances.delivery')}</li>
       </ul>
-      {shortDescription && <p className="product-info__description">{shortDescription}</p>}
+      {visibleDescription && <p className="product-info__description">{visibleDescription}</p>}
       <dl className="product-facts">
         {facts.map((item) => (
           <div key={item.label}>
@@ -94,9 +112,9 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
           </div>
         ))}
       </dl>
-      {summarySpecs.length > 0 && (
+      {visibleSummarySpecs.length > 0 && (
         <div className="product-key-specs" aria-label={t('product.specifications')}>
-          {summarySpecs.map((item) => (
+          {visibleSummarySpecs.map((item) => (
             <div key={item.label}>
               <span>{item.label}</span>
               <strong>{item.value}</strong>

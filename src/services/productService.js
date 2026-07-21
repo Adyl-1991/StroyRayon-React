@@ -305,6 +305,43 @@ export function getProductShortDescription(product, locale = 'kg') {
     : normalizeKgText(product.shortDescriptionKg || product.shortDescription || product.descriptionKg || '')
 }
 
+function normalizeComparableProductText(value) {
+  return String(value || '')
+    .toLocaleLowerCase('ru')
+    .replace(/ё/g, 'е')
+    .replace(/\bkg\b/g, 'кг')
+    .replace(/\bшт\.?\b/g, 'шт')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim()
+}
+
+function getMeasurementTokens(value) {
+  const normalized = normalizeComparableProductText(value)
+  return [...normalized.matchAll(/(?:^|\s)(\d+(?:[.,]\d+)?\s*(?:кг|г|л|мл|мм|см|м|шт))(?=\s|$)/gu)]
+    .map((match) => match[1])
+}
+
+/**
+ * Returns true when a card/detail value is already communicated by visible copy.
+ * Besides exact text fragments, measurements such as "30 кг мешок" are treated
+ * as duplicates when "30 кг" is already present in the product title.
+ */
+export function isRedundantProductText(value, ...visibleValues) {
+  const candidate = normalizeComparableProductText(value)
+  if (!candidate) return true
+
+  const candidateMeasurements = getMeasurementTokens(candidate)
+
+  return visibleValues.filter(Boolean).some((visibleValue) => {
+    const visible = normalizeComparableProductText(visibleValue)
+    if (!visible) return false
+    if (visible === candidate || visible.includes(candidate)) return true
+
+    return candidateMeasurements.length > 0
+      && candidateMeasurements.every((measurement) => visible.includes(measurement))
+  })
+}
+
 export function getProductFullDescription(product, locale = 'kg') {
   if (!product) return ''
   return locale === 'ru'

@@ -382,6 +382,40 @@ export const rootCategoryImages = {
   },
 }
 
-export function getRootCategoryImage(slug) {
-  return rootCategoryImages[slug] || null
+const semanticCategoryImagesByIcon = {
+  wall: categoryImage('/images/products/gips-shtukaturkasy-30kg/main.webp', 'Штукатурка категориясы'),
+  facade: categoryImage('/images/products/alinex-cementnaia-stukaturnaia-smes-alinex-forman/main.png', 'Фасаддык штукатурка категориясы'),
+  decor: categoryImage('/images/products/alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress/main.png', 'Декоративдик штукатурка категориясы'),
+  finish: categoryImage('/images/products/finish-shpaklevka-25kg/main.webp', 'Фиништик аралашмалар категориясы'),
+  primer: categoryImage('/images/products/gruntovka-tereng-singuu-10l/main.webp', 'Грунтовка категориясы'),
+  floor: categoryImage('/images/products/alinex-nalivnoi-pol-alinex-level2/main.png', 'Пол аралашмалары категориясы'),
+  insulation: categoryImage('/images/products/alinex-gidroizoliacionnaia-smes-alinex-aquaflex/main.png', 'Гидроизоляция категориясы'),
+  tile: categoryImage('/images/products/alinex-plitocnyi-klei-alinex-set-300/main.png', 'Плитка клейи категориясы'),
+  mix: categoryImage('/images/products/alinex-klei-dlia-gkl-alinex-unifix/main.png', 'Курулуш аралашмалары категориясы'),
+  mount: categoryImage('/images/categories/subcategories/kurgak-aralashmalar.jpg', 'Монтаждык аралашмалар категориясы'),
+  repair: categoryImage('/images/categories/subcategories/kurgak-aralashmalar.jpg', 'Ремонттук аралашмалар категориясы'),
+  cement: categoryImage('/images/products/portlandcement-m500-50kg/main.webp', 'Цемент категориясы'),
+  sheet: categoryImage('/images/categories/subcategories/listovye-materialdar.jpg', 'Лист материалдар категориясы'),
+  profile: categoryImage('/images/categories/subcategories/profilder.jpg', 'Металл профильдер категориясы'),
+  foam: categoryImage('/images/categories/subcategories/eshik-tereze-materialdary.jpg', 'Пена жана герметик категориясы'),
+  handle: categoryImage('/images/categories/subcategories/eshik-tereze-materialdary.jpg', 'Эшик фурнитурасы категориясы'),
+  window: categoryImage('/images/categories/subcategories/eshik-tereze-materialdary.jpg', 'Терезе материалдары категориясы'),
+  pipe: categoryImage('/images/categories/subcategories/trubalar.jpg', 'Түтүктөр категориясы'),
+  fitting: categoryImage('/images/categories/subcategories/fitingder.jpg', 'Фитингдер категориясы'),
+  valve: categoryImage('/images/categories/subcategories/zapornaya-armatura.jpg', 'Крандар категориясы'),
+  clamp: categoryImage('/images/products/ppr-klipsa-20/main.webp', 'Клипса жана бекиткичтер категориясы'),
+  sewer: categoryImage('/images/categories/subcategories/kanalizaciya.jpg', 'Канализация категориясы'),
+  heat: categoryImage('/images/categories/subcategories/zhylytu.jpg', 'Жылытуу жабдуулары категориясы'),
+  tank: categoryImage('/images/products/rasshiritelnyi-bak-24l/main.webp', 'Кеңейтүүчү бактар категориясы'),
+  pump: categoryImage('/images/categories/subcategories/zhylytu.jpg', 'Циркуляция насостору категориясы'),
+  filter: categoryImage('/images/categories/primary/filtry-dlya-vody.jpg', 'Суу фильтрлери категориясы'),
+  mixer: categoryImage('/images/categories/subcategories/smesitelder.jpg', 'Смесительдер категориясы'),
+  cable: categoryImage('/images/products/kabel-vvgng-3x2-5/main.webp', 'Кабель категориясы'),
+  breaker: categoryImage('/images/products/avtomat-16a-1p/main.webp', 'Электр автоматикасы категориясы'),
+  socket: categoryImage('/images/products/rozetka-ichki-montazh-ak/main.webp', 'Розетка жана өчүргүчтөр категориясы'),
+  lamp: categoryImage('/images/products/led-svetilnik-18w/main.webp', 'Жарык берүү категориясы'),
+}
+
+export function getRootCategoryImage(slug, icon) {
+  return rootCategoryImages[slug] || semanticCategoryImagesByIcon[icon] || null
 }

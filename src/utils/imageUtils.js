@@ -214,7 +214,7 @@ export function getProductGallery(product, selectedVariant = null) {
 
 export function getCategoryImage(category) {
   const assetEntry = getCategoryAssetEntry(category?.slug)
-  const rootImage = getRootCategoryImage(category?.slug)
+  const rootImage = getRootCategoryImage(category?.slug, category?.icon)
   const currentImage = category?.image
   const shouldUseRootImage = rootImage && (!currentImage || currentImage.type === 'placeholder' || currentImage.src === categoryFallback.src)
 

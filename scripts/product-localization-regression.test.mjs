@@ -8,6 +8,7 @@ import {
   getProductPrice,
   getProductSpecs,
   getSelectedVariant,
+  isRedundantProductText,
   normalizeProduct,
   resolveProductSlug,
 } from '../src/services/productService.js'
@@ -18,6 +19,15 @@ test('Russian commercial values translate Kyrgyz unit words safely', () => {
   assert.equal(getLocalizedUnitText('Метраж менен кесилип берилет.', 'ru'), 'Отрезается по метражу.')
   assert.equal(getLocalizedUnitText('10 метр', 'ru'), '10 метр')
   assert.equal(getLocalizedUnitText('1 даана', 'kg'), '1 даана')
+})
+
+test('card copy does not repeat measurements already present in the title', () => {
+  const title = 'Гипсовая штукатурка Knauf Rotband, 30 кг'
+
+  assert.equal(isRedundantProductText('30 кг мешок', title), true)
+  assert.equal(isRedundantProductText('Гипсовая штукатурка', title), true)
+  assert.equal(isRedundantProductText('1 мешок', title), false)
+  assert.equal(isRedundantProductText('SR-MIX-KRB-30', title), false)
 })
 
 test('Russian pages do not silently reuse Kyrgyz specs and FAQ', () => {

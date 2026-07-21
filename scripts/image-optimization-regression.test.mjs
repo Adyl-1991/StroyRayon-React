@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
-import { readdir, stat } from 'node:fs/promises'
+import { access, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 import sharp from 'sharp'
 
-import { getOptimizedProductImage } from '../src/utils/imageUtils.js'
+import { catalogTree } from '../src/data/catalogTree.js'
+import { getCategoryImage, getOptimizedProductImage } from '../src/utils/imageUtils.js'
 
 const root = process.cwd()
 const productsRoot = path.join(root, 'public', 'images', 'products')
@@ -60,4 +61,20 @@ test('AlinEX image helper supplies srcset and preserves the PNG fallback', () =>
   assert.match(image.srcSet, /detail-900\.webp 900w/)
   assert.equal(image.fallbackSrc, source)
   assert.equal(image.placeholderSrc, '/images/placeholders/product-building-placeholder.svg')
+})
+
+test('every catalog node resolves to an existing realistic image', async () => {
+  const nodes = []
+  const collect = (items) => items.forEach((item) => {
+    nodes.push(item)
+    collect(item.children || [])
+  })
+  collect(catalogTree)
+
+  assert.equal(nodes.length, 155)
+  for (const node of nodes) {
+    const image = getCategoryImage(node)
+    assert.notEqual(image.type, 'placeholder', node.slug)
+    await access(path.join(root, 'public', image.src.replace(/^\//, '')))
+  }
 })

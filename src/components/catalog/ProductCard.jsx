@@ -12,6 +12,7 @@ import {
   getVariantSizeSummary,
   hasProductVariants,
   isPurchasable,
+  isRedundantProductText,
 } from '../../services/productService'
 import { getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
@@ -35,7 +36,15 @@ export function ProductCard({ product }) {
   const activeUnit = getUnitLabel(product.unit, locale)
   const packText = getLocalizedProductValue(product, 'pack', locale) || product.weight || product.size
   const minOrderText = getLocalizedProductValue(product, 'minOrder', locale)
-  const commercialMeta = [packText, product.article || product.sku].filter(Boolean).slice(0, 2)
+  const visibleDescription = isRedundantProductText(shortDescription, productName) ? '' : shortDescription
+  const visiblePackText = isRedundantProductText(packText, productName) ? '' : packText
+  const visibleMinOrderText = isRedundantProductText(
+    minOrderText,
+    productName,
+    visiblePackText,
+    visibleDescription,
+  ) ? '' : minOrderText
+  const commercialMeta = [...new Set([visiblePackText, product.article || product.sku].filter(Boolean))].slice(0, 2)
   const hasReviews = Number(product.rating) > 0 && Number(product.reviewsCount) > 0
   const isNew = tags.includes('new')
 
@@ -80,7 +89,7 @@ export function ProductCard({ product }) {
             ))}
           </div>
         )}
-        <p>{shortDescription}</p>
+        {visibleDescription && <p>{visibleDescription}</p>}
         <div className="price-row">
           <strong>{hasPrice ? (hasVariants ? `${t('common.from')} ${formatPrice(product.price)}` : formatPrice(product.price)) : t('product.priceNotSet')}</strong>
           {hasPrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
@@ -93,9 +102,9 @@ export function ProductCard({ product }) {
           </div>
         )}
         {!hasReviews && isNew && <div className="product-card__new-note">{t('productCard.newProduct')}</div>}
-        {minOrderText && (
+        {visibleMinOrderText && (
           <p className="microcopy">
-            {t('productCard.minOrder')}: {minOrderText}
+            {t('productCard.minOrder')}: {visibleMinOrderText}
           </p>
         )}
         <div className="product-card__actions">
