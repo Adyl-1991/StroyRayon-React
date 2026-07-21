@@ -126,8 +126,6 @@ export const catalogTree = [
           leaf('grouts', 'Плитка аралыгы үчүн затирка', 'zatirka', 'finish', [], ['затирка', 'затирка для плитки']),
           leaf('building-gypsum', 'Курулуш гипси', 'stroitelnyi-gips', 'mix', [], ['строительный гипс']),
           leaf('sand-concrete', 'Пескобетон', 'peskobeton', 'mix'),
-          leaf('mounting-mixes', 'Монтаждык аралашмалар', 'montazhdyk-aralashmalar', 'mount'),
-          leaf('repair-mixes', 'Ремонттук аралашмалар', 'remonttuk-aralashmalar', 'repair'),
         ],
       }),
       node({

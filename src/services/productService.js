@@ -597,8 +597,15 @@ function getAggregateVariantStockStatus(variants) {
   return 'out_of_stock'
 }
 
+const HIDDEN_CATALOG_NODE_SLUGS = new Set([
+  'montazhdyk-aralashmalar',
+  'remonttuk-aralashmalar',
+])
+
 export function normalizeCatalogTree(nodes = []) {
-  return nodes.map((node) => normalizeCatalogNode(node))
+  return nodes
+    .filter((node) => !HIDDEN_CATALOG_NODE_SLUGS.has(node.slug))
+    .map((node) => normalizeCatalogNode(node))
 }
 
 function normalizeCatalogNode(node) {

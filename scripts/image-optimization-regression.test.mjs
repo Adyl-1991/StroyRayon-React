@@ -5,6 +5,7 @@ import test from 'node:test'
 import sharp from 'sharp'
 
 import { catalogTree } from '../src/data/catalogTree.js'
+import { normalizeCatalogTree } from '../src/services/productService.js'
 import { getCategoryImage, getOptimizedProductImage } from '../src/utils/imageUtils.js'
 
 const root = process.cwd()
@@ -71,10 +72,55 @@ test('every catalog node resolves to an existing realistic image', async () => {
   })
   collect(catalogTree)
 
-  assert.equal(nodes.length, 155)
+  assert.equal(nodes.length, 153)
+  assert.equal(nodes.some((node) => node.slug === 'montazhdyk-aralashmalar'), false)
+  assert.equal(nodes.some((node) => node.slug === 'remonttuk-aralashmalar'), false)
   for (const node of nodes) {
     const image = getCategoryImage(node)
     assert.notEqual(image.type, 'placeholder', node.slug)
     await access(path.join(root, 'public', image.src.replace(/^\//, '')))
   }
+})
+
+test('generated dry-mix category images are optimized landscape WebP files', async () => {
+  const directory = path.join(root, 'public', 'images', 'categories', 'generated', 'dry-mixes')
+  const filenames = (await readdir(directory)).filter((filename) => filename.endsWith('.webp')).sort()
+
+  assert.deepEqual(filenames, [
+    'adhesive-plaster.webp',
+    'building-gypsum.webp',
+    'cement-plaster.webp',
+    'construction-adhesive.webp',
+    'decorative-plaster.webp',
+    'facade-plaster.webp',
+    'plaster.webp',
+    'primer.webp',
+    'putty.webp',
+    'sand-concrete.webp',
+    'self-leveling-floor.webp',
+    'tile-adhesive.webp',
+    'tile-grout.webp',
+    'waterproofing.webp',
+  ])
+
+  for (const filename of filenames) {
+    const metadata = await sharp(path.join(directory, filename)).metadata()
+    assert.equal(metadata.format, 'webp', filename)
+    assert.equal(metadata.width, 768, filename)
+    assert.equal(metadata.height, 512, filename)
+  }
+})
+
+test('removed dry-mix categories are also filtered from the API catalog tree', () => {
+  const normalized = normalizeCatalogTree([{
+    slug: 'kurgak-aralashmalar',
+    path: 'stroymaterial/kurgak-aralashmalar',
+    children: [
+      { slug: 'shtukaturkalar', path: 'stroymaterial/kurgak-aralashmalar/shtukaturkalar' },
+      { slug: 'montazhdyk-aralashmalar', path: 'stroymaterial/kurgak-aralashmalar/montazhdyk-aralashmalar' },
+      { slug: 'remonttuk-aralashmalar', path: 'stroymaterial/kurgak-aralashmalar/remonttuk-aralashmalar' },
+    ],
+  }])
+
+  assert.deepEqual(normalized[0].children.map((node) => node.slug), ['shtukaturkalar'])
 })
