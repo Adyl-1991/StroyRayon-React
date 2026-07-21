@@ -20,6 +20,8 @@ export function useProducts(filters) {
   const limit = Number(filters?.limit || 24)
 
   const catalogPath = filters?.catalogNode?.path?.join('/')
+  const isVirtualCatalogGroup = Boolean(catalogNode?.isVirtualCatalogGroup)
+  const apiCatalogPath = catalogNode?.apiCatalogPath || catalogPath
   const preferBundledCatalog = useMemo(
     () => shouldUseBundledAlinex({
       catalogNode,
@@ -104,22 +106,64 @@ export function useProducts(filters) {
 
     let isActive = true
 
-    fetchProducts({
-      search,
-      minPrice,
-      maxPrice,
-      stockStatuses,
-      brands,
-      tags,
-      units,
-      sort,
-      catalogPath,
-      page,
-      limit,
-    })
+    fetchProducts(isVirtualCatalogGroup
+      ? {
+          catalogPath: apiCatalogPath,
+          page: 1,
+          limit: 200,
+        }
+      : {
+          search,
+          minPrice,
+          maxPrice,
+          stockStatuses,
+          brands,
+          tags,
+          units,
+          sort,
+          catalogPath: apiCatalogPath,
+          page,
+          limit,
+        })
       .then((result) => {
         if (!isActive) return
-        const products = (result.items || []).map(normalizeProduct)
+        const apiProducts = (result.items || []).map(normalizeProduct)
+
+        if (isVirtualCatalogGroup) {
+          const scopedProducts = getFilteredProducts({
+            catalogNode,
+            minPrice,
+            maxPrice,
+            stockStatuses,
+            brands,
+            tags,
+            units,
+            search,
+            sort,
+          }, apiProducts)
+          const total = scopedProducts.length
+          const totalPages = Math.max(Math.ceil(total / limit), 1)
+          const safePage = Math.min(Math.max(page, 1), totalPages)
+          const start = (safePage - 1) * limit
+          const pagedProducts = scopedProducts.slice(start, start + limit)
+
+          setState({
+            products: pagedProducts,
+            items: pagedProducts,
+            total,
+            page: safePage,
+            limit,
+            totalPages,
+            filterOptions: getFilterOptions({ catalogNode, products: apiProducts }),
+            isLoading: false,
+            error: null,
+            isApiMode: true,
+            isFallback: false,
+          })
+          return
+        }
+
+        const products = apiProducts
         setState({
           products,
           items: products,
@@ -144,9 +188,12 @@ export function useProducts(filters) {
       isActive = false
     }
   }, [
+    apiCatalogPath,
     brands,
     catalogPath,
+    catalogNode,
     fallbackResult,
+    isVirtualCatalogGroup,
     limit,
     maxPrice,
     minPrice,

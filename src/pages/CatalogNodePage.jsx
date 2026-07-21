@@ -18,11 +18,22 @@ export function CatalogNodePage() {
   const params = useParams()
   const pathSegments = (params['*'] || '').split('/').filter(Boolean)
   const pathKey = pathSegments.join('/')
-  const movedWarmFloorRoutes = {
+  const movedCatalogRoutes = {
     'teplyi-pol': '/catalog',
     'teplyi-pol/suu-teplyi-pol': '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
     'teplyi-pol/elektr-teplyi-pol': '/catalog/elektrika/elektr-teplyi-pol',
     'teplyi-pol/kollektor-komplektter': '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
+    'inzhenerdik-santehnika/pnd-trubalar': '/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-trubalar',
+    'inzhenerdik-santehnika/pnd-fitingder': '/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-fitingder',
+    'inzhenerdik-santehnika/schetchiki-vody': '/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/schetchiki-vody',
+    'inzhenerdik-santehnika/reduktory-davleniya': '/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/reduktory-davleniya',
+    'inzhenerdik-santehnika/manometry': '/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/manometry',
+    'inzhenerdik-santehnika/zapornaya-armatura': '/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/zapornaya-armatura',
+    'inzhenerdik-santehnika/obratnye-klapany': '/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/obratnye-klapany',
+    'inzhenerdik-santehnika/filtry-gruboi-ochistki': '/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-gruboi-ochistki',
+    'inzhenerdik-santehnika/filtry-dlya-vody': '/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody',
+    'inzhenerdik-santehnika/filtry-dlya-vody/kartridzhi': '/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/kartridzhi',
+    'inzhenerdik-santehnika/filtry-dlya-vody/komplektuyushchie-dlya-filtrov': '/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/komplektuyushchie-dlya-filtrov',
   }
   const { node, isLoading: isCatalogLoading } = useCatalogNode(pathSegments)
   const { filters, setFilters } = useCatalogFilters()
@@ -32,8 +43,8 @@ export function CatalogNodePage() {
     catalogNode: node,
   })
 
-  if (movedWarmFloorRoutes[pathKey]) {
-    return <Navigate to={movedWarmFloorRoutes[pathKey]} replace />
+  if (movedCatalogRoutes[pathKey]) {
+    return <Navigate to={movedCatalogRoutes[pathKey]} replace />
   }
 
   if (!node) {

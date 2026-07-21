@@ -602,6 +602,83 @@ const HIDDEN_CATALOG_NODE_SLUGS = new Set([
   'remonttuk-aralashmalar',
 ])
 
+const ENGINEERING_GROUP_DEFINITIONS = [
+  {
+    id: 'pnd-systems',
+    slug: 'pnd-sistemalary',
+    titleKg: 'ПНД системалары',
+    titleRu: 'ПНД системы',
+    descriptionKg: 'Сырткы суу линияларына ПНД түтүктөр жана компрессиялык фитингдер.',
+    descriptionRu: 'ПНД трубы и компрессионные фитинги для наружных водяных линий.',
+    seoTextKg: 'ПНД системасын түтүктүн диаметри, басым классы жана фитинг шайкештиги боюнча тандаңыз.',
+    seoTextRu: 'ПНД-систему подбирают по диаметру трубы, классу давления и совместимости компрессионных фитингов.',
+    icon: 'pipe',
+    aliases: ['pnd-sistemy'],
+    childSlugs: ['pnd-trubalar', 'pnd-fitingder'],
+  },
+  {
+    id: 'water-metering-control',
+    slug: 'uchet-kontrol-davleniya',
+    titleKg: 'Суу эсеби жана басымды көзөмөлдөө',
+    titleRu: 'Учёт и контроль давления',
+    descriptionKg: 'Суу эсептегичтер, басым редукторлору жана манометрлер.',
+    descriptionRu: 'Счётчики воды, редукторы давления и манометры.',
+    seoTextKg: 'Сууну эсептөө жана басымды көзөмөлдөө приборлорун линиянын диаметри менен иш басымына жараша тандаңыз.',
+    seoTextRu: 'Приборы учёта и контроля подбирают по диаметру линии, рабочему давлению и условиям монтажа.',
+    icon: 'measure',
+    childSlugs: ['schetchiki-vody', 'reduktory-davleniya', 'manometry'],
+  },
+  {
+    id: 'shutoff-protective-valves',
+    slug: 'zapornaya-zashchitnaya-armatura',
+    titleKg: 'Жапкыч жана коргоочу арматура',
+    titleRu: 'Запорная и защитная арматура',
+    descriptionKg: 'Суу агымын жабууга жана тескери агымдан коргоого арматура.',
+    descriptionRu: 'Арматура для перекрытия воды и защиты от обратного потока.',
+    seoTextKg: 'Арматураны кошулуу өлчөмү, материал, басым жана линиянын багыты боюнча тандаңыз.',
+    seoTextRu: 'Арматуру подбирают по присоединительному размеру, материалу, давлению и направлению потока.',
+    icon: 'valve',
+    childSlugs: ['zapornaya-armatura', 'obratnye-klapany'],
+  },
+  {
+    id: 'water-filtration',
+    slug: 'filtraciya-vody',
+    titleKg: 'Сууну фильтрациялоо',
+    titleRu: 'Фильтрация воды',
+    descriptionKg: 'Механикалык тазалоо, колбалар, картридждер жана фильтр комплекттери.',
+    descriptionRu: 'Механическая очистка, колбы, картриджи и фильтрующие комплекты.',
+    seoTextKg: 'Фильтрацияны суу сапатына, өткөрүмдүүлүккө, колба өлчөмүнө жана картридж түрүнө жараша тандаңыз.',
+    seoTextRu: 'Фильтрацию подбирают по качеству воды, пропускной способности, размеру колбы и типу картриджа.',
+    icon: 'filter',
+    childSlugs: ['filtry-gruboi-ochistki', 'filtry-dlya-vody'],
+  },
+]
+
+const ENGINEERING_GROUP_BY_SLUG = new Map(ENGINEERING_GROUP_DEFINITIONS.map((group) => [group.slug, group]))
+const ENGINEERING_LEGACY_API_PATHS = {
+  'pnd-trubalar': 'inzhenerdik-santehnika/pnd-trubalar',
+  'pnd-fitingder': 'inzhenerdik-santehnika/pnd-fitingder',
+  'schetchiki-vody': 'inzhenerdik-santehnika/schetchiki-vody',
+  'reduktory-davleniya': 'inzhenerdik-santehnika/reduktory-davleniya',
+  manometry: 'inzhenerdik-santehnika/manometry',
+  'zapornaya-armatura': 'inzhenerdik-santehnika/zapornaya-armatura',
+  'obratnye-klapany': 'inzhenerdik-santehnika/obratnye-klapany',
+  'filtry-gruboi-ochistki': 'inzhenerdik-santehnika/filtry-gruboi-ochistki',
+  'filtry-dlya-vody': 'inzhenerdik-santehnika/filtry-dlya-vody',
+  kartridzhi: 'inzhenerdik-santehnika/filtry-dlya-vody/kartridzhi',
+  'komplektuyushchie-dlya-filtrov': 'inzhenerdik-santehnika/filtry-dlya-vody/komplektuyushchie-dlya-filtrov',
+}
+const ENGINEERING_ROOT_ORDER = [
+  'ppr-trubalar-fitingder',
+  'kanalizaciya',
+  'metall-plastik-trubalar',
+  'pnd-sistemalary',
+  'otoplenie',
+  'uchet-kontrol-davleniya',
+  'zapornaya-zashchitnaya-armatura',
+  'filtraciya-vody',
+]
+
 export function normalizeCatalogTree(nodes = []) {
   return nodes
     .filter((node) => !HIDDEN_CATALOG_NODE_SLUGS.has(node.slug))
@@ -609,10 +686,63 @@ export function normalizeCatalogTree(nodes = []) {
 }
 
 function normalizeCatalogNode(node) {
-  return {
+  const virtualGroup = ENGINEERING_GROUP_BY_SLUG.get(node.slug)
+  const normalized = {
     ...node,
     path: getNodePathSegments(node),
     children: normalizeCatalogTree(node.children || []),
+    ...(virtualGroup ? { isVirtualCatalogGroup: true, apiCatalogPath: 'inzhenerdik-santehnika' } : {}),
+  }
+
+  if (normalized.slug === 'inzhenerdik-santehnika') {
+    normalized.children = groupEngineeringCatalogChildren(normalized.children)
+  }
+
+  return normalized
+}
+
+function groupEngineeringCatalogChildren(children) {
+  const bySlug = new Map(children.map((child) => [child.slug, child]))
+
+  for (const definition of ENGINEERING_GROUP_DEFINITIONS) {
+    const existing = bySlug.get(definition.slug)
+    if (existing) {
+      bySlug.set(definition.slug, {
+        ...existing,
+        children: existing.children.map(prepareEngineeringGroupedChild),
+        isVirtualCatalogGroup: true,
+        apiCatalogPath: 'inzhenerdik-santehnika',
+      })
+      continue
+    }
+
+    const groupedChildren = definition.childSlugs
+      .map((slug) => bySlug.get(slug))
+      .filter(Boolean)
+      .map(prepareEngineeringGroupedChild)
+    if (!groupedChildren.length) continue
+
+    definition.childSlugs.forEach((slug) => bySlug.delete(slug))
+    bySlug.set(definition.slug, {
+      ...definition,
+      aliases: definition.aliases || [],
+      children: groupedChildren,
+      productTags: [],
+      productType: 'category',
+      isVirtualCatalogGroup: true,
+      apiCatalogPath: 'inzhenerdik-santehnika',
+    })
+  }
+
+  return ENGINEERING_ROOT_ORDER.map((slug) => bySlug.get(slug)).filter(Boolean)
+}
+
+function prepareEngineeringGroupedChild(node) {
+  const originalPath = getNodePathSegments(node).join('/') || ENGINEERING_LEGACY_API_PATHS[node.slug]
+  return {
+    ...node,
+    ...(originalPath ? { apiCatalogPath: originalPath } : {}),
+    children: (node.children || []).map(prepareEngineeringGroupedChild),
   }
 }
 

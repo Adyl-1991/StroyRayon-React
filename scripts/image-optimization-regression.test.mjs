@@ -72,7 +72,7 @@ test('every catalog node resolves to an existing realistic image', async () => {
   })
   collect(catalogTree)
 
-  assert.equal(nodes.length, 153)
+  assert.equal(nodes.length, 157)
   assert.equal(nodes.some((node) => node.slug === 'montazhdyk-aralashmalar'), false)
   assert.equal(nodes.some((node) => node.slug === 'remonttuk-aralashmalar'), false)
   for (const node of nodes) {
@@ -123,4 +123,67 @@ test('removed dry-mix categories are also filtered from the API catalog tree', (
   }])
 
   assert.deepEqual(normalized[0].children.map((node) => node.slug), ['shtukaturkalar'])
+})
+
+test('generated engineering category images are optimized landscape WebP files', async () => {
+  const directory = path.join(root, 'public', 'images', 'categories', 'generated', 'engineering')
+  const filenames = (await readdir(directory)).filter((filename) => filename.endsWith('.webp')).sort()
+
+  assert.deepEqual(filenames, [
+    'heating.webp',
+    'metal-plastic.webp',
+    'pnd-system.webp',
+    'ppr-system.webp',
+    'sewerage.webp',
+    'valves.webp',
+    'water-control.webp',
+    'water-filtration.webp',
+  ])
+
+  for (const filename of filenames) {
+    const metadata = await sharp(path.join(directory, filename)).metadata()
+    assert.equal(metadata.format, 'webp', filename)
+    assert.equal(metadata.width, 768, filename)
+    assert.equal(metadata.height, 512, filename)
+  }
+})
+
+test('engineering API categories are grouped into eight customer-facing sections', () => {
+  const childSlugs = [
+    'ppr-trubalar-fitingder',
+    'kanalizaciya',
+    'metall-plastik-trubalar',
+    'pnd-trubalar',
+    'pnd-fitingder',
+    'otoplenie',
+    'schetchiki-vody',
+    'reduktory-davleniya',
+    'zapornaya-armatura',
+    'obratnye-klapany',
+    'manometry',
+    'filtry-gruboi-ochistki',
+    'filtry-dlya-vody',
+  ]
+  const [engineering] = normalizeCatalogTree([{
+    slug: 'inzhenerdik-santehnika',
+    path: 'inzhenerdik-santehnika',
+    children: childSlugs.map((slug) => ({ slug, path: `inzhenerdik-santehnika/${slug}` })),
+  }])
+
+  assert.deepEqual(engineering.children.map((node) => node.slug), [
+    'ppr-trubalar-fitingder',
+    'kanalizaciya',
+    'metall-plastik-trubalar',
+    'pnd-sistemalary',
+    'otoplenie',
+    'uchet-kontrol-davleniya',
+    'zapornaya-zashchitnaya-armatura',
+    'filtraciya-vody',
+  ])
+  const pndChildren = engineering.children.find((node) => node.slug === 'pnd-sistemalary').children
+  assert.deepEqual(pndChildren.map((node) => node.slug), [
+    'pnd-trubalar',
+    'pnd-fitingder',
+  ])
+  assert.equal(pndChildren[0].apiCatalogPath, 'inzhenerdik-santehnika/pnd-trubalar')
 })
