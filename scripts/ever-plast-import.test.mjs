@@ -6,6 +6,7 @@ import test from 'node:test'
 
 import { roundRetail } from './import-ever-plast-catalog.mjs'
 import { everPlastCatalogImportMeta, everPlastProducts } from '../src/data/everPlastProducts.generated.js'
+import { isBundledEverPlastProduct, shouldUseBundledEverPlast } from '../src/utils/everPlastCatalogMode.js'
 
 test('retail price applies 20 percent markup and rounds upward to whole KGS', () => {
   assert.equal(roundRetail(50), 60)
@@ -44,4 +45,11 @@ test('generated public module never contains purchase prices', async () => {
   const generatedSource = await readFile(path.resolve('src/data/everPlastProducts.generated.js'), 'utf8')
   assert.equal(generatedSource.includes('purchasePrice'), false)
   assert.equal(generatedSource.includes('purchase-price'), false)
+})
+
+test('production prefers the bundled EVER PLAST release over stale API data', () => {
+  assert.equal(shouldUseBundledEverPlast({ search: 'EVER PLAST' }), true)
+  assert.equal(shouldUseBundledEverPlast({ search: 'ППР труба' }), true)
+  assert.equal(shouldUseBundledEverPlast({ search: 'цемент' }), false)
+  assert.equal(isBundledEverPlastProduct(everPlastProducts[0]), true)
 })

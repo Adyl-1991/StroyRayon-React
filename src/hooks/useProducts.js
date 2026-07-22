@@ -3,6 +3,7 @@ import { fetchProductBySlug, fetchProducts } from '../api/productsApi'
 import { USE_API } from '../config/api'
 import { getFilteredProducts, getFilterOptions, getProductBySlug, normalizeProduct } from '../services/productService'
 import { isBundledAlinexProduct, shouldUseBundledAlinex } from '../utils/alinexCatalogMode'
+import { isBundledEverPlastProduct, shouldUseBundledEverPlast } from '../utils/everPlastCatalogMode'
 
 export function useProducts(filters) {
   const categorySlug = filters?.categorySlug
@@ -23,19 +24,22 @@ export function useProducts(filters) {
   const isVirtualCatalogGroup = Boolean(catalogNode?.isVirtualCatalogGroup)
   const apiCatalogPath = catalogNode?.apiCatalogPath || catalogPath
   const preferBundledCatalog = useMemo(
-    () => shouldUseBundledAlinex({
-      catalogNode,
-      categorySlug,
-      subcategorySlug,
-      minPrice,
-      maxPrice,
-      stockStatuses,
-      brands,
-      tags,
-      units,
-      search,
-      sort,
-    }),
+    () => {
+      const catalogFilters = {
+        catalogNode,
+        categorySlug,
+        subcategorySlug,
+        minPrice,
+        maxPrice,
+        stockStatuses,
+        brands,
+        tags,
+        units,
+        search,
+        sort,
+      }
+      return shouldUseBundledAlinex(catalogFilters) || shouldUseBundledEverPlast(catalogFilters)
+    },
     [
       brands,
       catalogNode,
@@ -211,7 +215,7 @@ export function useProducts(filters) {
 
 export function useProductBySlug(slug) {
   const fallbackProduct = useMemo(() => getProductBySlug(slug), [slug])
-  const preferBundledProduct = isBundledAlinexProduct(fallbackProduct)
+  const preferBundledProduct = isBundledAlinexProduct(fallbackProduct) || isBundledEverPlastProduct(fallbackProduct)
   const [state, setState] = useState({ product: fallbackProduct, isLoading: USE_API, error: null })
 
   useEffect(() => {
