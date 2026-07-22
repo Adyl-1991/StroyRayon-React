@@ -307,6 +307,7 @@ export class OrdersService {
   }
 
   private async findProductForOrderItem(tx: Prisma.TransactionClient, item: CreateOrderItemDto) {
+    const bundledItem = findBundledOrderCatalogItem(item)
     const productSelect = {
       id: true,
       sku: true,
@@ -332,22 +333,24 @@ export class OrdersService {
       })
       if (variant) {
         if (item.productId && item.productId !== variant.productId) {
+          if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
           throw new BadRequestException(`Product identifier mismatch: ${item.productId}`)
         }
         if (item.slug && item.slug !== variant.product.slug) {
+          if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
           throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
         }
         return { kind: 'database' as const, product: variant.product, variant }
       }
 
-      const bundledVariant = findBundledOrderCatalogItem(item)
-      if (bundledVariant) return { kind: 'bundled' as const, item: bundledVariant }
+      if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
     }
 
     if (item.productId) {
       const product = await tx.product.findUnique({ where: { id: item.productId }, select: productSelect })
       if (product) {
         if (item.slug && item.slug !== product.slug) {
+          if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
           throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
         }
         return { kind: 'database' as const, product, variant: null }
@@ -364,7 +367,6 @@ export class OrdersService {
       if (product) return { kind: 'database' as const, product, variant: null }
     }
 
-    const bundledItem = findBundledOrderCatalogItem(item)
     if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
 
     throw new BadRequestException(`Product not found: ${item.slug || item.productId || item.sku || 'unknown'}`)

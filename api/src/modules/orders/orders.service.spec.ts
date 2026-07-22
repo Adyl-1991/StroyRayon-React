@@ -73,3 +73,31 @@ test('EVER PLAST order is persisted from the server catalog when the CRM product
   assert.equal(result.orderNumber, 'SR-2026-000001')
   assert.equal(result.total, 120)
 })
+
+test('current storefront item wins when a stale CRM row reuses its product id', async () => {
+  const tx = {
+    productVariant: {
+      findUnique: async () => null,
+    },
+    product: {
+      findUnique: async ({ where }: any) => where.id === 'wago-terminal-3'
+        ? { id: 'wago-terminal-3', slug: 'stale-wago-slug' }
+        : null,
+    },
+  }
+  const service = new OrdersService({} as any, {} as any, {} as any, {} as any, {} as any)
+
+  const resolved = await (service as any).findProductForOrderItem(tx, {
+    productId: 'wago-terminal-3',
+    slug: 'wago-tip-klemma-3-orun',
+    sku: 'SR-ELC-WAG-003',
+    title: 'Client title is not trusted',
+    price: 1,
+    quantity: 1,
+    unit: 'client-unit',
+  })
+
+  assert.equal(resolved.kind, 'bundled')
+  assert.equal(resolved.item.slug, 'wago-tip-klemma-3-orun')
+  assert.equal(resolved.item.price, 22)
+})
