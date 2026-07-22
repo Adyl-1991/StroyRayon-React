@@ -20,6 +20,7 @@ reports/visual-audit/storefront-screenshots/
 reports/visual-audit.zip
 reports/**/chrome-profile*/
 reports/**/chrome-debug-profile*/
+reports/ever-plast-import-private/
 
 node_modules
 dist

@@ -1,5 +1,6 @@
 import { getProductAssetEntry } from './productAssets.js'
 import { alinexProducts } from './alinexProducts.generated.js'
+import { everPlastProducts } from './everPlastProducts.generated.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
 const buildingProductPlaceholder = '/images/placeholders/product-building-placeholder.svg'
@@ -12749,7 +12750,7 @@ const assortmentGapProducts = [
   },
 ]
 
-export const products = [
+const baseProducts = [
   product({
     id: 'ppr-pipe-20-pn20',
     titleKg: 'ППР түтүк PN20',
@@ -15143,4 +15144,53 @@ export const products = [
   }),
   ...alinexProducts,
   ...assortmentGapProducts.map(matrixProduct),
+]
+
+const everPlastReplacementIds = new Set([
+  'ppr-pipe-20-pn20',
+  'ppr-pipe-25-pn20',
+  'ppr-pipe-32-fiber',
+  'ppr-coupling-20',
+  'ppr-elbow-20-90',
+  'ppr-tee-25',
+  'ppr-valve-25',
+  'ppr-perehodnik-25-20',
+  'ppr-kombinirovannaya-mufta-20-12',
+  'ppr-klipsa-20',
+  'sewer-pipe-50',
+  'sewer-pipe-110',
+  'sewer-elbow-50-45',
+  'sewer-tee-110-50',
+  'kanalizaciya-truba-naruzhnaya-110',
+])
+
+const everPlastReplacementProductId = {
+  'ppr-pipe-20-pn20': 'ever-plast-ppr-pipe-pn20',
+  'ppr-pipe-25-pn20': 'ever-plast-ppr-pipe-pn20',
+  'ppr-pipe-32-fiber': 'ever-plast-ppr-pipe-fiber',
+  'ppr-coupling-20': 'ever-plast-ppr-coupling',
+  'ppr-elbow-20-90': 'ever-plast-ppr-elbow-90',
+  'ppr-tee-25': 'ever-plast-ppr-tee',
+  'ppr-valve-25': 'ever-plast-ppr-valve',
+  'ppr-perehodnik-25-20': 'ever-plast-ppr-reducer',
+  'ppr-kombinirovannaya-mufta-20-12': 'ever-plast-ppr-combined-coupling-vr',
+  'ppr-klipsa-20': 'ever-plast-ppr-clip',
+  'sewer-pipe-50': 'ever-plast-sewer-pipe-50-internal',
+  'sewer-pipe-110': 'ever-plast-sewer-pipe-110-internal',
+  'sewer-elbow-50-45': 'ever-plast-sewer-elbow-45',
+  'sewer-tee-110-50': 'ever-plast-sewer-tee-90',
+  'kanalizaciya-truba-naruzhnaya-110': 'ever-plast-sewer-pipe-110-external',
+}
+
+function updateEverPlastRelatedIds(item) {
+  if (!item.relatedProductIds?.length) return item
+  return {
+    ...item,
+    relatedProductIds: [...new Set(item.relatedProductIds.map((id) => everPlastReplacementProductId[id] || id))],
+  }
+}
+
+export const products = [
+  ...baseProducts.filter((item) => !everPlastReplacementIds.has(item.id)).map(updateEverPlastRelatedIds),
+  ...everPlastProducts.map(product),
 ]

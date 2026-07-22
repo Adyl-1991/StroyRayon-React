@@ -565,8 +565,14 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
   if (!productHref) return
 
   await navigate(cdp, productHref)
+  const productPageHealth = await inspectPage(cdp)
+  pageHealth(checks, issues, `${prefix}: product page`, productPageHealth)
   const product = await evaluate(cdp, `(() => ({
     title: document.querySelector('.product-info h1')?.textContent?.trim() || '',
+    titleClientWidth: document.querySelector('.product-info h1')?.clientWidth || 0,
+    titleScrollWidth: document.querySelector('.product-info h1')?.scrollWidth || 0,
+    titleWhiteSpace: getComputedStyle(document.querySelector('.product-info h1')).whiteSpace,
+    infoRight: document.querySelector('.product-info')?.getBoundingClientRect().right ?? null,
     price: document.querySelector('.product-price strong')?.textContent?.trim() || '',
     unit: document.querySelector('.product-price span')?.textContent?.trim() || '',
     imageSrc: document.querySelector('.product-gallery__main')?.currentSrc || '',
@@ -577,6 +583,15 @@ async function runCustomerFlow(cdp, locale, viewport, checks, issues) {
     actionTop: document.querySelector('.product-info__actions')?.getBoundingClientRect().top ?? null,
   }))()`)
   addCheck(checks, issues, `${prefix}: product title`, Boolean(product.title), product.title)
+  addCheck(
+    checks,
+    issues,
+    `${prefix}: product title fits its card`,
+    product.titleScrollWidth <= product.titleClientWidth + 1
+      && product.infoRight !== null
+      && product.infoRight <= viewport.width + 1,
+    `title ${product.titleScrollWidth}/${product.titleClientWidth}px, card right ${product.infoRight}px, white-space ${product.titleWhiteSpace}`,
+  )
   addCheck(checks, issues, `${prefix}: product price`, Boolean(product.price) && !/NaN/.test(product.price), product.price)
   addCheck(checks, issues, `${prefix}: product unit`, Boolean(product.unit), product.unit)
   addCheck(checks, issues, `${prefix}: product breadcrumbs`, product.breadcrumbs)

@@ -1,0 +1,2352 @@
+[
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 20х3,4 PN20 (толс. ст.) SDR 6 белый (100)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.20.034.20.60.W",
+    "officialName": "Труба 20х3,4 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 60
+  },
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 25х4,2 PN20 (толс. ст.) SDR 6 белый (80)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.25.042.20.60.W",
+    "officialName": "Труба 25х4,2 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 94
+  },
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 32х5,4 PN20 (толс. ст.) SDR 6 белый (60)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.32.054.60.60.W",
+    "officialName": "Труба 32х5,4 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 168
+  },
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 40х6,7 PN20 (толс. ст.) SDR 6 белый (40)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.40.067.20.60.W",
+    "officialName": "Труба 40х6,7 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 252
+  },
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 50х8.3 PN20 (толс. ст.) SDR 6 белый (24)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.50.083.20.60.W",
+    "officialName": "Труба 50х8,3 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 432
+  },
+  {
+    "familyKey": "ppr-pipe-pn20",
+    "priceName": "Труба 63х10,5 PN20 (толс. ст.) SDR 6 белый (16)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.63.105.20.60.W",
+    "officialName": "Труба 63х10,5 PN20 (толс. ст.) SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 696
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 20х3.4 PN25 (арм. стекловолокно) FIBER SDR 6 белый (100)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.20.034.25.60.W",
+    "officialName": "Труба 20х3.4 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 70
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 25х4.2 PN25 (арм. стекловолокно) FIBER SDR 6 белый (80)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.25.042.25.60.W",
+    "officialName": "Труба 25х4.2 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 100
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 32х5.4 PN25 (арм. стекловолокно) FIBER SDR 6 белый (60)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.32.054.25.60.W",
+    "officialName": "Труба 32х5.4 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 40х6.7 PN25 (арм. стекловолокно) FIBER SDR 6 белый (50)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.40.067.25.60.W",
+    "officialName": "Труба 40х6.7 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 288
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 50х8.3 PN25 (арм. стекловолокно) FIBER SDR 6 белый (24)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.50.083.25.60.W",
+    "officialName": "Труба 50х8.3 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 480
+  },
+  {
+    "familyKey": "ppr-pipe-fiber",
+    "priceName": "Труба 63х10,5 PN25 (арм. стекловолокно) FIBER SDR 6 белый (16)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.63.105.25.60.W",
+    "officialName": "Труба 63х10.5 PN25 (арм. стекловолокно) FIBER SDR 6 бел.",
+    "hasPicture": true,
+    "retailPrice": 756
+  },
+  {
+    "familyKey": "ppr-pipe-dual",
+    "priceName": "Труба 20х3.4 PN25 (алюм.) DUAL SDR 6 белый (100)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.20.034.25.60.WD.........",
+    "officialName": "Труба 20x3,4 PN25 (армир. алюминий) DUAL SDR6 Белый",
+    "hasPicture": true,
+    "retailPrice": 84
+  },
+  {
+    "familyKey": "ppr-pipe-dual",
+    "priceName": "Труба 25х4.2 PN25 (алюм.) DUAL SDR 6 белый (80)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.25.042.25.60.WD",
+    "officialName": "Труба 25x4,2 PN25 (армир. алюминий) DUAL SDR6 Белый",
+    "hasPicture": true,
+    "retailPrice": 114
+  },
+  {
+    "familyKey": "ppr-pipe-dual",
+    "priceName": "Труба 32х5.4 PN25 (алюм.) DUAL SDR 6 белый (60)",
+    "unit": "метр",
+    "confidence": "exact",
+    "officialSku": "UPP.32.054.25.60.WD",
+    "officialName": "Труба 32x5,4 PN25 (армир. алюминий) DUAL SDR6 Белый",
+    "hasPicture": true,
+    "retailPrice": 178
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Угол ф20 90* белый (50/400)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.20.00.W",
+    "officialName": "Уголок 90 градусов 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Угол ф25 90* белый (30/240)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.25.00.W",
+    "officialName": "Уголок 90 градусов 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 11
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Угол ф32 90* белый (20/120)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.32.00.W",
+    "officialName": "Уголок 90 градусов 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 22
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Угол ф40 90* белый (70)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.40.00.W",
+    "officialName": "Уголок 90 градусов 40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 40
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Угол ф50 90* белый (9/49)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.50.00.W",
+    "officialName": "Уголок 90 градусов 50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 52
+  },
+  {
+    "familyKey": "ppr-elbow-90",
+    "priceName": "Уголок 90е 63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.90.63.00.W",
+    "officialName": "Уголок 90 градусов 63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 102
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Угол ф20 45* белый (50/500)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.20.00.W",
+    "officialName": "Уголок 45 градусов 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 6
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Угол ф25 45* белый (30/300)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.25.00.W",
+    "officialName": "Уголок 45 градусов 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Угол ф32 45* белый (15/150)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.32.00.W",
+    "officialName": "Уголок 45 градусов 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 17
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Угол ф40 45* белый (10/90)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.40.00.W",
+    "officialName": "Уголок 45 градусов 40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 33
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Угол ф50 45* белый (7/49)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.50.00.W",
+    "officialName": "Уголок 45 градусов 50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 52
+  },
+  {
+    "familyKey": "ppr-elbow-45",
+    "priceName": "Уголок 45° 63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.025.45.63.00.W",
+    "officialName": "Уголок 45 градусов 63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-clip",
+    "priceName": "Крепление 20 белый (100/600)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.033.20.00.00.W",
+    "officialName": "Фиксатор для полипропиленовой трубы (клипса) 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 4
+  },
+  {
+    "familyKey": "ppr-clip",
+    "priceName": "Крепление 25 белый (50/450)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.033.25.00.00.W",
+    "officialName": "Фиксатор для полипропиленовой трубы (клипса) 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 5
+  },
+  {
+    "familyKey": "ppr-clip",
+    "priceName": "Крепление 32 белый (50/300)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.033.32.00.00.W",
+    "officialName": "Фиксатор для полипропиленовой трубы (клипса) 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 6
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 20 белый (40/280)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.021.20.00.00.W",
+    "officialName": "Тройник 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 25 белый (20/160)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.021.25.00.00.W",
+    "officialName": "Тройник 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 17
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 32 белый (15/90)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.021.32.00.00.W",
+    "officialName": "Тройник 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 28
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 40 белый (10/60)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.021.40.00.00.W",
+    "officialName": "Тройник 40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 45
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 50 белый (4/36)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.016.50.32.00.W",
+    "officialName": "Тройник 50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 84
+  },
+  {
+    "familyKey": "ppr-tee",
+    "priceName": "Тройник 63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.021.63.00.00.W",
+    "officialName": "Тройник 63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 138
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 20 белый (100/1000)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.20.00.00.W",
+    "officialName": "Заглушка полипропиленовая 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 5
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 25 белый (50/600)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.25.00.00.W",
+    "officialName": "Заглушка полипропиленовая 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 32 белый (40/400)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.32.00.00.W",
+    "officialName": "Заглушка полипропиленовая 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 12
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 40 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.40.00.00.W",
+    "officialName": "Заглушка полипропиленовая 40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 22
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 50 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.50.00.00.W",
+    "officialName": "Заглушка полипропиленовая 50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "ppr-plug",
+    "priceName": "Заглушка 63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.001.63.00.00.W",
+    "officialName": "Заглушка полипропиленовая 63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 66
+  },
+  {
+    "familyKey": "ppr-cross",
+    "priceName": "Крестовина 20 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.006.20.00.00.W",
+    "officialName": "Крестовина полипропиленовая 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 30
+  },
+  {
+    "familyKey": "ppr-cross",
+    "priceName": "Крестовина 25 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.006.25.00.00.W",
+    "officialName": "Крестовина полипропиленовая 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 34
+  },
+  {
+    "familyKey": "ppr-cross",
+    "priceName": "Крестовина 32 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.006.32.00.00.W",
+    "officialName": "Крестовина полипропиленовая 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 52
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 20 белый (100/600)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.20.00.00.W",
+    "officialName": "Муфта соединительная 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 6
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 25 белый (350)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.25.00.00.W",
+    "officialName": "Муфта соединительная 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 32 белый (40/200)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.32.00.00.W",
+    "officialName": "Муфта соединительная 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 14
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 40 белый (15/135)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.40.00.00.W",
+    "officialName": "Муфта соединительная 40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 22
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 50 белый (10/90)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.50.00.00.W",
+    "officialName": "Муфта соединительная 50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "ppr-coupling",
+    "priceName": "Муфта соединительная 63 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.017.63.00.00.W",
+    "officialName": "Муфта соединительная 63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 54
+  },
+  {
+    "familyKey": "ppr-bypass",
+    "priceName": "Обвод раструбный 20 белый (25/250)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.018.20.20.00.W",
+    "officialName": "Обвод раструбный 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 15
+  },
+  {
+    "familyKey": "ppr-bypass",
+    "priceName": "Обвод раструбный 25 белый (50/350)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.018.25.25.00.W",
+    "officialName": "Обвод раструбный 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 20
+  },
+  {
+    "familyKey": "ppr-bypass",
+    "priceName": "Обвод раструбный 32 белый (10/80)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.018.32.32.00.W",
+    "officialName": "Обвод раструбный 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 44
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 25/20 белый (50/450)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.25.20.00.W",
+    "officialName": "Муфта переходная внутр/внутр 25/20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 6
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 32/20 белый (50/250)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.32.20.00.W",
+    "officialName": "Муфта переходная внутр/внутр 32/20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 8
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 32/25 белый (50/250)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.32.25.00.W",
+    "officialName": "Муфта переходная внутр/внутр 32/25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 9
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "муфта переходная 40/25 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.40.25.00.W",
+    "officialName": "Муфта переходная внутр/внутр 40/25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 16
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "муфта переходная 40/32 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.40.32.00.W",
+    "officialName": "Муфта переходная внутр/внутр 40/32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 16
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 50/20 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.50.20..00.W",
+    "officialName": "Муфта переходная внутр/внутр 50/20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 27
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 50/25 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.50.25.00.W",
+    "officialName": "Муфта переходная внутр/внутр 50/25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 27
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 50/32 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.50.32.00.W",
+    "officialName": "Муфта переходная внутр/внутр 50/32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 29
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 50/40 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.50.40.00.W",
+    "officialName": "Муфта переходная внутр/внутр 50/40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 33
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 63/20 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.63.20.00.W",
+    "officialName": "Муфта переходная внутр/внутр 63/20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 47
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 63/25 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.63.25.00.W",
+    "officialName": "Муфта переходная внутр/внутр 63/25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 48
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 63/32 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.63.32.00.W",
+    "officialName": "Муфта переходная внутр/внутр 63/32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 48
+  },
+  {
+    "familyKey": "ppr-reducer",
+    "priceName": "Муфта переходная 63/40 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.015.63.40.00.W",
+    "officialName": "Муфта переходная внутр/внутр 63/40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 48
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 25х20х25 белый (20/200)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.25.20.25.W",
+    "officialName": "Тройник переходной 25х20х25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 12
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 32х20х32 белый (15120)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.32.20.32.W",
+    "officialName": "Тройник переходной 32х20х32EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 20
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 32х25х32 белый (10/100)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.32.25.32.W",
+    "officialName": "Тройник переходной 32х25х32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 20
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 40х20х40 белый (10/80)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.40.20.40.W",
+    "officialName": "Тройник переходной 40х20х40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 40х25х40 белый (10/70)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.40.25.40.W",
+    "officialName": "Тройник переходной 40х25х40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 40х32х40 белый (10/70)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.40.32.40.W",
+    "officialName": "Тройник переходной 40х32х40 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 50х20х50 белый (5/45)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.50.20.50.W",
+    "officialName": "Тройник переходной 50х20х50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 50х25х50 белый (5/45)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.50.25.50.W",
+    "officialName": "Тройник переходной 50х25х50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 50х32х50 белый (5/40)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.50.32.50.W",
+    "officialName": "Тройник переходной 50х32х50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 50х40х50 белый (5/35)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.50.40.50.W",
+    "officialName": "Тройник переходной 50х40х50 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 63x20x63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.63.20.63.W",
+    "officialName": "Тройник переходной 63х20х63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 90
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 63x25x63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.63.25.63.W",
+    "officialName": "Тройник переходной 63х25х63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 90
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 63x32x63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.63.32.63.W",
+    "officialName": "Тройник переходной 63х32х63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 63x40x63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.63.40.63.W",
+    "officialName": "Тройник переходной 63х40х63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "ppr-reducing-tee",
+    "priceName": "Тройник переходной 63x50x63 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.024.63.50.63.W",
+    "officialName": "Тройник переходной 63х50х63 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 144
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 20х1/2х20 белый (15/150)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.023.20.01.20.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 76
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 20х3/4 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.023.20.01.20.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 25х1/2 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.023.20.01.20.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 90
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 25х3/4 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.023.20.01.20.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 32х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.023.32.03.32.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 32х1х32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-combined-tee-vr",
+    "priceName": "Тройник комб. ВР 32х3/4 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.023.20.01.20.W",
+    "officialName": "Тройник комбинированный внутренняя резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 142
+  },
+  {
+    "familyKey": "ppr-combined-tee-nr",
+    "priceName": "Тройник комб. НР 20х1/2х20 белый (135)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.022.20.01.20.W",
+    "officialName": "Тройник комбинированный наружная резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-combined-tee-nr",
+    "priceName": "Тройник комб. НР 20х3/4 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.022.20.01.20.W",
+    "officialName": "Тройник комбинированный наружная резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-combined-tee-nr",
+    "priceName": "Тройник комб. НР 25х1/2 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.022.20.01.20.W",
+    "officialName": "Тройник комбинированный наружная резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "ppr-combined-tee-nr",
+    "priceName": "Тройник комб. НР 25х3/4 белый",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.022.20.01.20.W",
+    "officialName": "Тройник комбинированный наружная резьба 20х1/2х20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 144
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 20х1/2\" белый (20/200)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.20.01.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 72
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 20х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.20.02.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 25х1/2\"белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.25.01.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 75
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.25.02.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 32х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.32.03.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба 32х1' EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 150
+  },
+  {
+    "familyKey": "ppr-combined-elbow-vr",
+    "priceName": "Уголок комб. ВР 32х3/4 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.029.32.02.00.W.",
+    "officialName": "Уголок комбинированный внутренняя резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 20х1/2\"белый (20/180)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.20.01.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 20х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.20.02.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 25х1/2\"белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.25.01.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.25.02.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 120
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 32х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.32.03.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 32х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "ppr-combined-elbow-nr",
+    "priceName": "Уголок комб. НР 32х3/4 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.028.32.02.00.W",
+    "officialName": "Уголок комбинированный наружная резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 144
+  },
+  {
+    "familyKey": "ppr-double-wall-elbow-vr",
+    "priceName": "Уголок комб. ВР с креплением двойной 20х1/2\" белый (5/40)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.027.20.01.00.W",
+    "officialName": "Уголок комб. внутренняя резьба с креплением двойной 20х1/2\" EVER Белый",
+    "hasPicture": true,
+    "retailPrice": 168
+  },
+  {
+    "familyKey": "ppr-double-wall-elbow-nr",
+    "priceName": "Уголок комб. НР с креплением двойной 20х1/2\" белый (5/25)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.026.20.01.00.W",
+    "officialName": "Уголок комб. наружная резьба с креплением двойной 20х1/2\" EVER Белый",
+    "hasPicture": true,
+    "retailPrice": 204
+  },
+  {
+    "familyKey": "ppr-wall-elbow-vr",
+    "priceName": "Уголок комб. ВР с креплением 20х1/2\" белый (20/140)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.031.20.01.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба с креплением 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 66
+  },
+  {
+    "familyKey": "ppr-wall-elbow-vr",
+    "priceName": "Уголок комб. ВР с креплением 25х1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.031.25.01.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба с креплением 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 72
+  },
+  {
+    "familyKey": "ppr-wall-elbow-vr",
+    "priceName": "Уголок комб. ВР с креплением 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.031.25.02.00.W",
+    "officialName": "Уголок комбинированный внутренняя резьба с креплением 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 102
+  },
+  {
+    "familyKey": "ppr-wall-elbow-nr",
+    "priceName": "Уголок комб. НР с креплением 20х1/2\" белый (105)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.030.20.01.00.W",
+    "officialName": "Угол комбинированный наружная резьба с креплением 20х1/2 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 84
+  },
+  {
+    "familyKey": "ppr-wall-elbow-nr",
+    "priceName": "Уголок комб. НР с креплением 25х1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.030.25.01.00.W",
+    "officialName": "Угол комбинированный наружная резьба с креплением 25х1/2 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-wall-elbow-nr",
+    "priceName": "Уголок комб. НР с креплением 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.030.25.02.00.W",
+    "officialName": "Угол комбинированный наружная резьба с креплением 25х3/4 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 20х1/2\" белый (20/240)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.20.01.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 72
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 20х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.20.02.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 100
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 25x1/2\" бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.25.01.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 82
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.25.02.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 100
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 32х1\" белый (120)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.32.03.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 32х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 156
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 32х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.008.32.02.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 40х1 1/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.010.40.04.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 40х1 1/4\" под ключ EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 468
+  },
+  {
+    "familyKey": "ppr-combined-coupling-vr",
+    "priceName": "Муфта комб. ВР 50х1 1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.010.50.04.00.W",
+    "officialName": "Муфта комбинированная внутренняя резьба 50х1 1/2\" под ключ EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 588
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 20х1/2\" белый (225)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.014.20.01.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 84
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 20х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UUPF.014.20.02.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 138
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 25х1/2\" белый (225)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.014.25.01.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 25х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.014.25.02.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 138
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 32х1\" белый (90)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.009.32.03.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 32х1\" под ключ EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 192
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 32х3/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.014.32.02.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 144
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 40х1 1/4\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.009.40.04.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 40х1 1/4\" под ключ EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 624
+  },
+  {
+    "familyKey": "ppr-combined-coupling-nr",
+    "priceName": "Муфта комб. НР 50х1 1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.009.50.05.00.W",
+    "officialName": "Муфта комбинированная наружная резьба 50х1 1/2\" под ключ EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 780
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 20х1/2\" белый (10/300)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.20.01.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 156
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 20х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.20.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 20х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 312
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 20х3/4\" белый (290)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.20.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 150
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 25х1/2\" белый (160)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.25.01.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 228
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 25х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.25.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 25х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 252
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 25х3/4\" белый (10/170)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.25.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 234
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 32х1 1/4\" белый (5/120)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.32.04.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 32х1 1/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 360
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 32х1\" белый (5/100)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.32.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 32х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 300
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 32х3/4\" белый (5/100)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.32.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 300
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 40х1 1/4\" белый (5/60)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.40.04.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 40х1 1/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 432
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 50х1 1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.50.05.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 50х1 1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 828
+  },
+  {
+    "familyKey": "ppr-union-vr",
+    "priceName": "Муфта комб. разъемная ВР 63x2 \" бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.012.63.06.00.W",
+    "officialName": "Муфта комбинированная разъемная, внутренняя резьба 63х2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 1320
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 20х1/2\" белый (10/250)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.20.01.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 20х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 156
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 20х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.20.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 20х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 336
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 20х3/4\" белый (250)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.20.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 20х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 25х1/2\" белый (10/170)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.25.01.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 25х1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 198
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 25х1 белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.25.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 25х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 246
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 25х3/4\" белый (10/160)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.25.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 25х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 32х1 1/4\" белый (5/80)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.32.04.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 32х1 1/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 444
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 32х1\" белый (10/90)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.32.03.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 32х1\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 348
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 32х3/4\" белый (5/120)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.32.02.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 32х3/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 330
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 40х1 1/4\" белый (4/48)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.40.04.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 40х1 1/4\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 540
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная НР 50х1 1/2\" белый",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.50.05.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 50х1 1/2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 960
+  },
+  {
+    "familyKey": "ppr-union-nr",
+    "priceName": "Муфта комб. разъемная HP 63x2 \" бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.013.63.06.00.W",
+    "officialName": "Муфта комбинированная разъемная, наружная резьба 63х2\" EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 1440
+  },
+  {
+    "familyKey": "ppr-filter",
+    "priceName": "Фильтр косой 20 белый (1/110)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.035.20.00.00.W",
+    "officialName": "Фильтр косой 20 вн/вн EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "ppr-filter",
+    "priceName": "Фильтр косой 25 белый (70)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.035.25.00.00.W",
+    "officialName": "Фильтр косой 25 вн/вн EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 264
+  },
+  {
+    "familyKey": "ppr-filter",
+    "priceName": "Фильтр косой 32 белый (40)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.035.32.00.00.W",
+    "officialName": "Фильтр косой 32 вн/вн EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 456
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 20 бел.",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.005.20.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 174
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 25 белый (1/60)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.005.25.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 25 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 300
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 32 белый (1/35)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPF.005.32.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 32 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 384
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 40 белый (18)",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.005.20.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 840
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 50 белый (1/12)",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.005.20.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 1440
+  },
+  {
+    "familyKey": "ppr-valve",
+    "priceName": "Кран шар ручка 63 бел",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPF.005.20.00.00.W",
+    "officialName": "Полипропиленовый шаровой кран полнопроходной ручка 20 EVER PLAST /белый",
+    "hasPicture": true,
+    "retailPrice": 2280
+  },
+  {
+    "familyKey": "sewer-coupling",
+    "priceName": "ПВХ Муфта ф-50 (50)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 48
+  },
+  {
+    "familyKey": "sewer-coupling",
+    "priceName": "ПВХ Муфта 110 Рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "sewer-coupling",
+    "priceName": "ПВХ Муфта ф-110 (72)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 102
+  },
+  {
+    "familyKey": "sewer-elbow-45",
+    "priceName": "ПВХ Отвод Ф-50 45* (240)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 28
+  },
+  {
+    "familyKey": "sewer-elbow-45",
+    "priceName": "ПВХ Отвод Ф-110 45* (48)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "sewer-elbow-90",
+    "priceName": "ПВХ Отвод Ф-50 90* (240)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 28
+  },
+  {
+    "familyKey": "sewer-elbow-90",
+    "priceName": "ПВХ Отвод Ф-110 90* (40)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50 верх 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 186
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50 левый 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50 правый 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50 тыл 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 186
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50/50x45° левый /правый",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 192
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50x45° верх",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 186
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50x45° левый",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50x45° правый",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 180
+  },
+  {
+    "familyKey": "sewer-special-elbow",
+    "priceName": "Отвод 110/50x45° тыл",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 186
+  },
+  {
+    "familyKey": "sewer-plug",
+    "priceName": "ПВХ Заглушка Ф-50 (1250)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 18
+  },
+  {
+    "familyKey": "sewer-plug",
+    "priceName": "ПВХ Заглушка Ф-110 рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 30
+  },
+  {
+    "familyKey": "sewer-plug",
+    "priceName": "ПВХ Заглушка Ф-110 ()",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 30
+  },
+  {
+    "familyKey": "sewer-revision",
+    "priceName": "ПВХ Ревизия 50 (180)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 90
+  },
+  {
+    "familyKey": "sewer-revision",
+    "priceName": "ПВХ Ревизия 110 ()",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 228
+  },
+  {
+    "familyKey": "sewer-reducer",
+    "priceName": "ПВХ Переход короткий 110/50 ()",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 84
+  },
+  {
+    "familyKey": "sewer-reducer",
+    "priceName": "ПВХ Переход 110/50 ()",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "sewer-tee-90",
+    "priceName": "ПВХ Тройник 50х50 90* (120)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 66
+  },
+  {
+    "familyKey": "sewer-tee-90",
+    "priceName": "ПВХ Тройник 110х110 90*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 174
+  },
+  {
+    "familyKey": "sewer-tee-90",
+    "priceName": "ПВХ Тройник 110х50 90*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "sewer-tee-45",
+    "priceName": "ПВХ Тройник 50х50 45*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 66
+  },
+  {
+    "familyKey": "sewer-tee-45",
+    "priceName": "ПВХ Тройник 110х110 45*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 192
+  },
+  {
+    "familyKey": "sewer-tee-45",
+    "priceName": "ПВХ Тройник 110х50 45*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 126
+  },
+  {
+    "familyKey": "sewer-cross",
+    "priceName": "Крестовина 110/110/110 2х плоскостной рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 360
+  },
+  {
+    "familyKey": "sewer-cross",
+    "priceName": "Крестовина 110/110/50 левый 87,5 правый 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 264
+  },
+  {
+    "familyKey": "sewer-cross",
+    "priceName": "Крестовина 110/110/50 тыл 87,5",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 264
+  },
+  {
+    "familyKey": "sewer-cross",
+    "priceName": "Крестовина 110/110/50/50 левый правый 45г",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 264
+  },
+  {
+    "familyKey": "sewer-cross",
+    "priceName": "Крестовина 110/50/50/45г",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 264
+  },
+  {
+    "familyKey": "sewer-spigot",
+    "priceName": "110 патрубок компенсационный 0,15м ПП внутр.",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 132
+  },
+  {
+    "familyKey": "sewer-spigot",
+    "priceName": "110 патрубок компенсационный ПП внутр.",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 138
+  },
+  {
+    "familyKey": "sewer-external-elbow-45",
+    "priceName": "ПВХ Отвод 110 45* рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 108
+  },
+  {
+    "familyKey": "sewer-external-elbow-90",
+    "priceName": "ПВХ Отвод 110 90* рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 114
+  },
+  {
+    "familyKey": "sewer-external-revision",
+    "priceName": "ПВХ Ревизия 110 рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 240
+  },
+  {
+    "familyKey": "sewer-external-tee-45",
+    "priceName": "ПВХ Тройник 110х50 45* рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 126
+  },
+  {
+    "familyKey": "sewer-external-tee-45",
+    "priceName": "ПВХ Тройник 110х110 45* рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 216
+  },
+  {
+    "familyKey": "sewer-external-tee-45",
+    "priceName": "ПВХ Тройник 160х160 45*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 714
+  },
+  {
+    "familyKey": "sewer-external-tee-45",
+    "priceName": "ПВХ Тройник 160х110 45*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 642
+  },
+  {
+    "familyKey": "sewer-external-tee-90",
+    "priceName": "ПВХ Тройник 110х110 90*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 192
+  },
+  {
+    "familyKey": "sewer-external-tee-90",
+    "priceName": "ПВХ Тройник 110х50 90* рыж",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 168
+  },
+  {
+    "familyKey": "sewer-external-tee-90",
+    "priceName": "ПВХ Тройник 160х110 90*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 642
+  },
+  {
+    "familyKey": "sewer-external-tee-90",
+    "priceName": "ПВХ Тройник 160х160 90*",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 666
+  },
+  {
+    "familyKey": "sewer-clip",
+    "priceName": "110 Хомут с защелкой ПП (360)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 22
+  },
+  {
+    "familyKey": "sewer-clip",
+    "priceName": "50 Хомут с защелкой ПП (1200)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 11
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 1 1/4\" (38/43 мм) в комплекте со",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 36
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 1 1/2\" (4751 мм) в комплекте со",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 42
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 1\" (3236 мм) в комплекте со шпилькой и",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 34
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 1/2\" (2025 мм) в комплекте со шпилькой",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 32
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 2 1/2\" (7580 мм) в комплекте со",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 60
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 2\" (6064 мм) в комплекте со шпилькой и",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 50
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 3/4\" (2630 мм) в комплекте со шпилькой",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 33
+  },
+  {
+    "familyKey": "sewer-metal-clamp",
+    "priceName": "Хомут сантехнический 4\" (107115 мм) в комплекте со шпилькой",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 96
+  },
+  {
+    "familyKey": "sewer-pipe-50-internal",
+    "priceName": "Труба 50 - 0,25 м вн. канализация ПП (толщ. 1,8 мм) (10)",
+    "unit": "даана",
+    "confidence": "low",
+    "officialSku": "UPK.50.015.050.G",
+    "officialName": "50 труба 0,5 м ПП EVER PLAST (толщ. 1,5 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 66
+  },
+  {
+    "familyKey": "sewer-pipe-50-internal",
+    "priceName": "Труба 50 - 0,5 м вн. канализация ПП (толщ. 1,8 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.50.015.050.G",
+    "officialName": "50 труба 0,5 м ПП EVER PLAST (толщ. 1,5 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 78
+  },
+  {
+    "familyKey": "sewer-pipe-50-internal",
+    "priceName": "Труба 50 - 1 м вн. канализация ПП (толщ. 1,8 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.50.015.100.G",
+    "officialName": "50 труба 1 м ПП EVER PLAST (толщ. 1,5 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 120
+  },
+  {
+    "familyKey": "sewer-pipe-50-internal",
+    "priceName": "Труба 50 - 2 м вн. канализация ПП (толщ. 1,8 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.50.015.200.G",
+    "officialName": "50 труба 2 м ПП EVER PLAST (толщ. 1,5 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 216
+  },
+  {
+    "familyKey": "sewer-pipe-50-internal",
+    "priceName": "Труба 50 - 3 м вн. канализация ПП (толщ. 1,8 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.50.015.300.G",
+    "officialName": "50 труба 3 м ПП EVER PLAST (толщ. 1,5 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 300
+  },
+  {
+    "familyKey": "sewer-pipe-110-internal",
+    "priceName": "Труба 110 - 0,25 м вн. канализация ПП (толщ. 2,7 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.110.022.025.G",
+    "officialName": "110 патрубок 0,25 м ПП EVER PLAST (толщ. 2,2 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 150
+  },
+  {
+    "familyKey": "sewer-pipe-110-internal",
+    "priceName": "Труба 110 - 0,5 м вн. канализация ПП (толщ. 2,7 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.110.022.050.G",
+    "officialName": "110 труба 0,5 м ПП EVER PLAST (толщ. 2,2 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 222
+  },
+  {
+    "familyKey": "sewer-pipe-110-internal",
+    "priceName": "Труба 110 - 1 м вн. канализация ПП (толщ. 2,7 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.110.022.100.G",
+    "officialName": "110 труба 1 м ПП EVER PLAST (толщ. 2,2 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 348
+  },
+  {
+    "familyKey": "sewer-pipe-110-internal",
+    "priceName": "Труба 110 - 2 м вн. канализация ПП (толщ. 2,7 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.110.022.200.G",
+    "officialName": "110 труба 2 м ПП EVER PLAST (толщ. 2,2 мм) сер.",
+    "hasPicture": true,
+    "retailPrice": 660
+  },
+  {
+    "familyKey": "sewer-pipe-110-internal",
+    "priceName": "Труба 110 - 3 м вн. канализация ПП (толщ. 2,7 мм) (10)",
+    "unit": "даана",
+    "confidence": "exact",
+    "officialSku": "UPK.110.022.300.G",
+    "officialName": "110 труба 3 м ПП EVER PLAST (толщ. 2,2 мм) сер",
+    "hasPicture": true,
+    "retailPrice": 996
+  },
+  {
+    "familyKey": "sewer-pipe-110-external",
+    "priceName": "Труба 110 - 0,5 м наруж. канализация ПП (толщ. 3,4 мм) (10)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 276
+  },
+  {
+    "familyKey": "sewer-pipe-110-external",
+    "priceName": "Труба 110 - 1 м наруж. канализация ПП (толщ. 3,4 мм) (10)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 420
+  },
+  {
+    "familyKey": "sewer-pipe-110-external",
+    "priceName": "Труба 110 - 2 м наруж. канализация ПП (толщ. 3,4 мм) (10)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 852
+  },
+  {
+    "familyKey": "sewer-pipe-110-external",
+    "priceName": "Труба 110 - 3 м наруж. канализация ПП (толщ. 3,4 мм) (10)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 1140
+  },
+  {
+    "familyKey": "sewer-pipe-160-external",
+    "priceName": "160 труба 1 м ПП EVER РLASТ(толщ. стенки 4,9) наруж. (2)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 900
+  },
+  {
+    "familyKey": "sewer-pipe-160-external",
+    "priceName": "160 труба 2 м ПП EVER РLASТ(толщ. стенки 4,9) наруж. (2)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 1680
+  },
+  {
+    "familyKey": "sewer-pipe-160-external",
+    "priceName": "160 труба 3 м ПП EVER РLASТ(толщ. стенки 4,9) наруж. (2)",
+    "unit": "даана",
+    "confidence": "none",
+    "officialSku": "",
+    "officialName": "",
+    "hasPicture": false,
+    "retailPrice": 2520
+  }
+]

@@ -7,12 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "import:alinex": "node scripts/import-alinex-catalog.mjs",
+    "import:ever-plast": "node scripts/import-ever-plast-catalog.mjs",
     "optimize:alinex-images": "node scripts/optimize-alinex-images.mjs",
     "validate:catalog": "node src/scripts/validateCatalogData.js",
     "generate:sitemap": "node src/scripts/generateSitemap.js",
     "test:seo": "node --test scripts/seo-regression.test.mjs",
     "test:checkout": "node --test scripts/checkout-regression.test.mjs",
     "test:alinex": "node --test scripts/alinex-production-regression.test.mjs",
+    "test:ever-plast": "node --test scripts/ever-plast-import.test.mjs",
     "test:images": "node --test scripts/image-optimization-regression.test.mjs",
     "test:localization": "node --test scripts/product-localization-regression.test.mjs",
     "test:pwa": "node --test scripts/pwa-regression.test.mjs",
@@ -43,6 +45,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "pdfjs-dist": "^6.1.200",
     "sharp": "^0.35.3",
     "vite": "^8.0.12"
   }
