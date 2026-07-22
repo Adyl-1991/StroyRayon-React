@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import test from 'node:test'
+import { buildBundledOrderCatalog } from './generate-bundled-order-catalog.mjs'
 import { buildCheckoutOrderPayload } from '../src/services/checkoutService.js'
 
 const customer = {
@@ -45,4 +47,9 @@ test('checkout payload defaults to Kyrgyz and omits an empty comment', () => {
   assert.equal(payload.locale, 'kg')
   assert.equal(payload.items[0].title, 'ППР түтүк')
   assert.equal(payload.comment, undefined)
+})
+
+test('server bundled order catalog stays synchronized with imported products', async () => {
+  const generated = JSON.parse(await readFile(new URL('../api/src/modules/orders/bundled-order-catalog.generated.json', import.meta.url), 'utf8'))
+  assert.deepEqual(generated, buildBundledOrderCatalog())
 })

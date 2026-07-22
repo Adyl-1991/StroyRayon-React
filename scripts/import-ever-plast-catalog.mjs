@@ -675,6 +675,8 @@ export async function runImport() {
   await writeFile(path.join(PUBLIC_REPORT_DIR, 'pilot-ppr-families.json'), JSON.stringify(products.filter((product) => product.slug.includes('ppr-')).slice(0, 12), null, 2), 'utf8')
   await writeFile(path.join(PUBLIC_REPORT_DIR, 'match-quality.json'), JSON.stringify(matchDetails.map(({ retailPrice, ...item }) => ({ ...item, retailPrice })), null, 2), 'utf8')
   await writeFile(path.join(PRIVATE_REPORT_DIR, 'purchase-price-reconciliation.json'), JSON.stringify({ generatedAt, priceRows, eligibleRows, matchDetails, imageResults, familyKeys: [...groups.keys()] }, null, 2), 'utf8')
+  const { writeBundledOrderCatalog } = await import('./generate-bundled-order-catalog.mjs')
+  await writeBundledOrderCatalog()
 
   return meta
 }

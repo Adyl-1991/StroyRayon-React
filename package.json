@@ -8,6 +8,7 @@
     "build": "vite build",
     "import:alinex": "node scripts/import-alinex-catalog.mjs",
     "import:ever-plast": "node scripts/import-ever-plast-catalog.mjs",
+    "generate:order-catalog": "node scripts/generate-bundled-order-catalog.mjs",
     "optimize:alinex-images": "node scripts/optimize-alinex-images.mjs",
     "validate:catalog": "node src/scripts/validateCatalogData.js",
     "generate:sitemap": "node src/scripts/generateSitemap.js",

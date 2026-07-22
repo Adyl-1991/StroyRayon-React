@@ -9,6 +9,7 @@ import {
 import { formatOrderNumber } from '../../common/utils/order-number.util'
 import { PrismaService } from '../../prisma/prisma.service'
 import { StockService } from '../stock/stock.service'
+import { findBundledOrderCatalogItem } from './bundled-order-catalog'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { CreateOrderItemDto } from './dto/create-order-item.dto'
 import { OrderPdfService } from './order-pdf.service'
@@ -50,8 +51,34 @@ export class OrdersService {
       const orderNumber = await this.createOrderNumber(tx)
       const normalizedItems = await Promise.all(
         dto.items.map(async (item) => {
-          const { product, variant } = await this.findProductForOrderItem(tx, item)
+          const resolved = await this.findProductForOrderItem(tx, item)
           const quantity = Number(item.quantity)
+          if (resolved.kind === 'bundled') {
+            const bundled = resolved.item
+            const price = Number(bundled.price)
+            return {
+              product: null,
+              variant: null,
+              title: locale === 'ru' ? bundled.titleRu || bundled.titleKg : bundled.titleKg,
+              variantTitle: bundled.variantId
+                ? locale === 'ru'
+                  ? bundled.variantTitleRu || bundled.variantTitleKg
+                  : bundled.variantTitleKg
+                : null,
+              sku: bundled.variantSku || bundled.productSku,
+              productSku: bundled.productSku,
+              variantSku: bundled.variantSku,
+              slug: bundled.slug,
+              unit: bundled.unit,
+              price,
+              quantity,
+              total: calculateLineTotal(price, quantity),
+              stockCheckStatus: OrderItemStockCheckStatus.NEEDS_CONFIRMATION,
+              reservedQuantity: 0,
+            }
+          }
+
+          const { product, variant } = resolved
           const price = Number(variant?.price ?? product.price)
           const stockStatus = variant?.stockStatus ?? product.stockStatus
           const stock = variant
@@ -106,7 +133,7 @@ export class OrdersService {
         )
 
         if (stockCheckStatus === OrderItemStockCheckStatus.UNAVAILABLE) {
-          throw new BadRequestException(`Product variant is unavailable: ${firstItem.product.slug}`)
+          throw new BadRequestException(`Product variant is unavailable: ${firstItem.product!.slug}`)
         }
 
         if (stockCheckStatus !== OrderItemStockCheckStatus.OK) {
@@ -132,25 +159,25 @@ export class OrdersService {
       }
 
       const itemsByProduct = new Map<string, typeof normalizedItems>()
-      normalizedItems.filter((item) => !item.variant).forEach((item) => {
-        const productItems = itemsByProduct.get(item.product.id) || []
+      normalizedItems.filter((item) => item.product && !item.variant).forEach((item) => {
+        const productItems = itemsByProduct.get(item.product!.id) || []
         productItems.push(item)
-        itemsByProduct.set(item.product.id, productItems)
+        itemsByProduct.set(item.product!.id, productItems)
       })
       for (const productItems of itemsByProduct.values()) {
         const firstItem = productItems[0]
         const requestedQuantity = productItems.reduce((sum, item) => sum + item.quantity, 0)
         const stockCheckStatus = getStockCheckStatus(
-          firstItem.product.stockStatus,
-          firstItem.product.stock,
+          firstItem.product!.stockStatus,
+          firstItem.product!.stock,
           requestedQuantity,
         )
 
         if (stockCheckStatus === OrderItemStockCheckStatus.UNAVAILABLE) {
-          throw new BadRequestException(`Product is unavailable: ${firstItem.product.slug}`)
+          throw new BadRequestException(`Product is unavailable: ${firstItem.product!.slug}`)
         }
 
-        if (stockCheckStatus !== OrderItemStockCheckStatus.OK || !firstItem.product.stock) {
+        if (stockCheckStatus !== OrderItemStockCheckStatus.OK || !firstItem.product!.stock) {
           productItems.forEach((item) => {
             item.stockCheckStatus = OrderItemStockCheckStatus.NEEDS_CONFIRMATION
           })
@@ -159,9 +186,9 @@ export class OrdersService {
 
         const reserved = await this.stockService.reserveAvailableProduct(
           tx,
-          firstItem.product.id,
+          firstItem.product!.id,
           requestedQuantity,
-          firstItem.product.stock,
+          firstItem.product!.stock,
         )
 
         productItems.forEach((item) => {
@@ -204,7 +231,7 @@ export class OrdersService {
           availabilityCheckRequired,
           items: {
             create: normalizedItems.map((item) => ({
-              productId: item.product.id,
+              productId: item.product?.id || null,
               variantId: item.variant?.id || null,
               productSlugSnapshot: item.slug,
               productTitleSnapshot: item.title,
@@ -303,14 +330,18 @@ export class OrdersService {
         where: { id: item.variantId },
         include: { product: { select: productSelect } },
       })
-      if (!variant) throw new BadRequestException(`Product variant not found: ${item.variantId}`)
-      if (item.productId && item.productId !== variant.productId) {
-        throw new BadRequestException(`Product identifier mismatch: ${item.productId}`)
+      if (variant) {
+        if (item.productId && item.productId !== variant.productId) {
+          throw new BadRequestException(`Product identifier mismatch: ${item.productId}`)
+        }
+        if (item.slug && item.slug !== variant.product.slug) {
+          throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
+        }
+        return { kind: 'database' as const, product: variant.product, variant }
       }
-      if (item.slug && item.slug !== variant.product.slug) {
-        throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
-      }
-      return { product: variant.product, variant }
+
+      const bundledVariant = findBundledOrderCatalogItem(item)
+      if (bundledVariant) return { kind: 'bundled' as const, item: bundledVariant }
     }
 
     if (item.productId) {
@@ -319,19 +350,22 @@ export class OrdersService {
         if (item.slug && item.slug !== product.slug) {
           throw new BadRequestException(`Product identifier mismatch: ${item.slug}`)
         }
-        return { product, variant: null }
+        return { kind: 'database' as const, product, variant: null }
       }
     }
 
     if (item.slug) {
       const product = await tx.product.findUnique({ where: { slug: item.slug }, select: productSelect })
-      if (product) return { product, variant: null }
+      if (product) return { kind: 'database' as const, product, variant: null }
     }
 
     if (item.sku) {
       const product = await tx.product.findUnique({ where: { sku: item.sku }, select: productSelect })
-      if (product) return { product, variant: null }
+      if (product) return { kind: 'database' as const, product, variant: null }
     }
+
+    const bundledItem = findBundledOrderCatalogItem(item)
+    if (bundledItem) return { kind: 'bundled' as const, item: bundledItem }
 
     throw new BadRequestException(`Product not found: ${item.slug || item.productId || item.sku || 'unknown'}`)
   }
