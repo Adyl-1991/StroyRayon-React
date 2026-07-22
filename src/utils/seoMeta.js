@@ -8,8 +8,8 @@ export function formatSeoTitle(title, brand = siteConfig.name) {
   const normalizedTitle = String(title || brand).replace(/\s+/g, ' ').trim()
   if (!normalizedTitle || normalizedTitle.toLocaleLowerCase() === brand.toLocaleLowerCase()) return brand
 
-  const brandSuffix = new RegExp(`(?:[-|–—:]\\s*)${escapeRegExp(brand)}\\s*$`, 'iu')
-  return brandSuffix.test(normalizedTitle) ? normalizedTitle : `${normalizedTitle} | ${brand}`
+  const brandPattern = new RegExp(escapeRegExp(brand), 'iu')
+  return brandPattern.test(normalizedTitle) ? normalizedTitle : `${normalizedTitle} | ${brand}`
 }
 
 export function getCanonicalUrl(canonical, location) {

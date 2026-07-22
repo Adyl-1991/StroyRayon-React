@@ -24,6 +24,11 @@ test('SEO titles include the brand exactly once', () => {
   assert.equal(formatSeoTitle('ППР түтүк кескич'), 'ППР түтүк кескич | StroyRayon')
   assert.equal(formatSeoTitle('ППР түтүк кескич - StroyRayon'), 'ППР түтүк кескич - StroyRayon')
   assert.equal(formatSeoTitle('ППР түтүк кескич | StroyRayon'), 'ППР түтүк кескич | StroyRayon')
+  assert.equal(formatSeoTitle('StroyRayon жөнүндө'), 'StroyRayon жөнүндө')
+  assert.equal(
+    formatSeoTitle('ППР түтүк PN20 - баасы жана заказ StroyRayon'),
+    'ППР түтүк PN20 - баасы жана заказ StroyRayon',
+  )
 })
 
 test('canonical URLs use www and omit query strings and trailing slashes', () => {
