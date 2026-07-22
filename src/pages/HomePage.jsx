@@ -1,26 +1,60 @@
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HeroSlider } from '../components/home/HeroSlider'
 import { OrderProcessBlock } from '../components/home/OrderProcessBlock'
 import { blogPosts } from '../data/blogPosts'
-import { ProductGrid } from '../components/catalog/ProductGrid'
 import { TrustBlock } from '../components/marketing/TrustBlock'
 import { Seo } from '../components/seo/Seo'
 import { Button } from '../components/ui/Button'
 import { SectionTitle } from '../components/ui/SectionTitle'
-import { useProducts } from '../hooks/useProducts'
+import { getWhatsAppUrl } from '../config/contact'
 import { useLocale } from '../i18n/LocaleContext'
-import { getHomePopularProducts, getProducts } from '../services/productService'
-import { getWhatsAppUrl } from '../services/whatsappService'
-import { buildOrganizationStructuredData, getPageCanonical } from '../utils/seoUtils'
+import { buildOrganizationStructuredData, getPageCanonical } from '../utils/siteSeoUtils'
+
+const HomeProductSections = lazy(() => import('../components/home/HomeProductSections'))
+
+function DeferredHomeProductSections() {
+  const markerRef = useRef(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+
+  useEffect(() => {
+    const marker = markerRef.current
+    if (!marker || typeof IntersectionObserver === 'undefined') {
+      setShouldLoad(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        setShouldLoad(true)
+        observer.disconnect()
+      },
+      { rootMargin: '0px 0px -25% 0px' },
+    )
+
+    observer.observe(marker)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="home-products-deferred" ref={markerRef}>
+      {shouldLoad ? (
+        <Suspense fallback={<div className="home-products-placeholder" aria-hidden="true" />}>
+          <HomeProductSections />
+        </Suspense>
+      ) : (
+        <div className="home-products-placeholder" aria-hidden="true" />
+      )}
+    </div>
+  )
+}
 
 export function HomePage() {
   const { locale, t } = useLocale()
-  const { products: homeProducts } = useProducts({ limit: 100, sort: 'popular' })
-  const popularProducts = getHomePopularProducts(homeProducts)
-  const saleProducts = getProducts({ sale: true }).slice(0, 4)
 
   return (
-    <>
+    <main>
       <Seo
         title="StroyRayon"
         canonical={getPageCanonical('/')}
@@ -28,24 +62,7 @@ export function HomePage() {
       />
       <HeroSlider />
       <OrderProcessBlock />
-
-      <section className="page-section">
-        <SectionTitle
-          title={t('home.popularTitle')}
-          text={t('home.popularText')}
-          action={
-            <Button to="/catalog" variant="secondary">
-              {t('home.allProducts')}
-            </Button>
-          }
-        />
-        <ProductGrid products={popularProducts} />
-      </section>
-
-      <section className="page-section">
-        <SectionTitle title={t('home.saleTitle')} text={t('home.saleText')} />
-        <ProductGrid products={saleProducts} />
-      </section>
+      <DeferredHomeProductSections />
 
       <section className="benefits-band">
         <div>
@@ -93,6 +110,6 @@ export function HomePage() {
           ))}
         </div>
       </section>
-    </>
+    </main>
   )
 }

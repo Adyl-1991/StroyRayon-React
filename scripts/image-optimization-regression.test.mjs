@@ -5,6 +5,7 @@ import test from 'node:test'
 import sharp from 'sharp'
 
 import { catalogTree } from '../src/data/catalogTree.js'
+import { heroSlides } from '../src/data/heroSlides.js'
 import { normalizeCatalogTree } from '../src/services/productService.js'
 import { getCategoryImage, getOptimizedProductImage } from '../src/utils/imageUtils.js'
 
@@ -15,6 +16,32 @@ const expectedVariants = [
   { filename: 'card-640.webp', width: 640 },
   { filename: 'detail-900.webp', width: 900 },
 ]
+
+test('hero banners provide lightweight responsive AVIF and WebP files', async () => {
+  let originalBytes = 0
+  let optimizedAvifBytes = 0
+
+  for (const slide of heroSlides) {
+    assert.match(slide.imageBase, /^\/images\/banners\/optimized\/hero-[a-z-]+$/)
+    const sourcePath = path.join(root, 'public', 'images', 'banners', `hero-${slide.id}.png`)
+    originalBytes += (await stat(sourcePath)).size
+
+    for (const width of [768, 1600]) {
+      for (const format of ['avif', 'webp']) {
+        const imagePath = path.join(root, 'public', `${slide.imageBase}-${width}.${format}`)
+        const metadata = await sharp(imagePath).metadata()
+        assert.equal(metadata.format, format === 'avif' ? 'heif' : format, imagePath)
+        assert.equal(metadata.width, width, imagePath)
+        if (format === 'avif') optimizedAvifBytes += (await stat(imagePath)).size
+      }
+    }
+  }
+
+  assert.ok(
+    optimizedAvifBytes < originalBytes * 0.05,
+    `responsive AVIF total ${optimizedAvifBytes} should be below 5% of PNG total ${originalBytes}`,
+  )
+})
 
 async function alinexDirectories() {
   return (await readdir(productsRoot, { withFileTypes: true }))

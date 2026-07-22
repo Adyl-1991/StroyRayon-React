@@ -1,67 +1,66 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { heroSlides } from '../../data/heroSlides'
 import { useLocale } from '../../i18n/LocaleContext'
 
-const AUTOPLAY_DELAY = 5000
-
 export function HeroSlider() {
   const { locale, t } = useLocale()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-
-  useEffect(() => {
-    if (isPaused) return undefined
-
-    const timerId = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % heroSlides.length)
-    }, AUTOPLAY_DELAY)
-
-    return () => window.clearInterval(timerId)
-  }, [isPaused])
 
   function goToSlide(index) {
     setActiveIndex((index + heroSlides.length) % heroSlides.length)
   }
+
+  const activeSlide = heroSlides[activeIndex]
+  const responsiveSizes = '(max-width: 760px) calc(100vw - 20px), min(calc(100vw - 32px), 1180px)'
 
   return (
     <section
       className="promo-slider"
       aria-roledescription="carousel"
       aria-label={t('hero.label')}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="promo-slider__viewport">
-        <div className="promo-slider__track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-          {heroSlides.map((slide, index) => (
-            <article
-              className={`promo-slide promo-slide--${slide.theme}`}
-              key={slide.id}
-              aria-roledescription="slide"
-              aria-label={`${index + 1} / ${heroSlides.length}`}
-              aria-hidden={index !== activeIndex}
-            >
+      <div className="promo-slider__viewport" aria-live="polite">
+        <article
+          className={`promo-slide promo-slide--${activeSlide.theme}`}
+          key={activeSlide.id}
+          aria-roledescription="slide"
+          aria-label={`${activeIndex + 1} / ${heroSlides.length}`}
+        >
+          <picture className="promo-slide__picture">
+            <source
+              type="image/avif"
+              srcSet={`${activeSlide.imageBase}-768.avif 768w, ${activeSlide.imageBase}-1600.avif 1600w`}
+              sizes={responsiveSizes}
+            />
+            <source
+              type="image/webp"
+              srcSet={`${activeSlide.imageBase}-768.webp 768w, ${activeSlide.imageBase}-1600.webp 1600w`}
+              sizes={responsiveSizes}
+            />
               <img
                 className="promo-slide__image"
-                src={slide.image}
+                src={`${activeSlide.imageBase}-1600.webp`}
+                srcSet={`${activeSlide.imageBase}-768.webp 768w, ${activeSlide.imageBase}-1600.webp 1600w`}
+                sizes={responsiveSizes}
                 alt=""
-                width="1400"
-                height="520"
-                loading={index === 0 ? 'eager' : 'lazy'}
+                width="1600"
+                height="901"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
-              <div className="promo-slide__shade" aria-hidden="true" />
-              <div className="promo-slide__content">
-                <span className="promo-slide__kicker">{t('hero.kicker')}</span>
-                <h1>{slide.title[locale]}</h1>
-                <p>{slide.text[locale]}</p>
-                <Link className="button promo-slide__button" to={slide.ctaTo}>
-                  {slide.ctaLabel[locale]}
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+          </picture>
+          <div className="promo-slide__shade" aria-hidden="true" />
+          <div className="promo-slide__content">
+            <span className="promo-slide__kicker">{t('hero.kicker')}</span>
+            <h1>{activeSlide.title[locale]}</h1>
+            <p>{activeSlide.text[locale]}</p>
+            <Link className="button promo-slide__button" to={activeSlide.ctaTo}>
+              {activeSlide.ctaLabel[locale]}
+            </Link>
+          </div>
+        </article>
       </div>
 
       <button

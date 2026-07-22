@@ -8,7 +8,7 @@ export const heroSlides = [
     },
     ctaLabel: { kg: 'Каталогду ачуу', ru: 'Открыть каталог' },
     ctaTo: '/catalog/stroymaterial',
-    image: '/images/banners/hero-construction.png',
+    imageBase: '/images/banners/optimized/hero-construction',
     theme: 'construction',
   },
   {
@@ -20,7 +20,7 @@ export const heroSlides = [
     },
     ctaLabel: { kg: 'Сантехниканы көрүү', ru: 'Смотреть сантехнику' },
     ctaTo: '/catalog/santehnika',
-    image: '/images/banners/hero-plumbing.png',
+    imageBase: '/images/banners/optimized/hero-plumbing',
     theme: 'plumbing',
   },
   {
@@ -32,7 +32,7 @@ export const heroSlides = [
     },
     ctaLabel: { kg: 'Шаймандарды көрүү', ru: 'Смотреть инструменты' },
     ctaTo: '/catalog/instrument',
-    image: '/images/banners/hero-tools.png',
+    imageBase: '/images/banners/optimized/hero-tools',
     theme: 'tools',
   },
   {
@@ -44,7 +44,7 @@ export const heroSlides = [
     },
     ctaLabel: { kg: 'Электриканы көрүү', ru: 'Смотреть электрику' },
     ctaTo: '/catalog/elektrika',
-    image: '/images/banners/hero-electrical.png',
+    imageBase: '/images/banners/optimized/hero-electrical',
     theme: 'electrical',
   },
   {
@@ -56,7 +56,7 @@ export const heroSlides = [
     },
     ctaLabel: { kg: 'Чарбаны көрүү', ru: 'Смотреть товары' },
     ctaTo: '/catalog/bak-koroo',
-    image: '/images/banners/hero-garden.png',
+    imageBase: '/images/banners/optimized/hero-garden',
     theme: 'garden',
   },
 ]

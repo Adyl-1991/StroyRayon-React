@@ -691,12 +691,6 @@ html {
   box-shadow: 0 12px 28px rgba(31, 43, 37, 0.12);
 }
 
-.promo-slider__track {
-  display: flex;
-  transition: transform 0.58s ease;
-  will-change: transform;
-}
-
 .promo-slide {
   position: relative;
   flex: 0 0 100%;
@@ -705,6 +699,13 @@ html {
   align-items: stretch;
   overflow: hidden;
   background: #123a2b;
+  animation: promo-slide-in 0.32s ease;
+}
+
+.promo-slide__picture {
+  position: absolute;
+  inset: 0;
+  display: block;
 }
 
 .promo-slide__image {
@@ -899,23 +900,71 @@ html {
   bottom: 12px;
   z-index: 2;
   display: flex;
-  gap: 7px;
+  gap: 0;
   transform: translateX(-50%);
 }
 
+.home-products-deferred {
+  min-height: 720px;
+}
+
+.home-products-placeholder {
+  width: min(100% - 32px, var(--container));
+  min-height: 720px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.62) 42%, transparent 64%) -160% 0 / 48% 100% no-repeat,
+    linear-gradient(#ebe6dc 0 0) 0 36px / min(340px, 72%) 24px no-repeat,
+    linear-gradient(#f0ece4 0 0) 0 74px / min(520px, 88%) 14px no-repeat;
+  animation: home-products-loading 1.6s ease-in-out infinite;
+}
+
+@keyframes home-products-loading {
+  to { background-position: 320% 0, 0 36px, 0 74px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-products-placeholder {
+    animation: none;
+  }
+}
+
 .promo-slider__dots button {
-  width: 9px;
-  height: 9px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
   border: 0;
   border-radius: 999px;
   padding: 0;
-  background: rgba(31, 78, 58, 0.26);
+  background: transparent;
   cursor: pointer;
 }
 
-.promo-slider__dots button.active {
+.promo-slider__dots button::after {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(31, 78, 58, 0.38);
+  content: '';
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.promo-slider__dots button.active::after {
   width: 26px;
   background: var(--color-primary);
+}
+
+@keyframes promo-slide-in {
+  from { opacity: 0.84; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-slide {
+    animation: none;
+  }
 }
 
 @media (max-width: 760px) {
