@@ -6,7 +6,7 @@ import {
   getWhatsAppUrl,
 } from '../services/whatsappService'
 import { useLocale } from '../i18n/LocaleContext'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildWebPageStructuredData, getPageCanonical } from '../utils/seoUtils'
 
 export function DeliveryPage() {
   const { locale, t } = useLocale()
@@ -16,7 +16,16 @@ export function DeliveryPage() {
 
   return (
     <main className="page">
-      <Seo title={t('static.delivery.title')} description={t('static.delivery.description')} canonical={getPageCanonical('/delivery')} />
+      <Seo
+        title={t('static.delivery.title')}
+        description={t('static.delivery.description')}
+        canonical={getPageCanonical('/delivery')}
+        structuredData={buildWebPageStructuredData({
+          path: '/delivery',
+          title: t('static.delivery.title'),
+          description: t('static.delivery.description'),
+        })}
+      />
       <Breadcrumbs items={[{ label: t('static.delivery.title') }]} />
       <div className="page-heading">
         <h1>{t('static.delivery.title')}</h1>

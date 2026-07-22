@@ -27,5 +27,7 @@ export function getCanonicalUrl(canonical, location) {
 }
 
 export function getRobotsContent(noIndex = false) {
-  return noIndex ? 'noindex, nofollow, noarchive' : 'index, follow'
+  return noIndex
+    ? 'noindex, nofollow, noarchive'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 }

@@ -61,6 +61,7 @@ export function Seo({
   description = siteConfig.defaultDescription,
   canonical,
   image,
+  imageAlt,
   noIndex = false,
   type = 'website',
   structuredData,
@@ -70,7 +71,8 @@ export function Seo({
     const canonicalUrl = getCanonicalUrl(canonical, window.location)
     const ogImage = image
       ? new URL(image, siteConfig.siteUrl).href
-      : `${siteConfig.siteUrl}/images/brand/stroyrayon-logo.png`
+      : new URL(siteConfig.defaultOgImage, siteConfig.siteUrl).href
+    const ogImageAlt = imageAlt || fullTitle
     const robots = getRobotsContent(noIndex)
 
     document.title = fullTitle
@@ -81,15 +83,18 @@ export function Seo({
     upsertMetaProperty('og:description', description)
     upsertMetaProperty('og:url', canonicalUrl)
     upsertMetaProperty('og:site_name', siteConfig.name)
+    upsertMetaProperty('og:locale', siteConfig.defaultLocale)
     upsertMetaProperty('og:type', type)
     upsertMetaProperty('og:image', ogImage)
+    upsertMetaProperty('og:image:alt', ogImageAlt)
     upsertMeta('twitter:card', 'summary_large_image')
     upsertMeta('twitter:title', fullTitle)
     upsertMeta('twitter:description', description)
     upsertMeta('twitter:image', ogImage)
+    upsertMeta('twitter:image:alt', ogImageAlt)
     upsertLink('canonical', canonicalUrl)
     upsertJsonLd('stroyrayon-jsonld', structuredData)
-  }, [canonical, description, image, noIndex, structuredData, title, type])
+  }, [canonical, description, image, imageAlt, noIndex, structuredData, title, type])
 
   return null
 }

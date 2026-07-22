@@ -6,6 +6,7 @@
 /reports
 /scripts/*
 !/scripts/generate-bundled-order-catalog.mjs
+!/scripts/prerender-seo.mjs
 !/scripts/sync-catalog.mjs
 
 # Local and generated-only files.

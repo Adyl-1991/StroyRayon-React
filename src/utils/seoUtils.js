@@ -1,9 +1,20 @@
 import { siteConfig } from '../config/site.js'
 import { getProductFullDescription, getProductTitle, normalizeKgText } from '../services/productService.js'
-import { getProductImage } from './imageUtils.js'
-import { absoluteUrl, buildOrganizationStructuredData, getPageCanonical } from './siteSeoUtils.js'
+import { getProductGallery } from './imageUtils.js'
+import {
+  absoluteUrl,
+  buildOrganizationStructuredData,
+  buildWebPageStructuredData,
+  buildWebSiteStructuredData,
+  getPageCanonical,
+} from './siteSeoUtils.js'
 
-export { buildOrganizationStructuredData, getPageCanonical }
+export {
+  buildOrganizationStructuredData,
+  buildWebPageStructuredData,
+  buildWebSiteStructuredData,
+  getPageCanonical,
+}
 
 const availabilityMap = {
   in_stock: 'https://schema.org/InStock',
@@ -45,28 +56,68 @@ export function getProductSeo(product, locale = 'kg') {
 }
 
 export function buildProductStructuredData(product, locale = 'kg') {
-  if (!product?.titleKg || !product?.price || !product?.currency) return null
+  if (!product?.titleKg || !product?.slug) return null
 
-  const image = getProductImage(product)
   const productName = getProductTitle(product, locale)
+  const productImages = getProductGallery(product)
+    .filter((image) => image?.src && image.type !== 'placeholder' && !image.src.includes('/placeholders/'))
+    .map((image) => absoluteUrl(image.src))
+    .filter((imageUrl, index, imageUrls) => imageUrls.indexOf(imageUrl) === index)
+  const price = Number(product.price)
+  const currency = product.currency || 'KGS'
+  const pricedVariants = (product.variants || [])
+    .map((variant) => Number(variant.price))
+    .filter((variantPrice) => Number.isFinite(variantPrice) && variantPrice > 0)
+  const offers = Number.isFinite(price) && price > 0
+    ? {
+        '@type': 'Offer',
+        url: getPageCanonical(`/product/${product.slug}`),
+        price,
+        priceCurrency: currency,
+        availability: availabilityMap[product.stockStatus] || availabilityMap.in_stock,
+        itemCondition: 'https://schema.org/NewCondition',
+        seller: { '@id': `${siteConfig.siteUrl}/#organization` },
+      }
+    : pricedVariants.length
+      ? {
+          '@type': 'AggregateOffer',
+          url: getPageCanonical(`/product/${product.slug}`),
+          lowPrice: Math.min(...pricedVariants),
+          highPrice: Math.max(...pricedVariants),
+          offerCount: pricedVariants.length,
+          priceCurrency: currency,
+          availability: availabilityMap[product.stockStatus] || availabilityMap.in_stock,
+          seller: { '@id': `${siteConfig.siteUrl}/#organization` },
+        }
+      : undefined
+  const additionalProperty = Object.entries(product.specs || {})
+    .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
+    .slice(0, 12)
+    .map(([name, value]) => ({
+      '@type': 'PropertyValue',
+      name,
+      value: String(value),
+    }))
 
   return stripUndefined({
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: productName,
+    url: getPageCanonical(`/product/${product.slug}`),
     description: locale === 'ru'
       ? product.seoDescriptionRu || getProductFullDescription(product, locale) || product.shortDescriptionRu
       : normalizeKgText(product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg),
-    image: image?.src ? absoluteUrl(image.src) : undefined,
+    image: productImages.length ? productImages : undefined,
     sku: product.sku,
+    mpn: product.article || undefined,
+    category: locale === 'ru'
+      ? product.productTypeRu || product.productType || undefined
+      : product.productType || product.productTypeKg || undefined,
+    color: product.color || undefined,
+    material: locale === 'ru' ? product.materialRu || undefined : product.materialKg || undefined,
     brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
-    offers: {
-      '@type': 'Offer',
-      url: getPageCanonical(`/product/${product.slug}`),
-      price: product.price,
-      priceCurrency: product.currency || 'KGS',
-      availability: availabilityMap[product.stockStatus] || availabilityMap.in_stock,
-    },
+    additionalProperty: additionalProperty.length ? additionalProperty : undefined,
+    offers,
     aggregateRating:
       product.rating && product.reviewsCount
         ? {
@@ -76,6 +127,51 @@ export function buildProductStructuredData(product, locale = 'kg') {
           }
         : undefined,
   })
+}
+
+export function buildFaqStructuredData(items = []) {
+  const mainEntity = items
+    .filter((item) => item?.question && item?.answer)
+    .map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    }))
+
+  if (!mainEntity.length) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity,
+  }
+}
+
+export function buildCatalogPageStructuredData({ path = '/catalog', title, description, items = [] } = {}) {
+  const page = buildWebPageStructuredData({ path, title, description, type: 'CollectionPage' })
+  const itemListElement = items
+    .filter((item) => item?.name && item?.url)
+    .slice(0, 50)
+    .map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      url: getPageCanonical(item.url),
+    }))
+
+  return itemListElement.length
+    ? {
+        ...page,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: itemListElement.length,
+          itemListElement,
+        },
+      }
+    : page
 }
 
 export function buildBreadcrumbStructuredData(items) {

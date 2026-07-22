@@ -23,6 +23,8 @@ export const siteConfig = {
   name: 'StroyRayon',
   alternateNames: ['Stroy Rayon', 'СтройРайон', 'Строй Район'],
   siteUrl: normalizeSiteUrl(runtimeSiteUrl),
+  defaultLocale: 'ky_KG',
+  defaultOgImage: '/images/brand/stroyrayon-logo.png',
   defaultDescription:
     'StroyRayon — курулуш материалдарын оңой тандап, WhatsApp аркылуу буйрутма берүүгө жардам берген интернет-дүкөн.',
 }

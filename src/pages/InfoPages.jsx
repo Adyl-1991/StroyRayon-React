@@ -3,7 +3,7 @@ import { Button } from '../components/ui/Button'
 import { Seo } from '../components/seo/Seo'
 import { useLocale } from '../i18n/LocaleContext'
 import { getContactDetails, getWhatsAppUrl } from '../services/whatsappService'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildWebPageStructuredData, getPageCanonical } from '../utils/seoUtils'
 
 function InfoPage({ pageKey, canonicalPath, includeContact = false }) {
   const { locale, t } = useLocale()
@@ -14,7 +14,17 @@ function InfoPage({ pageKey, canonicalPath, includeContact = false }) {
 
   return (
     <main className="page">
-      <Seo title={title} description={description} canonical={getPageCanonical(canonicalPath)} />
+      <Seo
+        title={title}
+        description={description}
+        canonical={getPageCanonical(canonicalPath)}
+        structuredData={buildWebPageStructuredData({
+          path: canonicalPath,
+          title,
+          description,
+          type: pageKey === 'about' ? 'AboutPage' : 'WebPage',
+        })}
+      />
       <Breadcrumbs items={[{ label: title }]} />
       <div className="page-heading">
         <h1>{title}</h1>

@@ -9,7 +9,12 @@ import { Button } from '../components/ui/Button'
 import { SectionTitle } from '../components/ui/SectionTitle'
 import { getWhatsAppUrl } from '../config/contact'
 import { useLocale } from '../i18n/LocaleContext'
-import { buildOrganizationStructuredData, getPageCanonical } from '../utils/siteSeoUtils'
+import {
+  buildOrganizationStructuredData,
+  buildWebSiteStructuredData,
+  combineStructuredData,
+  getPageCanonical,
+} from '../utils/seoUtils'
 
 const HomeProductSections = lazy(() => import('../components/home/HomeProductSections'))
 
@@ -58,7 +63,10 @@ export function HomePage() {
       <Seo
         title="StroyRayon"
         canonical={getPageCanonical('/')}
-        structuredData={buildOrganizationStructuredData()}
+        structuredData={combineStructuredData(
+          buildOrganizationStructuredData(),
+          buildWebSiteStructuredData(),
+        )}
       />
       <HeroSlider />
       <OrderProcessBlock />

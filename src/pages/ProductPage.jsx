@@ -32,6 +32,7 @@ import {
 import { buildProductInquiryText, getWhatsAppUrl } from '../services/whatsappService'
 import {
   buildBreadcrumbStructuredData,
+  buildFaqStructuredData,
   buildProductStructuredData,
   combineStructuredData,
   getProductSeo,
@@ -294,6 +295,10 @@ export function ProductPage() {
     { label: productName },
   ]
   const seo = getProductSeo(product, locale)
+  const productImage = getProductImage(product)
+  const seoImage = productImage.type === 'placeholder' || productImage.src.includes('/placeholders/')
+    ? undefined
+    : productImage.src
   const managerAskText = buildProductInquiryText({ product: { ...product, name: productName }, variant: selectedVariant, locale })
 
   return (
@@ -302,11 +307,13 @@ export function ProductPage() {
         title={seo.title}
         description={seo.description}
         canonical={seo.canonical}
-        image={getProductImage(product)?.src}
+        image={seoImage}
+        imageAlt={productName}
         type="product"
         structuredData={combineStructuredData(
           buildProductStructuredData(product, locale),
           buildBreadcrumbStructuredData(breadcrumbItems),
+          buildFaqStructuredData(faqItems),
         )}
       />
       <Breadcrumbs items={breadcrumbItems} />

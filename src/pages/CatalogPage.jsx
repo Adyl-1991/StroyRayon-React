@@ -3,7 +3,7 @@ import { Seo } from '../components/seo/Seo'
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { useCatalogTree } from '../hooks/useCatalogTree'
 import { useLocale } from '../i18n/LocaleContext'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildCatalogPageStructuredData, getPageCanonical } from '../utils/seoUtils'
 
 export function CatalogPage() {
   const { nodes, isLoading } = useCatalogTree()
@@ -11,7 +11,20 @@ export function CatalogPage() {
 
   return (
     <main className="page catalog-directory-page">
-      <Seo title={t('catalog.title')} description={t('catalog.description')} canonical={getPageCanonical('/catalog')} />
+      <Seo
+        title={t('catalog.title')}
+        description={t('catalog.description')}
+        canonical={getPageCanonical('/catalog')}
+        structuredData={buildCatalogPageStructuredData({
+          path: '/catalog',
+          title: t('catalog.title'),
+          description: t('catalog.description'),
+          items: nodes.map((node) => ({
+            name: node.titleKg,
+            url: `/catalog/${node.slug}`,
+          })),
+        })}
+      />
       <Breadcrumbs items={[{ label: t('common.catalog') }]} />
       <div className="page-heading page-heading--compact">
         <h1>{t('catalog.title')}</h1>

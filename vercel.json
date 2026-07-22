@@ -1,4 +1,6 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -20,6 +22,15 @@
     },
     {
       "source": "/admin/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/admin",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -74,8 +85,98 @@
   ],
   "redirects": [
     {
+      "source": "/catalog/teplyi-pol",
+      "destination": "/catalog",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/teplyi-pol/suu-teplyi-pol",
+      "destination": "/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/teplyi-pol/elektr-teplyi-pol",
+      "destination": "/catalog/elektrika/elektr-teplyi-pol",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/teplyi-pol/kollektor-komplektter",
+      "destination": "/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/pnd-trubalar",
+      "destination": "/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-trubalar",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/pnd-fitingder",
+      "destination": "/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-fitingder",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/schetchiki-vody",
+      "destination": "/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/schetchiki-vody",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/reduktory-davleniya",
+      "destination": "/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/reduktory-davleniya",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/manometry",
+      "destination": "/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/manometry",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/zapornaya-armatura",
+      "destination": "/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/zapornaya-armatura",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/obratnye-klapany",
+      "destination": "/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/obratnye-klapany",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/filtry-gruboi-ochistki",
+      "destination": "/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-gruboi-ochistki",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/filtry-dlya-vody",
+      "destination": "/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/filtry-dlya-vody/kartridzhi",
+      "destination": "/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/kartridzhi",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/inzhenerdik-santehnika/filtry-dlya-vody/komplektuyushchie-dlya-filtrov",
+      "destination": "/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/komplektuyushchie-dlya-filtrov",
+      "permanent": true
+    },
+    {
+      "source": "/product/kabel-vvgng",
+      "destination": "/product/kabel-vvgng-3x2-5",
+      "permanent": true
+    },
+    {
       "source": "/product/kabel-kanal-16x16",
       "destination": "/product/kabel-kanal-25x16-2",
+      "permanent": true
+    },
+    {
+      "source": "/product/gips-shtukaturka",
+      "destination": "/product/gips-shtukaturkasy-30kg",
+      "permanent": true
+    },
+    {
+      "source": "/product/smesitel-kuhnya",
+      "destination": "/product/ashkana-smesiteli-basic",
       "permanent": true
     }
   ],

@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
 import { Seo } from '../components/seo/Seo'
 import { blogPosts } from '../data/blogPosts'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildCatalogPageStructuredData, getPageCanonical } from '../utils/seoUtils'
 import { useLocale } from '../i18n/LocaleContext'
 
 export function BlogPage() {
@@ -9,7 +9,16 @@ export function BlogPage() {
 
   return (
     <main className="page">
-      <Seo title={t('home.adviceTitle')} description={t('home.adviceText')} canonical={getPageCanonical('/blog')} />
+      <Seo
+        title={t('home.adviceTitle')}
+        description={t('home.adviceText')}
+        canonical={getPageCanonical('/blog')}
+        structuredData={buildCatalogPageStructuredData({
+          path: '/blog',
+          title: t('home.adviceTitle'),
+          description: t('home.adviceText'),
+        })}
+      />
       <Breadcrumbs items={[{ label: t('home.adviceTitle') }]} />
       <div className="page-heading">
         <h1>{t('home.adviceTitle')}</h1>

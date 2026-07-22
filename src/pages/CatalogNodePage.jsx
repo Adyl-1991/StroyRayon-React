@@ -12,7 +12,12 @@ import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
 import { getCatalogNodeUrl, getFilterOptions, getProductsByCatalogNode } from '../services/productService'
 import { getWhatsAppUrl } from '../services/whatsappService'
-import { buildBreadcrumbStructuredData, getCatalogNodeSeo } from '../utils/seoUtils'
+import {
+  buildBreadcrumbStructuredData,
+  buildCatalogPageStructuredData,
+  combineStructuredData,
+  getCatalogNodeSeo,
+} from '../utils/seoUtils'
 
 export function CatalogNodePage() {
   const params = useParams()
@@ -76,7 +81,24 @@ export function CatalogNodePage() {
         title={current.title || seo.title}
         description={current.description || seo.description}
         canonical={seo.canonical}
-        structuredData={buildBreadcrumbStructuredData(breadcrumbItems)}
+        structuredData={combineStructuredData(
+          buildCatalogPageStructuredData({
+            path: `/catalog/${node.path.join('/')}`,
+            title: current.title || seo.title,
+            description: current.description || seo.description,
+            items: [
+              ...children.map((child) => ({
+                name: nodeText(child).title,
+                url: `/catalog/${[...node.path, child.slug].join('/')}`,
+              })),
+              ...scopedProducts.slice(0, 50).map((product) => ({
+                name: product.titleKg || product.name,
+                url: `/product/${product.slug}`,
+              })),
+            ],
+          }),
+          buildBreadcrumbStructuredData(breadcrumbItems),
+        )}
       />
       <Breadcrumbs items={breadcrumbItems} />
       <div className="page-heading page-heading--compact">

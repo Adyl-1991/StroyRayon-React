@@ -3,7 +3,7 @@ import { Button } from '../components/ui/Button'
 import { Seo } from '../components/seo/Seo'
 import { useLocale } from '../i18n/LocaleContext'
 import { contactConfig, getContactDetails } from '../services/whatsappService'
-import { getPageCanonical } from '../utils/seoUtils'
+import { buildWebPageStructuredData, getPageCanonical } from '../utils/seoUtils'
 
 export function ContactsPage() {
   const { locale, t } = useLocale()
@@ -11,7 +11,17 @@ export function ContactsPage() {
 
   return (
     <main className="page">
-      <Seo title={t('static.contacts.title')} description={t('static.contacts.description')} canonical={getPageCanonical('/contacts')} />
+      <Seo
+        title={t('static.contacts.title')}
+        description={t('static.contacts.description')}
+        canonical={getPageCanonical('/contacts')}
+        structuredData={buildWebPageStructuredData({
+          path: '/contacts',
+          title: t('static.contacts.title'),
+          description: t('static.contacts.description'),
+          type: 'ContactPage',
+        })}
+      />
       <Breadcrumbs items={[{ label: t('static.contacts.title') }]} />
       <div className="page-heading">
         <h1>{t('static.contacts.title')}</h1>
