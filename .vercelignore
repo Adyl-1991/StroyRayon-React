@@ -4,7 +4,9 @@
 /api
 /docs
 /reports
-/scripts
+/scripts/*
+!/scripts/generate-bundled-order-catalog.mjs
+!/scripts/sync-catalog.mjs
 
 # Local and generated-only files.
 /dist
