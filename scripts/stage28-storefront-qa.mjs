@@ -35,6 +35,9 @@ const allRoutes = [
   { id: 'checkout', path: '/checkout' },
   { id: 'search', path: '/search' },
   { id: 'product-alinex-grender', path: '/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender' },
+  { id: 'product-ever-plast-ppr', path: '/product/ever-plast-ppr-pipe-pn20' },
+  { id: 'category-ever-plast-ppr', path: '/catalog/inzhenerdik-santehnika/ppr-trubalar-fitingder' },
+  { id: 'category-ever-plast-sewer', path: '/catalog/inzhenerdik-santehnika/kanalizaciya' },
   { id: 'contacts', path: '/contacts' },
   { id: 'delivery', path: '/delivery' },
   { id: 'about', path: '/about' },
@@ -57,6 +60,9 @@ const screenshotKeys = new Set([
   'admin-login-390',
   'home-1440',
   'product-alinex-grender-390',
+  'product-ever-plast-ppr-390',
+  'category-ever-plast-ppr-1366',
+  'category-ever-plast-sewer-1366',
 ])
 
 const routeFilter = process.env.STAGE28_ROUTE
@@ -171,6 +177,37 @@ async function navigate(cdp, pathname) {
   })`)
 }
 
+async function waitForPageContent(cdp, timeoutMs = 10000) {
+  await evaluate(cdp, `new Promise((resolve) => {
+    const started = Date.now();
+    const loadingPattern = /(?:товар(?:ы|лар).*?(?:обнов|жаңылан|загруз|жүктөл)|каталог.*?(?:обнов|жаңылан))/i;
+    const isReady = () => {
+      const statuses = Array.from(document.querySelectorAll('[role="status"]'));
+      const isLoading = statuses.some((element) => loadingPattern.test(element.textContent || ''));
+      return !isLoading || Date.now() - started > ${timeoutMs};
+    };
+    const tick = () => isReady() ? resolve(true) : setTimeout(tick, 150);
+    tick();
+  })`)
+
+  await evaluate(cdp, `new Promise((resolve) => {
+    const visibleImages = Array.from(document.images).filter((image) => {
+      const box = image.getBoundingClientRect();
+      return box.bottom > 0 && box.top < window.innerHeight && box.right > 0 && box.left < window.innerWidth;
+    });
+    if (!visibleImages.length) return resolve(true);
+    let pending = visibleImages.filter((image) => !image.complete).length;
+    if (!pending) return resolve(true);
+    const finish = () => { pending -= 1; if (pending <= 0) resolve(true); };
+    visibleImages.filter((image) => !image.complete).forEach((image) => {
+      image.addEventListener('load', finish, { once: true });
+      image.addEventListener('error', finish, { once: true });
+    });
+    setTimeout(() => resolve(true), 5000);
+  })`)
+  await delay(200)
+}
+
 async function inspect(cdp) {
   return evaluate(cdp, `(() => {
     const root = document.documentElement;
@@ -242,7 +279,8 @@ async function buyerFlow(cdp) {
     sessionStorage.clear();
     return true;
   })()`)
-  await navigate(cdp, '/product/ppr-truba-pn20')
+  await navigate(cdp, '/product/ever-plast-ppr-pipe-pn20')
+  await waitForPageContent(cdp)
   const added = await evaluate(cdp, `(() => {
     const variant = document.querySelector('.variant-option');
     if (variant) variant.click();
@@ -253,6 +291,7 @@ async function buyerFlow(cdp) {
   })()`)
   await delay(350)
   await navigate(cdp, '/cart')
+  await waitForPageContent(cdp)
   const cartBefore = await evaluate(cdp, `(() => ({
     items: document.querySelectorAll('.cart-item').length,
     quantity: document.querySelector('.quantity-control span')?.textContent?.trim() || ''
@@ -267,6 +306,7 @@ async function buyerFlow(cdp) {
   const quantityAfter = await evaluate(cdp, `document.querySelector('.quantity-control span')?.textContent?.trim() || ''`)
   const cartScreenshot = await capture(cdp, 'buyer-cart-filled.png', true)
   await navigate(cdp, '/checkout')
+  await waitForPageContent(cdp)
   const checkout = await evaluate(cdp, `(() => ({
     form: Boolean(document.querySelector('.checkout-form')),
     summary: Boolean(document.querySelector('.cart-summary')),
@@ -312,6 +352,7 @@ async function main() {
         const errorStart = consoleErrors.length
         const failedStart = failedRequests.length
         await navigate(cdp, route.path)
+        await waitForPageContent(cdp)
         const details = await inspect(cdp)
         const key = `${route.id}-${viewport.key}`
         let screenshot = null
@@ -332,7 +373,7 @@ async function main() {
     const buyerViewport = Number(process.env.STAGE28_BUYER_VIEWPORT || 390)
     await setViewport(cdp, allViewports.find((item) => item.width === buyerViewport) || viewports[0])
     const buyer = await buyerFlow(cdp)
-    const issues = results.flatMap((result) => {
+    const routeIssues = results.flatMap((result) => {
       const found = []
       if (result.textLength < 20) found.push('blank page')
       if (result.overflow > 1) {
@@ -351,6 +392,11 @@ async function main() {
       if (result.redirectsToLogin && !result.url.endsWith('/admin/login')) found.push('protected admin route did not redirect')
       return found.map((issue) => ({ route: result.route, viewport: result.viewport, issue }))
     })
+    const buyerIssues = []
+    if (!buyer.added) buyerIssues.push({ route: 'buyer-flow', viewport: buyerViewport, issue: 'product was not added to cart' })
+    if (!buyer.incremented || buyer.quantityAfter !== '2') buyerIssues.push({ route: 'buyer-flow', viewport: buyerViewport, issue: 'cart quantity did not increment' })
+    if (!buyer.checkout.form || !buyer.checkout.summary) buyerIssues.push({ route: 'buyer-flow', viewport: buyerViewport, issue: 'checkout form or summary missing' })
+    const issues = [...routeIssues, ...buyerIssues]
 
     const summary = {
       baseUrl,
