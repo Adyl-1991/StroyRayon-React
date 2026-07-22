@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import { normalizeSiteUrl, siteConfig } from '../src/config/site.js'
+import { products } from '../src/data/products.js'
 import { buildOrganizationStructuredData } from '../src/utils/seoUtils.js'
 import { formatSeoTitle, getCanonicalUrl, getRobotsContent } from '../src/utils/seoMeta.js'
 
@@ -54,6 +55,16 @@ test('generated crawler files use only the final www host', async () => {
   assert.doesNotMatch(sitemap, /<loc>https:\/\/stroyrayon\.kg/)
   assert.match(sitemap, /\/product\/kabel-kanal-25x16-2<\/loc>/)
   assert.doesNotMatch(sitemap, /\/product\/kabel-kanal-16x16<\/loc>/)
+
+  products
+    .filter((product) => product.isActive !== false)
+    .forEach((product) => {
+      assert.match(
+        sitemap,
+        new RegExp(`/product/${product.slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}<\\/loc>`),
+        product.slug,
+      )
+    })
 })
 
 test('Vercel sends noindex headers for private and transactional routes', async () => {

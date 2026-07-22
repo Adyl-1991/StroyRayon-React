@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/sync-catalog.mjs",
     "build": "vite build",
     "import:alinex": "node scripts/import-alinex-catalog.mjs",
     "import:ever-plast": "node scripts/import-ever-plast-catalog.mjs",
     "generate:order-catalog": "node scripts/generate-bundled-order-catalog.mjs",
+    "sync:catalog": "node scripts/sync-catalog.mjs",
     "optimize:hero-images": "node scripts/optimize-hero-images.mjs",
     "optimize:alinex-images": "node scripts/optimize-alinex-images.mjs",
     "validate:catalog": "node src/scripts/validateCatalogData.js",

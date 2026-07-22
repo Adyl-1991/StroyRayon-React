@@ -1,8 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { alinexProducts } from '../src/data/alinexProducts.generated.js'
-import { everPlastProducts } from '../src/data/everPlastProducts.generated.js'
+import { products } from '../src/data/products.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outputFile = path.join(projectRoot, 'api', 'src', 'modules', 'orders', 'bundled-order-catalog.generated.json')
@@ -29,23 +28,26 @@ function makeEntry(product, variant, source) {
   }
 }
 
-function collectEntries(products, source) {
-  return products
+function getProductSource(product) {
+  if (product.id?.startsWith('ever-plast-') || product.slug?.startsWith('ever-plast-')) return 'ever-plast'
+  if (product.id?.startsWith('alinex-') || product.slug?.startsWith('alinex-') || product.brand === 'AlinEX') return 'alinex'
+  return 'storefront'
+}
+
+function collectEntries(productList) {
+  return productList
     .filter((product) => product?.isActive !== false && product?.id && product?.slug)
     .flatMap((product) => [
-      makeEntry(product, null, source),
+      makeEntry(product, null, getProductSource(product)),
       ...(product.variants || [])
         .filter((variant) => variant?.id && variant?.stockStatus !== 'out_of_stock')
-        .map((variant) => makeEntry(product, variant, source)),
+        .map((variant) => makeEntry(product, variant, getProductSource(product))),
     ])
-    .filter((entry) => Number.isFinite(entry.price) && entry.price >= 0)
+    .filter((entry) => Number.isFinite(entry.price) && entry.price > 0)
 }
 
 export function buildBundledOrderCatalog() {
-  const items = [
-    ...collectEntries(alinexProducts, 'alinex'),
-    ...collectEntries(everPlastProducts, 'ever-plast'),
-  ]
+  const items = collectEntries(products)
 
   const identityKeys = new Set()
   for (const item of items) {

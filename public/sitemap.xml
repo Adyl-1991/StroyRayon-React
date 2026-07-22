@@ -64,6 +64,12 @@
     <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/plitka-kleileri</loc>
   </url>
   <url>
+    <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/klei-shtukaturka</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/klei</loc>
+  </url>
+  <url>
     <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/zatirka</loc>
   </url>
   <url>
@@ -71,12 +77,6 @@
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/peskobeton</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/montazhdyk-aralashmalar</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/catalog/stroymaterial/kurgak-aralashmalar/remonttuk-aralashmalar</loc>
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/catalog/stroymaterial/cement</loc>
@@ -208,10 +208,13 @@
     <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/metall-plastik-trubalar</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/pnd-trubalar</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/pnd-sistemalary</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/pnd-fitingder</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-trubalar</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/pnd-sistemalary/pnd-fitingder</loc>
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/otoplenie</loc>
@@ -232,31 +235,40 @@
     <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/schetchiki-vody</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/reduktory-davleniya</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/schetchiki-vody</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/zapornaya-armatura</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/reduktory-davleniya</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/obratnye-klapany</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/uchet-kontrol-davleniya/manometry</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/manometry</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtry-gruboi-ochistki</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/zapornaya-armatura</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtry-dlya-vody</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/zapornaya-zashchitnaya-armatura/obratnye-klapany</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtry-dlya-vody/kartridzhi</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtraciya-vody</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtry-dlya-vody/komplektuyushchie-dlya-filtrov</loc>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-gruboi-ochistki</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/kartridzhi</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika/filtraciya-vody/filtry-dlya-vody/komplektuyushchie-dlya-filtrov</loc>
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/catalog/santehnika</loc>
@@ -487,39 +499,6 @@
     <loc>https://www.stroyrayon.kg/catalog/bak-koroo/tachka-araba</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-truba-pn20</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-truba-pn20-25mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/armirlengen-ppr-truba-32mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-mufta-20mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-ugolok-90</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-troynik-25mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-sharovyi-kran-25mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/kanalizatsiya-truba-50mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/kanalizatsiya-truba-110mm</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/kanalizatsiya-ugolok-50mm-45</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/kanalizatsiya-troynik-110-50mm</loc>
-  </url>
-  <url>
     <loc>https://www.stroyrayon.kg/product/ashkana-smesiteli-basic</loc>
   </url>
   <url>
@@ -670,19 +649,7 @@
     <loc>https://www.stroyrayon.kg/product/plastifikator-beton-1l</loc>
   </url>
   <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-perehodnik-25-20</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-kombinirovannaya-mufta-20-12</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/ppr-klipsa-20</loc>
-  </url>
-  <url>
     <loc>https://www.stroyrayon.kg/product/pnd-fiting-mufta-25</loc>
-  </url>
-  <url>
-    <loc>https://www.stroyrayon.kg/product/kanalizaciya-truba-naruzhnaya-110</loc>
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/product/schetchik-vody-15</loc>
@@ -755,6 +722,108 @@
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/product/mat-teplyi-pol-1m2</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaflex</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaproof</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-stukaturka-alinex-aquaplaster</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-dobavka-dlya-gidroizolyacii</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gruntovka-dlia-pola-alinex-primer-2</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gruntovka-alinex-primer</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-alinex-fixline</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-gipsokartonnyx-listov-gkl-alinex-joint</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-klei-stukaturka-dlia-sistemy-skreplennoi-teploizoliacii-alinex-set-307</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-level2</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-unilevel</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-promyslennyi-rovnitel-dlia-pola-alinex-level-3</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-rovnitel-dlia-pola-alinex-level-1</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-300</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-302</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-305</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-308</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-set-301</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-klei-dlia-gkl-alinex-unifix</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-cementnaia-spatlevka-alinex-finish-wp</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-spatlevka-alinex-glatt</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish-premium</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-zarostoikaiaia-stukaturka-alinex-termoplaster</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-saniruiushhaia-stukaturka-alinex-sanirplast</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-forman</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-uniplaster-m-50</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-20</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-25</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35</loc>
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/product/ventilyaciya-reshetkasy-200x200mm</loc>
@@ -1019,5 +1088,152 @@
   </url>
   <url>
     <loc>https://www.stroyrayon.kg/product/ppr-tutuk-keskich</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-pn20</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-fiber</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-dual</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-90</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-45</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-clip</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-tee</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-plug</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-cross</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-coupling</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-bypass</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-reducer</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-reducing-tee</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-union-vr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-union-nr</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-filter</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-ppr-valve</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-coupling</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-45</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-90</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-special-elbow</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-plug</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-revision</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-reducer</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-tee-90</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-tee-45</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-cross</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-spigot</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-45</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-90</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-external-revision</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-45</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-90</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-clip</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-metal-clamp</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-50-internal</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-internal</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-external</loc>
+  </url>
+  <url>
+    <loc>https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-160-external</loc>
   </url>
 </urlset>

@@ -30,8 +30,21 @@ test('bundled order catalog rejects identifier or SKU tampering', () => {
   }), null)
 })
 
-test('bundled order catalog contains both imported supplier catalogs', () => {
+test('bundled order catalog resolves regular storefront products missing from the CRM database', () => {
+  const item = findBundledOrderCatalogItem({
+    productId: 'wago-terminal-3',
+    slug: 'wago-tip-klemma-3-orun',
+    sku: 'SR-ELC-WAG-003',
+  })
+
+  assert.ok(item)
+  assert.equal(item.source, 'storefront')
+  assert.equal(item.price, 22)
+  assert.equal(item.currency, 'KGS')
+})
+
+test('bundled order catalog covers storefront and supplier catalogs', () => {
   assert.equal(bundledOrderCatalogStats.schemaVersion, 1)
-  assert.ok(bundledOrderCatalogStats.productCount >= 80)
-  assert.ok(bundledOrderCatalogStats.itemCount >= 300)
+  assert.ok(bundledOrderCatalogStats.productCount >= 220)
+  assert.ok(bundledOrderCatalogStats.itemCount >= 450)
 })
