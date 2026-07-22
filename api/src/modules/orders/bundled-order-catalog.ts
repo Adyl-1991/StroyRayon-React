@@ -1,4 +1,4 @@
-import bundledOrderCatalog from './bundled-order-catalog.generated.json'
+import bundledOrderCatalog = require('./bundled-order-catalog.generated.json')
 
 export type BundledOrderCatalogItem = (typeof bundledOrderCatalog.items)[number]
 
