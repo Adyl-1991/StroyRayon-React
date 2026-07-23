@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { heroSlides } from '../../data/heroSlides'
 import { useLocale } from '../../i18n/LocaleContext'
+import { normalizeKyrgyzText } from '../../i18n/kyrgyzText'
 
 export function HeroSlider() {
   const { locale, t } = useLocale()
@@ -12,6 +13,7 @@ export function HeroSlider() {
   }
 
   const activeSlide = heroSlides[activeIndex]
+  const slideText = (value) => locale === 'kg' ? normalizeKyrgyzText(value) : value
   const responsiveSizes = '(max-width: 760px) calc(100vw - 20px), min(calc(100vw - 32px), 1180px)'
 
   return (
@@ -54,10 +56,10 @@ export function HeroSlider() {
           <div className="promo-slide__shade" aria-hidden="true" />
           <div className="promo-slide__content">
             <span className="promo-slide__kicker">{t('hero.kicker')}</span>
-            <h1>{activeSlide.title[locale]}</h1>
-            <p>{activeSlide.text[locale]}</p>
+            <h1>{slideText(activeSlide.title[locale])}</h1>
+            <p>{slideText(activeSlide.text[locale])}</p>
             <Link className="button promo-slide__button" to={activeSlide.ctaTo}>
-              {activeSlide.ctaLabel[locale]}
+              {slideText(activeSlide.ctaLabel[locale])}
             </Link>
           </div>
         </article>

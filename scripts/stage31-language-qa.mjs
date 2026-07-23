@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
+import { findKyrgyzLanguageLeakage } from '../src/i18n/kyrgyzText.js'
 
 const baseUrl = process.env.STAGE31_BASE_URL || 'http://127.0.0.1:4183'
 const chromePath = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
@@ -25,17 +26,17 @@ const routes = [
   { path: '/', kg: null, ru: null },
   { path: '/catalog', kg: 'Каталог', ru: 'Каталог' },
   { path: '/catalog/kurulush', kg: 'Курулуш материалдары', ru: 'Стройматериалы' },
-  { path: '/catalog/inzhenerdik-santehnika', kg: 'Инженердик сантехника', ru: 'Инженерная сантехника' },
+  { path: '/catalog/inzhenerdik-santehnika', kg: 'Инженердик түтүк системалары', ru: 'Инженерная сантехника' },
   { path: '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol', kg: 'Суу жылуу пол', ru: 'Водяной тёплый пол' },
   { path: '/catalog/teplyi-pol/suu-teplyi-pol', kg: 'Суу жылуу пол', ru: 'Водяной тёплый пол' },
-  { path: '/catalog/santehnika', kg: 'Сантехника', ru: 'Сантехника' },
-  { path: '/catalog/elektrika', kg: 'Электрика', ru: 'Электрика' },
+  { path: '/catalog/santehnika', kg: 'Сантехникалык жабдуулар', ru: 'Сантехника' },
+  { path: '/catalog/elektrika', kg: 'Электр жабдуулары', ru: 'Электрика' },
   { path: '/catalog/elektrika/elektr-teplyi-pol', kg: 'Электр жылуу пол', ru: 'Электрический тёплый пол' },
   { path: '/catalog/teplyi-pol/elektr-teplyi-pol', kg: 'Электр жылуу пол', ru: 'Электрический тёплый пол' },
   { path: '/catalog/shaimandar', kg: 'Шаймандар', ru: 'Инструменты' },
   { path: '/catalog/bekitkich', kg: 'Бекиткич', ru: 'Крепёж' },
   { path: '/catalog/boiok-tush-kagaz', kg: 'Боёк, туш жана кагаз', ru: 'Краски и обои' },
-  { path: '/catalog/ventilyaciya', kg: 'Вентиляция', ru: 'Вентиляция' },
+  { path: '/catalog/ventilyaciya', kg: 'Желдетүү', ru: 'Вентиляция' },
   { path: '/catalog/bak-koroo', kg: 'Бак жана короо', ru: 'Сад и огород' },
   { path: '/product/ppr-truba-pn20', kg: null, ru: null },
   { path: '/cart', kg: 'Себет', ru: 'Корзина', cart: true },
@@ -55,7 +56,7 @@ const selectedViewports = viewportFilter ? viewports.filter((viewport) => viewpo
 
 const adminRoutes = ['/admin/login', '/admin/orders', '/admin/products']
 const expectedChips = {
-  kg: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция', 'Бак/чарба'],
+  kg: ['Курулуш', 'Инженердик түтүк системалары', 'Сантехникалык жабдуулар', 'Электр жабдуулары', 'Шаймандар', 'Бекиткич', 'Боёк', 'Желдетүү', 'Бак/чарба'],
   ru: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция', 'Сад и хозяйство'],
 }
 const expectedCta = {
@@ -216,6 +217,7 @@ async function main() {
     '--disable-gpu',
     '--no-first-run',
     '--disable-background-networking',
+    '--remote-allow-origins=*',
     `--remote-debugging-port=${debugPort}`,
     `--user-data-dir=${profileDir}`,
     'about:blank',
@@ -238,6 +240,7 @@ async function main() {
           const expectedLang = locale === 'ru' ? 'ru' : 'ky'
           const expectedHeading = route[locale]
           const forbidden = forbiddenUi[locale].filter((text) => result.text.includes(text))
+          const kyrgyzLeakage = locale === 'kg' ? findKyrgyzLanguageLeakage(result.text) : []
           const chipMismatch = result.chips.length !== expectedChips[locale].length
             || expectedChips[locale].some((text, index) => result.chips[index] !== text)
           const ctaMismatch = result.ctaTitle !== expectedCta[locale].title || result.ctaAction !== expectedCta[locale].action
@@ -259,6 +262,7 @@ async function main() {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header language leakage: ${forbiddenText}` })
           }
           if (forbidden.length) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `language leakage: ${forbidden.join(' | ')}` })
+          if (kyrgyzLeakage.length) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `Kyrgyz terminology leakage: ${kyrgyzLeakage.join(' | ')}` })
           checks.push({ route: route.path, viewport: viewport.width, locale })
         }
       }

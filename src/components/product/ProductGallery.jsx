@@ -6,8 +6,11 @@ import {
   getProductImage,
   resolveImage,
 } from '../../utils/imageUtils'
+import { useLocale } from '../../i18n/LocaleContext'
+import { getProductTitle, normalizeKgText } from '../../services/productService'
 
 export function ProductGallery({ product, selectedVariant }) {
+  const { locale } = useLocale()
   const images = useMemo(() => getProductGallery(product, selectedVariant), [product, selectedVariant])
   const [activeImageSrc, setActiveImageSrc] = useState(null)
   const fallbackImage = getProductImage(product, selectedVariant)
@@ -15,6 +18,8 @@ export function ProductGallery({ product, selectedVariant }) {
     images.find((image) => resolveImage(image, fallbackImage).src === activeImageSrc) || images[0] || fallbackImage
   const activeSource = resolveImage(activeImage, fallbackImage)
   const active = getOptimizedProductImage(activeSource, 'detail')
+  const productName = getProductTitle(product, locale)
+  const localizeAlt = (alt) => locale === 'ru' ? productName : normalizeKgText(alt || productName)
 
   return (
     <div className="product-gallery">
@@ -23,7 +28,7 @@ export function ProductGallery({ product, selectedVariant }) {
         src={active.src}
         srcSet={active.srcSet || undefined}
         sizes={active.sizes || undefined}
-        alt={active.alt}
+        alt={localizeAlt(active.alt)}
         decoding="async"
         fetchPriority="high"
         width={active.width}
@@ -50,7 +55,7 @@ export function ProductGallery({ product, selectedVariant }) {
                   src={displayImage.src}
                   srcSet={displayImage.srcSet || undefined}
                   sizes={displayImage.sizes || undefined}
-                  alt={displayImage.alt}
+                  alt={localizeAlt(displayImage.alt)}
                   loading="lazy"
                   decoding="async"
                   width="180"

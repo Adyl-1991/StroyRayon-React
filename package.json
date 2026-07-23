@@ -23,6 +23,8 @@
     "test:ever-plast": "node --test scripts/ever-plast-import.test.mjs",
     "test:images": "node --test scripts/image-optimization-regression.test.mjs",
     "test:localization": "node --test scripts/product-localization-regression.test.mjs",
+    "test:content": "node --test scripts/kyrgyz-content-regression.test.mjs",
+    "audit:kg": "node scripts/kyrgyz-content-audit.mjs",
     "test:pwa": "node --test scripts/pwa-regression.test.mjs",
     "qa:pwa": "node scripts/pwa-browser-qa.mjs",
     "qa:stage21": "node scripts/stage21-e2e.mjs",

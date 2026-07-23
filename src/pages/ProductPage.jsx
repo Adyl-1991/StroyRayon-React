@@ -24,8 +24,6 @@ import {
   getProductTitle,
   getRelatedProducts,
   getSelectedVariant,
-  getStockLabel,
-  getStockStatus,
   normalizeKgText,
   resolveProductSlug,
 } from '../services/productService'
@@ -49,7 +47,7 @@ const ignoredSpecKeys = new Set([
 ])
 
 const specLabelMap = {
-  article: { kg: 'Артикул', ru: 'Артикул' },
+  article: { kg: 'Товар коду', ru: 'Артикул' },
   material: { kg: 'Материал', ru: 'Материал' },
   nominalPressure: { kg: 'Басым', ru: 'Давление' },
   color: { kg: 'Түсү', ru: 'Цвет' },
@@ -58,9 +56,9 @@ const specLabelMap = {
   length: { kg: 'Узундугу', ru: 'Длина' },
   diameter: { kg: 'Диаметри', ru: 'Диаметр' },
   wallThickness: { kg: 'Дубал калыңдыгы', ru: 'Толщина стенки' },
-  монтаж: { kg: 'Монтаж', ru: 'Монтаж' },
-  максимальнаяТемпература: { kg: 'Макс. температура', ru: 'Макс. температура' },
-  эксплуатация: { kg: 'Класс эксплуатации', ru: 'Класс эксплуатации' },
+  монтаж: { kg: 'Орнотуу', ru: 'Монтаж' },
+  максимальнаяТемпература: { kg: 'Эң жогорку температура', ru: 'Макс. температура' },
+  эксплуатация: { kg: 'Колдонуу классы', ru: 'Класс эксплуатации' },
 }
 
 const summarySpecKeys = [
@@ -191,19 +189,30 @@ function stripDocumentationSection(text) {
 }
 
 const documentTypeLabels = {
-  CERTIFICATE: 'Сертификат',
-  MANUAL: 'Инструкция',
-  PASSPORT: 'Паспорт товара',
-  OTHER: 'Документ',
+  kg: {
+    CERTIFICATE: 'Сертификат',
+    MANUAL: 'Колдонмо',
+    PASSPORT: 'Товардын паспорту',
+    OTHER: 'Документ',
+  },
+  ru: {
+    CERTIFICATE: 'Сертификат',
+    MANUAL: 'Инструкция',
+    PASSPORT: 'Паспорт товара',
+    OTHER: 'Документ',
+  },
 }
 
-function extractDocumentation(product, specifications) {
+function extractDocumentation(product, specifications, locale) {
+  const labels = documentTypeLabels[locale] || documentTypeLabels.kg
   if (Array.isArray(product?.documents) && product.documents.length) {
     return product.documents
       .map((item) => ({
-        title: String(item.title || '').trim(),
+        title: locale === 'kg'
+          ? `${labels[item.type] || labels.OTHER}: ${getProductTitle(product, 'kg')}`
+          : String(item.title || '').trim(),
         url: String(item.url || '').trim(),
-        label: documentTypeLabels[item.type] || item.label || item.type || 'Документ',
+        label: labels[item.type] || (locale === 'kg' ? normalizeKgText(item.label) : item.label) || item.type || labels.OTHER,
       }))
       .filter((item) => item.title && item.url)
   }
@@ -273,20 +282,11 @@ export function ProductPage() {
   const benefitItems = getProductListField(product, 'benefits', locale)
   const instructionItems = getProductListField(product, 'instructions', locale)
   const faqItems = getProductListField(product, 'faq', locale)
-  const documents = extractDocumentation(product, specifications)
+  const documents = extractDocumentation(product, specifications, locale)
   const relatedProducts = getRelatedProducts(product)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
-  const activeSku = selectedVariant?.sku || product.sku || product.article
-  const packageInfo =
-    locale === 'ru'
-      ? selectedVariant?.packageInfoRu || product.packRu || product.packageInfoRu || product.minOrderRu
-      : normalizeKgText(selectedVariant?.packageInfo || product.pack || product.packageInfoKg || product.minOrder)
-  const stockStatus = selectedVariant ? getStockStatus(selectedVariant) : getStockStatus(product)
   const variantSpecs = buildCleanSpecs(specifications, locale, {
     ...(selectedVariant?.specs || {}),
-    ...(activeSku ? { [t('product.sku')]: activeSku } : {}),
-    ...(packageInfo ? { [t('product.pack')]: packageInfo } : {}),
-    [t('product.stock')]: getStockLabel(stockStatus, locale),
   })
   const summarySpecs = buildSummarySpecs(specifications, locale, selectedVariant?.specs)
   const breadcrumbItems = [
@@ -343,10 +343,10 @@ export function ProductPage() {
         onVariantChange={handleVariantChange}
       />
 
-      <nav className="product-section-nav" aria-label="Разделы товара">
+      <nav className="product-section-nav" aria-label={t('product.sectionNavLabel')}>
         <a href="#product-description">{t('product.fullDescription')}</a>
         <a href="#product-specs">{t('product.specifications')}</a>
-        {documents.length > 0 && <a href="#product-documents">Документация</a>}
+        {documents.length > 0 && <a href="#product-documents">{t('product.documentation')}</a>}
         <a href="#product-delivery">{t('product.deliveryTitle')}</a>
       </nav>
 
@@ -361,7 +361,7 @@ export function ProductPage() {
 
           {documents.length > 0 && (
             <section id="product-documents" className="detail-panel product-section product-documents">
-              <h2>Документация</h2>
+              <h2>{t('product.documentation')}</h2>
               <div className="product-documents__list">
                 {documents.map((documentItem) => (
                   <div key={`${documentItem.url}-${documentItem.title}`} className="product-document-row">

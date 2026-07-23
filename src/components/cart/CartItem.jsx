@@ -8,10 +8,14 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
   const { locale, t } = useLocale()
   const cartItemId = item.cartItemId || item.productId
   const product = getProductBySlug(item.slug)
-  const name = product ? getProductTitle(product, locale) : locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name
+  const name = product
+    ? getProductTitle(product, locale)
+    : locale === 'ru'
+      ? item.titleRu || item.name
+      : normalizeKgText(item.titleKg || item.name)
   const variantTitle = locale === 'ru'
     ? item.variantTitleRu || item.variantSize
-    : item.variantTitleKg || item.variantSize
+    : normalizeKgText(item.variantTitleKg || item.variantSize)
   const unit = getUnitLabel(item.unitKg || item.unit, locale)
   const packageInfo = locale === 'ru' ? item.packageInfoRu : normalizeKgText(item.packageInfo)
   const image = getOptimizedProductImage(
@@ -25,7 +29,7 @@ export function CartItem({ item, setQuantity, removeFromCart }) {
         src={image.src}
         srcSet={image.srcSet || undefined}
         sizes={image.sizes || undefined}
-        alt={image.alt}
+        alt={locale === 'ru' ? image.alt : normalizeKgText(image.alt || name)}
         loading="lazy"
         decoding="async"
         width="82"

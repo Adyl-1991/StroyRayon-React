@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../i18n/LocaleContext'
+import { normalizeKyrgyzText } from '../../i18n/kyrgyzText'
 import { applyImageFallback, getCategoryImage } from '../../utils/imageUtils'
 
 const categoryCopy = {
@@ -28,7 +29,7 @@ const categoryCopy = {
     ru: { title: 'Цемент и сухие смеси', description: 'Цемент, плиточный клей, штукатурки и шпаклёвки.' },
   },
   electrics: {
-    kg: { title: 'Электрика', description: 'Кабель, розетка, автомат жана монтаж материалдары.' },
+    kg: { title: 'Электр жабдуулары', description: 'Кабель, розетка, автоматтык өчүргүч жана орнотуу материалдары.' },
     ru: { title: 'Электрика', description: 'Кабель, розетки, автоматы и монтажные материалы.' },
   },
   fasteners: {
@@ -41,20 +42,24 @@ export function CategoryCard({ category }) {
   const { locale, t } = useLocale()
   const image = getCategoryImage(category)
   const copy = categoryCopy[category.id]?.[locale]
+  const title = copy?.title || category.titleKg || category.name
+  const description = copy?.description || category.descriptionKg || category.description
+  const localizedTitle = locale === 'kg' ? normalizeKyrgyzText(title) : title
+  const localizedDescription = locale === 'kg' ? normalizeKyrgyzText(description) : description
 
   return (
     <article className="category-card">
       <img
         src={image.src}
-        alt={copy?.title || image.alt}
+        alt={localizedTitle || image.alt}
         loading="lazy"
         width={image.width}
         height={image.height}
         onError={(event) => applyImageFallback(event, 'category')}
       />
       <div>
-        <h3>{copy?.title || category.titleKg || category.name}</h3>
-        <p>{copy?.description || category.descriptionKg || category.description}</p>
+        <h3>{localizedTitle}</h3>
+        <p>{localizedDescription}</p>
         <Link to={`/catalog/${category.slug}`}>{t('common.openCategory')}</Link>
       </div>
     </article>

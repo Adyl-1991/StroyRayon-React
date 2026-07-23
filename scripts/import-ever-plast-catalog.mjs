@@ -98,7 +98,7 @@ const generatedSewerAssetByFamily = {
   'sewer-pipe-160-external': 'pipes-orange.webp',
 }
 
-function family(titleKg, titleRu, catalogPath, unit = 'даана', productType = 'ППР фитинг', productTypeRu = 'ППР фитинг') {
+function family(titleKg, titleRu, catalogPath, unit = 'даана', productType = 'ППР бириктиргич', productTypeRu = 'ППР фитинг') {
   return { titleKg, titleRu, catalogPath, unit, productType, productTypeRu }
 }
 
@@ -561,11 +561,11 @@ function buildFamilyProducts(rows, officialProducts, csvBySku) {
       minOrderRu: config.unit === 'метр' ? '1 метр' : '1 шт.',
       pack: `1 ${config.unit}`,
       packRu: config.unit === 'метр' ? '1 метр' : '1 шт.',
-      shortDescriptionKg: `${config.titleKg}: керектүү өлчөмдү варианттардан тандаңыз. Баа 30.05.2026 прайсынын негизинде жаңыртылган.`,
+      shortDescriptionKg: `${config.titleKg}: керектүү өлчөмдү түрлөрдүн арасынан тандаңыз. Баа 30.05.2026 күнкү баа тизмесинин негизинде жаңыртылган.`,
       shortDescriptionRu: `${config.titleRu}: выберите нужный размер в вариантах. Цена обновлена по прайсу от 30.05.2026.`,
-      fullDescriptionKg: `${config.titleKg} суу, жылытуу же канализация системасын монтаждоого арналган. Диаметрди, туташуу түрүн жана колдонуу шартын долбоор боюнча текшериңиз.`,
+      fullDescriptionKg: `${config.titleKg} суу, жылытуу же канализация системасын орнотууга арналган. Диаметрди, туташуу түрүн жана колдонуу шарттарын долбоор боюнча текшериңиз.`,
       fullDescriptionRu: `${config.titleRu} предназначен для монтажа инженерной системы. Перед заказом проверьте диаметр, тип соединения и условия применения по проекту.`,
-      specs: { Бренд: 'EVER PLAST', Материал: group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен', 'Дата прайса': '30.05.2026', Варианты: `${variants.length}` },
+      specs: { Өндүрүүчү: 'EVER PLAST', Материал: group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен', 'Баа тизмесинин датасы': '30.05.2026', 'Түрлөрүнүн саны': `${variants.length}` },
       specsRu: { Бренд: 'EVER PLAST', Материал: group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен', 'Дата прайса': '30.05.2026', Варианты: `${variants.length}` },
       images: [image],
       image,

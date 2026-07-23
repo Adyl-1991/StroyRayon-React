@@ -3,7 +3,6 @@ import { useLocale } from '../../i18n/LocaleContext'
 import {
   getDefaultVariant,
   getLocalizedProductValue,
-  getProductShortDescription,
   getProductTitle,
   getStockLabel,
   getStockStatus,
@@ -35,21 +34,18 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
   const activeVariantTitle = locale === 'ru'
     ? activeVariant?.titleRu || activeVariant?.size
     : activeVariant?.titleKg || activeVariant?.size
-  const shortDescription = getProductShortDescription(product, locale)
   const visibleVariantTitle = isRedundantProductText(activeVariantTitle, productName) ? '' : activeVariantTitle
-  const visibleDescription = isRedundantProductText(shortDescription, productName, visibleVariantTitle) ? '' : shortDescription
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
   const packValue =
     locale === 'ru'
       ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || product.weight
       : normalizeKgText(activeVariant?.packageInfo || product.pack || product.weight)
-  const visiblePackValue = isRedundantProductText(packValue, productName, visibleVariantTitle, visibleDescription) ? '' : packValue
+  const visiblePackValue = isRedundantProductText(packValue, productName, visibleVariantTitle) ? '' : packValue
   const visibleMinOrder = isRedundantProductText(
     activeMinOrder,
     productName,
     visibleVariantTitle,
     visiblePackValue,
-    visibleDescription,
   ) ? '' : activeMinOrder
   const facts = [
     { label: t('product.sku'), value: activeSku || product.article },
@@ -63,7 +59,6 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
       item.value,
       productName,
       visibleVariantTitle,
-      visibleDescription,
       ...facts.map((fact) => fact.value),
     ),
   )
@@ -103,7 +98,6 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
         <li>{t('product.assurances.calculation')}</li>
         <li>{t('product.assurances.delivery')}</li>
       </ul>
-      {visibleDescription && <p className="product-info__description">{visibleDescription}</p>}
       <dl className="product-facts">
         {facts.map((item) => (
           <div key={item.label}>

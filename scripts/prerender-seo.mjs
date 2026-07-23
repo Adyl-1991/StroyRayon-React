@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { siteConfig } from '../src/config/site.js'
 import { catalogTree } from '../src/data/catalogTree.js'
 import { products } from '../src/data/products.js'
+import { normalizeKyrgyzContent, normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 import { translations } from '../src/i18n/translations.js'
 import { getSitemapRoutes } from '../src/scripts/generateSitemap.js'
 import {
@@ -76,13 +77,13 @@ function buildPrerenderBody({ title, description, body = {} }) {
 
   return [
     '<main class="page seo-prerender-content" data-seo-prerender="true">',
-    breadcrumbs ? `<nav aria-label="Навигация">${breadcrumbs}</nav>` : '',
+    breadcrumbs ? `<nav aria-label="Багыттоо">${breadcrumbs}</nav>` : '',
     `<h1>${escapeHtml(bodyTitle)}</h1>`,
     description ? `<p>${escapeHtml(description)}</p>` : '',
     image,
     body.price ? `<p><strong>${escapeHtml(body.price)}</strong></p>` : '',
     links ? `<section><h2>${escapeHtml(body.linksTitle || 'Бөлүмдөр жана товарлар')}</h2><ul>${links}</ul></section>` : '',
-    specs ? `<section><h2>Характеристикалары</h2><dl>${specs}</dl></section>` : '',
+    specs ? `<section><h2>Мүнөздөмөлөрү</h2><dl>${specs}</dl></section>` : '',
     faq ? `<section><h2>Көп берилүүчү суроолор</h2>${faq}</section>` : '',
     '</main>',
   ].filter(Boolean).join('')
@@ -152,7 +153,14 @@ export function buildRouteDefinitions() {
   const routes = new Map()
   const add = (route, seo) => {
     if (routes.has(route)) throw new Error(`Duplicate SEO prerender route: ${route}`)
-    routes.set(route, seo)
+    routes.set(route, {
+      ...seo,
+      title: normalizeKyrgyzText(seo.title),
+      description: normalizeKyrgyzText(seo.description),
+      imageAlt: normalizeKyrgyzText(seo.imageAlt),
+      structuredData: normalizeKyrgyzContent(seo.structuredData),
+      body: normalizeKyrgyzContent(seo.body),
+    })
   }
 
   add('/', {

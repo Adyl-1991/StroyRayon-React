@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { catalogTranslations, translations } from './translations'
 import { getCatalogRuFallback } from './catalogRuFallbacks'
+import { normalizeKyrgyzContent, normalizeKyrgyzText } from './kyrgyzText'
 
 const LocaleContext = createContext(null)
 const STORAGE_KEY = 'stroyrayon.locale'
@@ -32,7 +33,7 @@ export function LocaleProvider({ children }) {
   const value = useMemo(() => {
     function t(path, params) {
       const translated = readPath(translations[locale], path) ?? readPath(translations.kg, path) ?? path
-      return interpolate(translated, params)
+      return interpolate(locale === 'kg' ? normalizeKyrgyzContent(translated) : translated, params)
     }
 
     function nodeText(node) {
@@ -42,11 +43,14 @@ export function LocaleProvider({ children }) {
       const localeTitle = locale === 'ru' ? node?.titleRu : node?.titleKg
       const localeDescription = locale === 'ru' ? node?.descriptionRu : node?.descriptionKg
       const localeSeoText = locale === 'ru' ? node?.seoTextRu : node?.seoTextKg
-      return {
+      const copy = {
         title: bySlug?.title || localeTitle || ruFallback?.title || fallback?.title || node?.titleKg || node?.name || '',
         description: bySlug?.description || localeDescription || ruFallback?.description || fallback?.description || node?.descriptionKg || node?.description || '',
         seoText: bySlug?.seoText || localeSeoText || ruFallback?.seoText || fallback?.seoText || node?.seoTextKg || node?.seoText || '',
       }
+      return locale === 'kg'
+        ? Object.fromEntries(Object.entries(copy).map(([key, text]) => [key, normalizeKyrgyzText(text)]))
+        : copy
     }
 
     return {

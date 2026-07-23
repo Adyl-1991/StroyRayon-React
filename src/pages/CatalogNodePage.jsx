@@ -10,7 +10,7 @@ import { useCatalogNode } from '../hooks/useCatalogTree'
 import { useCatalogFilters } from '../hooks/useCatalogFilters'
 import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
-import { getCatalogNodeUrl, getFilterOptions, getProductsByCatalogNode } from '../services/productService'
+import { getCatalogNodeUrl, getFilterOptions, getProductTitle, getProductsByCatalogNode } from '../services/productService'
 import { getWhatsAppUrl } from '../services/whatsappService'
 import {
   buildBreadcrumbStructuredData,
@@ -92,7 +92,7 @@ export function CatalogNodePage() {
                 url: `/catalog/${[...node.path, child.slug].join('/')}`,
               })),
               ...scopedProducts.slice(0, 50).map((product) => ({
-                name: product.titleKg || product.name,
+                name: getProductTitle(product, locale),
                 url: `/product/${product.slug}`,
               })),
             ],
@@ -146,16 +146,14 @@ export function CatalogNodePage() {
       <section className="consultation-inline catalog-consultation">
         <h2>{t('catalog.consultTitle')}</h2>
         <p>{t('catalog.consultText')}</p>
-        <a href={getWhatsAppUrl('Салам! StroyRayon каталог бөлүмү боюнча менеджерден кеңеш алгым келет.')} target="_blank" rel="noreferrer">
+        <a href={getWhatsAppUrl('Салам! StroyRayon каталог бөлүмү боюнча адистен кеңеш алгым келет.')} target="_blank" rel="noreferrer">
           {t('common.askManager')}
         </a>
       </section>
 
       {current.seoText && (
         <article className="seo-text">
-          <h2>
-            {current.title} {t('catalog.shortAbout')}
-          </h2>
+          <h2>{t('catalog.buyingGuide')}</h2>
           <p>{current.seoText}</p>
         </article>
       )}

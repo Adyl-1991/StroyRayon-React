@@ -7,7 +7,7 @@ import { buildCatalogPageStructuredData, getPageCanonical } from '../utils/seoUt
 
 export function CatalogPage() {
   const { nodes, isLoading } = useCatalogTree()
-  const { t } = useLocale()
+  const { t, nodeText } = useLocale()
 
   return (
     <main className="page catalog-directory-page">
@@ -20,7 +20,7 @@ export function CatalogPage() {
           title: t('catalog.title'),
           description: t('catalog.description'),
           items: nodes.map((node) => ({
-            name: node.titleKg,
+            name: nodeText(node).title,
             url: `/catalog/${node.slug}`,
           })),
         })}

@@ -1,5 +1,11 @@
 import { siteConfig } from '../config/site.js'
-import { getProductFullDescription, getProductTitle, normalizeKgText } from '../services/productService.js'
+import {
+  getProductFullDescription,
+  getProductSpecs,
+  getProductTitle,
+  normalizeKgText,
+  normalizeProductKgText,
+} from '../services/productService.js'
 import { getProductGallery } from './imageUtils.js'
 import {
   absoluteUrl,
@@ -31,11 +37,13 @@ function cleanText(value, maxLength = 155) {
 
 export function getCatalogNodeSeo(node, locale = 'kg') {
   return {
-    title: locale === 'ru' ? node?.titleRu || node?.titleKg || 'Каталог' : node?.titleKg || 'Каталог',
+    title: locale === 'ru'
+      ? node?.titleRu || node?.titleKg || 'Каталог'
+      : normalizeKgText(node?.titleKg || 'Каталог'),
     description: cleanText(
       locale === 'ru'
         ? node?.descriptionRu || node?.seoTextRu || siteConfig.defaultDescription
-        : node?.descriptionKg || node?.seoTextKg || siteConfig.defaultDescription,
+        : normalizeKgText(node?.descriptionKg || node?.seoTextKg || siteConfig.defaultDescription),
     ),
     canonical: getPageCanonical(node?.path?.length ? `/catalog/${node.path.join('/')}` : '/catalog'),
   }
@@ -45,11 +53,13 @@ export function getProductSeo(product, locale = 'kg') {
   return {
     title: locale === 'ru'
       ? product?.seoTitleRu || product?.titleRu || getProductTitle(product, locale) || 'Товар'
-      : product?.seoTitleKg || product?.titleKg || getProductTitle(product, locale) || 'Товар',
+      : product?.slug?.startsWith('alinex-')
+        ? getProductTitle(product, locale)
+        : normalizeKgText(product?.seoTitleKg || product?.titleKg || getProductTitle(product, locale) || 'Товар'),
     description: cleanText(
       locale === 'ru'
         ? product?.seoDescriptionRu || product?.descriptionRu || product?.shortDescriptionRu || siteConfig.defaultDescription
-        : normalizeKgText(product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
+        : normalizeProductKgText(product, product?.seoDescriptionKg || product?.descriptionKg || product?.shortDescriptionKg || siteConfig.defaultDescription),
     ),
     canonical: getPageCanonical(product?.slug ? `/product/${product.slug}` : '/catalog'),
   }
@@ -90,7 +100,7 @@ export function buildProductStructuredData(product, locale = 'kg') {
           seller: { '@id': `${siteConfig.siteUrl}/#organization` },
         }
       : undefined
-  const additionalProperty = Object.entries(product.specs || {})
+  const additionalProperty = Object.entries(getProductSpecs(product, locale))
     .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
     .slice(0, 12)
     .map(([name, value]) => ({
@@ -106,13 +116,13 @@ export function buildProductStructuredData(product, locale = 'kg') {
     url: getPageCanonical(`/product/${product.slug}`),
     description: locale === 'ru'
       ? product.seoDescriptionRu || getProductFullDescription(product, locale) || product.shortDescriptionRu
-      : normalizeKgText(product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg),
+      : normalizeProductKgText(product, product.seoDescriptionKg || getProductFullDescription(product, locale) || product.shortDescriptionKg),
     image: productImages.length ? productImages : undefined,
     sku: product.sku,
     mpn: product.article || undefined,
     category: locale === 'ru'
       ? product.productTypeRu || product.productType || undefined
-      : product.productType || product.productTypeKg || undefined,
+      : normalizeKgText(product.productTypeKg || product.productType || '') || undefined,
     color: product.color || undefined,
     material: locale === 'ru' ? product.materialRu || undefined : product.materialKg || undefined,
     brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,

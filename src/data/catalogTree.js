@@ -202,7 +202,7 @@ export const catalogTree = [
   }),
   node({
     id: 'root-engineering-plumbing',
-    titleKg: 'Инженердик сантехника',
+    titleKg: 'Инженердик түтүк системалары',
     titleRu: 'Инженерная сантехника',
     slug: 'inzhenerdik-santehnika',
     aliases: ['inzhenernaya-santehnika', 'trubalar-fitingder', 'kanalizaciya', 'zhylytu'],
@@ -488,7 +488,7 @@ export const catalogTree = [
   }),
   node({
     id: 'root-plumbing',
-    titleKg: 'Сантехника',
+    titleKg: 'Сантехникалык жабдуулар',
     titleRu: 'Сантехника',
     slug: 'santehnika',
     aliases: ['smesitelder', 'dush-sistemalary', 'rakovinalar'],
@@ -524,7 +524,7 @@ export const catalogTree = [
   }),
   node({
     id: 'root-electrical',
-    titleKg: 'Электрика',
+    titleKg: 'Электр жабдуулары',
     titleRu: 'Электрика',
     slug: 'elektrika',
     icon: 'electric',
@@ -663,18 +663,18 @@ export const catalogTree = [
   }),
   node({
     id: 'root-ventilation',
-    titleKg: 'Вентиляция',
+    titleKg: 'Желдетүү',
     titleRu: 'Вентиляция',
     slug: 'ventilyaciya',
     icon: 'vent',
-    descriptionKg: 'Үй, кеңсе жана курулуш объекттери үчүн вентиляция товарлары.',
-    seoTextKg: 'Вентиляция бөлүмүндө аба өткөргүчтөр, торчолор, вентиляторлор жана монтаж аксессуарлары сыяктуу товарлар топтолот.',
+    descriptionKg: 'Үй, кеңсе жана курулуш жайлары үчүн желдетүү жабдуулары.',
+    seoTextKg: 'Желдетүү бөлүмүндө аба өткөргүчтөр, торчолор, желдеткичтер жана орнотуу жабдуулары топтолгон.',
     children: [
-      leaf('ventilation-fans', 'Вентиляторлор', 'ventilyatorlor', 'fan', ['ventilation-fan']),
-      leaf('ventilation-grilles', 'Вентиляция торчолору', 'ventilyaciya-reshetkalary', 'vent', ['ventilation-grille'], ['вентиляционные решетки', 'вентиляция решеткалары']),
+      leaf('ventilation-fans', 'Желдеткичтер', 'ventilyatorlor', 'fan', ['ventilation-fan']),
+      leaf('ventilation-grilles', 'Желдетүү торлору', 'ventilyaciya-reshetkalary', 'vent', ['ventilation-grille'], ['вентиляционные решетки', 'вентиляция решеткалары']),
       leaf('air-ducts', 'Аба өткөргүчтөр', 'aba-otkorguchtor', 'duct', ['air-duct']),
-      leaf('ventilation-mounting', 'Хомут жана монтаж аксессуарлары', 'homut-montazh-aksessuarlar', 'clamp', ['ventilation-accessory']),
-      leaf('ventilation-channels', 'Вентиляция каналдары', 'ventilyaciya-kanaldary', 'duct'),
+      leaf('ventilation-mounting', 'Кыскычтар жана орнотуу жабдуулары', 'homut-montazh-aksessuarlar', 'clamp', ['ventilation-accessory']),
+      leaf('ventilation-channels', 'Желдетүү каналдары', 'ventilyaciya-kanaldary', 'duct'),
     ],
   }),
   node({

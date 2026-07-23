@@ -45,9 +45,9 @@ export function SubcategoryPage() {
           <ProductGrid products={products} />
           <section className="consultation-inline">
             <h2>Кайсы товарды тандай албай жатасызбы?</h2>
-            <p>Кайсы негизге жана канча көлөмгө керек экенин жазсаңыз, менеджер туура товарды тактап берет.</p>
-            <a href={getWhatsAppUrl('Салам! StroyRayon бөлүмү боюнча менеджерден кеңеш алгым келет.')} target="_blank" rel="noreferrer">
-              Менеджерден кеңеш алуу
+            <p>Кайсы негизге жана канча көлөмгө керек экенин жазсаңыз, адис туура товарды тактап берет.</p>
+            <a href={getWhatsAppUrl('Салам! StroyRayon бөлүмү боюнча адистен кеңеш алгым келет.')} target="_blank" rel="noreferrer">
+              Адистен кеңеш алуу
             </a>
           </section>
           <article className="seo-text">

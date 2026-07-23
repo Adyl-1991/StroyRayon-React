@@ -22,7 +22,7 @@ const requestHeaders = {
 
 const categoryConfig = {
   stukaturki: {
-    titleKg: 'Штукатуркалар',
+    titleKg: 'Шыбак аралашмалары',
     titleRu: 'Штукатурки',
     pathFor(title) {
       if (/декоратив|munfort|fortress/i.test(title)) return ['stroymaterial', 'kurgak-aralashmalar', 'shtukaturkalar', 'dekorativdik-shtukaturka']
@@ -31,7 +31,7 @@ const categoryConfig = {
     },
   },
   spatlevki: {
-    titleKg: 'Шпаклёвкалар',
+    titleKg: 'Жука тегиздөөчү аралашмалар',
     titleRu: 'Шпатлевки',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'shpaklevkalar'],
   },
@@ -41,32 +41,32 @@ const categoryConfig = {
     path: ['stroymaterial', 'kurgak-aralashmalar', 'nalivnoi-pol'],
   },
   'plitocnye-klei': {
-    titleKg: 'Плитка клейлери',
+    titleKg: 'Плитка желимдери',
     titleRu: 'Плиточные клеи',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'plitka-kleileri'],
   },
   gidroizoliaciia: {
-    titleKg: 'Гидроизоляция',
+    titleKg: 'Суу өткөрбөөчү материалдар',
     titleRu: 'Гидроизоляция',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'gidroizolyaciya'],
   },
   'klei-stukaturka': {
-    titleKg: 'Клей-штукатурка',
+    titleKg: 'Желим-шыбак аралашмасы',
     titleRu: 'Клей-штукатурка',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'klei-shtukaturka'],
   },
   klei: {
-    titleKg: 'Курулуш клейи',
+    titleKg: 'Курулуш желими',
     titleRu: 'Строительный клей',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'klei'],
   },
   'zatirka-dlia-svov': {
-    titleKg: 'Тигиштер үчүн затирка',
+    titleKg: 'Тигиштер үчүн жик толтургуч',
     titleRu: 'Затирка для швов',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'zatirka'],
   },
   gruntovki: {
-    titleKg: 'Грунтовкалар',
+    titleKg: 'Астарлар',
     titleRu: 'Грунтовки',
     path: ['stroymaterial', 'kurgak-aralashmalar', 'gruntovkalar'],
   },
@@ -388,7 +388,7 @@ function makeProduct(entry, stroydomById, imagePath) {
   const minOrderKg = unit === 'кап' ? '1 кап' : '1 даана'
   const minOrderRu = unit === 'кап' ? '1 мешок' : '1 шт.'
   const sourceUrl = `https://www.alinex.kz/catalog/${entry.slug}`
-  const shortKg = `${titleRu} — AlinEX брендинин «${category.titleKg}» категориясындагы профессионалдык курулуш материалы.`
+  const shortKg = `${titleRu} — AlinEX брендинин «${category.titleKg}» категориясындагы кесиптик курулуш материалы.`
   const shortRu = `${titleRu} — профессиональный строительный материал AlinEX из категории «${category.titleRu}».`
   const specs = specsFromProduct(detail)
 
