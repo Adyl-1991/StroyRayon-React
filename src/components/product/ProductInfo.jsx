@@ -9,14 +9,14 @@ import {
   getUnitLabel,
   isPurchasable,
   isRedundantProductText,
-  normalizeKgText,
 } from '../../services/productService'
 import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
+import { ProductVariants } from './ProductVariants'
 
-export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
+export function ProductInfo({ product, selectedVariant, onVariantChange, summarySpecs = [] }) {
   const { addToCart } = useCart()
   const { locale, t } = useLocale()
   const activeVariant = selectedVariant || getDefaultVariant(product)
@@ -26,39 +26,17 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
   const hasActivePrice = Number(activePrice) > 0
   const activeUnit = getUnitLabel(activeVariant?.unit || product.unit, locale)
   const activeSku = activeVariant?.sku || product.sku
-  const activeMinOrder =
-    locale === 'ru'
-      ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'minOrder', locale) || `1 ${activeUnit}`
-      : normalizeKgText(activeVariant?.packageInfo || product.minOrder || `1 ${activeUnit}`)
   const productName = getProductTitle(product, locale)
-  const activeVariantTitle = locale === 'ru'
-    ? activeVariant?.titleRu || activeVariant?.size
-    : activeVariant?.titleKg || activeVariant?.size
-  const visibleVariantTitle = isRedundantProductText(activeVariantTitle, productName) ? '' : activeVariantTitle
   const quickText = buildProductInquiryText({ product: { ...product, name: productName }, variant: activeVariant, locale })
-  const packValue =
-    locale === 'ru'
-      ? activeVariant?.packageInfoRu || getLocalizedProductValue(product, 'pack', locale) || product.weight
-      : normalizeKgText(activeVariant?.packageInfo || product.pack || product.weight)
-  const visiblePackValue = isRedundantProductText(packValue, productName, visibleVariantTitle) ? '' : packValue
-  const visibleMinOrder = isRedundantProductText(
-    activeMinOrder,
-    productName,
-    visibleVariantTitle,
-    visiblePackValue,
-  ) ? '' : activeMinOrder
   const facts = [
     { label: t('product.sku'), value: activeSku || product.article },
     { label: t('product.brand'), value: product.brand },
     { label: t('product.productType'), value: getLocalizedProductValue(product, 'productType', locale) },
-    { label: t('product.pack'), value: visiblePackValue },
-    { label: t('product.minOrder'), value: visibleMinOrder },
   ].filter((item) => item.value)
   const visibleSummarySpecs = summarySpecs.filter((item) =>
     !isRedundantProductText(
       item.value,
       productName,
-      visibleVariantTitle,
       ...facts.map((fact) => fact.value),
     ),
   )
@@ -70,11 +48,11 @@ export function ProductInfo({ product, selectedVariant, summarySpecs = [] }) {
         <span className={`stock-pill stock-pill--${stockStatus}`}>{getStockLabel(stockStatus, locale)}</span>
       </div>
       <h1>{productName}</h1>
-      {visibleVariantTitle && (
-        <p className="product-info__selected-variant" aria-live="polite">
-          {visibleVariantTitle}
-        </p>
-      )}
+      <ProductVariants
+        product={product}
+        selectedVariant={activeVariant}
+        onVariantChange={onVariantChange}
+      />
       <div className="product-price">
         <strong>{hasActivePrice ? formatPrice(activePrice) : t('product.priceNotSet')}</strong>
         {hasActivePrice && product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}

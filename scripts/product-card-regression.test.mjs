@@ -15,6 +15,10 @@ const productInfoSource = await readFile(
   new URL('../src/components/product/ProductInfo.jsx', import.meta.url),
   'utf8',
 )
+const productVariantsSource = await readFile(
+  new URL('../src/components/product/ProductVariants.jsx', import.meta.url),
+  'utf8',
+)
 const productPageSource = await readFile(
   new URL('../src/pages/ProductPage.jsx', import.meta.url),
   'utf8',
@@ -113,7 +117,31 @@ test('catalog cards use readable column counts and compact fixed image heights',
 test('product detail does not repeat summary copy and commercial facts in specifications', () => {
   assert.doesNotMatch(productInfoSource, /getProductShortDescription/)
   assert.doesNotMatch(productInfoSource, /product-info__description/)
+  assert.doesNotMatch(productInfoSource, /t\('product\.minOrder'\)/)
+  assert.doesNotMatch(productInfoSource, /t\('product\.pack'\)/)
   assert.doesNotMatch(productPageSource, /\[t\('product\.sku'\)\]:/)
   assert.doesNotMatch(productPageSource, /\[t\('product\.pack'\)\]:/)
   assert.doesNotMatch(productPageSource, /\[t\('product\.stock'\)\]:/)
+})
+
+test('variant selector is rendered directly below the product name and nowhere below the layout', () => {
+  assert.match(productInfoSource, /<h1>\{productName\}<\/h1>\s*<ProductVariants/)
+  assert.match(productInfoSource, /onVariantChange=\{onVariantChange\}/)
+  assert.doesNotMatch(productPageSource, /import \{ ProductVariants \}/)
+  assert.doesNotMatch(productPageSource, /<ProductVariants/)
+  assert.match(productPageSource, /onVariantChange=\{handleVariantChange\}/)
+})
+
+test('variant choices are compact horizontal pills without repeated price or stock copy', () => {
+  assert.doesNotMatch(productVariantsSource, /formatPrice|getStockLabel|getUnitLabel/)
+  assert.doesNotMatch(productVariantsSource, /<small>|<em>/)
+  assert.match(globalCssSource, /\.variant-selector__grid\s*\{[^}]*display: flex;[^}]*overflow-x: auto;/s)
+  assert.match(globalCssSource, /\.variant-option\s*\{[^}]*border-radius: 999px;/s)
+})
+
+test('variant specifications remain localized in Kyrgyz product pages', () => {
+  assert.match(productPageSource, /'размер': 'size'/)
+  assert.match(productPageSource, /'цвет': 'color'/)
+  assert.match(productPageSource, /'белый': 'Ак'/)
+  assert.match(productPageSource, /formatSpecValue\(value, locale\)/)
 })

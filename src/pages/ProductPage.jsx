@@ -5,7 +5,6 @@ import { ProductGallery } from '../components/product/ProductGallery'
 import { ProductInfo } from '../components/product/ProductInfo'
 import { ProductSpecs } from '../components/product/ProductSpecs'
 import { ProductStickyCta } from '../components/product/ProductStickyCta'
-import { ProductVariants } from '../components/product/ProductVariants'
 import { RelatedProducts } from '../components/product/RelatedProducts'
 import { Seo } from '../components/seo/Seo'
 import { Breadcrumbs } from '../components/ui/Breadcrumbs'
@@ -48,6 +47,7 @@ const ignoredSpecKeys = new Set([
 
 const specLabelMap = {
   article: { kg: 'Товар коду', ru: 'Артикул' },
+  size: { kg: 'Өлчөмү', ru: 'Размер' },
   material: { kg: 'Материал', ru: 'Материал' },
   nominalPressure: { kg: 'Басым', ru: 'Давление' },
   color: { kg: 'Түсү', ru: 'Цвет' },
@@ -59,6 +59,37 @@ const specLabelMap = {
   монтаж: { kg: 'Орнотуу', ru: 'Монтаж' },
   максимальнаяТемпература: { kg: 'Эң жогорку температура', ru: 'Макс. температура' },
   эксплуатация: { kg: 'Колдонуу классы', ru: 'Класс эксплуатации' },
+}
+
+const specKeyAliases = {
+  'артикул': 'article',
+  'размер': 'size',
+  'материал': 'material',
+  'давление': 'nominalPressure',
+  'номинальное давление': 'nominalPressure',
+  'цвет': 'color',
+  'гарантия': 'warranty',
+  'упаковка': 'packageQty',
+  'длина': 'length',
+  'диаметр': 'diameter',
+  'толщина стенки': 'wallThickness',
+}
+
+const specValueMapKg = {
+  'белый': 'Ак',
+  'белая': 'Ак',
+  'серый': 'Боз',
+  'серая': 'Боз',
+  'черный': 'Кара',
+  'черная': 'Кара',
+  'оранжевый': 'Кызгылт сары',
+  'оранжевая': 'Кызгылт сары',
+  'зеленый': 'Жашыл',
+  'зеленая': 'Жашыл',
+  'синий': 'Көк',
+  'синяя': 'Көк',
+  'красный': 'Кызыл',
+  'красная': 'Кызыл',
 }
 
 const summarySpecKeys = [
@@ -115,18 +146,22 @@ function ProductParagraphs({ text }) {
 }
 
 function getLocalizedSpecLabel(key, locale) {
-  const mapped = specLabelMap[key]
+  const normalizedKey = String(key).trim().toLocaleLowerCase('ru')
+  const mapped = specLabelMap[key] || specLabelMap[specKeyAliases[normalizedKey]]
   if (mapped) return mapped[locale] || mapped.ru || mapped.kg
 
-  return String(key)
+  const fallback = String(key)
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/^./, (char) => char.toUpperCase())
+  return locale === 'kg' ? normalizeKgText(fallback) : fallback
 }
 
-function formatSpecValue(value) {
-  if (Array.isArray(value)) return value.filter(Boolean).join(', ')
+function formatSpecValue(value, locale = 'ru') {
+  if (Array.isArray(value)) return value.filter(Boolean).map((item) => formatSpecValue(item, locale)).join(', ')
   if (value && typeof value === 'object') return ''
-  return String(value || '').trim()
+  const formatted = String(value || '').trim()
+  if (locale !== 'kg') return formatted
+  return specValueMapKg[formatted.toLocaleLowerCase('ru')] || normalizeKgText(formatted)
 }
 
 function isCleanSpec(key, value) {
@@ -147,7 +182,7 @@ function buildCleanSpecs(specifications, locale, extraSpecs = {}) {
 
   Object.entries({ ...specifications, ...extraSpecs }).forEach(([key, value]) => {
     if (!isCleanSpec(key, value)) return
-    rows[getLocalizedSpecLabel(key, locale)] = formatSpecValue(value)
+    rows[getLocalizedSpecLabel(key, locale)] = formatSpecValue(value, locale)
   })
 
   return rows
@@ -165,7 +200,7 @@ function buildSummarySpecs(specifications, locale, variantSpecifications = {}) {
     if (seenLabels.has(normalizedLabel)) return
 
     seenLabels.add(normalizedLabel)
-    rows.push({ label, value: formatSpecValue(value) })
+    rows.push({ label, value: formatSpecValue(value, locale) })
   }
 
   Object.entries(variantSpecifications || {}).forEach(([key, value]) => addSpec(key, value))
@@ -333,15 +368,10 @@ export function ProductPage() {
         <ProductInfo
           product={product}
           selectedVariant={selectedVariant}
+          onVariantChange={handleVariantChange}
           summarySpecs={summarySpecs}
         />
       </div>
-
-      <ProductVariants
-        product={product}
-        selectedVariant={selectedVariant}
-        onVariantChange={handleVariantChange}
-      />
 
       <nav className="product-section-nav" aria-label={t('product.sectionNavLabel')}>
         <a href="#product-description">{t('product.fullDescription')}</a>
