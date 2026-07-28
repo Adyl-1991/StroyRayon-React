@@ -37,6 +37,17 @@ const baseHtmlPath = path.join(distDir, 'index.html')
 const seoMarkerStart = '<!-- stroyrayon:seo:start -->'
 const seoMarkerEnd = '<!-- stroyrayon:seo:end -->'
 const kg = translations.kg
+const prerenderPrimaryLinks = [
+  { label: kg.nav.home, to: '/' },
+  { label: kg.common.catalog, to: '/catalog' },
+  { label: kg.nav.delivery, to: '/delivery' },
+  { label: kg.nav.contacts, to: '/contacts' },
+  { label: kg.footer.payment, to: '/payment' },
+  { label: kg.footer.return, to: '/return' },
+  { label: kg.footer.about, to: '/about' },
+  { label: kg.footer.advice, to: '/blog' },
+  { label: kg.footer.privacy, to: '/privacy' },
+]
 
 function escapeHtml(value) {
   return String(value || '')
@@ -74,9 +85,13 @@ function buildPrerenderBody({ title, description, body = {} }) {
   const image = body.image
     ? `<img src="${escapeHtml(absoluteUrl(body.image.src))}" alt="${escapeHtml(body.image.alt || bodyTitle)}" width="${Number(body.image.width) || 900}" height="${Number(body.image.height) || 675}" />`
     : ''
+  const primaryLinks = prerenderPrimaryLinks
+    .map((item) => `<a href="${escapeHtml(item.to)}">${escapeHtml(item.label)}</a>`)
+    .join(' ')
 
   return [
     '<main class="page seo-prerender-content" data-seo-prerender="true">',
+    `<nav aria-label="${escapeHtml(kg.common.mainNavigation || 'Негизги навигация')}">${primaryLinks}</nav>`,
     breadcrumbs ? `<nav aria-label="Багыттоо">${breadcrumbs}</nav>` : '',
     `<h1>${escapeHtml(bodyTitle)}</h1>`,
     description ? `<p>${escapeHtml(description)}</p>` : '',
@@ -98,12 +113,12 @@ function stripBaseSeo(html) {
     .replace(/<script\b[^>]*id=["']stroyrayon-jsonld["'][^>]*>[\s\S]*?<\/script>\s*/gi, '')
 }
 
-function buildSeoBlock({ title, description, canonical, image, imageAlt, type = 'website', structuredData }) {
+function buildSeoBlock({ title, description, canonical, image, imageAlt, noIndex = false, type = 'website', structuredData }) {
   const fullTitle = formatSeoTitle(title)
   const canonicalUrl = getPageCanonical(new URL(canonical || '/', siteConfig.siteUrl).pathname)
   const ogImage = absoluteUrl(image || siteConfig.defaultOgImage)
   const ogImageAlt = imageAlt || fullTitle
-  const robots = getRobotsContent(false)
+  const robots = getRobotsContent(noIndex)
   const tags = [
     `<title>${escapeHtml(fullTitle)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}" />`,
@@ -245,7 +260,7 @@ export function buildRouteDefinitions() {
       to: `${route}/${child.slug}`,
     }))
     const productLinks = getProductsByCatalogNode(node)
-      .slice(0, 48)
+      .filter((product) => !node.children?.length || product.catalogPath?.at(-1) === node.slug)
       .map((product) => ({
         label: getProductTitle(product, 'kg'),
         to: `/product/${product.slug}`,
@@ -351,6 +366,27 @@ export async function prerenderSeo() {
     await mkdir(path.dirname(outputPath), { recursive: true })
     await writeFile(outputPath, injectSeo(baseHtml, seo), 'utf8')
   }
+
+  await writeFile(path.join(distDir, '404.html'), injectSeo(baseHtml, {
+    title: kg.common.notFoundTitle,
+    description: kg.common.notFoundText,
+    canonical: getPageCanonical('/404'),
+    noIndex: true,
+    structuredData: buildWebPageStructuredData({
+      path: '/404',
+      title: kg.common.notFoundTitle,
+      description: kg.common.notFoundText,
+      type: 'WebPage',
+    }),
+    body: {
+      title: kg.common.notFoundTitle,
+      linksTitle: kg.common.sections,
+      links: [
+        { label: kg.nav.home, to: '/' },
+        { label: kg.common.catalog, to: '/catalog' },
+      ],
+    },
+  }), 'utf8')
 
   const productRoutes = [...routeDefinitions.keys()].filter((route) => route.startsWith('/product/')).length
   const catalogRoutes = [...routeDefinitions.keys()].filter((route) => route.startsWith('/catalog/')).length

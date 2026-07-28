@@ -109,7 +109,9 @@ export const catalogTree = [
             ],
           }),
           leaf('putties', 'Шпаклёвкалар', 'shpaklevkalar', 'finish'),
-          leaf('primers', 'Грунтовка', 'gruntovkalar', 'primer'),
+          leaf('primers', 'Курулуш грунтовкалары', 'gruntovkalar', 'primer', [], [], {
+            titleRu: 'Строительные грунтовки',
+          }),
           leaf('floor-mixes', 'Өзү тегизделүүчү пол', 'nalivnoi-pol', 'floor', [], ['pol-uchun-aralashmalar', 'наливной пол', 'nalivnoy pol']),
           leaf('waterproofing-mixes', 'Гидроизоляция', 'gidroizolyaciya', 'insulation'),
           leaf('tile-adhesives', 'Плитка клейи', 'plitka-kleileri', 'tile', ['tile-adhesive'], ['плиточный клей']),
@@ -656,7 +658,9 @@ export const catalogTree = [
       leaf('facade-paints', 'Фасад боёктору', 'fasad-boyogu', 'paint'),
       leaf('enamels', 'Эмаль', 'emal', 'paint', [], ['lak-emal']),
       leaf('varnishes', 'Лактар', 'laktar', 'paint'),
-      leaf('primers-paint', 'Грунтовка', 'gruntovka', 'primer', [], ['boyok-gruntovkasy']),
+      leaf('primers-paint', 'Боёк үчүн грунтовка', 'gruntovka', 'primer', [], ['boyok-gruntovkasy'], {
+        titleRu: 'Грунтовка под краску',
+      }),
       leaf('wallpapers', 'Туш кагаздар', 'tush-kagazdar', 'wallpaper'),
       leaf('paint-tools', 'Валик/кисть', 'valik-kist', 'roller', [], ['boyok-shaimandary']),
     ],

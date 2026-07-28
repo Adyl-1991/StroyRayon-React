@@ -51,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'about', lazy: lazyNamed(() => import('../pages/InfoPages'), 'AboutPage') },
       { path: 'privacy', lazy: lazyNamed(() => import('../pages/InfoPages'), 'PrivacyPage') },
       { path: 'blog', lazy: lazyNamed(() => import('../pages/BlogPage'), 'BlogPage') },
+      { path: '*', lazy: lazyNamed(() => import('../pages/NotFoundPage'), 'NotFoundPage') },
     ],
   },
 ])

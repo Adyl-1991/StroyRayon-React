@@ -45,14 +45,14 @@ const locales = requestedLocales.length ? [...new Set(requestedLocales)] : ['kg'
 const categoryRoutes = [
   '/',
   '/catalog',
-  '/catalog/kurulush',
+  '/catalog/stroymaterial',
   '/catalog/inzhenerdik-santehnika',
   '/catalog/inzhenerdik-santehnika/otoplenie/suu-teplyi-pol',
   '/catalog/santehnika',
   '/catalog/elektrika',
   '/catalog/elektrika/elektr-teplyi-pol',
-  '/catalog/shaimandar',
-  '/catalog/bekitkich',
+  '/catalog/instrument',
+  '/catalog/krepezh',
   '/catalog/boiok-tush-kagaz',
   '/catalog/ventilyaciya',
   '/catalog/bak-koroo',
@@ -64,7 +64,7 @@ const flowProductPath = String(process.env.CUSTOMER_QA_FLOW_PRODUCT || '').trim(
 const expected = {
   kg: {
     lang: 'ky',
-    chips: ['Курулуш', 'Инженердик сантехника', 'Сантехника', 'Электрика', 'Шаймандар', 'Бекиткич', 'Боёк', 'Вентиляция', 'Бак/чарба'],
+    chips: ['Курулуш', 'Инженердик түтүк системалары', 'Сантехникалык жабдуулар', 'Электр жабдуулары', 'Шаймандар', 'Бекиткич', 'Боёк', 'Желдетүү', 'Бак/чарба'],
     cart: 'Себет',
     checkout: 'Буйрутма берүү',
     whatsapp: 'WhatsApp аркылуу буйрутма жөнөтүү',
@@ -403,6 +403,7 @@ async function inspectPage(cdp) {
       productCards: document.querySelectorAll('.product-card').length,
       productGrid: Boolean(document.querySelector('.product-grid')),
       emptyState: Boolean(document.querySelector('.empty-state')),
+      homeContent: Boolean(document.querySelector('.order-process, .home-products-deferred, .blog-grid')),
       languageSwitcherVisible: (() => {
         const switcher = document.querySelector('.language-switcher');
         return Boolean(switcher && getComputedStyle(switcher).display !== 'none' && switcher.getBoundingClientRect().width > 0);
@@ -434,7 +435,7 @@ function pageHealth(checks, issues, label, result, { breadcrumb = true, content 
       checks,
       issues,
       `${label}: category/product content visible`,
-      result.categoryCards > 0 || result.catalogSections > 0 || result.productCards > 0 || result.productGrid || result.emptyState,
+      result.categoryCards > 0 || result.catalogSections > 0 || result.productCards > 0 || result.productGrid || result.emptyState || result.homeContent,
       `categories ${result.categoryCards}, directory ${result.catalogSections}, products ${result.productCards}`,
     )
   }
@@ -513,7 +514,23 @@ async function runSearchAudit(cdp, checks, issues) {
         form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
         return { submitted: true };
       })()`)
-      await delay(500)
+      await evaluate(cdp, `new Promise((resolve) => {
+        const started = Date.now();
+        const ready = () => {
+          const onSearchPage = location.pathname === '/search';
+          const hasBreadcrumbs = Boolean(document.querySelector('.breadcrumbs'));
+          const hasSettledResult = Boolean(
+            document.querySelector('.product-card, .empty-state')
+            && !document.querySelector('[role="status"]')
+          );
+          if ((onSearchPage && hasBreadcrumbs && hasSettledResult) || Date.now() - started > 5000) {
+            resolve();
+            return;
+          }
+          setTimeout(ready, 100);
+        };
+        ready();
+      })`)
       const page = await inspectPage(cdp)
       const label = `${locale.toUpperCase()} search "${term}"`
       addCheck(checks, issues, `${label}: submitted`, result.submitted)

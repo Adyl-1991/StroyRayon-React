@@ -8,6 +8,7 @@ import {
   getUnitLabel,
   normalizeKgText,
 } from '../../services/productService'
+import { buildProductInquiryText, getWhatsAppUrl } from '../../services/whatsappService'
 import { formatPrice } from '../../utils/formatPrice'
 import { applyImageFallback, getOptimizedProductImage, getProductImage } from '../../utils/imageUtils'
 import { Button } from '../ui/Button'
@@ -24,6 +25,11 @@ export function ProductCard({ product }) {
   const image = getOptimizedProductImage(getProductImage(product), 'card')
   const productName = getProductTitle(product, locale)
   const imageAlt = locale === 'ru' ? productName : normalizeKgText(image.alt || productName)
+  const inquiryText = buildProductInquiryText({
+    product: { ...product, name: productName },
+    variant: activeVariant,
+    locale,
+  })
   const clampQuantity = (value) => Math.min(999, Math.max(1, Math.floor(Number(value) || 1)))
   const changeQuantity = (value) => setQuantity(clampQuantity(value))
   const handleAddToCart = () => addToCart(product, quantity, activeVariant)
@@ -59,26 +65,38 @@ export function ProductCard({ product }) {
           {hasPrice && <span>/ {activeUnit}</span>}
         </div>
         <p className="product-card__availability">{t('productCard.availabilityCheck')}</p>
-        <div className="product-card__purchase">
-          <div className="product-card__quantity" aria-label={t('productCard.quantity')}>
-            <button type="button" onClick={() => changeQuantity(quantity - 1)} aria-label={t('productCard.decreaseQuantity')}>
-              −
-            </button>
-            <input
-              type="number"
-              min="1"
-              max="999"
-              step="1"
-              value={quantity}
-              onChange={(event) => changeQuantity(event.target.value)}
-              aria-label={t('productCard.quantity')}
-            />
-            <button type="button" onClick={() => changeQuantity(quantity + 1)} aria-label={t('productCard.increaseQuantity')}>
-              +
-            </button>
+        {hasPrice ? (
+          <div className="product-card__purchase">
+            <div className="product-card__quantity" aria-label={t('productCard.quantity')}>
+              <button type="button" onClick={() => changeQuantity(quantity - 1)} aria-label={t('productCard.decreaseQuantity')}>
+                −
+              </button>
+              <input
+                type="number"
+                min="1"
+                max="999"
+                step="1"
+                value={quantity}
+                onChange={(event) => changeQuantity(event.target.value)}
+                aria-label={t('productCard.quantity')}
+              />
+              <button type="button" onClick={() => changeQuantity(quantity + 1)} aria-label={t('productCard.increaseQuantity')}>
+                +
+              </button>
+            </div>
+            <Button onClick={handleAddToCart}>{t('productCard.addToCart')}</Button>
           </div>
-          <Button onClick={handleAddToCart}>{t('productCard.addToCart')}</Button>
-        </div>
+        ) : (
+          <Button
+            className="product-card__inquiry"
+            href={getWhatsAppUrl(inquiryText)}
+            target="_blank"
+            rel="noreferrer"
+            variant="whatsapp"
+          >
+            {t('product.askPriceWhatsApp')}
+          </Button>
+        )}
       </div>
     </article>
   )

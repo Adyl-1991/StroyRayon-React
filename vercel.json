@@ -85,6 +85,21 @@
   ],
   "redirects": [
     {
+      "source": "/catalog/kurulush",
+      "destination": "/catalog/stroymaterial",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/shaimandar",
+      "destination": "/catalog/instrument",
+      "permanent": true
+    },
+    {
+      "source": "/catalog/bekitkich",
+      "destination": "/catalog/krepezh",
+      "permanent": true
+    },
+    {
       "source": "/catalog/teplyi-pol",
       "destination": "/catalog",
       "permanent": true
@@ -182,7 +197,23 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/search",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cart",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/checkout",
       "destination": "/index.html"
     }
   ]

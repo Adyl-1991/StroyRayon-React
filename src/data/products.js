@@ -9,7 +9,9 @@ const plumbingProductPlaceholder = '/images/placeholders/product-plumbing-placeh
 
 function imageFor(titleKg, slug) {
   const asset = getProductAssetEntry(slug)
-  const src = asset?.main || `${productPlaceholder}`
+  const src = asset?.available
+    ? asset.main
+    : asset?.fallback || productPlaceholder
 
   return [
     {
