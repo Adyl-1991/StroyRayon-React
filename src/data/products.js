@@ -1,5 +1,6 @@
 import { getProductAssetEntry } from './productAssets.js'
 import { alinexProducts } from './alinexProducts.generated.js'
+import { carkitCableProducts } from './carkitCableProducts.generated.js'
 import { everPlastProducts } from './everPlastProducts.generated.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
@@ -4719,6 +4720,7 @@ const stage6BElectricalContent = {
 }
 
 delete stage6AElectricalContent['shvvp-provod-2x0-75']
+delete stage6AElectricalContent['pvs-provod-3x1-5']
 
 function applyStage6AElectricalContent(data) {
   const content = stage6AElectricalContent[data.slug]
@@ -15191,6 +15193,9 @@ function updateEverPlastRelatedIds(item) {
 }
 
 export const products = [
-  ...baseProducts.filter((item) => !everPlastReplacementIds.has(item.id)).map(updateEverPlastRelatedIds),
+  ...baseProducts
+    .filter((item) => !everPlastReplacementIds.has(item.id) && item.id !== 'pvs-provod-3x1-5')
+    .map(updateEverPlastRelatedIds),
+  ...carkitCableProducts.map(product),
   ...everPlastProducts.map(product),
 ]

@@ -142,6 +142,8 @@ const plannedProductAssetSlugs = [
 ]
 
 const priorityProductImageSlugs = [
+  'carkit-pvs-2-zhilnyi',
+  'pvs-provod-3x1-5',
   'difavtomat-16a',
   'gofra-tutuk-16mm',
   'gofra-tutuk-20mm',
