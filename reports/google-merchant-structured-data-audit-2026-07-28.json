@@ -1,12 +1,12 @@
 {
   "summary": {
-    "generatedAt": "2026-07-28T09:32:44.563Z",
-    "durationSeconds": 45.2,
-    "baseUrl": "http://127.0.0.1:4184",
+    "generatedAt": "2026-07-28T09:42:29.170Z",
+    "durationSeconds": 41.7,
+    "baseUrl": "https://www.stroyrayon.kg",
     "apiBaseUrl": "https://api.stroyrayon.kg",
     "productPagesAudited": 245,
     "retiredUrlsChecked": 2,
-    "retiredHttpVerificationEnabled": false,
+    "retiredHttpVerificationEnabled": true,
     "totalUrlsChecked": 247,
     "passedPages": 247,
     "failedPages": 0,
@@ -23,29 +23,29 @@
     "confirmedUrlPassed": true
   },
   "confirmedPage": {
-    "url": "http://127.0.0.1:4184/product/start-shpaklevka-20kg",
+    "url": "https://www.stroyrayon.kg/product/start-shpaklevka-20kg",
     "slug": "start-shpaklevka-20kg",
-    "status": null,
-    "productSchemaCount": null,
+    "status": 404,
+    "productSchemaCount": 0,
     "issues": [],
     "warnings": [],
     "retired": true
   },
   "retiredPages": [
     {
-      "url": "http://127.0.0.1:4184/product/start-shpaklevka-20kg",
+      "url": "https://www.stroyrayon.kg/product/start-shpaklevka-20kg",
       "slug": "start-shpaklevka-20kg",
-      "status": null,
-      "productSchemaCount": null,
+      "status": 404,
+      "productSchemaCount": 0,
       "issues": [],
       "warnings": [],
       "retired": true
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp",
+      "url": "https://www.stroyrayon.kg/product/alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp",
       "slug": "alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp",
-      "status": null,
-      "productSchemaCount": null,
+      "status": 404,
+      "productSchemaCount": 0,
       "issues": [],
       "warnings": [],
       "retired": true
@@ -54,7 +54,7 @@
   "failedPages": [],
   "warningPages": [
     {
-      "url": "http://127.0.0.1:4184/product/drel-650w-udarnyi/",
+      "url": "https://www.stroyrayon.kg/product/drel-650w-udarnyi",
       "slug": "drel-650w-udarnyi",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/drel-650w-udarnyi",
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/akkumulyatorduk-shurupovert-12v/",
+      "url": "https://www.stroyrayon.kg/product/akkumulyatorduk-shurupovert-12v",
       "slug": "akkumulyatorduk-shurupovert-12v",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/akkumulyatorduk-shurupovert-12v",
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/portlandcement-m500-50kg/",
+      "url": "https://www.stroyrayon.kg/product/portlandcement-m500-50kg",
       "slug": "portlandcement-m500-50kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/portlandcement-m500-50kg",
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plitka-kleyi-standard-25kg/",
+      "url": "https://www.stroyrayon.kg/product/plitka-kleyi-standard-25kg",
       "slug": "plitka-kleyi-standard-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plitka-kleyi-standard-25kg",
@@ -122,7 +122,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gips-shtukaturkasy-30kg/",
+      "url": "https://www.stroyrayon.kg/product/gips-shtukaturkasy-30kg",
       "slug": "gips-shtukaturkasy-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gips-shtukaturkasy-30kg",
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/knauf-rotband-30kg/",
+      "url": "https://www.stroyrayon.kg/product/knauf-rotband-30kg",
       "slug": "knauf-rotband-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/knauf-rotband-30kg",
@@ -156,7 +156,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/knauf-mp-75-30kg/",
+      "url": "https://www.stroyrayon.kg/product/knauf-mp-75-30kg",
       "slug": "knauf-mp-75-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/knauf-mp-75-30kg",
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabel-vvgng-3x2-5/",
+      "url": "https://www.stroyrayon.kg/product/kabel-vvgng-3x2-5",
       "slug": "kabel-vvgng-3x2-5",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabel-vvgng-3x2-5",
@@ -190,7 +190,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rozetka-ichki-montazh-ak/",
+      "url": "https://www.stroyrayon.kg/product/rozetka-ichki-montazh-ak",
       "slug": "rozetka-ichki-montazh-ak",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rozetka-ichki-montazh-ak",
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/avtomat-16a-1p/",
+      "url": "https://www.stroyrayon.kg/product/avtomat-16a-1p",
       "slug": "avtomat-16a-1p",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/avtomat-16a-1p",
@@ -224,7 +224,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/dyubel-6x40mm/",
+      "url": "https://www.stroyrayon.kg/product/dyubel-6x40mm",
       "slug": "dyubel-6x40mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dyubel-6x40mm",
@@ -241,7 +241,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/anker-bolt-10x80mm/",
+      "url": "https://www.stroyrayon.kg/product/anker-bolt-10x80mm",
       "slug": "anker-bolt-10x80mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/anker-bolt-10x80mm",
@@ -258,7 +258,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/unitaz-kompakt-ak-standart/",
+      "url": "https://www.stroyrayon.kg/product/unitaz-kompakt-ak-standart",
       "slug": "unitaz-kompakt-ak-standart",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/unitaz-kompakt-ak-standart",
@@ -275,7 +275,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rakovina-keramika-50sm/",
+      "url": "https://www.stroyrayon.kg/product/rakovina-keramika-50sm",
       "slug": "rakovina-keramika-50sm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rakovina-keramika-50sm",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sifon-botolko-40mm/",
+      "url": "https://www.stroyrayon.kg/product/sifon-botolko-40mm",
       "slug": "sifon-botolko-40mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sifon-botolko-40mm",
@@ -309,7 +309,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gibkaya-podvodka-60sm-12/",
+      "url": "https://www.stroyrayon.kg/product/gibkaya-podvodka-60sm-12",
       "slug": "gibkaya-podvodka-60sm-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gibkaya-podvodka-60sm-12",
@@ -326,7 +326,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sharovyi-kran-latun-12/",
+      "url": "https://www.stroyrayon.kg/product/sharovyi-kran-latun-12",
       "slug": "sharovyi-kran-latun-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sharovyi-kran-latun-12",
@@ -343,7 +343,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ichki-dubal-boyogu-ak-10l/",
+      "url": "https://www.stroyrayon.kg/product/ichki-dubal-boyogu-ak-10l",
       "slug": "ichki-dubal-boyogu-ak-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ichki-dubal-boyogu-ak-10l",
@@ -360,7 +360,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fasad-boyogu-ak-10l/",
+      "url": "https://www.stroyrayon.kg/product/fasad-boyogu-ak-10l",
       "slug": "fasad-boyogu-ak-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fasad-boyogu-ak-10l",
@@ -377,7 +377,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/emal-ak-27kg/",
+      "url": "https://www.stroyrayon.kg/product/emal-ak-27kg",
       "slug": "emal-ak-27kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/emal-ak-27kg",
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/valik-boyok-uchun-250mm/",
+      "url": "https://www.stroyrayon.kg/product/valik-boyok-uchun-250mm",
       "slug": "valik-boyok-uchun-250mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/valik-boyok-uchun-250mm",
@@ -411,7 +411,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/alyuminii-radiator-500mm-sekciya/",
+      "url": "https://www.stroyrayon.kg/product/alyuminii-radiator-500mm-sekciya",
       "slug": "alyuminii-radiator-500mm-sekciya",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alyuminii-radiator-500mm-sekciya",
@@ -428,7 +428,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/radiator-termostatikalyk-bash/",
+      "url": "https://www.stroyrayon.kg/product/radiator-termostatikalyk-bash",
       "slug": "radiator-termostatikalyk-bash",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/radiator-termostatikalyk-bash",
@@ -445,7 +445,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-truba-16mm/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-truba-16mm",
       "slug": "teplyi-pol-truba-16mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-truba-16mm",
@@ -462,7 +462,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugaruu-nasadka-komplekti/",
+      "url": "https://www.stroyrayon.kg/product/sugaruu-nasadka-komplekti",
       "slug": "sugaruu-nasadka-komplekti",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugaruu-nasadka-komplekti",
@@ -479,7 +479,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/montazh-kobugu-750ml/",
+      "url": "https://www.stroyrayon.kg/product/montazh-kobugu-750ml",
       "slug": "montazh-kobugu-750ml",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/montazh-kobugu-750ml",
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/eshik-tutkasy-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/eshik-tutkasy-komplekt",
       "slug": "eshik-tutkasy-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/eshik-tutkasy-komplekt",
@@ -513,7 +513,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvh-podokonnik-200mm/",
+      "url": "https://www.stroyrayon.kg/product/pvh-podokonnik-200mm",
       "slug": "pvh-podokonnik-200mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvh-podokonnik-200mm",
@@ -530,7 +530,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/finish-shpaklevka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/finish-shpaklevka-25kg",
       "slug": "finish-shpaklevka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/finish-shpaklevka-25kg",
@@ -547,7 +547,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gruntovka-tereng-singuu-10l/",
+      "url": "https://www.stroyrayon.kg/product/gruntovka-tereng-singuu-10l",
       "slug": "gruntovka-tereng-singuu-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gruntovka-tereng-singuu-10l",
@@ -564,7 +564,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vlagostoikii-gipsokarton-125mm/",
+      "url": "https://www.stroyrayon.kg/product/vlagostoikii-gipsokarton-125mm",
       "slug": "vlagostoikii-gipsokarton-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vlagostoikii-gipsokarton-125mm",
@@ -581,7 +581,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metall-plastik-truba-16mm/",
+      "url": "https://www.stroyrayon.kg/product/metall-plastik-truba-16mm",
       "slug": "metall-plastik-truba-16mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metall-plastik-truba-16mm",
@@ -598,7 +598,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pnd-truba-25mm/",
+      "url": "https://www.stroyrayon.kg/product/pnd-truba-25mm",
       "slug": "pnd-truba-25mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pnd-truba-25mm",
@@ -615,7 +615,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/elektr-shit-12-modul/",
+      "url": "https://www.stroyrayon.kg/product/elektr-shit-12-modul",
       "slug": "elektr-shit-12-modul",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/elektr-shit-12-modul",
@@ -632,7 +632,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/led-lampa-e27-12w/",
+      "url": "https://www.stroyrayon.kg/product/led-lampa-e27-12w",
       "slug": "led-lampa-e27-12w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/led-lampa-e27-12w",
@@ -649,7 +649,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bolt-gaika-shaiba-m8-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/bolt-gaika-shaiba-m8-komplekt",
       "slug": "bolt-gaika-shaiba-m8-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bolt-gaika-shaiba-m8-komplekt",
@@ -666,7 +666,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metall-homut-20-32mm/",
+      "url": "https://www.stroyrayon.kg/product/metall-homut-20-32mm",
       "slug": "metall-homut-20-32mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metall-homut-20-32mm",
@@ -683,7 +683,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gidroizolyaciya-smes-20kg/",
+      "url": "https://www.stroyrayon.kg/product/gidroizolyaciya-smes-20kg",
       "slug": "gidroizolyaciya-smes-20kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gidroizolyaciya-smes-20kg",
@@ -700,7 +700,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/zatirka-dlya-plitki-2kg/",
+      "url": "https://www.stroyrayon.kg/product/zatirka-dlya-plitki-2kg",
       "slug": "zatirka-dlya-plitki-2kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/zatirka-dlya-plitki-2kg",
@@ -717,7 +717,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/stroitelnyi-gips-25kg/",
+      "url": "https://www.stroyrayon.kg/product/stroitelnyi-gips-25kg",
       "slug": "stroitelnyi-gips-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/stroitelnyi-gips-25kg",
@@ -734,7 +734,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/profnastil-krovlya-08mm/",
+      "url": "https://www.stroyrayon.kg/product/profnastil-krovlya-08mm",
       "slug": "profnastil-krovlya-08mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/profnastil-krovlya-08mm",
@@ -751,7 +751,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plastifikator-beton-1l/",
+      "url": "https://www.stroyrayon.kg/product/plastifikator-beton-1l",
       "slug": "plastifikator-beton-1l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plastifikator-beton-1l",
@@ -768,7 +768,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pnd-fiting-mufta-25/",
+      "url": "https://www.stroyrayon.kg/product/pnd-fiting-mufta-25",
       "slug": "pnd-fiting-mufta-25",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pnd-fiting-mufta-25",
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/schetchik-vody-15/",
+      "url": "https://www.stroyrayon.kg/product/schetchik-vody-15",
       "slug": "schetchik-vody-15",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/schetchik-vody-15",
@@ -802,7 +802,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/reduktor-davleniya-12/",
+      "url": "https://www.stroyrayon.kg/product/reduktor-davleniya-12",
       "slug": "reduktor-davleniya-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/reduktor-davleniya-12",
@@ -819,7 +819,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/obratnyi-klapan-12/",
+      "url": "https://www.stroyrayon.kg/product/obratnyi-klapan-12",
       "slug": "obratnyi-klapan-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/obratnyi-klapan-12",
@@ -836,7 +836,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/manometr-6bar/",
+      "url": "https://www.stroyrayon.kg/product/manometr-6bar",
       "slug": "manometr-6bar",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/manometr-6bar",
@@ -853,7 +853,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-gruboi-ochistki-12/",
+      "url": "https://www.stroyrayon.kg/product/filtr-gruboi-ochistki-12",
       "slug": "filtr-gruboi-ochistki-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-gruboi-ochistki-12",
@@ -870,7 +870,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-korpus-10/",
+      "url": "https://www.stroyrayon.kg/product/filtr-korpus-10",
       "slug": "filtr-korpus-10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-korpus-10",
@@ -887,7 +887,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kartridzh-polipropilen-10/",
+      "url": "https://www.stroyrayon.kg/product/kartridzh-polipropilen-10",
       "slug": "kartridzh-polipropilen-10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kartridzh-polipropilen-10",
@@ -904,7 +904,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rasshiritelnyi-bak-24l/",
+      "url": "https://www.stroyrayon.kg/product/rasshiritelnyi-bak-24l",
       "slug": "rasshiritelnyi-bak-24l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rasshiritelnyi-bak-24l",
@@ -921,7 +921,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rakovina-smesitel-basic/",
+      "url": "https://www.stroyrayon.kg/product/rakovina-smesitel-basic",
       "slug": "rakovina-smesitel-basic",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rakovina-smesitel-basic",
@@ -938,7 +938,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gigienicheskii-dush-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/gigienicheskii-dush-komplekt",
       "slug": "gigienicheskii-dush-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gigienicheskii-dush-komplekt",
@@ -955,7 +955,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/trap-dushevoi-10x10/",
+      "url": "https://www.stroyrayon.kg/product/trap-dushevoi-10x10",
       "slug": "trap-dushevoi-10x10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/trap-dushevoi-10x10",
@@ -972,7 +972,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vanna-akril-170/",
+      "url": "https://www.stroyrayon.kg/product/vanna-akril-170",
       "slug": "vanna-akril-170",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vanna-akril-170",
@@ -989,7 +989,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vodonagrevatel-50l/",
+      "url": "https://www.stroyrayon.kg/product/vodonagrevatel-50l",
       "slug": "vodonagrevatel-50l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vodonagrevatel-50l",
@@ -1006,7 +1006,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shvvp-provod-2x0-75/",
+      "url": "https://www.stroyrayon.kg/product/shvvp-provod-2x0-75",
       "slug": "shvvp-provod-2x0-75",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shvvp-provod-2x0-75",
@@ -1023,7 +1023,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sip-kabel-2x16/",
+      "url": "https://www.stroyrayon.kg/product/sip-kabel-2x16",
       "slug": "sip-kabel-2x16",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sip-kabel-2x16",
@@ -1040,7 +1040,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/uzo-2p-40a/",
+      "url": "https://www.stroyrayon.kg/product/uzo-2p-40a",
       "slug": "uzo-2p-40a",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/uzo-2p-40a",
@@ -1057,7 +1057,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/difavtomat-16a/",
+      "url": "https://www.stroyrayon.kg/product/difavtomat-16a",
       "slug": "difavtomat-16a",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/difavtomat-16a",
@@ -1074,7 +1074,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/led-svetilnik-18w/",
+      "url": "https://www.stroyrayon.kg/product/led-svetilnik-18w",
       "slug": "led-svetilnik-18w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/led-svetilnik-18w",
@@ -1091,7 +1091,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ulichnyi-prozhektor-30w/",
+      "url": "https://www.stroyrayon.kg/product/ulichnyi-prozhektor-30w",
       "slug": "ulichnyi-prozhektor-30w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ulichnyi-prozhektor-30w",
@@ -1108,7 +1108,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-1m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-1m2",
       "slug": "mat-teplyi-pol-1m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-1m2",
@@ -1125,7 +1125,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvc-ventilyaciya-kanaly-55x110/",
+      "url": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-55x110",
       "slug": "pvc-ventilyaciya-kanaly-55x110",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-55x110",
@@ -1142,7 +1142,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vytyazhnoi-ventilyator-100mm/",
+      "url": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-100mm",
       "slug": "vytyazhnoi-ventilyator-100mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-100mm",
@@ -1159,7 +1159,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vytyazhnoi-ventilyator-125mm/",
+      "url": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-125mm",
       "slug": "vytyazhnoi-ventilyator-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-125mm",
@@ -1176,7 +1176,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/perforator-800w/",
+      "url": "https://www.stroyrayon.kg/product/perforator-800w",
       "slug": "perforator-800w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/perforator-800w",
@@ -1193,7 +1193,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bolgarka-125mm/",
+      "url": "https://www.stroyrayon.kg/product/bolgarka-125mm",
       "slug": "bolgarka-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bolgarka-125mm",
@@ -1210,7 +1210,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ruletka-5m/",
+      "url": "https://www.stroyrayon.kg/product/ruletka-5m",
       "slug": "ruletka-5m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ruletka-5m",
@@ -1227,7 +1227,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-bychagy/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-bychagy",
       "slug": "kurulush-bychagy",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-bychagy",
@@ -1244,7 +1244,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shpatel-100mm/",
+      "url": "https://www.stroyrayon.kg/product/shpatel-100mm",
       "slug": "shpatel-100mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shpatel-100mm",
@@ -1261,7 +1261,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shpatel-250mm/",
+      "url": "https://www.stroyrayon.kg/product/shpatel-250mm",
       "slug": "shpatel-250mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shpatel-250mm",
@@ -1278,7 +1278,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mikser-nasadka-kurgak-aralashma/",
+      "url": "https://www.stroyrayon.kg/product/mikser-nasadka-kurgak-aralashma",
       "slug": "mikser-nasadka-kurgak-aralashma",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mikser-nasadka-kurgak-aralashma",
@@ -1295,7 +1295,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bur-sds-plus-6mm/",
+      "url": "https://www.stroyrayon.kg/product/bur-sds-plus-6mm",
       "slug": "bur-sds-plus-6mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bur-sds-plus-6mm",
@@ -1312,7 +1312,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bur-sds-plus-8mm/",
+      "url": "https://www.stroyrayon.kg/product/bur-sds-plus-8mm",
       "slug": "bur-sds-plus-8mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bur-sds-plus-8mm",
@@ -1329,7 +1329,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/otreznoi-disk-125mm/",
+      "url": "https://www.stroyrayon.kg/product/otreznoi-disk-125mm",
       "slug": "otreznoi-disk-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/otreznoi-disk-125mm",
@@ -1346,7 +1346,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-2m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-2m2",
       "slug": "mat-teplyi-pol-2m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-2m2",
@@ -1363,7 +1363,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-3m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-3m2",
       "slug": "mat-teplyi-pol-3m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-3m2",
@@ -1380,7 +1380,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabeldik-teplyi-pol-10m/",
+      "url": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-10m",
       "slug": "kabeldik-teplyi-pol-10m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-10m",
@@ -1397,7 +1397,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabeldik-teplyi-pol-20m/",
+      "url": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-20m",
       "slug": "kabeldik-teplyi-pol-20m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-20m",
@@ -1414,7 +1414,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mehanikalyk-termoregulyator/",
+      "url": "https://www.stroyrayon.kg/product/mehanikalyk-termoregulyator",
       "slug": "mehanikalyk-termoregulyator",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mehanikalyk-termoregulyator",
@@ -1431,7 +1431,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/elektronduk-termoregulyator/",
+      "url": "https://www.stroyrayon.kg/product/elektronduk-termoregulyator",
       "slug": "elektronduk-termoregulyator",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/elektronduk-termoregulyator",
@@ -1448,7 +1448,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pol-datchigi/",
+      "url": "https://www.stroyrayon.kg/product/pol-datchigi",
       "slug": "pol-datchigi",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pol-datchigi",
@@ -1465,7 +1465,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-montazh-lenta/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-montazh-lenta",
       "slug": "teplyi-pol-montazh-lenta",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-montazh-lenta",
@@ -1482,7 +1482,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-kollektor-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-kollektor-komplekt",
       "slug": "teplyi-pol-kollektor-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-kollektor-komplekt",
@@ -1499,7 +1499,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugat-shlangy-12-25m/",
+      "url": "https://www.stroyrayon.kg/product/sugat-shlangy-12-25m",
       "slug": "sugat-shlangy-12-25m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugat-shlangy-12-25m",
@@ -1516,7 +1516,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shlang-konnektoru/",
+      "url": "https://www.stroyrayon.kg/product/shlang-konnektoru",
       "slug": "shlang-konnektoru",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shlang-konnektoru",
@@ -1533,7 +1533,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugat-pistoleti/",
+      "url": "https://www.stroyrayon.kg/product/sugat-pistoleti",
       "slug": "sugat-pistoleti",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugat-pistoleti",
@@ -1550,7 +1550,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bakcha-leykasy/",
+      "url": "https://www.stroyrayon.kg/product/bakcha-leykasy",
       "slug": "bakcha-leykasy",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bakcha-leykasy",
@@ -1567,7 +1567,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/grabli/",
+      "url": "https://www.stroyrayon.kg/product/grabli",
       "slug": "grabli",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/grabli",
@@ -1584,7 +1584,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metla/",
+      "url": "https://www.stroyrayon.kg/product/metla",
       "slug": "metla",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metla",
@@ -1601,7 +1601,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-chakasy-12l/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-chakasy-12l",
       "slug": "kurulush-chakasy-12l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-chakasy-12l",
@@ -1618,7 +1618,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plastik-taz/",
+      "url": "https://www.stroyrayon.kg/product/plastik-taz",
       "slug": "plastik-taz",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plastik-taz",
@@ -1635,7 +1635,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/upakovka-skotch/",
+      "url": "https://www.stroyrayon.kg/product/upakovka-skotch",
       "slug": "upakovka-skotch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/upakovka-skotch",
@@ -1652,7 +1652,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/tachka-araba-bakcha/",
+      "url": "https://www.stroyrayon.kg/product/tachka-araba-bakcha",
       "slug": "tachka-araba-bakcha",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/tachka-araba-bakcha",
@@ -1669,7 +1669,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vodoemulsiyalyk-boyok-10l/",
+      "url": "https://www.stroyrayon.kg/product/vodoemulsiyalyk-boyok-10l",
       "slug": "vodoemulsiyalyk-boyok-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vodoemulsiyalyk-boyok-10l",
@@ -1686,7 +1686,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/emal-pf115-kara/",
+      "url": "https://www.stroyrayon.kg/product/emal-pf115-kara",
       "slug": "emal-pf115-kara",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/emal-pf115-kara",
@@ -1703,7 +1703,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/parket-lak/",
+      "url": "https://www.stroyrayon.kg/product/parket-lak",
       "slug": "parket-lak",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/parket-lak",
@@ -1720,7 +1720,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/universal-koler/",
+      "url": "https://www.stroyrayon.kg/product/universal-koler",
       "slug": "universal-koler",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/universal-koler",
@@ -1737,7 +1737,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rastvoritel-646/",
+      "url": "https://www.stroyrayon.kg/product/rastvoritel-646",
       "slug": "rastvoritel-646",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rastvoritel-646",
@@ -1754,7 +1754,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kist-50mm/",
+      "url": "https://www.stroyrayon.kg/product/kist-50mm",
       "slug": "kist-50mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kist-50mm",
@@ -1771,7 +1771,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/malyardyk-lenta/",
+      "url": "https://www.stroyrayon.kg/product/malyardyk-lenta",
       "slug": "malyardyk-lenta",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/malyardyk-lenta",
@@ -1788,7 +1788,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/boyok-vannochka/",
+      "url": "https://www.stroyrayon.kg/product/boyok-vannochka",
       "slug": "boyok-vannochka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/boyok-vannochka",
@@ -1805,7 +1805,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/boyok-gruntovka-10l/",
+      "url": "https://www.stroyrayon.kg/product/boyok-gruntovka-10l",
       "slug": "boyok-gruntovka-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/boyok-gruntovka-10l",
@@ -1822,7 +1822,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/flizelin-tush-kagaz/",
+      "url": "https://www.stroyrayon.kg/product/flizelin-tush-kagaz",
       "slug": "flizelin-tush-kagaz",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/flizelin-tush-kagaz",
@@ -1839,7 +1839,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ud-profil-27x28/",
+      "url": "https://www.stroyrayon.kg/product/ud-profil-27x28",
       "slug": "ud-profil-27x28",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ud-profil-27x28",
@@ -1856,7 +1856,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cd-profil-60x27/",
+      "url": "https://www.stroyrayon.kg/product/cd-profil-60x27",
       "slug": "cd-profil-60x27",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cd-profil-60x27",
@@ -1873,7 +1873,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/uw-profil-50/",
+      "url": "https://www.stroyrayon.kg/product/uw-profil-50",
       "slug": "uw-profil-50",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/uw-profil-50",
@@ -1890,7 +1890,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cw-profil-50/",
+      "url": "https://www.stroyrayon.kg/product/cw-profil-50",
       "slug": "cw-profil-50",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cw-profil-50",
@@ -1907,7 +1907,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/tuz-podves/",
+      "url": "https://www.stroyrayon.kg/product/tuz-podves",
       "slug": "tuz-podves",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/tuz-podves",
@@ -1924,7 +1924,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/krab-soedinitel/",
+      "url": "https://www.stroyrayon.kg/product/krab-soedinitel",
       "slug": "krab-soedinitel",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/krab-soedinitel",
@@ -1941,7 +1941,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/lenta-serpyanka/",
+      "url": "https://www.stroyrayon.kg/product/lenta-serpyanka",
       "slug": "lenta-serpyanka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/lenta-serpyanka",
@@ -1958,7 +1958,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/perforaciyalangan-burchtuk/",
+      "url": "https://www.stroyrayon.kg/product/perforaciyalangan-burchtuk",
       "slug": "perforaciyalangan-burchtuk",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/perforaciyalangan-burchtuk",
@@ -1975,7 +1975,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cementtuu-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/cementtuu-shtukaturka-25kg",
       "slug": "cementtuu-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cementtuu-shtukaturka-25kg",
@@ -1992,7 +1992,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fasaddyk-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/fasaddyk-shtukaturka-25kg",
       "slug": "fasaddyk-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fasaddyk-shtukaturka-25kg",
@@ -2009,7 +2009,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/dekorativdik-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/dekorativdik-shtukaturka-25kg",
       "slug": "dekorativdik-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dekorativdik-shtukaturka-25kg",
@@ -2026,7 +2026,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plitka-kleyi-usilennyi-25kg/",
+      "url": "https://www.stroyrayon.kg/product/plitka-kleyi-usilennyi-25kg",
       "slug": "plitka-kleyi-usilennyi-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plitka-kleyi-usilennyi-25kg",
@@ -2043,7 +2043,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ozu-tegizdeluuchu-pol-25kg/",
+      "url": "https://www.stroyrayon.kg/product/ozu-tegizdeluuchu-pol-25kg",
       "slug": "ozu-tegizdeluuchu-pol-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ozu-tegizdeluuchu-pol-25kg",
@@ -2060,7 +2060,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/peskobeton-m300-40kg/",
+      "url": "https://www.stroyrayon.kg/product/peskobeton-m300-40kg",
       "slug": "peskobeton-m300-40kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/peskobeton-m300-40kg",
@@ -2077,7 +2077,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/montazhdyk-aralashma-25kg/",
+      "url": "https://www.stroyrayon.kg/product/montazhdyk-aralashma-25kg",
       "slug": "montazhdyk-aralashma-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/montazhdyk-aralashma-25kg",
@@ -2094,7 +2094,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/remonttuk-aralashma-25kg/",
+      "url": "https://www.stroyrayon.kg/product/remonttuk-aralashma-25kg",
       "slug": "remonttuk-aralashma-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/remonttuk-aralashma-25kg",
@@ -2111,7 +2111,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/m400-cement-50kg/",
+      "url": "https://www.stroyrayon.kg/product/m400-cement-50kg",
       "slug": "m400-cement-50kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/m400-cement-50kg",
@@ -2128,7 +2128,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-blogu-200mm/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-blogu-200mm",
       "slug": "kurulush-blogu-200mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-blogu-200mm",
@@ -2145,7 +2145,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bazalt-zhyluuloo-50mm/",
+      "url": "https://www.stroyrayon.kg/product/bazalt-zhyluuloo-50mm",
       "slug": "bazalt-zhyluuloo-50mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bazalt-zhyluuloo-50mm",
@@ -2162,7 +2162,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kadimki-gipsokarton-125mm/",
+      "url": "https://www.stroyrayon.kg/product/kadimki-gipsokarton-125mm",
       "slug": "kadimki-gipsokarton-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kadimki-gipsokarton-125mm",
@@ -2179,7 +2179,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shyp-uchun-gipsokarton-95mm/",
+      "url": "https://www.stroyrayon.kg/product/shyp-uchun-gipsokarton-95mm",
       "slug": "shyp-uchun-gipsokarton-95mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shyp-uchun-gipsokarton-95mm",
@@ -2196,7 +2196,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/osb-plita-9mm/",
+      "url": "https://www.stroyrayon.kg/product/osb-plita-9mm",
       "slug": "osb-plita-9mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/osb-plita-9mm",
@@ -2213,7 +2213,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fanera-10mm/",
+      "url": "https://www.stroyrayon.kg/product/fanera-10mm",
       "slug": "fanera-10mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fanera-10mm",
@@ -2230,7 +2230,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mdf-panel-6mm/",
+      "url": "https://www.stroyrayon.kg/product/mdf-panel-6mm",
       "slug": "mdf-panel-6mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mdf-panel-6mm",
@@ -2247,7 +2247,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cementtik-plita-8mm/",
+      "url": "https://www.stroyrayon.kg/product/cementtik-plita-8mm",
       "slug": "cementtik-plita-8mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cementtik-plita-8mm",
@@ -2264,7 +2264,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cirkulyaciyalyk-nasos-25-40/",
+      "url": "https://www.stroyrayon.kg/product/cirkulyaciyalyk-nasos-25-40",
       "slug": "cirkulyaciyalyk-nasos-25-40",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cirkulyaciyalyk-nasos-25-40",
@@ -2281,7 +2281,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-korpusu-kluch-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/filtr-korpusu-kluch-komplekt",
       "slug": "filtr-korpusu-kluch-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-korpusu-kluch-komplekt",
@@ -2298,7 +2298,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/dush-sistemasy-basic/",
+      "url": "https://www.stroyrayon.kg/product/dush-sistemasy-basic",
       "slug": "dush-sistemasy-basic",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dush-sistemasy-basic",
@@ -2315,7 +2315,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/1-klavishaluu-ochurguch/",
+      "url": "https://www.stroyrayon.kg/product/1-klavishaluu-ochurguch",
       "slug": "1-klavishaluu-ochurguch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/1-klavishaluu-ochurguch",
@@ -2332,7 +2332,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/2-klavishaluu-ochurguch/",
+      "url": "https://www.stroyrayon.kg/product/2-klavishaluu-ochurguch",
       "slug": "2-klavishaluu-ochurguch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/2-klavishaluu-ochurguch",
@@ -2349,7 +2349,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/zherge-tutashtyrgychy-bar-rozetka/",
+      "url": "https://www.stroyrayon.kg/product/zherge-tutashtyrgychy-bar-rozetka",
       "slug": "zherge-tutashtyrgychy-bar-rozetka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/zherge-tutashtyrgychy-bar-rozetka",
@@ -2366,7 +2366,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/wago-tip-klemma-3-orun/",
+      "url": "https://www.stroyrayon.kg/product/wago-tip-klemma-3-orun",
       "slug": "wago-tip-klemma-3-orun",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/wago-tip-klemma-3-orun",
@@ -3212,7 +3212,7 @@
   ],
   "pages": [
     {
-      "url": "http://127.0.0.1:4184/product/ashkana-smesiteli-basic/",
+      "url": "https://www.stroyrayon.kg/product/ashkana-smesiteli-basic",
       "slug": "ashkana-smesiteli-basic",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ashkana-smesiteli-basic",
@@ -3229,7 +3229,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/vanna-smesiteli-dush-komplekti/",
+      "url": "https://www.stroyrayon.kg/product/vanna-smesiteli-dush-komplekti",
       "slug": "vanna-smesiteli-dush-komplekti",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vanna-smesiteli-dush-komplekti",
@@ -3246,7 +3246,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/drel-650w-udarnyi/",
+      "url": "https://www.stroyrayon.kg/product/drel-650w-udarnyi",
       "slug": "drel-650w-udarnyi",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/drel-650w-udarnyi",
@@ -3263,7 +3263,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/akkumulyatorduk-shurupovert-12v/",
+      "url": "https://www.stroyrayon.kg/product/akkumulyatorduk-shurupovert-12v",
       "slug": "akkumulyatorduk-shurupovert-12v",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/akkumulyatorduk-shurupovert-12v",
@@ -3280,7 +3280,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/molotok-500g/",
+      "url": "https://www.stroyrayon.kg/product/molotok-500g",
       "slug": "molotok-500g",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/molotok-500g",
@@ -3297,7 +3297,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/portlandcement-m500-50kg/",
+      "url": "https://www.stroyrayon.kg/product/portlandcement-m500-50kg",
       "slug": "portlandcement-m500-50kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/portlandcement-m500-50kg",
@@ -3314,7 +3314,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plitka-kleyi-standard-25kg/",
+      "url": "https://www.stroyrayon.kg/product/plitka-kleyi-standard-25kg",
       "slug": "plitka-kleyi-standard-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plitka-kleyi-standard-25kg",
@@ -3331,7 +3331,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gips-shtukaturkasy-30kg/",
+      "url": "https://www.stroyrayon.kg/product/gips-shtukaturkasy-30kg",
       "slug": "gips-shtukaturkasy-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gips-shtukaturkasy-30kg",
@@ -3348,7 +3348,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/knauf-rotband-30kg/",
+      "url": "https://www.stroyrayon.kg/product/knauf-rotband-30kg",
       "slug": "knauf-rotband-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/knauf-rotband-30kg",
@@ -3365,7 +3365,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/knauf-mp-75-30kg/",
+      "url": "https://www.stroyrayon.kg/product/knauf-mp-75-30kg",
       "slug": "knauf-mp-75-30kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/knauf-mp-75-30kg",
@@ -3382,7 +3382,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabel-vvgng-3x2-5/",
+      "url": "https://www.stroyrayon.kg/product/kabel-vvgng-3x2-5",
       "slug": "kabel-vvgng-3x2-5",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabel-vvgng-3x2-5",
@@ -3399,7 +3399,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rozetka-ichki-montazh-ak/",
+      "url": "https://www.stroyrayon.kg/product/rozetka-ichki-montazh-ak",
       "slug": "rozetka-ichki-montazh-ak",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rozetka-ichki-montazh-ak",
@@ -3416,7 +3416,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/avtomat-16a-1p/",
+      "url": "https://www.stroyrayon.kg/product/avtomat-16a-1p",
       "slug": "avtomat-16a-1p",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/avtomat-16a-1p",
@@ -3433,7 +3433,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/samorez-gipsokarton-35x35/",
+      "url": "https://www.stroyrayon.kg/product/samorez-gipsokarton-35x35",
       "slug": "samorez-gipsokarton-35x35",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/samorez-gipsokarton-35x35",
@@ -3450,7 +3450,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/dyubel-6x40mm/",
+      "url": "https://www.stroyrayon.kg/product/dyubel-6x40mm",
       "slug": "dyubel-6x40mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dyubel-6x40mm",
@@ -3467,7 +3467,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/anker-bolt-10x80mm/",
+      "url": "https://www.stroyrayon.kg/product/anker-bolt-10x80mm",
       "slug": "anker-bolt-10x80mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/anker-bolt-10x80mm",
@@ -3484,7 +3484,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/unitaz-kompakt-ak-standart/",
+      "url": "https://www.stroyrayon.kg/product/unitaz-kompakt-ak-standart",
       "slug": "unitaz-kompakt-ak-standart",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/unitaz-kompakt-ak-standart",
@@ -3501,7 +3501,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rakovina-keramika-50sm/",
+      "url": "https://www.stroyrayon.kg/product/rakovina-keramika-50sm",
       "slug": "rakovina-keramika-50sm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rakovina-keramika-50sm",
@@ -3518,7 +3518,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sifon-botolko-40mm/",
+      "url": "https://www.stroyrayon.kg/product/sifon-botolko-40mm",
       "slug": "sifon-botolko-40mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sifon-botolko-40mm",
@@ -3535,7 +3535,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gibkaya-podvodka-60sm-12/",
+      "url": "https://www.stroyrayon.kg/product/gibkaya-podvodka-60sm-12",
       "slug": "gibkaya-podvodka-60sm-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gibkaya-podvodka-60sm-12",
@@ -3552,7 +3552,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sharovyi-kran-latun-12/",
+      "url": "https://www.stroyrayon.kg/product/sharovyi-kran-latun-12",
       "slug": "sharovyi-kran-latun-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sharovyi-kran-latun-12",
@@ -3569,7 +3569,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ichki-dubal-boyogu-ak-10l/",
+      "url": "https://www.stroyrayon.kg/product/ichki-dubal-boyogu-ak-10l",
       "slug": "ichki-dubal-boyogu-ak-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ichki-dubal-boyogu-ak-10l",
@@ -3586,7 +3586,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fasad-boyogu-ak-10l/",
+      "url": "https://www.stroyrayon.kg/product/fasad-boyogu-ak-10l",
       "slug": "fasad-boyogu-ak-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fasad-boyogu-ak-10l",
@@ -3603,7 +3603,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/emal-ak-27kg/",
+      "url": "https://www.stroyrayon.kg/product/emal-ak-27kg",
       "slug": "emal-ak-27kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/emal-ak-27kg",
@@ -3620,7 +3620,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/valik-boyok-uchun-250mm/",
+      "url": "https://www.stroyrayon.kg/product/valik-boyok-uchun-250mm",
       "slug": "valik-boyok-uchun-250mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/valik-boyok-uchun-250mm",
@@ -3637,7 +3637,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/alyuminii-radiator-500mm-sekciya/",
+      "url": "https://www.stroyrayon.kg/product/alyuminii-radiator-500mm-sekciya",
       "slug": "alyuminii-radiator-500mm-sekciya",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alyuminii-radiator-500mm-sekciya",
@@ -3654,7 +3654,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/radiator-termostatikalyk-bash/",
+      "url": "https://www.stroyrayon.kg/product/radiator-termostatikalyk-bash",
       "slug": "radiator-termostatikalyk-bash",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/radiator-termostatikalyk-bash",
@@ -3671,7 +3671,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-truba-16mm/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-truba-16mm",
       "slug": "teplyi-pol-truba-16mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-truba-16mm",
@@ -3688,7 +3688,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugat-shlangy-34-25m/",
+      "url": "https://www.stroyrayon.kg/product/sugat-shlangy-34-25m",
       "slug": "sugat-shlangy-34-25m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugat-shlangy-34-25m",
@@ -3705,7 +3705,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurok-metall-saptuu/",
+      "url": "https://www.stroyrayon.kg/product/kurok-metall-saptuu",
       "slug": "kurok-metall-saptuu",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurok-metall-saptuu",
@@ -3722,7 +3722,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugaruu-nasadka-komplekti/",
+      "url": "https://www.stroyrayon.kg/product/sugaruu-nasadka-komplekti",
       "slug": "sugaruu-nasadka-komplekti",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugaruu-nasadka-komplekti",
@@ -3739,7 +3739,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/montazh-kobugu-750ml/",
+      "url": "https://www.stroyrayon.kg/product/montazh-kobugu-750ml",
       "slug": "montazh-kobugu-750ml",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/montazh-kobugu-750ml",
@@ -3756,7 +3756,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/eshik-tutkasy-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/eshik-tutkasy-komplekt",
       "slug": "eshik-tutkasy-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/eshik-tutkasy-komplekt",
@@ -3773,7 +3773,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvh-podokonnik-200mm/",
+      "url": "https://www.stroyrayon.kg/product/pvh-podokonnik-200mm",
       "slug": "pvh-podokonnik-200mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvh-podokonnik-200mm",
@@ -3790,7 +3790,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/finish-shpaklevka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/finish-shpaklevka-25kg",
       "slug": "finish-shpaklevka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/finish-shpaklevka-25kg",
@@ -3807,7 +3807,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gruntovka-tereng-singuu-10l/",
+      "url": "https://www.stroyrayon.kg/product/gruntovka-tereng-singuu-10l",
       "slug": "gruntovka-tereng-singuu-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gruntovka-tereng-singuu-10l",
@@ -3824,7 +3824,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vlagostoikii-gipsokarton-125mm/",
+      "url": "https://www.stroyrayon.kg/product/vlagostoikii-gipsokarton-125mm",
       "slug": "vlagostoikii-gipsokarton-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vlagostoikii-gipsokarton-125mm",
@@ -3841,7 +3841,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metall-plastik-truba-16mm/",
+      "url": "https://www.stroyrayon.kg/product/metall-plastik-truba-16mm",
       "slug": "metall-plastik-truba-16mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metall-plastik-truba-16mm",
@@ -3858,7 +3858,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pnd-truba-25mm/",
+      "url": "https://www.stroyrayon.kg/product/pnd-truba-25mm",
       "slug": "pnd-truba-25mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pnd-truba-25mm",
@@ -3875,7 +3875,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/elektr-shit-12-modul/",
+      "url": "https://www.stroyrayon.kg/product/elektr-shit-12-modul",
       "slug": "elektr-shit-12-modul",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/elektr-shit-12-modul",
@@ -3892,7 +3892,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/led-lampa-e27-12w/",
+      "url": "https://www.stroyrayon.kg/product/led-lampa-e27-12w",
       "slug": "led-lampa-e27-12w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/led-lampa-e27-12w",
@@ -3909,7 +3909,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shurup-po-derevu-4x50mm/",
+      "url": "https://www.stroyrayon.kg/product/shurup-po-derevu-4x50mm",
       "slug": "shurup-po-derevu-4x50mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shurup-po-derevu-4x50mm",
@@ -3926,7 +3926,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/bolt-gaika-shaiba-m8-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/bolt-gaika-shaiba-m8-komplekt",
       "slug": "bolt-gaika-shaiba-m8-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bolt-gaika-shaiba-m8-komplekt",
@@ -3943,7 +3943,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metall-homut-20-32mm/",
+      "url": "https://www.stroyrayon.kg/product/metall-homut-20-32mm",
       "slug": "metall-homut-20-32mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metall-homut-20-32mm",
@@ -3960,7 +3960,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ventilyaciya-reshetkasy-150x150mm/",
+      "url": "https://www.stroyrayon.kg/product/ventilyaciya-reshetkasy-150x150mm",
       "slug": "ventilyaciya-reshetkasy-150x150mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ventilyaciya-reshetkasy-150x150mm",
@@ -3977,7 +3977,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/gidroizolyaciya-smes-20kg/",
+      "url": "https://www.stroyrayon.kg/product/gidroizolyaciya-smes-20kg",
       "slug": "gidroizolyaciya-smes-20kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gidroizolyaciya-smes-20kg",
@@ -3994,7 +3994,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/zatirka-dlya-plitki-2kg/",
+      "url": "https://www.stroyrayon.kg/product/zatirka-dlya-plitki-2kg",
       "slug": "zatirka-dlya-plitki-2kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/zatirka-dlya-plitki-2kg",
@@ -4011,7 +4011,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/stroitelnyi-gips-25kg/",
+      "url": "https://www.stroyrayon.kg/product/stroitelnyi-gips-25kg",
       "slug": "stroitelnyi-gips-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/stroitelnyi-gips-25kg",
@@ -4028,7 +4028,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/profnastil-krovlya-08mm/",
+      "url": "https://www.stroyrayon.kg/product/profnastil-krovlya-08mm",
       "slug": "profnastil-krovlya-08mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/profnastil-krovlya-08mm",
@@ -4045,7 +4045,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plastifikator-beton-1l/",
+      "url": "https://www.stroyrayon.kg/product/plastifikator-beton-1l",
       "slug": "plastifikator-beton-1l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plastifikator-beton-1l",
@@ -4062,7 +4062,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pnd-fiting-mufta-25/",
+      "url": "https://www.stroyrayon.kg/product/pnd-fiting-mufta-25",
       "slug": "pnd-fiting-mufta-25",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pnd-fiting-mufta-25",
@@ -4079,7 +4079,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/schetchik-vody-15/",
+      "url": "https://www.stroyrayon.kg/product/schetchik-vody-15",
       "slug": "schetchik-vody-15",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/schetchik-vody-15",
@@ -4096,7 +4096,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/reduktor-davleniya-12/",
+      "url": "https://www.stroyrayon.kg/product/reduktor-davleniya-12",
       "slug": "reduktor-davleniya-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/reduktor-davleniya-12",
@@ -4113,7 +4113,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/obratnyi-klapan-12/",
+      "url": "https://www.stroyrayon.kg/product/obratnyi-klapan-12",
       "slug": "obratnyi-klapan-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/obratnyi-klapan-12",
@@ -4130,7 +4130,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/manometr-6bar/",
+      "url": "https://www.stroyrayon.kg/product/manometr-6bar",
       "slug": "manometr-6bar",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/manometr-6bar",
@@ -4147,7 +4147,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-gruboi-ochistki-12/",
+      "url": "https://www.stroyrayon.kg/product/filtr-gruboi-ochistki-12",
       "slug": "filtr-gruboi-ochistki-12",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-gruboi-ochistki-12",
@@ -4164,7 +4164,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-korpus-10/",
+      "url": "https://www.stroyrayon.kg/product/filtr-korpus-10",
       "slug": "filtr-korpus-10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-korpus-10",
@@ -4181,7 +4181,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kartridzh-polipropilen-10/",
+      "url": "https://www.stroyrayon.kg/product/kartridzh-polipropilen-10",
       "slug": "kartridzh-polipropilen-10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kartridzh-polipropilen-10",
@@ -4198,7 +4198,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rasshiritelnyi-bak-24l/",
+      "url": "https://www.stroyrayon.kg/product/rasshiritelnyi-bak-24l",
       "slug": "rasshiritelnyi-bak-24l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rasshiritelnyi-bak-24l",
@@ -4215,7 +4215,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rakovina-smesitel-basic/",
+      "url": "https://www.stroyrayon.kg/product/rakovina-smesitel-basic",
       "slug": "rakovina-smesitel-basic",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rakovina-smesitel-basic",
@@ -4232,7 +4232,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/gigienicheskii-dush-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/gigienicheskii-dush-komplekt",
       "slug": "gigienicheskii-dush-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gigienicheskii-dush-komplekt",
@@ -4249,7 +4249,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/trap-dushevoi-10x10/",
+      "url": "https://www.stroyrayon.kg/product/trap-dushevoi-10x10",
       "slug": "trap-dushevoi-10x10",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/trap-dushevoi-10x10",
@@ -4266,7 +4266,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vanna-akril-170/",
+      "url": "https://www.stroyrayon.kg/product/vanna-akril-170",
       "slug": "vanna-akril-170",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vanna-akril-170",
@@ -4283,7 +4283,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vodonagrevatel-50l/",
+      "url": "https://www.stroyrayon.kg/product/vodonagrevatel-50l",
       "slug": "vodonagrevatel-50l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vodonagrevatel-50l",
@@ -4300,7 +4300,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/aerator-smesitelya-m24/",
+      "url": "https://www.stroyrayon.kg/product/aerator-smesitelya-m24",
       "slug": "aerator-smesitelya-m24",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/aerator-smesitelya-m24",
@@ -4317,7 +4317,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/shvvp-provod-2x0-75/",
+      "url": "https://www.stroyrayon.kg/product/shvvp-provod-2x0-75",
       "slug": "shvvp-provod-2x0-75",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shvvp-provod-2x0-75",
@@ -4334,7 +4334,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sip-kabel-2x16/",
+      "url": "https://www.stroyrayon.kg/product/sip-kabel-2x16",
       "slug": "sip-kabel-2x16",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sip-kabel-2x16",
@@ -4351,7 +4351,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/uzo-2p-40a/",
+      "url": "https://www.stroyrayon.kg/product/uzo-2p-40a",
       "slug": "uzo-2p-40a",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/uzo-2p-40a",
@@ -4368,7 +4368,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/difavtomat-16a/",
+      "url": "https://www.stroyrayon.kg/product/difavtomat-16a",
       "slug": "difavtomat-16a",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/difavtomat-16a",
@@ -4385,7 +4385,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/led-svetilnik-18w/",
+      "url": "https://www.stroyrayon.kg/product/led-svetilnik-18w",
       "slug": "led-svetilnik-18w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/led-svetilnik-18w",
@@ -4402,7 +4402,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ulichnyi-prozhektor-30w/",
+      "url": "https://www.stroyrayon.kg/product/ulichnyi-prozhektor-30w",
       "slug": "ulichnyi-prozhektor-30w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ulichnyi-prozhektor-30w",
@@ -4419,7 +4419,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/podrozetnik-plastik/",
+      "url": "https://www.stroyrayon.kg/product/podrozetnik-plastik",
       "slug": "podrozetnik-plastik",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/podrozetnik-plastik",
@@ -4436,7 +4436,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/raspredkorobka-80/",
+      "url": "https://www.stroyrayon.kg/product/raspredkorobka-80",
       "slug": "raspredkorobka-80",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/raspredkorobka-80",
@@ -4453,7 +4453,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-1m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-1m2",
       "slug": "mat-teplyi-pol-1m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-1m2",
@@ -4470,7 +4470,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gidroizoliacionnaia-smes-alinex-aquaflex/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaflex",
       "slug": "alinex-gidroizoliacionnaia-smes-alinex-aquaflex",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaflex",
@@ -4487,7 +4487,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gidroizoliacionnaia-smes-alinex-aquaproof/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaproof",
       "slug": "alinex-gidroizoliacionnaia-smes-alinex-aquaproof",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-smes-alinex-aquaproof",
@@ -4504,7 +4504,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gidroizoliacionnaia-stukaturka-alinex-aquaplaster/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-stukaturka-alinex-aquaplaster",
       "slug": "alinex-gidroizoliacionnaia-stukaturka-alinex-aquaplaster",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gidroizoliacionnaia-stukaturka-alinex-aquaplaster",
@@ -4521,7 +4521,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-dobavka-dlya-gidroizolyacii/",
+      "url": "https://www.stroyrayon.kg/product/alinex-dobavka-dlya-gidroizolyacii",
       "slug": "alinex-dobavka-dlya-gidroizolyacii",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-dobavka-dlya-gidroizolyacii",
@@ -4538,7 +4538,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gruntovka-dlia-pola-alinex-primer-2/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gruntovka-dlia-pola-alinex-primer-2",
       "slug": "alinex-gruntovka-dlia-pola-alinex-primer-2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gruntovka-dlia-pola-alinex-primer-2",
@@ -4555,7 +4555,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gruntovka-alinex-primer/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gruntovka-alinex-primer",
       "slug": "alinex-gruntovka-alinex-primer",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gruntovka-alinex-primer",
@@ -4572,7 +4572,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-zatirka-dlia-svov-alinex-fixline/",
+      "url": "https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-alinex-fixline",
       "slug": "alinex-zatirka-dlia-svov-alinex-fixline",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-alinex-fixline",
@@ -4589,7 +4589,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-zatirka-dlia-svov-gipsokartonnyx-listov-gkl-alinex-joint/",
+      "url": "https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-gipsokartonnyx-listov-gkl-alinex-joint",
       "slug": "alinex-zatirka-dlia-svov-gipsokartonnyx-listov-gkl-alinex-joint",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-zatirka-dlia-svov-gipsokartonnyx-listov-gkl-alinex-joint",
@@ -4606,7 +4606,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-klei-stukaturka-dlia-sistemy-skreplennoi-teploizoliacii-alinex-set-307/",
+      "url": "https://www.stroyrayon.kg/product/alinex-klei-stukaturka-dlia-sistemy-skreplennoi-teploizoliacii-alinex-set-307",
       "slug": "alinex-klei-stukaturka-dlia-sistemy-skreplennoi-teploizoliacii-alinex-set-307",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-klei-stukaturka-dlia-sistemy-skreplennoi-teploizoliacii-alinex-set-307",
@@ -4623,7 +4623,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-nalivnoi-pol-alinex-level2/",
+      "url": "https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-level2",
       "slug": "alinex-nalivnoi-pol-alinex-level2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-level2",
@@ -4640,7 +4640,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-nalivnoi-pol-alinex-unilevel/",
+      "url": "https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-unilevel",
       "slug": "alinex-nalivnoi-pol-alinex-unilevel",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-nalivnoi-pol-alinex-unilevel",
@@ -4657,7 +4657,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-promyslennyi-rovnitel-dlia-pola-alinex-level-3/",
+      "url": "https://www.stroyrayon.kg/product/alinex-promyslennyi-rovnitel-dlia-pola-alinex-level-3",
       "slug": "alinex-promyslennyi-rovnitel-dlia-pola-alinex-level-3",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-promyslennyi-rovnitel-dlia-pola-alinex-level-3",
@@ -4674,7 +4674,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-rovnitel-dlia-pola-alinex-level-1/",
+      "url": "https://www.stroyrayon.kg/product/alinex-rovnitel-dlia-pola-alinex-level-1",
       "slug": "alinex-rovnitel-dlia-pola-alinex-level-1",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-rovnitel-dlia-pola-alinex-level-1",
@@ -4691,7 +4691,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-plitocnyi-klei-alinex-set-300/",
+      "url": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-300",
       "slug": "alinex-plitocnyi-klei-alinex-set-300",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-300",
@@ -4708,7 +4708,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-plitocnyi-klei-alinex-set-302/",
+      "url": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-302",
       "slug": "alinex-plitocnyi-klei-alinex-set-302",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-302",
@@ -4725,7 +4725,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-plitocnyi-klei-alinex-set-305/",
+      "url": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-305",
       "slug": "alinex-plitocnyi-klei-alinex-set-305",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-305",
@@ -4742,7 +4742,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-plitocnyi-klei-alinex-set-308/",
+      "url": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-308",
       "slug": "alinex-plitocnyi-klei-alinex-set-308",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-308",
@@ -4759,7 +4759,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-plitocnyi-klei-alinex-set-set-301/",
+      "url": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-set-301",
       "slug": "alinex-plitocnyi-klei-alinex-set-set-301",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-plitocnyi-klei-alinex-set-set-301",
@@ -4776,7 +4776,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-klei-dlia-gkl-alinex-unifix/",
+      "url": "https://www.stroyrayon.kg/product/alinex-klei-dlia-gkl-alinex-unifix",
       "slug": "alinex-klei-dlia-gkl-alinex-unifix",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-klei-dlia-gkl-alinex-unifix",
@@ -4793,7 +4793,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-cementnaia-spatlevka-alinex-finish-wp/",
+      "url": "https://www.stroyrayon.kg/product/alinex-cementnaia-spatlevka-alinex-finish-wp",
       "slug": "alinex-cementnaia-spatlevka-alinex-finish-wp",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-cementnaia-spatlevka-alinex-finish-wp",
@@ -4810,7 +4810,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-spatlevka-alinex-glatt/",
+      "url": "https://www.stroyrayon.kg/product/alinex-spatlevka-alinex-glatt",
       "slug": "alinex-spatlevka-alinex-glatt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-spatlevka-alinex-glatt",
@@ -4827,7 +4827,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-spatlevka-polimernaia-alinex-finish-premium/",
+      "url": "https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish-premium",
       "slug": "alinex-spatlevka-polimernaia-alinex-finish-premium",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish-premium",
@@ -4844,7 +4844,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-spatlevka-polimernaia-alinex-finish/",
+      "url": "https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish",
       "slug": "alinex-spatlevka-polimernaia-alinex-finish",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-spatlevka-polimernaia-alinex-finish",
@@ -4861,7 +4861,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender/",
+      "url": "https://www.stroyrayon.kg/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender",
       "slug": "alinex-gipsovaia-stukaturnaia-smes-alinex-grender",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender",
@@ -4878,7 +4878,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress/",
+      "url": "https://www.stroyrayon.kg/product/alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress",
       "slug": "alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-dekorativnaia-relefnaia-stukaturka-alinex-fortress",
@@ -4895,7 +4895,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-zarostoikaiaia-stukaturka-alinex-termoplaster/",
+      "url": "https://www.stroyrayon.kg/product/alinex-zarostoikaiaia-stukaturka-alinex-termoplaster",
       "slug": "alinex-zarostoikaiaia-stukaturka-alinex-termoplaster",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-zarostoikaiaia-stukaturka-alinex-termoplaster",
@@ -4912,7 +4912,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-saniruiushhaia-stukaturka-alinex-sanirplast/",
+      "url": "https://www.stroyrayon.kg/product/alinex-saniruiushhaia-stukaturka-alinex-sanirplast",
       "slug": "alinex-saniruiushhaia-stukaturka-alinex-sanirplast",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-saniruiushhaia-stukaturka-alinex-sanirplast",
@@ -4929,7 +4929,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-cementnaia-stukaturnaia-smes-alinex-forman/",
+      "url": "https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-forman",
       "slug": "alinex-cementnaia-stukaturnaia-smes-alinex-forman",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-forman",
@@ -4946,7 +4946,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-cementnaia-stukaturnaia-smes-alinex-uniplaster-m-50/",
+      "url": "https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-uniplaster-m-50",
       "slug": "alinex-cementnaia-stukaturnaia-smes-alinex-uniplaster-m-50",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-cementnaia-stukaturnaia-smes-alinex-uniplaster-m-50",
@@ -4963,7 +4963,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-stukaturka-dlia-dekorativnoi-otdelki/",
+      "url": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki",
       "slug": "alinex-stukaturka-dlia-dekorativnoi-otdelki",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki",
@@ -4980,7 +4980,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-20/",
+      "url": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-20",
       "slug": "alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-20",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-20",
@@ -4997,7 +4997,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-25/",
+      "url": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-25",
       "slug": "alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-25",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-25",
@@ -5014,7 +5014,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35/",
+      "url": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35",
       "slug": "alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35",
@@ -5031,7 +5031,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ventilyaciya-reshetkasy-200x200mm/",
+      "url": "https://www.stroyrayon.kg/product/ventilyaciya-reshetkasy-200x200mm",
       "slug": "ventilyaciya-reshetkasy-200x200mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ventilyaciya-reshetkasy-200x200mm",
@@ -5048,7 +5048,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvc-ventilyaciya-kanaly-55x110/",
+      "url": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-55x110",
       "slug": "pvc-ventilyaciya-kanaly-55x110",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-55x110",
@@ -5065,7 +5065,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvc-ventilyaciya-kanaly-60x120/",
+      "url": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-60x120",
       "slug": "pvc-ventilyaciya-kanaly-60x120",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvc-ventilyaciya-kanaly-60x120",
@@ -5082,7 +5082,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ventilyaciya-burchu-90/",
+      "url": "https://www.stroyrayon.kg/product/ventilyaciya-burchu-90",
       "slug": "ventilyaciya-burchu-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ventilyaciya-burchu-90",
@@ -5099,7 +5099,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ventilyaciya-muftasy/",
+      "url": "https://www.stroyrayon.kg/product/ventilyaciya-muftasy",
       "slug": "ventilyaciya-muftasy",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ventilyaciya-muftasy",
@@ -5116,7 +5116,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/vytyazhnoi-ventilyator-100mm/",
+      "url": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-100mm",
       "slug": "vytyazhnoi-ventilyator-100mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-100mm",
@@ -5133,7 +5133,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vytyazhnoi-ventilyator-125mm/",
+      "url": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-125mm",
       "slug": "vytyazhnoi-ventilyator-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vytyazhnoi-ventilyator-125mm",
@@ -5150,7 +5150,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/obratnyi-klapan-ventilyaciya/",
+      "url": "https://www.stroyrayon.kg/product/obratnyi-klapan-ventilyaciya",
       "slug": "obratnyi-klapan-ventilyaciya",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/obratnyi-klapan-ventilyaciya",
@@ -5167,7 +5167,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/perforator-800w/",
+      "url": "https://www.stroyrayon.kg/product/perforator-800w",
       "slug": "perforator-800w",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/perforator-800w",
@@ -5184,7 +5184,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bolgarka-125mm/",
+      "url": "https://www.stroyrayon.kg/product/bolgarka-125mm",
       "slug": "bolgarka-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bolgarka-125mm",
@@ -5201,7 +5201,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ruletka-5m/",
+      "url": "https://www.stroyrayon.kg/product/ruletka-5m",
       "slug": "ruletka-5m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ruletka-5m",
@@ -5218,7 +5218,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/uroven-60sm/",
+      "url": "https://www.stroyrayon.kg/product/uroven-60sm",
       "slug": "uroven-60sm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/uroven-60sm",
@@ -5235,7 +5235,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-bychagy/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-bychagy",
       "slug": "kurulush-bychagy",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-bychagy",
@@ -5252,7 +5252,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shpatel-100mm/",
+      "url": "https://www.stroyrayon.kg/product/shpatel-100mm",
       "slug": "shpatel-100mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shpatel-100mm",
@@ -5269,7 +5269,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shpatel-250mm/",
+      "url": "https://www.stroyrayon.kg/product/shpatel-250mm",
       "slug": "shpatel-250mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shpatel-250mm",
@@ -5286,7 +5286,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mikser-nasadka-kurgak-aralashma/",
+      "url": "https://www.stroyrayon.kg/product/mikser-nasadka-kurgak-aralashma",
       "slug": "mikser-nasadka-kurgak-aralashma",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mikser-nasadka-kurgak-aralashma",
@@ -5303,7 +5303,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bur-sds-plus-6mm/",
+      "url": "https://www.stroyrayon.kg/product/bur-sds-plus-6mm",
       "slug": "bur-sds-plus-6mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bur-sds-plus-6mm",
@@ -5320,7 +5320,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bur-sds-plus-8mm/",
+      "url": "https://www.stroyrayon.kg/product/bur-sds-plus-8mm",
       "slug": "bur-sds-plus-8mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bur-sds-plus-8mm",
@@ -5337,7 +5337,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/otreznoi-disk-125mm/",
+      "url": "https://www.stroyrayon.kg/product/otreznoi-disk-125mm",
       "slug": "otreznoi-disk-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/otreznoi-disk-125mm",
@@ -5354,7 +5354,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-2m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-2m2",
       "slug": "mat-teplyi-pol-2m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-2m2",
@@ -5371,7 +5371,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mat-teplyi-pol-3m2/",
+      "url": "https://www.stroyrayon.kg/product/mat-teplyi-pol-3m2",
       "slug": "mat-teplyi-pol-3m2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mat-teplyi-pol-3m2",
@@ -5388,7 +5388,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabeldik-teplyi-pol-10m/",
+      "url": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-10m",
       "slug": "kabeldik-teplyi-pol-10m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-10m",
@@ -5405,7 +5405,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabeldik-teplyi-pol-20m/",
+      "url": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-20m",
       "slug": "kabeldik-teplyi-pol-20m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabeldik-teplyi-pol-20m",
@@ -5422,7 +5422,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mehanikalyk-termoregulyator/",
+      "url": "https://www.stroyrayon.kg/product/mehanikalyk-termoregulyator",
       "slug": "mehanikalyk-termoregulyator",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mehanikalyk-termoregulyator",
@@ -5439,7 +5439,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/elektronduk-termoregulyator/",
+      "url": "https://www.stroyrayon.kg/product/elektronduk-termoregulyator",
       "slug": "elektronduk-termoregulyator",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/elektronduk-termoregulyator",
@@ -5456,7 +5456,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/pol-datchigi/",
+      "url": "https://www.stroyrayon.kg/product/pol-datchigi",
       "slug": "pol-datchigi",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pol-datchigi",
@@ -5473,7 +5473,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-montazh-lenta/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-montazh-lenta",
       "slug": "teplyi-pol-montazh-lenta",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-montazh-lenta",
@@ -5490,7 +5490,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/teplyi-pol-kollektor-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/teplyi-pol-kollektor-komplekt",
       "slug": "teplyi-pol-kollektor-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/teplyi-pol-kollektor-komplekt",
@@ -5507,7 +5507,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugat-shlangy-12-25m/",
+      "url": "https://www.stroyrayon.kg/product/sugat-shlangy-12-25m",
       "slug": "sugat-shlangy-12-25m",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugat-shlangy-12-25m",
@@ -5524,7 +5524,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shlang-konnektoru/",
+      "url": "https://www.stroyrayon.kg/product/shlang-konnektoru",
       "slug": "shlang-konnektoru",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shlang-konnektoru",
@@ -5541,7 +5541,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/sugat-pistoleti/",
+      "url": "https://www.stroyrayon.kg/product/sugat-pistoleti",
       "slug": "sugat-pistoleti",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/sugat-pistoleti",
@@ -5558,7 +5558,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bakcha-leykasy/",
+      "url": "https://www.stroyrayon.kg/product/bakcha-leykasy",
       "slug": "bakcha-leykasy",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bakcha-leykasy",
@@ -5575,7 +5575,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/grabli/",
+      "url": "https://www.stroyrayon.kg/product/grabli",
       "slug": "grabli",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/grabli",
@@ -5592,7 +5592,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/metla/",
+      "url": "https://www.stroyrayon.kg/product/metla",
       "slug": "metla",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/metla",
@@ -5609,7 +5609,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-chakasy-12l/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-chakasy-12l",
       "slug": "kurulush-chakasy-12l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-chakasy-12l",
@@ -5626,7 +5626,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plastik-taz/",
+      "url": "https://www.stroyrayon.kg/product/plastik-taz",
       "slug": "plastik-taz",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plastik-taz",
@@ -5643,7 +5643,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/upakovka-skotch/",
+      "url": "https://www.stroyrayon.kg/product/upakovka-skotch",
       "slug": "upakovka-skotch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/upakovka-skotch",
@@ -5660,7 +5660,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/tachka-araba-bakcha/",
+      "url": "https://www.stroyrayon.kg/product/tachka-araba-bakcha",
       "slug": "tachka-araba-bakcha",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/tachka-araba-bakcha",
@@ -5677,7 +5677,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/vodoemulsiyalyk-boyok-10l/",
+      "url": "https://www.stroyrayon.kg/product/vodoemulsiyalyk-boyok-10l",
       "slug": "vodoemulsiyalyk-boyok-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/vodoemulsiyalyk-boyok-10l",
@@ -5694,7 +5694,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/emal-pf115-kara/",
+      "url": "https://www.stroyrayon.kg/product/emal-pf115-kara",
       "slug": "emal-pf115-kara",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/emal-pf115-kara",
@@ -5711,7 +5711,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/parket-lak/",
+      "url": "https://www.stroyrayon.kg/product/parket-lak",
       "slug": "parket-lak",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/parket-lak",
@@ -5728,7 +5728,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/universal-koler/",
+      "url": "https://www.stroyrayon.kg/product/universal-koler",
       "slug": "universal-koler",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/universal-koler",
@@ -5745,7 +5745,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/rastvoritel-646/",
+      "url": "https://www.stroyrayon.kg/product/rastvoritel-646",
       "slug": "rastvoritel-646",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/rastvoritel-646",
@@ -5762,7 +5762,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kist-50mm/",
+      "url": "https://www.stroyrayon.kg/product/kist-50mm",
       "slug": "kist-50mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kist-50mm",
@@ -5779,7 +5779,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/malyardyk-lenta/",
+      "url": "https://www.stroyrayon.kg/product/malyardyk-lenta",
       "slug": "malyardyk-lenta",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/malyardyk-lenta",
@@ -5796,7 +5796,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/boyok-vannochka/",
+      "url": "https://www.stroyrayon.kg/product/boyok-vannochka",
       "slug": "boyok-vannochka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/boyok-vannochka",
@@ -5813,7 +5813,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/boyok-gruntovka-10l/",
+      "url": "https://www.stroyrayon.kg/product/boyok-gruntovka-10l",
       "slug": "boyok-gruntovka-10l",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/boyok-gruntovka-10l",
@@ -5830,7 +5830,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/flizelin-tush-kagaz/",
+      "url": "https://www.stroyrayon.kg/product/flizelin-tush-kagaz",
       "slug": "flizelin-tush-kagaz",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/flizelin-tush-kagaz",
@@ -5847,7 +5847,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ud-profil-27x28/",
+      "url": "https://www.stroyrayon.kg/product/ud-profil-27x28",
       "slug": "ud-profil-27x28",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ud-profil-27x28",
@@ -5864,7 +5864,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cd-profil-60x27/",
+      "url": "https://www.stroyrayon.kg/product/cd-profil-60x27",
       "slug": "cd-profil-60x27",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cd-profil-60x27",
@@ -5881,7 +5881,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/uw-profil-50/",
+      "url": "https://www.stroyrayon.kg/product/uw-profil-50",
       "slug": "uw-profil-50",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/uw-profil-50",
@@ -5898,7 +5898,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cw-profil-50/",
+      "url": "https://www.stroyrayon.kg/product/cw-profil-50",
       "slug": "cw-profil-50",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cw-profil-50",
@@ -5915,7 +5915,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/tuz-podves/",
+      "url": "https://www.stroyrayon.kg/product/tuz-podves",
       "slug": "tuz-podves",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/tuz-podves",
@@ -5932,7 +5932,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/krab-soedinitel/",
+      "url": "https://www.stroyrayon.kg/product/krab-soedinitel",
       "slug": "krab-soedinitel",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/krab-soedinitel",
@@ -5949,7 +5949,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/lenta-serpyanka/",
+      "url": "https://www.stroyrayon.kg/product/lenta-serpyanka",
       "slug": "lenta-serpyanka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/lenta-serpyanka",
@@ -5966,7 +5966,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/perforaciyalangan-burchtuk/",
+      "url": "https://www.stroyrayon.kg/product/perforaciyalangan-burchtuk",
       "slug": "perforaciyalangan-burchtuk",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/perforaciyalangan-burchtuk",
@@ -5983,7 +5983,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cementtuu-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/cementtuu-shtukaturka-25kg",
       "slug": "cementtuu-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cementtuu-shtukaturka-25kg",
@@ -6000,7 +6000,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fasaddyk-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/fasaddyk-shtukaturka-25kg",
       "slug": "fasaddyk-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fasaddyk-shtukaturka-25kg",
@@ -6017,7 +6017,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/dekorativdik-shtukaturka-25kg/",
+      "url": "https://www.stroyrayon.kg/product/dekorativdik-shtukaturka-25kg",
       "slug": "dekorativdik-shtukaturka-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dekorativdik-shtukaturka-25kg",
@@ -6034,7 +6034,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/plitka-kleyi-usilennyi-25kg/",
+      "url": "https://www.stroyrayon.kg/product/plitka-kleyi-usilennyi-25kg",
       "slug": "plitka-kleyi-usilennyi-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/plitka-kleyi-usilennyi-25kg",
@@ -6051,7 +6051,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/ozu-tegizdeluuchu-pol-25kg/",
+      "url": "https://www.stroyrayon.kg/product/ozu-tegizdeluuchu-pol-25kg",
       "slug": "ozu-tegizdeluuchu-pol-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ozu-tegizdeluuchu-pol-25kg",
@@ -6068,7 +6068,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/peskobeton-m300-40kg/",
+      "url": "https://www.stroyrayon.kg/product/peskobeton-m300-40kg",
       "slug": "peskobeton-m300-40kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/peskobeton-m300-40kg",
@@ -6085,7 +6085,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/montazhdyk-aralashma-25kg/",
+      "url": "https://www.stroyrayon.kg/product/montazhdyk-aralashma-25kg",
       "slug": "montazhdyk-aralashma-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/montazhdyk-aralashma-25kg",
@@ -6102,7 +6102,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/remonttuk-aralashma-25kg/",
+      "url": "https://www.stroyrayon.kg/product/remonttuk-aralashma-25kg",
       "slug": "remonttuk-aralashma-25kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/remonttuk-aralashma-25kg",
@@ -6119,7 +6119,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/m400-cement-50kg/",
+      "url": "https://www.stroyrayon.kg/product/m400-cement-50kg",
       "slug": "m400-cement-50kg",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/m400-cement-50kg",
@@ -6136,7 +6136,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kurulush-blogu-200mm/",
+      "url": "https://www.stroyrayon.kg/product/kurulush-blogu-200mm",
       "slug": "kurulush-blogu-200mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kurulush-blogu-200mm",
@@ -6153,7 +6153,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/bazalt-zhyluuloo-50mm/",
+      "url": "https://www.stroyrayon.kg/product/bazalt-zhyluuloo-50mm",
       "slug": "bazalt-zhyluuloo-50mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/bazalt-zhyluuloo-50mm",
@@ -6170,7 +6170,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kadimki-gipsokarton-125mm/",
+      "url": "https://www.stroyrayon.kg/product/kadimki-gipsokarton-125mm",
       "slug": "kadimki-gipsokarton-125mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kadimki-gipsokarton-125mm",
@@ -6187,7 +6187,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/shyp-uchun-gipsokarton-95mm/",
+      "url": "https://www.stroyrayon.kg/product/shyp-uchun-gipsokarton-95mm",
       "slug": "shyp-uchun-gipsokarton-95mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/shyp-uchun-gipsokarton-95mm",
@@ -6204,7 +6204,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/osb-plita-9mm/",
+      "url": "https://www.stroyrayon.kg/product/osb-plita-9mm",
       "slug": "osb-plita-9mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/osb-plita-9mm",
@@ -6221,7 +6221,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/fanera-10mm/",
+      "url": "https://www.stroyrayon.kg/product/fanera-10mm",
       "slug": "fanera-10mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/fanera-10mm",
@@ -6238,7 +6238,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/mdf-panel-6mm/",
+      "url": "https://www.stroyrayon.kg/product/mdf-panel-6mm",
       "slug": "mdf-panel-6mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/mdf-panel-6mm",
@@ -6255,7 +6255,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cementtik-plita-8mm/",
+      "url": "https://www.stroyrayon.kg/product/cementtik-plita-8mm",
       "slug": "cementtik-plita-8mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cementtik-plita-8mm",
@@ -6272,7 +6272,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/cirkulyaciyalyk-nasos-25-40/",
+      "url": "https://www.stroyrayon.kg/product/cirkulyaciyalyk-nasos-25-40",
       "slug": "cirkulyaciyalyk-nasos-25-40",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/cirkulyaciyalyk-nasos-25-40",
@@ -6289,7 +6289,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/filtr-korpusu-kluch-komplekt/",
+      "url": "https://www.stroyrayon.kg/product/filtr-korpusu-kluch-komplekt",
       "slug": "filtr-korpusu-kluch-komplekt",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/filtr-korpusu-kluch-komplekt",
@@ -6306,7 +6306,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/dush-sistemasy-basic/",
+      "url": "https://www.stroyrayon.kg/product/dush-sistemasy-basic",
       "slug": "dush-sistemasy-basic",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/dush-sistemasy-basic",
@@ -6323,7 +6323,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/1-klavishaluu-ochurguch/",
+      "url": "https://www.stroyrayon.kg/product/1-klavishaluu-ochurguch",
       "slug": "1-klavishaluu-ochurguch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/1-klavishaluu-ochurguch",
@@ -6340,7 +6340,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/2-klavishaluu-ochurguch/",
+      "url": "https://www.stroyrayon.kg/product/2-klavishaluu-ochurguch",
       "slug": "2-klavishaluu-ochurguch",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/2-klavishaluu-ochurguch",
@@ -6357,7 +6357,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/zherge-tutashtyrgychy-bar-rozetka/",
+      "url": "https://www.stroyrayon.kg/product/zherge-tutashtyrgychy-bar-rozetka",
       "slug": "zherge-tutashtyrgychy-bar-rozetka",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/zherge-tutashtyrgychy-bar-rozetka",
@@ -6374,7 +6374,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/kabel-kanal-25x16-2/",
+      "url": "https://www.stroyrayon.kg/product/kabel-kanal-25x16-2",
       "slug": "kabel-kanal-25x16-2",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/kabel-kanal-25x16-2",
@@ -6397,7 +6397,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/wago-tip-klemma-3-orun/",
+      "url": "https://www.stroyrayon.kg/product/wago-tip-klemma-3-orun",
       "slug": "wago-tip-klemma-3-orun",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/wago-tip-klemma-3-orun",
@@ -6414,7 +6414,7 @@
       ]
     },
     {
-      "url": "http://127.0.0.1:4184/product/izolenta-kara/",
+      "url": "https://www.stroyrayon.kg/product/izolenta-kara",
       "slug": "izolenta-kara",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/izolenta-kara",
@@ -6433,7 +6433,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/gofra-tutuk-16mm/",
+      "url": "https://www.stroyrayon.kg/product/gofra-tutuk-16mm",
       "slug": "gofra-tutuk-16mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gofra-tutuk-16mm",
@@ -6454,7 +6454,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/gofra-tutuk-20mm/",
+      "url": "https://www.stroyrayon.kg/product/gofra-tutuk-20mm",
       "slug": "gofra-tutuk-20mm",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/gofra-tutuk-20mm",
@@ -6475,7 +6475,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/internet-kabel-cat5e/",
+      "url": "https://www.stroyrayon.kg/product/internet-kabel-cat5e",
       "slug": "internet-kabel-cat5e",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/internet-kabel-cat5e",
@@ -6496,7 +6496,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/perforaciyalangan-montazh-lenta/",
+      "url": "https://www.stroyrayon.kg/product/perforaciyalangan-montazh-lenta",
       "slug": "perforaciyalangan-montazh-lenta",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/perforaciyalangan-montazh-lenta",
@@ -6515,7 +6515,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ppr-tutuk-keskich/",
+      "url": "https://www.stroyrayon.kg/product/ppr-tutuk-keskich",
       "slug": "ppr-tutuk-keskich",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ppr-tutuk-keskich",
@@ -6536,7 +6536,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/carkit-pvs-2-zhilnyi/",
+      "url": "https://www.stroyrayon.kg/product/carkit-pvs-2-zhilnyi",
       "slug": "carkit-pvs-2-zhilnyi",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/carkit-pvs-2-zhilnyi",
@@ -6553,7 +6553,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/pvs-provod-3x1-5/",
+      "url": "https://www.stroyrayon.kg/product/pvs-provod-3x1-5",
       "slug": "pvs-provod-3x1-5",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/pvs-provod-3x1-5",
@@ -6570,7 +6570,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-pipe-pn20/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-pn20",
       "slug": "ever-plast-ppr-pipe-pn20",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-pn20",
@@ -6587,7 +6587,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-pipe-fiber/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-fiber",
       "slug": "ever-plast-ppr-pipe-fiber",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-fiber",
@@ -6604,7 +6604,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-pipe-dual/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-dual",
       "slug": "ever-plast-ppr-pipe-dual",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-pipe-dual",
@@ -6621,7 +6621,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-elbow-90/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-90",
       "slug": "ever-plast-ppr-elbow-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-90",
@@ -6638,7 +6638,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-elbow-45/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-45",
       "slug": "ever-plast-ppr-elbow-45",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-elbow-45",
@@ -6655,7 +6655,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-clip/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-clip",
       "slug": "ever-plast-ppr-clip",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-clip",
@@ -6672,7 +6672,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-tee/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-tee",
       "slug": "ever-plast-ppr-tee",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-tee",
@@ -6689,7 +6689,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-plug/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-plug",
       "slug": "ever-plast-ppr-plug",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-plug",
@@ -6706,7 +6706,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-cross/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-cross",
       "slug": "ever-plast-ppr-cross",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-cross",
@@ -6723,7 +6723,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-coupling/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-coupling",
       "slug": "ever-plast-ppr-coupling",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-coupling",
@@ -6740,7 +6740,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-bypass/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-bypass",
       "slug": "ever-plast-ppr-bypass",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-bypass",
@@ -6757,7 +6757,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-reducer/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-reducer",
       "slug": "ever-plast-ppr-reducer",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-reducer",
@@ -6774,7 +6774,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-reducing-tee/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-reducing-tee",
       "slug": "ever-plast-ppr-reducing-tee",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-reducing-tee",
@@ -6791,7 +6791,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-tee-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-vr",
       "slug": "ever-plast-ppr-combined-tee-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-vr",
@@ -6808,7 +6808,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-tee-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-nr",
       "slug": "ever-plast-ppr-combined-tee-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-tee-nr",
@@ -6825,7 +6825,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-elbow-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-vr",
       "slug": "ever-plast-ppr-combined-elbow-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-vr",
@@ -6842,7 +6842,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-elbow-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-nr",
       "slug": "ever-plast-ppr-combined-elbow-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-elbow-nr",
@@ -6859,7 +6859,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-double-wall-elbow-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-vr",
       "slug": "ever-plast-ppr-double-wall-elbow-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-vr",
@@ -6876,7 +6876,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-double-wall-elbow-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-nr",
       "slug": "ever-plast-ppr-double-wall-elbow-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-double-wall-elbow-nr",
@@ -6893,7 +6893,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-wall-elbow-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-vr",
       "slug": "ever-plast-ppr-wall-elbow-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-vr",
@@ -6910,7 +6910,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-wall-elbow-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-nr",
       "slug": "ever-plast-ppr-wall-elbow-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-wall-elbow-nr",
@@ -6927,7 +6927,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-coupling-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-vr",
       "slug": "ever-plast-ppr-combined-coupling-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-vr",
@@ -6944,7 +6944,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-combined-coupling-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-nr",
       "slug": "ever-plast-ppr-combined-coupling-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-combined-coupling-nr",
@@ -6961,7 +6961,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-union-vr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-union-vr",
       "slug": "ever-plast-ppr-union-vr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-union-vr",
@@ -6978,7 +6978,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-union-nr/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-union-nr",
       "slug": "ever-plast-ppr-union-nr",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-union-nr",
@@ -6995,7 +6995,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-filter/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-filter",
       "slug": "ever-plast-ppr-filter",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-filter",
@@ -7012,7 +7012,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-ppr-valve/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-ppr-valve",
       "slug": "ever-plast-ppr-valve",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-ppr-valve",
@@ -7029,7 +7029,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-coupling/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-coupling",
       "slug": "ever-plast-sewer-coupling",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-coupling",
@@ -7046,7 +7046,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-elbow-45/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-45",
       "slug": "ever-plast-sewer-elbow-45",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-45",
@@ -7063,7 +7063,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-elbow-90/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-90",
       "slug": "ever-plast-sewer-elbow-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-elbow-90",
@@ -7080,7 +7080,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-special-elbow/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-special-elbow",
       "slug": "ever-plast-sewer-special-elbow",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-special-elbow",
@@ -7097,7 +7097,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-plug/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-plug",
       "slug": "ever-plast-sewer-plug",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-plug",
@@ -7114,7 +7114,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-revision/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-revision",
       "slug": "ever-plast-sewer-revision",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-revision",
@@ -7131,7 +7131,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-reducer/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-reducer",
       "slug": "ever-plast-sewer-reducer",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-reducer",
@@ -7148,7 +7148,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-tee-90/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-tee-90",
       "slug": "ever-plast-sewer-tee-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-tee-90",
@@ -7165,7 +7165,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-tee-45/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-tee-45",
       "slug": "ever-plast-sewer-tee-45",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-tee-45",
@@ -7182,7 +7182,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-cross/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-cross",
       "slug": "ever-plast-sewer-cross",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-cross",
@@ -7199,7 +7199,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-spigot/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-spigot",
       "slug": "ever-plast-sewer-spigot",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-spigot",
@@ -7216,7 +7216,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-external-elbow-45/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-45",
       "slug": "ever-plast-sewer-external-elbow-45",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-45",
@@ -7233,7 +7233,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-external-elbow-90/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-90",
       "slug": "ever-plast-sewer-external-elbow-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-elbow-90",
@@ -7250,7 +7250,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-external-revision/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-revision",
       "slug": "ever-plast-sewer-external-revision",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-revision",
@@ -7267,7 +7267,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-external-tee-45/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-45",
       "slug": "ever-plast-sewer-external-tee-45",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-45",
@@ -7284,7 +7284,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-external-tee-90/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-90",
       "slug": "ever-plast-sewer-external-tee-90",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-external-tee-90",
@@ -7301,7 +7301,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-clip/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-clip",
       "slug": "ever-plast-sewer-clip",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-clip",
@@ -7318,7 +7318,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-metal-clamp/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-metal-clamp",
       "slug": "ever-plast-sewer-metal-clamp",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-metal-clamp",
@@ -7335,7 +7335,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-pipe-50-internal/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-50-internal",
       "slug": "ever-plast-sewer-pipe-50-internal",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-50-internal",
@@ -7352,7 +7352,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-pipe-110-internal/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-internal",
       "slug": "ever-plast-sewer-pipe-110-internal",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-internal",
@@ -7369,7 +7369,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-pipe-110-external/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-external",
       "slug": "ever-plast-sewer-pipe-110-external",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-110-external",
@@ -7386,7 +7386,7 @@
       "warnings": []
     },
     {
-      "url": "http://127.0.0.1:4184/product/ever-plast-sewer-pipe-160-external/",
+      "url": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-160-external",
       "slug": "ever-plast-sewer-pipe-160-external",
       "status": 200,
       "canonical": "https://www.stroyrayon.kg/product/ever-plast-sewer-pipe-160-external",

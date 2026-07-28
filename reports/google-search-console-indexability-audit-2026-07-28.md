@@ -509,9 +509,32 @@ ppr-tutuk-keskich
 
 ### Production и ручное действие
 
-На момент подготовки этого раздела production deployment ещё не выполнен.
-Поэтому HTTP 404 для двух снятых URL, применение миграции и итоговая разметка
-оставшихся карточек пока не заявляются как проверенные на рабочем домене.
+Production deployment коммита `69df5f9` завершён Vercel со статусом Success
+28 июля 2026. Первый deployment `d27d4bb` не был опубликован: Vercel исключил
+новый build-модуль по старому правилу `.vercelignore`. В `69df5f9` модуль был
+добавлен в явный allowlist; повторная облачная сборка завершилась успешно.
+
+Проверка рабочего домена подтвердила:
+
+- `https://www.stroyrayon.kg/product/start-shpaklevka-20kg` — HTTP 404,
+  без редиректа и без Product JSON-LD;
+- `https://www.stroyrayon.kg/product/alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp`
+  — HTTP 404, без редиректа и без Product JSON-LD;
+- production sitemap — HTTP 200, 411 URL, оба снятых slug отсутствуют;
+- production API больше не возвращает данные обоих снятых товаров;
+- `npm run qa:structured-data` на production — PASS: 245 индексируемых
+  карточек + 2 снятых URL, всего 247/247, 0 ошибок;
+- валидных Product JSON-LD — 245/245;
+- битых или перенаправляемых изображений — 0;
+- дублирующихся или несогласованных Product schema — 0;
+- `npm run qa:seo:indexability` — PASS: 411/411, 0 критических ошибок;
+- `npm run production:smoke` — PASS, 0 ошибок; R2-фото контрольного товара
+  возвращает HTTP 200.
+
+Финальный Product JSON-LD и финальный публичный image URL для удалённого товара
+не применяются: корректный production-результат — HTTP 404 и отсутствие
+товарной разметки. Для оставшихся карточек общий генератор использует реальные
+доступные изображения.
 
 После успешной production-проверки владельцу нужно открыть Merchant listings →
 Missing field `image` и нажать Validate fix. Удалённый URL не нужно отправлять
