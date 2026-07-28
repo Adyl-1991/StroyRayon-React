@@ -2,6 +2,7 @@ import { getProductAssetEntry } from './productAssets.js'
 import { alinexProducts } from './alinexProducts.generated.js'
 import { carkitCableProducts } from './carkitCableProducts.generated.js'
 import { everPlastProducts } from './everPlastProducts.generated.js'
+import { isRetiredProductId, isRetiredProductSlug } from './retiredProductSlugs.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
 const buildingProductPlaceholder = '/images/placeholders/product-building-placeholder.svg'
@@ -15194,10 +15195,23 @@ function updateEverPlastRelatedIds(item) {
   }
 }
 
+function removeRetiredProductRelations(item) {
+  if (!item.relatedProductIds?.some(isRetiredProductId)) return item
+  return {
+    ...item,
+    relatedProductIds: item.relatedProductIds.filter((id) => !isRetiredProductId(id)),
+  }
+}
+
 export const products = [
   ...baseProducts
-    .filter((item) => !everPlastReplacementIds.has(item.id) && item.id !== 'pvs-provod-3x1-5')
-    .map(updateEverPlastRelatedIds),
-  ...carkitCableProducts.map(product),
-  ...everPlastProducts.map(product),
+    .filter((item) =>
+      !isRetiredProductSlug(item.slug)
+      && !everPlastReplacementIds.has(item.id)
+      && item.id !== 'pvs-provod-3x1-5',
+    )
+    .map(updateEverPlastRelatedIds)
+    .map(removeRetiredProductRelations),
+  ...carkitCableProducts.map(product).map(removeRetiredProductRelations),
+  ...everPlastProducts.map(product).map(removeRetiredProductRelations),
 ]

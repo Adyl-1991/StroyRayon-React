@@ -366,3 +366,154 @@ Production напрямую подтверждён полным HTTP/HTML SEO-а
 Если GSC Examples содержат URL, отсутствующий в подробном JSON-аудите и
 legacy-списках выше, его нужно проверить отдельно до заявления о полном
 исправлении исходных пяти URL.
+
+## Confirmed Merchant Listing Issue — Missing Product Image
+
+### Исходная проблема
+
+- раздел Google Search Console: Merchant listings / «Данные о товарах продавца»;
+- ошибка: Missing field `image` / «Отсутствует поле `image`»;
+- обнаружено: 28 июля 2026;
+- последний обход Google: 28 июля 2026;
+- затронутый URL: `https://www.stroyrayon.kg/product/start-shpaklevka-20kg`;
+- название в GSC: «Жука тегиздөөчү аралашма старт 20 кг».
+
+В исходном HTML находился один валидный объект Product JSON-LD, но без свойства
+`image`. В production API у товара была только общая SVG-заглушка
+`/images/placeholders/product-building-placeholder.svg` с
+`storageDriver=legacy`; реального основного изображения и объекта R2 не было.
+Локальный файл `public/images/products/start-shpaklevka-20kg/main.webp` изображал
+другой товар Dalmia DSP и ранее уже был отклонён фотоаудитом. Использовать его
+как изображение товара было бы недостоверно.
+
+Упрощённый вид прежних структурированных данных:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Жука тегиздөөчү аралашма старт 20 кг",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "KGS"
+  }
+}
+```
+
+### Принятое владельцем решение
+
+Владелец магазина решил не публиковать вымышленное или чужое изображение, а
+полностью снять товар с продажи. Дополнительно снята карточка:
+
+`https://www.stroyrayon.kg/product/alinex-stukaturka-gipsovaia-usilennaia-alinex-grender-wp`
+
+Оба slug внесены в единый список снятых товаров. Они исключаются из публичного
+каталога, поиска, sitemap, SEO-пререндера, связанных товаров и заказного
+каталога. Для `start-shpaklevka-20kg`, существующего в PostgreSQL, добавлена
+Prisma-миграция мягкой деактивации (`isActive=false`), сохраняющая целостность
+старых заказов. Устаревший ответ API также фильтруется фронтендом до применения
+миграции.
+
+После снятия товара корректным результатом является отсутствие Product JSON-LD
+и ответ HTTP 404, а не Product с выдуманным `image`. Финальный публичный URL
+изображения и content type неприменимы: товар удалён, фотография намеренно не
+создавалась.
+
+### Общая реализация Product image
+
+Помимо удаления карточек исправлен общий механизм для оставшихся товаров:
+
+- JSON-LD использует массив абсолютных публичных HTTPS-изображений;
+- исключаются пустые значения, SVG-заглушки, брендовые картинки, localhost,
+  приватные R2/S3 endpoint и дубликаты;
+- основное фото согласуется с `og:image`, `twitter:image` и изображением в
+  пререндеренном HTML;
+- production build получает публичные R2-изображения через открытый API без
+  приватных ключей;
+- при SPA-переходах старый Product JSON-LD удаляется и не накапливается;
+- отсутствующий или снятый товар получает noindex-интерфейс без устаревшей
+  Product-разметки.
+
+До исправления production-аудит обнаружил ещё семь индексируемых карточек,
+которые имели публичные R2-фото в API, но не передавали их в исходный HTML:
+
+```text
+kabel-kanal-25x16-2
+izolenta-kara
+gofra-tutuk-16mm
+gofra-tutuk-20mm
+internet-kabel-cat5e
+perforaciyalangan-montazh-lenta
+ppr-tutuk-keskich
+```
+
+Общий build-time механизм устраняет эти расхождения без slug-специфичных
+исключений.
+
+### Результат локального аудита перед публикацией
+
+- индексируемых товарных страниц: 245;
+- отдельно проверенных снятых URL: 2;
+- всего проверок URL: 247;
+- прошли: 247;
+- критических ошибок: 0;
+- Product JSON-LD: 245 из 245;
+- страниц без подтверждённого реального изображения: 137 предупреждений;
+- битых изображений: 0;
+- изображений с редиректом: 0;
+- дублирующихся Product schema: 0;
+- несогласованных Product/OG/Twitter/видимых изображений: 0;
+- sitemap: 411 URL, из них 245 товаров;
+- заказной каталог: 227 товаров / 480 записей.
+
+Полный список 137 товаров без подтверждённого изображения и результаты по
+каждому URL сохранены в
+`reports/google-merchant-structured-data-audit-2026-07-28.json`.
+
+### Изменённые компоненты
+
+- общий валидатор и нормализатор Product image;
+- генератор Product JSON-LD;
+- React SEO-компонент и очистка JSON-LD при навигации;
+- загрузка товара и фильтрация снятых slug;
+- production SEO-пререндер и синхронизация публичных R2-фото;
+- sitemap и серверный заказной каталог;
+- Prisma-миграция деактивации;
+- `qa:structured-data` и 14 регрессионных сценариев;
+- тест ожидаемого количества активных товаров;
+- этот отчёт и подробный JSON-аудит.
+
+### Выполненные проверки перед deploy
+
+| Команда | Результат |
+|---|---|
+| `SEO_SYNC_PUBLIC_IMAGES=1 npm run build` | PASS; 245 товаров, 411 маршрутов |
+| `npm run test:structured-data` | PASS; 14/14 |
+| `npm run test:seo` | PASS; 11/11 |
+| `npm run test:checkout` | PASS; 4/4 |
+| `npm run test:alinex` | PASS; 3/3 |
+| `npm run test:ever-plast` | PASS; 6/6 |
+| `npm run test:carkit` | PASS; 3/3 |
+| `npm run test:images` | PASS; 8/8 |
+| `npm run test:localization` | PASS; 5/5 |
+| `npm run test:content` | PASS; 2/2 |
+| `npm run test:pwa` | PASS; 4/4 |
+| `npm run validate:catalog` / `npm run sync:catalog` | PASS; 0 предупреждений |
+| `npm run lint` | PASS |
+| `npm run qa:bundle` | PASS |
+| `npm run qa:customer` | PASS; 1934/1934 |
+| `npm run qa:structured-data` на production preview | PASS; 247/247 |
+| `npm run prisma:validate` в `api` | PASS |
+| `npm test` в `api` | PASS; 68/68 |
+| `npm run build` и `npm run lint` в `api` | PASS |
+
+### Production и ручное действие
+
+На момент подготовки этого раздела production deployment ещё не выполнен.
+Поэтому HTTP 404 для двух снятых URL, применение миграции и итоговая разметка
+оставшихся карточек пока не заявляются как проверенные на рабочем домене.
+
+После успешной production-проверки владельцу нужно открыть Merchant listings →
+Missing field `image` и нажать Validate fix. Удалённый URL не нужно отправлять
+через Request indexing: Google должен повторно обойти его и удалить товарный
+результат. Успех проверки GSC нельзя считать подтверждённым до ответа Google.

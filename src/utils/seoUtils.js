@@ -6,9 +6,8 @@ import {
   normalizeKgText,
   normalizeProductKgText,
 } from '../services/productService.js'
-import { getProductGallery } from './imageUtils.js'
+import { getProductStructuredDataImages } from './productImageSeo.js'
 import {
-  absoluteUrl,
   buildOrganizationStructuredData,
   buildWebPageStructuredData,
   buildWebSiteStructuredData,
@@ -66,13 +65,10 @@ export function getProductSeo(product, locale = 'kg') {
 }
 
 export function buildProductStructuredData(product, locale = 'kg') {
-  if (!product?.titleKg || !product?.slug) return null
+  if (!product?.titleKg || !product?.slug || product.isActive === false) return null
 
   const productName = getProductTitle(product, locale)
-  const productImages = getProductGallery(product)
-    .filter((image) => image?.src && image.type !== 'placeholder' && !image.src.includes('/placeholders/'))
-    .map((image) => absoluteUrl(image.src))
-    .filter((imageUrl, index, imageUrls) => imageUrls.indexOf(imageUrl) === index)
+  const productImages = getProductStructuredDataImages(product)
   const price = Number(product.price)
   const currency = product.currency || 'KGS'
   const pricedVariants = (product.variants || [])

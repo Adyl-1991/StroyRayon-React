@@ -34,7 +34,7 @@ import {
   combineStructuredData,
   getProductSeo,
 } from '../utils/seoUtils'
-import { getProductImage } from '../utils/imageUtils'
+import { getPrimaryProductStructuredDataImage } from '../utils/productImageSeo'
 
 const ignoredSpecKeys = new Set([
   'descriptionru',
@@ -302,7 +302,17 @@ export function ProductPage() {
   }
 
   if (!product) {
-    return <EmptyState title={t('product.notFoundTitle')} text={t('product.notFoundText')} />
+    return (
+      <main className="page">
+        <Seo
+          title={t('common.notFoundTitle')}
+          description={t('common.notFoundText')}
+          canonical={`/product/${canonicalProductSlug}`}
+          noIndex
+        />
+        <EmptyState title={t('product.notFoundTitle')} text={t('product.notFoundText')} />
+      </main>
+    )
   }
 
   const productName = getProductTitle(product, locale)
@@ -330,27 +340,26 @@ export function ProductPage() {
     { label: productName },
   ]
   const seo = getProductSeo(product, locale)
-  const productImage = getProductImage(product)
-  const seoImage = productImage.type === 'placeholder' || productImage.src.includes('/placeholders/')
-    ? undefined
-    : productImage.src
+  const seoImage = getPrimaryProductStructuredDataImage(product)
   const managerAskText = buildProductInquiryText({ product: { ...product, name: productName }, variant: selectedVariant, locale })
 
   return (
     <main className="page">
-      <Seo
-        title={seo.title}
-        description={seo.description}
-        canonical={seo.canonical}
-        image={seoImage}
-        imageAlt={productName}
-        type="product"
-        structuredData={combineStructuredData(
-          buildProductStructuredData(product, locale),
-          buildBreadcrumbStructuredData(breadcrumbItems),
-          buildFaqStructuredData(faqItems),
-        )}
-      />
+      {!isLoading && (
+        <Seo
+          title={seo.title}
+          description={seo.description}
+          canonical={seo.canonical}
+          image={seoImage}
+          imageAlt={productName}
+          type="product"
+          structuredData={combineStructuredData(
+            buildProductStructuredData(product, locale),
+            buildBreadcrumbStructuredData(breadcrumbItems),
+            buildFaqStructuredData(faqItems),
+          )}
+        />
+      )}
       <Breadcrumbs items={breadcrumbItems} />
       {isLoading && (
         <p className="microcopy" role="status">

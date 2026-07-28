@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { fetchProductBySlug, fetchProducts } from '../api/productsApi'
 import { USE_API } from '../config/api'
+import { isRetiredProductSlug } from '../data/retiredProductSlugs'
 import { getFilteredProducts, getFilterOptions, getProductBySlug, normalizeProduct } from '../services/productService'
 import { isBundledAlinexProduct, shouldUseBundledAlinex } from '../utils/alinexCatalogMode'
 import { isBundledEverPlastProduct, shouldUseBundledEverPlast } from '../utils/everPlastCatalogMode'
@@ -131,7 +132,9 @@ export function useProducts(filters) {
         })
       .then((result) => {
         if (!isActive) return
-        const apiProducts = (result.items || []).map(normalizeProduct)
+        const apiProducts = (result.items || [])
+          .map(normalizeProduct)
+          .filter((product) => !isRetiredProductSlug(product.slug))
 
         if (isVirtualCatalogGroup) {
           const scopedProducts = getFilteredProducts({
@@ -168,13 +171,16 @@ export function useProducts(filters) {
         }
 
         const products = apiProducts
+        const removedResultCount = Math.max(0, (result.items || []).length - products.length)
+        const total = Math.max(0, Number(result.total || 0) - removedResultCount)
+        const totalPages = Math.max(Math.ceil(total / Number(result.limit || limit)), 1)
         setState({
           products,
           items: products,
-          total: result.total,
+          total,
           page: result.page,
           limit: result.limit,
-          totalPages: result.totalPages,
+          totalPages,
           filterOptions: normalizeFilterOptions(result.filters) || fallbackResult.filterOptions,
           isLoading: false,
           error: null,
@@ -214,32 +220,61 @@ export function useProducts(filters) {
 }
 
 export function useProductBySlug(slug) {
-  const fallbackProduct = useMemo(() => getProductBySlug(slug), [slug])
+  const isRetiredProduct = isRetiredProductSlug(slug)
+  const fallbackProduct = useMemo(
+    () => (isRetiredProduct ? undefined : getProductBySlug(slug)),
+    [isRetiredProduct, slug],
+  )
   const preferBundledProduct = isBundledAlinexProduct(fallbackProduct) || isBundledEverPlastProduct(fallbackProduct)
-  const [state, setState] = useState({ product: fallbackProduct, isLoading: USE_API, error: null })
+  const [state, setState] = useState({
+    requestedSlug: slug,
+    product: fallbackProduct,
+    isLoading: USE_API,
+    error: null,
+  })
 
   useEffect(() => {
-    if (!USE_API || !slug || preferBundledProduct) return
+    if (!USE_API || !slug || isRetiredProduct || preferBundledProduct) return
 
     let isActive = true
 
     fetchProductBySlug(slug)
       .then((product) => {
         if (!isActive) return
-        setState({ product: product ? normalizeProduct(product) : null, isLoading: false, error: null })
+        setState({
+          requestedSlug: slug,
+          product: product ? normalizeProduct(product) : null,
+          isLoading: false,
+          error: null,
+        })
       })
       .catch((error) => {
         if (!isActive) return
         console.warn('StroyRayon API product fallback:', error)
-        setState({ product: fallbackProduct, isLoading: false, error })
+        setState({
+          requestedSlug: slug,
+          product: fallbackProduct,
+          isLoading: false,
+          error,
+        })
       })
 
     return () => {
       isActive = false
     }
-  }, [fallbackProduct, preferBundledProduct, slug])
+  }, [fallbackProduct, isRetiredProduct, preferBundledProduct, slug])
 
-  return USE_API && !preferBundledProduct ? state : { product: fallbackProduct, isLoading: false, error: null }
+  if (isRetiredProduct) {
+    return { product: null, isLoading: false, error: null }
+  }
+
+  if (!USE_API || preferBundledProduct) {
+    return { product: fallbackProduct, isLoading: false, error: null }
+  }
+
+  return state.requestedSlug === slug
+    ? state
+    : { product: fallbackProduct, isLoading: true, error: null }
 }
 
 function normalizeFilterOptions(filters) {

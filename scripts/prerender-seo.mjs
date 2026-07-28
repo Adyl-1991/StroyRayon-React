@@ -15,6 +15,7 @@ import {
   getProductsByCatalogNode,
 } from '../src/services/productService.js'
 import { getProductImage } from '../src/utils/imageUtils.js'
+import { getPrimaryProductStructuredDataImage } from '../src/utils/productImageSeo.js'
 import { formatSeoTitle, getRobotsContent } from '../src/utils/seoMeta.js'
 import {
   buildBreadcrumbStructuredData,
@@ -29,6 +30,10 @@ import {
   getPageCanonical,
   getProductSeo,
 } from '../src/utils/seoUtils.js'
+import {
+  fetchPublicProductImageOverrides,
+  mergePublicProductImageOverride,
+} from './public-product-image-overrides.mjs'
 import { absoluteUrl } from '../src/utils/siteSeoUtils.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -164,7 +169,7 @@ function flattenCatalog(nodes, parentPath = [], ancestors = []) {
   })
 }
 
-export function buildRouteDefinitions() {
+export function buildRouteDefinitions({ productImageOverrides = new Map() } = {}) {
   const routes = new Map()
   const add = (route, seo) => {
     if (routes.has(route)) throw new Error(`Duplicate SEO prerender route: ${route}`)
@@ -291,15 +296,17 @@ export function buildRouteDefinitions() {
   })
 
   products.filter((product) => product.isActive !== false).forEach((product) => {
-    const route = `/product/${product.slug}`
-    const seo = getProductSeo(product, 'kg')
-    const productTitle = getProductTitle(product, 'kg')
-    const productImage = getProductImage(product)
-    const seoImage = productImage.type === 'placeholder' || productImage.src.includes('/placeholders/')
-      ? undefined
-      : productImage
-    const faqItems = getProductListField(product, 'faq', 'kg')
-    const productSpecs = Object.entries(getProductSpecs(product, 'kg') || {})
+    const seoProduct = mergePublicProductImageOverride(product, productImageOverrides)
+    const route = `/product/${seoProduct.slug}`
+    const seo = getProductSeo(seoProduct, 'kg')
+    const productTitle = getProductTitle(seoProduct, 'kg')
+    const productImage = getProductImage(seoProduct)
+    const seoImageSrc = getPrimaryProductStructuredDataImage(seoProduct)
+    const seoImage = seoImageSrc
+      ? { ...productImage, src: seoImageSrc }
+      : undefined
+    const faqItems = getProductListField(seoProduct, 'faq', 'kg')
+    const productSpecs = Object.entries(getProductSpecs(seoProduct, 'kg') || {})
       .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
       .slice(0, 12)
       .map(([name, value]) => ({ name, value: String(value) }))
@@ -321,7 +328,7 @@ export function buildRouteDefinitions() {
       imageAlt: productTitle,
       type: 'product',
       structuredData: combineStructuredData(
-        buildProductStructuredData(product, 'kg'),
+        buildProductStructuredData(seoProduct, 'kg'),
         buildBreadcrumbStructuredData(breadcrumbItems),
         buildFaqStructuredData(faqItems),
       ),
@@ -329,8 +336,8 @@ export function buildRouteDefinitions() {
         title: productTitle,
         breadcrumbs: breadcrumbItems,
         image: seoImage,
-        price: Number(product.price) > 0
-          ? `${Number(product.price).toLocaleString('ru-RU')} сом / ${product.unit || 'даана'}`
+        price: Number(seoProduct.price) > 0
+          ? `${Number(seoProduct.price).toLocaleString('ru-RU')} сом / ${seoProduct.unit || 'даана'}`
           : kg.product.priceNotSet,
         specs: productSpecs,
         faq: faqItems,
@@ -349,7 +356,8 @@ function outputPathForRoute(route) {
 
 export async function prerenderSeo() {
   const baseHtml = await readFile(baseHtmlPath, 'utf8')
-  const routeDefinitions = buildRouteDefinitions()
+  const productImageOverrides = await fetchPublicProductImageOverrides()
+  const routeDefinitions = buildRouteDefinitions({ productImageOverrides })
   const sitemapRoutes = getSitemapRoutes()
   const missingRoutes = sitemapRoutes.filter((route) => !routeDefinitions.has(route))
   const extraRoutes = [...routeDefinitions.keys()].filter((route) => !sitemapRoutes.includes(route))

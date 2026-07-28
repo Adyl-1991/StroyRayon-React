@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { siteConfig } from '../../config/site'
+import { removeJsonLd, upsertJsonLd } from '../../utils/jsonLdDom'
 import { formatSeoTitle, getCanonicalUrl, getRobotsContent } from '../../utils/seoMeta'
 
 function upsertMeta(name, content) {
@@ -36,24 +37,6 @@ function upsertLink(rel, href) {
     document.head.appendChild(link)
   }
   link.setAttribute('href', href)
-}
-
-function upsertJsonLd(id, data) {
-  if (typeof document === 'undefined') return
-
-  let script = document.getElementById(id)
-  if (!data) {
-    script?.remove()
-    return
-  }
-
-  if (!script) {
-    script = document.createElement('script')
-    script.id = id
-    script.type = 'application/ld+json'
-    document.head.appendChild(script)
-  }
-  script.textContent = JSON.stringify(data)
 }
 
 export function Seo({
@@ -94,6 +77,8 @@ export function Seo({
     upsertMeta('twitter:image:alt', ogImageAlt)
     upsertLink('canonical', canonicalUrl)
     upsertJsonLd('stroyrayon-jsonld', structuredData)
+
+    return () => removeJsonLd('stroyrayon-jsonld', structuredData)
   }, [canonical, description, image, imageAlt, noIndex, structuredData, title, type])
 
   return null

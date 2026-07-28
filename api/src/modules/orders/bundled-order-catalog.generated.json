@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "productCount": 228,
-  "itemCount": 481,
+  "productCount": 227,
+  "itemCount": 480,
   "items": [
     {
       "source": "storefront",
@@ -2325,21 +2325,6 @@
       "variantTitleKg": null,
       "variantTitleRu": null,
       "price": 420,
-      "currency": "KGS",
-      "unit": "кап"
-    },
-    {
-      "source": "storefront",
-      "productId": "start-putty-20kg",
-      "variantId": null,
-      "slug": "start-shpaklevka-20kg",
-      "productSku": "SR-MIX-SPT-020",
-      "variantSku": null,
-      "titleKg": "Шпаклёвка старт 20 кг",
-      "titleRu": "Стартовая шпаклевка, 20 кг",
-      "variantTitleKg": null,
-      "variantTitleRu": null,
-      "price": 260,
       "currency": "KGS",
       "unit": "кап"
     },
