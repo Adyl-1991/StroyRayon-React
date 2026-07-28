@@ -7,6 +7,7 @@
 /scripts/*
 !/scripts/generate-bundled-order-catalog.mjs
 !/scripts/prerender-seo.mjs
+!/scripts/public-product-image-overrides.mjs
 !/scripts/sync-catalog.mjs
 
 # Local and generated-only files.
