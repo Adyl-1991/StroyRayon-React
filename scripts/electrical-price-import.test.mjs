@@ -9,6 +9,10 @@ import {
 } from '../src/data/electricalSupplierProducts.generated.js'
 import { rootCategoryImages } from '../src/data/categoryAssets.js'
 import { products } from '../src/data/products.js'
+import {
+  isBundledElectricalSupplierProduct,
+  shouldUseBundledElectricalSupplier,
+} from '../src/utils/electricalSupplierCatalogMode.js'
 
 const expectedSupplierCounts = {
   CHINT: 442,
@@ -90,4 +94,14 @@ test('each cable subsection uses its own relevant generated image', () => {
     assert.equal(rootCategoryImages[slug]?.src, imagePath)
     assert.equal(existsSync(path.resolve('public', imagePath.replace(/^\/+/, ''))), true)
   }
+})
+
+test('new supplier products stay available when the public API has not imported them yet', () => {
+  const chintProduct = products.find((product) => product.slug === 'chint-breakers-nxb-63-1p')
+
+  assert.equal(isBundledElectricalSupplierProduct(chintProduct), true)
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'CHINT NXB-63' }), true)
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'PANASONIC ARKEDİA' }), true)
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'VIKO Carmen' }), true)
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'несуществующий товар' }), false)
 })

@@ -4,6 +4,10 @@ import { USE_API } from '../config/api'
 import { isRetiredProductSlug } from '../data/retiredProductSlugs'
 import { getFilteredProducts, getFilterOptions, getProductBySlug, normalizeProduct } from '../services/productService'
 import { isBundledAlinexProduct, shouldUseBundledAlinex } from '../utils/alinexCatalogMode'
+import {
+  isBundledElectricalSupplierProduct,
+  shouldUseBundledElectricalSupplier,
+} from '../utils/electricalSupplierCatalogMode'
 import { isBundledEverPlastProduct, shouldUseBundledEverPlast } from '../utils/everPlastCatalogMode'
 
 export function useProducts(filters) {
@@ -39,7 +43,11 @@ export function useProducts(filters) {
         search,
         sort,
       }
-      return shouldUseBundledAlinex(catalogFilters) || shouldUseBundledEverPlast(catalogFilters)
+      return (
+        shouldUseBundledAlinex(catalogFilters)
+        || shouldUseBundledEverPlast(catalogFilters)
+        || shouldUseBundledElectricalSupplier(catalogFilters)
+      )
     },
     [
       brands,
@@ -225,7 +233,11 @@ export function useProductBySlug(slug) {
     () => (isRetiredProduct ? undefined : getProductBySlug(slug)),
     [isRetiredProduct, slug],
   )
-  const preferBundledProduct = isBundledAlinexProduct(fallbackProduct) || isBundledEverPlastProduct(fallbackProduct)
+  const preferBundledProduct = (
+    isBundledAlinexProduct(fallbackProduct)
+    || isBundledEverPlastProduct(fallbackProduct)
+    || isBundledElectricalSupplierProduct(fallbackProduct)
+  )
   const [state, setState] = useState({
     requestedSlug: slug,
     product: fallbackProduct,
