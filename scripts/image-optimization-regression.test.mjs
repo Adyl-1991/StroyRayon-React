@@ -96,7 +96,7 @@ test('AlinEX image helper supplies srcset and preserves the PNG fallback', () =>
   assert.equal(image.placeholderSrc, '/images/placeholders/product-building-placeholder.svg')
 })
 
-test('audited products use stable placeholders without requesting 17 missing WebP files', () => {
+test('audited products use stable placeholders without requesting missing legacy WebP files', () => {
   const auditedSlugs = [
     'sugat-shlangy-12-25m',
     'teplyi-pol-kollektor-komplekt',
@@ -104,6 +104,7 @@ test('audited products use stable placeholders without requesting 17 missing Web
     'kist-50mm',
     'ichki-dubal-boyogu-ak-10l',
     'universal-koler',
+    'vodoemulsiyalyk-boyok-10l',
     'malyardyk-lenta',
     'fasad-boyogu-ak-10l',
     'boyok-gruntovka-10l',
@@ -123,17 +124,20 @@ test('audited products use stable placeholders without requesting 17 missing Web
     const missingMain = `/images/products/${slug}/main.webp`
     const product = {
       ...bundledProduct,
-      imageStatus: 'needs-real-photo',
+      imageStatus: undefined,
+      isPlaceholderImage: undefined,
       images: [
         {
           src: `https://www.stroyrayon.kg${missingMain}`,
           fallbackSrc: bundledProduct.images?.[0]?.fallbackSrc,
           expectedSrc: missingMain,
           futureSrc: missingMain,
+          storageDriver: 'legacy',
         },
         {
           src: `/images/products/${slug}/gallery-1.webp`,
           fallbackSrc: bundledProduct.images?.[0]?.fallbackSrc,
+          storageDriver: 'legacy',
         },
       ],
     }

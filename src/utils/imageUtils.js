@@ -132,7 +132,7 @@ function sanitizeUnavailableProductImage(product, image, assetEntry, fallback) {
   const isReady = imageStatus.startsWith('ready')
   const isExplicitlyUnavailable = product?.isPlaceholderImage === true || Boolean(imageStatus && !isReady)
 
-  if (!assetEntry || assetEntry.available || isReady || !isExplicitlyUnavailable) return normalized
+  if (!assetEntry || assetEntry.available) return normalized
 
   const unavailablePaths = new Set(
     [assetEntry.main, assetEntry.futureMain, ...(assetEntry.gallery || [])]
@@ -148,6 +148,9 @@ function sanitizeUnavailableProductImage(product, image, assetEntry, fallback) {
     ? imagePathname.slice(productDirectory.length)
     : ''
   const isPlannedProductFile = plannedFilename === 'main.webp' || /^gallery-\d+\.webp$/.test(plannedFilename)
+  const isLegacyPlannedImage = String(normalized.storageDriver || '').toLowerCase() === 'legacy' && isPlannedProductFile
+
+  if ((isReady || !isExplicitlyUnavailable) && !isLegacyPlannedImage) return normalized
 
   if (unavailablePaths.has(imagePathname) || isPlannedProductFile) {
     return fallback
