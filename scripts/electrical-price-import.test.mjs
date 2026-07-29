@@ -3,6 +3,8 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
 
+import sharp from 'sharp'
+
 import {
   electricalSupplierImportStats,
   electricalSupplierProducts,
@@ -129,4 +131,24 @@ test('new supplier products stay available when the public API has not imported 
   assert.equal(shouldUseBundledElectricalSupplier({ search: 'PANASONIC ARKEDİA' }), true)
   assert.equal(shouldUseBundledElectricalSupplier({ search: 'VIKO Carmen' }), true)
   assert.equal(shouldUseBundledElectricalSupplier({ search: 'несуществующий товар' }), false)
+})
+
+test('CHINT NXB-63 cards use the matching official pole-count images', async () => {
+  for (const poles of [1, 2, 3, 4]) {
+    const slug = `chint-breakers-nxb-63-${poles}p`
+    const expectedImage = `/images/products/${slug}/main-official-v1.webp`
+    const product = products.find((item) => item.slug === slug)
+    const localPath = path.resolve('public', expectedImage.replace(/^\/+/, ''))
+
+    assert.ok(product, slug)
+    assert.equal(product.image.src, expectedImage)
+    assert.equal(product.imageStatus, 'ready')
+    assert.equal(product.isPlaceholderImage, false)
+    assert.equal(existsSync(localPath), true)
+
+    const metadata = await sharp(localPath).metadata()
+    assert.equal(metadata.format, 'webp')
+    assert.equal(metadata.width, 900)
+    assert.equal(metadata.height, 675)
+  }
 })

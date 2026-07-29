@@ -145,6 +145,10 @@ const plannedProductAssetSlugs = [
 const priorityProductImageSlugs = [
   'carkit-pvs-2-zhilnyi',
   'pvs-provod-3x1-5',
+  'chint-breakers-nxb-63-1p',
+  'chint-breakers-nxb-63-2p',
+  'chint-breakers-nxb-63-3p',
+  'chint-breakers-nxb-63-4p',
   'difavtomat-16a',
   'gofra-tutuk-16mm',
   'gofra-tutuk-20mm',
@@ -180,6 +184,10 @@ const priorityProductImageSlugs = [
 const priorityProductImageOverrides = {
   'carkit-pvs-2-zhilnyi': `${PRODUCT_IMAGE_BASE_PATH}/carkit-pvs-2-zhilnyi/main-ai-v2.webp`,
   'pvs-provod-3x1-5': `${PRODUCT_IMAGE_BASE_PATH}/pvs-provod-3x1-5/main-ai-v2.webp`,
+  'chint-breakers-nxb-63-1p': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxb-63-1p/main-official-v1.webp`,
+  'chint-breakers-nxb-63-2p': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxb-63-2p/main-official-v1.webp`,
+  'chint-breakers-nxb-63-3p': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxb-63-3p/main-official-v1.webp`,
+  'chint-breakers-nxb-63-4p': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxb-63-4p/main-official-v1.webp`,
 }
 
 const plannedProductAssets = Object.fromEntries(
