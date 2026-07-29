@@ -88,13 +88,14 @@ const packshotAssets = {
 export function createProductAssetEntry(slug, options = {}) {
   const galleryCount = Number.isFinite(Number(options.galleryCount)) ? Number(options.galleryCount) : 2
   const assetType = options.type || inferProductAssetType(slug)
+  const main = options.main || `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`
 
   return {
     slug,
-    main: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`,
+    main,
     placeholder: getProductPlaceholderByType(assetType),
     fallback: getProductPlaceholderByType(assetType),
-    futureMain: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`,
+    futureMain: main,
     gallery: Array.from({ length: galleryCount }, (_, index) => `${PRODUCT_IMAGE_BASE_PATH}/${slug}/gallery-${index + 1}.webp`),
     type: assetType,
     available: Boolean(options.available),
@@ -176,6 +177,11 @@ const priorityProductImageSlugs = [
   'rakovina-smesitel-basic',
 ]
 
+const priorityProductImageOverrides = {
+  'carkit-pvs-2-zhilnyi': `${PRODUCT_IMAGE_BASE_PATH}/carkit-pvs-2-zhilnyi/main-ai-v2.webp`,
+  'pvs-provod-3x1-5': `${PRODUCT_IMAGE_BASE_PATH}/pvs-provod-3x1-5/main-ai-v2.webp`,
+}
+
 const plannedProductAssets = Object.fromEntries(
   plannedProductAssetSlugs.map((slug) => [slug, createProductAssetEntry(slug)]),
 )
@@ -186,6 +192,7 @@ const priorityProductAssets = Object.fromEntries(
     createProductAssetEntry(slug, {
       available: true,
       galleryCount: 0,
+      main: priorityProductImageOverrides[slug],
     }),
   ]),
 )

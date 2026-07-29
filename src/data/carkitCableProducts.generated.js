@@ -67,6 +67,8 @@ function carkitPvsProduct({ cores, id, slug, sku }) {
     unitRu: 'м',
     brand: 'CARKIT',
     stockStatus: 'in_stock',
+    imageStatus: 'ready-generated',
+    isPlaceholderImage: false,
     minOrder: '1 метр',
     minOrderRu: '1 метр',
     pack: 'метр менен кесилип берилет',

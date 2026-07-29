@@ -23,6 +23,11 @@ const expectedByProduct = {
   ],
 }
 
+const expectedImageByProduct = {
+  'carkit-pvs-2-zhilnyi': '/images/products/carkit-pvs-2-zhilnyi/main-ai-v2.webp',
+  'pvs-provod-3x1-5': '/images/products/pvs-provod-3x1-5/main-ai-v2.webp',
+}
+
 test('CARKIT PVS first batch keeps the approved assortment and retail prices', () => {
   for (const [productId, expectedVariants] of Object.entries(expectedByProduct)) {
     const product = products.find((item) => item.id === productId)
@@ -46,8 +51,10 @@ test('CARKIT PVS first batch keeps the approved assortment and retail prices', (
       assert.equal(variant.unit, 'метр')
     })
 
+    assert.equal(product.image.src, expectedImageByProduct[productId])
     assert.equal(existsSync(path.resolve('public', product.image.src.replace(/^\/+/, ''))), true)
-    assert.equal(product.imageStatus, 'ready')
+    assert.equal(product.imageStatus, 'ready-generated')
+    assert.equal(product.isPlaceholderImage, false)
   }
 })
 
