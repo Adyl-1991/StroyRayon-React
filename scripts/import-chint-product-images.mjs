@@ -14,6 +14,20 @@ const NXB125_PAGE = `${CHINT_PRODUCT_ROOT}/final-power-distribution/nxb-125.html
 const NXB125_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/mccb/nxb-125/product-image`
 const NM1_PAGE = `${CHINT_PRODUCT_ROOT}/secondary-power-distribution/nm1.html`
 const NM1_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/secondary-power-distribution/mccb/nm1/product-image/new`
+const OKMARTS_PAGE_ROOT = 'https://okmarts.com'
+const OKMARTS_IMAGE_ROOT = `${OKMARTS_PAGE_ROOT}/jeecg-boot/sys/common/view/product/Circuit_Breaker/CHINT/2023`
+const OKMARTS_IMAGE_PROXY = `${OKMARTS_PAGE_ROOT}/cdn-cgi/image/fit=contain,format=auto,metadata=none,onerror=redirect,quality=90,width=1000,height=1000`
+const ELECTROCONTROL_NM8N250_PAGE = 'https://electrocontrol.com.ua/ua/av/271335-avtomatichnii-vimikach-v-litomu-korpusi-chint-nm8n-250s-en-250a-3p-50ka'
+
+function okmartsNxmEntry(model) {
+  const file = `Chint-Circuit-Breaker-${model}`
+  return {
+    slug: `chint-breakers-${model.toLowerCase()}`,
+    sourcePage: `${OKMARTS_PAGE_ROOT}/chint-circuit-breaker-${model.toLowerCase()}.html`,
+    imageUrl: `${OKMARTS_IMAGE_PROXY}/${OKMARTS_IMAGE_ROOT}/${file}/${file}.jpg`,
+    outputName: 'main-supplier-v1.webp',
+  }
+}
 
 const entries = [
   {
@@ -66,6 +80,17 @@ const entries = [
     sourcePage: NM1_PAGE,
     imageUrl: `${NM1_IMAGE_ROOT}/NM1-400S-3300-MCCB.png`,
   },
+  ...[
+    'NXM-160S-3300',
+    'NXM-250S-3300',
+    'NXM-1000S-3300',
+  ].map(okmartsNxmEntry),
+  {
+    slug: 'chint-breakers-nm8n-250s',
+    sourcePage: ELECTROCONTROL_NM8N250_PAGE,
+    imageUrl: 'https://electrocontrol.com.ua/productimages/000012/29868/271335-avtomatichnii-vimikach-v-litomu-korpusi-chint-nm8n-250s-en-250a-3p-50ka.jpg',
+    outputName: 'main-supplier-v1.webp',
+  },
 ]
 
 async function downloadImage(url) {
@@ -91,10 +116,16 @@ async function downloadImage(url) {
 async function importEntry(entry) {
   const source = await downloadImage(entry.imageUrl)
   const outputDir = path.join(PRODUCT_IMAGE_ROOT, entry.slug)
-  const outputPath = path.join(outputDir, 'main-official-v1.webp')
+  const outputName = entry.outputName || 'main-official-v1.webp'
+  const outputPath = path.join(outputDir, outputName)
   await mkdir(outputDir, { recursive: true })
 
-  await sharp(source)
+  let pipeline = sharp(source)
+  if (outputName.includes('supplier')) {
+    pipeline = pipeline.trim({ background: '#ffffff', threshold: 10 })
+  }
+
+  await pipeline
     .resize(900, 675, {
       fit: 'contain',
       background: '#ffffff',
@@ -106,7 +137,7 @@ async function importEntry(entry) {
   const metadata = await sharp(outputPath).metadata()
   return {
     slug: entry.slug,
-    localPath: `/images/products/${entry.slug}/main-official-v1.webp`,
+    localPath: `/images/products/${entry.slug}/${outputName}`,
     sourcePage: entry.sourcePage,
     sourceImage: entry.imageUrl,
     width: metadata.width,

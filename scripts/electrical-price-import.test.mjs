@@ -180,3 +180,29 @@ test('next CHINT breaker batch uses exact official model-family images', async (
     assert.equal(metadata.height, 675)
   }
 })
+
+test('verified NXM and NM8N supplier photos match their exact catalog families', async () => {
+  const slugs = [
+    'chint-breakers-nxm-160s-3300',
+    'chint-breakers-nxm-250s-3300',
+    'chint-breakers-nxm-1000s-3300',
+    'chint-breakers-nm8n-250s',
+  ]
+
+  for (const slug of slugs) {
+    const expectedImage = `/images/products/${slug}/main-supplier-v1.webp`
+    const product = products.find((item) => item.slug === slug)
+    const localPath = path.resolve('public', expectedImage.replace(/^\/+/, ''))
+
+    assert.ok(product, slug)
+    assert.equal(product.image.src, expectedImage)
+    assert.equal(product.imageStatus, 'ready')
+    assert.equal(product.isPlaceholderImage, false)
+    assert.equal(existsSync(localPath), true)
+
+    const metadata = await sharp(localPath).metadata()
+    assert.equal(metadata.format, 'webp')
+    assert.equal(metadata.width, 900)
+    assert.equal(metadata.height, 675)
+  }
+})

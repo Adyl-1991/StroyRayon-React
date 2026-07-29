@@ -155,6 +155,10 @@ const priorityProductImageSlugs = [
   'chint-breakers-nxb-125-3p',
   'chint-breakers-nm1-250s',
   'chint-breakers-nm1-400s',
+  'chint-breakers-nxm-160s-3300',
+  'chint-breakers-nxm-250s-3300',
+  'chint-breakers-nxm-1000s-3300',
+  'chint-breakers-nm8n-250s',
   'difavtomat-16a',
   'gofra-tutuk-16mm',
   'gofra-tutuk-20mm',
@@ -200,6 +204,10 @@ const priorityProductImageOverrides = {
   'chint-breakers-nxb-125-3p': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxb-125-3p/main-official-v1.webp`,
   'chint-breakers-nm1-250s': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nm1-250s/main-official-v1.webp`,
   'chint-breakers-nm1-400s': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nm1-400s/main-official-v1.webp`,
+  'chint-breakers-nxm-160s-3300': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxm-160s-3300/main-supplier-v1.webp`,
+  'chint-breakers-nxm-250s-3300': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxm-250s-3300/main-supplier-v1.webp`,
+  'chint-breakers-nxm-1000s-3300': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxm-1000s-3300/main-supplier-v1.webp`,
+  'chint-breakers-nm8n-250s': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nm8n-250s/main-supplier-v1.webp`,
 }
 
 const plannedProductAssets = Object.fromEntries(
