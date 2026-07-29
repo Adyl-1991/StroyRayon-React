@@ -152,3 +152,31 @@ test('CHINT NXB-63 cards use the matching official pole-count images', async () 
     assert.equal(metadata.height, 675)
   }
 })
+
+test('next CHINT breaker batch uses exact official model-family images', async () => {
+  const slugs = [
+    'chint-breakers-nb1-1p',
+    'chint-breakers-nb1-3p',
+    'chint-breakers-nxb-125-1p',
+    'chint-breakers-nxb-125-3p',
+    'chint-breakers-nm1-250s',
+    'chint-breakers-nm1-400s',
+  ]
+
+  for (const slug of slugs) {
+    const expectedImage = `/images/products/${slug}/main-official-v1.webp`
+    const product = products.find((item) => item.slug === slug)
+    const localPath = path.resolve('public', expectedImage.replace(/^\/+/, ''))
+
+    assert.ok(product, slug)
+    assert.equal(product.image.src, expectedImage)
+    assert.equal(product.imageStatus, 'ready')
+    assert.equal(product.isPlaceholderImage, false)
+    assert.equal(existsSync(localPath), true)
+
+    const metadata = await sharp(localPath).metadata()
+    assert.equal(metadata.format, 'webp')
+    assert.equal(metadata.width, 900)
+    assert.equal(metadata.height, 675)
+  }
+})
