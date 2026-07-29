@@ -35,6 +35,9 @@ The Blueprint performs:
 - `npm ci`, Prisma client generation, and NestJS build;
 - `npx prisma migrate deploy` before each release;
 - the catalog/admin seed on the first successful deployment;
+- safe catalog synchronization before later releases, preserving admin-edited fields,
+  stock/reservations, and uploaded images while deactivating stale rows without deleting
+  order history;
 - a health check at `/api/health`;
 - private-network-only PostgreSQL access.
 

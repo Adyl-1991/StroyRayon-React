@@ -35,8 +35,10 @@ ADMIN_INITIAL_NAME
 ADMIN_INITIAL_ROLE=OWNER
 ```
 
-Run `npm run prisma:seed` once, verify login, then remove
-`ADMIN_INITIAL_PASSWORD` from the hosting environment.
+Run `npm run prisma:seed`, verify login, then remove `ADMIN_INITIAL_PASSWORD` from the
+hosting environment. Later releases run the same idempotent catalog synchronization
+without resetting the administrator: existing manual prices, stock quantities,
+reservations, and uploaded product images are preserved.
 
 ## 2. Deploy frontend
 

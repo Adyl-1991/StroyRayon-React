@@ -95,9 +95,12 @@ Existing admin passwords are not overwritten by later catalog seeds.
 
 For production, use `NODE_ENV=production`, a managed PostgreSQL URL, a unique JWT
 secret, and exact HTTPS origins in `CORS_ORIGIN`. Wildcard CORS is rejected at startup.
-Run `npx prisma migrate deploy` before starting the new API release. Run the seed once
-with the initial admin variables, then remove `ADMIN_INITIAL_PASSWORD` from the hosting
-environment.
+Run `npx prisma migrate deploy` before starting the new API release. The production
+pre-deploy command then runs the catalog seed in safe synchronization mode: missing
+products and variants are added, stale catalog rows are deactivated instead of deleted,
+and admin-edited fields, stock quantities, reservations, and uploaded images are
+preserved. Use the initial admin variables only for the first deployment, then remove
+`ADMIN_INITIAL_PASSWORD` from the hosting environment.
 
 ## API Prefix
 
