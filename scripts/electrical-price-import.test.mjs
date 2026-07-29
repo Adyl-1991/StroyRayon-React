@@ -70,6 +70,31 @@ test('all imported supplier products and variants are in stock and have unique i
   }
 })
 
+test('heating cables and Safari mats prefer the current bundled product data', () => {
+  const cableSlugs = ['kabeldik-teplyi-pol-10m', 'kabeldik-teplyi-pol-20m']
+  const matSlugs = ['mat-teplyi-pol-1m2', 'mat-teplyi-pol-2m2', 'mat-teplyi-pol-3m2']
+
+  for (const slug of cableSlugs) {
+    const product = products.find((item) => item.slug === slug)
+    assert.ok(product, slug)
+    assert.match(product.titleRu, /^Греющий кабель \d+ м$/)
+    assert.doesNotMatch(JSON.stringify(product), /Кабельный т[её]плый пол/i)
+    assert.equal(isBundledElectricalSupplierProduct(product), true)
+  }
+
+  for (const slug of matSlugs) {
+    const product = products.find((item) => item.slug === slug)
+    assert.ok(product, slug)
+    assert.match(product.titleRu, /^Нагревательный мат Safari \d+ м²$/)
+    assert.equal(product.brand, 'Safari')
+    assert.equal(product.specificationsRu?.['Страна производства'], 'Корея')
+    assert.equal(isBundledElectricalSupplierProduct(product), true)
+  }
+
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'греющий кабель' }), true)
+  assert.equal(shouldUseBundledElectricalSupplier({ search: 'Safari' }), true)
+})
+
 test('generated public catalog does not expose supplier wholesale fields', () => {
   const source = readFileSync(
     path.resolve('src/data/electricalSupplierProducts.generated.js'),
