@@ -6,6 +6,7 @@ import test from 'node:test'
 const apiRoot = path.resolve(process.cwd())
 const projectRoot = path.resolve(apiRoot, '..')
 const seedSource = readFileSync(path.join(apiRoot, 'prisma', 'seed.ts'), 'utf8')
+const packageSource = readFileSync(path.join(apiRoot, 'package.json'), 'utf8')
 const renderSource = readFileSync(path.join(projectRoot, 'render.yaml'), 'utf8')
 
 test('production catalog sync deactivates stale products instead of deleting them', () => {
@@ -22,11 +23,12 @@ test('production catalog sync preserves manual fields, stock rows and uploaded i
   assert.match(seedSource, /wasEdited\('stock', 'stockStatus'\)/)
 })
 
-test('production catalog sync has a catalog-size guard and runs before each Render release', () => {
+test('production catalog sync has a catalog-size guard and runs before API startup', () => {
   assert.match(seedSource, /products\.length < 300/)
   assert.match(seedSource, /stats\.skippedProducts\.length \|\| stats\.warnings\.length/)
+  assert.match(packageSource, /"prestart:prod":\s*"prisma migrate deploy && npm run prisma:seed"/)
   assert.match(
     renderSource,
-    /preDeployCommand:\s*cd api && npx prisma migrate deploy && npm run prisma:seed/,
+    /preDeployCommand:\s*cd api && npx prisma migrate deploy/,
   )
 })

@@ -8,7 +8,7 @@ services:
     plan: starter
     autoDeployTrigger: commit
     buildCommand: cd api && npm ci && npm run prisma:generate && npm run build
-    preDeployCommand: cd api && npx prisma migrate deploy && npm run prisma:seed
+    preDeployCommand: cd api && npx prisma migrate deploy
     startCommand: cd api && npm run start:prod
     initialDeployHook: cd api && npm run prisma:seed
     healthCheckPath: /api/health
