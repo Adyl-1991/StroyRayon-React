@@ -559,6 +559,27 @@ export const catalogTree = [
           leaf('breakers', 'Автоматтар', 'avtomattar', 'breaker', ['breaker']),
           leaf('rcd', 'УЗО', 'uzo', 'breaker', ['rcd']),
           leaf('differential-breakers', 'Дифавтоматтар', 'difavtomattar', 'breaker', ['differential-breaker']),
+          leaf('contactors', 'Контакторлор', 'kontaktory', 'breaker', [], ['контакторы'], {
+            titleRu: 'Контакторы',
+          }),
+          leaf('control-relays', 'Башкаруу релелери', 'rele-kontrolya', 'breaker', [], ['реле контроля'], {
+            titleRu: 'Реле и аппараты управления',
+          }),
+          leaf('motor-starters', 'Кыймылдаткыч пускателдери', 'puskateli-dvigatelya', 'breaker', [], ['пускатели двигателя'], {
+            titleRu: 'Пускатели и защита двигателя',
+          }),
+          leaf('automatic-transfer-switches', 'Резервди автоматтык киргизүү', 'avtomaticheskii-vvod-rezerva', 'breaker', [], ['АВР'], {
+            titleRu: 'Автоматический ввод резерва',
+          }),
+          leaf('voltage-stabilizers', 'Чыңалуу стабилизаторлору', 'stabilizatory-napryazheniya', 'breaker', [], ['стабилизаторы напряжения'], {
+            titleRu: 'Стабилизаторы напряжения',
+          }),
+          leaf('frequency-converters', 'Жыштык өзгөрткүчтөр', 'chastotnye-preobrazovateli', 'breaker', [], ['частотные преобразователи'], {
+            titleRu: 'Частотные преобразователи',
+          }),
+          leaf('transformers', 'Трансформаторлор', 'transformatory', 'breaker', [], ['трансформаторы'], {
+            titleRu: 'Трансформаторы',
+          }),
         ],
       }),
       node({
@@ -572,6 +593,15 @@ export const catalogTree = [
         children: [
           leaf('sockets', 'Розетки', 'rozetkalar', 'socket', ['socket']),
           leaf('switches', 'Өчүргүчтөр', 'vyklyuchatelder', 'socket', ['switch'], ['выключатели']),
+          leaf('dimmers', 'Жарык жөндөгүчтөр', 'dimmery', 'socket', [], ['диммеры'], {
+            titleRu: 'Диммеры',
+          }),
+          leaf('fixture-frames', 'Рамкалар', 'ramki-rozetok-vyklyuchatelei', 'socket', [], ['рамки для розеток'], {
+            titleRu: 'Рамки для розеток и выключателей',
+          }),
+          leaf('fixture-mounting-boxes', 'Монтаждык кутулар', 'montazhnye-korobki', 'socket', [], ['коробки наружного монтажа'], {
+            titleRu: 'Монтажные коробки',
+          }),
         ],
       }),
       leaf('panels', 'Щиттер', 'shitter', 'panel'),

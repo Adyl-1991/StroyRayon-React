@@ -23,6 +23,7 @@
     "test:alinex": "node --test scripts/alinex-production-regression.test.mjs",
     "test:ever-plast": "node --test scripts/ever-plast-import.test.mjs",
     "test:carkit": "node --test scripts/carkit-cable-import.test.mjs",
+    "test:electrical": "node --test scripts/electrical-price-import.test.mjs",
     "test:images": "node --test scripts/image-optimization-regression.test.mjs",
     "test:localization": "node --test scripts/product-localization-regression.test.mjs",
     "test:content": "node --test scripts/kyrgyz-content-regression.test.mjs",

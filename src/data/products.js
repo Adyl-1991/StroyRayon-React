@@ -1,6 +1,7 @@
 import { getProductAssetEntry } from './productAssets.js'
 import { alinexProducts } from './alinexProducts.generated.js'
 import { carkitCableProducts } from './carkitCableProducts.generated.js'
+import { electricalSupplierProducts } from './electricalSupplierProducts.generated.js'
 import { everPlastProducts } from './everPlastProducts.generated.js'
 import { isRetiredProductId, isRetiredProductSlug } from './retiredProductSlugs.js'
 
@@ -15213,5 +15214,6 @@ export const products = [
     .map(updateEverPlastRelatedIds)
     .map(removeRetiredProductRelations),
   ...carkitCableProducts.map(product).map(removeRetiredProductRelations),
+  ...electricalSupplierProducts.map(product).map(removeRetiredProductRelations),
   ...everPlastProducts.map(product).map(removeRetiredProductRelations),
 ]

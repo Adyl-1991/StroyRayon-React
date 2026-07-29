@@ -99,7 +99,7 @@ test('every catalog node resolves to an existing realistic image', async () => {
   })
   collect(catalogTree)
 
-  assert.equal(nodes.length, 157)
+  assert.equal(nodes.length, 167)
   assert.equal(nodes.some((node) => node.slug === 'montazhdyk-aralashmalar'), false)
   assert.equal(nodes.some((node) => node.slug === 'remonttuk-aralashmalar'), false)
   for (const node of nodes) {

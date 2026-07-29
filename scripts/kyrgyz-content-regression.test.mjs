@@ -6,7 +6,7 @@ import { normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 test('all public Kyrgyz content passes the language and copy audit', () => {
   const result = auditKyrgyzContent()
 
-  assert.equal(result.activeProducts, 245)
+  assert.equal(result.activeProducts, 335)
   assert.ok(result.checkedStrings > 9000)
   assert.deepEqual(result.languageLeakage, [])
   assert.deepEqual(result.mojibake, [])
