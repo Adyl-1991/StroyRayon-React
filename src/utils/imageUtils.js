@@ -104,17 +104,56 @@ export function getProductPlaceholderSrc(product) {
   return getProductPlaceholderByType(inferredType)
 }
 
-function getProductFallback(product, expectedSrc) {
-  const fallbackSrc = getProductPlaceholderSrc(product)
+function getProductFallback(product, expectedSrc, fallbackOverride) {
+  const fallbackSrc = fallbackOverride || getProductPlaceholderSrc(product)
 
   return {
     ...productFallback,
     src: fallbackSrc,
     fallbackSrc,
     alt: getImageAlt(product, productFallback.alt),
-    expectedSrc,
-    futureSrc: expectedSrc,
+    ...(expectedSrc ? { expectedSrc, futureSrc: expectedSrc } : {}),
   }
+}
+
+function getImagePathname(src) {
+  if (!src) return ''
+
+  try {
+    return new URL(src, 'https://www.stroyrayon.kg').pathname
+  } catch {
+    return String(src).split(/[?#]/, 1)[0]
+  }
+}
+
+function sanitizeUnavailableProductImage(product, image, assetEntry, fallback) {
+  const normalized = normalizeImage(image, fallback)
+  const imageStatus = String(product?.imageStatus || '').toLowerCase()
+  const isReady = imageStatus.startsWith('ready')
+  const isExplicitlyUnavailable = product?.isPlaceholderImage === true || Boolean(imageStatus && !isReady)
+
+  if (!assetEntry || assetEntry.available || isReady || !isExplicitlyUnavailable) return normalized
+
+  const unavailablePaths = new Set(
+    [assetEntry.main, assetEntry.futureMain, ...(assetEntry.gallery || [])]
+      .map(getImagePathname)
+      .filter(Boolean),
+  )
+  const safeImage = Object.fromEntries(
+    Object.entries(normalized).filter(([key]) => key !== 'expectedSrc' && key !== 'futureSrc'),
+  )
+  const imagePathname = getImagePathname(normalized.src)
+  const productDirectory = `/images/products/${assetEntry.slug}/`
+  const plannedFilename = imagePathname.startsWith(productDirectory)
+    ? imagePathname.slice(productDirectory.length)
+    : ''
+  const isPlannedProductFile = plannedFilename === 'main.webp' || /^gallery-\d+\.webp$/.test(plannedFilename)
+
+  if (unavailablePaths.has(imagePathname) || isPlannedProductFile) {
+    return fallback
+  }
+
+  return safeImage
 }
 
 function getVariantSpecificImage(product, variant, fallback) {
@@ -149,13 +188,17 @@ export function getProductImage(product, variant = 'main') {
     : variant === 'main'
       ? assetEntry?.main
       : assetEntry?.gallery?.[Number(String(variant).replace('gallery-', '')) - 1]
-  const fallback = getProductFallback(product, expectedSrc)
+  const fallback = getProductFallback(
+    product,
+    assetEntry?.available ? expectedSrc : undefined,
+    assetEntry?.fallback,
+  )
   const variantImage = getVariantSpecificImage(product, variant, fallback)
-  if (variantImage) return variantImage
+  if (variantImage) return sanitizeUnavailableProductImage(product, variantImage, assetEntry, fallback)
 
   const image = getProductImageByVariant(product, variant)
 
-  if (image) return normalizeImage(image, fallback)
+  if (image) return sanitizeUnavailableProductImage(product, image, assetEntry, fallback)
 
   if (assetEntry?.available && expectedSrc) {
     return normalizeImage(
@@ -175,16 +218,25 @@ export function getProductImage(product, variant = 'main') {
 
 export function getProductGallery(product, selectedVariant = null) {
   const images = Array.isArray(product?.images) ? product.images : []
+  const assetEntry = getProductAssetEntry(product?.slug)
   const fallback = getProductImage(product)
-  const variantImage = getVariantSpecificImage(product, selectedVariant, fallback)
+  const rawVariantImage = getVariantSpecificImage(product, selectedVariant, fallback)
+  const variantImage = rawVariantImage
+    ? sanitizeUnavailableProductImage(product, rawVariantImage, assetEntry, fallback)
+    : null
 
   if (images.length) {
     const normalizedImages = images.map((image, index) =>
-      normalizeImage(image, {
-        ...fallback,
-        type: index === 0 ? 'product' : 'gallery',
-      }),
-    )
+      sanitizeUnavailableProductImage(
+        product,
+        image,
+        assetEntry,
+        {
+          ...fallback,
+          type: index === 0 ? 'product' : 'gallery',
+        },
+      ),
+    ).filter((image, index, list) => list.findIndex((item) => item.src === image.src) === index)
 
     if (variantImage && !normalizedImages.some((image) => image.src === variantImage.src)) {
       return [variantImage, ...normalizedImages]
@@ -193,7 +245,6 @@ export function getProductGallery(product, selectedVariant = null) {
     return normalizedImages
   }
 
-  const assetEntry = getProductAssetEntry(product?.slug)
   if (assetEntry?.available) {
     const assetImages = [
       normalizeImage({ src: assetEntry.main, type: 'product', alt: assetEntry.altKg || getImageAlt(product, fallback.alt) }, fallback),

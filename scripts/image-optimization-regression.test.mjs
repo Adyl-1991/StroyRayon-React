@@ -6,8 +6,13 @@ import sharp from 'sharp'
 
 import { catalogTree } from '../src/data/catalogTree.js'
 import { heroSlides } from '../src/data/heroSlides.js'
-import { normalizeCatalogTree } from '../src/services/productService.js'
-import { getCategoryImage, getOptimizedProductImage } from '../src/utils/imageUtils.js'
+import { getProductBySlug, normalizeCatalogTree } from '../src/services/productService.js'
+import {
+  getCategoryImage,
+  getOptimizedProductImage,
+  getProductGallery,
+  getProductImage,
+} from '../src/utils/imageUtils.js'
 
 const root = process.cwd()
 const productsRoot = path.join(root, 'public', 'images', 'products')
@@ -89,6 +94,59 @@ test('AlinEX image helper supplies srcset and preserves the PNG fallback', () =>
   assert.match(image.srcSet, /detail-900\.webp 900w/)
   assert.equal(image.fallbackSrc, source)
   assert.equal(image.placeholderSrc, '/images/placeholders/product-building-placeholder.svg')
+})
+
+test('audited products use stable placeholders without requesting 17 missing WebP files', () => {
+  const auditedSlugs = [
+    'sugat-shlangy-12-25m',
+    'teplyi-pol-kollektor-komplekt',
+    'valik-boyok-uchun-250mm',
+    'kist-50mm',
+    'ichki-dubal-boyogu-ak-10l',
+    'universal-koler',
+    'malyardyk-lenta',
+    'fasad-boyogu-ak-10l',
+    'boyok-gruntovka-10l',
+    'boyok-vannochka',
+    'vlagostoikii-gipsokarton-125mm',
+    'kabeldik-teplyi-pol-10m',
+    'kabeldik-teplyi-pol-20m',
+    'mat-teplyi-pol-1m2',
+    'mat-teplyi-pol-3m2',
+    'mat-teplyi-pol-2m2',
+    'teplyi-pol-montazh-lenta',
+  ]
+
+  for (const slug of auditedSlugs) {
+    const bundledProduct = getProductBySlug(slug)
+    assert.ok(bundledProduct, slug)
+    const missingMain = `/images/products/${slug}/main.webp`
+    const product = {
+      ...bundledProduct,
+      imageStatus: 'needs-real-photo',
+      images: [
+        {
+          src: `https://www.stroyrayon.kg${missingMain}`,
+          fallbackSrc: bundledProduct.images?.[0]?.fallbackSrc,
+          expectedSrc: missingMain,
+          futureSrc: missingMain,
+        },
+        {
+          src: `/images/products/${slug}/gallery-1.webp`,
+          fallbackSrc: bundledProduct.images?.[0]?.fallbackSrc,
+        },
+      ],
+    }
+
+    const image = getProductImage(product)
+    const gallery = getProductGallery(product)
+
+    assert.notEqual(image.src, missingMain, slug)
+    assert.doesNotMatch(image.src, new RegExp(`/images/products/${slug}/(?:main|gallery-[0-9]+)\\.webp`), slug)
+    assert.equal(image.expectedSrc, undefined, slug)
+    assert.equal(image.futureSrc, undefined, slug)
+    assert.deepEqual(gallery.map((item) => item.src), [image.src], slug)
+  }
 })
 
 test('every catalog node resolves to an existing realistic image', async () => {
