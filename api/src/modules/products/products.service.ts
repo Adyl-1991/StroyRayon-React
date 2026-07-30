@@ -21,7 +21,69 @@ const productInclude = {
   },
 } satisfies Prisma.ProductInclude
 
+const productListSelect = {
+  id: true,
+  titleKg: true,
+  titleRu: true,
+  slug: true,
+  sku: true,
+  price: true,
+  oldPrice: true,
+  currency: true,
+  unit: true,
+  unitRu: true,
+  stockStatus: true,
+  minOrder: true,
+  minOrderRu: true,
+  shortDescriptionKg: true,
+  shortDescriptionRu: true,
+  packageInfoKg: true,
+  packageInfoRu: true,
+  tags: true,
+  isActive: true,
+  brand: {
+    select: {
+      name: true,
+      slug: true,
+    },
+  },
+  catalogNode: {
+    select: {
+      path: true,
+    },
+  },
+  images: {
+    orderBy: [{ sortOrder: 'asc' as const }],
+    take: 1,
+    select: {
+      id: true,
+      src: true,
+      alt: true,
+      width: true,
+      height: true,
+      type: true,
+      sortOrder: true,
+      storageDriver: true,
+    },
+  },
+  variants: {
+    where: { isActive: true },
+    orderBy: [{ sortOrder: 'asc' as const }, { titleKg: 'asc' as const }],
+    select: {
+      id: true,
+      titleKg: true,
+      titleRu: true,
+      sku: true,
+      price: true,
+      currency: true,
+      unit: true,
+      stockStatus: true,
+    },
+  },
+} satisfies Prisma.ProductSelect
+
 type ProductRecord = Prisma.ProductGetPayload<{ include: typeof productInclude }>
+type ProductListRecord = Prisma.ProductGetPayload<{ select: typeof productListSelect }>
 
 const stockMap: Record<string, ProductStockStatus> = {
   in_stock: ProductStockStatus.IN_STOCK,
@@ -63,7 +125,7 @@ export class ProductsService {
     const [products, total, filters] = await Promise.all([
       this.prisma.product.findMany({
         where,
-        include: productInclude,
+        select: productListSelect,
         orderBy: this.getOrderBy(query.sort),
         skip: (page - 1) * limit,
         take: limit,
@@ -73,7 +135,7 @@ export class ProductsService {
     ])
 
     return {
-      items: products.map((product) => this.mapProduct(product)),
+      items: products.map((product) => this.mapProductListItem(product)),
       total,
       page,
       limit,
@@ -263,6 +325,60 @@ export class ProductsService {
       createdAt: product.createdAt,
       updatedAt: product.updatedAt,
     }
+  }
+
+  private mapProductListItem(product: ProductListRecord) {
+    const defaultVariant = getDefaultListVariant(product.variants)
+
+    return {
+      id: product.id,
+      titleKg: product.titleKg,
+      titleRu: product.titleRu,
+      slug: product.slug,
+      sku: product.sku,
+      catalogPath: product.catalogNode.path.split('/'),
+      brand: product.brand,
+      price: Number(product.price),
+      oldPrice: product.oldPrice ? Number(product.oldPrice) : null,
+      currency: product.currency,
+      unit: product.unit,
+      unitRu: product.unitRu,
+      stockStatus: frontendStockMap[product.stockStatus],
+      minOrder: product.minOrder,
+      minOrderRu: product.minOrderRu,
+      shortDescriptionKg: product.shortDescriptionKg,
+      shortDescriptionRu: product.shortDescriptionRu,
+      packageInfoKg: product.packageInfoKg,
+      packageInfoRu: product.packageInfoRu,
+      tags: product.tags,
+      isActive: product.isActive,
+      images: product.images,
+      variants: defaultVariant ? [mapListVariant(defaultVariant)] : [],
+    }
+  }
+}
+
+type ProductListVariant = ProductListRecord['variants'][number]
+
+function getDefaultListVariant(variants: ProductListVariant[]) {
+  return variants.find((variant) => Number(variant.price) > 0 && variant.stockStatus !== ProductStockStatus.OUT_OF_STOCK)
+    || variants.find((variant) => variant.stockStatus !== ProductStockStatus.OUT_OF_STOCK)
+    || variants.find((variant) => Number(variant.price) > 0)
+    || variants[0]
+    || null
+}
+
+function mapListVariant(variant: ProductListVariant) {
+  return {
+    id: variant.id,
+    titleKg: variant.titleKg,
+    titleRu: variant.titleRu,
+    size: variant.titleKg,
+    sku: variant.sku,
+    price: Number(variant.price),
+    currency: variant.currency,
+    unit: variant.unit,
+    stockStatus: frontendStockMap[variant.stockStatus],
   }
 }
 
