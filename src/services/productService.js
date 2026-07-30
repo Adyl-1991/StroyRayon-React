@@ -152,6 +152,9 @@ export const legacyProductSlugAliases = {
   'kabel-kanal-16x16': 'kabel-kanal-25x16-2',
   'gips-shtukaturka': 'gips-shtukaturkasy-30kg',
   'smesitel-kuhnya': 'ashkana-smesiteli-basic',
+  'chint-rcd-uzo': 'chint-relays-njyw1',
+  'chint-rcd-nl-63': 'chint-rcd-nl1-63-2p',
+  'chint-rcd-nl-100': 'chint-rcd-nl1-100',
 }
 
 export function resolveProductSlug(productSlug) {

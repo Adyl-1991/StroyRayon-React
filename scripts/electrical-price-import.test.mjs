@@ -32,9 +32,9 @@ function variantBySku(sku) {
 
 test('all reliably priced April 2026 electrical rows are published as variants', () => {
   assert.equal(electricalSupplierImportStats.sourceItems, 696)
-  assert.equal(electricalSupplierImportStats.productCards, 90)
+  assert.equal(electricalSupplierImportStats.productCards, 91)
   assert.equal(electricalSupplierImportStats.variants, 696)
-  assert.equal(electricalSupplierProducts.length, 90)
+  assert.equal(electricalSupplierProducts.length, 91)
   assert.equal(importedVariants().length, 696)
 
   for (const [supplier, expectedCount] of Object.entries(expectedSupplierCounts)) {
@@ -70,6 +70,27 @@ test('all imported supplier products and variants are in stock and have unique i
     assert.ok(product.catalogPath.length >= 2)
     product.variants.forEach((variant) => assert.equal(variant.stockStatus, 'in_stock'))
   }
+})
+
+test('CHINT liquid-level relay and NL1 pole groups are classified by their real characteristics', () => {
+  assert.equal(products.some((product) => product.slug === 'chint-rcd-uzo'), false)
+  assert.equal(products.some((product) => product.slug === 'chint-rcd-nl-63'), false)
+
+  const liquidLevelRelay = products.find((product) => product.slug === 'chint-relays-njyw1')
+  const nl1TwoPole = products.find((product) => product.slug === 'chint-rcd-nl1-63-2p')
+  const nl1FourPole = products.find((product) => product.slug === 'chint-rcd-nl1-63-4p')
+  const nl1Hundred = products.find((product) => product.slug === 'chint-rcd-nl1-100')
+
+  assert.ok(liquidLevelRelay)
+  assert.deepEqual(liquidLevelRelay.catalogPath, ['elektrika', 'avtomatika-korgoo', 'rele-kontrolya'])
+  assert.match(liquidLevelRelay.variants[0].titleRu, /NJYW1-NL1 AC 220V\/380V/)
+
+  assert.ok(nl1TwoPole)
+  assert.ok(nl1FourPole)
+  assert.ok(nl1Hundred)
+  assert.equal(nl1TwoPole.variants.every((variant) => /\b2P\b/.test(variant.titleRu)), true)
+  assert.equal(nl1FourPole.variants.every((variant) => /\b4P\b/.test(variant.titleRu)), true)
+  assert.equal(nl1Hundred.variants.every((variant) => /\b4P\b/.test(variant.titleRu)), true)
 })
 
 test('heating cables and Safari mats prefer the current bundled product data', () => {
@@ -191,6 +212,34 @@ test('verified NXM and NM8N supplier photos match their exact catalog families',
 
   for (const slug of slugs) {
     const expectedImage = `/images/products/${slug}/main-supplier-v1.webp`
+    const product = products.find((item) => item.slug === slug)
+    const localPath = path.resolve('public', expectedImage.replace(/^\/+/, ''))
+
+    assert.ok(product, slug)
+    assert.equal(product.image.src, expectedImage)
+    assert.equal(product.imageStatus, 'ready')
+    assert.equal(product.isPlaceholderImage, false)
+    assert.equal(existsSync(localPath), true)
+
+    const metadata = await sharp(localPath).metadata()
+    assert.equal(metadata.format, 'webp')
+    assert.equal(metadata.width, 900)
+    assert.equal(metadata.height, 675)
+  }
+})
+
+test('verified CHINT RCCB, RCBO and liquid-level relay photos match catalog characteristics', async () => {
+  const slugs = [
+    'chint-rcd-nl1-63-2p',
+    'chint-rcd-nl1-63-4p',
+    'chint-differential-nb2le',
+    'chint-differential-nxble-63',
+    'chint-differential-nxble-63y',
+    'chint-relays-njyw1',
+  ]
+
+  for (const slug of slugs) {
+    const expectedImage = `/images/products/${slug}/main-official-v1.webp`
     const product = products.find((item) => item.slug === slug)
     const localPath = path.resolve('public', expectedImage.replace(/^\/+/, ''))
 

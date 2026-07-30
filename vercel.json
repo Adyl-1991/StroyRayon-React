@@ -193,6 +193,21 @@
       "source": "/product/smesitel-kuhnya",
       "destination": "/product/ashkana-smesiteli-basic",
       "permanent": true
+    },
+    {
+      "source": "/product/chint-rcd-uzo",
+      "destination": "/product/chint-relays-njyw1",
+      "permanent": true
+    },
+    {
+      "source": "/product/chint-rcd-nl-63",
+      "destination": "/product/chint-rcd-nl1-63-2p",
+      "permanent": true
+    },
+    {
+      "source": "/product/chint-rcd-nl-100",
+      "destination": "/product/chint-rcd-nl1-100",
+      "permanent": true
     }
   ],
   "rewrites": [

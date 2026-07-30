@@ -14,6 +14,16 @@ const NXB125_PAGE = `${CHINT_PRODUCT_ROOT}/final-power-distribution/nxb-125.html
 const NXB125_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/mccb/nxb-125/product-image`
 const NM1_PAGE = `${CHINT_PRODUCT_ROOT}/secondary-power-distribution/nm1.html`
 const NM1_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/secondary-power-distribution/mccb/nm1/product-image/new`
+const NL1_PAGE = `${CHINT_PRODUCT_ROOT}/final-power-distribution/nl1.html`
+const NL1_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/rccb/nl1/product-image/new`
+const NB2LE_PAGE = 'https://www.chintglobal.com/in/en/products/low-voltage/iec/final-power-distribution/nb2le.html'
+const NB2LE_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/rcbo/nb2le/product-iamge`
+const NXBLE63_PAGE = 'https://www.chintglobal.com/sg/en/products/low-voltage/iec/final-power-distribution/nxble-63.html'
+const NXBLE63_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/rcbo/nxble-63/product-image/new`
+const NXBLE63Y_PAGE = `${CHINT_PRODUCT_ROOT}/final-power-distribution/nxble-63y.html`
+const NXBLE63Y_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/final-power-distribution/rcbo/nxble-63y/product-image/new`
+const NJYW1_PAGE = 'https://www.chintglobal.com/sg/en/products/low-voltage/iec/industrial-control/njyw1.html'
+const NJYW1_IMAGE_ROOT = `${CHINT_IMAGE_ROOT}/industrial-control/liquid-level-relay/njyw1/product-image`
 const OKMARTS_PAGE_ROOT = 'https://okmarts.com'
 const OKMARTS_IMAGE_ROOT = `${OKMARTS_PAGE_ROOT}/jeecg-boot/sys/common/view/product/Circuit_Breaker/CHINT/2023`
 const OKMARTS_IMAGE_PROXY = `${OKMARTS_PAGE_ROOT}/cdn-cgi/image/fit=contain,format=auto,metadata=none,onerror=redirect,quality=90,width=1000,height=1000`
@@ -90,6 +100,36 @@ const entries = [
     sourcePage: ELECTROCONTROL_NM8N250_PAGE,
     imageUrl: 'https://electrocontrol.com.ua/productimages/000012/29868/271335-avtomatichnii-vimikach-v-litomu-korpusi-chint-nm8n-250s-en-250a-3p-50ka.jpg',
     outputName: 'main-supplier-v1.webp',
+  },
+  {
+    slug: 'chint-rcd-nl1-63-2p',
+    sourcePage: NL1_PAGE,
+    imageUrl: `${NL1_IMAGE_ROOT}/NL1-63-63A-2P-RCCB-Front-10.png`,
+  },
+  {
+    slug: 'chint-rcd-nl1-63-4p',
+    sourcePage: NL1_PAGE,
+    imageUrl: `${NL1_IMAGE_ROOT}/NL1-63-63A-4P-RCCB-Front-11.png`,
+  },
+  {
+    slug: 'chint-differential-nb2le',
+    sourcePage: NB2LE_PAGE,
+    imageUrl: `${NB2LE_IMAGE_ROOT}/NB2LE%20%20C40-RCBO%20%201P-RCBO-Front.jpg`,
+  },
+  {
+    slug: 'chint-differential-nxble-63',
+    sourcePage: NXBLE63_PAGE,
+    imageUrl: `${NXBLE63_IMAGE_ROOT}/NXBLE-63-C63-4P-N-RCBO-Front-5.png`,
+  },
+  {
+    slug: 'chint-differential-nxble-63y',
+    sourcePage: NXBLE63Y_PAGE,
+    imageUrl: `${NXBLE63Y_IMAGE_ROOT}/NXBLE-63Y-C63-2P-RCBO-Front-5.png`,
+  },
+  {
+    slug: 'chint-relays-njyw1',
+    sourcePage: NJYW1_PAGE,
+    imageUrl: `${NJYW1_IMAGE_ROOT}/NJYW1.png`,
   },
 ]
 

@@ -4,12 +4,12 @@
 export const electricalSupplierImportStats = {
   "source": "supplier-price-lists-april-2026",
   "sourceItems": 696,
-  "productCards": 90,
+  "productCards": 91,
   "variants": 696,
   "bySupplier": {
     "CHINT": {
       "sourceItems": 442,
-      "productCards": 65,
+      "productCards": 66,
       "variants": 442
     },
     "PANASONIC": {
@@ -10087,103 +10087,11 @@ export const electricalSupplierProducts = [
     ]
   },
   {
-    "id": "chint-rcd-uzo",
-    "slug": "chint-rcd-uzo",
+    "id": "chint-rcd-nl1-100",
+    "slug": "chint-rcd-nl1-100",
     "sku": "CHINT-APR26-G050",
-    "titleKg": "CHINT — УЗО",
-    "titleRu": "УЗО CHINT",
-    "categorySlug": "electrics",
-    "subcategorySlug": "automation-protection",
-    "catalogPath": [
-      "elektrika",
-      "avtomatika-korgoo",
-      "uzo"
-    ],
-    "price": 780,
-    "unit": "даана",
-    "unitRu": "шт",
-    "brand": "CHINT",
-    "stockStatus": "in_stock",
-    "minOrder": "1 даана",
-    "minOrderRu": "1 штука",
-    "pack": "1 даана",
-    "packRu": "1 штука",
-    "productType": "УЗО",
-    "productTypeRu": "УЗО",
-    "shortDescriptionKg": "CHINT маркасындагы УЗО. Керектүү моделди жана номиналды варианттардан тандаңыз.",
-    "shortDescriptionRu": "УЗО CHINT. Выберите нужную модель и номинал в списке вариантов.",
-    "fullDescriptionKg": "CHINT маркасындагы УЗО электр монтажы үчүн. Карточкада 2026-жылдын апрель айындагы жеткирүүчүнүн баа тизмесинде баасы көрсөтүлгөн түрлөр гана жарыяланды. Туура номиналды, чыңалууну жана туташтыруу схемасын электрик менен тактаңыз.",
-    "fullDescriptionRu": "УЗО CHINT для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
-    "specificationsKg": {
-      "Бренд": "CHINT",
-      "Категория": "УЗО",
-      "Варианттар": "1",
-      "Кампада": "Бар"
-    },
-    "specificationsRu": {
-      "Бренд": "CHINT",
-      "Категория": "УЗО",
-      "Вариантов": "1",
-      "Наличие": "В наличии"
-    },
-    "aliases": [
-      "\"CHINT\" Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V"
-    ],
-    "aliasesKg": [
-      "CHINT — УЗО"
-    ],
-    "aliasesRu": [
-      "УЗО CHINT",
-      "\"CHINT\" Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V"
-    ],
-    "faqKg": [
-      {
-        "question": "Көрсөтүлгөн баа эмнеге тиешелүү?",
-        "answer": "Баасы тандалган түрдүн бир даанасына көрсөтүлөт. Буйрутма берердин алдында керектүү номиналды жана чыңалууну текшериңиз."
-      },
-      {
-        "question": "Кайсы түрдү тандоо керек?",
-        "answer": "Тандоо электр жүгүнө, полюстардын санына, тармак чыңалуусуна жана туташтыруу чиймесине жараша жүргүзүлөт. Так эсепти электрик менен макулдашыңыз."
-      }
-    ],
-    "faqRu": [
-      {
-        "question": "За что указана цена?",
-        "answer": "Цена указана за одну штуку выбранного варианта. Перед заказом проверьте нужный номинал и напряжение."
-      },
-      {
-        "question": "Как выбрать подходящий вариант?",
-        "answer": "Выбор зависит от электрической нагрузки, количества полюсов, напряжения сети и схемы подключения. Точный расчёт рекомендуется согласовать с электриком."
-      }
-    ],
-    "relatedProductIds": [],
-    "variants": [
-      {
-        "id": "chint-rcd-uzo-001",
-        "size": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
-        "titleKg": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
-        "titleRu": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
-        "price": 780,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-E241",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 1
-      }
-    ]
-  },
-  {
-    "id": "chint-rcd-nl-100",
-    "slug": "chint-rcd-nl-100",
-    "sku": "CHINT-APR26-G051",
-    "titleKg": "CHINT NL-100 — УЗО",
-    "titleRu": "УЗО CHINT NL-100",
+    "titleKg": "CHINT NL1-100 — УЗО",
+    "titleRu": "УЗО CHINT NL1-100",
     "categorySlug": "electrics",
     "subcategorySlug": "automation-protection",
     "catalogPath": [
@@ -10203,9 +10111,9 @@ export const electricalSupplierProducts = [
     "productType": "УЗО",
     "productTypeRu": "УЗО",
     "shortDescriptionKg": "CHINT маркасындагы УЗО. Керектүү моделди жана номиналды варианттардан тандаңыз.",
-    "shortDescriptionRu": "УЗО CHINT NL-100. Выберите нужную модель и номинал в списке вариантов.",
+    "shortDescriptionRu": "УЗО CHINT NL1-100. Выберите нужную модель и номинал в списке вариантов.",
     "fullDescriptionKg": "CHINT маркасындагы УЗО электр монтажы үчүн. Карточкада 2026-жылдын апрель айындагы жеткирүүчүнүн баа тизмесинде баасы көрсөтүлгөн түрлөр гана жарыяланды. Туура номиналды, чыңалууну жана туташтыруу схемасын электрик менен тактаңыз.",
-    "fullDescriptionRu": "УЗО CHINT NL-100 для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
+    "fullDescriptionRu": "УЗО CHINT NL1-100 для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
     "specificationsKg": {
       "Бренд": "CHINT",
       "Категория": "УЗО",
@@ -10224,10 +10132,10 @@ export const electricalSupplierProducts = [
       "\"CHINT\" Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA"
     ],
     "aliasesKg": [
-      "CHINT NL-100 — УЗО"
+      "CHINT NL1-100 — УЗО"
     ],
     "aliasesRu": [
-      "УЗО CHINT NL-100",
+      "УЗО CHINT NL1-100",
       "\"CHINT\" Автомат УЗО NL-100 6KA 4P 63A 100mA/300mA",
       "\"CHINT\" Автомат УЗО NL-100 6KA 4P 80A 100mA/300mA",
       "\"CHINT\" Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA"
@@ -10255,10 +10163,10 @@ export const electricalSupplierProducts = [
     "relatedProductIds": [],
     "variants": [
       {
-        "id": "chint-rcd-nl-100-001",
-        "size": "Автомат УЗО NL-100 6KA 4P 63A 100mA/300mA",
-        "titleKg": "Автомат УЗО NL-100 6KA 4P 63A 100mA/300mA",
-        "titleRu": "Автомат УЗО NL-100 6KA 4P 63A 100mA/300mA",
+        "id": "chint-rcd-nl1-100-001",
+        "size": "Автомат УЗО NL1-100 6KA 4P 63A 100mA/300mA",
+        "titleKg": "Автомат УЗО NL1-100 6KA 4P 63A 100mA/300mA",
+        "titleRu": "Автомат УЗО NL1-100 6KA 4P 63A 100mA/300mA",
         "price": 1860,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10267,16 +10175,16 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B245",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-100 6KA 4P 63A 100mA/300mA",
+          "Модель": "Автомат УЗО NL1-100 6KA 4P 63A 100mA/300mA",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
-        "id": "chint-rcd-nl-100-002",
-        "size": "Автомат УЗО NL-100 6KA 4P 80A 100mA/300mA",
-        "titleKg": "Автомат УЗО NL-100 6KA 4P 80A 100mA/300mA",
-        "titleRu": "Автомат УЗО NL-100 6KA 4P 80A 100mA/300mA",
+        "id": "chint-rcd-nl1-100-002",
+        "size": "Автомат УЗО NL1-100 6KA 4P 80A 100mA/300mA",
+        "titleKg": "Автомат УЗО NL1-100 6KA 4P 80A 100mA/300mA",
+        "titleRu": "Автомат УЗО NL1-100 6KA 4P 80A 100mA/300mA",
         "price": 2160,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10285,16 +10193,16 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B246",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-100 6KA 4P 80A 100mA/300mA",
+          "Модель": "Автомат УЗО NL1-100 6KA 4P 80A 100mA/300mA",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
-        "id": "chint-rcd-nl-100-003",
-        "size": "Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA",
-        "titleKg": "Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA",
-        "titleRu": "Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA",
+        "id": "chint-rcd-nl1-100-003",
+        "size": "Автомат УЗО NL1-100 6KA 4P 100A 100mA/300mA",
+        "titleKg": "Автомат УЗО NL1-100 6KA 4P 100A 100mA/300mA",
+        "titleRu": "Автомат УЗО NL1-100 6KA 4P 100A 100mA/300mA",
         "price": 2160,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10303,7 +10211,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B247",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-100 6KA 4P 100A 100mA/300mA",
+          "Модель": "Автомат УЗО NL1-100 6KA 4P 100A 100mA/300mA",
           "Бирдик": "даана"
         },
         "sortOrder": 3
@@ -10311,11 +10219,11 @@ export const electricalSupplierProducts = [
     ]
   },
   {
-    "id": "chint-rcd-nl-63",
-    "slug": "chint-rcd-nl-63",
-    "sku": "CHINT-APR26-G052",
-    "titleKg": "CHINT NL-63 — УЗО",
-    "titleRu": "УЗО CHINT NL-63",
+    "id": "chint-rcd-nl1-63-2p",
+    "slug": "chint-rcd-nl1-63-2p",
+    "sku": "CHINT-APR26-G051",
+    "titleKg": "CHINT NL1-63 2P — УЗО",
+    "titleRu": "УЗО CHINT NL1-63 2P",
     "categorySlug": "electrics",
     "subcategorySlug": "automation-protection",
     "catalogPath": [
@@ -10335,19 +10243,19 @@ export const electricalSupplierProducts = [
     "productType": "УЗО",
     "productTypeRu": "УЗО",
     "shortDescriptionKg": "CHINT маркасындагы УЗО. Керектүү моделди жана номиналды варианттардан тандаңыз.",
-    "shortDescriptionRu": "УЗО CHINT NL-63. Выберите нужную модель и номинал в списке вариантов.",
+    "shortDescriptionRu": "УЗО CHINT NL1-63 2P. Выберите нужную модель и номинал в списке вариантов.",
     "fullDescriptionKg": "CHINT маркасындагы УЗО электр монтажы үчүн. Карточкада 2026-жылдын апрель айындагы жеткирүүчүнүн баа тизмесинде баасы көрсөтүлгөн түрлөр гана жарыяланды. Туура номиналды, чыңалууну жана туташтыруу схемасын электрик менен тактаңыз.",
-    "fullDescriptionRu": "УЗО CHINT NL-63 для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
+    "fullDescriptionRu": "УЗО CHINT NL1-63 2P для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
     "specificationsKg": {
       "Бренд": "CHINT",
       "Категория": "УЗО",
-      "Варианттар": "9",
+      "Варианттар": "5",
       "Кампада": "Бар"
     },
     "specificationsRu": {
       "Бренд": "CHINT",
       "Категория": "УЗО",
-      "Вариантов": "9",
+      "Вариантов": "5",
       "Наличие": "В наличии"
     },
     "aliases": [
@@ -10355,22 +10263,184 @@ export const electricalSupplierProducts = [
       "\"CHINT\" Автомат УЗО NL-63 6KA 2P 25A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 2P 32A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 2P 40A 30mA",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 63A 30mA",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 63A 30mA"
+    ],
+    "aliasesKg": [
+      "CHINT NL1-63 2P — УЗО"
+    ],
+    "aliasesRu": [
+      "УЗО CHINT NL1-63 2P",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 16A 30mA",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 25A 30mA",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 32A 30mA",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 40A 30mA",
+      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 63A 30mA"
+    ],
+    "faqKg": [
+      {
+        "question": "Көрсөтүлгөн баа эмнеге тиешелүү?",
+        "answer": "Баасы тандалган түрдүн бир даанасына көрсөтүлөт. Буйрутма берердин алдында керектүү номиналды жана чыңалууну текшериңиз."
+      },
+      {
+        "question": "Кайсы түрдү тандоо керек?",
+        "answer": "Тандоо электр жүгүнө, полюстардын санына, тармак чыңалуусуна жана туташтыруу чиймесине жараша жүргүзүлөт. Так эсепти электрик менен макулдашыңыз."
+      }
+    ],
+    "faqRu": [
+      {
+        "question": "За что указана цена?",
+        "answer": "Цена указана за одну штуку выбранного варианта. Перед заказом проверьте нужный номинал и напряжение."
+      },
+      {
+        "question": "Как выбрать подходящий вариант?",
+        "answer": "Выбор зависит от электрической нагрузки, количества полюсов, напряжения сети и схемы подключения. Точный расчёт рекомендуется согласовать с электриком."
+      }
+    ],
+    "relatedProductIds": [],
+    "variants": [
+      {
+        "id": "chint-rcd-nl1-63-2p-001",
+        "size": "Автомат УЗО NL1-63 6KA 2P 16A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 2P 16A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 2P 16A 30mA",
+        "price": 980,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-B236",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Автомат УЗО NL1-63 6KA 2P 16A 30mA",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 1
+      },
+      {
+        "id": "chint-rcd-nl1-63-2p-002",
+        "size": "Автомат УЗО NL1-63 6KA 2P 25A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 2P 25A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 2P 25A 30mA",
+        "price": 980,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-B237",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Автомат УЗО NL1-63 6KA 2P 25A 30mA",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 2
+      },
+      {
+        "id": "chint-rcd-nl1-63-2p-003",
+        "size": "Автомат УЗО NL1-63 6KA 2P 32A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 2P 32A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 2P 32A 30mA",
+        "price": 980,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-B238",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Автомат УЗО NL1-63 6KA 2P 32A 30mA",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 3
+      },
+      {
+        "id": "chint-rcd-nl1-63-2p-004",
+        "size": "Автомат УЗО NL1-63 6KA 2P 40A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 2P 40A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 2P 40A 30mA",
+        "price": 980,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-B239",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Автомат УЗО NL1-63 6KA 2P 40A 30mA",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 4
+      },
+      {
+        "id": "chint-rcd-nl1-63-2p-005",
+        "size": "Автомат УЗО NL1-63 6KA 2P 63A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 2P 63A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 2P 63A 30mA",
+        "price": 1110,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-B240",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Автомат УЗО NL1-63 6KA 2P 63A 30mA",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 5
+      }
+    ]
+  },
+  {
+    "id": "chint-rcd-nl1-63-4p",
+    "slug": "chint-rcd-nl1-63-4p",
+    "sku": "CHINT-APR26-G052",
+    "titleKg": "CHINT NL1-63 4P — УЗО",
+    "titleRu": "УЗО CHINT NL1-63 4P",
+    "categorySlug": "electrics",
+    "subcategorySlug": "automation-protection",
+    "catalogPath": [
+      "elektrika",
+      "avtomatika-korgoo",
+      "uzo"
+    ],
+    "price": 1620,
+    "unit": "даана",
+    "unitRu": "шт",
+    "brand": "CHINT",
+    "stockStatus": "in_stock",
+    "minOrder": "1 даана",
+    "minOrderRu": "1 штука",
+    "pack": "1 даана",
+    "packRu": "1 штука",
+    "productType": "УЗО",
+    "productTypeRu": "УЗО",
+    "shortDescriptionKg": "CHINT маркасындагы УЗО. Керектүү моделди жана номиналды варианттардан тандаңыз.",
+    "shortDescriptionRu": "УЗО CHINT NL1-63 4P. Выберите нужную модель и номинал в списке вариантов.",
+    "fullDescriptionKg": "CHINT маркасындагы УЗО электр монтажы үчүн. Карточкада 2026-жылдын апрель айындагы жеткирүүчүнүн баа тизмесинде баасы көрсөтүлгөн түрлөр гана жарыяланды. Туура номиналды, чыңалууну жана туташтыруу схемасын электрик менен тактаңыз.",
+    "fullDescriptionRu": "УЗО CHINT NL1-63 4P для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
+    "specificationsKg": {
+      "Бренд": "CHINT",
+      "Категория": "УЗО",
+      "Варианттар": "4",
+      "Кампада": "Бар"
+    },
+    "specificationsRu": {
+      "Бренд": "CHINT",
+      "Категория": "УЗО",
+      "Вариантов": "4",
+      "Наличие": "В наличии"
+    },
+    "aliases": [
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 25A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 32A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 40A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 63A 30mA"
     ],
     "aliasesKg": [
-      "CHINT NL-63 — УЗО"
+      "CHINT NL1-63 4P — УЗО"
     ],
     "aliasesRu": [
-      "УЗО CHINT NL-63",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 16A 30mA",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 25A 30mA",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 32A 30mA",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 40A 30mA",
-      "\"CHINT\" Автомат УЗО NL-63 6KA 2P 63A 30mA",
+      "УЗО CHINT NL1-63 4P",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 25A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 32A 30mA",
       "\"CHINT\" Автомат УЗО NL-63 6KA 4P 40A 30mA",
@@ -10399,100 +10469,10 @@ export const electricalSupplierProducts = [
     "relatedProductIds": [],
     "variants": [
       {
-        "id": "chint-rcd-nl-63-001",
-        "size": "Автомат УЗО NL-63 6KA 2P 16A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 2P 16A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 2P 16A 30mA",
-        "price": 980,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-B236",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 2P 16A 30mA",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 1
-      },
-      {
-        "id": "chint-rcd-nl-63-002",
-        "size": "Автомат УЗО NL-63 6KA 2P 25A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 2P 25A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 2P 25A 30mA",
-        "price": 980,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-B237",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 2P 25A 30mA",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 2
-      },
-      {
-        "id": "chint-rcd-nl-63-003",
-        "size": "Автомат УЗО NL-63 6KA 2P 32A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 2P 32A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 2P 32A 30mA",
-        "price": 980,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-B238",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 2P 32A 30mA",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 3
-      },
-      {
-        "id": "chint-rcd-nl-63-004",
-        "size": "Автомат УЗО NL-63 6KA 2P 40A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 2P 40A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 2P 40A 30mA",
-        "price": 980,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-B239",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 2P 40A 30mA",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 4
-      },
-      {
-        "id": "chint-rcd-nl-63-005",
-        "size": "Автомат УЗО NL-63 6KA 2P 63A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 2P 63A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 2P 63A 30mA",
-        "price": 1110,
-        "unit": "даана",
-        "packageInfo": "1 даана",
-        "packageInfoRu": "1 штука",
-        "stockStatus": "in_stock",
-        "sku": "CHINT-APR26-B240",
-        "specs": {
-          "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 2P 63A 30mA",
-          "Бирдик": "даана"
-        },
-        "sortOrder": 5
-      },
-      {
-        "id": "chint-rcd-nl-63-006",
-        "size": "Автомат УЗО NL-63 6KA 4P 25A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 4P 25A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 4P 25A 30mA",
+        "id": "chint-rcd-nl1-63-4p-001",
+        "size": "Автомат УЗО NL1-63 6KA 4P 25A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 4P 25A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 4P 25A 30mA",
         "price": 1620,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10501,16 +10481,16 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B241",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 4P 25A 30mA",
+          "Модель": "Автомат УЗО NL1-63 6KA 4P 25A 30mA",
           "Бирдик": "даана"
         },
-        "sortOrder": 6
+        "sortOrder": 1
       },
       {
-        "id": "chint-rcd-nl-63-007",
-        "size": "Автомат УЗО NL-63 6KA 4P 32A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 4P 32A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 4P 32A 30mA",
+        "id": "chint-rcd-nl1-63-4p-002",
+        "size": "Автомат УЗО NL1-63 6KA 4P 32A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 4P 32A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 4P 32A 30mA",
         "price": 1620,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10519,16 +10499,16 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B242",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 4P 32A 30mA",
+          "Модель": "Автомат УЗО NL1-63 6KA 4P 32A 30mA",
           "Бирдик": "даана"
         },
-        "sortOrder": 7
+        "sortOrder": 2
       },
       {
-        "id": "chint-rcd-nl-63-008",
-        "size": "Автомат УЗО NL-63 6KA 4P 40A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 4P 40A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 4P 40A 30mA",
+        "id": "chint-rcd-nl1-63-4p-003",
+        "size": "Автомат УЗО NL1-63 6KA 4P 40A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 4P 40A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 4P 40A 30mA",
         "price": 1620,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10537,16 +10517,16 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B243",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 4P 40A 30mA",
+          "Модель": "Автомат УЗО NL1-63 6KA 4P 40A 30mA",
           "Бирдик": "даана"
         },
-        "sortOrder": 8
+        "sortOrder": 3
       },
       {
-        "id": "chint-rcd-nl-63-009",
-        "size": "Автомат УЗО NL-63 6KA 4P 63A 30mA",
-        "titleKg": "Автомат УЗО NL-63 6KA 4P 63A 30mA",
-        "titleRu": "Автомат УЗО NL-63 6KA 4P 63A 30mA",
+        "id": "chint-rcd-nl1-63-4p-004",
+        "size": "Автомат УЗО NL1-63 6KA 4P 63A 30mA",
+        "titleKg": "Автомат УЗО NL1-63 6KA 4P 63A 30mA",
+        "titleRu": "Автомат УЗО NL1-63 6KA 4P 63A 30mA",
         "price": 1920,
         "unit": "даана",
         "packageInfo": "1 даана",
@@ -10555,10 +10535,10 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B244",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Автомат УЗО NL-63 6KA 4P 63A 30mA",
+          "Модель": "Автомат УЗО NL1-63 6KA 4P 63A 30mA",
           "Бирдик": "даана"
         },
-        "sortOrder": 9
+        "sortOrder": 4
       }
     ]
   },
@@ -11071,9 +11051,101 @@ export const electricalSupplierProducts = [
     ]
   },
   {
+    "id": "chint-relays-njyw1",
+    "slug": "chint-relays-njyw1",
+    "sku": "CHINT-APR26-G057",
+    "titleKg": "CHINT NJYW1 — реле жана башкаруу аппараттары",
+    "titleRu": "Реле и аппараты управления CHINT NJYW1",
+    "categorySlug": "electrics",
+    "subcategorySlug": "automation-protection",
+    "catalogPath": [
+      "elektrika",
+      "avtomatika-korgoo",
+      "rele-kontrolya"
+    ],
+    "price": 780,
+    "unit": "даана",
+    "unitRu": "шт",
+    "brand": "CHINT",
+    "stockStatus": "in_stock",
+    "minOrder": "1 даана",
+    "minOrderRu": "1 штука",
+    "pack": "1 даана",
+    "packRu": "1 штука",
+    "productType": "реле жана башкаруу аппараттары",
+    "productTypeRu": "реле и аппараты управления",
+    "shortDescriptionKg": "CHINT маркасындагы реле жана башкаруу аппараттары. Керектүү моделди жана номиналды варианттардан тандаңыз.",
+    "shortDescriptionRu": "Реле и аппараты управления CHINT NJYW1. Выберите нужную модель и номинал в списке вариантов.",
+    "fullDescriptionKg": "CHINT маркасындагы реле жана башкаруу аппараттары электр монтажы үчүн. Карточкада 2026-жылдын апрель айындагы жеткирүүчүнүн баа тизмесинде баасы көрсөтүлгөн түрлөр гана жарыяланды. Туура номиналды, чыңалууну жана туташтыруу схемасын электрик менен тактаңыз.",
+    "fullDescriptionRu": "Реле и аппараты управления CHINT NJYW1 для электромонтажных работ. В карточке опубликованы только варианты с указанной ценой из прайс-листа за апрель 2026 года. Номинал, напряжение и схему подключения рекомендуется согласовать с электриком.",
+    "specificationsKg": {
+      "Бренд": "CHINT",
+      "Категория": "реле жана башкаруу аппараттары",
+      "Варианттар": "1",
+      "Кампада": "Бар"
+    },
+    "specificationsRu": {
+      "Бренд": "CHINT",
+      "Категория": "реле и аппараты управления",
+      "Вариантов": "1",
+      "Наличие": "В наличии"
+    },
+    "aliases": [
+      "\"CHINT\" Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V"
+    ],
+    "aliasesKg": [
+      "CHINT NJYW1 — реле жана башкаруу аппараттары"
+    ],
+    "aliasesRu": [
+      "Реле и аппараты управления CHINT NJYW1",
+      "\"CHINT\" Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V"
+    ],
+    "faqKg": [
+      {
+        "question": "Көрсөтүлгөн баа эмнеге тиешелүү?",
+        "answer": "Баасы тандалган түрдүн бир даанасына көрсөтүлөт. Буйрутма берердин алдында керектүү номиналды жана чыңалууну текшериңиз."
+      },
+      {
+        "question": "Кайсы түрдү тандоо керек?",
+        "answer": "Тандоо электр жүгүнө, полюстардын санына, тармак чыңалуусуна жана туташтыруу чиймесине жараша жүргүзүлөт. Так эсепти электрик менен макулдашыңыз."
+      }
+    ],
+    "faqRu": [
+      {
+        "question": "За что указана цена?",
+        "answer": "Цена указана за одну штуку выбранного варианта. Перед заказом проверьте нужный номинал и напряжение."
+      },
+      {
+        "question": "Как выбрать подходящий вариант?",
+        "answer": "Выбор зависит от электрической нагрузки, количества полюсов, напряжения сети и схемы подключения. Точный расчёт рекомендуется согласовать с электриком."
+      }
+    ],
+    "relatedProductIds": [],
+    "variants": [
+      {
+        "id": "chint-relays-njyw1-001",
+        "size": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+        "titleKg": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+        "titleRu": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+        "price": 780,
+        "unit": "даана",
+        "packageInfo": "1 даана",
+        "packageInfoRu": "1 штука",
+        "stockStatus": "in_stock",
+        "sku": "CHINT-APR26-E241",
+        "specs": {
+          "Бренд": "CHINT",
+          "Модель": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+          "Бирдик": "даана"
+        },
+        "sortOrder": 1
+      }
+    ]
+  },
+  {
     "id": "chint-relays-nr2",
     "slug": "chint-relays-nr2",
-    "sku": "CHINT-APR26-G057",
+    "sku": "CHINT-APR26-G058",
     "titleKg": "CHINT NR2 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NR2",
     "categorySlug": "electrics",
@@ -11485,7 +11557,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-nxr",
     "slug": "chint-relays-nxr",
-    "sku": "CHINT-APR26-G058",
+    "sku": "CHINT-APR26-G059",
     "titleKg": "CHINT NXR — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NXR",
     "categorySlug": "electrics",
@@ -12057,7 +12129,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-xj3",
     "slug": "chint-relays-xj3",
-    "sku": "CHINT-APR26-G059",
+    "sku": "CHINT-APR26-G060",
     "titleKg": "CHINT XJ3 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT XJ3",
     "categorySlug": "electrics",
@@ -12149,7 +12221,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tnd-1f",
     "slug": "chint-stabilizers-tnd-1f",
-    "sku": "CHINT-APR26-G060",
+    "sku": "CHINT-APR26-G061",
     "titleKg": "CHINT TND 1Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TND 1Ф",
     "categorySlug": "electrics",
@@ -12421,7 +12493,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tns-3f",
     "slug": "chint-stabilizers-tns-3f",
-    "sku": "CHINT-APR26-G061",
+    "sku": "CHINT-APR26-G062",
     "titleKg": "CHINT TNS 3Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TNS 3Ф",
     "categorySlug": "electrics",
@@ -12613,7 +12685,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tnsz-3f",
     "slug": "chint-stabilizers-tnsz-3f",
-    "sku": "CHINT-APR26-G062",
+    "sku": "CHINT-APR26-G063",
     "titleKg": "CHINT TNSZ 3Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TNSZ 3Ф",
     "categorySlug": "electrics",
@@ -12705,7 +12777,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-starters-nq3",
     "slug": "chint-starters-nq3",
-    "sku": "CHINT-APR26-G063",
+    "sku": "CHINT-APR26-G064",
     "titleKg": "CHINT NQ3 — кыймылдаткычты ишке киргизгичтер",
     "titleRu": "Пускатели и защита двигателя CHINT NQ3",
     "categorySlug": "electrics",
@@ -12857,7 +12929,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-starters-ns2",
     "slug": "chint-starters-ns2",
-    "sku": "CHINT-APR26-G064",
+    "sku": "CHINT-APR26-G065",
     "titleKg": "CHINT NS2 — кыймылдаткычты ишке киргизгичтер",
     "titleRu": "Пускатели и защита двигателя CHINT NS2",
     "categorySlug": "electrics",
@@ -13269,7 +13341,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-transformers-ndk",
     "slug": "chint-transformers-ndk",
-    "sku": "CHINT-APR26-G065",
+    "sku": "CHINT-APR26-G066",
     "titleKg": "CHINT NDK — трансформаторлор",
     "titleRu": "Трансформаторы CHINT NDK",
     "categorySlug": "electrics",
@@ -13541,7 +13613,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-frames-panasonic",
     "slug": "panasonic-frames-panasonic",
-    "sku": "PANASONIC-APR26-G066",
+    "sku": "PANASONIC-APR26-G067",
     "titleKg": "PANASONIC — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей PANASONIC",
     "categorySlug": "electrics",
@@ -14373,7 +14445,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-mounting-panasonic",
     "slug": "panasonic-mounting-panasonic",
-    "sku": "PANASONIC-APR26-G067",
+    "sku": "PANASONIC-APR26-G068",
     "titleKg": "PANASONIC — монтаждык кутулар",
     "titleRu": "Монтажные коробки PANASONIC",
     "categorySlug": "electrics",
@@ -14485,7 +14557,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-sockets-panasonic",
     "slug": "panasonic-sockets-panasonic",
-    "sku": "PANASONIC-APR26-G068",
+    "sku": "PANASONIC-APR26-G069",
     "titleKg": "PANASONIC — розеткалар",
     "titleRu": "Розетки PANASONIC",
     "categorySlug": "electrics",
@@ -15397,7 +15469,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-switches-panasonic",
     "slug": "panasonic-switches-panasonic",
-    "sku": "PANASONIC-APR26-G069",
+    "sku": "PANASONIC-APR26-G070",
     "titleKg": "PANASONIC — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели PANASONIC",
     "categorySlug": "electrics",
@@ -16429,7 +16501,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-1p",
     "slug": "viko-breakers-1p",
-    "sku": "VIKO-APR26-G070",
+    "sku": "VIKO-APR26-G071",
     "titleKg": "VIKO 1P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 1P",
     "categorySlug": "electrics",
@@ -16781,7 +16853,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-2p",
     "slug": "viko-breakers-2p",
-    "sku": "VIKO-APR26-G071",
+    "sku": "VIKO-APR26-G072",
     "titleKg": "VIKO 2P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 2P",
     "categorySlug": "electrics",
@@ -17013,7 +17085,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-3p",
     "slug": "viko-breakers-3p",
-    "sku": "VIKO-APR26-G072",
+    "sku": "VIKO-APR26-G073",
     "titleKg": "VIKO 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 3P",
     "categorySlug": "electrics",
@@ -17305,7 +17377,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-sbt-3p",
     "slug": "viko-breakers-sbt-3p",
-    "sku": "VIKO-APR26-G073",
+    "sku": "VIKO-APR26-G074",
     "titleKg": "VIKO SBT 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO SBT 3P",
     "categorySlug": "electrics",
@@ -17437,7 +17509,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-contactors-viko",
     "slug": "viko-contactors-viko",
-    "sku": "VIKO-APR26-G074",
+    "sku": "VIKO-APR26-G075",
     "titleKg": "VIKO — контакторлор",
     "titleRu": "Контакторы VIKO",
     "categorySlug": "electrics",
@@ -17709,7 +17781,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-dimmers-carmen",
     "slug": "viko-dimmers-carmen",
-    "sku": "VIKO-APR26-G075",
+    "sku": "VIKO-APR26-G076",
     "titleKg": "VIKO CARMEN — жарык жөндөгүчтөр",
     "titleRu": "Диммеры VIKO CARMEN",
     "categorySlug": "electrics",
@@ -17821,7 +17893,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-dimmers-karre",
     "slug": "viko-dimmers-karre",
-    "sku": "VIKO-APR26-G076",
+    "sku": "VIKO-APR26-G077",
     "titleKg": "VIKO KARRE — жарык жөндөгүчтөр",
     "titleRu": "Диммеры VIKO KARRE",
     "categorySlug": "electrics",
@@ -17933,7 +18005,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-frames-carmen",
     "slug": "viko-frames-carmen",
-    "sku": "VIKO-APR26-G077",
+    "sku": "VIKO-APR26-G078",
     "titleKg": "VIKO CARMEN — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей VIKO CARMEN",
     "categorySlug": "electrics",
@@ -18105,7 +18177,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-frames-karre",
     "slug": "viko-frames-karre",
-    "sku": "VIKO-APR26-G078",
+    "sku": "VIKO-APR26-G079",
     "titleKg": "VIKO KARRE — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей VIKO KARRE",
     "categorySlug": "electrics",
@@ -18277,7 +18349,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-mounting-carmen",
     "slug": "viko-mounting-carmen",
-    "sku": "VIKO-APR26-G079",
+    "sku": "VIKO-APR26-G080",
     "titleKg": "VIKO CARMEN — монтаждык кутулар",
     "titleRu": "Монтажные коробки VIKO CARMEN",
     "categorySlug": "electrics",
@@ -18369,7 +18441,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-mounting-karre",
     "slug": "viko-mounting-karre",
-    "sku": "VIKO-APR26-G080",
+    "sku": "VIKO-APR26-G081",
     "titleKg": "VIKO KARRE — монтаждык кутулар",
     "titleRu": "Монтажные коробки VIKO KARRE",
     "categorySlug": "electrics",
@@ -18461,7 +18533,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-rcd-2p",
     "slug": "viko-rcd-2p",
-    "sku": "VIKO-APR26-G081",
+    "sku": "VIKO-APR26-G082",
     "titleKg": "VIKO 2P — УЗО",
     "titleRu": "УЗО VIKO 2P",
     "categorySlug": "electrics",
@@ -18713,7 +18785,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-rcd-4p",
     "slug": "viko-rcd-4p",
-    "sku": "VIKO-APR26-G082",
+    "sku": "VIKO-APR26-G083",
     "titleKg": "VIKO 4P — УЗО",
     "titleRu": "УЗО VIKO 4P",
     "categorySlug": "electrics",
@@ -18945,7 +19017,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-carmen",
     "slug": "viko-sockets-carmen",
-    "sku": "VIKO-APR26-G083",
+    "sku": "VIKO-APR26-G084",
     "titleKg": "VIKO CARMEN — розеткалар",
     "titleRu": "Розетки VIKO CARMEN",
     "categorySlug": "electrics",
@@ -19177,7 +19249,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-karre",
     "slug": "viko-sockets-karre",
-    "sku": "VIKO-APR26-G084",
+    "sku": "VIKO-APR26-G085",
     "titleKg": "VIKO KARRE — розеткалар",
     "titleRu": "Розетки VIKO KARRE",
     "categorySlug": "electrics",
@@ -19409,7 +19481,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-pacific",
     "slug": "viko-sockets-pacific",
-    "sku": "VIKO-APR26-G085",
+    "sku": "VIKO-APR26-G086",
     "titleKg": "VIKO PACIFIC — розеткалар",
     "titleRu": "Розетки VIKO PACIFIC",
     "categorySlug": "electrics",
@@ -19561,7 +19633,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-palmiye",
     "slug": "viko-sockets-palmiye",
-    "sku": "VIKO-APR26-G086",
+    "sku": "VIKO-APR26-G087",
     "titleKg": "VIKO PALMIYE — розеткалар",
     "titleRu": "Розетки VIKO PALMIYE",
     "categorySlug": "electrics",
@@ -19733,7 +19805,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-carmen",
     "slug": "viko-switches-carmen",
-    "sku": "VIKO-APR26-G087",
+    "sku": "VIKO-APR26-G088",
     "titleKg": "VIKO CARMEN — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO CARMEN",
     "categorySlug": "electrics",
@@ -19945,7 +20017,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-karre",
     "slug": "viko-switches-karre",
-    "sku": "VIKO-APR26-G088",
+    "sku": "VIKO-APR26-G089",
     "titleKg": "VIKO KARRE — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO KARRE",
     "categorySlug": "electrics",
@@ -20157,7 +20229,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-pacific",
     "slug": "viko-switches-pacific",
-    "sku": "VIKO-APR26-G089",
+    "sku": "VIKO-APR26-G090",
     "titleKg": "VIKO PACIFIC — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO PACIFIC",
     "categorySlug": "electrics",
@@ -20269,7 +20341,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-palmiye",
     "slug": "viko-switches-palmiye",
-    "sku": "VIKO-APR26-G090",
+    "sku": "VIKO-APR26-G091",
     "titleKg": "VIKO PALMIYE — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO PALMIYE",
     "categorySlug": "electrics",

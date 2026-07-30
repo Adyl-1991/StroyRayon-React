@@ -202,6 +202,7 @@ function chintCategory(name) {
   if (/трансформатор|\bNDK\b/i.test(name)) return 'transformers'
   if (/автоматическ.*ввод.*резерв|\bNXZM\b/i.test(name)) return 'ats'
   if (/диф\.?\s*автомат|NXBLE|NB2LE/i.test(name)) return 'differential'
+  if (/\b(?:NJBK\d*|NJYB\d*|NJYW\d*|NTE8|JD5|JD8|XJ3)\b/i.test(name)) return 'relays'
   if (/\bУЗО\b|\bNL-?\d+/i.test(name)) return 'rcd'
   if (/контактор|\bNC1\b|\bNC2\b|\bNXC\b|\bNCH8\b/i.test(name)) return 'contactors'
   if (/пускател|\bNS2\b|\bNQ3\b/i.test(name)) return 'starters'
@@ -234,7 +235,16 @@ function chintGroupModel(item, category) {
   if (category === 'starters') return model?.match(/^(NS2|NQ3)/i)?.[1]?.toUpperCase() || 'ПУСКАТЕЛИ'
   if (category === 'ats') return 'NXZM'
   if (category === 'differential') return model?.match(/^(NXBLE-63Y|NXBLE-63|NB2LE)/i)?.[1]?.toUpperCase() || 'ДИФАВТОМАТЫ'
-  if (category === 'rcd') return model?.match(/^NL-?\d+/i)?.[0]?.toUpperCase() || 'УЗО'
+  if (category === 'rcd') {
+    const rcdModel = model
+      ?.match(/^NL-?\d+/i)?.[0]
+      ?.toUpperCase()
+      .replace(/^NL-/, 'NL1-')
+    const poles = name.match(/\b([24])P\b/i)?.[1]
+
+    if (rcdModel === 'NL1-63' && poles) return `${rcdModel} ${poles}P`
+    return rcdModel || 'УЗО'
+  }
   if (category === 'stabilizers') {
     if (/\bTNSZ\b/i.test(name)) return 'TNSZ 3Ф'
     if (/\bTNS\b/i.test(name)) return 'TNS 3Ф'
@@ -287,6 +297,7 @@ function cleanVariantLabel(name) {
   return name
     .replace(/^["“]?CHIN[ТT]["”]?\s*/i, '')
     .replace(/^PANASONIC\s*/i, '')
+    .replace(/\bNL-(63|100)\b/gi, 'NL1-$1')
     .replace(/\s+/g, ' ')
     .trim()
 }

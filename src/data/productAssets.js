@@ -159,6 +159,12 @@ const priorityProductImageSlugs = [
   'chint-breakers-nxm-250s-3300',
   'chint-breakers-nxm-1000s-3300',
   'chint-breakers-nm8n-250s',
+  'chint-rcd-nl1-63-2p',
+  'chint-rcd-nl1-63-4p',
+  'chint-differential-nb2le',
+  'chint-differential-nxble-63',
+  'chint-differential-nxble-63y',
+  'chint-relays-njyw1',
   'difavtomat-16a',
   'gofra-tutuk-16mm',
   'gofra-tutuk-20mm',
@@ -208,6 +214,12 @@ const priorityProductImageOverrides = {
   'chint-breakers-nxm-250s-3300': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxm-250s-3300/main-supplier-v1.webp`,
   'chint-breakers-nxm-1000s-3300': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nxm-1000s-3300/main-supplier-v1.webp`,
   'chint-breakers-nm8n-250s': `${PRODUCT_IMAGE_BASE_PATH}/chint-breakers-nm8n-250s/main-supplier-v1.webp`,
+  'chint-rcd-nl1-63-2p': `${PRODUCT_IMAGE_BASE_PATH}/chint-rcd-nl1-63-2p/main-official-v1.webp`,
+  'chint-rcd-nl1-63-4p': `${PRODUCT_IMAGE_BASE_PATH}/chint-rcd-nl1-63-4p/main-official-v1.webp`,
+  'chint-differential-nb2le': `${PRODUCT_IMAGE_BASE_PATH}/chint-differential-nb2le/main-official-v1.webp`,
+  'chint-differential-nxble-63': `${PRODUCT_IMAGE_BASE_PATH}/chint-differential-nxble-63/main-official-v1.webp`,
+  'chint-differential-nxble-63y': `${PRODUCT_IMAGE_BASE_PATH}/chint-differential-nxble-63y/main-official-v1.webp`,
+  'chint-relays-njyw1': `${PRODUCT_IMAGE_BASE_PATH}/chint-relays-njyw1/main-official-v1.webp`,
 }
 
 const plannedProductAssets = Object.fromEntries(
