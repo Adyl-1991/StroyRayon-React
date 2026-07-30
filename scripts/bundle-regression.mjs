@@ -12,7 +12,8 @@ assert.ok(entryMatch, 'Production HTML must reference a JavaScript entry asset')
 const entryFile = entryMatch[1]
 const entryBytes = (await stat(path.join(assetsDir, entryFile))).size
 const assetNames = await readdir(assetsDir)
-const productDataChunk = assetNames.find((name) => /^productService-.*\.js$/.test(name))
+const productServiceChunk = assetNames.find((name) => /^productService-.*\.js$/.test(name))
+const productDataChunk = assetNames.find((name) => /^products-.*\.js$/.test(name))
 const adminCssChunk = assetNames.find((name) => /^admin-.*\.css$/.test(name))
 const requiredRouteChunks = [
   'HomePage-',
@@ -24,8 +25,18 @@ const requiredRouteChunks = [
 ]
 
 assert.ok(entryBytes <= 300_000, `Entry bundle is too large: ${entryBytes} bytes`)
-assert.ok(productDataChunk, 'Catalog fallback data must remain in a lazy productService chunk')
+assert.ok(productServiceChunk, 'Product service chunk must be emitted separately')
+assert.ok(productDataChunk, 'Catalog fallback data must remain in a lazy products chunk')
 assert.notEqual(entryFile, productDataChunk, 'Catalog fallback data must not be the entry bundle')
+assert.ok(
+  !html.includes(`/assets/${productDataChunk}`),
+  'Catalog fallback data must not be preloaded by production HTML',
+)
+const productServiceBytes = (await stat(path.join(assetsDir, productServiceChunk))).size
+assert.ok(
+  productServiceBytes <= 200_000,
+  `Product service bundle unexpectedly contains catalog data: ${productServiceBytes} bytes`,
+)
 assert.ok(adminCssChunk, 'Admin CSS must be emitted separately from storefront CSS')
 
 for (const prefix of requiredRouteChunks) {
@@ -37,6 +48,8 @@ console.log(JSON.stringify({
   entryFile,
   entryBytes,
   entryReductionFromBaselinePercent: Number((100 - (entryBytes / 2_036_685) * 100).toFixed(1)),
+  productServiceChunk,
+  productServiceBytes,
   productDataChunk,
   productDataBytes: (await stat(path.join(assetsDir, productDataChunk))).size,
   adminCssChunk,

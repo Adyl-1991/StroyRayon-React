@@ -10,7 +10,7 @@ import { useCatalogNode } from '../hooks/useCatalogTree'
 import { useCatalogFilters } from '../hooks/useCatalogFilters'
 import { useProducts } from '../hooks/useProducts'
 import { useLocale } from '../i18n/LocaleContext'
-import { getCatalogNodeUrl, getFilterOptions, getProductTitle, getProductsByCatalogNode } from '../services/productService'
+import { getCatalogNodeUrl, getFilterOptions, getProductTitle } from '../services/productService'
 import { getWhatsAppUrl } from '../services/whatsappService'
 import {
   buildBreadcrumbStructuredData,
@@ -63,9 +63,9 @@ export function CatalogNodePage() {
 
   const current = nodeText(node)
   const children = node.children || []
-  const scopedProducts = getProductsByCatalogNode(node)
+  const scopedProducts = products
   const filterOptions = apiFilterOptions || getFilterOptions({ catalogNode: node })
-  const hasProductScope = scopedProducts.length > 0
+  const hasProductScope = total > 0
   const breadcrumbItems = [
     { label: t('common.catalog'), to: '/catalog' },
     ...node.breadcrumbs.map((item, index) => ({

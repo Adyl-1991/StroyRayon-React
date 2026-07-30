@@ -1,18 +1,15 @@
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getProductBySlug, getProductTitle, getUnitLabel, normalizeKgText } from '../../services/productService'
+import { getUnitLabel, normalizeKgText } from '../../services/productService'
 import { formatPrice } from '../../utils/formatPrice'
 import { applyImageFallback, getOptimizedProductImage, resolveImage } from '../../utils/imageUtils'
 
 export function CartItem({ item, setQuantity, removeFromCart }) {
   const { locale, t } = useLocale()
   const cartItemId = item.cartItemId || item.productId
-  const product = getProductBySlug(item.slug)
-  const name = product
-    ? getProductTitle(product, locale)
-    : locale === 'ru'
-      ? item.titleRu || item.name
-      : normalizeKgText(item.titleKg || item.name)
+  const name = locale === 'ru'
+    ? item.titleRu || item.name
+    : normalizeKgText(item.titleKg || item.name)
   const variantTitle = locale === 'ru'
     ? item.variantTitleRu || item.variantSize
     : normalizeKgText(item.variantTitleKg || item.variantSize)

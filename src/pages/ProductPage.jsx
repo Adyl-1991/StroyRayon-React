@@ -328,7 +328,7 @@ export function ProductPage() {
   const instructionItems = getProductListField(product, 'instructions', locale)
   const faqItems = getProductListField(product, 'faq', locale)
   const documents = extractDocumentation(product, specifications, locale)
-  const relatedProducts = getRelatedProducts(product)
+  const relatedProducts = getRelatedProducts(product, 4)
   const catalogBreadcrumbs = getCatalogBreadcrumbs(product.catalogPath || [], catalogNodes)
   const variantSpecs = buildCleanSpecs(specifications, locale, {
     ...(selectedVariant?.specs || {}),

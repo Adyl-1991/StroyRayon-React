@@ -3,13 +3,13 @@ import { Button } from '../ui/Button'
 import { SectionTitle } from '../ui/SectionTitle'
 import { useProducts } from '../../hooks/useProducts'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getHomePopularProducts, getProducts } from '../../services/productService'
+import { getHomePopularProducts } from '../../services/productService'
 
 export default function HomeProductSections() {
   const { t } = useLocale()
-  const { products: homeProducts } = useProducts({ limit: 8, sort: 'popular' })
+  const { products: homeProducts } = useProducts({ limit: 48, sort: 'popular' })
+  const { products: saleProducts } = useProducts({ limit: 4, sort: 'sale' })
   const popularProducts = getHomePopularProducts(homeProducts)
-  const saleProducts = getProducts({ sale: true }).slice(0, 4)
 
   return (
     <>

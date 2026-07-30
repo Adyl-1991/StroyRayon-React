@@ -264,7 +264,7 @@ export function buildRouteDefinitions({ productImageOverrides = new Map() } = {}
       label: child.titleKg,
       to: `${route}/${child.slug}`,
     }))
-    const productLinks = getProductsByCatalogNode(node)
+    const productLinks = getProductsByCatalogNode(node, products)
       .filter((product) => !node.children?.length || product.catalogPath?.at(-1) === node.slug)
       .map((product) => ({
         label: getProductTitle(product, 'kg'),

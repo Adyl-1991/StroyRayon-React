@@ -6,6 +6,7 @@ import sharp from 'sharp'
 
 import { catalogTree } from '../src/data/catalogTree.js'
 import { heroSlides } from '../src/data/heroSlides.js'
+import { products } from '../src/data/products.js'
 import { getProductBySlug, normalizeCatalogTree } from '../src/services/productService.js'
 import {
   getCategoryImage,
@@ -119,7 +120,7 @@ test('audited products use stable placeholders without requesting missing legacy
   ]
 
   for (const slug of auditedSlugs) {
-    const bundledProduct = getProductBySlug(slug)
+    const bundledProduct = getProductBySlug(slug, products)
     assert.ok(bundledProduct, slug)
     const missingMain = `/images/products/${slug}/main.webp`
     const product = {

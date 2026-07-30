@@ -10,6 +10,19 @@ const bundledElectricalOverrideSlugs = new Set([
   'mat-teplyi-pol-3m2',
 ])
 
+function matchesBundledElectricalOverride(filters) {
+  const search = String(filters.search || '').toLocaleLowerCase('ru')
+  const catalogPath = filters.catalogNode?.path || []
+
+  return (
+    catalogPath.includes('elektr-teplyi-pol')
+    || filters.categorySlug === 'heating'
+    || filters.subcategorySlug === 'underfloor-heating'
+    || filters.brands?.some((brand) => String(brand).toLocaleLowerCase('ru') === 'safari')
+    || /safari|греющ|нагревательн|тепл.*пол|жылуу пол/u.test(search)
+  )
+}
+
 export function shouldUseBundledElectricalSupplier(filters = {}) {
   const hasCatalogScope = Boolean(
     filters.catalogNode
@@ -26,7 +39,7 @@ export function shouldUseBundledElectricalSupplier(filters = {}) {
 
   return (
     getFilteredProducts(filters, electricalSupplierProducts).length > 0
-    || getFilteredProducts(filters).some((product) => bundledElectricalOverrideSlugs.has(product.slug))
+    || matchesBundledElectricalOverride(filters)
   )
 }
 

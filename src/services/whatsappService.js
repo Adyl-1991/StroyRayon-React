@@ -1,5 +1,5 @@
 import { formatPrice } from '../utils/formatPrice'
-import { getLocalizedProductValue, getProductBySlug, getProductTitle, getUnitLabel, normalizeKgText } from './productService'
+import { getLocalizedProductValue, getUnitLabel, normalizeKgText } from './productService'
 import { contactConfig, getWhatsAppUrl } from '../config/contact'
 
 export { contactConfig, getWhatsAppUrl }
@@ -37,8 +37,7 @@ export function getContactDetails(locale = 'kg') {
 }
 
 function formatOrderItem(item, index, locale) {
-  const product = getProductBySlug(item.slug)
-  const name = product ? getProductTitle(product, locale) : locale === 'ru' ? item.titleRu || item.name : item.titleKg || item.name
+  const name = locale === 'ru' ? item.titleRu || item.name : normalizeKgText(item.titleKg || item.name)
   const variantText = item.variantSize ? ` (${item.variantSize})` : ''
   const skuText = item.variantSku || item.sku ? `, SKU: ${item.variantSku || item.sku}` : ''
   const packageInfo = locale === 'ru' ? item.packageInfoRu : item.packageInfo

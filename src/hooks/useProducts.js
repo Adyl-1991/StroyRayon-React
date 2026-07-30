@@ -1,123 +1,94 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchProductBySlug, fetchProducts } from '../api/productsApi'
 import { USE_API } from '../config/api'
 import { isRetiredProductSlug } from '../data/retiredProductSlugs'
-import { getFilteredProducts, getFilterOptions, getProductBySlug, normalizeProduct } from '../services/productService'
-import { isBundledAlinexProduct, shouldUseBundledAlinex } from '../utils/alinexCatalogMode'
+import { loadBundledProducts } from '../services/bundledCatalogLoader'
 import {
-  isBundledElectricalSupplierProduct,
-  shouldUseBundledElectricalSupplier,
-} from '../utils/electricalSupplierCatalogMode'
-import { isBundledEverPlastProduct, shouldUseBundledEverPlast } from '../utils/everPlastCatalogMode'
+  getFilteredProducts,
+  getFilterOptions,
+  getProductBySlug,
+  normalizeProduct,
+} from '../services/productService'
 
-export function useProducts(filters) {
-  const categorySlug = filters?.categorySlug
-  const subcategorySlug = filters?.subcategorySlug
-  const minPrice = filters?.minPrice
-  const maxPrice = filters?.maxPrice
-  const stockStatuses = filters?.stockStatuses
-  const brands = filters?.brands
-  const tags = filters?.tags
-  const units = filters?.units
-  const search = filters?.search
-  const sort = filters?.sort
-  const catalogNode = filters?.catalogNode
-  const page = Number(filters?.page || 1)
-  const limit = Number(filters?.limit || 24)
-
-  const catalogPath = filters?.catalogNode?.path?.join('/')
+export function useProducts(filters = {}) {
+  const categorySlug = filters.categorySlug
+  const subcategorySlug = filters.subcategorySlug
+  const minPrice = filters.minPrice
+  const maxPrice = filters.maxPrice
+  const stockStatuses = filters.stockStatuses
+  const brands = filters.brands
+  const tags = filters.tags
+  const units = filters.units
+  const search = filters.search
+  const sort = filters.sort
+  const catalogNode = filters.catalogNode
+  const page = Number(filters.page || 1)
+  const limit = Number(filters.limit || 24)
+  const catalogPath = catalogNode?.path?.join('/')
   const isVirtualCatalogGroup = Boolean(catalogNode?.isVirtualCatalogGroup)
   const apiCatalogPath = catalogNode?.apiCatalogPath || catalogPath
-  const preferBundledCatalog = useMemo(
-    () => {
-      const catalogFilters = {
-        catalogNode,
-        categorySlug,
-        subcategorySlug,
-        minPrice,
-        maxPrice,
-        stockStatuses,
-        brands,
-        tags,
-        units,
-        search,
-        sort,
-      }
-      return (
-        shouldUseBundledAlinex(catalogFilters)
-        || shouldUseBundledEverPlast(catalogFilters)
-        || shouldUseBundledElectricalSupplier(catalogFilters)
-      )
-    },
-    [
-      brands,
-      catalogNode,
-      categorySlug,
-      maxPrice,
-      minPrice,
-      search,
-      sort,
-      stockStatuses,
-      subcategorySlug,
-      tags,
-      units,
-    ],
-  )
-  const fallbackAllProducts = useMemo(
-    () =>
-      getFilteredProducts({
-        catalogNode,
-        categorySlug,
-        subcategorySlug,
-        minPrice,
-        maxPrice,
-        stockStatuses,
-        brands,
-        tags,
-        units,
-        search,
-        sort,
-      }),
-    [
-      brands,
-      catalogNode,
-      categorySlug,
-      maxPrice,
-      minPrice,
-      search,
-      sort,
-      stockStatuses,
-      subcategorySlug,
-      tags,
-      units,
-    ],
-  )
-  const fallbackResult = useMemo(() => {
-    const total = fallbackAllProducts.length
-    const totalPages = Math.max(Math.ceil(total / limit), 1)
-    const safePage = Math.min(Math.max(page, 1), totalPages)
-    const start = (safePage - 1) * limit
-
-    return {
-      products: fallbackAllProducts.slice(start, start + limit),
-      items: fallbackAllProducts.slice(start, start + limit),
-      total,
-      page: safePage,
-      limit,
-      totalPages,
-      filterOptions: getFilterOptions({ catalogNode }),
-      isLoading: false,
-      error: null,
-      isApiMode: false,
-      isFallback: true,
-    }
-  }, [catalogNode, fallbackAllProducts, limit, page])
-  const [state, setState] = useState({ ...fallbackResult, isLoading: USE_API, isApiMode: USE_API, isFallback: false })
+  const [state, setState] = useState(() => emptyProductsState({ page, limit }))
+  const requestKey = JSON.stringify([
+    apiCatalogPath,
+    brands,
+    categorySlug,
+    isVirtualCatalogGroup,
+    limit,
+    maxPrice,
+    minPrice,
+    page,
+    search,
+    sort,
+    stockStatuses,
+    subcategorySlug,
+    tags,
+    units,
+  ])
 
   useEffect(() => {
-    if (!USE_API || preferBundledCatalog) return
-
     let isActive = true
+    const localFilters = {
+      catalogNode,
+      categorySlug,
+      subcategorySlug,
+      minPrice,
+      maxPrice,
+      stockStatuses,
+      brands,
+      tags,
+      units,
+      search,
+      sort,
+    }
+
+    const loadBundledFallback = async (error = null) => {
+      const bundledProducts = await loadBundledProducts()
+      if (!isActive) return
+      setState(buildBundledResult({
+        sourceProducts: bundledProducts,
+        filters: localFilters,
+        page,
+        limit,
+        error,
+        requestKey,
+      }))
+    }
+
+    if (!USE_API) {
+      loadBundledFallback().catch((error) => {
+        if (!isActive) return
+        setState({
+          ...emptyProductsState({ page, limit }),
+          requestKey,
+          isLoading: false,
+          error,
+          isFallback: true,
+        })
+      })
+      return () => {
+        isActive = false
+      }
+    }
 
     fetchProducts(isVirtualCatalogGroup
       ? {
@@ -145,17 +116,7 @@ export function useProducts(filters) {
           .filter((product) => !isRetiredProductSlug(product.slug))
 
         if (isVirtualCatalogGroup) {
-          const scopedProducts = getFilteredProducts({
-            catalogNode,
-            minPrice,
-            maxPrice,
-            stockStatuses,
-            brands,
-            tags,
-            units,
-            search,
-            sort,
-          }, apiProducts)
+          const scopedProducts = getFilteredProducts(localFilters, apiProducts)
           const total = scopedProducts.length
           const totalPages = Math.max(Math.ceil(total / limit), 1)
           const safePage = Math.min(Math.max(page, 1), totalPages)
@@ -169,37 +130,50 @@ export function useProducts(filters) {
             page: safePage,
             limit,
             totalPages,
-            filterOptions: getFilterOptions({ catalogNode, products: apiProducts }),
+            filterOptions: normalizeFilterOptions(result.filters)
+              || getFilterOptions({ catalogNode, products: apiProducts }),
             isLoading: false,
             error: null,
             isApiMode: true,
             isFallback: false,
+            requestKey,
           })
           return
         }
 
-        const products = apiProducts
-        const removedResultCount = Math.max(0, (result.items || []).length - products.length)
+        const removedResultCount = Math.max(0, (result.items || []).length - apiProducts.length)
         const total = Math.max(0, Number(result.total || 0) - removedResultCount)
-        const totalPages = Math.max(Math.ceil(total / Number(result.limit || limit)), 1)
+        const resultLimit = Number(result.limit || limit)
         setState({
-          products,
-          items: products,
+          products: apiProducts,
+          items: apiProducts,
           total,
-          page: result.page,
-          limit: result.limit,
-          totalPages,
-          filterOptions: normalizeFilterOptions(result.filters) || fallbackResult.filterOptions,
+          page: Number(result.page || page),
+          limit: resultLimit,
+          totalPages: Number(result.totalPages || Math.max(Math.ceil(total / resultLimit), 1)),
+          filterOptions: normalizeFilterOptions(result.filters)
+            || getFilterOptions({ catalogNode, products: apiProducts }),
           isLoading: false,
           error: null,
           isApiMode: true,
           isFallback: false,
+          requestKey,
         })
       })
       .catch((error) => {
-        if (!isActive) return
         console.warn('StroyRayon API products fallback:', error)
-        setState({ ...fallbackResult, isLoading: false, error, isApiMode: true, isFallback: true })
+        return loadBundledFallback(error)
+      })
+      .catch((error) => {
+        if (!isActive) return
+        setState({
+          ...emptyProductsState({ page, limit }),
+          requestKey,
+          isLoading: false,
+          error,
+          isApiMode: true,
+          isFallback: true,
+        })
       })
 
     return () => {
@@ -208,85 +182,151 @@ export function useProducts(filters) {
   }, [
     apiCatalogPath,
     brands,
-    catalogPath,
     catalogNode,
-    fallbackResult,
+    categorySlug,
     isVirtualCatalogGroup,
     limit,
     maxPrice,
     minPrice,
     page,
-    preferBundledCatalog,
     search,
     sort,
     stockStatuses,
+    subcategorySlug,
     tags,
     units,
+    requestKey,
   ])
 
-  return USE_API && !preferBundledCatalog ? state : fallbackResult
+  return state.requestKey === requestKey
+    ? state
+    : {
+        ...state,
+        page,
+        limit,
+        isLoading: true,
+        error: null,
+        isApiMode: USE_API,
+      }
 }
 
 export function useProductBySlug(slug) {
   const isRetiredProduct = isRetiredProductSlug(slug)
-  const fallbackProduct = useMemo(
-    () => (isRetiredProduct ? undefined : getProductBySlug(slug)),
-    [isRetiredProduct, slug],
-  )
-  const preferBundledProduct = (
-    isBundledAlinexProduct(fallbackProduct)
-    || isBundledEverPlastProduct(fallbackProduct)
-    || isBundledElectricalSupplierProduct(fallbackProduct)
-  )
   const [state, setState] = useState({
     requestedSlug: slug,
-    product: fallbackProduct,
-    isLoading: USE_API,
+    product: null,
+    isLoading: !isRetiredProduct,
     error: null,
   })
 
   useEffect(() => {
-    if (!USE_API || !slug || isRetiredProduct || preferBundledProduct) return
-
     let isActive = true
+
+    if (!slug || isRetiredProduct) {
+      return () => {
+        isActive = false
+      }
+    }
+
+    const loadBundledFallback = async (error = null) => {
+      const bundledProducts = await loadBundledProducts()
+      if (!isActive) return
+      setState({
+        requestedSlug: slug,
+        product: getProductBySlug(slug, bundledProducts) || null,
+        isLoading: false,
+        error,
+      })
+    }
+
+    if (!USE_API) {
+      loadBundledFallback().catch((error) => {
+        if (!isActive) return
+        setState({ requestedSlug: slug, product: null, isLoading: false, error })
+      })
+      return () => {
+        isActive = false
+      }
+    }
 
     fetchProductBySlug(slug)
       .then((product) => {
+        if (!product) return loadBundledFallback()
         if (!isActive) return
         setState({
           requestedSlug: slug,
-          product: product ? normalizeProduct(product) : null,
+          product: normalizeProduct(product),
           isLoading: false,
           error: null,
         })
       })
       .catch((error) => {
-        if (!isActive) return
         console.warn('StroyRayon API product fallback:', error)
-        setState({
-          requestedSlug: slug,
-          product: fallbackProduct,
-          isLoading: false,
-          error,
-        })
+        return loadBundledFallback(error)
+      })
+      .catch((error) => {
+        if (!isActive) return
+        setState({ requestedSlug: slug, product: null, isLoading: false, error })
       })
 
     return () => {
       isActive = false
     }
-  }, [fallbackProduct, isRetiredProduct, preferBundledProduct, slug])
+  }, [isRetiredProduct, slug])
 
   if (isRetiredProduct) {
     return { product: null, isLoading: false, error: null }
   }
 
-  if (!USE_API || preferBundledProduct) {
-    return { product: fallbackProduct, isLoading: false, error: null }
-  }
-
   return state.requestedSlug === slug
     ? state
-    : { product: fallbackProduct, isLoading: true, error: null }
+    : { product: null, isLoading: true, error: null }
+}
+
+function emptyProductsState({ page, limit }) {
+  return {
+    products: [],
+    items: [],
+    total: 0,
+    page,
+    limit,
+    totalPages: 1,
+    filterOptions: getFilterOptions(),
+    isLoading: true,
+    error: null,
+    isApiMode: USE_API,
+    isFallback: false,
+    requestKey: null,
+  }
+}
+
+function buildBundledResult({ sourceProducts, filters, page, limit, error, requestKey }) {
+  const filteredProducts = getFilteredProducts(filters, sourceProducts)
+  const total = filteredProducts.length
+  const totalPages = Math.max(Math.ceil(total / limit), 1)
+  const safePage = Math.min(Math.max(page, 1), totalPages)
+  const start = (safePage - 1) * limit
+  const products = filteredProducts.slice(start, start + limit)
+
+  return {
+    products,
+    items: products,
+    total,
+    page: safePage,
+    limit,
+    totalPages,
+    filterOptions: getFilterOptions({
+      catalogNode: filters.catalogNode,
+      categorySlug: filters.categorySlug,
+      subcategorySlug: filters.subcategorySlug,
+      products: sourceProducts,
+    }),
+    isLoading: false,
+    error,
+    isApiMode: USE_API,
+    isFallback: true,
+    requestKey,
+  }
 }
 
 function normalizeFilterOptions(filters) {

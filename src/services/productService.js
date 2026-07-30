@@ -1,7 +1,8 @@
 import { categories } from '../data/categories.js'
 import { catalogTree } from '../data/catalogTree.js'
-import { products } from '../data/products.js'
 import { normalizeKyrgyzText } from '../i18n/kyrgyzText.js'
+
+const EMPTY_PRODUCTS = Object.freeze([])
 
 export const STOCK_LABELS_BY_LOCALE = {
   kg: {
@@ -103,7 +104,7 @@ export function getDescendantSlugs(node) {
   return [node.slug, ...(node.children || []).flatMap((child) => getDescendantSlugs(child))]
 }
 
-export function getProductsByCatalogNode(node, sourceProducts = products) {
+export function getProductsByCatalogNode(node, sourceProducts = EMPTY_PRODUCTS) {
   if (!node) return []
   const descendantSlugs = getDescendantSlugs(node)
   const nodeTags = node.productTags || []
@@ -125,8 +126,8 @@ export function getSubcategory(categorySlug, subcategorySlug) {
   return category?.subcategories.find((subcategory) => subcategory.slug === subcategorySlug)
 }
 
-export function getProducts(filters = {}) {
-  return products.filter((product) => {
+export function getProducts(filters = {}, sourceProducts = EMPTY_PRODUCTS) {
+  return sourceProducts.filter((product) => {
     if (product.isActive === false) return false
     if (filters.categorySlug && product.categorySlug !== filters.categorySlug) return false
     if (filters.subcategorySlug && product.subcategorySlug !== filters.subcategorySlug) return false
@@ -161,15 +162,12 @@ export function resolveProductSlug(productSlug) {
   return legacyProductSlugAliases[productSlug] || productSlug
 }
 
-export function getHomePopularProducts(sourceProducts = products) {
+export function getHomePopularProducts(sourceProducts = EMPTY_PRODUCTS) {
   const normalizedSource = sourceProducts.map(normalizeProduct).filter((product) => product.isActive !== false)
-  const normalizedFallback = products.map(normalizeProduct).filter((product) => product.isActive !== false)
   const selected = []
 
   for (const group of HOME_POPULAR_GROUPS) {
-    const product =
-      findProductForGroup(normalizedSource, group, selected) ||
-      findProductForGroup(normalizedFallback, group, selected)
+    const product = findProductForGroup(normalizedSource, group, selected)
 
     if (product) selected.push(product)
   }
@@ -219,7 +217,7 @@ export function filterProducts(productsToFilter, filters = {}) {
   })
 }
 
-export function getFilteredProducts(filters = {}, sourceProducts = products) {
+export function getFilteredProducts(filters = {}, sourceProducts = EMPTY_PRODUCTS) {
   const baseProducts = filters.catalogNode
     ? getProductsByCatalogNode(filters.catalogNode, sourceProducts)
     : filters.search
@@ -230,13 +228,13 @@ export function getFilteredProducts(filters = {}, sourceProducts = products) {
   return sortProducts(filteredProducts, filters.sort)
 }
 
-export function getProductBySlug(productSlug) {
+export function getProductBySlug(productSlug, sourceProducts = EMPTY_PRODUCTS) {
   const resolvedSlug = resolveProductSlug(productSlug)
-  const product = products.find((product) => product.slug === resolvedSlug && product.isActive !== false)
+  const product = sourceProducts.find((product) => product.slug === resolvedSlug && product.isActive !== false)
   return product ? normalizeProduct(product) : undefined
 }
 
-export function getRelatedProducts(product, limit = 4, sourceProducts = products) {
+export function getRelatedProducts(product, limit = 4, sourceProducts = EMPTY_PRODUCTS) {
   if (!product) return []
   const preferredIds = product.relatedProductIds || []
   const normalizedProducts = sourceProducts.map(normalizeProduct)
@@ -250,7 +248,7 @@ export function getRelatedProducts(product, limit = 4, sourceProducts = products
     .slice(0, limit)
 }
 
-export function searchProducts(query, sourceProducts = products) {
+export function searchProducts(query, sourceProducts = EMPTY_PRODUCTS) {
   const normalizedQuery = query.trim().toLowerCase()
   if (!normalizedQuery) return []
   return sourceProducts
@@ -525,9 +523,10 @@ export function hasTag(product, tag) {
 }
 
 export function getFilterOptions(scopeFilters = {}) {
+  const sourceProducts = scopeFilters.products || EMPTY_PRODUCTS
   const scopedProducts = scopeFilters.catalogNode
-    ? getProductsByCatalogNode(scopeFilters.catalogNode, scopeFilters.products || products)
-    : filterProducts(scopeFilters.products || products, {
+    ? getProductsByCatalogNode(scopeFilters.catalogNode, sourceProducts)
+    : filterProducts(sourceProducts, {
         categorySlug: scopeFilters.categorySlug,
         subcategorySlug: scopeFilters.subcategorySlug,
       })
