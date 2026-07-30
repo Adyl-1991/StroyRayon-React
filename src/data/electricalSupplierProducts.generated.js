@@ -29,7 +29,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-aksessuary",
     "slug": "chint-accessories-aksessuary",
-    "sku": "CHINT-APR26-G001",
+    "sku": "CHINT-APR26-G-0IBH9BI",
     "titleKg": "CHINT АКСЕССУАРЫ — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT АКСЕССУАРЫ",
     "categorySlug": "electrics",
@@ -180,7 +180,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-ac30",
     "slug": "chint-accessories-ac30",
-    "sku": "CHINT-APR26-G002",
+    "sku": "CHINT-APR26-G-1170UU0",
     "titleKg": "CHINT AC30 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT AC30",
     "categorySlug": "electrics",
@@ -271,7 +271,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-kg316",
     "slug": "chint-accessories-kg316",
-    "sku": "CHINT-APR26-G003",
+    "sku": "CHINT-APR26-G-18AIWI1",
     "titleKg": "CHINT KG316 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT KG316",
     "categorySlug": "electrics",
@@ -362,7 +362,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-nd9",
     "slug": "chint-accessories-nd9",
-    "sku": "CHINT-APR26-G004",
+    "sku": "CHINT-APR26-G-0MOMHAS",
     "titleKg": "CHINT ND9 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT ND9",
     "categorySlug": "electrics",
@@ -493,7 +493,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-np2",
     "slug": "chint-accessories-np2",
-    "sku": "CHINT-APR26-G005",
+    "sku": "CHINT-APR26-G-0NJRJKX",
     "titleKg": "CHINT NP2 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT NP2",
     "categorySlug": "electrics",
@@ -604,7 +604,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-np9",
     "slug": "chint-accessories-np9",
-    "sku": "CHINT-APR26-G006",
+    "sku": "CHINT-APR26-G-0KHVWY8",
     "titleKg": "CHINT NP9 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT NP9",
     "categorySlug": "electrics",
@@ -815,7 +815,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-accessories-nzk1",
     "slug": "chint-accessories-nzk1",
-    "sku": "CHINT-APR26-G007",
+    "sku": "CHINT-APR26-G-0X4MK5V",
     "titleKg": "CHINT NZK1 — электромонтаж аксессуарлары",
     "titleRu": "Электромонтажные аксессуары CHINT NZK1",
     "categorySlug": "electrics",
@@ -926,7 +926,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-ats-nxzm",
     "slug": "chint-ats-nxzm",
-    "sku": "CHINT-APR26-G008",
+    "sku": "CHINT-APR26-G-0DTJI0S",
     "titleKg": "CHINT NXZM — резервди автоматтык киргизүү",
     "titleRu": "Автоматический ввод резерва CHINT NXZM",
     "categorySlug": "electrics",
@@ -1218,7 +1218,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-na1-1000",
     "slug": "chint-breakers-na1-1000",
-    "sku": "CHINT-APR26-G009",
+    "sku": "CHINT-APR26-G-1TKK028",
     "titleKg": "CHINT NA1-1000 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NA1-1000",
     "categorySlug": "electrics",
@@ -1330,7 +1330,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-na1-2000",
     "slug": "chint-breakers-na1-2000",
-    "sku": "CHINT-APR26-G010",
+    "sku": "CHINT-APR26-G-1FRYD8J",
     "titleKg": "CHINT NA1-2000 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NA1-2000",
     "categorySlug": "electrics",
@@ -1482,7 +1482,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-na1-3200",
     "slug": "chint-breakers-na1-3200",
-    "sku": "CHINT-APR26-G011",
+    "sku": "CHINT-APR26-G-0KARX0C",
     "titleKg": "CHINT NA1-3200 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NA1-3200",
     "categorySlug": "electrics",
@@ -1634,7 +1634,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-na1-4000",
     "slug": "chint-breakers-na1-4000",
-    "sku": "CHINT-APR26-G012",
+    "sku": "CHINT-APR26-G-009NWV9",
     "titleKg": "CHINT NA1-4000 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NA1-4000",
     "categorySlug": "electrics",
@@ -1726,7 +1726,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nb1-1p",
     "slug": "chint-breakers-nb1-1p",
-    "sku": "CHINT-APR26-G013",
+    "sku": "CHINT-APR26-G-0BLWKOH",
     "titleKg": "CHINT NB1 1P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NB1 1P",
     "categorySlug": "electrics",
@@ -1958,7 +1958,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nb1-3p",
     "slug": "chint-breakers-nb1-3p",
-    "sku": "CHINT-APR26-G014",
+    "sku": "CHINT-APR26-G-062D1ER",
     "titleKg": "CHINT NB1 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NB1 3P",
     "categorySlug": "electrics",
@@ -2150,7 +2150,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-1250h",
     "slug": "chint-breakers-nm1-1250h",
-    "sku": "CHINT-APR26-G015",
+    "sku": "CHINT-APR26-G-0QR4FJ9",
     "titleKg": "CHINT NM1-1250H — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-1250H",
     "categorySlug": "electrics",
@@ -2262,7 +2262,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-125c-3300",
     "slug": "chint-breakers-nm1-125c-3300",
-    "sku": "CHINT-APR26-G016",
+    "sku": "CHINT-APR26-G-0D57PKZ",
     "titleKg": "CHINT NM1-125C/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-125C/3300",
     "categorySlug": "electrics",
@@ -2494,7 +2494,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-125s",
     "slug": "chint-breakers-nm1-125s",
-    "sku": "CHINT-APR26-G017",
+    "sku": "CHINT-APR26-G-1STRNC2",
     "titleKg": "CHINT NM1-125S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-125S",
     "categorySlug": "electrics",
@@ -2726,7 +2726,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-250s",
     "slug": "chint-breakers-nm1-250s",
-    "sku": "CHINT-APR26-G018",
+    "sku": "CHINT-APR26-G-1HX4GM9",
     "titleKg": "CHINT NM1-250S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-250S",
     "categorySlug": "electrics",
@@ -2918,7 +2918,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-400s",
     "slug": "chint-breakers-nm1-400s",
-    "sku": "CHINT-APR26-G019",
+    "sku": "CHINT-APR26-G-1O41PPC",
     "titleKg": "CHINT NM1-400S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-400S",
     "categorySlug": "electrics",
@@ -3070,7 +3070,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-630s",
     "slug": "chint-breakers-nm1-630s",
-    "sku": "CHINT-APR26-G020",
+    "sku": "CHINT-APR26-G-0O2CB6B",
     "titleKg": "CHINT NM1-630S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-630S",
     "categorySlug": "electrics",
@@ -3202,7 +3202,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-63s",
     "slug": "chint-breakers-nm1-63s",
-    "sku": "CHINT-APR26-G021",
+    "sku": "CHINT-APR26-G-1PLQ74V",
     "titleKg": "CHINT NM1-63S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-63S",
     "categorySlug": "electrics",
@@ -3394,7 +3394,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm1-800h",
     "slug": "chint-breakers-nm1-800h",
-    "sku": "CHINT-APR26-G022",
+    "sku": "CHINT-APR26-G-13ZG3Q5",
     "titleKg": "CHINT NM1-800H — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM1-800H",
     "categorySlug": "electrics",
@@ -3486,7 +3486,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm8n",
     "slug": "chint-breakers-nm8n",
-    "sku": "CHINT-APR26-G023",
+    "sku": "CHINT-APR26-G-1GISOFD",
     "titleKg": "CHINT NM8N — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM8N",
     "categorySlug": "electrics",
@@ -3578,7 +3578,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm8n-250s",
     "slug": "chint-breakers-nm8n-250s",
-    "sku": "CHINT-APR26-G024",
+    "sku": "CHINT-APR26-G-0ZR05E4",
     "titleKg": "CHINT NM8N-250S — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM8N-250S",
     "categorySlug": "electrics",
@@ -3750,7 +3750,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm8n-400q",
     "slug": "chint-breakers-nm8n-400q",
-    "sku": "CHINT-APR26-G025",
+    "sku": "CHINT-APR26-G-0UCR257",
     "titleKg": "CHINT NM8N-400Q — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM8N-400Q",
     "categorySlug": "electrics",
@@ -3842,7 +3842,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nm8n-630q",
     "slug": "chint-breakers-nm8n-630q",
-    "sku": "CHINT-APR26-G026",
+    "sku": "CHINT-APR26-G-1A7B6GC",
     "titleKg": "CHINT NM8N-630Q — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NM8N-630Q",
     "categorySlug": "electrics",
@@ -3934,7 +3934,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-125-1p",
     "slug": "chint-breakers-nxb-125-1p",
-    "sku": "CHINT-APR26-G027",
+    "sku": "CHINT-APR26-G-04SCP9P",
     "titleKg": "CHINT NXB-125 1P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-125 1P",
     "categorySlug": "electrics",
@@ -4086,7 +4086,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-125-3p",
     "slug": "chint-breakers-nxb-125-3p",
-    "sku": "CHINT-APR26-G028",
+    "sku": "CHINT-APR26-G-1Y9V0DB",
     "titleKg": "CHINT NXB-125 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-125 3P",
     "categorySlug": "electrics",
@@ -4238,7 +4238,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-63-1p",
     "slug": "chint-breakers-nxb-63-1p",
-    "sku": "CHINT-APR26-G029",
+    "sku": "CHINT-APR26-G-0620LQS",
     "titleKg": "CHINT NXB-63 1P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-63 1P",
     "categorySlug": "electrics",
@@ -4570,7 +4570,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-63-2p",
     "slug": "chint-breakers-nxb-63-2p",
-    "sku": "CHINT-APR26-G030",
+    "sku": "CHINT-APR26-G-026HU4V",
     "titleKg": "CHINT NXB-63 2P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-63 2P",
     "categorySlug": "electrics",
@@ -4822,7 +4822,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-63-3p",
     "slug": "chint-breakers-nxb-63-3p",
-    "sku": "CHINT-APR26-G031",
+    "sku": "CHINT-APR26-G-00IH2H2",
     "titleKg": "CHINT NXB-63 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-63 3P",
     "categorySlug": "electrics",
@@ -5134,7 +5134,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxb-63-4p",
     "slug": "chint-breakers-nxb-63-4p",
-    "sku": "CHINT-APR26-G032",
+    "sku": "CHINT-APR26-G-011YARD",
     "titleKg": "CHINT NXB-63 4P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXB-63 4P",
     "categorySlug": "electrics",
@@ -5326,7 +5326,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-1000s-3300",
     "slug": "chint-breakers-nxm-1000s-3300",
-    "sku": "CHINT-APR26-G033",
+    "sku": "CHINT-APR26-G-14HCIDD",
     "titleKg": "CHINT NXM-1000S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-1000S/3300",
     "categorySlug": "electrics",
@@ -5418,7 +5418,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-125s-3300",
     "slug": "chint-breakers-nxm-125s-3300",
-    "sku": "CHINT-APR26-G034",
+    "sku": "CHINT-APR26-G-07UKOSQ",
     "titleKg": "CHINT NXM-125S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-125S/3300",
     "categorySlug": "electrics",
@@ -5570,7 +5570,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-1600s-3300",
     "slug": "chint-breakers-nxm-1600s-3300",
-    "sku": "CHINT-APR26-G035",
+    "sku": "CHINT-APR26-G-0EZRKKN",
     "titleKg": "CHINT NXM-1600S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-1600S/3300",
     "categorySlug": "electrics",
@@ -5662,7 +5662,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-160s-3300",
     "slug": "chint-breakers-nxm-160s-3300",
-    "sku": "CHINT-APR26-G036",
+    "sku": "CHINT-APR26-G-11TPMI5",
     "titleKg": "CHINT NXM-160S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-160S/3300",
     "categorySlug": "electrics",
@@ -5754,7 +5754,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-250s-3300",
     "slug": "chint-breakers-nxm-250s-3300",
-    "sku": "CHINT-APR26-G037",
+    "sku": "CHINT-APR26-G-0DQ336V",
     "titleKg": "CHINT NXM-250S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-250S/3300",
     "categorySlug": "electrics",
@@ -5926,7 +5926,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-400s-3300",
     "slug": "chint-breakers-nxm-400s-3300",
-    "sku": "CHINT-APR26-G038",
+    "sku": "CHINT-APR26-G-1R598H0",
     "titleKg": "CHINT NXM-400S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-400S/3300",
     "categorySlug": "electrics",
@@ -6058,7 +6058,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-630s-3300",
     "slug": "chint-breakers-nxm-630s-3300",
-    "sku": "CHINT-APR26-G039",
+    "sku": "CHINT-APR26-G-0VP32GD",
     "titleKg": "CHINT NXM-630S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-630S/3300",
     "categorySlug": "electrics",
@@ -6170,7 +6170,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-breakers-nxm-800s-3300",
     "slug": "chint-breakers-nxm-800s-3300",
-    "sku": "CHINT-APR26-G040",
+    "sku": "CHINT-APR26-G-0ZM03MO",
     "titleKg": "CHINT NXM-800S/3300 — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели CHINT NXM-800S/3300",
     "categorySlug": "electrics",
@@ -6262,7 +6262,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-contactors-nc1",
     "slug": "chint-contactors-nc1",
-    "sku": "CHINT-APR26-G041",
+    "sku": "CHINT-APR26-G-15PEH5V",
     "titleKg": "CHINT NC1 — контакторлор",
     "titleRu": "Контакторы CHINT NC1",
     "categorySlug": "electrics",
@@ -6914,7 +6914,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-contactors-nc2",
     "slug": "chint-contactors-nc2",
-    "sku": "CHINT-APR26-G042",
+    "sku": "CHINT-APR26-G-15ZE2UU",
     "titleKg": "CHINT NC2 — контакторлор",
     "titleRu": "Контакторы CHINT NC2",
     "categorySlug": "electrics",
@@ -7286,7 +7286,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-contactors-nch8",
     "slug": "chint-contactors-nch8",
-    "sku": "CHINT-APR26-G043",
+    "sku": "CHINT-APR26-G-1VGG2IO",
     "titleKg": "CHINT NCH8 — контакторлор",
     "titleRu": "Контакторы CHINT NCH8",
     "categorySlug": "electrics",
@@ -7678,7 +7678,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-contactors-nxc",
     "slug": "chint-contactors-nxc",
-    "sku": "CHINT-APR26-G044",
+    "sku": "CHINT-APR26-G-0K4VFYE",
     "titleKg": "CHINT NXC — контакторлор",
     "titleRu": "Контакторы CHINT NXC",
     "categorySlug": "electrics",
@@ -8450,7 +8450,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-converters-nvf2g",
     "slug": "chint-converters-nvf2g",
-    "sku": "CHINT-APR26-G045",
+    "sku": "CHINT-APR26-G-14SRWV3",
     "titleKg": "CHINT NVF2G — жыштык өзгөрткүчтөр",
     "titleRu": "Частотные преобразователи CHINT NVF2G",
     "categorySlug": "electrics",
@@ -9022,7 +9022,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-differential-nb2le",
     "slug": "chint-differential-nb2le",
-    "sku": "CHINT-APR26-G046",
+    "sku": "CHINT-APR26-G-0ZCLSH7",
     "titleKg": "CHINT NB2LE — дифференциалдык автоматтар",
     "titleRu": "Дифференциальные автоматы CHINT NB2LE",
     "categorySlug": "electrics",
@@ -9174,7 +9174,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-differential-nxble-63",
     "slug": "chint-differential-nxble-63",
-    "sku": "CHINT-APR26-G047",
+    "sku": "CHINT-APR26-G-1BIB4WR",
     "titleKg": "CHINT NXBLE-63 — дифференциалдык автоматтар",
     "titleRu": "Дифференциальные автоматы CHINT NXBLE-63",
     "categorySlug": "electrics",
@@ -9406,7 +9406,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-differential-nxble-63y",
     "slug": "chint-differential-nxble-63y",
-    "sku": "CHINT-APR26-G048",
+    "sku": "CHINT-APR26-G-0UBPZUU",
     "titleKg": "CHINT NXBLE-63Y — дифференциалдык автоматтар",
     "titleRu": "Дифференциальные автоматы CHINT NXBLE-63Y",
     "categorySlug": "electrics",
@@ -9658,7 +9658,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-panels-metallicheskie",
     "slug": "chint-panels-metallicheskie",
-    "sku": "CHINT-APR26-G049",
+    "sku": "CHINT-APR26-G-14J6NYU",
     "titleKg": "CHINT МЕТАЛЛИЧЕСКИЕ — монтаждык электр щиттери",
     "titleRu": "Монтажные электрические щиты CHINT МЕТАЛЛИЧЕСКИЕ",
     "categorySlug": "electrics",
@@ -10089,7 +10089,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-rcd-nl1-100",
     "slug": "chint-rcd-nl1-100",
-    "sku": "CHINT-APR26-G050",
+    "sku": "CHINT-APR26-G-0XZFG81",
     "titleKg": "CHINT NL1-100 — УЗО",
     "titleRu": "УЗО CHINT NL1-100",
     "categorySlug": "electrics",
@@ -10221,7 +10221,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-rcd-nl1-63-2p",
     "slug": "chint-rcd-nl1-63-2p",
-    "sku": "CHINT-APR26-G051",
+    "sku": "CHINT-APR26-G-0UKFQZ6",
     "titleKg": "CHINT NL1-63 2P — УЗО",
     "titleRu": "УЗО CHINT NL1-63 2P",
     "categorySlug": "electrics",
@@ -10393,7 +10393,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-rcd-nl1-63-4p",
     "slug": "chint-rcd-nl1-63-4p",
-    "sku": "CHINT-APR26-G052",
+    "sku": "CHINT-APR26-G-0XWHAAS",
     "titleKg": "CHINT NL1-63 4P — УЗО",
     "titleRu": "УЗО CHINT NL1-63 4P",
     "categorySlug": "electrics",
@@ -10545,7 +10545,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-rele",
     "slug": "chint-relays-rele",
-    "sku": "CHINT-APR26-G053",
+    "sku": "CHINT-APR26-G-0VKF1X1",
     "titleKg": "CHINT РЕЛЕ — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT РЕЛЕ",
     "categorySlug": "electrics",
@@ -10717,7 +10717,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-jd5",
     "slug": "chint-relays-jd5",
-    "sku": "CHINT-APR26-G054",
+    "sku": "CHINT-APR26-G-0DIXK28",
     "titleKg": "CHINT JD5 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT JD5",
     "categorySlug": "electrics",
@@ -10809,7 +10809,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-jd8",
     "slug": "chint-relays-jd8",
-    "sku": "CHINT-APR26-G055",
+    "sku": "CHINT-APR26-G-0H4SE2V",
     "titleKg": "CHINT JD8 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT JD8",
     "categorySlug": "electrics",
@@ -10961,7 +10961,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-njyb3",
     "slug": "chint-relays-njyb3",
-    "sku": "CHINT-APR26-G056",
+    "sku": "CHINT-APR26-G-0MBYJYX",
     "titleKg": "CHINT NJYB3 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NJYB3",
     "categorySlug": "electrics",
@@ -11053,7 +11053,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-njyw1",
     "slug": "chint-relays-njyw1",
-    "sku": "CHINT-APR26-G057",
+    "sku": "CHINT-APR26-G-0TIL4AY",
     "titleKg": "CHINT NJYW1 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NJYW1",
     "categorySlug": "electrics",
@@ -11145,7 +11145,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-nr2",
     "slug": "chint-relays-nr2",
-    "sku": "CHINT-APR26-G058",
+    "sku": "CHINT-APR26-G-0TGW61B",
     "titleKg": "CHINT NR2 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NR2",
     "categorySlug": "electrics",
@@ -11557,7 +11557,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-nxr",
     "slug": "chint-relays-nxr",
-    "sku": "CHINT-APR26-G059",
+    "sku": "CHINT-APR26-G-1B7LLTX",
     "titleKg": "CHINT NXR — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT NXR",
     "categorySlug": "electrics",
@@ -12129,7 +12129,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-relays-xj3",
     "slug": "chint-relays-xj3",
-    "sku": "CHINT-APR26-G060",
+    "sku": "CHINT-APR26-G-1K89E1A",
     "titleKg": "CHINT XJ3 — реле жана башкаруу аппараттары",
     "titleRu": "Реле и аппараты управления CHINT XJ3",
     "categorySlug": "electrics",
@@ -12221,7 +12221,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tnd-1f",
     "slug": "chint-stabilizers-tnd-1f",
-    "sku": "CHINT-APR26-G061",
+    "sku": "CHINT-APR26-G-1MCQX2L",
     "titleKg": "CHINT TND 1Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TND 1Ф",
     "categorySlug": "electrics",
@@ -12493,7 +12493,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tns-3f",
     "slug": "chint-stabilizers-tns-3f",
-    "sku": "CHINT-APR26-G062",
+    "sku": "CHINT-APR26-G-1Q2WXB0",
     "titleKg": "CHINT TNS 3Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TNS 3Ф",
     "categorySlug": "electrics",
@@ -12685,7 +12685,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-stabilizers-tnsz-3f",
     "slug": "chint-stabilizers-tnsz-3f",
-    "sku": "CHINT-APR26-G063",
+    "sku": "CHINT-APR26-G-0YCY9PA",
     "titleKg": "CHINT TNSZ 3Ф — чыңалуу стабилизаторлору",
     "titleRu": "Стабилизаторы напряжения CHINT TNSZ 3Ф",
     "categorySlug": "electrics",
@@ -12777,7 +12777,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-starters-nq3",
     "slug": "chint-starters-nq3",
-    "sku": "CHINT-APR26-G064",
+    "sku": "CHINT-APR26-G-0SUUHKL",
     "titleKg": "CHINT NQ3 — кыймылдаткычты ишке киргизгичтер",
     "titleRu": "Пускатели и защита двигателя CHINT NQ3",
     "categorySlug": "electrics",
@@ -12929,7 +12929,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-starters-ns2",
     "slug": "chint-starters-ns2",
-    "sku": "CHINT-APR26-G065",
+    "sku": "CHINT-APR26-G-1UBJ57S",
     "titleKg": "CHINT NS2 — кыймылдаткычты ишке киргизгичтер",
     "titleRu": "Пускатели и защита двигателя CHINT NS2",
     "categorySlug": "electrics",
@@ -13341,7 +13341,7 @@ export const electricalSupplierProducts = [
   {
     "id": "chint-transformers-ndk",
     "slug": "chint-transformers-ndk",
-    "sku": "CHINT-APR26-G066",
+    "sku": "CHINT-APR26-G-19685YG",
     "titleKg": "CHINT NDK — трансформаторлор",
     "titleRu": "Трансформаторы CHINT NDK",
     "categorySlug": "electrics",
@@ -13613,7 +13613,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-frames-panasonic",
     "slug": "panasonic-frames-panasonic",
-    "sku": "PANASONIC-APR26-G067",
+    "sku": "PANASONIC-APR26-G-177RFZH",
     "titleKg": "PANASONIC — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей PANASONIC",
     "categorySlug": "electrics",
@@ -14445,7 +14445,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-mounting-panasonic",
     "slug": "panasonic-mounting-panasonic",
-    "sku": "PANASONIC-APR26-G068",
+    "sku": "PANASONIC-APR26-G-04A268S",
     "titleKg": "PANASONIC — монтаждык кутулар",
     "titleRu": "Монтажные коробки PANASONIC",
     "categorySlug": "electrics",
@@ -14557,7 +14557,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-sockets-panasonic",
     "slug": "panasonic-sockets-panasonic",
-    "sku": "PANASONIC-APR26-G069",
+    "sku": "PANASONIC-APR26-G-0MNF235",
     "titleKg": "PANASONIC — розеткалар",
     "titleRu": "Розетки PANASONIC",
     "categorySlug": "electrics",
@@ -15469,7 +15469,7 @@ export const electricalSupplierProducts = [
   {
     "id": "panasonic-switches-panasonic",
     "slug": "panasonic-switches-panasonic",
-    "sku": "PANASONIC-APR26-G070",
+    "sku": "PANASONIC-APR26-G-07GAGGV",
     "titleKg": "PANASONIC — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели PANASONIC",
     "categorySlug": "electrics",
@@ -16501,7 +16501,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-1p",
     "slug": "viko-breakers-1p",
-    "sku": "VIKO-APR26-G071",
+    "sku": "VIKO-APR26-G-1CCR75M",
     "titleKg": "VIKO 1P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 1P",
     "categorySlug": "electrics",
@@ -16853,7 +16853,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-2p",
     "slug": "viko-breakers-2p",
-    "sku": "VIKO-APR26-G072",
+    "sku": "VIKO-APR26-G-1AOQFHT",
     "titleKg": "VIKO 2P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 2P",
     "categorySlug": "electrics",
@@ -17085,7 +17085,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-3p",
     "slug": "viko-breakers-3p",
-    "sku": "VIKO-APR26-G073",
+    "sku": "VIKO-APR26-G-190PNU0",
     "titleKg": "VIKO 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO 3P",
     "categorySlug": "electrics",
@@ -17377,7 +17377,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-breakers-sbt-3p",
     "slug": "viko-breakers-sbt-3p",
-    "sku": "VIKO-APR26-G074",
+    "sku": "VIKO-APR26-G-0XQFRBU",
     "titleKg": "VIKO SBT 3P — автоматтык өчүргүчтөр",
     "titleRu": "Автоматические выключатели VIKO SBT 3P",
     "categorySlug": "electrics",
@@ -17509,7 +17509,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-contactors-viko",
     "slug": "viko-contactors-viko",
-    "sku": "VIKO-APR26-G075",
+    "sku": "VIKO-APR26-G-0KRZW75",
     "titleKg": "VIKO — контакторлор",
     "titleRu": "Контакторы VIKO",
     "categorySlug": "electrics",
@@ -17781,7 +17781,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-dimmers-carmen",
     "slug": "viko-dimmers-carmen",
-    "sku": "VIKO-APR26-G076",
+    "sku": "VIKO-APR26-G-0PXVHE5",
     "titleKg": "VIKO CARMEN — жарык жөндөгүчтөр",
     "titleRu": "Диммеры VIKO CARMEN",
     "categorySlug": "electrics",
@@ -17893,7 +17893,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-dimmers-karre",
     "slug": "viko-dimmers-karre",
-    "sku": "VIKO-APR26-G077",
+    "sku": "VIKO-APR26-G-125NKRA",
     "titleKg": "VIKO KARRE — жарык жөндөгүчтөр",
     "titleRu": "Диммеры VIKO KARRE",
     "categorySlug": "electrics",
@@ -18005,7 +18005,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-frames-carmen",
     "slug": "viko-frames-carmen",
-    "sku": "VIKO-APR26-G078",
+    "sku": "VIKO-APR26-G-1MV5VWG",
     "titleKg": "VIKO CARMEN — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей VIKO CARMEN",
     "categorySlug": "electrics",
@@ -18177,7 +18177,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-frames-karre",
     "slug": "viko-frames-karre",
-    "sku": "VIKO-APR26-G079",
+    "sku": "VIKO-APR26-G-0DNFZ3D",
     "titleKg": "VIKO KARRE — розетка жана өчүргүч рамкалары",
     "titleRu": "Рамки для розеток и выключателей VIKO KARRE",
     "categorySlug": "electrics",
@@ -18349,7 +18349,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-mounting-carmen",
     "slug": "viko-mounting-carmen",
-    "sku": "VIKO-APR26-G080",
+    "sku": "VIKO-APR26-G-0BA8FYZ",
     "titleKg": "VIKO CARMEN — монтаждык кутулар",
     "titleRu": "Монтажные коробки VIKO CARMEN",
     "categorySlug": "electrics",
@@ -18441,7 +18441,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-mounting-karre",
     "slug": "viko-mounting-karre",
-    "sku": "VIKO-APR26-G081",
+    "sku": "VIKO-APR26-G-0F61NG8",
     "titleKg": "VIKO KARRE — монтаждык кутулар",
     "titleRu": "Монтажные коробки VIKO KARRE",
     "categorySlug": "electrics",
@@ -18533,7 +18533,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-rcd-2p",
     "slug": "viko-rcd-2p",
-    "sku": "VIKO-APR26-G082",
+    "sku": "VIKO-APR26-G-0WW8ILZ",
     "titleKg": "VIKO 2P — УЗО",
     "titleRu": "УЗО VIKO 2P",
     "categorySlug": "electrics",
@@ -18785,7 +18785,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-rcd-4p",
     "slug": "viko-rcd-4p",
-    "sku": "VIKO-APR26-G083",
+    "sku": "VIKO-APR26-G-0VROZ8H",
     "titleKg": "VIKO 4P — УЗО",
     "titleRu": "УЗО VIKO 4P",
     "categorySlug": "electrics",
@@ -19017,7 +19017,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-carmen",
     "slug": "viko-sockets-carmen",
-    "sku": "VIKO-APR26-G084",
+    "sku": "VIKO-APR26-G-1WZPBY6",
     "titleKg": "VIKO CARMEN — розеткалар",
     "titleRu": "Розетки VIKO CARMEN",
     "categorySlug": "electrics",
@@ -19249,7 +19249,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-karre",
     "slug": "viko-sockets-karre",
-    "sku": "VIKO-APR26-G085",
+    "sku": "VIKO-APR26-G-02X6QMJ",
     "titleKg": "VIKO KARRE — розеткалар",
     "titleRu": "Розетки VIKO KARRE",
     "categorySlug": "electrics",
@@ -19481,7 +19481,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-pacific",
     "slug": "viko-sockets-pacific",
-    "sku": "VIKO-APR26-G086",
+    "sku": "VIKO-APR26-G-1F6P66J",
     "titleKg": "VIKO PACIFIC — розеткалар",
     "titleRu": "Розетки VIKO PACIFIC",
     "categorySlug": "electrics",
@@ -19633,7 +19633,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-sockets-palmiye",
     "slug": "viko-sockets-palmiye",
-    "sku": "VIKO-APR26-G087",
+    "sku": "VIKO-APR26-G-17UDW89",
     "titleKg": "VIKO PALMIYE — розеткалар",
     "titleRu": "Розетки VIKO PALMIYE",
     "categorySlug": "electrics",
@@ -19805,7 +19805,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-carmen",
     "slug": "viko-switches-carmen",
-    "sku": "VIKO-APR26-G088",
+    "sku": "VIKO-APR26-G-065WBIM",
     "titleKg": "VIKO CARMEN — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO CARMEN",
     "categorySlug": "electrics",
@@ -20017,7 +20017,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-karre",
     "slug": "viko-switches-karre",
-    "sku": "VIKO-APR26-G089",
+    "sku": "VIKO-APR26-G-1JCATJV",
     "titleKg": "VIKO KARRE — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO KARRE",
     "categorySlug": "electrics",
@@ -20229,7 +20229,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-pacific",
     "slug": "viko-switches-pacific",
-    "sku": "VIKO-APR26-G090",
+    "sku": "VIKO-APR26-G-03L8VAZ",
     "titleKg": "VIKO PACIFIC — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO PACIFIC",
     "categorySlug": "electrics",
@@ -20341,7 +20341,7 @@ export const electricalSupplierProducts = [
   {
     "id": "viko-switches-palmiye",
     "slug": "viko-switches-palmiye",
-    "sku": "VIKO-APR26-G091",
+    "sku": "VIKO-APR26-G-00ZH6BD",
     "titleKg": "VIKO PALMIYE — өчүргүчтөр жана которгучтар",
     "titleRu": "Выключатели и переключатели VIKO PALMIYE",
     "categorySlug": "electrics",

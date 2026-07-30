@@ -324,7 +324,16 @@ function createGroups(items) {
   return [...groups.values()]
 }
 
-function groupProduct(group, groupIndex) {
+function stableSkuToken(value) {
+  let hash = 2166136261
+  for (const character of String(value)) {
+    hash ^= character.charCodeAt(0)
+    hash = Math.imul(hash, 16777619)
+  }
+  return (hash >>> 0).toString(36).toUpperCase().padStart(7, '0')
+}
+
+function groupProduct(group) {
   const meta = CATEGORY_META[group.category]
   const redundantModel = (
     group.model === group.supplier
@@ -361,7 +370,7 @@ function groupProduct(group, groupIndex) {
   return {
     id,
     slug: id,
-    sku: `${group.supplier}-APR26-G${String(groupIndex + 1).padStart(3, '0')}`,
+    sku: `${group.supplier}-APR26-G-${stableSkuToken(id)}`,
     titleKg,
     titleRu,
     categorySlug: 'electrics',

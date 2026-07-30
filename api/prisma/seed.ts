@@ -103,6 +103,7 @@ type SeedStats = {
   preservedImages: number
   preservedManualProducts: number
   rekeyedProducts: number
+  transferredVariants: number
   skippedProducts: string[]
   warnings: string[]
   staleCatalogNodes: number
@@ -121,6 +122,19 @@ const stockQuantityMap: Record<ProductStockStatus, number> = {
   [ProductStockStatus.LOW_STOCK]: 5,
   [ProductStockStatus.PRE_ORDER]: 0,
   [ProductStockStatus.OUT_OF_STOCK]: 0,
+}
+
+const catalogLegacyProductSlugs: Record<string, string> = {
+  'chint-rcd-nl1-100': 'chint-rcd-nl-100',
+  'chint-rcd-nl1-63-2p': 'chint-rcd-nl-63',
+  'chint-relays-njyw1': 'chint-rcd-uzo',
+}
+
+const catalogVariantSkuTransferTargets: Record<string, string> = {
+  'CHINT-APR26-B241': 'chint-rcd-nl1-63-4p',
+  'CHINT-APR26-B242': 'chint-rcd-nl1-63-4p',
+  'CHINT-APR26-B243': 'chint-rcd-nl1-63-4p',
+  'CHINT-APR26-B244': 'chint-rcd-nl1-63-4p',
 }
 
 function slugify(value: string) {
@@ -205,13 +219,17 @@ async function assertIdentityCompatibility(products: ProductInput[]) {
   for (const product of products) {
     const byId = databaseProductsById.get(product.id)
     const bySlug = databaseProductsBySlug.get(product.slug)
-    if (byId && bySlug && byId.id !== bySlug.id) {
+    const legacySlug = catalogLegacyProductSlugs[product.slug]
+    const byLegacySlug = legacySlug ? databaseProductsBySlug.get(legacySlug) : undefined
+    const identityRows = [byId, bySlug, byLegacySlug].filter(Boolean)
+    if (new Set(identityRows.map((item) => item!.id)).size > 1) {
       throw new Error(`Product identity conflict for ${product.slug}: id and slug belong to different rows`)
     }
-    const targetProductId = bySlug?.id || byId?.id || product.id
+    const targetProductId = bySlug?.id || byId?.id || byLegacySlug?.id || product.id
     for (const sku of [product.sku, ...(product.variants || []).map((variant) => variant.sku).filter(Boolean)]) {
       const ownerId = databaseSkuOwners.get(sku as string)
-      if (ownerId && ownerId !== targetProductId) {
+      const transferTarget = catalogVariantSkuTransferTargets[sku as string]
+      if (ownerId && ownerId !== targetProductId && transferTarget !== product.slug) {
         throw new Error(`Database SKU conflict for ${product.slug}: ${sku}`)
       }
     }
@@ -368,7 +386,19 @@ async function seedProducts(products: ProductInput[], brandMap: Map<string, stri
             auditLogs: { select: { changedFields: true } },
           },
         })
-    const existing = existingBySlug || existingById
+    const legacySlug = catalogLegacyProductSlugs[product.slug]
+    const existingByLegacySlug = existingBySlug || existingById || !legacySlug
+      ? null
+      : await prisma.product.findUnique({
+          where: { slug: legacySlug },
+          include: {
+            images: true,
+            stock: true,
+            variants: true,
+            auditLogs: { select: { changedFields: true } },
+          },
+        })
+    const existing = existingBySlug || existingById || existingByLegacySlug
     const changedFields = new Set(existing?.auditLogs.flatMap((entry) => entry.changedFields) || [])
     const wasEdited = (...fields: string[]) => fields.some((field) => changedFields.has(field))
     const stockStatus = normalizeStockStatus(product.stockStatus)
@@ -519,6 +549,7 @@ async function seedProductVariants(
   productId: string,
   existingVariants: Array<{
     id: string
+    productId: string
     sku: string | null
     stockQuantity: number
     reservedQuantity: number
@@ -532,14 +563,29 @@ async function seedProductVariants(
   for (const [index, variant] of (product.variants || []).entries()) {
     const titleKg = variant.titleKg || variant.size || `${product.titleKg} ${index + 1}`
     const stockStatus = normalizeStockStatus(variant.stockStatus || product.stockStatus)
-    const existing = existingVariants.find((item) =>
+    let existing = existingVariants.find((item) =>
       (variant.id && item.id === variant.id) || (variant.sku && item.sku === variant.sku),
     )
+    const transferTarget = variant.sku ? catalogVariantSkuTransferTargets[variant.sku] : undefined
+    if (!existing && variant.sku && transferTarget === product.slug) {
+      existing = await prisma.productVariant.findUnique({
+        where: { sku: variant.sku },
+        select: {
+          id: true,
+          productId: true,
+          sku: true,
+          stockQuantity: true,
+          reservedQuantity: true,
+        },
+      })
+    }
 
     if (existing) {
+      const shouldTransfer = existing.productId !== productId && transferTarget === product.slug
       await prisma.productVariant.update({
         where: { id: existing.id },
         data: {
+          ...(shouldTransfer ? { productId } : {}),
           ...(!wasEdited('variants', 'variantTitle')
             ? { titleKg, titleRu: variant.titleRu || titleKg }
             : {}),
@@ -554,6 +600,7 @@ async function seedProductVariants(
           ...(!wasEdited('variants', 'variantSpecs') ? { specs: variant.specs || Prisma.JsonNull } : {}),
         },
       })
+      if (shouldTransfer) stats.transferredVariants += 1
       savedVariantIds.push(existing.id)
     } else {
       const created = await prisma.productVariant.create({
@@ -644,6 +691,7 @@ async function main() {
     preservedImages: 0,
     preservedManualProducts: 0,
     rekeyedProducts: 0,
+    transferredVariants: 0,
     skippedProducts: [],
     warnings: [],
     staleCatalogNodes: 0,
@@ -682,6 +730,7 @@ async function main() {
         preservedImages: stats.preservedImages,
         preservedManualProducts: stats.preservedManualProducts,
         rekeyedProducts: stats.rekeyedProducts,
+        transferredVariants: stats.transferredVariants,
         staleCatalogNodes: stats.staleCatalogNodes,
         staleProductsDeactivated: stats.staleProductsDeactivated,
         skippedProducts: stats.skippedProducts.length,

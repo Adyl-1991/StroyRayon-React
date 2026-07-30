@@ -56,12 +56,16 @@ test('representative retail prices follow the approved market-balanced rules', (
 test('all imported supplier products and variants are in stock and have unique identifiers', () => {
   const publishedIds = new Set(products.map((product) => product.id))
   const productIds = electricalSupplierProducts.map((product) => product.id)
+  const productSkus = electricalSupplierProducts.map((product) => product.sku)
   const variantIds = importedVariants().map((variant) => variant.id)
   const variantSkus = importedVariants().map((variant) => variant.sku)
 
   assert.equal(new Set(productIds).size, productIds.length)
+  assert.equal(new Set(productSkus).size, productSkus.length)
   assert.equal(new Set(variantIds).size, variantIds.length)
   assert.equal(new Set(variantSkus).size, variantSkus.length)
+  assert.equal(new Set([...productSkus, ...variantSkus]).size, productSkus.length + variantSkus.length)
+  productSkus.forEach((sku) => assert.match(sku, /^(?:CHINT|PANASONIC|VIKO)-APR26-G-[0-9A-Z]{7}$/))
 
   for (const product of electricalSupplierProducts) {
     assert.equal(publishedIds.has(product.id), true, product.id)
@@ -123,8 +127,14 @@ test('generated public catalog does not expose supplier wholesale fields', () =>
     path.resolve('src/data/electricalSupplierProducts.generated.js'),
     'utf8',
   )
+  const importerSource = readFileSync(
+    path.resolve('scripts/import-electrical-price-lists.mjs'),
+    'utf8',
+  )
 
   assert.doesNotMatch(source, /"wholesale"\s*:/)
+  assert.match(importerSource, /stableSkuToken\(id\)/)
+  assert.doesNotMatch(importerSource, /G\\?\$\{String\(groupIndex/)
 })
 
 test('each cable subsection uses its own relevant generated image', () => {

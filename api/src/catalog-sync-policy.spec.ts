@@ -32,3 +32,12 @@ test('production catalog sync has a catalog-size guard and runs before API start
     /preDeployCommand:\s*cd api && npx prisma migrate deploy/,
   )
 })
+
+test('production catalog sync safely rekeys split CHINT products and transfers 4P variants', () => {
+  assert.match(seedSource, /'chint-rcd-nl1-100':\s*'chint-rcd-nl-100'/)
+  assert.match(seedSource, /'chint-rcd-nl1-63-2p':\s*'chint-rcd-nl-63'/)
+  assert.match(seedSource, /'chint-relays-njyw1':\s*'chint-rcd-uzo'/)
+  assert.match(seedSource, /'CHINT-APR26-B241':\s*'chint-rcd-nl1-63-4p'/)
+  assert.match(seedSource, /shouldTransfer\s*\?\s*\{\s*productId\s*\}/)
+  assert.match(seedSource, /transferredVariants/)
+})
