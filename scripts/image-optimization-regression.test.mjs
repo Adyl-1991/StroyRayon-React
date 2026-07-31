@@ -49,6 +49,23 @@ test('hero banners provide lightweight responsive AVIF and WebP files', async ()
   )
 })
 
+test('mobile hero banners preserve every slide in a compact 10:7 composition', async () => {
+  const mobileRoot = path.join(root, 'public', 'images', 'banners', 'mobile')
+
+  for (const slide of heroSlides) {
+    for (const format of ['avif', 'webp']) {
+      const imagePath = path.join(mobileRoot, `hero-${slide.id}-768.${format}`)
+      const metadata = await sharp(imagePath).metadata()
+      const imageBytes = (await stat(imagePath)).size
+
+      assert.equal(metadata.format, format === 'avif' ? 'heif' : format, imagePath)
+      assert.equal(metadata.width, 768, imagePath)
+      assert.equal(metadata.height, 540, imagePath)
+      assert.ok(imageBytes < 50_000, `${imagePath} should remain below 50 KB`)
+    }
+  }
+})
+
 async function alinexDirectories() {
   return (await readdir(productsRoot, { withFileTypes: true }))
     .filter((entry) => entry.isDirectory() && entry.name.startsWith('alinex-'))

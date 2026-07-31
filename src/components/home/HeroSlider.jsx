@@ -31,6 +31,16 @@ export function HeroSlider() {
         >
           <picture className="promo-slide__picture">
             <source
+              media="(max-width: 760px)"
+              type="image/avif"
+              srcSet={`/images/banners/mobile/hero-${activeSlide.id}-768.avif`}
+            />
+            <source
+              media="(max-width: 760px)"
+              type="image/webp"
+              srcSet={`/images/banners/mobile/hero-${activeSlide.id}-768.webp`}
+            />
+            <source
               type="image/avif"
               srcSet={`${activeSlide.imageBase}-768.avif 768w, ${activeSlide.imageBase}-1600.avif 1600w`}
               sizes={responsiveSizes}

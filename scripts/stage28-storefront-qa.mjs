@@ -27,6 +27,7 @@ const allRoutes = [
   { id: 'category-engineering', path: '/catalog/inzhenerdik-santehnika' },
   { id: 'category-plumbing', path: '/catalog/santehnika' },
   { id: 'category-electrical', path: '/catalog/elektrika' },
+  { id: 'category-uzo', path: '/catalog/elektrika/avtomatika-korgoo/uzo' },
   { id: 'category-tools', path: '/catalog/instrument' },
   { id: 'category-fasteners', path: '/catalog/krepezh' },
   { id: 'category-paint', path: '/catalog/boiok-tush-kagaz' },
@@ -51,7 +52,10 @@ const allRoutes = [
 
 const screenshotKeys = new Set([
   'home-360',
+  'home-390',
+  'home-430',
   'catalog-390',
+  'category-uzo-390',
   'category-paint-390',
   'category-building-1366',
   'category-engineering-1440',
