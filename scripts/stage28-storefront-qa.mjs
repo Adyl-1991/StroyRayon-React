@@ -24,6 +24,9 @@ const allRoutes = [
   { id: 'home', path: '/' },
   { id: 'catalog', path: '/catalog' },
   { id: 'category-building', path: '/catalog/stroymaterial' },
+  { id: 'category-building-dry-mixes', path: '/catalog/stroymaterial/kurgak-aralashmalar' },
+  { id: 'category-building-profiles', path: '/catalog/stroymaterial/profilder' },
+  { id: 'category-building-sheets', path: '/catalog/stroymaterial/listovye-materialdar' },
   { id: 'category-engineering', path: '/catalog/inzhenerdik-santehnika' },
   { id: 'category-plumbing', path: '/catalog/santehnika' },
   { id: 'category-electrical', path: '/catalog/elektrika' },
@@ -36,6 +39,7 @@ const allRoutes = [
   { id: 'checkout', path: '/checkout' },
   { id: 'search', path: '/search' },
   { id: 'product-alinex-grender', path: '/product/alinex-gipsovaia-stukaturnaia-smes-alinex-grender' },
+  { id: 'product-building-cement', path: '/product/portlandcement-m500-50kg' },
   { id: 'product-ever-plast-ppr', path: '/product/ever-plast-ppr-pipe-pn20' },
   { id: 'category-ever-plast-ppr', path: '/catalog/inzhenerdik-santehnika/ppr-trubalar-fitingder' },
   { id: 'category-ever-plast-sewer', path: '/catalog/inzhenerdik-santehnika/kanalizaciya' },
@@ -58,12 +62,16 @@ const screenshotKeys = new Set([
   'category-uzo-390',
   'category-paint-390',
   'category-building-1366',
+  'category-building-dry-mixes-1366',
+  'category-building-profiles-1366',
+  'category-building-sheets-390',
   'category-engineering-1440',
   'cart-390',
   'checkout-390',
   'admin-login-390',
   'home-1440',
   'product-alinex-grender-390',
+  'product-building-cement-390',
   'product-ever-plast-ppr-390',
   'category-ever-plast-ppr-1366',
   'category-ever-plast-sewer-1366',
@@ -194,16 +202,18 @@ async function waitForPageContent(cdp, timeoutMs = 10000) {
     tick();
   })`)
 
+  // Give API-backed product grids time to replace their loading state before
+  // collecting lazy images. Otherwise a fast audit can inspect the skeleton.
+  await delay(1200)
+
   await evaluate(cdp, `new Promise((resolve) => {
-    const visibleImages = Array.from(document.images).filter((image) => {
-      const box = image.getBoundingClientRect();
-      return box.bottom > 0 && box.top < window.innerHeight && box.right > 0 && box.left < window.innerWidth;
-    });
-    if (!visibleImages.length) return resolve(true);
-    let pending = visibleImages.filter((image) => !image.complete).length;
+    const pageImages = Array.from(document.images);
+    pageImages.forEach((image) => { image.loading = 'eager'; });
+    if (!pageImages.length) return resolve(true);
+    let pending = pageImages.filter((image) => !image.complete).length;
     if (!pending) return resolve(true);
     const finish = () => { pending -= 1; if (pending <= 0) resolve(true); };
-    visibleImages.filter((image) => !image.complete).forEach((image) => {
+    pageImages.filter((image) => !image.complete).forEach((image) => {
       image.addEventListener('load', finish, { once: true });
       image.addEventListener('error', finish, { once: true });
     });
@@ -240,6 +250,12 @@ async function inspect(cdp) {
         .filter((item) => item.right > root.clientWidth + 1 || item.left < -1)
         .slice(0, 12),
       brokenImages,
+      productImages: Array.from(document.querySelectorAll('.product-card__image img')).map((image) => ({
+        src: image.currentSrc || image.src || '',
+        complete: image.complete,
+        naturalWidth: image.naturalWidth,
+        naturalHeight: image.naturalHeight,
+      })),
       publicHeader: Boolean(document.querySelector('.site-header')),
       publicFooter: Boolean(document.querySelector('.site-footer')),
       adminShell: Boolean(document.querySelector('.admin-shell, .admin-login')),

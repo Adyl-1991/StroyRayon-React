@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { auditKyrgyzContent } from './kyrgyz-content-audit.mjs'
-import { normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
+import { normalizeKyrgyzContent, normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 
 test('all public Kyrgyz content passes the language and copy audit', () => {
   const result = auditKyrgyzContent()
@@ -26,4 +26,18 @@ test('mixed catalogue terminology is converted to clear Kyrgyz wording', () => {
     normalizeKyrgyzText('Стяжкадагы финиш катмар үчүн расход запасын эсептеңиз.'),
     'Пол тегиздөөчү катмардагы акыркы катмар үчүн сарпталыш корун эсептеңиз.',
   )
+})
+
+test('recursive Kyrgyz normalization preserves URLs while translating visible copy', () => {
+  const route = '/catalog/stroymaterial/kurgak-aralashmalar/gidroizolyaciya'
+  const canonical = `https://www.stroyrayon.kg${route}`
+  const normalized = normalizeKyrgyzContent({
+    label: 'gidroizolyaciya аралашмасы',
+    route,
+    canonical,
+  })
+
+  assert.equal(normalized.route, route)
+  assert.equal(normalized.canonical, canonical)
+  assert.notEqual(normalized.label, 'gidroizolyaciya аралашмасы')
 })

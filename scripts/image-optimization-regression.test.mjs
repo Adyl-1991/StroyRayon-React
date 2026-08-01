@@ -14,6 +14,7 @@ import {
   getProductGallery,
   getProductImage,
 } from '../src/utils/imageUtils.js'
+import { isRealProductImage } from '../src/utils/productImageSeo.js'
 
 const root = process.cwd()
 const productsRoot = path.join(root, 'public', 'images', 'products')
@@ -127,7 +128,6 @@ test('audited products use stable placeholders without requesting missing legacy
     'fasad-boyogu-ak-10l',
     'boyok-gruntovka-10l',
     'boyok-vannochka',
-    'vlagostoikii-gipsokarton-125mm',
     'kabeldik-teplyi-pol-10m',
     'kabeldik-teplyi-pol-20m',
     'mat-teplyi-pol-1m2',
@@ -186,6 +186,30 @@ test('every catalog node resolves to an existing realistic image', async () => {
     const image = getCategoryImage(node)
     assert.notEqual(image.type, 'placeholder', node.slug)
     await access(path.join(root, 'public', image.src.replace(/^\//, '')))
+  }
+})
+
+test('every active construction-material product has an approved catalog image', async () => {
+  const buildingProducts = products.filter(
+    (product) => product.isActive !== false && product.catalogPath?.[0] === 'stroymaterial',
+  )
+
+  assert.equal(buildingProducts.length, 74)
+  for (const product of buildingProducts) {
+    const image = getProductImage(product)
+    assert.equal(isRealProductImage(image, product), true, product.slug)
+
+    if (image.src.startsWith('/images/products/')) {
+      const imagePath = path.join(root, 'public', image.src.replace(/^\//, ''))
+      await access(imagePath)
+      const metadata = await sharp(imagePath).metadata()
+      assert.ok(['webp', 'png', 'jpeg'].includes(metadata.format), product.slug)
+      if (image.src.endsWith('/main-ai-v1.webp')) {
+        assert.equal(metadata.format, 'webp', product.slug)
+        assert.equal(metadata.width, 900, product.slug)
+        assert.equal(metadata.height, 675, product.slug)
+      }
+    }
   }
 })
 

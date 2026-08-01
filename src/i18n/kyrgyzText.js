@@ -641,7 +641,10 @@ export function normalizeKyrgyzText(value) {
 }
 
 export function normalizeKyrgyzContent(value) {
-  if (typeof value === 'string') return normalizeKyrgyzText(value)
+  if (typeof value === 'string') {
+    if (/^(?:https?:\/\/|\/|#|mailto:|tel:|data:)/iu.test(value.trim())) return value
+    return normalizeKyrgyzText(value)
+  }
   if (Array.isArray(value)) return value.map(normalizeKyrgyzContent)
   if (value && typeof value === 'object') {
     return Object.fromEntries(

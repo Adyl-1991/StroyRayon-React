@@ -99,6 +99,8 @@ export function createProductAssetEntry(slug, options = {}) {
     gallery: Array.from({ length: galleryCount }, (_, index) => `${PRODUCT_IMAGE_BASE_PATH}/${slug}/gallery-${index + 1}.webp`),
     type: assetType,
     available: Boolean(options.available),
+    preferAsset: Boolean(options.preferAsset),
+    imageStatus: options.imageStatus,
     altKg: options.altKg,
   }
 }
@@ -140,6 +142,50 @@ const plannedProductAssetSlugs = [
   'podrozetnik-plastik',
   'raspredkorobka-80',
   'mat-teplyi-pol-1m2',
+]
+
+const generatedBuildingProductImageSlugs = [
+  'portlandcement-m500-50kg',
+  'plitka-kleyi-standard-25kg',
+  'gips-shtukaturkasy-30kg',
+  'knauf-rotband-30kg',
+  'knauf-mp-75-30kg',
+  'montazh-kobugu-750ml',
+  'eshik-tutkasy-komplekt',
+  'pvh-podokonnik-200mm',
+  'finish-shpaklevka-25kg',
+  'gruntovka-tereng-singuu-10l',
+  'vlagostoikii-gipsokarton-125mm',
+  'gidroizolyaciya-smes-20kg',
+  'zatirka-dlya-plitki-2kg',
+  'stroitelnyi-gips-25kg',
+  'profnastil-krovlya-08mm',
+  'plastifikator-beton-1l',
+  'ud-profil-27x28',
+  'cd-profil-60x27',
+  'uw-profil-50',
+  'cw-profil-50',
+  'tuz-podves',
+  'krab-soedinitel',
+  'lenta-serpyanka',
+  'perforaciyalangan-burchtuk',
+  'cementtuu-shtukaturka-25kg',
+  'fasaddyk-shtukaturka-25kg',
+  'dekorativdik-shtukaturka-25kg',
+  'plitka-kleyi-usilennyi-25kg',
+  'ozu-tegizdeluuchu-pol-25kg',
+  'peskobeton-m300-40kg',
+  'montazhdyk-aralashma-25kg',
+  'remonttuk-aralashma-25kg',
+  'm400-cement-50kg',
+  'kurulush-blogu-200mm',
+  'bazalt-zhyluuloo-50mm',
+  'kadimki-gipsokarton-125mm',
+  'shyp-uchun-gipsokarton-95mm',
+  'osb-plita-9mm',
+  'fanera-10mm',
+  'mdf-panel-6mm',
+  'cementtik-plita-8mm',
 ]
 
 const priorityProductImageSlugs = [
@@ -226,6 +272,19 @@ const plannedProductAssets = Object.fromEntries(
   plannedProductAssetSlugs.map((slug) => [slug, createProductAssetEntry(slug)]),
 )
 
+const generatedBuildingProductAssets = Object.fromEntries(
+  generatedBuildingProductImageSlugs.map((slug) => [
+    slug,
+    createProductAssetEntry(slug, {
+      available: true,
+      preferAsset: true,
+      galleryCount: 0,
+      imageStatus: 'ready-generated',
+      main: `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main-ai-v1.webp`,
+    }),
+  ]),
+)
+
 const priorityProductAssets = Object.fromEntries(
   priorityProductImageSlugs.map((slug) => [
     slug,
@@ -239,6 +298,7 @@ const priorityProductAssets = Object.fromEntries(
 
 export function getProductAssetEntry(slug) {
   if (!slug) return null
+  if (generatedBuildingProductAssets[slug]) return generatedBuildingProductAssets[slug]
   if (packshotAssets[slug]) {
     const assetType = inferProductAssetType(slug)
     const futureMain = `${PRODUCT_IMAGE_BASE_PATH}/${slug}/main.webp`

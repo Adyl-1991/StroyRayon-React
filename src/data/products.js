@@ -791,7 +791,10 @@ function product(data) {
   const fullDescriptionRu = data.fullDescriptionRu || data.descriptionRu || shortDescriptionRu || fullDescriptionKg
   const specificationsKg = data.specificationsKg || data.specs || {}
   const specificationsRu = data.specificationsRu || data.specsRu || specificationsKg
-  const imageStatus = data.imageStatus || (imageAssets?.available ? 'ready' : 'planned')
+  const imageStatus = imageAssets?.imageStatus || data.imageStatus || (imageAssets?.available ? 'ready' : 'planned')
+  const productImages = imageAssets?.preferAsset
+    ? imageFor(titleKg, data.slug)
+    : data.images || imageFor(titleKg, data.slug)
   const faqKg = Array.isArray(data.faqKg) && data.faqKg.length >= 2
     ? data.faqKg.map((item) => ({
         ...item,
@@ -828,10 +831,12 @@ function product(data) {
     unitRu,
     weight: data.weight || specificationsKg.Салмак || specificationsKg.Салмагы,
     size: data.size || data.weight || pack,
-    images: data.images || imageFor(titleKg, data.slug),
-    image: data.image || (data.images || imageFor(titleKg, data.slug))[0],
+    images: productImages,
+    image: imageAssets?.preferAsset ? productImages[0] : data.image || productImages[0],
     imageStatus,
-    isPlaceholderImage: data.isPlaceholderImage ?? imageStatus !== 'ready',
+    isPlaceholderImage: imageAssets?.available
+      ? false
+      : data.isPlaceholderImage ?? !String(imageStatus).startsWith('ready'),
     name: titleKg,
     description: descriptionKg,
     descriptionKg,
