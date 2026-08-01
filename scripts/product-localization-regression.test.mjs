@@ -5,6 +5,7 @@ import {
   getFilteredProducts,
   getLocalizedUnitText,
   getProductListField,
+  getProductTitle,
   getProductPrice,
   getProductSpecs,
   getSelectedVariant,
@@ -58,6 +59,39 @@ test('real Russian specs and FAQ remain available when supplied', () => {
 
   assert.deepEqual(getProductSpecs(product, 'ru'), { Цвет: 'белый' })
   assert.deepEqual(getProductListField(product, 'faq', 'ru'), [{ question: 'Вопрос?', answer: 'Ответ.' }])
+})
+
+test('API-first products resolve Kyrgyz product types from the catalogue tree', () => {
+  const apiProduct = normalizeProduct({
+    id: 'alinex-api-list-item',
+    slug: 'alinex-stukaturka-dlia-dekorativnoi-otdelki-munfort-f-35',
+    titleKg: 'Штукатурка для декоративной отделки MUNFORT F 3,5',
+    titleRu: 'Штукатурка для декоративной отделки MUNFORT F 3,5',
+    catalogPath: ['stroymaterial', 'kurgak-aralashmalar', 'shtukaturkalar', 'dekorativdik-shtukaturka'],
+  })
+
+  assert.equal(apiProduct.productTypeKg, 'Декоративдик штукатурка')
+  assert.equal(apiProduct.productTypeRu, 'Декоративная штукатурка')
+  assert.equal(getProductTitle(apiProduct, 'kg'), 'Декоративдик шыбак AlinEX MUNFORT F 3,5')
+  assert.doesNotMatch(getProductTitle(apiProduct, 'kg'), /dekorativdik-shtukaturka/)
+})
+
+test('Kyrgyz product variants translate supplier wording but preserve models', () => {
+  const product = normalizeProduct({
+    id: 'supplier-variants',
+    titleKg: 'Техникалык товар',
+    variants: [
+      { id: 'mounting-box', titleKg: 'Karre Коробка наружного монтажа', titleRu: 'Karre Коробка наружного монтажа', price: 85 },
+      { id: 'converter', titleKg: 'Частотный преобразователь NVF2G-2.2/TD2', titleRu: 'Частотный преобразователь NVF2G-2.2/TD2', price: 21740 },
+      { id: 'color', titleKg: '110 мм, оранжевый', titleRu: '110 мм, оранжевый', price: 100 },
+    ],
+  })
+
+  assert.deepEqual(
+    product.variants.map((variant) => variant.titleKg),
+    ['Karre Сырттан орнотулуучу куту', 'Жыштык өзгөрткүч NVF2G-2.2/TD2', '110 мм, кызгылт сары'],
+  )
+  assert.equal(product.variants[0].titleRu, 'Karre Коробка наружного монтажа')
 })
 
 test('white 2 m cable channel exposes all existing sizes as variants', () => {

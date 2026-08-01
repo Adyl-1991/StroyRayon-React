@@ -13,6 +13,7 @@ test('all public Kyrgyz content passes the language and copy audit', () => {
   assert.deepEqual(result.repeatedWords, [])
   assert.deepEqual(result.spacing, [])
   assert.deepEqual(result.orthography, [])
+  assert.deepEqual(result.transliteratedProductTitles, [])
   assert.deepEqual(result.missingProductCopy, [])
 })
 

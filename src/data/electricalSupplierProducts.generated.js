@@ -105,8 +105,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-aksessuary-001",
-        "size": "Таймер электронный NKG3 AC 220V",
-        "titleKg": "Таймер электронный NKG3 AC 220V",
+        "size": "Таймер электрондук NKG3 AC 220V",
+        "titleKg": "Таймер электрондук NKG3 AC 220V",
         "titleRu": "Таймер электронный NKG3 AC 220V",
         "price": 1500,
         "unit": "даана",
@@ -116,15 +116,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E239",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Таймер электронный NKG3 AC 220V",
+          "Модель": "Таймер электрондук NKG3 AC 220V",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-accessories-aksessuary-002",
-        "size": "Таймер электронный KG10D-1Z AC220B",
-        "titleKg": "Таймер электронный KG10D-1Z AC220B",
+        "size": "Таймер электрондук KG10D-1Z AC220B",
+        "titleKg": "Таймер электрондук KG10D-1Z AC220B",
         "titleRu": "Таймер электронный KG10D-1Z AC220B",
         "price": 1620,
         "unit": "даана",
@@ -134,7 +134,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E240",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Таймер электронный KG10D-1Z AC220B",
+          "Модель": "Таймер электрондук KG10D-1Z AC220B",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -250,8 +250,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-ac30-001",
-        "size": "Розетка AC30-111 с заземляющим контактом на DIN-рейку (CHINT)",
-        "titleKg": "Розетка AC30-111 с заземляющим контактом на DIN-рейку (CHINT)",
+        "size": "Розетка AC30-111 жердетүүчү контакты менен DIN-рейкага (CHINT)",
+        "titleKg": "Розетка AC30-111 жердетүүчү контакты менен DIN-рейкага (CHINT)",
         "titleRu": "Розетка AC30-111 с заземляющим контактом на DIN-рейку (CHINT)",
         "price": 210,
         "unit": "даана",
@@ -261,7 +261,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E259",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Розетка AC30-111 с заземляющим контактом на DIN-рейку (CHINT)",
+          "Модель": "Розетка AC30-111 жердетүүчү контакты менен DIN-рейкага (CHINT)",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -436,8 +436,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-nd9-001",
-        "size": "Индикатор ND9-1/g зеленый, AC/DC230В (LED) (R)",
-        "titleKg": "Индикатор ND9-1/g зеленый, AC/DC230В (LED) (R)",
+        "size": "Көрсөткүч ND9-1/g жашыл, AC/DC230В (LED) (R)",
+        "titleKg": "Көрсөткүч ND9-1/g жашыл, AC/DC230В (LED) (R)",
         "titleRu": "Индикатор ND9-1/g зеленый, AC/DC230В (LED) (R)",
         "price": 170,
         "unit": "даана",
@@ -447,15 +447,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E247",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Индикатор ND9-1/g зеленый, AC/DC230В (LED) (R)",
+          "Модель": "Көрсөткүч ND9-1/g жашыл, AC/DC230В (LED) (R)",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-accessories-nd9-002",
-        "size": "Индикатор ND9-1/r красный , AC/DC230В (LED) (R)",
-        "titleKg": "Индикатор ND9-1/r красный , AC/DC230В (LED) (R)",
+        "size": "Көрсөткүч ND9-1/r кызыл, AC/DC230В (LED) (R)",
+        "titleKg": "Көрсөткүч ND9-1/r кызыл, AC/DC230В (LED) (R)",
         "titleRu": "Индикатор ND9-1/r красный , AC/DC230В (LED) (R)",
         "price": 170,
         "unit": "даана",
@@ -465,15 +465,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E248",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Индикатор ND9-1/r красный , AC/DC230В (LED) (R)",
+          "Модель": "Көрсөткүч ND9-1/r кызыл, AC/DC230В (LED) (R)",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-accessories-nd9-003",
-        "size": "Индикатор ND9-1/y желтый , AC/DC230В (LED) (R)",
-        "titleKg": "Индикатор ND9-1/y желтый , AC/DC230В (LED) (R)",
+        "size": "Көрсөткүч ND9-1/y сары, AC/DC230В (LED) (R)",
+        "titleKg": "Көрсөткүч ND9-1/y сары, AC/DC230В (LED) (R)",
         "titleRu": "Индикатор ND9-1/y желтый , AC/DC230В (LED) (R)",
         "price": 170,
         "unit": "даана",
@@ -483,7 +483,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E249",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Индикатор ND9-1/y желтый , AC/DC230В (LED) (R)",
+          "Модель": "Көрсөткүч ND9-1/y сары, AC/DC230В (LED) (R)",
           "Бирдик": "даана"
         },
         "sortOrder": 3
@@ -565,8 +565,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-np2-001",
-        "size": "Кнопочный пост NP2-BA35",
-        "titleKg": "Кнопочный пост NP2-BA35",
+        "size": "Баскыч блогу NP2-BA35",
+        "titleKg": "Баскыч блогу NP2-BA35",
         "titleRu": "Кнопочный пост NP2-BA35",
         "price": 160,
         "unit": "даана",
@@ -576,15 +576,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E257",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопочный пост NP2-BA35",
+          "Модель": "Баскыч блогу NP2-BA35",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-accessories-np2-002",
-        "size": "Кнопочный пост NP2-BA45",
-        "titleKg": "Кнопочный пост NP2-BA45",
+        "size": "Баскыч блогу NP2-BA45",
+        "titleKg": "Баскыч блогу NP2-BA45",
         "titleRu": "Кнопочный пост NP2-BA45",
         "price": 160,
         "unit": "даана",
@@ -594,7 +594,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E258",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопочный пост NP2-BA45",
+          "Модель": "Баскыч блогу NP2-BA45",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -686,8 +686,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-np9-001",
-        "size": "Кнопка модульная NP9-10D3/2 (WITH 230V 1NO GRN)",
-        "titleKg": "Кнопка модульная NP9-10D3/2 (WITH 230V 1NO GRN)",
+        "size": "Баскыч модулдук NP9-10D3/2 (WITH 230V 1NO GRN)",
+        "titleKg": "Баскыч модулдук NP9-10D3/2 (WITH 230V 1NO GRN)",
         "titleRu": "Кнопка модульная NP9-10D3/2 (WITH 230V 1NO GRN)",
         "price": 230,
         "unit": "даана",
@@ -697,15 +697,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E250",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-10D3/2 (WITH 230V 1NO GRN)",
+          "Модель": "Баскыч модулдук NP9-10D3/2 (WITH 230V 1NO GRN)",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-accessories-np9-002",
-        "size": "Кнопка модульная NP9-12/1 (WITHOUR GRN)",
-        "titleKg": "Кнопка модульная NP9-12/1 (WITHOUR GRN)",
+        "size": "Баскыч модулдук NP9-12/1 (WITHOUR GRN)",
+        "titleKg": "Баскыч модулдук NP9-12/1 (WITHOUR GRN)",
         "titleRu": "Кнопка модульная NP9-12/1 (WITHOUR GRN)",
         "price": 275,
         "unit": "даана",
@@ -715,15 +715,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E251",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-12/1 (WITHOUR GRN)",
+          "Модель": "Баскыч модулдук NP9-12/1 (WITHOUR GRN)",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-accessories-np9-003",
-        "size": "Кнопка модульная NP9-12/2 (WITHOUR RED)",
-        "titleKg": "Кнопка модульная NP9-12/2 (WITHOUR RED)",
+        "size": "Баскыч модулдук NP9-12/2 (WITHOUR RED)",
+        "titleKg": "Баскыч модулдук NP9-12/2 (WITHOUR RED)",
         "titleRu": "Кнопка модульная NP9-12/2 (WITHOUR RED)",
         "price": 275,
         "unit": "даана",
@@ -733,15 +733,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E252",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-12/2 (WITHOUR RED)",
+          "Модель": "Баскыч модулдук NP9-12/2 (WITHOUR RED)",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-accessories-np9-004",
-        "size": "Кнопка модульная NP9-12D3/1 (WITH 230V GRN)",
-        "titleKg": "Кнопка модульная NP9-12D3/1 (WITH 230V GRN)",
+        "size": "Баскыч модулдук NP9-12D3/1 (WITH 230V GRN)",
+        "titleKg": "Баскыч модулдук NP9-12D3/1 (WITH 230V GRN)",
         "titleRu": "Кнопка модульная NP9-12D3/1 (WITH 230V GRN)",
         "price": 345,
         "unit": "даана",
@@ -751,15 +751,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E253",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-12D3/1 (WITH 230V GRN)",
+          "Модель": "Баскыч модулдук NP9-12D3/1 (WITH 230V GRN)",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-accessories-np9-005",
-        "size": "Кнопка модульная NP9-12D3/2 (WITH 230V RED)",
-        "titleKg": "Кнопка модульная NP9-12D3/2 (WITH 230V RED)",
+        "size": "Баскыч модулдук NP9-12D3/2 (WITH 230V RED)",
+        "titleKg": "Баскыч модулдук NP9-12D3/2 (WITH 230V RED)",
         "titleRu": "Кнопка модульная NP9-12D3/2 (WITH 230V RED)",
         "price": 345,
         "unit": "даана",
@@ -769,15 +769,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E254",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-12D3/2 (WITH 230V RED)",
+          "Модель": "Баскыч модулдук NP9-12D3/2 (WITH 230V RED)",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-accessories-np9-006",
-        "size": "Кнопка модульная NP9-22/1 (WITHOUR GRN)",
-        "titleKg": "Кнопка модульная NP9-22/1 (WITHOUR GRN)",
+        "size": "Баскыч модулдук NP9-22/1 (WITHOUR GRN)",
+        "titleKg": "Баскыч модулдук NP9-22/1 (WITHOUR GRN)",
         "titleRu": "Кнопка модульная NP9-22/1 (WITHOUR GRN)",
         "price": 330,
         "unit": "даана",
@@ -787,15 +787,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E255",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-22/1 (WITHOUR GRN)",
+          "Модель": "Баскыч модулдук NP9-22/1 (WITHOUR GRN)",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "chint-accessories-np9-007",
-        "size": "Кнопка модульная NP9-22/2 (WITHOUR RED)",
-        "titleKg": "Кнопка модульная NP9-22/2 (WITHOUR RED)",
+        "size": "Баскыч модулдук NP9-22/2 (WITHOUR RED)",
+        "titleKg": "Баскыч модулдук NP9-22/2 (WITHOUR RED)",
         "titleRu": "Кнопка модульная NP9-22/2 (WITHOUR RED)",
         "price": 330,
         "unit": "даана",
@@ -805,7 +805,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E256",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Кнопка модульная NP9-22/2 (WITHOUR RED)",
+          "Модель": "Баскыч модулдук NP9-22/2 (WITHOUR RED)",
           "Бирдик": "даана"
         },
         "sortOrder": 7
@@ -887,8 +887,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-accessories-nzk1-001",
-        "size": "Модульный переключатель NZK1-32/1 1P",
-        "titleKg": "Модульный переключатель NZK1-32/1 1P",
+        "size": "Модулдук которгуч NZK1-32/1 1P",
+        "titleKg": "Модулдук которгуч NZK1-32/1 1P",
         "titleRu": "Модульный переключатель NZK1-32/1 1P",
         "price": 260,
         "unit": "даана",
@@ -898,15 +898,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E233",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Модульный переключатель NZK1-32/1 1P",
+          "Модель": "Модулдук которгуч NZK1-32/1 1P",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-accessories-nzk1-002",
-        "size": "Модульный переключатель NZK1-32/2 2P",
-        "titleKg": "Модульный переключатель NZK1-32/2 2P",
+        "size": "Модулдук которгуч NZK1-32/2 2P",
+        "titleKg": "Модулдук которгуч NZK1-32/2 2P",
         "titleRu": "Модульный переключатель NZK1-32/2 2P",
         "price": 565,
         "unit": "даана",
@@ -916,7 +916,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E234",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Модульный переключатель NZK1-32/2 2P",
+          "Модель": "Модулдук которгуч NZK1-32/2 2P",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -1291,8 +1291,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-breakers-na1-1000-001",
-        "size": "Воздушный автомат NA1-1000-1000M/3P MO-WD AC220V",
-        "titleKg": "Воздушный автомат NA1-1000-1000M/3P MO-WD AC220V",
+        "size": "Аба автоматтык өчүргүч NA1-1000-1000M/3P MO-WD AC220V",
+        "titleKg": "Аба автоматтык өчүргүч NA1-1000-1000M/3P MO-WD AC220V",
         "titleRu": "Воздушный автомат NA1-1000-1000M/3P MO-WD AC220V",
         "price": 108350,
         "unit": "даана",
@@ -1302,15 +1302,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B173",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-1000-1000M/3P MO-WD AC220V",
+          "Модель": "Аба автоматтык өчүргүч NA1-1000-1000M/3P MO-WD AC220V",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-breakers-na1-1000-002",
-        "size": "Воздушный автомат NA1-1000-1000M/3P стационарный AC220V",
-        "titleKg": "Воздушный автомат NA1-1000-1000M/3P стационарный AC220V",
+        "size": "Аба автоматтык өчүргүч NA1-1000-1000M/3P туруктуу орнотулуучу AC220V",
+        "titleKg": "Аба автоматтык өчүргүч NA1-1000-1000M/3P туруктуу орнотулуучу AC220V",
         "titleRu": "Воздушный автомат NA1-1000-1000M/3P стационарный AC220V",
         "price": 85250,
         "unit": "даана",
@@ -1320,7 +1320,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B174",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-1000-1000M/3P стационарный AC220V",
+          "Модель": "Аба автоматтык өчүргүч NA1-1000-1000M/3P туруктуу орнотулуучу AC220V",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -1407,8 +1407,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-breakers-na1-2000-001",
-        "size": "Воздушный автомат NA1-2000-1600M/3P выкатной AC220",
-        "titleKg": "Воздушный автомат NA1-2000-1600M/3P выкатной AC220",
+        "size": "Аба автоматтык өчүргүч NA1-2000-1600M/3P суурма түрү AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-2000-1600M/3P суурма түрү AC220",
         "titleRu": "Воздушный автомат NA1-2000-1600M/3P выкатной AC220",
         "price": 160800,
         "unit": "даана",
@@ -1418,15 +1418,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B175",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-2000-1600M/3P выкатной AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-2000-1600M/3P суурма түрү AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-breakers-na1-2000-002",
-        "size": "Воздушный автомат NA1-2000-1600M/3P стационарный AC220",
-        "titleKg": "Воздушный автомат NA1-2000-1600M/3P стационарный AC220",
+        "size": "Аба автоматтык өчүргүч NA1-2000-1600M/3P туруктуу орнотулуучу AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-2000-1600M/3P туруктуу орнотулуучу AC220",
         "titleRu": "Воздушный автомат NA1-2000-1600M/3P стационарный AC220",
         "price": 101700,
         "unit": "даана",
@@ -1436,15 +1436,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B176",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-2000-1600M/3P стационарный AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-2000-1600M/3P туруктуу орнотулуучу AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-breakers-na1-2000-003",
-        "size": "Воздушный автомат NA1-2000-2000M/3P выкатной AC220",
-        "titleKg": "Воздушный автомат NA1-2000-2000M/3P выкатной AC220",
+        "size": "Аба автоматтык өчүргүч NA1-2000-2000M/3P суурма түрү AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-2000-2000M/3P суурма түрү AC220",
         "titleRu": "Воздушный автомат NA1-2000-2000M/3P выкатной AC220",
         "price": 177250,
         "unit": "даана",
@@ -1454,15 +1454,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B177",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-2000-2000M/3P выкатной AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-2000-2000M/3P суурма түрү AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-breakers-na1-2000-004",
-        "size": "Воздушный автомат NA1-2000-2000M/3P стационарный AC220",
-        "titleKg": "Воздушный автомат NA1-2000-2000M/3P стационарный AC220",
+        "size": "Аба автоматтык өчүргүч NA1-2000-2000M/3P туруктуу орнотулуучу AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-2000-2000M/3P туруктуу орнотулуучу AC220",
         "titleRu": "Воздушный автомат NA1-2000-2000M/3P стационарный AC220",
         "price": 105950,
         "unit": "даана",
@@ -1472,7 +1472,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B178",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-2000-2000M/3P стационарный AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-2000-2000M/3P туруктуу орнотулуучу AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 4
@@ -1559,8 +1559,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-breakers-na1-3200-001",
-        "size": "Воздушный автомат NA1-3200-2500M/3P выкатной AC220",
-        "titleKg": "Воздушный автомат NA1-3200-2500M/3P выкатной AC220",
+        "size": "Аба автоматтык өчүргүч NA1-3200-2500M/3P суурма түрү AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-3200-2500M/3P суурма түрү AC220",
         "titleRu": "Воздушный автомат NA1-3200-2500M/3P выкатной AC220",
         "price": 254750,
         "unit": "даана",
@@ -1570,15 +1570,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B179",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-3200-2500M/3P выкатной AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-3200-2500M/3P суурма түрү AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-breakers-na1-3200-002",
-        "size": "Воздушный автомат NA1-3200-2500M/3P стационарный AC220",
-        "titleKg": "Воздушный автомат NA1-3200-2500M/3P стационарный AC220",
+        "size": "Аба автоматтык өчүргүч NA1-3200-2500M/3P туруктуу орнотулуучу AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-3200-2500M/3P туруктуу орнотулуучу AC220",
         "titleRu": "Воздушный автомат NA1-3200-2500M/3P стационарный AC220",
         "price": 144050,
         "unit": "даана",
@@ -1588,15 +1588,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B180",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-3200-2500M/3P стационарный AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-3200-2500M/3P туруктуу орнотулуучу AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-breakers-na1-3200-003",
-        "size": "Воздушный автомат NA1-3200-3200M/3P выкатной AC220",
-        "titleKg": "Воздушный автомат NA1-3200-3200M/3P выкатной AC220",
+        "size": "Аба автоматтык өчүргүч NA1-3200-3200M/3P суурма түрү AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-3200-3200M/3P суурма түрү AC220",
         "titleRu": "Воздушный автомат NA1-3200-3200M/3P выкатной AC220",
         "price": 264150,
         "unit": "даана",
@@ -1606,15 +1606,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B181",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-3200-3200M/3P выкатной AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-3200-3200M/3P суурма түрү AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-breakers-na1-3200-004",
-        "size": "Воздушный автомат NA1-3200-3200M/3P стационарный AC220",
-        "titleKg": "Воздушный автомат NA1-3200-3200M/3P стационарный AC220",
+        "size": "Аба автоматтык өчүргүч NA1-3200-3200M/3P туруктуу орнотулуучу AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-3200-3200M/3P туруктуу орнотулуучу AC220",
         "titleRu": "Воздушный автомат NA1-3200-3200M/3P стационарный AC220",
         "price": 159400,
         "unit": "даана",
@@ -1624,7 +1624,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B182",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-3200-3200M/3P стационарный AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-3200-3200M/3P туруктуу орнотулуучу AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 4
@@ -1705,8 +1705,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-breakers-na1-4000-001",
-        "size": "Воздушный автомат NA1-4000-4000M/3P выкатной AC220",
-        "titleKg": "Воздушный автомат NA1-4000-4000M/3P выкатной AC220",
+        "size": "Аба автоматтык өчүргүч NA1-4000-4000M/3P суурма түрү AC220",
+        "titleKg": "Аба автоматтык өчүргүч NA1-4000-4000M/3P суурма түрү AC220",
         "titleRu": "Воздушный автомат NA1-4000-4000M/3P выкатной AC220",
         "price": 357800,
         "unit": "даана",
@@ -1716,7 +1716,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B183",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Воздушный автомат NA1-4000-4000M/3P выкатной AC220",
+          "Модель": "Аба автоматтык өчүргүч NA1-4000-4000M/3P суурма түрү AC220",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -8569,8 +8569,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-converters-nvf2g-001",
-        "size": "Частотный преобразователь NVF2G-2.2/TD2",
-        "titleKg": "Частотный преобразователь NVF2G-2.2/TD2",
+        "size": "Жыштык өзгөрткүч NVF2G-2.2/TD2",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-2.2/TD2",
         "titleRu": "Частотный преобразователь NVF2G-2.2/TD2",
         "price": 21740,
         "unit": "даана",
@@ -8580,15 +8580,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E274",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-2.2/TD2",
+          "Модель": "Жыштык өзгөрткүч NVF2G-2.2/TD2",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-converters-nvf2g-002",
-        "size": "Частотный преобразователь NVF2G-3.7/TD2",
-        "titleKg": "Частотный преобразователь NVF2G-3.7/TD2",
+        "size": "Жыштык өзгөрткүч NVF2G-3.7/TD2",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-3.7/TD2",
         "titleRu": "Частотный преобразователь NVF2G-3.7/TD2",
         "price": 23900,
         "unit": "даана",
@@ -8598,15 +8598,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E275",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-3.7/TD2",
+          "Модель": "Жыштык өзгөрткүч NVF2G-3.7/TD2",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-converters-nvf2g-003",
-        "size": "Частотный преобразователь NVF2G-0.75/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-0.75/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-0.75/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-0.75/TS4",
         "titleRu": "Частотный преобразователь NVF2G-0.75/TS4",
         "price": 16220,
         "unit": "даана",
@@ -8616,15 +8616,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E276",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-0.75/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-0.75/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-converters-nvf2g-004",
-        "size": "Частотный преобразователь NVF2G-1.5/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-1.5/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-1.5/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-1.5/TS4",
         "titleRu": "Частотный преобразователь NVF2G-1.5/TS4",
         "price": 19210,
         "unit": "даана",
@@ -8634,15 +8634,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E277",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-1.5/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-1.5/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-converters-nvf2g-005",
-        "size": "Частотный преобразователь NVF2G-1.5/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-1.5/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-1.5/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-1.5/PS4",
         "titleRu": "Частотный преобразователь NVF2G-1.5/PS4",
         "price": 18170,
         "unit": "даана",
@@ -8652,15 +8652,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E278",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-1.5/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-1.5/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-converters-nvf2g-006",
-        "size": "Частотный преобразователь NVF2G-2.2/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-2.2/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-2.2/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-2.2/TS4",
         "titleRu": "Частотный преобразователь NVF2G-2.2/TS4",
         "price": 20010,
         "unit": "даана",
@@ -8670,15 +8670,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E279",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-2.2/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-2.2/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "chint-converters-nvf2g-007",
-        "size": "Частотный преобразователь NVF2G-2.2/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-2.2/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-2.2/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-2.2/PS4",
         "titleRu": "Частотный преобразователь NVF2G-2.2/PS4",
         "price": 18630,
         "unit": "даана",
@@ -8688,15 +8688,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E280",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-2.2/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-2.2/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "chint-converters-nvf2g-008",
-        "size": "Частотный преобразователь NVF2G-3.7/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-3.7/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-3.7/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-3.7/TS4",
         "titleRu": "Частотный преобразователь NVF2G-3.7/TS4",
         "price": 20930,
         "unit": "даана",
@@ -8706,15 +8706,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E281",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-3.7/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-3.7/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "chint-converters-nvf2g-009",
-        "size": "Частотный преобразователь NVF2G-3.7/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-3.7/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-3.7/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-3.7/PS4",
         "titleRu": "Частотный преобразователь NVF2G-3.7/PS4",
         "price": 19210,
         "unit": "даана",
@@ -8724,15 +8724,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E282",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-3.7/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-3.7/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "chint-converters-nvf2g-010",
-        "size": "Частотный преобразователь NVF2G-5.5/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-5.5/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-5.5/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-5.5/TS4",
         "titleRu": "Частотный преобразователь NVF2G-5.5/TS4",
         "price": 21970,
         "unit": "даана",
@@ -8742,15 +8742,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E283",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-5.5/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-5.5/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 10
       },
       {
         "id": "chint-converters-nvf2g-011",
-        "size": "Частотный преобразователь NVF2G-5.5/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-5.5/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-5.5/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-5.5/PS4",
         "titleRu": "Частотный преобразователь NVF2G-5.5/PS4",
         "price": 20820,
         "unit": "даана",
@@ -8760,15 +8760,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E284",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-5.5/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-5.5/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 11
       },
       {
         "id": "chint-converters-nvf2g-012",
-        "size": "Частотный преобразователь NVF2G-7.5/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-7.5/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-7.5/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-7.5/TS4",
         "titleRu": "Частотный преобразователь NVF2G-7.5/TS4",
         "price": 22250,
         "unit": "даана",
@@ -8778,15 +8778,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E285",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-7.5/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-7.5/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 12
       },
       {
         "id": "chint-converters-nvf2g-013",
-        "size": "Частотный преобразователь NVF2G-7.5/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-7.5/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-7.5/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-7.5/PS4",
         "titleRu": "Частотный преобразователь NVF2G-7.5/PS4",
         "price": 22310,
         "unit": "даана",
@@ -8796,15 +8796,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E286",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-7.5/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-7.5/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 13
       },
       {
         "id": "chint-converters-nvf2g-014",
-        "size": "Частотный преобразователь NVF2G-11/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-11/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-11/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-11/TS4",
         "titleRu": "Частотный преобразователь NVF2G-11/TS4",
         "price": 35100,
         "unit": "даана",
@@ -8814,15 +8814,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E287",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-11/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-11/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 14
       },
       {
         "id": "chint-converters-nvf2g-015",
-        "size": "Частотный преобразователь NVF2G-11/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-11/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-11/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-11/PS4",
         "titleRu": "Частотный преобразователь NVF2G-11/PS4",
         "price": 27750,
         "unit": "даана",
@@ -8832,15 +8832,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E288",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-11/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-11/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 15
       },
       {
         "id": "chint-converters-nvf2g-016",
-        "size": "Частотный преобразователь NVF2G-15/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-15/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-15/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-15/PS4",
         "titleRu": "Частотный преобразователь NVF2G-15/PS4",
         "price": 36850,
         "unit": "даана",
@@ -8850,15 +8850,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E289",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-15/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-15/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 16
       },
       {
         "id": "chint-converters-nvf2g-017",
-        "size": "Частотный преобразователь NVF2G-15/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-15/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-15/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-15/TS4",
         "titleRu": "Частотный преобразователь NVF2G-15/TS4",
         "price": 43450,
         "unit": "даана",
@@ -8868,15 +8868,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E290",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-15/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-15/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 17
       },
       {
         "id": "chint-converters-nvf2g-018",
-        "size": "Частотный преобразователь NVF2G-18.5/PS4",
-        "titleKg": "Частотный преобразователь NVF2G-18.5/PS4",
+        "size": "Жыштык өзгөрткүч NVF2G-18.5/PS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-18.5/PS4",
         "titleRu": "Частотный преобразователь NVF2G-18.5/PS4",
         "price": 42350,
         "unit": "даана",
@@ -8886,15 +8886,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E291",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-18.5/PS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-18.5/PS4",
           "Бирдик": "даана"
         },
         "sortOrder": 18
       },
       {
         "id": "chint-converters-nvf2g-019",
-        "size": "Частотный преобразователь NVF2G-18.5/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-18.5/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-18.5/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-18.5/TS4",
         "titleRu": "Частотный преобразователь NVF2G-18.5/TS4",
         "price": 47750,
         "unit": "даана",
@@ -8904,15 +8904,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E292",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-18.5/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-18.5/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 19
       },
       {
         "id": "chint-converters-nvf2g-020",
-        "size": "Частотный преобразователь NVF2G-22/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-22/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-22/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-22/TS4",
         "titleRu": "Частотный преобразователь NVF2G-22/TS4",
         "price": 59300,
         "unit": "даана",
@@ -8922,15 +8922,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E293",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-22/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-22/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 20
       },
       {
         "id": "chint-converters-nvf2g-021",
-        "size": "Частотный преобразователь NVF2G-30/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-30/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-30/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-30/TS4",
         "titleRu": "Частотный преобразователь NVF2G-30/TS4",
         "price": 82400,
         "unit": "даана",
@@ -8940,15 +8940,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E294",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-30/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-30/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 21
       },
       {
         "id": "chint-converters-nvf2g-022",
-        "size": "Частотный преобразователь NVF2G-37/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-37/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-37/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-37/TS4",
         "titleRu": "Частотный преобразователь NVF2G-37/TS4",
         "price": 93400,
         "unit": "даана",
@@ -8958,15 +8958,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E295",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-37/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-37/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 22
       },
       {
         "id": "chint-converters-nvf2g-023",
-        "size": "Частотный преобразователь NVF2G-45/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-45/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-45/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-45/TS4",
         "titleRu": "Частотный преобразователь NVF2G-45/TS4",
         "price": 113200,
         "unit": "даана",
@@ -8976,15 +8976,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E296",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-45/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-45/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 23
       },
       {
         "id": "chint-converters-nvf2g-024",
-        "size": "Частотный преобразователь NVF2G-55/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-55/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-55/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-55/TS4",
         "titleRu": "Частотный преобразователь NVF2G-55/TS4",
         "price": 123000,
         "unit": "даана",
@@ -8994,15 +8994,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E297",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-55/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-55/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 24
       },
       {
         "id": "chint-converters-nvf2g-025",
-        "size": "Частотный преобразователь NVF2G-75/TS4",
-        "titleKg": "Частотный преобразователь NVF2G-75/TS4",
+        "size": "Жыштык өзгөрткүч NVF2G-75/TS4",
+        "titleKg": "Жыштык өзгөрткүч NVF2G-75/TS4",
         "titleRu": "Частотный преобразователь NVF2G-75/TS4",
         "price": 164050,
         "unit": "даана",
@@ -9012,7 +9012,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E298",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Частотный преобразователь NVF2G-75/TS4",
+          "Модель": "Жыштык өзгөрткүч NVF2G-75/TS4",
           "Бирдик": "даана"
         },
         "sortOrder": 25
@@ -9762,8 +9762,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-panels-metallicheskie-001",
-        "size": "Щит метал. 3025/15",
-        "titleKg": "Щит метал. 3025/15",
+        "size": "Калкан метал. 3025/15",
+        "titleKg": "Калкан метал. 3025/15",
         "titleRu": "Щит метал. 3025/15",
         "price": 2640,
         "unit": "даана",
@@ -9773,15 +9773,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E25",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 3025/15",
+          "Модель": "Калкан метал. 3025/15",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-panels-metallicheskie-002",
-        "size": "Щит метал. 3025/20",
-        "titleKg": "Щит метал. 3025/20",
+        "size": "Калкан метал. 3025/20",
+        "titleKg": "Калкан метал. 3025/20",
         "titleRu": "Щит метал. 3025/20",
         "price": 2880,
         "unit": "даана",
@@ -9791,15 +9791,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E26",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 3025/20",
+          "Модель": "Калкан метал. 3025/20",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-panels-metallicheskie-003",
-        "size": "Щит метал. 4030/20",
-        "titleKg": "Щит метал. 4030/20",
+        "size": "Калкан метал. 4030/20",
+        "titleKg": "Калкан метал. 4030/20",
         "titleRu": "Щит метал. 4030/20",
         "price": 3960,
         "unit": "даана",
@@ -9809,15 +9809,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E27",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 4030/20",
+          "Модель": "Калкан метал. 4030/20",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-panels-metallicheskie-004",
-        "size": "Щит метал. 5040/20",
-        "titleKg": "Щит метал. 5040/20",
+        "size": "Калкан метал. 5040/20",
+        "titleKg": "Калкан метал. 5040/20",
         "titleRu": "Щит метал. 5040/20",
         "price": 5640,
         "unit": "даана",
@@ -9827,15 +9827,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E28",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 5040/20",
+          "Модель": "Калкан метал. 5040/20",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-panels-metallicheskie-005",
-        "size": "Щит метал. 5040/25",
-        "titleKg": "Щит метал. 5040/25",
+        "size": "Калкан метал. 5040/25",
+        "titleKg": "Калкан метал. 5040/25",
         "titleRu": "Щит метал. 5040/25",
         "price": 5870,
         "unit": "даана",
@@ -9845,15 +9845,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E29",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 5040/25",
+          "Модель": "Калкан метал. 5040/25",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-panels-metallicheskie-006",
-        "size": "Щит метал. 6040/20",
-        "titleKg": "Щит метал. 6040/20",
+        "size": "Калкан метал. 6040/20",
+        "titleKg": "Калкан метал. 6040/20",
         "titleRu": "Щит метал. 6040/20",
         "price": 6210,
         "unit": "даана",
@@ -9863,15 +9863,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E30",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 6040/20",
+          "Модель": "Калкан метал. 6040/20",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "chint-panels-metallicheskie-007",
-        "size": "Щит метал. 6040/25",
-        "titleKg": "Щит метал. 6040/25",
+        "size": "Калкан метал. 6040/25",
+        "titleKg": "Калкан метал. 6040/25",
         "titleRu": "Щит метал. 6040/25",
         "price": 6440,
         "unit": "даана",
@@ -9881,15 +9881,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E31",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 6040/25",
+          "Модель": "Калкан метал. 6040/25",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "chint-panels-metallicheskie-008",
-        "size": "Щит метал. 6050/20",
-        "titleKg": "Щит метал. 6050/20",
+        "size": "Калкан метал. 6050/20",
+        "titleKg": "Калкан метал. 6050/20",
         "titleRu": "Щит метал. 6050/20",
         "price": 7250,
         "unit": "даана",
@@ -9899,15 +9899,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E32",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 6050/20",
+          "Модель": "Калкан метал. 6050/20",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "chint-panels-metallicheskie-009",
-        "size": "Щит метал. 6050/25",
-        "titleKg": "Щит метал. 6050/25",
+        "size": "Калкан метал. 6050/25",
+        "titleKg": "Калкан метал. 6050/25",
         "titleRu": "Щит метал. 6050/25",
         "price": 7710,
         "unit": "даана",
@@ -9917,15 +9917,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E33",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 6050/25",
+          "Модель": "Калкан метал. 6050/25",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "chint-panels-metallicheskie-010",
-        "size": "Щит метал. 7050/20",
-        "titleKg": "Щит метал. 7050/20",
+        "size": "Калкан метал. 7050/20",
+        "titleKg": "Калкан метал. 7050/20",
         "titleRu": "Щит метал. 7050/20",
         "price": 8630,
         "unit": "даана",
@@ -9935,15 +9935,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E34",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 7050/20",
+          "Модель": "Калкан метал. 7050/20",
           "Бирдик": "даана"
         },
         "sortOrder": 10
       },
       {
         "id": "chint-panels-metallicheskie-011",
-        "size": "Щит метал. 7050/25",
-        "titleKg": "Щит метал. 7050/25",
+        "size": "Калкан метал. 7050/25",
+        "titleKg": "Калкан метал. 7050/25",
         "titleRu": "Щит метал. 7050/25",
         "price": 10240,
         "unit": "даана",
@@ -9953,15 +9953,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E35",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 7050/25",
+          "Модель": "Калкан метал. 7050/25",
           "Бирдик": "даана"
         },
         "sortOrder": 11
       },
       {
         "id": "chint-panels-metallicheskie-012",
-        "size": "Щит метал. 8060/20",
-        "titleKg": "Щит метал. 8060/20",
+        "size": "Калкан метал. 8060/20",
+        "titleKg": "Калкан метал. 8060/20",
         "titleRu": "Щит метал. 8060/20",
         "price": 12650,
         "unit": "даана",
@@ -9971,15 +9971,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E36",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 8060/20",
+          "Модель": "Калкан метал. 8060/20",
           "Бирдик": "даана"
         },
         "sortOrder": 12
       },
       {
         "id": "chint-panels-metallicheskie-013",
-        "size": "Щит метал. 8060/25",
-        "titleKg": "Щит метал. 8060/25",
+        "size": "Калкан метал. 8060/25",
+        "titleKg": "Калкан метал. 8060/25",
         "titleRu": "Щит метал. 8060/25",
         "price": 12880,
         "unit": "даана",
@@ -9989,15 +9989,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E37",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 8060/25",
+          "Модель": "Калкан метал. 8060/25",
           "Бирдик": "даана"
         },
         "sortOrder": 13
       },
       {
         "id": "chint-panels-metallicheskie-014",
-        "size": "Щит метал. 8080/25",
-        "titleKg": "Щит метал. 8080/25",
+        "size": "Калкан метал. 8080/25",
+        "titleKg": "Калкан метал. 8080/25",
         "titleRu": "Щит метал. 8080/25",
         "price": 16220,
         "unit": "даана",
@@ -10007,15 +10007,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E38",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 8080/25",
+          "Модель": "Калкан метал. 8080/25",
           "Бирдик": "даана"
         },
         "sortOrder": 14
       },
       {
         "id": "chint-panels-metallicheskie-015",
-        "size": "Щит метал. 10060/25",
-        "titleKg": "Щит метал. 10060/25",
+        "size": "Калкан метал. 10060/25",
+        "titleKg": "Калкан метал. 10060/25",
         "titleRu": "Щит метал. 10060/25",
         "price": 16450,
         "unit": "даана",
@@ -10025,15 +10025,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E39",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 10060/25",
+          "Модель": "Калкан метал. 10060/25",
           "Бирдик": "даана"
         },
         "sortOrder": 15
       },
       {
         "id": "chint-panels-metallicheskie-016",
-        "size": "Щит метал. 10060/30",
-        "titleKg": "Щит метал. 10060/30",
+        "size": "Калкан метал. 10060/30",
+        "titleKg": "Калкан метал. 10060/30",
         "titleRu": "Щит метал. 10060/30",
         "price": 17140,
         "unit": "даана",
@@ -10043,15 +10043,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E40",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 10060/30",
+          "Модель": "Калкан метал. 10060/30",
           "Бирдик": "даана"
         },
         "sortOrder": 16
       },
       {
         "id": "chint-panels-metallicheskie-017",
-        "size": "Щит метал. 10080/30",
-        "titleKg": "Щит метал. 10080/30",
+        "size": "Калкан метал. 10080/30",
+        "titleKg": "Калкан метал. 10080/30",
         "titleRu": "Щит метал. 10080/30",
         "price": 21160,
         "unit": "даана",
@@ -10061,15 +10061,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E41",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 10080/30",
+          "Модель": "Калкан метал. 10080/30",
           "Бирдик": "даана"
         },
         "sortOrder": 17
       },
       {
         "id": "chint-panels-metallicheskie-018",
-        "size": "Щит метал. 12080/30",
-        "titleKg": "Щит метал. 12080/30",
+        "size": "Калкан метал. 12080/30",
+        "titleKg": "Калкан метал. 12080/30",
         "titleRu": "Щит метал. 12080/30",
         "price": 23350,
         "unit": "даана",
@@ -10079,7 +10079,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E42",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Щит метал. 12080/30",
+          "Модель": "Калкан метал. 12080/30",
           "Бирдик": "даана"
         },
         "sortOrder": 18
@@ -10624,8 +10624,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-relays-rele-001",
-        "size": "Импульсное реле NJMC1-16/1P DC24V",
-        "titleKg": "Импульсное реле NJMC1-16/1P DC24V",
+        "size": "Импульстук реле NJMC1-16/1P DC24V",
+        "titleKg": "Импульстук реле NJMC1-16/1P DC24V",
         "titleRu": "Импульсное реле NJMC1-16/1P DC24V",
         "price": 510,
         "unit": "даана",
@@ -10635,15 +10635,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E235",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Импульсное реле NJMC1-16/1P DC24V",
+          "Модель": "Импульстук реле NJMC1-16/1P DC24V",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-relays-rele-002",
-        "size": "Импульсное реле NJMC1-16/1P AC230V",
-        "titleKg": "Импульсное реле NJMC1-16/1P AC230V",
+        "size": "Импульстук реле NJMC1-16/1P AC230V",
+        "titleKg": "Импульстук реле NJMC1-16/1P AC230V",
         "titleRu": "Импульсное реле NJMC1-16/1P AC230V",
         "price": 500,
         "unit": "даана",
@@ -10653,15 +10653,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E236",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Импульсное реле NJMC1-16/1P AC230V",
+          "Модель": "Импульстук реле NJMC1-16/1P AC230V",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-relays-rele-003",
-        "size": "Импульсное реле NJMC1-32/1P AC230V",
-        "titleKg": "Импульсное реле NJMC1-32/1P AC230V",
+        "size": "Импульстук реле NJMC1-32/1P AC230V",
+        "titleKg": "Импульстук реле NJMC1-32/1P AC230V",
         "titleRu": "Импульсное реле NJMC1-32/1P AC230V",
         "price": 550,
         "unit": "даана",
@@ -10671,7 +10671,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E237",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Импульсное реле NJMC1-32/1P AC230V",
+          "Модель": "Импульстук реле NJMC1-32/1P AC230V",
           "Бирдик": "даана"
         },
         "sortOrder": 3
@@ -11124,8 +11124,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-relays-njyw1-001",
-        "size": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
-        "titleKg": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+        "size": "Суюктуктун деңгээлин көзөмөлдөө релеси NJYW1-NL1 AC 220V/380V",
+        "titleKg": "Суюктуктун деңгээлин көзөмөлдөө релеси NJYW1-NL1 AC 220V/380V",
         "titleRu": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
         "price": 780,
         "unit": "даана",
@@ -11135,7 +11135,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E241",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Реле контроля уровня жидкости NJYW1-NL1 AC 220V/380V",
+          "Модель": "Суюктуктун деңгээлин көзөмөлдөө релеси NJYW1-NL1 AC 220V/380V",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -12310,8 +12310,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-stabilizers-tnd-1f-001",
-        "size": "Стабилизаторы 220V TND -1ф-0.5 kw",
-        "titleKg": "Стабилизаторы 220V TND -1ф-0.5 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND -1ф-0.5 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND -1ф-0.5 kw",
         "titleRu": "Стабилизаторы 220V TND -1ф-0.5 kw",
         "price": 4680,
         "unit": "даана",
@@ -12321,15 +12321,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B277",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND -1ф-0.5 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND -1ф-0.5 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-stabilizers-tnd-1f-002",
-        "size": "Стабилизаторы 220V TND-1ф-1 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-1 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-1 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-1 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-1 kw",
         "price": 5520,
         "unit": "даана",
@@ -12339,15 +12339,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B278",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-1 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-1 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-stabilizers-tnd-1f-003",
-        "size": "Стабилизаторы 220V TND-1ф-1.5 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-1.5 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-1.5 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-1.5 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-1.5 kw",
         "price": 5980,
         "unit": "даана",
@@ -12357,15 +12357,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B279",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-1.5 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-1.5 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-stabilizers-tnd-1f-004",
-        "size": "Стабилизаторы 220V TND-1ф-2 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-2 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-2 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-2 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-2 kw",
         "price": 8170,
         "unit": "даана",
@@ -12375,15 +12375,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B280",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-2 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-2 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-stabilizers-tnd-1f-005",
-        "size": "Стабилизаторы 220V TND-1ф-3 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-3 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-3 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-3 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-3 kw",
         "price": 10530,
         "unit": "даана",
@@ -12393,15 +12393,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B281",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-3 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-3 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-stabilizers-tnd-1f-006",
-        "size": "Стабилизаторы 220V TND-1ф-5 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-5 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-5 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-5 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-5 kw",
         "price": 18060,
         "unit": "даана",
@@ -12411,15 +12411,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B282",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-5 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-5 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "chint-stabilizers-tnd-1f-007",
-        "size": "Стабилизаторы 220V TND-1ф-10kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-10kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-10kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-10kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-10kw",
         "price": 34000,
         "unit": "даана",
@@ -12429,15 +12429,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B283",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-10kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-10kw",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "chint-stabilizers-tnd-1f-008",
-        "size": "Стабилизаторы 220V TND-1ф-15 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-15 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-15 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-15 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-15 kw",
         "price": 44150,
         "unit": "даана",
@@ -12447,15 +12447,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B284",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-15 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-15 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "chint-stabilizers-tnd-1f-009",
-        "size": "Стабилизаторы 220V TND-1ф-20 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-20 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-20 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-20 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-20 kw",
         "price": 58200,
         "unit": "даана",
@@ -12465,15 +12465,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B285",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-20 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-20 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "chint-stabilizers-tnd-1f-010",
-        "size": "Стабилизаторы 220V TND-1ф-30 kw",
-        "titleKg": "Стабилизаторы 220V TND-1ф-30 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TND-1ф-30 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TND-1ф-30 kw",
         "titleRu": "Стабилизаторы 220V TND-1ф-30 kw",
         "price": 102200,
         "unit": "даана",
@@ -12483,7 +12483,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B286",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TND-1ф-30 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TND-1ф-30 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 10
@@ -12574,8 +12574,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-stabilizers-tns-3f-001",
-        "size": "Стабилизаторы 220V TNS-3ф-9 kw",
-        "titleKg": "Стабилизаторы 220V TNS-3ф-9 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TNS-3ф-9 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TNS-3ф-9 kw",
         "titleRu": "Стабилизаторы 220V TNS-3ф-9 kw",
         "price": 37200,
         "unit": "даана",
@@ -12585,15 +12585,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B287",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TNS-3ф-9 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TNS-3ф-9 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-stabilizers-tns-3f-002",
-        "size": "Стабилизаторы 220V TNS-3ф-15 kw",
-        "titleKg": "Стабилизаторы 220V TNS-3ф-15 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TNS-3ф-15 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TNS-3ф-15 kw",
         "titleRu": "Стабилизаторы 220V TNS-3ф-15 kw",
         "price": 59250,
         "unit": "даана",
@@ -12603,15 +12603,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B288",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TNS-3ф-15 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TNS-3ф-15 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-stabilizers-tns-3f-003",
-        "size": "Стабилизаторы 220V TNS-3ф-20 kw",
-        "titleKg": "Стабилизаторы 220V TNS-3ф-20 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TNS-3ф-20 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TNS-3ф-20 kw",
         "titleRu": "Стабилизаторы 220V TNS-3ф-20 kw",
         "price": 86700,
         "unit": "даана",
@@ -12621,15 +12621,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B289",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TNS-3ф-20 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TNS-3ф-20 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-stabilizers-tns-3f-004",
-        "size": "Стабилизаторы 220V TNS-3ф-30 kw",
-        "titleKg": "Стабилизаторы 220V TNS-3ф-30 kw",
+        "size": "Чыңалуу стабилизаторлору 220V TNS-3ф-30 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 220V TNS-3ф-30 kw",
         "titleRu": "Стабилизаторы 220V TNS-3ф-30 kw",
         "price": 93450,
         "unit": "даана",
@@ -12639,15 +12639,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B290",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 220V TNS-3ф-30 kw",
+          "Модель": "Чыңалуу стабилизаторлору 220V TNS-3ф-30 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-stabilizers-tns-3f-005",
-        "size": "Стабилизаторы 380V TNS-3ф-45 kw",
-        "titleKg": "Стабилизаторы 380V TNS-3ф-45 kw",
+        "size": "Чыңалуу стабилизаторлору 380V TNS-3ф-45 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 380V TNS-3ф-45 kw",
         "titleRu": "Стабилизаторы 380V TNS-3ф-45 kw",
         "price": 144350,
         "unit": "даана",
@@ -12657,15 +12657,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B291",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 380V TNS-3ф-45 kw",
+          "Модель": "Чыңалуу стабилизаторлору 380V TNS-3ф-45 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-stabilizers-tns-3f-006",
-        "size": "Стабилизаторы 380V TNS-3ф-60 kw",
-        "titleKg": "Стабилизаторы 380V TNS-3ф-60 kw",
+        "size": "Чыңалуу стабилизаторлору 380V TNS-3ф-60 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 380V TNS-3ф-60 kw",
         "titleRu": "Стабилизаторы 380V TNS-3ф-60 kw",
         "price": 167750,
         "unit": "даана",
@@ -12675,7 +12675,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B292",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 380V TNS-3ф-60 kw",
+          "Модель": "Чыңалуу стабилизаторлору 380V TNS-3ф-60 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 6
@@ -12756,8 +12756,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-stabilizers-tnsz-3f-001",
-        "size": "Стабилизаторы 380V TNSZ-3ф-100 kw",
-        "titleKg": "Стабилизаторы 380V TNSZ-3ф-100 kw",
+        "size": "Чыңалуу стабилизаторлору 380V TNSZ-3ф-100 kw",
+        "titleKg": "Чыңалуу стабилизаторлору 380V TNSZ-3ф-100 kw",
         "titleRu": "Стабилизаторы 380V TNSZ-3ф-100 kw",
         "price": 328900,
         "unit": "даана",
@@ -12767,7 +12767,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-B293",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Стабилизаторы 380V TNSZ-3ф-100 kw",
+          "Модель": "Чыңалуу стабилизаторлору 380V TNSZ-3ф-100 kw",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -12854,8 +12854,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-starters-nq3-001",
-        "size": "Пускатель в корпусе NQ3-11P 220V 17-25A",
-        "titleKg": "Пускатель в корпусе NQ3-11P 220V 17-25A",
+        "size": "Ишке киргизгич в корпуста NQ3-11P 220V 17-25A",
+        "titleKg": "Ишке киргизгич в корпуста NQ3-11P 220V 17-25A",
         "titleRu": "Пускатель в корпусе NQ3-11P 220V 17-25A",
         "price": 3070,
         "unit": "даана",
@@ -12865,15 +12865,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E229",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель в корпусе NQ3-11P 220V 17-25A",
+          "Модель": "Ишке киргизгич в корпуста NQ3-11P 220V 17-25A",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-starters-nq3-002",
-        "size": "Пускатель в корпусе NQ3-11P 380V 17-25A",
-        "titleKg": "Пускатель в корпусе NQ3-11P 380V 17-25A",
+        "size": "Ишке киргизгич в корпуста NQ3-11P 380V 17-25A",
+        "titleKg": "Ишке киргизгич в корпуста NQ3-11P 380V 17-25A",
         "titleRu": "Пускатель в корпусе NQ3-11P 380V 17-25A",
         "price": 3090,
         "unit": "даана",
@@ -12883,15 +12883,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E230",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель в корпусе NQ3-11P 380V 17-25A",
+          "Модель": "Ишке киргизгич в корпуста NQ3-11P 380V 17-25A",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-starters-nq3-003",
-        "size": "Пускатель в корпусе NQ3-5.5P 220V 9-13A",
-        "titleKg": "Пускатель в корпусе NQ3-5.5P 220V 9-13A",
+        "size": "Ишке киргизгич в корпуста NQ3-5.5P 220V 9-13A",
+        "titleKg": "Ишке киргизгич в корпуста NQ3-5.5P 220V 9-13A",
         "titleRu": "Пускатель в корпусе NQ3-5.5P 220V 9-13A",
         "price": 1930,
         "unit": "даана",
@@ -12901,15 +12901,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E231",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель в корпусе NQ3-5.5P 220V 9-13A",
+          "Модель": "Ишке киргизгич в корпуста NQ3-5.5P 220V 9-13A",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-starters-nq3-004",
-        "size": "Пускатель в корпусе NQ3-5.5P 380V 9-13A",
-        "titleKg": "Пускатель в корпусе NQ3-5.5P 380V 9-13A",
+        "size": "Ишке киргизгич в корпуста NQ3-5.5P 380V 9-13A",
+        "titleKg": "Ишке киргизгич в корпуста NQ3-5.5P 380V 9-13A",
         "titleRu": "Пускатель в корпусе NQ3-5.5P 380V 9-13A",
         "price": 1940,
         "unit": "даана",
@@ -12919,7 +12919,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E232",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель в корпусе NQ3-5.5P 380V 9-13A",
+          "Модель": "Ишке киргизгич в корпуста NQ3-5.5P 380V 9-13A",
           "Бирдик": "даана"
         },
         "sortOrder": 4
@@ -13032,8 +13032,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "chint-starters-ns2-001",
-        "size": "Пускатель NS2-25 0.4-0.63A",
-        "titleKg": "Пускатель NS2-25 0.4-0.63A",
+        "size": "Ишке киргизгич NS2-25 0.4-0.63A",
+        "titleKg": "Ишке киргизгич NS2-25 0.4-0.63A",
         "titleRu": "Пускатель NS2-25 0.4-0.63A",
         "price": 1320,
         "unit": "даана",
@@ -13043,15 +13043,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E212",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 0.4-0.63A",
+          "Модель": "Ишке киргизгич NS2-25 0.4-0.63A",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "chint-starters-ns2-002",
-        "size": "Пускатель NS2-25 0.63-1A",
-        "titleKg": "Пускатель NS2-25 0.63-1A",
+        "size": "Ишке киргизгич NS2-25 0.63-1A",
+        "titleKg": "Ишке киргизгич NS2-25 0.63-1A",
         "titleRu": "Пускатель NS2-25 0.63-1A",
         "price": 1320,
         "unit": "даана",
@@ -13061,15 +13061,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E213",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 0.63-1A",
+          "Модель": "Ишке киргизгич NS2-25 0.63-1A",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "chint-starters-ns2-003",
-        "size": "Пускатель NS2-25 1-1.6A",
-        "titleKg": "Пускатель NS2-25 1-1.6A",
+        "size": "Ишке киргизгич NS2-25 1-1.6A",
+        "titleKg": "Ишке киргизгич NS2-25 1-1.6A",
         "titleRu": "Пускатель NS2-25 1-1.6A",
         "price": 1320,
         "unit": "даана",
@@ -13079,15 +13079,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E214",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 1-1.6A",
+          "Модель": "Ишке киргизгич NS2-25 1-1.6A",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "chint-starters-ns2-004",
-        "size": "Пускатель NS2-25 1.6-2.5A",
-        "titleKg": "Пускатель NS2-25 1.6-2.5A",
+        "size": "Ишке киргизгич NS2-25 1.6-2.5A",
+        "titleKg": "Ишке киргизгич NS2-25 1.6-2.5A",
         "titleRu": "Пускатель NS2-25 1.6-2.5A",
         "price": 1320,
         "unit": "даана",
@@ -13097,15 +13097,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E215",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 1.6-2.5A",
+          "Модель": "Ишке киргизгич NS2-25 1.6-2.5A",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "chint-starters-ns2-005",
-        "size": "Пускатель NS2-25 2.5-4A",
-        "titleKg": "Пускатель NS2-25 2.5-4A",
+        "size": "Ишке киргизгич NS2-25 2.5-4A",
+        "titleKg": "Ишке киргизгич NS2-25 2.5-4A",
         "titleRu": "Пускатель NS2-25 2.5-4A",
         "price": 1320,
         "unit": "даана",
@@ -13115,15 +13115,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E216",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 2.5-4A",
+          "Модель": "Ишке киргизгич NS2-25 2.5-4A",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "chint-starters-ns2-006",
-        "size": "Пускатель NS2-25 4-6.3A",
-        "titleKg": "Пускатель NS2-25 4-6.3A",
+        "size": "Ишке киргизгич NS2-25 4-6.3A",
+        "titleKg": "Ишке киргизгич NS2-25 4-6.3A",
         "titleRu": "Пускатель NS2-25 4-6.3A",
         "price": 1320,
         "unit": "даана",
@@ -13133,15 +13133,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E217",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 4-6.3A",
+          "Модель": "Ишке киргизгич NS2-25 4-6.3A",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "chint-starters-ns2-007",
-        "size": "Пускатель NS2-25 6-10A",
-        "titleKg": "Пускатель NS2-25 6-10A",
+        "size": "Ишке киргизгич NS2-25 6-10A",
+        "titleKg": "Ишке киргизгич NS2-25 6-10A",
         "titleRu": "Пускатель NS2-25 6-10A",
         "price": 1320,
         "unit": "даана",
@@ -13151,15 +13151,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E218",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 6-10A",
+          "Модель": "Ишке киргизгич NS2-25 6-10A",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "chint-starters-ns2-008",
-        "size": "Пускатель NS2-25 9-14A",
-        "titleKg": "Пускатель NS2-25 9-14A",
+        "size": "Ишке киргизгич NS2-25 9-14A",
+        "titleKg": "Ишке киргизгич NS2-25 9-14A",
         "titleRu": "Пускатель NS2-25 9-14A",
         "price": 1320,
         "unit": "даана",
@@ -13169,15 +13169,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E219",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 9-14A",
+          "Модель": "Ишке киргизгич NS2-25 9-14A",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "chint-starters-ns2-009",
-        "size": "Пускатель NS2-25 13-18A",
-        "titleKg": "Пускатель NS2-25 13-18A",
+        "size": "Ишке киргизгич NS2-25 13-18A",
+        "titleKg": "Ишке киргизгич NS2-25 13-18A",
         "titleRu": "Пускатель NS2-25 13-18A",
         "price": 1320,
         "unit": "даана",
@@ -13187,15 +13187,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E220",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 13-18A",
+          "Модель": "Ишке киргизгич NS2-25 13-18A",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "chint-starters-ns2-010",
-        "size": "Пускатель NS2-25 17-23A",
-        "titleKg": "Пускатель NS2-25 17-23A",
+        "size": "Ишке киргизгич NS2-25 17-23A",
+        "titleKg": "Ишке киргизгич NS2-25 17-23A",
         "titleRu": "Пускатель NS2-25 17-23A",
         "price": 1320,
         "unit": "даана",
@@ -13205,15 +13205,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E221",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 17-23A",
+          "Модель": "Ишке киргизгич NS2-25 17-23A",
           "Бирдик": "даана"
         },
         "sortOrder": 10
       },
       {
         "id": "chint-starters-ns2-011",
-        "size": "Пускатель NS2-25 20-25A",
-        "titleKg": "Пускатель NS2-25 20-25A",
+        "size": "Ишке киргизгич NS2-25 20-25A",
+        "titleKg": "Ишке киргизгич NS2-25 20-25A",
         "titleRu": "Пускатель NS2-25 20-25A",
         "price": 1320,
         "unit": "даана",
@@ -13223,15 +13223,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E222",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25 20-25A",
+          "Модель": "Ишке киргизгич NS2-25 20-25A",
           "Бирдик": "даана"
         },
         "sortOrder": 11
       },
       {
         "id": "chint-starters-ns2-012",
-        "size": "Пускатель NS2-80B 25-40A",
-        "titleKg": "Пускатель NS2-80B 25-40A",
+        "size": "Ишке киргизгич NS2-80B 25-40A",
+        "titleKg": "Ишке киргизгич NS2-80B 25-40A",
         "titleRu": "Пускатель NS2-80B 25-40A",
         "price": 3680,
         "unit": "даана",
@@ -13241,15 +13241,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E223",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-80B 25-40A",
+          "Модель": "Ишке киргизгич NS2-80B 25-40A",
           "Бирдик": "даана"
         },
         "sortOrder": 12
       },
       {
         "id": "chint-starters-ns2-013",
-        "size": "Пускатель NS2-80B 40-63A",
-        "titleKg": "Пускатель NS2-80B 40-63A",
+        "size": "Ишке киргизгич NS2-80B 40-63A",
+        "titleKg": "Ишке киргизгич NS2-80B 40-63A",
         "titleRu": "Пускатель NS2-80B 40-63A",
         "price": 3710,
         "unit": "даана",
@@ -13259,15 +13259,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E224",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-80B 40-63A",
+          "Модель": "Ишке киргизгич NS2-80B 40-63A",
           "Бирдик": "даана"
         },
         "sortOrder": 13
       },
       {
         "id": "chint-starters-ns2-014",
-        "size": "Пускатель NS2-25X 1.6-2.5A",
-        "titleKg": "Пускатель NS2-25X 1.6-2.5A",
+        "size": "Ишке киргизгич NS2-25X 1.6-2.5A",
+        "titleKg": "Ишке киргизгич NS2-25X 1.6-2.5A",
         "titleRu": "Пускатель NS2-25X 1.6-2.5A",
         "price": 1320,
         "unit": "даана",
@@ -13277,15 +13277,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E225",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25X 1.6-2.5A",
+          "Модель": "Ишке киргизгич NS2-25X 1.6-2.5A",
           "Бирдик": "даана"
         },
         "sortOrder": 14
       },
       {
         "id": "chint-starters-ns2-015",
-        "size": "Пускатель NS2-25X 6-10A",
-        "titleKg": "Пускатель NS2-25X 6-10A",
+        "size": "Ишке киргизгич NS2-25X 6-10A",
+        "titleKg": "Ишке киргизгич NS2-25X 6-10A",
         "titleRu": "Пускатель NS2-25X 6-10A",
         "price": 1320,
         "unit": "даана",
@@ -13295,15 +13295,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E226",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25X 6-10A",
+          "Модель": "Ишке киргизгич NS2-25X 6-10A",
           "Бирдик": "даана"
         },
         "sortOrder": 15
       },
       {
         "id": "chint-starters-ns2-016",
-        "size": "Пускатель NS2-25X 13-18A",
-        "titleKg": "Пускатель NS2-25X 13-18A",
+        "size": "Ишке киргизгич NS2-25X 13-18A",
+        "titleKg": "Ишке киргизгич NS2-25X 13-18A",
         "titleRu": "Пускатель NS2-25X 13-18A",
         "price": 1320,
         "unit": "даана",
@@ -13313,15 +13313,15 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E227",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25X 13-18A",
+          "Модель": "Ишке киргизгич NS2-25X 13-18A",
           "Бирдик": "даана"
         },
         "sortOrder": 16
       },
       {
         "id": "chint-starters-ns2-017",
-        "size": "Пускатель NS2-25X 20-25A",
-        "titleKg": "Пускатель NS2-25X 20-25A",
+        "size": "Ишке киргизгич NS2-25X 20-25A",
+        "titleKg": "Ишке киргизгич NS2-25X 20-25A",
         "titleRu": "Пускатель NS2-25X 20-25A",
         "price": 1320,
         "unit": "даана",
@@ -13331,7 +13331,7 @@ export const electricalSupplierProducts = [
         "sku": "CHINT-APR26-E228",
         "specs": {
           "Бренд": "CHINT",
-          "Модель": "Пускатель NS2-25X 20-25A",
+          "Модель": "Ишке киргизгич NS2-25X 20-25A",
           "Бирдик": "даана"
         },
         "sortOrder": 17
@@ -13758,8 +13758,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "panasonic-frames-panasonic-001",
-        "size": "БРОНЗА рамка 1-я",
-        "titleKg": "БРОНЗА рамка 1-я",
+        "size": "Коло түстүү алкак 1-я",
+        "titleKg": "Коло түстүү алкак 1-я",
         "titleRu": "БРОНЗА рамка 1-я",
         "price": 140,
         "unit": "даана",
@@ -13769,15 +13769,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E18",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 1-я",
+          "Модель": "Коло түстүү алкак 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "panasonic-frames-panasonic-002",
-        "size": "ARKEDİA SLİM рамка 2-я",
-        "titleKg": "ARKEDİA SLİM рамка 2-я",
+        "size": "ARKEDİA SLİM алкак 2-я",
+        "titleKg": "ARKEDİA SLİM алкак 2-я",
         "titleRu": "ARKEDİA SLİM рамка 2-я",
         "price": 110,
         "unit": "даана",
@@ -13787,15 +13787,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B19",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM рамка 2-я",
+          "Модель": "ARKEDİA SLİM алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "panasonic-frames-panasonic-003",
-        "size": "БРОНЗА рамка на 2-ю розетку",
-        "titleKg": "БРОНЗА рамка на 2-ю розетку",
+        "size": "Коло түстүү эки розеткалык алкак",
+        "titleKg": "Коло түстүү эки розеткалык алкак",
         "titleRu": "БРОНЗА рамка на 2-ю розетку",
         "price": 245,
         "unit": "даана",
@@ -13805,15 +13805,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E19",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка на 2-ю розетку",
+          "Модель": "Коло түстүү эки розеткалык алкак",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "panasonic-frames-panasonic-004",
-        "size": "ARKEDİA SLİM рамка 3-я",
-        "titleKg": "ARKEDİA SLİM рамка 3-я",
+        "size": "ARKEDİA SLİM алкак 3-я",
+        "titleKg": "ARKEDİA SLİM алкак 3-я",
         "titleRu": "ARKEDİA SLİM рамка 3-я",
         "price": 135,
         "unit": "даана",
@@ -13823,15 +13823,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B20",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM рамка 3-я",
+          "Модель": "ARKEDİA SLİM алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "panasonic-frames-panasonic-005",
-        "size": "БРОНЗА рамка 2-я",
-        "titleKg": "БРОНЗА рамка 2-я",
+        "size": "Коло түстүү алкак 2-я",
+        "titleKg": "Коло түстүү алкак 2-я",
         "titleRu": "БРОНЗА рамка 2-я",
         "price": 255,
         "unit": "даана",
@@ -13841,15 +13841,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E20",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 2-я",
+          "Модель": "Коло түстүү алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "panasonic-frames-panasonic-006",
-        "size": "ARKEDİA SLİM рамка 4-я",
-        "titleKg": "ARKEDİA SLİM рамка 4-я",
+        "size": "ARKEDİA SLİM алкак 4-я",
+        "titleKg": "ARKEDİA SLİM алкак 4-я",
         "titleRu": "ARKEDİA SLİM рамка 4-я",
         "price": 175,
         "unit": "даана",
@@ -13859,15 +13859,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B21",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM рамка 4-я",
+          "Модель": "ARKEDİA SLİM алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "panasonic-frames-panasonic-007",
-        "size": "БРОНЗА рамка 3-я",
-        "titleKg": "БРОНЗА рамка 3-я",
+        "size": "Коло түстүү алкак 3-я",
+        "titleKg": "Коло түстүү алкак 3-я",
         "titleRu": "БРОНЗА рамка 3-я",
         "price": 325,
         "unit": "даана",
@@ -13877,15 +13877,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E21",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 3-я",
+          "Модель": "Коло түстүү алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "panasonic-frames-panasonic-008",
-        "size": "ARKEDİA SLİM рамка 5-я",
-        "titleKg": "ARKEDİA SLİM рамка 5-я",
+        "size": "ARKEDİA SLİM алкак 5-я",
+        "titleKg": "ARKEDİA SLİM алкак 5-я",
         "titleRu": "ARKEDİA SLİM рамка 5-я",
         "price": 220,
         "unit": "даана",
@@ -13895,15 +13895,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B22",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM рамка 5-я",
+          "Модель": "ARKEDİA SLİM алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "panasonic-frames-panasonic-009",
-        "size": "БРОНЗА рамка 4-я",
-        "titleKg": "БРОНЗА рамка 4-я",
+        "size": "Коло түстүү алкак 4-я",
+        "titleKg": "Коло түстүү алкак 4-я",
         "titleRu": "БРОНЗА рамка 4-я",
         "price": 470,
         "unit": "даана",
@@ -13913,15 +13913,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E22",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 4-я",
+          "Модель": "Коло түстүү алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "panasonic-frames-panasonic-010",
-        "size": "ARKEDİA SLİM рамка 6-я",
-        "titleKg": "ARKEDİA SLİM рамка 6-я",
+        "size": "ARKEDİA SLİM алкак 6-я",
+        "titleKg": "ARKEDİA SLİM алкак 6-я",
         "titleRu": "ARKEDİA SLİM рамка 6-я",
         "price": 260,
         "unit": "даана",
@@ -13931,15 +13931,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B23",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM рамка 6-я",
+          "Модель": "ARKEDİA SLİM алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 10
       },
       {
         "id": "panasonic-frames-panasonic-011",
-        "size": "БРОНЗА рамка 5-я",
-        "titleKg": "БРОНЗА рамка 5-я",
+        "size": "Коло түстүү алкак 5-я",
+        "titleKg": "Коло түстүү алкак 5-я",
         "titleRu": "БРОНЗА рамка 5-я",
         "price": 615,
         "unit": "даана",
@@ -13949,15 +13949,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E23",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 5-я",
+          "Модель": "Коло түстүү алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 11
       },
       {
         "id": "panasonic-frames-panasonic-012",
-        "size": "БРОНЗА рамка 6-я",
-        "titleKg": "БРОНЗА рамка 6-я",
+        "size": "Коло түстүү алкак 6-я",
+        "titleKg": "Коло түстүү алкак 6-я",
         "titleRu": "БРОНЗА рамка 6-я",
         "price": 685,
         "unit": "даана",
@@ -13967,15 +13967,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E24",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА рамка 6-я",
+          "Модель": "Коло түстүү алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 12
       },
       {
         "id": "panasonic-frames-panasonic-013",
-        "size": "ARKEDİA SLİM KREM рамка 2-я",
-        "titleKg": "ARKEDİA SLİM KREM рамка 2-я",
+        "size": "ARKEDİA SLİM KREM алкак 2-я",
+        "titleKg": "ARKEDİA SLİM KREM алкак 2-я",
         "titleRu": "ARKEDİA SLİM KREM рамка 2-я",
         "price": 110,
         "unit": "даана",
@@ -13985,15 +13985,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B40",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM рамка 2-я",
+          "Модель": "ARKEDİA SLİM KREM алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 13
       },
       {
         "id": "panasonic-frames-panasonic-014",
-        "size": "СЕРЕБРО рамка 1-я",
-        "titleKg": "СЕРЕБРО рамка 1-я",
+        "size": "Күмүш түстүү алкак 1-я",
+        "titleKg": "Күмүш түстүү алкак 1-я",
         "titleRu": "СЕРЕБРО рамка 1-я",
         "price": 140,
         "unit": "даана",
@@ -14003,15 +14003,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E40",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 1-я",
+          "Модель": "Күмүш түстүү алкак 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 14
       },
       {
         "id": "panasonic-frames-panasonic-015",
-        "size": "ARKEDİA SLİM KREM рамка 3-я",
-        "titleKg": "ARKEDİA SLİM KREM рамка 3-я",
+        "size": "ARKEDİA SLİM KREM алкак 3-я",
+        "titleKg": "ARKEDİA SLİM KREM алкак 3-я",
         "titleRu": "ARKEDİA SLİM KREM рамка 3-я",
         "price": 135,
         "unit": "даана",
@@ -14021,15 +14021,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B41",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM рамка 3-я",
+          "Модель": "ARKEDİA SLİM KREM алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 15
       },
       {
         "id": "panasonic-frames-panasonic-016",
-        "size": "СЕРЕБРО рамка на 2-ю розетку",
-        "titleKg": "СЕРЕБРО рамка на 2-ю розетку",
+        "size": "Күмүш түстүү эки розеткалык алкак",
+        "titleKg": "Күмүш түстүү эки розеткалык алкак",
         "titleRu": "СЕРЕБРО рамка на 2-ю розетку",
         "price": 245,
         "unit": "даана",
@@ -14039,15 +14039,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E41",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка на 2-ю розетку",
+          "Модель": "Күмүш түстүү эки розеткалык алкак",
           "Бирдик": "даана"
         },
         "sortOrder": 16
       },
       {
         "id": "panasonic-frames-panasonic-017",
-        "size": "ARKEDİA SLİM KREM рамка 4-я",
-        "titleKg": "ARKEDİA SLİM KREM рамка 4-я",
+        "size": "ARKEDİA SLİM KREM алкак 4-я",
+        "titleKg": "ARKEDİA SLİM KREM алкак 4-я",
         "titleRu": "ARKEDİA SLİM KREM рамка 4-я",
         "price": 175,
         "unit": "даана",
@@ -14057,15 +14057,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B42",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM рамка 4-я",
+          "Модель": "ARKEDİA SLİM KREM алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 17
       },
       {
         "id": "panasonic-frames-panasonic-018",
-        "size": "СЕРЕБРО рамка 2-я",
-        "titleKg": "СЕРЕБРО рамка 2-я",
+        "size": "Күмүш түстүү алкак 2-я",
+        "titleKg": "Күмүш түстүү алкак 2-я",
         "titleRu": "СЕРЕБРО рамка 2-я",
         "price": 255,
         "unit": "даана",
@@ -14075,15 +14075,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E42",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 2-я",
+          "Модель": "Күмүш түстүү алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 18
       },
       {
         "id": "panasonic-frames-panasonic-019",
-        "size": "ARKEDİA SLİM KREM рамка 5-я",
-        "titleKg": "ARKEDİA SLİM KREM рамка 5-я",
+        "size": "ARKEDİA SLİM KREM алкак 5-я",
+        "titleKg": "ARKEDİA SLİM KREM алкак 5-я",
         "titleRu": "ARKEDİA SLİM KREM рамка 5-я",
         "price": 220,
         "unit": "даана",
@@ -14093,15 +14093,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B43",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM рамка 5-я",
+          "Модель": "ARKEDİA SLİM KREM алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 19
       },
       {
         "id": "panasonic-frames-panasonic-020",
-        "size": "СЕРЕБРО рамка 3-я",
-        "titleKg": "СЕРЕБРО рамка 3-я",
+        "size": "Күмүш түстүү алкак 3-я",
+        "titleKg": "Күмүш түстүү алкак 3-я",
         "titleRu": "СЕРЕБРО рамка 3-я",
         "price": 325,
         "unit": "даана",
@@ -14111,15 +14111,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E43",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 3-я",
+          "Модель": "Күмүш түстүү алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 20
       },
       {
         "id": "panasonic-frames-panasonic-021",
-        "size": "ARKEDİA SLİM KREM рамка 6-я",
-        "titleKg": "ARKEDİA SLİM KREM рамка 6-я",
+        "size": "ARKEDİA SLİM KREM алкак 6-я",
+        "titleKg": "ARKEDİA SLİM KREM алкак 6-я",
         "titleRu": "ARKEDİA SLİM KREM рамка 6-я",
         "price": 260,
         "unit": "даана",
@@ -14129,15 +14129,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B44",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM рамка 6-я",
+          "Модель": "ARKEDİA SLİM KREM алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 21
       },
       {
         "id": "panasonic-frames-panasonic-022",
-        "size": "СЕРЕБРО рамка 4-я",
-        "titleKg": "СЕРЕБРО рамка 4-я",
+        "size": "Күмүш түстүү алкак 4-я",
+        "titleKg": "Күмүш түстүү алкак 4-я",
         "titleRu": "СЕРЕБРО рамка 4-я",
         "price": 470,
         "unit": "даана",
@@ -14147,15 +14147,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E44",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 4-я",
+          "Модель": "Күмүш түстүү алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 22
       },
       {
         "id": "panasonic-frames-panasonic-023",
-        "size": "СЕРЕБРО рамка 5-я",
-        "titleKg": "СЕРЕБРО рамка 5-я",
+        "size": "Күмүш түстүү алкак 5-я",
+        "titleKg": "Күмүш түстүү алкак 5-я",
         "titleRu": "СЕРЕБРО рамка 5-я",
         "price": 615,
         "unit": "даана",
@@ -14165,15 +14165,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E45",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 5-я",
+          "Модель": "Күмүш түстүү алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 23
       },
       {
         "id": "panasonic-frames-panasonic-024",
-        "size": "СЕРЕБРО рамка 6-я",
-        "titleKg": "СЕРЕБРО рамка 6-я",
+        "size": "Күмүш түстүү алкак 6-я",
+        "titleKg": "Күмүш түстүү алкак 6-я",
         "titleRu": "СЕРЕБРО рамка 6-я",
         "price": 685,
         "unit": "даана",
@@ -14183,15 +14183,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E46",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО рамка 6-я",
+          "Модель": "Күмүш түстүү алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 24
       },
       {
         "id": "panasonic-frames-panasonic-025",
-        "size": "ЧЕРНЫЙ рамка 1-я",
-        "titleKg": "ЧЕРНЫЙ рамка 1-я",
+        "size": "Кара алкак 1-я",
+        "titleKg": "Кара алкак 1-я",
         "titleRu": "ЧЕРНЫЙ рамка 1-я",
         "price": 140,
         "unit": "даана",
@@ -14201,15 +14201,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B62",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 1-я",
+          "Модель": "Кара алкак 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 25
       },
       {
         "id": "panasonic-frames-panasonic-026",
-        "size": "ДЫМЧАТЫЙ рамка 1-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 1-я",
+        "size": "Түтүн түстүү алкак 1-я",
+        "titleKg": "Түтүн түстүү алкак 1-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 1-я",
         "price": 140,
         "unit": "даана",
@@ -14219,15 +14219,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E62",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 1-я",
+          "Модель": "Түтүн түстүү алкак 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 26
       },
       {
         "id": "panasonic-frames-panasonic-027",
-        "size": "ЧЕРНЫЙ рамка на 2-ю розетку",
-        "titleKg": "ЧЕРНЫЙ рамка на 2-ю розетку",
+        "size": "Кара эки розеткалык алкак",
+        "titleKg": "Кара эки розеткалык алкак",
         "titleRu": "ЧЕРНЫЙ рамка на 2-ю розетку",
         "price": 245,
         "unit": "даана",
@@ -14237,15 +14237,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B63",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка на 2-ю розетку",
+          "Модель": "Кара эки розеткалык алкак",
           "Бирдик": "даана"
         },
         "sortOrder": 27
       },
       {
         "id": "panasonic-frames-panasonic-028",
-        "size": "ДЫМЧАТЫЙ рамка на 2-ю розетку",
-        "titleKg": "ДЫМЧАТЫЙ рамка на 2-ю розетку",
+        "size": "Түтүн түстүү эки розеткалык алкак",
+        "titleKg": "Түтүн түстүү эки розеткалык алкак",
         "titleRu": "ДЫМЧАТЫЙ рамка на 2-ю розетку",
         "price": 245,
         "unit": "даана",
@@ -14255,15 +14255,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E63",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка на 2-ю розетку",
+          "Модель": "Түтүн түстүү эки розеткалык алкак",
           "Бирдик": "даана"
         },
         "sortOrder": 28
       },
       {
         "id": "panasonic-frames-panasonic-029",
-        "size": "ЧЕРНЫЙ рамка 2-я",
-        "titleKg": "ЧЕРНЫЙ рамка 2-я",
+        "size": "Кара алкак 2-я",
+        "titleKg": "Кара алкак 2-я",
         "titleRu": "ЧЕРНЫЙ рамка 2-я",
         "price": 255,
         "unit": "даана",
@@ -14273,15 +14273,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B64",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 2-я",
+          "Модель": "Кара алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 29
       },
       {
         "id": "panasonic-frames-panasonic-030",
-        "size": "ДЫМЧАТЫЙ рамка 2-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 2-я",
+        "size": "Түтүн түстүү алкак 2-я",
+        "titleKg": "Түтүн түстүү алкак 2-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 2-я",
         "price": 255,
         "unit": "даана",
@@ -14291,15 +14291,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E64",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 2-я",
+          "Модель": "Түтүн түстүү алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 30
       },
       {
         "id": "panasonic-frames-panasonic-031",
-        "size": "ЧЕРНЫЙ рамка 3-я",
-        "titleKg": "ЧЕРНЫЙ рамка 3-я",
+        "size": "Кара алкак 3-я",
+        "titleKg": "Кара алкак 3-я",
         "titleRu": "ЧЕРНЫЙ рамка 3-я",
         "price": 325,
         "unit": "даана",
@@ -14309,15 +14309,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B65",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 3-я",
+          "Модель": "Кара алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 31
       },
       {
         "id": "panasonic-frames-panasonic-032",
-        "size": "ДЫМЧАТЫЙ рамка 3-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 3-я",
+        "size": "Түтүн түстүү алкак 3-я",
+        "titleKg": "Түтүн түстүү алкак 3-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 3-я",
         "price": 325,
         "unit": "даана",
@@ -14327,15 +14327,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E65",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 3-я",
+          "Модель": "Түтүн түстүү алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 32
       },
       {
         "id": "panasonic-frames-panasonic-033",
-        "size": "ЧЕРНЫЙ рамка 4-я",
-        "titleKg": "ЧЕРНЫЙ рамка 4-я",
+        "size": "Кара алкак 4-я",
+        "titleKg": "Кара алкак 4-я",
         "titleRu": "ЧЕРНЫЙ рамка 4-я",
         "price": 470,
         "unit": "даана",
@@ -14345,15 +14345,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B66",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 4-я",
+          "Модель": "Кара алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 33
       },
       {
         "id": "panasonic-frames-panasonic-034",
-        "size": "ДЫМЧАТЫЙ рамка 4-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 4-я",
+        "size": "Түтүн түстүү алкак 4-я",
+        "titleKg": "Түтүн түстүү алкак 4-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 4-я",
         "price": 470,
         "unit": "даана",
@@ -14363,15 +14363,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E66",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 4-я",
+          "Модель": "Түтүн түстүү алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 34
       },
       {
         "id": "panasonic-frames-panasonic-035",
-        "size": "ЧЕРНЫЙ рамка 5-я",
-        "titleKg": "ЧЕРНЫЙ рамка 5-я",
+        "size": "Кара алкак 5-я",
+        "titleKg": "Кара алкак 5-я",
         "titleRu": "ЧЕРНЫЙ рамка 5-я",
         "price": 615,
         "unit": "даана",
@@ -14381,15 +14381,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B67",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 5-я",
+          "Модель": "Кара алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 35
       },
       {
         "id": "panasonic-frames-panasonic-036",
-        "size": "ДЫМЧАТЫЙ рамка 5-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 5-я",
+        "size": "Түтүн түстүү алкак 5-я",
+        "titleKg": "Түтүн түстүү алкак 5-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 5-я",
         "price": 615,
         "unit": "даана",
@@ -14399,15 +14399,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E67",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 5-я",
+          "Модель": "Түтүн түстүү алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 36
       },
       {
         "id": "panasonic-frames-panasonic-037",
-        "size": "ЧЕРНЫЙ рамка 6-я",
-        "titleKg": "ЧЕРНЫЙ рамка 6-я",
+        "size": "Кара алкак 6-я",
+        "titleKg": "Кара алкак 6-я",
         "titleRu": "ЧЕРНЫЙ рамка 6-я",
         "price": 685,
         "unit": "даана",
@@ -14417,15 +14417,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B68",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ рамка 6-я",
+          "Модель": "Кара алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 37
       },
       {
         "id": "panasonic-frames-panasonic-038",
-        "size": "ДЫМЧАТЫЙ рамка 6-я",
-        "titleKg": "ДЫМЧАТЫЙ рамка 6-я",
+        "size": "Түтүн түстүү алкак 6-я",
+        "titleKg": "Түтүн түстүү алкак 6-я",
         "titleRu": "ДЫМЧАТЫЙ рамка 6-я",
         "price": 685,
         "unit": "даана",
@@ -14435,7 +14435,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E68",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ рамка 6-я",
+          "Модель": "Түтүн түстүү алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 38
@@ -14518,8 +14518,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "panasonic-mounting-panasonic-001",
-        "size": "ARKEDİA SLİM коробка наружного монтажа",
-        "titleKg": "ARKEDİA SLİM коробка наружного монтажа",
+        "size": "ARKEDİA SLİM сырттан орнотулуучу куту",
+        "titleKg": "ARKEDİA SLİM сырттан орнотулуучу куту",
         "titleRu": "ARKEDİA SLİM коробка наружного монтажа",
         "price": 105,
         "unit": "даана",
@@ -14529,15 +14529,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B18",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM коробка наружного монтажа",
+          "Модель": "ARKEDİA SLİM сырттан орнотулуучу куту",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "panasonic-mounting-panasonic-002",
-        "size": "ARKEDİA SLİM KREM коробка наружного монтажа",
-        "titleKg": "ARKEDİA SLİM KREM коробка наружного монтажа",
+        "size": "ARKEDİA SLİM KREM сырттан орнотулуучу куту",
+        "titleKg": "ARKEDİA SLİM KREM сырттан орнотулуучу куту",
         "titleRu": "ARKEDİA SLİM KREM коробка наружного монтажа",
         "price": 105,
         "unit": "даана",
@@ -14547,7 +14547,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B39",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM коробка наружного монтажа",
+          "Модель": "ARKEDİA SLİM KREM сырттан орнотулуучу куту",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -14728,8 +14728,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-002",
-        "size": "БРОНЗА розетка 1-я",
-        "titleKg": "БРОНЗА розетка 1-я",
+        "size": "Коло түстүү розетка 1-я",
+        "titleKg": "Коло түстүү розетка 1-я",
         "titleRu": "БРОНЗА розетка 1-я",
         "price": 225,
         "unit": "даана",
@@ -14739,7 +14739,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E3",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка 1-я",
+          "Модель": "Коло түстүү розетка 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -14764,8 +14764,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-004",
-        "size": "БРОНЗА розетка 1-я с/з",
-        "titleKg": "БРОНЗА розетка 1-я с/з",
+        "size": "Коло түстүү розетка 1-я с/з",
+        "titleKg": "Коло түстүү розетка 1-я с/з",
         "titleRu": "БРОНЗА розетка 1-я с/з",
         "price": 255,
         "unit": "даана",
@@ -14775,7 +14775,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E4",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка 1-я с/з",
+          "Модель": "Коло түстүү розетка 1-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 4
@@ -14800,8 +14800,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-006",
-        "size": "БРОНЗА розетка 1-я с/кр",
-        "titleKg": "БРОНЗА розетка 1-я с/кр",
+        "size": "Коло түстүү розетка 1-я с/кр",
+        "titleKg": "Коло түстүү розетка 1-я с/кр",
         "titleRu": "БРОНЗА розетка 1-я с/кр",
         "price": 305,
         "unit": "даана",
@@ -14811,7 +14811,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E5",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка 1-я с/кр",
+          "Модель": "Коло түстүү розетка 1-я с/кр",
           "Бирдик": "даана"
         },
         "sortOrder": 6
@@ -14836,8 +14836,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-008",
-        "size": "БРОНЗА розетка 2-я",
-        "titleKg": "БРОНЗА розетка 2-я",
+        "size": "Коло түстүү розетка 2-я",
+        "titleKg": "Коло түстүү розетка 2-я",
         "titleRu": "БРОНЗА розетка 2-я",
         "price": 455,
         "unit": "даана",
@@ -14847,7 +14847,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E6",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка 2-я",
+          "Модель": "Коло түстүү розетка 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 8
@@ -14872,8 +14872,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-010",
-        "size": "БРОНЗА розетка 2-я с/з",
-        "titleKg": "БРОНЗА розетка 2-я с/з",
+        "size": "Коло түстүү розетка 2-я с/з",
+        "titleKg": "Коло түстүү розетка 2-я с/з",
         "titleRu": "БРОНЗА розетка 2-я с/з",
         "price": 515,
         "unit": "даана",
@@ -14883,7 +14883,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E7",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка 2-я с/з",
+          "Модель": "Коло түстүү розетка 2-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 10
@@ -14908,8 +14908,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-012",
-        "size": "БРОНЗА розетка ТВ",
-        "titleKg": "БРОНЗА розетка ТВ",
+        "size": "Коло түстүү розетка ТВ",
+        "titleKg": "Коло түстүү розетка ТВ",
         "titleRu": "БРОНЗА розетка ТВ",
         "price": 365,
         "unit": "даана",
@@ -14919,7 +14919,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E8",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка ТВ",
+          "Модель": "Коло түстүү розетка ТВ",
           "Бирдик": "даана"
         },
         "sortOrder": 12
@@ -14944,8 +14944,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-014",
-        "size": "БРОНЗА розетка ТФ",
-        "titleKg": "БРОНЗА розетка ТФ",
+        "size": "Коло түстүү розетка ТФ",
+        "titleKg": "Коло түстүү розетка ТФ",
         "titleRu": "БРОНЗА розетка ТФ",
         "price": 250,
         "unit": "даана",
@@ -14955,7 +14955,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E9",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА розетка ТФ",
+          "Модель": "Коло түстүү розетка ТФ",
           "Бирдик": "даана"
         },
         "sortOrder": 14
@@ -14998,8 +14998,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-017",
-        "size": "СЕРЕБРО розетка 1-я",
-        "titleKg": "СЕРЕБРО розетка 1-я",
+        "size": "Күмүш түстүү розетка 1-я",
+        "titleKg": "Күмүш түстүү розетка 1-я",
         "titleRu": "СЕРЕБРО розетка 1-я",
         "price": 225,
         "unit": "даана",
@@ -15009,7 +15009,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E25",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка 1-я",
+          "Модель": "Күмүш түстүү розетка 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 17
@@ -15034,8 +15034,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-019",
-        "size": "СЕРЕБРО розетка 1-я с/з",
-        "titleKg": "СЕРЕБРО розетка 1-я с/з",
+        "size": "Күмүш түстүү розетка 1-я с/з",
+        "titleKg": "Күмүш түстүү розетка 1-я с/з",
         "titleRu": "СЕРЕБРО розетка 1-я с/з",
         "price": 255,
         "unit": "даана",
@@ -15045,7 +15045,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E26",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка 1-я с/з",
+          "Модель": "Күмүш түстүү розетка 1-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 19
@@ -15070,8 +15070,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-021",
-        "size": "СЕРЕБРО розетка 1-я с/кр",
-        "titleKg": "СЕРЕБРО розетка 1-я с/кр",
+        "size": "Күмүш түстүү розетка 1-я с/кр",
+        "titleKg": "Күмүш түстүү розетка 1-я с/кр",
         "titleRu": "СЕРЕБРО розетка 1-я с/кр",
         "price": 305,
         "unit": "даана",
@@ -15081,7 +15081,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E27",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка 1-я с/кр",
+          "Модель": "Күмүш түстүү розетка 1-я с/кр",
           "Бирдик": "даана"
         },
         "sortOrder": 21
@@ -15106,8 +15106,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-023",
-        "size": "СЕРЕБРО розетка 2-я",
-        "titleKg": "СЕРЕБРО розетка 2-я",
+        "size": "Күмүш түстүү розетка 2-я",
+        "titleKg": "Күмүш түстүү розетка 2-я",
         "titleRu": "СЕРЕБРО розетка 2-я",
         "price": 455,
         "unit": "даана",
@@ -15117,7 +15117,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E28",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка 2-я",
+          "Модель": "Күмүш түстүү розетка 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 23
@@ -15142,8 +15142,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-025",
-        "size": "СЕРЕБРО розетка 2-я с/з",
-        "titleKg": "СЕРЕБРО розетка 2-я с/з",
+        "size": "Күмүш түстүү розетка 2-я с/з",
+        "titleKg": "Күмүш түстүү розетка 2-я с/з",
         "titleRu": "СЕРЕБРО розетка 2-я с/з",
         "price": 515,
         "unit": "даана",
@@ -15153,7 +15153,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E29",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка 2-я с/з",
+          "Модель": "Күмүш түстүү розетка 2-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 25
@@ -15178,8 +15178,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "panasonic-sockets-panasonic-027",
-        "size": "СЕРЕБРО розетка ТВ",
-        "titleKg": "СЕРЕБРО розетка ТВ",
+        "size": "Күмүш түстүү розетка ТВ",
+        "titleKg": "Күмүш түстүү розетка ТВ",
         "titleRu": "СЕРЕБРО розетка ТВ",
         "price": 365,
         "unit": "даана",
@@ -15189,15 +15189,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E30",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка ТВ",
+          "Модель": "Күмүш түстүү розетка ТВ",
           "Бирдик": "даана"
         },
         "sortOrder": 27
       },
       {
         "id": "panasonic-sockets-panasonic-028",
-        "size": "СЕРЕБРО розетка ТФ",
-        "titleKg": "СЕРЕБРО розетка ТФ",
+        "size": "Күмүш түстүү розетка ТФ",
+        "titleKg": "Күмүш түстүү розетка ТФ",
         "titleRu": "СЕРЕБРО розетка ТФ",
         "price": 250,
         "unit": "даана",
@@ -15207,15 +15207,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E31",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО розетка ТФ",
+          "Модель": "Күмүш түстүү розетка ТФ",
           "Бирдик": "даана"
         },
         "sortOrder": 28
       },
       {
         "id": "panasonic-sockets-panasonic-029",
-        "size": "ЧЕРНЫЙ розетка 1-я",
-        "titleKg": "ЧЕРНЫЙ розетка 1-я",
+        "size": "Кара розетка 1-я",
+        "titleKg": "Кара розетка 1-я",
         "titleRu": "ЧЕРНЫЙ розетка 1-я",
         "price": 225,
         "unit": "даана",
@@ -15225,15 +15225,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B47",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка 1-я",
+          "Модель": "Кара розетка 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 29
       },
       {
         "id": "panasonic-sockets-panasonic-030",
-        "size": "ДЫМЧАТЫЙ розетка 1-я",
-        "titleKg": "ДЫМЧАТЫЙ розетка 1-я",
+        "size": "Түтүн түстүү розетка 1-я",
+        "titleKg": "Түтүн түстүү розетка 1-я",
         "titleRu": "ДЫМЧАТЫЙ розетка 1-я",
         "price": 225,
         "unit": "даана",
@@ -15243,15 +15243,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E47",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка 1-я",
+          "Модель": "Түтүн түстүү розетка 1-я",
           "Бирдик": "даана"
         },
         "sortOrder": 30
       },
       {
         "id": "panasonic-sockets-panasonic-031",
-        "size": "ЧЕРНЫЙ розетка 1-я с/з",
-        "titleKg": "ЧЕРНЫЙ розетка 1-я с/з",
+        "size": "Кара розетка 1-я с/з",
+        "titleKg": "Кара розетка 1-я с/з",
         "titleRu": "ЧЕРНЫЙ розетка 1-я с/з",
         "price": 255,
         "unit": "даана",
@@ -15261,15 +15261,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B48",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка 1-я с/з",
+          "Модель": "Кара розетка 1-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 31
       },
       {
         "id": "panasonic-sockets-panasonic-032",
-        "size": "ДЫМЧАТЫЙ розетка 1-я с/з",
-        "titleKg": "ДЫМЧАТЫЙ розетка 1-я с/з",
+        "size": "Түтүн түстүү розетка 1-я с/з",
+        "titleKg": "Түтүн түстүү розетка 1-я с/з",
         "titleRu": "ДЫМЧАТЫЙ розетка 1-я с/з",
         "price": 255,
         "unit": "даана",
@@ -15279,15 +15279,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E48",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка 1-я с/з",
+          "Модель": "Түтүн түстүү розетка 1-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 32
       },
       {
         "id": "panasonic-sockets-panasonic-033",
-        "size": "ЧЕРНЫЙ розетка 1-я с/кр",
-        "titleKg": "ЧЕРНЫЙ розетка 1-я с/кр",
+        "size": "Кара розетка 1-я с/кр",
+        "titleKg": "Кара розетка 1-я с/кр",
         "titleRu": "ЧЕРНЫЙ розетка 1-я с/кр",
         "price": 305,
         "unit": "даана",
@@ -15297,15 +15297,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B49",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка 1-я с/кр",
+          "Модель": "Кара розетка 1-я с/кр",
           "Бирдик": "даана"
         },
         "sortOrder": 33
       },
       {
         "id": "panasonic-sockets-panasonic-034",
-        "size": "ДЫМЧАТЫЙ розетка 1-я с/кр",
-        "titleKg": "ДЫМЧАТЫЙ розетка 1-я с/кр",
+        "size": "Түтүн түстүү розетка 1-я с/кр",
+        "titleKg": "Түтүн түстүү розетка 1-я с/кр",
         "titleRu": "ДЫМЧАТЫЙ розетка 1-я с/кр",
         "price": 305,
         "unit": "даана",
@@ -15315,15 +15315,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E49",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка 1-я с/кр",
+          "Модель": "Түтүн түстүү розетка 1-я с/кр",
           "Бирдик": "даана"
         },
         "sortOrder": 34
       },
       {
         "id": "panasonic-sockets-panasonic-035",
-        "size": "ЧЕРНЫЙ розетка 2-я",
-        "titleKg": "ЧЕРНЫЙ розетка 2-я",
+        "size": "Кара розетка 2-я",
+        "titleKg": "Кара розетка 2-я",
         "titleRu": "ЧЕРНЫЙ розетка 2-я",
         "price": 455,
         "unit": "даана",
@@ -15333,15 +15333,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B50",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка 2-я",
+          "Модель": "Кара розетка 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 35
       },
       {
         "id": "panasonic-sockets-panasonic-036",
-        "size": "ДЫМЧАТЫЙ розетка 2-я",
-        "titleKg": "ДЫМЧАТЫЙ розетка 2-я",
+        "size": "Түтүн түстүү розетка 2-я",
+        "titleKg": "Түтүн түстүү розетка 2-я",
         "titleRu": "ДЫМЧАТЫЙ розетка 2-я",
         "price": 455,
         "unit": "даана",
@@ -15351,15 +15351,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E50",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка 2-я",
+          "Модель": "Түтүн түстүү розетка 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 36
       },
       {
         "id": "panasonic-sockets-panasonic-037",
-        "size": "ЧЕРНЫЙ розетка 2-я с/з",
-        "titleKg": "ЧЕРНЫЙ розетка 2-я с/з",
+        "size": "Кара розетка 2-я с/з",
+        "titleKg": "Кара розетка 2-я с/з",
         "titleRu": "ЧЕРНЫЙ розетка 2-я с/з",
         "price": 515,
         "unit": "даана",
@@ -15369,15 +15369,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B51",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка 2-я с/з",
+          "Модель": "Кара розетка 2-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 37
       },
       {
         "id": "panasonic-sockets-panasonic-038",
-        "size": "ДЫМЧАТЫЙ розетка 2-я с/з",
-        "titleKg": "ДЫМЧАТЫЙ розетка 2-я с/з",
+        "size": "Түтүн түстүү розетка 2-я с/з",
+        "titleKg": "Түтүн түстүү розетка 2-я с/з",
         "titleRu": "ДЫМЧАТЫЙ розетка 2-я с/з",
         "price": 515,
         "unit": "даана",
@@ -15387,15 +15387,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E51",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка 2-я с/з",
+          "Модель": "Түтүн түстүү розетка 2-я с/з",
           "Бирдик": "даана"
         },
         "sortOrder": 38
       },
       {
         "id": "panasonic-sockets-panasonic-039",
-        "size": "ЧЕРНЫЙ розетка ТВ",
-        "titleKg": "ЧЕРНЫЙ розетка ТВ",
+        "size": "Кара розетка ТВ",
+        "titleKg": "Кара розетка ТВ",
         "titleRu": "ЧЕРНЫЙ розетка ТВ",
         "price": 365,
         "unit": "даана",
@@ -15405,15 +15405,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B52",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка ТВ",
+          "Модель": "Кара розетка ТВ",
           "Бирдик": "даана"
         },
         "sortOrder": 39
       },
       {
         "id": "panasonic-sockets-panasonic-040",
-        "size": "ДЫМЧАТЫЙ розетка ТВ",
-        "titleKg": "ДЫМЧАТЫЙ розетка ТВ",
+        "size": "Түтүн түстүү розетка ТВ",
+        "titleKg": "Түтүн түстүү розетка ТВ",
         "titleRu": "ДЫМЧАТЫЙ розетка ТВ",
         "price": 365,
         "unit": "даана",
@@ -15423,15 +15423,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E52",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка ТВ",
+          "Модель": "Түтүн түстүү розетка ТВ",
           "Бирдик": "даана"
         },
         "sortOrder": 40
       },
       {
         "id": "panasonic-sockets-panasonic-041",
-        "size": "ЧЕРНЫЙ розетка ТФ",
-        "titleKg": "ЧЕРНЫЙ розетка ТФ",
+        "size": "Кара розетка ТФ",
+        "titleKg": "Кара розетка ТФ",
         "titleRu": "ЧЕРНЫЙ розетка ТФ",
         "price": 250,
         "unit": "даана",
@@ -15441,15 +15441,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B53",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ розетка ТФ",
+          "Модель": "Кара розетка ТФ",
           "Бирдик": "даана"
         },
         "sortOrder": 41
       },
       {
         "id": "panasonic-sockets-panasonic-042",
-        "size": "ДЫМЧАТЫЙ розетка ТФ",
-        "titleKg": "ДЫМЧАТЫЙ розетка ТФ",
+        "size": "Түтүн түстүү розетка ТФ",
+        "titleKg": "Түтүн түстүү розетка ТФ",
         "titleRu": "ДЫМЧАТЫЙ розетка ТФ",
         "price": 250,
         "unit": "даана",
@@ -15459,7 +15459,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E53",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ розетка ТФ",
+          "Модель": "Түтүн түстүү розетка ТФ",
           "Бирдик": "даана"
         },
         "sortOrder": 42
@@ -15634,8 +15634,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "panasonic-switches-panasonic-001",
-        "size": "ARKEDİA SLİM включатель 1-й",
-        "titleKg": "ARKEDİA SLİM включатель 1-й",
+        "size": "ARKEDİA SLİM өчүргүч 1-й",
+        "titleKg": "ARKEDİA SLİM өчүргүч 1-й",
         "titleRu": "ARKEDİA SLİM включатель 1-й",
         "price": 175,
         "unit": "даана",
@@ -15645,15 +15645,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B10",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель 1-й",
+          "Модель": "ARKEDİA SLİM өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "panasonic-switches-panasonic-002",
-        "size": "БРОНЗА включатель 1-й",
-        "titleKg": "БРОНЗА включатель 1-й",
+        "size": "Коло түстүү өчүргүч 1-й",
+        "titleKg": "Коло түстүү өчүргүч 1-й",
         "titleRu": "БРОНЗА включатель 1-й",
         "price": 220,
         "unit": "даана",
@@ -15663,15 +15663,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E10",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель 1-й",
+          "Модель": "Коло түстүү өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "panasonic-switches-panasonic-003",
-        "size": "ARKEDİA SLİM включатель 1-й с/п",
-        "titleKg": "ARKEDİA SLİM включатель 1-й с/п",
+        "size": "ARKEDİA SLİM өчүргүч 1-й с/п",
+        "titleKg": "ARKEDİA SLİM өчүргүч 1-й с/п",
         "titleRu": "ARKEDİA SLİM включатель 1-й с/п",
         "price": 215,
         "unit": "даана",
@@ -15681,15 +15681,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B11",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель 1-й с/п",
+          "Модель": "ARKEDİA SLİM өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "panasonic-switches-panasonic-004",
-        "size": "БРОНЗА включатель 1-й с/п",
-        "titleKg": "БРОНЗА включатель 1-й с/п",
+        "size": "Коло түстүү өчүргүч 1-й с/п",
+        "titleKg": "Коло түстүү өчүргүч 1-й с/п",
         "titleRu": "БРОНЗА включатель 1-й с/п",
         "price": 295,
         "unit": "даана",
@@ -15699,15 +15699,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E11",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель 1-й с/п",
+          "Модель": "Коло түстүү өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "panasonic-switches-panasonic-005",
-        "size": "ARKEDİA SLİM включатель 2-й",
-        "titleKg": "ARKEDİA SLİM включатель 2-й",
+        "size": "ARKEDİA SLİM өчүргүч 2-й",
+        "titleKg": "ARKEDİA SLİM өчүргүч 2-й",
         "titleRu": "ARKEDİA SLİM включатель 2-й",
         "price": 210,
         "unit": "даана",
@@ -15717,15 +15717,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B12",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель 2-й",
+          "Модель": "ARKEDİA SLİM өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "panasonic-switches-panasonic-006",
-        "size": "БРОНЗА включатель 2-й",
-        "titleKg": "БРОНЗА включатель 2-й",
+        "size": "Коло түстүү өчүргүч 2-й",
+        "titleKg": "Коло түстүү өчүргүч 2-й",
         "titleRu": "БРОНЗА включатель 2-й",
         "price": 255,
         "unit": "даана",
@@ -15735,15 +15735,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E12",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель 2-й",
+          "Модель": "Коло түстүү өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "panasonic-switches-panasonic-007",
-        "size": "ARKEDİA SLİM включатель 2-й с/п",
-        "titleKg": "ARKEDİA SLİM включатель 2-й с/п",
+        "size": "ARKEDİA SLİM өчүргүч 2-й с/п",
+        "titleKg": "ARKEDİA SLİM өчүргүч 2-й с/п",
         "titleRu": "ARKEDİA SLİM включатель 2-й с/п",
         "price": 275,
         "unit": "даана",
@@ -15753,15 +15753,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B13",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель 2-й с/п",
+          "Модель": "ARKEDİA SLİM өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 7
       },
       {
         "id": "panasonic-switches-panasonic-008",
-        "size": "БРОНЗА включатель 2-й с/п",
-        "titleKg": "БРОНЗА включатель 2-й с/п",
+        "size": "Коло түстүү өчүргүч 2-й с/п",
+        "titleKg": "Коло түстүү өчүргүч 2-й с/п",
         "titleRu": "БРОНЗА включатель 2-й с/п",
         "price": 355,
         "unit": "даана",
@@ -15771,15 +15771,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E13",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель 2-й с/п",
+          "Модель": "Коло түстүү өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 8
       },
       {
         "id": "panasonic-switches-panasonic-009",
-        "size": "ARKEDİA SLİM включатель 3-й",
-        "titleKg": "ARKEDİA SLİM включатель 3-й",
+        "size": "ARKEDİA SLİM өчүргүч 3-й",
+        "titleKg": "ARKEDİA SLİM өчүргүч 3-й",
         "titleRu": "ARKEDİA SLİM включатель 3-й",
         "price": 320,
         "unit": "даана",
@@ -15789,15 +15789,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B14",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель 3-й",
+          "Модель": "ARKEDİA SLİM өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 9
       },
       {
         "id": "panasonic-switches-panasonic-010",
-        "size": "БРОНЗА включатель 3-й",
-        "titleKg": "БРОНЗА включатель 3-й",
+        "size": "Коло түстүү өчүргүч 3-й",
+        "titleKg": "Коло түстүү өчүргүч 3-й",
         "titleRu": "БРОНЗА включатель 3-й",
         "price": 400,
         "unit": "даана",
@@ -15807,15 +15807,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E14",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель 3-й",
+          "Модель": "Коло түстүү өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 10
       },
       {
         "id": "panasonic-switches-panasonic-011",
-        "size": "ARKEDİA SLİM включатель реверсный 1-й",
-        "titleKg": "ARKEDİA SLİM включатель реверсный 1-й",
+        "size": "ARKEDİA SLİM өчүргүч кайтарымдуу 1-й",
+        "titleKg": "ARKEDİA SLİM өчүргүч кайтарымдуу 1-й",
         "titleRu": "ARKEDİA SLİM включатель реверсный 1-й",
         "price": 220,
         "unit": "даана",
@@ -15825,15 +15825,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B15",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель реверсный 1-й",
+          "Модель": "ARKEDİA SLİM өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 11
       },
       {
         "id": "panasonic-switches-panasonic-012",
-        "size": "БРОНЗА включатель реверсный 1-й",
-        "titleKg": "БРОНЗА включатель реверсный 1-й",
+        "size": "Коло түстүү өчүргүч кайтарымдуу 1-й",
+        "titleKg": "Коло түстүү өчүргүч кайтарымдуу 1-й",
         "titleRu": "БРОНЗА включатель реверсный 1-й",
         "price": 270,
         "unit": "даана",
@@ -15843,15 +15843,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E15",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель реверсный 1-й",
+          "Модель": "Коло түстүү өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 12
       },
       {
         "id": "panasonic-switches-panasonic-013",
-        "size": "ARKEDİA SLİM включатель реверсный 2-й",
-        "titleKg": "ARKEDİA SLİM включатель реверсный 2-й",
+        "size": "ARKEDİA SLİM өчүргүч кайтарымдуу 2-й",
+        "titleKg": "ARKEDİA SLİM өчүргүч кайтарымдуу 2-й",
         "titleRu": "ARKEDİA SLİM включатель реверсный 2-й",
         "price": 310,
         "unit": "даана",
@@ -15861,15 +15861,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B16",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM включатель реверсный 2-й",
+          "Модель": "ARKEDİA SLİM өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 13
       },
       {
         "id": "panasonic-switches-panasonic-014",
-        "size": "БРОНЗА включатель реверсный 2-й",
-        "titleKg": "БРОНЗА включатель реверсный 2-й",
+        "size": "Коло түстүү өчүргүч кайтарымдуу 2-й",
+        "titleKg": "Коло түстүү өчүргүч кайтарымдуу 2-й",
         "titleRu": "БРОНЗА включатель реверсный 2-й",
         "price": 410,
         "unit": "даана",
@@ -15879,15 +15879,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E16",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА включатель реверсный 2-й",
+          "Модель": "Коло түстүү өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 14
       },
       {
         "id": "panasonic-switches-panasonic-015",
-        "size": "ARKEDİA SLİM переключатель(проходной)",
-        "titleKg": "ARKEDİA SLİM переключатель(проходной)",
+        "size": "ARKEDİA SLİM которгуч(өтмө)",
+        "titleKg": "ARKEDİA SLİM которгуч(өтмө)",
         "titleRu": "ARKEDİA SLİM переключатель(проходной)",
         "price": 290,
         "unit": "даана",
@@ -15897,15 +15897,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B17",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM переключатель(проходной)",
+          "Модель": "ARKEDİA SLİM которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 15
       },
       {
         "id": "panasonic-switches-panasonic-016",
-        "size": "БРОНЗА переключатель(проходной)",
-        "titleKg": "БРОНЗА переключатель(проходной)",
+        "size": "Коло түстүү которгуч(өтмө)",
+        "titleKg": "Коло түстүү которгуч(өтмө)",
         "titleRu": "БРОНЗА переключатель(проходной)",
         "price": 360,
         "unit": "даана",
@@ -15915,15 +15915,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E17",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "БРОНЗА переключатель(проходной)",
+          "Модель": "Коло түстүү которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 16
       },
       {
         "id": "panasonic-switches-panasonic-017",
-        "size": "ARKEDİA SLİM KREM включатель 1-й",
-        "titleKg": "ARKEDİA SLİM KREM включатель 1-й",
+        "size": "ARKEDİA SLİM KREM өчүргүч 1-й",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч 1-й",
         "titleRu": "ARKEDİA SLİM KREM включатель 1-й",
         "price": 175,
         "unit": "даана",
@@ -15933,15 +15933,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B31",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель 1-й",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 17
       },
       {
         "id": "panasonic-switches-panasonic-018",
-        "size": "ARKEDİA SLİM KREM включатель 1-й с/п",
-        "titleKg": "ARKEDİA SLİM KREM включатель 1-й с/п",
+        "size": "ARKEDİA SLİM KREM өчүргүч 1-й с/п",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч 1-й с/п",
         "titleRu": "ARKEDİA SLİM KREM включатель 1-й с/п",
         "price": 215,
         "unit": "даана",
@@ -15951,15 +15951,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B32",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель 1-й с/п",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 18
       },
       {
         "id": "panasonic-switches-panasonic-019",
-        "size": "СЕРЕБРО включатель 1-й",
-        "titleKg": "СЕРЕБРО включатель 1-й",
+        "size": "Күмүш түстүү өчүргүч 1-й",
+        "titleKg": "Күмүш түстүү өчүргүч 1-й",
         "titleRu": "СЕРЕБРО включатель 1-й",
         "price": 220,
         "unit": "даана",
@@ -15969,15 +15969,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E32",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель 1-й",
+          "Модель": "Күмүш түстүү өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 19
       },
       {
         "id": "panasonic-switches-panasonic-020",
-        "size": "ARKEDİA SLİM KREM включатель 2-й",
-        "titleKg": "ARKEDİA SLİM KREM включатель 2-й",
+        "size": "ARKEDİA SLİM KREM өчүргүч 2-й",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч 2-й",
         "titleRu": "ARKEDİA SLİM KREM включатель 2-й",
         "price": 210,
         "unit": "даана",
@@ -15987,15 +15987,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B33",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель 2-й",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 20
       },
       {
         "id": "panasonic-switches-panasonic-021",
-        "size": "СЕРЕБРО включатель 1-й с/п",
-        "titleKg": "СЕРЕБРО включатель 1-й с/п",
+        "size": "Күмүш түстүү өчүргүч 1-й с/п",
+        "titleKg": "Күмүш түстүү өчүргүч 1-й с/п",
         "titleRu": "СЕРЕБРО включатель 1-й с/п",
         "price": 295,
         "unit": "даана",
@@ -16005,15 +16005,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E33",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель 1-й с/п",
+          "Модель": "Күмүш түстүү өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 21
       },
       {
         "id": "panasonic-switches-panasonic-022",
-        "size": "ARKEDİA SLİM KREM включатель 2-й с/п",
-        "titleKg": "ARKEDİA SLİM KREM включатель 2-й с/п",
+        "size": "ARKEDİA SLİM KREM өчүргүч 2-й с/п",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч 2-й с/п",
         "titleRu": "ARKEDİA SLİM KREM включатель 2-й с/п",
         "price": 275,
         "unit": "даана",
@@ -16023,15 +16023,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B34",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель 2-й с/п",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 22
       },
       {
         "id": "panasonic-switches-panasonic-023",
-        "size": "СЕРЕБРО включатель 2-й",
-        "titleKg": "СЕРЕБРО включатель 2-й",
+        "size": "Күмүш түстүү өчүргүч 2-й",
+        "titleKg": "Күмүш түстүү өчүргүч 2-й",
         "titleRu": "СЕРЕБРО включатель 2-й",
         "price": 255,
         "unit": "даана",
@@ -16041,15 +16041,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E34",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель 2-й",
+          "Модель": "Күмүш түстүү өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 23
       },
       {
         "id": "panasonic-switches-panasonic-024",
-        "size": "ARKEDİA SLİM KREM включатель 3-й",
-        "titleKg": "ARKEDİA SLİM KREM включатель 3-й",
+        "size": "ARKEDİA SLİM KREM өчүргүч 3-й",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч 3-й",
         "titleRu": "ARKEDİA SLİM KREM включатель 3-й",
         "price": 320,
         "unit": "даана",
@@ -16059,15 +16059,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B35",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель 3-й",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 24
       },
       {
         "id": "panasonic-switches-panasonic-025",
-        "size": "СЕРЕБРО включатель 2-й с/п",
-        "titleKg": "СЕРЕБРО включатель 2-й с/п",
+        "size": "Күмүш түстүү өчүргүч 2-й с/п",
+        "titleKg": "Күмүш түстүү өчүргүч 2-й с/п",
         "titleRu": "СЕРЕБРО включатель 2-й с/п",
         "price": 355,
         "unit": "даана",
@@ -16077,15 +16077,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E35",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель 2-й с/п",
+          "Модель": "Күмүш түстүү өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 25
       },
       {
         "id": "panasonic-switches-panasonic-026",
-        "size": "ARKEDİA SLİM KREM включатель реверсный 1-й",
-        "titleKg": "ARKEDİA SLİM KREM включатель реверсный 1-й",
+        "size": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 1-й",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 1-й",
         "titleRu": "ARKEDİA SLİM KREM включатель реверсный 1-й",
         "price": 220,
         "unit": "даана",
@@ -16095,15 +16095,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B36",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель реверсный 1-й",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 26
       },
       {
         "id": "panasonic-switches-panasonic-027",
-        "size": "СЕРЕБРО включатель 3-й",
-        "titleKg": "СЕРЕБРО включатель 3-й",
+        "size": "Күмүш түстүү өчүргүч 3-й",
+        "titleKg": "Күмүш түстүү өчүргүч 3-й",
         "titleRu": "СЕРЕБРО включатель 3-й",
         "price": 400,
         "unit": "даана",
@@ -16113,15 +16113,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E36",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель 3-й",
+          "Модель": "Күмүш түстүү өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 27
       },
       {
         "id": "panasonic-switches-panasonic-028",
-        "size": "ARKEDİA SLİM KREM включатель реверсный 2-й",
-        "titleKg": "ARKEDİA SLİM KREM включатель реверсный 2-й",
+        "size": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 2-й",
+        "titleKg": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 2-й",
         "titleRu": "ARKEDİA SLİM KREM включатель реверсный 2-й",
         "price": 310,
         "unit": "даана",
@@ -16131,15 +16131,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B37",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM включатель реверсный 2-й",
+          "Модель": "ARKEDİA SLİM KREM өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 28
       },
       {
         "id": "panasonic-switches-panasonic-029",
-        "size": "СЕРЕБРО включатель реверсный 1-й",
-        "titleKg": "СЕРЕБРО включатель реверсный 1-й",
+        "size": "Күмүш түстүү өчүргүч кайтарымдуу 1-й",
+        "titleKg": "Күмүш түстүү өчүргүч кайтарымдуу 1-й",
         "titleRu": "СЕРЕБРО включатель реверсный 1-й",
         "price": 270,
         "unit": "даана",
@@ -16149,15 +16149,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E37",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель реверсный 1-й",
+          "Модель": "Күмүш түстүү өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 29
       },
       {
         "id": "panasonic-switches-panasonic-030",
-        "size": "ARKEDİA SLİM KREM переключатель(проходной)",
-        "titleKg": "ARKEDİA SLİM KREM переключатель(проходной)",
+        "size": "ARKEDİA SLİM KREM которгуч(өтмө)",
+        "titleKg": "ARKEDİA SLİM KREM которгуч(өтмө)",
         "titleRu": "ARKEDİA SLİM KREM переключатель(проходной)",
         "price": 290,
         "unit": "даана",
@@ -16167,15 +16167,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B38",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ARKEDİA SLİM KREM переключатель(проходной)",
+          "Модель": "ARKEDİA SLİM KREM которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 30
       },
       {
         "id": "panasonic-switches-panasonic-031",
-        "size": "СЕРЕБРО включатель реверсный 2-й",
-        "titleKg": "СЕРЕБРО включатель реверсный 2-й",
+        "size": "Күмүш түстүү өчүргүч кайтарымдуу 2-й",
+        "titleKg": "Күмүш түстүү өчүргүч кайтарымдуу 2-й",
         "titleRu": "СЕРЕБРО включатель реверсный 2-й",
         "price": 410,
         "unit": "даана",
@@ -16185,15 +16185,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E38",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО включатель реверсный 2-й",
+          "Модель": "Күмүш түстүү өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 31
       },
       {
         "id": "panasonic-switches-panasonic-032",
-        "size": "СЕРЕБРО переключатель(проходной)",
-        "titleKg": "СЕРЕБРО переключатель(проходной)",
+        "size": "Күмүш түстүү которгуч(өтмө)",
+        "titleKg": "Күмүш түстүү которгуч(өтмө)",
         "titleRu": "СЕРЕБРО переключатель(проходной)",
         "price": 360,
         "unit": "даана",
@@ -16203,15 +16203,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E39",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "СЕРЕБРО переключатель(проходной)",
+          "Модель": "Күмүш түстүү которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 32
       },
       {
         "id": "panasonic-switches-panasonic-033",
-        "size": "ЧЕРНЫЙ включатель 1-й",
-        "titleKg": "ЧЕРНЫЙ включатель 1-й",
+        "size": "Кара өчүргүч 1-й",
+        "titleKg": "Кара өчүргүч 1-й",
         "titleRu": "ЧЕРНЫЙ включатель 1-й",
         "price": 220,
         "unit": "даана",
@@ -16221,15 +16221,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B54",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель 1-й",
+          "Модель": "Кара өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 33
       },
       {
         "id": "panasonic-switches-panasonic-034",
-        "size": "ДЫМЧАТЫЙ включатель 1-й",
-        "titleKg": "ДЫМЧАТЫЙ включатель 1-й",
+        "size": "Түтүн түстүү өчүргүч 1-й",
+        "titleKg": "Түтүн түстүү өчүргүч 1-й",
         "titleRu": "ДЫМЧАТЫЙ включатель 1-й",
         "price": 220,
         "unit": "даана",
@@ -16239,15 +16239,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E54",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель 1-й",
+          "Модель": "Түтүн түстүү өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 34
       },
       {
         "id": "panasonic-switches-panasonic-035",
-        "size": "ЧЕРНЫЙ включатель 1-й с/п",
-        "titleKg": "ЧЕРНЫЙ включатель 1-й с/п",
+        "size": "Кара өчүргүч 1-й с/п",
+        "titleKg": "Кара өчүргүч 1-й с/п",
         "titleRu": "ЧЕРНЫЙ включатель 1-й с/п",
         "price": 295,
         "unit": "даана",
@@ -16257,15 +16257,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B55",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель 1-й с/п",
+          "Модель": "Кара өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 35
       },
       {
         "id": "panasonic-switches-panasonic-036",
-        "size": "ДЫМЧАТЫЙ включатель 1-й с/п",
-        "titleKg": "ДЫМЧАТЫЙ включатель 1-й с/п",
+        "size": "Түтүн түстүү өчүргүч 1-й с/п",
+        "titleKg": "Түтүн түстүү өчүргүч 1-й с/п",
         "titleRu": "ДЫМЧАТЫЙ включатель 1-й с/п",
         "price": 295,
         "unit": "даана",
@@ -16275,15 +16275,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E55",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель 1-й с/п",
+          "Модель": "Түтүн түстүү өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 36
       },
       {
         "id": "panasonic-switches-panasonic-037",
-        "size": "ЧЕРНЫЙ включатель 2-й",
-        "titleKg": "ЧЕРНЫЙ включатель 2-й",
+        "size": "Кара өчүргүч 2-й",
+        "titleKg": "Кара өчүргүч 2-й",
         "titleRu": "ЧЕРНЫЙ включатель 2-й",
         "price": 255,
         "unit": "даана",
@@ -16293,15 +16293,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B56",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель 2-й",
+          "Модель": "Кара өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 37
       },
       {
         "id": "panasonic-switches-panasonic-038",
-        "size": "ДЫМЧАТЫЙ включатель 2-й",
-        "titleKg": "ДЫМЧАТЫЙ включатель 2-й",
+        "size": "Түтүн түстүү өчүргүч 2-й",
+        "titleKg": "Түтүн түстүү өчүргүч 2-й",
         "titleRu": "ДЫМЧАТЫЙ включатель 2-й",
         "price": 255,
         "unit": "даана",
@@ -16311,15 +16311,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E56",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель 2-й",
+          "Модель": "Түтүн түстүү өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 38
       },
       {
         "id": "panasonic-switches-panasonic-039",
-        "size": "ЧЕРНЫЙ включатель 2-й с/п",
-        "titleKg": "ЧЕРНЫЙ включатель 2-й с/п",
+        "size": "Кара өчүргүч 2-й с/п",
+        "titleKg": "Кара өчүргүч 2-й с/п",
         "titleRu": "ЧЕРНЫЙ включатель 2-й с/п",
         "price": 355,
         "unit": "даана",
@@ -16329,15 +16329,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B57",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель 2-й с/п",
+          "Модель": "Кара өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 39
       },
       {
         "id": "panasonic-switches-panasonic-040",
-        "size": "ДЫМЧАТЫЙ включатель 2-й с/п",
-        "titleKg": "ДЫМЧАТЫЙ включатель 2-й с/п",
+        "size": "Түтүн түстүү өчүргүч 2-й с/п",
+        "titleKg": "Түтүн түстүү өчүргүч 2-й с/п",
         "titleRu": "ДЫМЧАТЫЙ включатель 2-й с/п",
         "price": 355,
         "unit": "даана",
@@ -16347,15 +16347,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E57",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель 2-й с/п",
+          "Модель": "Түтүн түстүү өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 40
       },
       {
         "id": "panasonic-switches-panasonic-041",
-        "size": "ЧЕРНЫЙ включатель 3-й",
-        "titleKg": "ЧЕРНЫЙ включатель 3-й",
+        "size": "Кара өчүргүч 3-й",
+        "titleKg": "Кара өчүргүч 3-й",
         "titleRu": "ЧЕРНЫЙ включатель 3-й",
         "price": 400,
         "unit": "даана",
@@ -16365,15 +16365,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B58",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель 3-й",
+          "Модель": "Кара өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 41
       },
       {
         "id": "panasonic-switches-panasonic-042",
-        "size": "ДЫМЧАТЫЙ включатель 3-й",
-        "titleKg": "ДЫМЧАТЫЙ включатель 3-й",
+        "size": "Түтүн түстүү өчүргүч 3-й",
+        "titleKg": "Түтүн түстүү өчүргүч 3-й",
         "titleRu": "ДЫМЧАТЫЙ включатель 3-й",
         "price": 400,
         "unit": "даана",
@@ -16383,15 +16383,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E58",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель 3-й",
+          "Модель": "Түтүн түстүү өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 42
       },
       {
         "id": "panasonic-switches-panasonic-043",
-        "size": "ЧЕРНЫЙ включатель реверсный 1-й",
-        "titleKg": "ЧЕРНЫЙ включатель реверсный 1-й",
+        "size": "Кара өчүргүч кайтарымдуу 1-й",
+        "titleKg": "Кара өчүргүч кайтарымдуу 1-й",
         "titleRu": "ЧЕРНЫЙ включатель реверсный 1-й",
         "price": 270,
         "unit": "даана",
@@ -16401,15 +16401,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B59",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель реверсный 1-й",
+          "Модель": "Кара өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 43
       },
       {
         "id": "panasonic-switches-panasonic-044",
-        "size": "ДЫМЧАТЫЙ включатель реверсный 1-й",
-        "titleKg": "ДЫМЧАТЫЙ включатель реверсный 1-й",
+        "size": "Түтүн түстүү өчүргүч кайтарымдуу 1-й",
+        "titleKg": "Түтүн түстүү өчүргүч кайтарымдуу 1-й",
         "titleRu": "ДЫМЧАТЫЙ включатель реверсный 1-й",
         "price": 270,
         "unit": "даана",
@@ -16419,15 +16419,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E59",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель реверсный 1-й",
+          "Модель": "Түтүн түстүү өчүргүч кайтарымдуу 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 44
       },
       {
         "id": "panasonic-switches-panasonic-045",
-        "size": "ЧЕРНЫЙ включатель реверсный 2-й",
-        "titleKg": "ЧЕРНЫЙ включатель реверсный 2-й",
+        "size": "Кара өчүргүч кайтарымдуу 2-й",
+        "titleKg": "Кара өчүргүч кайтарымдуу 2-й",
         "titleRu": "ЧЕРНЫЙ включатель реверсный 2-й",
         "price": 410,
         "unit": "даана",
@@ -16437,15 +16437,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B60",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ включатель реверсный 2-й",
+          "Модель": "Кара өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 45
       },
       {
         "id": "panasonic-switches-panasonic-046",
-        "size": "ДЫМЧАТЫЙ включатель реверсный 2-й",
-        "titleKg": "ДЫМЧАТЫЙ включатель реверсный 2-й",
+        "size": "Түтүн түстүү өчүргүч кайтарымдуу 2-й",
+        "titleKg": "Түтүн түстүү өчүргүч кайтарымдуу 2-й",
         "titleRu": "ДЫМЧАТЫЙ включатель реверсный 2-й",
         "price": 410,
         "unit": "даана",
@@ -16455,15 +16455,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E60",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ включатель реверсный 2-й",
+          "Модель": "Түтүн түстүү өчүргүч кайтарымдуу 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 46
       },
       {
         "id": "panasonic-switches-panasonic-047",
-        "size": "ЧЕРНЫЙ переключатель(проходной)",
-        "titleKg": "ЧЕРНЫЙ переключатель(проходной)",
+        "size": "Кара которгуч(өтмө)",
+        "titleKg": "Кара которгуч(өтмө)",
         "titleRu": "ЧЕРНЫЙ переключатель(проходной)",
         "price": 360,
         "unit": "даана",
@@ -16473,15 +16473,15 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-B61",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ЧЕРНЫЙ переключатель(проходной)",
+          "Модель": "Кара которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 47
       },
       {
         "id": "panasonic-switches-panasonic-048",
-        "size": "ДЫМЧАТЫЙ переключатель(проходной)",
-        "titleKg": "ДЫМЧАТЫЙ переключатель(проходной)",
+        "size": "Түтүн түстүү которгуч(өтмө)",
+        "titleKg": "Түтүн түстүү которгуч(өтмө)",
         "titleRu": "ДЫМЧАТЫЙ переключатель(проходной)",
         "price": 360,
         "unit": "даана",
@@ -16491,7 +16491,7 @@ export const electricalSupplierProducts = [
         "sku": "PANASONIC-APR26-E61",
         "specs": {
           "Бренд": "PANASONIC",
-          "Модель": "ДЫМЧАТЫЙ переключатель(проходной)",
+          "Модель": "Түтүн түстүү которгуч(өтмө)",
           "Бирдик": "даана"
         },
         "sortOrder": 48
@@ -17854,8 +17854,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-dimmers-carmen-001",
-        "size": "Carmen Реостат(Диммер) 600 W",
-        "titleKg": "Carmen Реостат(Диммер) 600 W",
+        "size": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
+        "titleKg": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
         "titleRu": "Carmen Реостат(Диммер) 600 W",
         "price": 855,
         "unit": "даана",
@@ -17865,15 +17865,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B31",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Реостат(Диммер) 600 W",
+          "Модель": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-dimmers-carmen-002",
-        "size": "Carmen Реостат(Диммер) 1000 W",
-        "titleKg": "Carmen Реостат(Диммер) 1000 W",
+        "size": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
+        "titleKg": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
         "titleRu": "Carmen Реостат(Диммер) 1000 W",
         "price": 1070,
         "unit": "даана",
@@ -17883,7 +17883,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B32",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Реостат(Диммер) 1000 W",
+          "Модель": "Carmen Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -17966,8 +17966,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-dimmers-karre-001",
-        "size": "Karre Реостат(Диммер) 600 W",
-        "titleKg": "Karre Реостат(Диммер) 600 W",
+        "size": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
+        "titleKg": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
         "titleRu": "Karre Реостат(Диммер) 600 W",
         "price": 1655,
         "unit": "даана",
@@ -17977,15 +17977,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B74",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Реостат(Диммер) 600 W",
+          "Модель": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 600 W",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-dimmers-karre-002",
-        "size": "Karre Реостат(Диммер) 1000 W",
-        "titleKg": "Karre Реостат(Диммер) 1000 W",
+        "size": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
+        "titleKg": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
         "titleRu": "Karre Реостат(Диммер) 1000 W",
         "price": 1655,
         "unit": "даана",
@@ -17995,7 +17995,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B75",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Реостат(Диммер) 1000 W",
+          "Модель": "Karre Жарык жөндөгүч(Жарык жөндөгүч) 1000 W",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -18084,8 +18084,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-frames-carmen-001",
-        "size": "Carmen Рамка 2-я",
-        "titleKg": "Carmen Рамка 2-я",
+        "size": "Carmen Алкак 2-я",
+        "titleKg": "Carmen Алкак 2-я",
         "titleRu": "Carmen Рамка 2-я",
         "price": 90,
         "unit": "даана",
@@ -18095,15 +18095,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B34",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Рамка 2-я",
+          "Модель": "Carmen Алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-frames-carmen-002",
-        "size": "Carmen Рамка 3-я",
-        "titleKg": "Carmen Рамка 3-я",
+        "size": "Carmen Алкак 3-я",
+        "titleKg": "Carmen Алкак 3-я",
         "titleRu": "Carmen Рамка 3-я",
         "price": 115,
         "unit": "даана",
@@ -18113,15 +18113,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B35",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Рамка 3-я",
+          "Модель": "Carmen Алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-frames-carmen-003",
-        "size": "Carmen Рамка 4-я",
-        "titleKg": "Carmen Рамка 4-я",
+        "size": "Carmen Алкак 4-я",
+        "titleKg": "Carmen Алкак 4-я",
         "titleRu": "Carmen Рамка 4-я",
         "price": 145,
         "unit": "даана",
@@ -18131,15 +18131,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B36",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Рамка 4-я",
+          "Модель": "Carmen Алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-frames-carmen-004",
-        "size": "Carmen Рамка 5-я",
-        "titleKg": "Carmen Рамка 5-я",
+        "size": "Carmen Алкак 5-я",
+        "titleKg": "Carmen Алкак 5-я",
         "titleRu": "Carmen Рамка 5-я",
         "price": 185,
         "unit": "даана",
@@ -18149,15 +18149,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B37",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Рамка 5-я",
+          "Модель": "Carmen Алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "viko-frames-carmen-005",
-        "size": "Carmen Рамка 6-я",
-        "titleKg": "Carmen Рамка 6-я",
+        "size": "Carmen Алкак 6-я",
+        "titleKg": "Carmen Алкак 6-я",
         "titleRu": "Carmen Рамка 6-я",
         "price": 225,
         "unit": "даана",
@@ -18167,7 +18167,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B38",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Рамка 6-я",
+          "Модель": "Carmen Алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 5
@@ -18256,8 +18256,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-frames-karre-001",
-        "size": "Karre Рамка 2-я",
-        "titleKg": "Karre Рамка 2-я",
+        "size": "Karre Алкак 2-я",
+        "titleKg": "Karre Алкак 2-я",
         "titleRu": "Karre Рамка 2-я",
         "price": 110,
         "unit": "даана",
@@ -18267,15 +18267,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B77",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Рамка 2-я",
+          "Модель": "Karre Алкак 2-я",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-frames-karre-002",
-        "size": "Karre Рамка 3-я",
-        "titleKg": "Karre Рамка 3-я",
+        "size": "Karre Алкак 3-я",
+        "titleKg": "Karre Алкак 3-я",
         "titleRu": "Karre Рамка 3-я",
         "price": 135,
         "unit": "даана",
@@ -18285,15 +18285,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B78",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Рамка 3-я",
+          "Модель": "Karre Алкак 3-я",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-frames-karre-003",
-        "size": "Karre Рамка 4-я",
-        "titleKg": "Karre Рамка 4-я",
+        "size": "Karre Алкак 4-я",
+        "titleKg": "Karre Алкак 4-я",
         "titleRu": "Karre Рамка 4-я",
         "price": 175,
         "unit": "даана",
@@ -18303,15 +18303,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B79",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Рамка 4-я",
+          "Модель": "Karre Алкак 4-я",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-frames-karre-004",
-        "size": "Karre Рамка 5-я",
-        "titleKg": "Karre Рамка 5-я",
+        "size": "Karre Алкак 5-я",
+        "titleKg": "Karre Алкак 5-я",
         "titleRu": "Karre Рамка 5-я",
         "price": 220,
         "unit": "даана",
@@ -18321,15 +18321,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B80",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Рамка 5-я",
+          "Модель": "Karre Алкак 5-я",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "viko-frames-karre-005",
-        "size": "Karre Рамка 6-я",
-        "titleKg": "Karre Рамка 6-я",
+        "size": "Karre Алкак 6-я",
+        "titleKg": "Karre Алкак 6-я",
         "titleRu": "Karre Рамка 6-я",
         "price": 255,
         "unit": "даана",
@@ -18339,7 +18339,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B81",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Рамка 6-я",
+          "Модель": "Karre Алкак 6-я",
           "Бирдик": "даана"
         },
         "sortOrder": 5
@@ -18420,8 +18420,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-mounting-carmen-001",
-        "size": "Carmen Коробка наружного монтажа",
-        "titleKg": "Carmen Коробка наружного монтажа",
+        "size": "Carmen Сырттан орнотулуучу куту",
+        "titleKg": "Carmen Сырттан орнотулуучу куту",
         "titleRu": "Carmen Коробка наружного монтажа",
         "price": 75,
         "unit": "даана",
@@ -18431,7 +18431,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B33",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Коробка наружного монтажа",
+          "Модель": "Carmen Сырттан орнотулуучу куту",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -18512,8 +18512,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-mounting-karre-001",
-        "size": "Karre Коробка наружного монтажа",
-        "titleKg": "Karre Коробка наружного монтажа",
+        "size": "Karre Сырттан орнотулуучу куту",
+        "titleKg": "Karre Сырттан орнотулуучу куту",
         "titleRu": "Karre Коробка наружного монтажа",
         "price": 85,
         "unit": "даана",
@@ -18523,7 +18523,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B76",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Коробка наружного монтажа",
+          "Модель": "Karre Сырттан орнотулуучу куту",
           "Бирдик": "даана"
         },
         "sortOrder": 1
@@ -19594,8 +19594,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "viko-sockets-pacific-003",
-        "size": "PACIFIC розетка+включатель 1-й",
-        "titleKg": "PACIFIC розетка+включатель 1-й",
+        "size": "PACIFIC розетка+өчүргүч 1-й",
+        "titleKg": "PACIFIC розетка+өчүргүч 1-й",
         "titleRu": "PACIFIC розетка+включатель 1-й",
         "price": 570,
         "unit": "даана",
@@ -19605,15 +19605,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B103",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PACIFIC розетка+включатель 1-й",
+          "Модель": "PACIFIC розетка+өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-sockets-pacific-004",
-        "size": "PACIFIC розетка+включатель 2-й",
-        "titleKg": "PACIFIC розетка+включатель 2-й",
+        "size": "PACIFIC розетка+өчүргүч 2-й",
+        "titleKg": "PACIFIC розетка+өчүргүч 2-й",
         "titleRu": "PACIFIC розетка+включатель 2-й",
         "price": 580,
         "unit": "даана",
@@ -19623,7 +19623,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B104",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PACIFIC розетка+включатель 2-й",
+          "Модель": "PACIFIC розетка+өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 4
@@ -19730,8 +19730,8 @@ export const electricalSupplierProducts = [
       },
       {
         "id": "viko-sockets-palmiye-002",
-        "size": "PALMIYE розетка 2-я с крышкой",
-        "titleKg": "PALMIYE розетка 2-я с крышкой",
+        "size": "PALMIYE розетка 2-я с капкагы менен",
+        "titleKg": "PALMIYE розетка 2-я с капкагы менен",
         "titleRu": "PALMIYE розетка 2-я с крышкой",
         "price": 440,
         "unit": "даана",
@@ -19741,15 +19741,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B92",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE розетка 2-я с крышкой",
+          "Модель": "PALMIYE розетка 2-я с капкагы менен",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-sockets-palmiye-003",
-        "size": "PALMIYE розетка+включатель 1-й",
-        "titleKg": "PALMIYE розетка+включатель 1-й",
+        "size": "PALMIYE розетка+өчүргүч 1-й",
+        "titleKg": "PALMIYE розетка+өчүргүч 1-й",
         "titleRu": "PALMIYE розетка+включатель 1-й",
         "price": 405,
         "unit": "даана",
@@ -19759,15 +19759,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B93",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE розетка+включатель 1-й",
+          "Модель": "PALMIYE розетка+өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-sockets-palmiye-004",
-        "size": "PALMIYE розетка+включатель 2-й",
-        "titleKg": "PALMIYE розетка+включатель 2-й",
+        "size": "PALMIYE розетка+өчүргүч 2-й",
+        "titleKg": "PALMIYE розетка+өчүргүч 2-й",
         "titleRu": "PALMIYE розетка+включатель 2-й",
         "price": 435,
         "unit": "даана",
@@ -19777,15 +19777,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B94",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE розетка+включатель 2-й",
+          "Модель": "PALMIYE розетка+өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "viko-sockets-palmiye-005",
-        "size": "PALMIYE розетка+включатель 1-й с/п",
-        "titleKg": "PALMIYE розетка+включатель 1-й с/п",
+        "size": "PALMIYE розетка+өчүргүч 1-й с/п",
+        "titleKg": "PALMIYE розетка+өчүргүч 1-й с/п",
         "titleRu": "PALMIYE розетка+включатель 1-й с/п",
         "price": 410,
         "unit": "даана",
@@ -19795,7 +19795,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B99",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE розетка+включатель 1-й с/п",
+          "Модель": "PALMIYE розетка+өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 5
@@ -19888,8 +19888,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-switches-carmen-001",
-        "size": "Carmen Включатель 1-й",
-        "titleKg": "Carmen Включатель 1-й",
+        "size": "Carmen Өчүргүч 1-й",
+        "titleKg": "Carmen Өчүргүч 1-й",
         "titleRu": "Carmen Включатель 1-й",
         "price": 150,
         "unit": "даана",
@@ -19899,15 +19899,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B24",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 1-й",
+          "Модель": "Carmen Өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-switches-carmen-002",
-        "size": "Carmen Включатель 1-й с/п",
-        "titleKg": "Carmen Включатель 1-й с/п",
+        "size": "Carmen Өчүргүч 1-й с/п",
+        "titleKg": "Carmen Өчүргүч 1-й с/п",
         "titleRu": "Carmen Включатель 1-й с/п",
         "price": 190,
         "unit": "даана",
@@ -19917,15 +19917,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B25",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 1-й с/п",
+          "Модель": "Carmen Өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-switches-carmen-003",
-        "size": "Carmen Включатель 2-й",
-        "titleKg": "Carmen Включатель 2-й",
+        "size": "Carmen Өчүргүч 2-й",
+        "titleKg": "Carmen Өчүргүч 2-й",
         "titleRu": "Carmen Включатель 2-й",
         "price": 180,
         "unit": "даана",
@@ -19935,15 +19935,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B26",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 2-й",
+          "Модель": "Carmen Өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-switches-carmen-004",
-        "size": "Carmen Включатель 2-й с/п",
-        "titleKg": "Carmen Включатель 2-й с/п",
+        "size": "Carmen Өчүргүч 2-й с/п",
+        "titleKg": "Carmen Өчүргүч 2-й с/п",
         "titleRu": "Carmen Включатель 2-й с/п",
         "price": 235,
         "unit": "даана",
@@ -19953,15 +19953,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B27",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 2-й с/п",
+          "Модель": "Carmen Өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "viko-switches-carmen-005",
-        "size": "Carmen Включатель 3-й",
-        "titleKg": "Carmen Включатель 3-й",
+        "size": "Carmen Өчүргүч 3-й",
+        "titleKg": "Carmen Өчүргүч 3-й",
         "titleRu": "Carmen Включатель 3-й",
         "price": 250,
         "unit": "даана",
@@ -19971,15 +19971,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B28",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 3-й",
+          "Модель": "Carmen Өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "viko-switches-carmen-006",
-        "size": "Carmen Включатель 1-й реверсный",
-        "titleKg": "Carmen Включатель 1-й реверсный",
+        "size": "Carmen Өчүргүч 1-й кайтарымдуу",
+        "titleKg": "Carmen Өчүргүч 1-й кайтарымдуу",
         "titleRu": "Carmen Включатель 1-й реверсный",
         "price": 190,
         "unit": "даана",
@@ -19989,15 +19989,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B29",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 1-й реверсный",
+          "Модель": "Carmen Өчүргүч 1-й кайтарымдуу",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "viko-switches-carmen-007",
-        "size": "Carmen Включатель 2-й реверсный",
-        "titleKg": "Carmen Включатель 2-й реверсный",
+        "size": "Carmen Өчүргүч 2-й кайтарымдуу",
+        "titleKg": "Carmen Өчүргүч 2-й кайтарымдуу",
         "titleRu": "Carmen Включатель 2-й реверсный",
         "price": 270,
         "unit": "даана",
@@ -20007,7 +20007,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B30",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Carmen Включатель 2-й реверсный",
+          "Модель": "Carmen Өчүргүч 2-й кайтарымдуу",
           "Бирдик": "даана"
         },
         "sortOrder": 7
@@ -20100,8 +20100,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-switches-karre-001",
-        "size": "Karre Включатель 1-й",
-        "titleKg": "Karre Включатель 1-й",
+        "size": "Karre Өчүргүч 1-й",
+        "titleKg": "Karre Өчүргүч 1-й",
         "titleRu": "Karre Включатель 1-й",
         "price": 170,
         "unit": "даана",
@@ -20111,15 +20111,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B67",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 1-й",
+          "Модель": "Karre Өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-switches-karre-002",
-        "size": "Karre Включатель 1-й с/п",
-        "titleKg": "Karre Включатель 1-й с/п",
+        "size": "Karre Өчүргүч 1-й с/п",
+        "titleKg": "Karre Өчүргүч 1-й с/п",
         "titleRu": "Karre Включатель 1-й с/п",
         "price": 215,
         "unit": "даана",
@@ -20129,15 +20129,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B68",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 1-й с/п",
+          "Модель": "Karre Өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-switches-karre-003",
-        "size": "Karre Включатель 2-й",
-        "titleKg": "Karre Включатель 2-й",
+        "size": "Karre Өчүргүч 2-й",
+        "titleKg": "Karre Өчүргүч 2-й",
         "titleRu": "Karre Включатель 2-й",
         "price": 205,
         "unit": "даана",
@@ -20147,15 +20147,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B69",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 2-й",
+          "Модель": "Karre Өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-switches-karre-004",
-        "size": "Karre Включатель 2-й с/п",
-        "titleKg": "Karre Включатель 2-й с/п",
+        "size": "Karre Өчүргүч 2-й с/п",
+        "titleKg": "Karre Өчүргүч 2-й с/п",
         "titleRu": "Karre Включатель 2-й с/п",
         "price": 270,
         "unit": "даана",
@@ -20165,15 +20165,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B70",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 2-й с/п",
+          "Модель": "Karre Өчүргүч 2-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 4
       },
       {
         "id": "viko-switches-karre-005",
-        "size": "Karre Включатель 3-й",
-        "titleKg": "Karre Включатель 3-й",
+        "size": "Karre Өчүргүч 3-й",
+        "titleKg": "Karre Өчүргүч 3-й",
         "titleRu": "Karre Включатель 3-й",
         "price": 325,
         "unit": "даана",
@@ -20183,15 +20183,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B71",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 3-й",
+          "Модель": "Karre Өчүргүч 3-й",
           "Бирдик": "даана"
         },
         "sortOrder": 5
       },
       {
         "id": "viko-switches-karre-006",
-        "size": "Karre Включатель 1-й реверсный",
-        "titleKg": "Karre Включатель 1-й реверсный",
+        "size": "Karre Өчүргүч 1-й кайтарымдуу",
+        "titleKg": "Karre Өчүргүч 1-й кайтарымдуу",
         "titleRu": "Karre Включатель 1-й реверсный",
         "price": 215,
         "unit": "даана",
@@ -20201,15 +20201,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B72",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 1-й реверсный",
+          "Модель": "Karre Өчүргүч 1-й кайтарымдуу",
           "Бирдик": "даана"
         },
         "sortOrder": 6
       },
       {
         "id": "viko-switches-karre-007",
-        "size": "Karre Включатель 2-й реверсный",
-        "titleKg": "Karre Включатель 2-й реверсный",
+        "size": "Karre Өчүргүч 2-й кайтарымдуу",
+        "titleKg": "Karre Өчүргүч 2-й кайтарымдуу",
         "titleRu": "Karre Включатель 2-й реверсный",
         "price": 295,
         "unit": "даана",
@@ -20219,7 +20219,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B73",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "Karre Включатель 2-й реверсный",
+          "Модель": "Karre Өчүргүч 2-й кайтарымдуу",
           "Бирдик": "даана"
         },
         "sortOrder": 7
@@ -20302,8 +20302,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-switches-pacific-001",
-        "size": "PACIFIC включатель 1-й",
-        "titleKg": "PACIFIC включатель 1-й",
+        "size": "PACIFIC өчүргүч 1-й",
+        "titleKg": "PACIFIC өчүргүч 1-й",
         "titleRu": "PACIFIC включатель 1-й",
         "price": 235,
         "unit": "даана",
@@ -20313,15 +20313,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B105",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PACIFIC включатель 1-й",
+          "Модель": "PACIFIC өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-switches-pacific-002",
-        "size": "PACIFIC включатель 2-й",
-        "titleKg": "PACIFIC включатель 2-й",
+        "size": "PACIFIC өчүргүч 2-й",
+        "titleKg": "PACIFIC өчүргүч 2-й",
         "titleRu": "PACIFIC включатель 2-й",
         "price": 270,
         "unit": "даана",
@@ -20331,7 +20331,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B106",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PACIFIC включатель 2-й",
+          "Модель": "PACIFIC өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 2
@@ -20418,8 +20418,8 @@ export const electricalSupplierProducts = [
     "variants": [
       {
         "id": "viko-switches-palmiye-001",
-        "size": "PALMIYE включатель 1-й",
-        "titleKg": "PALMIYE включатель 1-й",
+        "size": "PALMIYE өчүргүч 1-й",
+        "titleKg": "PALMIYE өчүргүч 1-й",
         "titleRu": "PALMIYE включатель 1-й",
         "price": 205,
         "unit": "даана",
@@ -20429,15 +20429,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B95",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE включатель 1-й",
+          "Модель": "PALMIYE өчүргүч 1-й",
           "Бирдик": "даана"
         },
         "sortOrder": 1
       },
       {
         "id": "viko-switches-palmiye-002",
-        "size": "PALMIYE включатель 2-й",
-        "titleKg": "PALMIYE включатель 2-й",
+        "size": "PALMIYE өчүргүч 2-й",
+        "titleKg": "PALMIYE өчүргүч 2-й",
         "titleRu": "PALMIYE включатель 2-й",
         "price": 240,
         "unit": "даана",
@@ -20447,15 +20447,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B96",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE включатель 2-й",
+          "Модель": "PALMIYE өчүргүч 2-й",
           "Бирдик": "даана"
         },
         "sortOrder": 2
       },
       {
         "id": "viko-switches-palmiye-003",
-        "size": "PALMIYE включатель 1-й с/п",
-        "titleKg": "PALMIYE включатель 1-й с/п",
+        "size": "PALMIYE өчүргүч 1-й с/п",
+        "titleKg": "PALMIYE өчүргүч 1-й с/п",
         "titleRu": "PALMIYE включатель 1-й с/п",
         "price": 210,
         "unit": "даана",
@@ -20465,15 +20465,15 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B97",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE включатель 1-й с/п",
+          "Модель": "PALMIYE өчүргүч 1-й с/п",
           "Бирдик": "даана"
         },
         "sortOrder": 3
       },
       {
         "id": "viko-switches-palmiye-004",
-        "size": "PALMIYE включатель 1-й реверсный",
-        "titleKg": "PALMIYE включатель 1-й реверсный",
+        "size": "PALMIYE өчүргүч 1-й кайтарымдуу",
+        "titleKg": "PALMIYE өчүргүч 1-й кайтарымдуу",
         "titleRu": "PALMIYE включатель 1-й реверсный",
         "price": 230,
         "unit": "даана",
@@ -20483,7 +20483,7 @@ export const electricalSupplierProducts = [
         "sku": "VIKO-APR26-B98",
         "specs": {
           "Бренд": "VIKO",
-          "Модель": "PALMIYE включатель 1-й реверсный",
+          "Модель": "PALMIYE өчүргүч 1-й кайтарымдуу",
           "Бирдик": "даана"
         },
         "sortOrder": 4

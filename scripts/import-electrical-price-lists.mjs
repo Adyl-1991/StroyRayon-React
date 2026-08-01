@@ -3,6 +3,7 @@ import os from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const defaultExtractPath = path.join(os.tmpdir(), 'stroyrayon-electrical-price-extract.json')
@@ -346,10 +347,11 @@ function groupProduct(group) {
   const variants = group.items
     .map((item, index) => {
       const label = cleanVariantLabel(item.name)
+      const titleKg = normalizeKyrgyzText(label)
       return {
         id: `${id}-${String(index + 1).padStart(3, '0')}`,
-        size: label,
-        titleKg: label,
+        size: titleKg,
+        titleKg,
         titleRu: label,
         price: retailPrice(item),
         unit: 'даана',
@@ -359,7 +361,7 @@ function groupProduct(group) {
         sku: `${group.supplier}-APR26-${item.sourceRef}`,
         specs: {
           Бренд: group.supplier,
-          Модель: label,
+          Модель: titleKg,
           Бирдик: 'даана',
         },
         sortOrder: index + 1,

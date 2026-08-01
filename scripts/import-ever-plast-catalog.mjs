@@ -6,6 +6,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 import sharp from 'sharp'
+import { normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 
 const EVER_BASE = 'https://ever58.ru'
 const XML_URL = `${EVER_BASE}/ever58_ru_catalog.xml`
@@ -518,25 +519,29 @@ function buildFamilyProducts(rows, officialProducts, csvBySku) {
         ? `/images/products/ever-plast-sewer-assets/${generatedAsset}`
         : ''
     const variants = group.rows
-      .map((item, index) => ({
-        id: `${slug}-${index + 1}-${slugify(variantLabel(item, group.familyKey)) || 'variant'}`,
-        size: variantLabel(item, group.familyKey),
-        titleKg: variantLabel(item, group.familyKey),
-        titleRu: variantLabel(item, group.familyKey),
-        price: item.retailPrice,
-        unit: item.unit,
-        unitRu: item.unit === 'метр' ? 'метр' : 'шт.',
-        packageInfo: `1 ${item.unit}`,
-        packageInfoRu: item.unit === 'метр' ? '1 метр' : '1 шт.',
-        stockStatus: 'in_stock',
-        sku: item.sku,
-        sortOrder: index,
-        specs: {
-          Размер: variantLabel(item, group.familyKey),
-          Материал: item.technical.material || (group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен'),
-          Цвет: item.technical.color || (/external/.test(group.familyKey) ? 'оранжевый' : group.familyKey.startsWith('sewer-') ? 'серый' : 'белый'),
-        },
-      }))
+      .map((item, index) => {
+        const titleRu = variantLabel(item, group.familyKey)
+        const titleKg = normalizeKyrgyzText(titleRu)
+        return {
+          id: `${slug}-${index + 1}-${slugify(titleRu) || 'variant'}`,
+          size: titleKg,
+          titleKg,
+          titleRu,
+          price: item.retailPrice,
+          unit: item.unit,
+          unitRu: item.unit === 'метр' ? 'метр' : 'шт.',
+          packageInfo: `1 ${item.unit}`,
+          packageInfoRu: item.unit === 'метр' ? '1 метр' : '1 шт.',
+          stockStatus: 'in_stock',
+          sku: item.sku,
+          sortOrder: index,
+          specs: {
+            Өлчөм: titleKg,
+            Материал: item.technical.material || (group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен'),
+            Түс: normalizeKyrgyzText(item.technical.color || (/external/.test(group.familyKey) ? 'оранжевый' : group.familyKey.startsWith('sewer-') ? 'серый' : 'белый')),
+          },
+        }
+      })
       .sort((a, b) => a.size.localeCompare(b.size, 'ru', { numeric: true }))
 
     const image = imageObject(slug, config.titleRu, localImage, fallback)

@@ -3,6 +3,8 @@ import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
+import { getProductTitle } from '../src/services/productService.js'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
@@ -388,7 +390,8 @@ function makeProduct(entry, stroydomById, imagePath) {
   const minOrderKg = unit === 'кап' ? '1 кап' : '1 даана'
   const minOrderRu = unit === 'кап' ? '1 мешок' : '1 шт.'
   const sourceUrl = `https://www.alinex.kz/catalog/${entry.slug}`
-  const shortKg = `${titleRu} — AlinEX брендинин «${category.titleKg}» категориясындагы кесиптик курулуш материалы.`
+  const titleKg = getProductTitle({ slug: localSlug(entry.slug), titleKg: titleRu, catalogPath }, 'kg')
+  const shortKg = `${titleKg} — AlinEX брендинин «${category.titleKg}» категориясындагы кесиптик курулуш материалы.`
   const shortRu = `${titleRu} — профессиональный строительный материал AlinEX из категории «${category.titleRu}».`
   const specs = specsFromProduct(detail)
 
@@ -396,10 +399,11 @@ function makeProduct(entry, stroydomById, imagePath) {
     ? kurulushMatches.map((match) => {
         const sizeMatch = decodeHtml(match.name).match(/(\d+(?:[.,]\d+)?)\s*кг(?:\s+(.+))?$/i)
         const size = sizeMatch ? `${sizeMatch[1]} кг${sizeMatch[2] ? `, ${sizeMatch[2]}` : ''}` : decodeHtml(match.name)
+        const titleKg = normalizeKyrgyzText(size)
         return {
           id: `${localSlug(entry.slug)}-${match.id}`,
-          size,
-          titleKg: size,
+          size: titleKg,
+          titleKg,
           titleRu: size,
           price: Number(match.prices.price),
           unit,
@@ -418,7 +422,7 @@ function makeProduct(entry, stroydomById, imagePath) {
     id: `alinex-${detail.id || entry.slug}`,
     slug: localSlug(entry.slug),
     sku: `ALX-${String(detail.id || entry.slug).toUpperCase()}`,
-    titleKg: titleRu,
+    titleKg,
     titleRu,
     name: titleRu,
     catalogPath,

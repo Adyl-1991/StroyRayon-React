@@ -13,6 +13,7 @@ import {
   getProductShortDescription,
   getProductSpecs,
   getProductTitle,
+  getProductVariants,
   normalizeProductKgText,
 } from '../src/services/productService.js'
 
@@ -54,6 +55,7 @@ function collectProductRows(product) {
     deliveryInfo: normalizeKyrgyzText(product.deliveryInfoKg),
     warrantyInfo: normalizeKyrgyzText(product.warrantyInfoKg),
     recommendedUse: normalizeKyrgyzText(product.recommendedUseKg),
+    variants: getProductVariants(product).map((variant) => variant.titleKg),
     seoTitle: product.slug?.startsWith('alinex-')
       ? getProductTitle(product, 'kg')
       : normalizeProductKgText(product, product.seoTitleKg),
@@ -98,6 +100,12 @@ export function auditKyrgyzContent() {
   const repeatedWords = rows.filter((row) => /(^|\s)([\p{L}]{3,})\s+\2(?=\s|[,.!?;:]|$)/iu.test(row.text))
   const spacing = rows.filter((row) => /\s{2,}|\s+[,.!?;:]/u.test(row.text))
   const orthography = rows.filter((row) => /[қғәіұ]|ындаги/iu.test(row.text))
+  const transliteratedProductTitles = activeProducts.flatMap((product) => {
+    const title = getProductTitle(product, 'kg').toLocaleLowerCase('en')
+    const leakedSegments = (product.catalogPath || [])
+      .filter((segment) => /^[a-z][a-z0-9-]+$/i.test(segment) && title.includes(segment.toLocaleLowerCase('en')))
+    return leakedSegments.length ? [{ slug: product.slug, title: getProductTitle(product, 'kg'), leakedSegments }] : []
+  })
   const missingProductCopy = activeProducts.flatMap((product) => {
     const missing = []
     if (!getProductTitle(product, 'kg')) missing.push('title')
@@ -115,6 +123,7 @@ export function auditKyrgyzContent() {
     repeatedWords,
     spacing,
     orthography,
+    transliteratedProductTitles,
     missingProductCopy,
   }
 }
@@ -129,6 +138,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     repeatedWords: result.repeatedWords.length,
     spacing: result.spacing.length,
     orthography: result.orthography.length,
+    transliteratedProductTitles: result.transliteratedProductTitles.length,
     missingProductCopy: result.missingProductCopy.length,
   }
   console.log(JSON.stringify({
@@ -139,6 +149,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
       repeatedWords: result.repeatedWords.slice(0, 10),
       spacing: result.spacing.slice(0, 10),
       orthography: result.orthography.slice(0, 10),
+      transliteratedProductTitles: result.transliteratedProductTitles.slice(0, 10),
       missingProductCopy: result.missingProductCopy.slice(0, 10),
     },
   }, null, 2))

@@ -47,7 +47,13 @@ function getAlinexKyrgyzTitle(product) {
   const rawTitle = String(product?.titleKg || product?.name || '')
   const model = rawTitle.match(/[aа]linex\s+([^»\u0022]+)/iu)?.[1]?.trim()
     || rawTitle.match(/munfort\s+.+$/iu)?.[0]?.trim()
-  const productType = normalizeKgText(product?.productTypeKg || product?.productType || 'Курулуш материалы')
+  const catalogPath = Array.isArray(product?.catalogPath)
+    ? product.catalogPath
+    : getNodePathSegments(product?.catalogNode)
+  const catalogProductType = findCatalogNodeByPath(catalogPath)?.titleKg
+  const productType = normalizeKgText(
+    catalogProductType || product?.productTypeKg || product?.productType || 'Курулуш материалы',
+  )
 
   if (model) return `${productType} AlinEX ${model}`.replace(/\s+/g, ' ').trim()
   if (/добавк/iu.test(rawTitle)) return 'Эки курамдуу суу өткөрбөөчү аралашмага кошулма AlinEX'
@@ -337,6 +343,7 @@ export function getLocalizedUnitText(value, locale = 'kg') {
 export function getLocalizedProductValue(product, fieldBase, locale = 'kg') {
   if (!product) return ''
   if (locale === 'ru' && fieldBase === 'productType') return product.productTypeRu || product.typeRu || ''
+  if (fieldBase === 'productType') return normalizeKgText(product.productTypeKg || product.productType || '')
   if (locale === 'ru') return getLocalizedUnitText(product[`${fieldBase}Ru`] || product[fieldBase] || product[`${fieldBase}Kg`] || '', locale)
   return normalizeProductKgText(product, product[`${fieldBase}Kg`] || product[fieldBase] || '')
 }
@@ -402,7 +409,7 @@ export function getProductSpecs(product, locale = 'kg') {
   }
 
   if (product.slug?.startsWith('alinex-')) {
-    const sizes = (product.variants || []).map((variant) => variant.size).filter(Boolean)
+    const sizes = getProductVariants(product).map((variant) => variant.titleKg).filter(Boolean)
     return {
       'Өндүрүүчү': product.brand || 'AlinEX',
       'Товар түрү': normalizeKgText(product.productTypeKg || product.productType || 'Курулуш материалы'),
@@ -592,6 +599,9 @@ export function normalizeProduct(product) {
   const rating = product.rating || 0
   const reviewsCount = product.reviewsCount || 0
   const catalogPath = Array.isArray(product.catalogPath) ? product.catalogPath : getNodePathSegments(product.catalogNode)
+  const catalogNode = findCatalogNodeByPath(catalogPath)
+  const productTypeKg = product.productTypeKg || product.productType || product.type || catalogNode?.titleKg || catalogPath.at(-1) || product.subcategorySlug
+  const productTypeRu = product.productTypeRu || product.typeRu || catalogNode?.titleRu || ''
   const titleKg = product.titleKg || product.name || product.title || ''
   const titleRu = product.titleRu || titleKg
   const shortDescriptionKg = product.shortDescriptionKg || product.shortDescription || product.descriptionKg || product.description || ''
@@ -621,8 +631,9 @@ export function normalizeProduct(product) {
     article: product.article || product.sku,
     categoryId: product.categoryId || product.categorySlug || catalogPath[0],
     subcategoryId: product.subcategoryId || product.subcategorySlug || catalogPath.at(-1),
-    productType: product.productType || product.type || catalogPath.at(-1) || product.subcategorySlug,
-    productTypeRu: product.productTypeRu || product.typeRu || '',
+    productType: productTypeKg,
+    productTypeKg,
+    productTypeRu,
     pack: product.pack || product.packageInfoKg || product.minOrder,
     packRu: getLocalizedUnitText(product.packRu || product.pack || product.packageInfoKg || product.minOrder, 'ru'),
     minOrderRu: getLocalizedUnitText(product.minOrderRu || product.minOrder, 'ru'),
