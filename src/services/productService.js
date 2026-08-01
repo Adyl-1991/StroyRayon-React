@@ -147,6 +147,7 @@ const HOME_POPULAR_GROUPS = [
   { key: 'boiok-tush-kagaz', labelKg: 'Боёк, туш жана кагаз', slugs: ['boiok-tush-kagaz'], preferredIds: ['interior-paint-white-10l'] },
   { key: 'bak-koroo', labelKg: 'Бак жана короо', slugs: ['bak-koroo'], preferredIds: ['garden-hose-3-4-25m', 'garden-shovel-metal'] },
 ]
+const HOME_POPULAR_PRODUCTS_PER_GROUP = 2
 
 export const legacyProductSlugAliases = {
   'kabel-vvgng': 'kabel-vvgng-3x2-5',
@@ -166,10 +167,12 @@ export function getHomePopularProducts(sourceProducts = EMPTY_PRODUCTS) {
   const normalizedSource = sourceProducts.map(normalizeProduct).filter((product) => product.isActive !== false)
   const selected = []
 
-  for (const group of HOME_POPULAR_GROUPS) {
-    const product = findProductForGroup(normalizedSource, group, selected)
+  for (let round = 0; round < HOME_POPULAR_PRODUCTS_PER_GROUP; round += 1) {
+    for (const group of HOME_POPULAR_GROUPS) {
+      const product = findProductForGroup(normalizedSource, group, selected)
 
-    if (product) selected.push(product)
+      if (product) selected.push(product)
+    }
   }
 
   return selected

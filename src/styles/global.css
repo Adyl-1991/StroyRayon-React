@@ -1081,6 +1081,100 @@ html {
   row-gap: 32px;
 }
 
+.product-carousel {
+  position: relative;
+}
+
+.product-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: -8px 0 14px;
+}
+
+.product-carousel__controls button {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  font: inherit;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(31, 43, 37, 0.06);
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.product-carousel__controls button:hover,
+.product-carousel__controls button:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.product-carousel__controls .product-carousel__playback {
+  font-size: 0.9rem;
+}
+
+.product-carousel__viewport {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 2px 2px 12px;
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+}
+
+.product-carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.product-carousel__viewport:focus-visible {
+  outline: 3px solid rgba(45, 106, 79, 0.28);
+  outline-offset: 4px;
+}
+
+.product-carousel__item {
+  display: flex;
+  min-width: 0;
+  flex: 0 0 calc((100% - 48px) / 4);
+  scroll-snap-align: start;
+}
+
+.product-carousel__item .product-card {
+  width: 100%;
+}
+
+@media (max-width: 939px) {
+  .product-carousel__item {
+    flex-basis: calc((100% - 16px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-carousel__controls {
+    margin-top: -4px;
+  }
+
+  .product-carousel__item {
+    flex-basis: min(84vw, 320px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-carousel__viewport {
+    scroll-behavior: auto;
+  }
+}
+
 .category-card,
 .product-card,
 .blog-card,

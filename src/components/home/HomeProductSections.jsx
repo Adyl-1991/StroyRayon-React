@@ -4,10 +4,11 @@ import { SectionTitle } from '../ui/SectionTitle'
 import { useProducts } from '../../hooks/useProducts'
 import { useLocale } from '../../i18n/LocaleContext'
 import { getHomePopularProducts } from '../../services/productService'
+import { ProductCarousel } from './ProductCarousel'
 
 export default function HomeProductSections() {
   const { t } = useLocale()
-  const { products: homeProducts } = useProducts({ limit: 48, sort: 'popular' })
+  const { products: homeProducts } = useProducts({ limit: 64, sort: 'popular' })
   const { products: saleProducts } = useProducts({ limit: 4, sort: 'sale' })
   const popularProducts = getHomePopularProducts(homeProducts)
 
@@ -23,7 +24,7 @@ export default function HomeProductSections() {
             </Button>
           }
         />
-        <ProductGrid products={popularProducts} />
+        <ProductCarousel products={popularProducts} />
       </section>
 
       <section className="page-section">
