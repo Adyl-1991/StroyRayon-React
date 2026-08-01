@@ -3,6 +3,23 @@ import { Prisma, ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { ProductQueryDto } from './dto/product-query.dto'
 
+export const PUBLIC_PRODUCT_BRANDS = [
+  'AlinEX',
+  'EVER PLAST',
+  'CHINT',
+  'VIKO',
+  'PANASONIC',
+  'CARKIT',
+  'Knauf',
+  'Kant Cement',
+  'Safari',
+] as const
+
+const publicProductWhere = {
+  isActive: true,
+  brand: { name: { in: [...PUBLIC_PRODUCT_BRANDS] } },
+} satisfies Prisma.ProductWhereInput
+
 const productInclude = {
   brand: true,
   catalogNode: true,
@@ -14,7 +31,12 @@ const productInclude = {
   },
   stock: true,
   relatedFrom: {
-    where: { relatedProduct: { isActive: true } },
+    where: {
+      relatedProduct: {
+        isActive: true,
+        brand: { name: { in: [...PUBLIC_PRODUCT_BRANDS] } },
+      },
+    },
     include: {
       relatedProduct: { include: { brand: true } },
     },
@@ -152,7 +174,7 @@ export class ProductsService {
     const normalizedCatalogPath = query.catalogPath?.replace(/^\/+|\/+$/g, '')
 
     return {
-      isActive: true,
+      ...publicProductWhere,
       ...(query.q
         ? {
             OR: [
@@ -178,6 +200,7 @@ export class ProductsService {
       ...(brandValues.length
         ? {
             brand: {
+              name: { in: [...PUBLIC_PRODUCT_BRANDS] },
               OR: [{ slug: { in: brandValues } }, { name: { in: brandValues } }],
             },
           }
@@ -190,7 +213,7 @@ export class ProductsService {
 
   async findBySlug(slug: string) {
     const product = await this.prisma.product.findFirst({
-      where: { slug, isActive: true },
+      where: { slug, ...publicProductWhere },
       include: productInclude,
     })
 
@@ -220,22 +243,26 @@ export class ProductsService {
   private async getFilterOptions() {
     const [brands, units, products, priceRange] = await Promise.all([
       this.prisma.brand.findMany({
-        where: { isActive: true, products: { some: { isActive: true } } },
+        where: {
+          isActive: true,
+          name: { in: [...PUBLIC_PRODUCT_BRANDS] },
+          products: { some: { isActive: true } },
+        },
         orderBy: { name: 'asc' },
         select: { name: true, slug: true, _count: { select: { products: true } } },
       }),
       this.prisma.product.groupBy({
         by: ['unit'],
-        where: { isActive: true },
+        where: publicProductWhere,
         _count: { unit: true },
         orderBy: { unit: 'asc' },
       }),
       this.prisma.product.findMany({
-        where: { isActive: true },
+        where: publicProductWhere,
         select: { stockStatus: true, tags: true },
       }),
       this.prisma.product.aggregate({
-        where: { isActive: true },
+        where: publicProductWhere,
         _min: { price: true },
         _max: { price: true },
       }),

@@ -15,5 +15,7 @@ The approved brands and their provenance are defined in
 catalog build until its provenance is recorded.
 
 `Safari` is owner-confirmed and remains published while the supplier price is
-pending. On 2026-08-01, 156 products were detached from 48 unverified brand
-labels. Product IDs, SKUs, slugs, prices, categories and image paths were kept.
+pending. On 2026-08-01, 156 products assigned to 48 unverified brand labels
+were hidden from the storefront and public API. Their source records, IDs,
+SKUs, slugs, prices, categories and image paths were kept for recovery after a
+real supplier brand is confirmed.

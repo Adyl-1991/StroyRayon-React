@@ -1,5 +1,6 @@
 import { categories } from '../data/categories.js'
 import { catalogTree } from '../data/catalogTree.js'
+import { isPublishableCatalogProduct } from '../data/catalogBrandProvenance.js'
 import { normalizeKyrgyzText } from '../i18n/kyrgyzText.js'
 
 const EMPTY_PRODUCTS = Object.freeze([])
@@ -116,7 +117,7 @@ export function getProductsByCatalogNode(node, sourceProducts = EMPTY_PRODUCTS) 
   const nodeTags = node.productTags || []
 
   return sourceProducts.map(normalizeProduct).filter((product) => {
-    if (product.isActive === false) return false
+    if (product.isActive === false || !isPublishableCatalogProduct(product)) return false
     const pathMatch = product.catalogPath?.some((slug) => descendantSlugs.includes(slug))
     const tagMatch = nodeTags.some((tag) => product.tags?.includes(tag))
     return pathMatch || tagMatch
@@ -134,7 +135,7 @@ export function getSubcategory(categorySlug, subcategorySlug) {
 
 export function getProducts(filters = {}, sourceProducts = EMPTY_PRODUCTS) {
   return sourceProducts.filter((product) => {
-    if (product.isActive === false) return false
+    if (product.isActive === false || !isPublishableCatalogProduct(product)) return false
     if (filters.categorySlug && product.categorySlug !== filters.categorySlug) return false
     if (filters.subcategorySlug && product.subcategorySlug !== filters.subcategorySlug) return false
     if (filters.sale && !product.isSale) return false
@@ -170,7 +171,9 @@ export function resolveProductSlug(productSlug) {
 }
 
 export function getHomePopularProducts(sourceProducts = EMPTY_PRODUCTS) {
-  const normalizedSource = sourceProducts.map(normalizeProduct).filter((product) => product.isActive !== false)
+  const normalizedSource = sourceProducts
+    .map(normalizeProduct)
+    .filter((product) => product.isActive !== false && isPublishableCatalogProduct(product))
   const selected = []
 
   for (let round = 0; round < HOME_POPULAR_PRODUCTS_PER_GROUP; round += 1) {
@@ -212,7 +215,7 @@ export function sortProducts(productsToSort, sort = 'popular') {
 
 export function filterProducts(productsToFilter, filters = {}) {
   return productsToFilter.map(normalizeProduct).filter((product) => {
-    if (product.isActive === false) return false
+    if (product.isActive === false || !isPublishableCatalogProduct(product)) return false
     if (filters.categorySlug && product.categorySlug !== filters.categorySlug) return false
     if (filters.subcategorySlug && product.subcategorySlug !== filters.subcategorySlug) return false
     if (filters.minPrice && product.price < Number(filters.minPrice)) return false
@@ -239,7 +242,11 @@ export function getFilteredProducts(filters = {}, sourceProducts = EMPTY_PRODUCT
 
 export function getProductBySlug(productSlug, sourceProducts = EMPTY_PRODUCTS) {
   const resolvedSlug = resolveProductSlug(productSlug)
-  const product = sourceProducts.find((product) => product.slug === resolvedSlug && product.isActive !== false)
+  const product = sourceProducts.find((product) => (
+    product.slug === resolvedSlug
+    && product.isActive !== false
+    && isPublishableCatalogProduct(product)
+  ))
   return product ? normalizeProduct(product) : undefined
 }
 
@@ -252,7 +259,12 @@ export function getRelatedProducts(product, limit = 4, sourceProducts = EMPTY_PR
   const categoryProducts = normalizedProducts.filter((item) => item.id !== product.id && item.categorySlug === product.categorySlug)
 
   return [...apiRelatedProducts, ...preferredProducts, ...categoryProducts]
-    .filter((item, index, list) => item.isActive !== false && item.id !== product.id && list.findIndex((candidate) => candidate.id === item.id) === index)
+    .filter((item, index, list) => (
+      item.isActive !== false
+      && isPublishableCatalogProduct(item)
+      && item.id !== product.id
+      && list.findIndex((candidate) => candidate.id === item.id) === index
+    ))
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit)
 }
@@ -262,7 +274,11 @@ export function searchProducts(query, sourceProducts = EMPTY_PRODUCTS) {
   if (!normalizedQuery) return []
   return sourceProducts
     .map(normalizeProduct)
-    .filter((product) => product.isActive !== false && getSearchIndex(product).includes(normalizedQuery))
+    .filter((product) => (
+      product.isActive !== false
+      && isPublishableCatalogProduct(product)
+      && getSearchIndex(product).includes(normalizedQuery)
+    ))
 }
 
 export function getStockLabel(stockStatus, locale = 'kg') {

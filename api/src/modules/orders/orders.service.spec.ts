@@ -80,17 +80,16 @@ test('current storefront item wins when a stale CRM row reuses its product id', 
       findUnique: async () => null,
     },
     product: {
-      findUnique: async ({ where }: any) => where.id === 'wago-terminal-3'
-        ? { id: 'wago-terminal-3', slug: 'stale-wago-slug' }
+      findUnique: async ({ where }: any) => where.id === 'knauf-rotband-30kg'
+        ? { id: 'knauf-rotband-30kg', slug: 'stale-knauf-slug' }
         : null,
     },
   }
   const service = new OrdersService({} as any, {} as any, {} as any, {} as any, {} as any)
 
   const resolved = await (service as any).findProductForOrderItem(tx, {
-    productId: 'wago-terminal-3',
-    slug: 'wago-tip-klemma-3-orun',
-    sku: 'SR-ELC-WAG-003',
+    productId: 'knauf-rotband-30kg',
+    slug: 'knauf-rotband-30kg',
     title: 'Client title is not trusted',
     price: 1,
     quantity: 1,
@@ -98,6 +97,6 @@ test('current storefront item wins when a stale CRM row reuses its product id', 
   })
 
   assert.equal(resolved.kind, 'bundled')
-  assert.equal(resolved.item.slug, 'wago-tip-klemma-3-orun')
-  assert.equal(resolved.item.price, 22)
+  assert.equal(resolved.item.slug, 'knauf-rotband-30kg')
+  assert.equal(resolved.item.price, 670)
 })

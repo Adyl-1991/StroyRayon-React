@@ -18,18 +18,18 @@ test('only brands with recorded provenance reach the storefront', () => {
   assert.ok(products.every((product) => !product.brand || isVerifiedCatalogBrand(product.brand)))
 })
 
-test('unverified brand assignments are removed without changing product identity', () => {
+test('products without an approved brand are hidden from the storefront', () => {
   const unbrandedProducts = products.filter((product) => !product.brand)
 
-  assert.equal(products.length, 337)
-  assert.equal(unbrandedProducts.length, 156)
+  assert.equal(products.length, 181)
+  assert.equal(unbrandedProducts.length, 0)
   assert.ok(products.every((product) => product.id && product.slug && product.sku))
   assert.ok(products.every((product) => !UNVERIFIED_CATALOG_BRAND_ASSIGNMENTS.some(
     (brand) => product.slug.toLocaleLowerCase('ru').includes(brand.toLocaleLowerCase('ru')),
   )))
 })
 
-test('removed labels do not remain in customer-facing product content', () => {
+test('hidden labels do not remain in published product content', () => {
   const content = JSON.stringify(products)
 
   for (const brand of removedTextBrands) {

@@ -75,7 +75,7 @@ test('website, product and FAQ schemas contain usable public data', () => {
 
 test('SEO prerender covers every public route with unique route metadata', () => {
   const routes = buildRouteDefinitions()
-  const productSeo = routes.get('/product/wago-tip-klemma-3-orun')
+  const productSeo = routes.get('/product/knauf-rotband-30kg')
   const catalogSeo = routes.get('/catalog/inzhenerdik-santehnika')
   const html = injectSeo(
     '<!doctype html><html><head><meta name="description" content="generic"><title>StroyRayon</title></head><body><div id="root"></div></body></html>',
@@ -83,14 +83,14 @@ test('SEO prerender covers every public route with unique route metadata', () =>
   )
 
   assert.equal(routes.size, getSitemapRoutes().length)
-  assert.equal(productSeo.canonical, 'https://www.stroyrayon.kg/product/wago-tip-klemma-3-orun')
+  assert.equal(productSeo.canonical, 'https://www.stroyrayon.kg/product/knauf-rotband-30kg')
   assert.equal(catalogSeo.canonical, 'https://www.stroyrayon.kg/catalog/inzhenerdik-santehnika')
-  assert.match(html, /<title>WAGO түр клемма 3 орун[^<]*StroyRayon<\/title>/)
-  assert.match(html, /rel="canonical" href="https:\/\/www\.stroyrayon\.kg\/product\/wago-tip-klemma-3-orun"/)
+  assert.match(html, /<title>[^<]*Knauf Rotband[^<]*StroyRayon<\/title>/)
+  assert.match(html, /rel="canonical" href="https:\/\/www\.stroyrayon\.kg\/product\/knauf-rotband-30kg"/)
   assert.match(html, /application\/ld\+json/)
   assert.match(html, /data-seo-prerender="true"/)
-  assert.match(html, /<h1>WAGO түр клемма 3 орун<\/h1>/)
-  assert.match(html, /22 сом \/ даана/)
+  assert.match(html, /<h1>[^<]*Knauf Rotband[^<]*<\/h1>/)
+  assert.match(html, /670 сом \/ кап/)
   assert.equal((html.match(/name="description"/g) || []).length, 1)
 
   const duplicateValues = (field) => {
@@ -131,7 +131,8 @@ test('generated crawler files use only the final www host', async () => {
   assert.doesNotMatch(robots, /https:\/\/stroyrayon\.kg/)
   assert.match(sitemap, /<loc>https:\/\/www\.stroyrayon\.kg/)
   assert.doesNotMatch(sitemap, /<loc>https:\/\/stroyrayon\.kg/)
-  assert.match(sitemap, /\/product\/kabel-kanal-25x16-2<\/loc>/)
+  assert.match(sitemap, /\/product\/knauf-rotband-30kg<\/loc>/)
+  assert.doesNotMatch(sitemap, /\/product\/kabel-kanal-25x16-2<\/loc>/)
   assert.doesNotMatch(sitemap, /\/product\/kabel-kanal-16x16<\/loc>/)
   assert.doesNotMatch(sitemap, /\/catalog\/(?:kurulush|shaimandar|bekitkich)<\/loc>/)
 

@@ -4,7 +4,7 @@ import { carkitCableProducts } from './carkitCableProducts.generated.js'
 import { electricalSupplierProducts } from './electricalSupplierProducts.generated.js'
 import { everPlastProducts } from './everPlastProducts.generated.js'
 import { isRetiredProductId, isRetiredProductSlug } from './retiredProductSlugs.js'
-import { sanitizeCatalogProductBrand } from './catalogBrandProvenance.js'
+import { isPublishableCatalogProduct, sanitizeCatalogProductBrand } from './catalogBrandProvenance.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
 const buildingProductPlaceholder = '/images/placeholders/product-building-placeholder.svg'
@@ -15217,7 +15217,7 @@ function removeRetiredProductRelations(item) {
   }
 }
 
-export const products = [
+const sanitizedProducts = [
   ...baseProducts
     .filter((item) =>
       !isRetiredProductSlug(item.slug)
@@ -15229,4 +15229,13 @@ export const products = [
   ...carkitCableProducts.map(product).map(removeRetiredProductRelations),
   ...electricalSupplierProducts.map(product).map(removeRetiredProductRelations),
   ...everPlastProducts.map(product).map(removeRetiredProductRelations),
-].map(sanitizeCatalogProductBrand)
+]
+  .map(sanitizeCatalogProductBrand)
+
+const publishableProducts = sanitizedProducts.filter(isPublishableCatalogProduct)
+const publishableProductIds = new Set(publishableProducts.map((product) => product.id))
+
+export const products = publishableProducts.map((product) => ({
+  ...product,
+  relatedProductIds: (product.relatedProductIds || []).filter((id) => publishableProductIds.has(id)),
+}))

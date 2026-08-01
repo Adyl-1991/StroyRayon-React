@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { fetchProductBySlug, fetchProducts } from '../api/productsApi'
 import { USE_API } from '../config/api'
 import { isRetiredProductSlug } from '../data/retiredProductSlugs'
+import { isPublishableCatalogProduct, isVerifiedCatalogBrand } from '../data/catalogBrandProvenance'
 import { loadBundledProducts } from '../services/bundledCatalogLoader'
 import {
   getFilteredProducts,
@@ -113,7 +114,7 @@ export function useProducts(filters = {}) {
         if (!isActive) return
         const apiProducts = (result.items || [])
           .map(normalizeProduct)
-          .filter((product) => !isRetiredProductSlug(product.slug))
+          .filter((product) => !isRetiredProductSlug(product.slug) && isPublishableCatalogProduct(product))
 
         if (isVirtualCatalogGroup) {
           const scopedProducts = getFilteredProducts(localFilters, apiProducts)
@@ -253,9 +254,10 @@ export function useProductBySlug(slug) {
       .then((product) => {
         if (!product) return loadBundledFallback()
         if (!isActive) return
+        const normalizedProduct = normalizeProduct(product)
         setState({
           requestedSlug: slug,
-          product: normalizeProduct(product),
+          product: isPublishableCatalogProduct(normalizedProduct) ? normalizedProduct : null,
           isLoading: false,
           error: null,
         })
@@ -332,7 +334,9 @@ function buildBundledResult({ sourceProducts, filters, page, limit, error, reque
 function normalizeFilterOptions(filters) {
   if (!filters) return null
   return {
-    brands: filters.brands || [],
+    brands: (filters.brands || []).filter((brand) => isVerifiedCatalogBrand(
+      typeof brand === 'object' ? brand.label : brand,
+    )),
     units: filters.units || [],
     tags: filters.badges || filters.tags || [],
     stockStatuses: filters.stockStatuses || [],

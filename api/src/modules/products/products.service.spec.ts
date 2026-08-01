@@ -2,7 +2,15 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { ProductStockStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
-import { ProductsService } from './products.service'
+import { PUBLIC_PRODUCT_BRANDS, ProductsService } from './products.service'
+import { CATALOG_BRAND_PROVENANCE } from '../../../../src/data/catalogBrandProvenance.js'
+
+test('public API brand allowlist matches the storefront provenance registry', () => {
+  assert.deepEqual(
+    [...PUBLIC_PRODUCT_BRANDS].sort(),
+    Object.keys(CATALOG_BRAND_PROVENANCE).sort(),
+  )
+})
 
 test('public product list uses a lightweight card query and response', async () => {
   let receivedSelect: Record<string, unknown> | undefined
@@ -13,7 +21,7 @@ test('public product list uses a lightweight card query and response', async () 
     slug: 'product-1',
     sku: 'PRODUCT-1',
     catalogNode: { path: 'elektrika/kabel' },
-    brand: { name: 'Brand', slug: 'brand' },
+    brand: { name: 'CHINT', slug: 'chint' },
     price: 100,
     oldPrice: null,
     currency: 'KGS',
@@ -110,7 +118,11 @@ test('public product detail excludes inactive products', async () => {
   const result = await new ProductsService(prisma).findBySlug('hidden-product')
 
   assert.equal(result, null)
-  assert.deepEqual(receivedWhere, { slug: 'hidden-product', isActive: true })
+  assert.deepEqual(receivedWhere, {
+    slug: 'hidden-product',
+    isActive: true,
+    brand: { name: { in: [...PUBLIC_PRODUCT_BRANDS] } },
+  })
 })
 
 test('public product detail loads the real brand for related products', async () => {

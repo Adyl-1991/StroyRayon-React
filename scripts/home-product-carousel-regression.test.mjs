@@ -29,9 +29,9 @@ const homeGroups = [
 
 test('home popular products stay balanced at two unique active products per group', () => {
   const products = homeGroups.flatMap((slug) => [
-    { id: `${slug}-first`, name: `${slug} first`, catalogPath: [slug] },
-    { id: `${slug}-second`, name: `${slug} second`, catalogPath: [slug] },
-    { id: `${slug}-inactive`, name: `${slug} inactive`, catalogPath: [slug], isActive: false },
+    { id: `${slug}-first`, name: `${slug} first`, catalogPath: [slug], brand: 'CHINT' },
+    { id: `${slug}-second`, name: `${slug} second`, catalogPath: [slug], brand: 'CHINT' },
+    { id: `${slug}-inactive`, name: `${slug} inactive`, catalogPath: [slug], brand: 'CHINT', isActive: false },
   ])
 
   const selected = getHomePopularProducts(products)
@@ -51,10 +51,10 @@ test('home popular products stay balanced at two unique active products per grou
 
 test('home popular products preserve preferred merchandising choices', () => {
   const products = [
-    { id: 'cement-fallback', name: 'Fallback cement', catalogPath: ['stroymaterial'] },
-    { id: 'cement-m500-50kg', name: 'Preferred cement', catalogPath: ['stroymaterial'] },
-    { id: 'drill-fallback', name: 'Fallback drill', catalogPath: ['instrument'] },
-    { id: 'drill-650w', name: 'Preferred drill', catalogPath: ['instrument'] },
+    { id: 'cement-fallback', name: 'Fallback cement', catalogPath: ['stroymaterial'], brand: 'Kant Cement' },
+    { id: 'cement-m500-50kg', name: 'Preferred cement', catalogPath: ['stroymaterial'], brand: 'Kant Cement' },
+    { id: 'drill-fallback', name: 'Fallback drill', catalogPath: ['instrument'], brand: 'CHINT' },
+    { id: 'drill-650w', name: 'Preferred drill', catalogPath: ['instrument'], brand: 'CHINT' },
   ]
 
   assert.deepEqual(

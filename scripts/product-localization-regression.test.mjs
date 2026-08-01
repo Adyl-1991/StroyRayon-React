@@ -1,14 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
-  getDefaultVariant,
-  getFilteredProducts,
   getLocalizedUnitText,
   getProductListField,
   getProductTitle,
-  getProductPrice,
   getProductSpecs,
-  getSelectedVariant,
   isRedundantProductText,
   normalizeProduct,
   resolveProductSlug,
@@ -94,42 +90,8 @@ test('Kyrgyz product variants translate supplier wording but preserve models', (
   assert.equal(product.variants[0].titleRu, 'Karre Коробка наружного монтажа')
 })
 
-test('white 2 m cable channel exposes all existing sizes as variants', () => {
-  const product = products.find((item) => item.id === 'cable-channel-25x16')
-  const oldProduct = products.find((item) => item.id === 'cable-channel-16x16')
-
-  assert.ok(product)
-  assert.equal(product.slug, 'kabel-kanal-25x16-2')
-  assert.equal(product.sku, 'SR-ELC-CHN-WHT-2M')
-  assert.equal(product.brand, null)
-  assert.equal(product.price, 38)
-  assert.equal(product.unit, 'даана')
-  assert.equal(product.unitRu, 'шт.')
-  assert.equal(product.minOrder, '1 даана')
-  assert.equal(product.minOrderRu, '1 шт.')
-  assert.equal(product.packageInfoKg, '1 даана (узундугу 2 м)')
-  assert.equal(product.packageInfoRu, '1 шт. (длина 2 м)')
-  assert.equal(product.specs['Сатуу бирдиги'], 'даана')
-  assert.equal(product.specificationsRu['Единица продажи'], 'шт.')
-  assert.equal(product.specificationsRu.Цвет, 'белый')
-  assert.equal(product.faqRu.length, 4)
-  assert.equal(getProductSpecs(product, 'ru').Размеры, '29 типоразмеров')
-  assert.equal(getProductSpecs(product, 'ru')['Размеры под заказ'], undefined)
-  assert.equal(product.variants.length, 29)
-  assert.deepEqual(
-    product.variants.slice(0, 2).map((variant) => [variant.size, variant.titleRu, variant.sku, variant.price, variant.specs.Цвет]),
-    [
-      ['16x16 мм', '16x16 мм, 2 м, белый', 'SR-ELC-CHN-1616-2M', 38, 'белый'],
-      ['25x16 мм', '25x16 мм, 2 м, белый', 'SR-ELC-CHN-2516-2M', 59.97, 'белый'],
-    ],
-  )
-  assert.equal(product.variants.filter((variant) => variant.price === 0).length, 27)
-  assert.equal(product.variants.filter((variant) => variant.stockStatus === 'out_of_stock').length, 27)
-  assert.ok(product.variants.every((variant) => variant.sku && variant.specs.Цвет === 'белый'))
-  assert.equal(getProductPrice(product), 38)
-  assert.equal(getDefaultVariant(product).id, 'cable-channel-white-2m-16x16')
-  assert.equal(getSelectedVariant(product, 'cable-channel-white-2m-25x16').price, 59.97)
-  assert.equal(oldProduct.isActive, false)
-  assert.deepEqual(getFilteredProducts({}, [oldProduct, product]).map((item) => item.id), ['cable-channel-25x16'])
+test('unbranded cable-channel records stay recoverable but are not published', () => {
+  assert.equal(products.find((item) => item.id === 'cable-channel-25x16'), undefined)
+  assert.equal(products.find((item) => item.id === 'cable-channel-16x16'), undefined)
   assert.equal(resolveProductSlug('kabel-kanal-16x16'), 'kabel-kanal-25x16-2')
 })

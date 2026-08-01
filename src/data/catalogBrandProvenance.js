@@ -87,6 +87,11 @@ export function isUnverifiedCatalogBrand(brand) {
   return unverifiedBrands.has(String(brand || '').trim())
 }
 
+export function isPublishableCatalogProduct(product) {
+  const brand = typeof product?.brand === 'string' ? product.brand : product?.brand?.name
+  return isVerifiedCatalogBrand(brand)
+}
+
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
