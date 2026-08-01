@@ -101,7 +101,7 @@ test('white 2 m cable channel exposes all existing sizes as variants', () => {
   assert.ok(product)
   assert.equal(product.slug, 'kabel-kanal-25x16-2')
   assert.equal(product.sku, 'SR-ELC-CHN-WHT-2M')
-  assert.equal(product.brand, 'ElectroSafe')
+  assert.equal(product.brand, null)
   assert.equal(product.price, 38)
   assert.equal(product.unit, 'даана')
   assert.equal(product.unitRu, 'шт.')

@@ -9,7 +9,6 @@ export const PRODUCT_REQUIRED_FIELDS = [
   'categorySlug',
   'subcategoryId',
   'subcategorySlug',
-  'brand',
   'productType',
   'price',
   'currency',

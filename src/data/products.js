@@ -4,6 +4,7 @@ import { carkitCableProducts } from './carkitCableProducts.generated.js'
 import { electricalSupplierProducts } from './electricalSupplierProducts.generated.js'
 import { everPlastProducts } from './everPlastProducts.generated.js'
 import { isRetiredProductId, isRetiredProductSlug } from './retiredProductSlugs.js'
+import { sanitizeCatalogProductBrand } from './catalogBrandProvenance.js'
 
 const productPlaceholder = '/images/placeholders/product-placeholder.svg'
 const buildingProductPlaceholder = '/images/placeholders/product-building-placeholder.svg'
@@ -15228,4 +15229,4 @@ export const products = [
   ...carkitCableProducts.map(product).map(removeRetiredProductRelations),
   ...electricalSupplierProducts.map(product).map(removeRetiredProductRelations),
   ...everPlastProducts.map(product).map(removeRetiredProductRelations),
-]
+].map(sanitizeCatalogProductBrand)

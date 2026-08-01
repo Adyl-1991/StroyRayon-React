@@ -5,6 +5,7 @@ import { catalogTree } from '../data/catalogTree.js'
 import { categories } from '../data/categories.js'
 import { PRODUCT_REQUIRED_FIELDS, PRODUCT_UNIT_VALUES, STOCK_STATUS_VALUES } from '../data/productSchema.js'
 import { products } from '../data/products.js'
+import { isVerifiedCatalogBrand } from '../data/catalogBrandProvenance.js'
 
 function findDuplicates(values) {
   return values.filter((value, index) => values.indexOf(value) !== index)
@@ -93,6 +94,10 @@ export function validateCatalogData() {
   })
 
   products.forEach((product) => {
+    if (product.brand && !isVerifiedCatalogBrand(product.brand)) {
+      warnings.push(`${product.id}: brand "${product.brand}" has no approved provenance`)
+    }
+
     requiredProductFields.forEach((field) => {
       if (product[field] === undefined || product[field] === null || product[field] === '') {
         warnings.push(`${product.id}: critical field "${field}" is empty`)
