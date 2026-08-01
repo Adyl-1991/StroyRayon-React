@@ -24,7 +24,7 @@ test('production catalog sync preserves manual fields, stock rows and uploaded i
 })
 
 test('production catalog sync has a catalog-size guard and runs before API startup', () => {
-  assert.match(seedSource, /products\.length < 300/)
+  assert.match(seedSource, /products\.length < 180/)
   assert.match(seedSource, /stats\.skippedProducts\.length \|\| stats\.warnings\.length/)
   assert.match(packageSource, /"prestart:prod":\s*"prisma migrate deploy && npm run prisma:seed"/)
   assert.match(

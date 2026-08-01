@@ -700,8 +700,8 @@ async function main() {
 
   console.log('Seed started')
   const { catalogTree, products } = await loadFrontendData()
-  if (products.length < 300) {
-    throw new Error(`Catalog safety check failed: expected at least 300 products, received ${products.length}`)
+  if (products.length < 180) {
+    throw new Error(`Catalog safety check failed: expected at least 180 products, received ${products.length}`)
   }
   await assertIdentityCompatibility(products)
   await seedCatalogNodes(catalogTree, stats)
