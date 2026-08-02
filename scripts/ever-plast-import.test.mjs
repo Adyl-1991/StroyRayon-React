@@ -21,6 +21,9 @@ test('generated EVER PLAST catalog contains every eligible PDF row', () => {
   assert.equal(variants.length, 235)
   assert.equal(everPlastCatalogImportMeta.markupPercent, 20)
   assert.equal(everPlastCatalogImportMeta.categoryFallbackFamilyCount, 0)
+  assert.equal(everPlastCatalogImportMeta.generatedImageFamilyCount, 0)
+  assert.equal(everPlastCatalogImportMeta.supplierImageFamilyCount, 12)
+  assert.equal(everPlastCatalogImportMeta.representativeImageFamilyCount, 8)
   assert.equal(new Set(variants.map((variant) => variant.id)).size, variants.length)
   assert.equal(new Set(variants.map((variant) => variant.sku)).size, variants.length)
 })
@@ -38,6 +41,8 @@ test('all public images are local and present', () => {
     assert.match(product.image.src, /^\/images\//)
     assert.equal(existsSync(path.resolve('public', product.image.src.replace(/^\/+/, ''))), true, product.slug)
     assert.notEqual(product.imageStatus, 'category-fallback')
+    assert.notEqual(product.imageStatus, 'ready-generated')
+    assert.equal(product.image.src.includes('/ever-plast-sewer-assets/'), false, product.slug)
   }
 })
 

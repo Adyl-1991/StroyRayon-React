@@ -99,6 +99,38 @@ const generatedSewerAssetByFamily = {
   'sewer-pipe-160-external': 'pipes-orange.webp',
 }
 
+// EVER PLAST does not expose individual sewer-fitting packshots in its public XML feed.
+// These verified supplier pages replace the previous generated group images with real
+// product photography. `supplier-product` is an exact EVER PLAST listing;
+// `supplier-representative` is the same fitting type/geometry when the supplier has no
+// public EVER PLAST listing for that family.
+const verifiedSewerPhotoByFamily = {
+  'sewer-coupling': supplierPhoto('https://www.f58.ru/products/50_mufta_pp_ever', 'https://www.f58.ru/files/products/556954.800x800.jpg?8fb88aca35a0b8df8c5feacbf2d8f501'),
+  'sewer-elbow-45': supplierPhoto('https://www.f58.ru/products/50_otvod_ugol_45_pp_ever', 'https://www.f58.ru/files/products/556956.800x800.jpg?6ab192f21c50f98efa28258f83854ecc'),
+  'sewer-elbow-90': supplierPhoto('https://www.f58.ru/products/50_otvod_ugol_87_pp_ever', 'https://www.f58.ru/files/products/556957.800x800.jpg?74381a27d5c2cc6127a720f97d7feae0'),
+  'sewer-special-elbow': supplierPhoto('https://www.f58.ru/products/110_otvod_ugol_90_s_vyhodom_50front_politjek', 'https://www.f58.ru/files/products/512408_1.800x800.jpg?6742950f063a952ec641a6f6e8e5a953', true),
+  'sewer-plug': supplierPhoto('https://www.f58.ru/products/50_zaglushka_pp_ever', 'https://www.f58.ru/files/products/556797_1.800x800.jpg?6a620458cf6536f8ca2e8405390a79ab'),
+  'sewer-revision': supplierPhoto('https://www.f58.ru/products/50_revizija_pp_ever', 'https://www.f58.ru/files/products/556960_1.800x800.jpg?523d07445c9bba85b6d7a77f55e600aa'),
+  'sewer-reducer': supplierPhoto('https://www.f58.ru/products/110_patrubok_perehodnoj_na_50_korotkij_pp_ever', 'https://www.f58.ru/files/products/556949.800x800.jpg?9b6ed3e7235042ef9e7cab552d6b2604'),
+  'sewer-tee-90': supplierPhoto('https://www.f58.ru/products/50_trojnik_na_50_ugol_87_pp_ever', 'https://www.f58.ru/files/products/556937_1.800x800.jpg?f246e9ad3a5a042216733d8b84271f6f'),
+  'sewer-tee-45': supplierPhoto('https://www.f58.ru/products/50_trojnik_na_50_ugol_45_pp_ever', 'https://www.f58.ru/files/products/556959.800x800.jpg?2893bf49faaed82b23aed0605a5ca1c8'),
+  'sewer-cross': supplierPhoto('https://www.f58.ru/products/1105050_krestovina_ugol_45_politjek', 'https://www.f58.ru/files/products/520406_1.800x800.jpg?dae64bf540594a5912677238658ba419', true),
+  'sewer-spigot': supplierPhoto('https://www.f58.ru/products/110_patrubok_kompensacionnyj_pp_ever', 'https://www.f58.ru/files/products/558327.800x800.jpg?a369db9bb85826c8fcea7dd4d42eaa9c'),
+  'sewer-external-elbow-45': supplierPhoto('https://www.f58.ru/products/110_otvod_ugol_45_pp_politjek_naruzh', 'https://www.f58.ru/files/products/503330_2.800x800.jpg?6fdaa5125654e55e1160cb637005b5f1', true),
+  'sewer-external-elbow-90': supplierPhoto('https://www.f58.ru/products/110_otvod_ugol_87_5_pp_politjek_naruzh', 'https://www.f58.ru/files/products/503303_1.800x800.jpg?d06abeb98ac8dbf7f14e26e2564a3213', true),
+  'sewer-external-revision': supplierPhoto('https://www.f58.ru/products/110_revizija_pp_politjek_naruzh', 'https://www.f58.ru/files/products/503327_1.800x800.jpg?9d5d67043bb7e6ab6c6b60f186447ad1', true),
+  'sewer-external-tee-45': supplierPhoto('https://www.f58.ru/products/110_trojnik_na_110_ugol_45_pp_politjek_naruzh', 'https://www.f58.ru/files/products/503304_1.800x800.jpg?caa33fbc4cbf4881c80eeca9586b9547', true),
+  'sewer-external-tee-90': supplierPhoto('https://www.f58.ru/products/110_trojnik_na_110_ugol_87_5_pp_politjek_naruzh', 'https://www.f58.ru/files/products/503322_1.800x800.jpg?78c28892a9aedbe1f11612b69131dab1', true),
+  'sewer-clip': supplierPhoto('https://www.f58.ru/products/50_krepezh_usilennyj_ever', 'https://www.f58.ru/files/products/%D0%9A%D1%80%D0%B5%D0%BF%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%2050%20%D0%9F%D0%9F.800x800.PNG?00eb53ec98371cb9700cbcd453267601'),
+  'sewer-metal-clamp': supplierPhoto('https://www.f58.ru/products/homut_santehnicheskij_34_26_30_mm_v_komplekte_so_shpilkoj_i_djubelem_vrt', 'https://www.f58.ru/files/products/320402_1.800x800.jpg?f3f5a8854e7c17ecfcbffd071895f06e', true),
+  'sewer-pipe-110-external': supplierPhoto('https://www.f58.ru/products/110_truba_1_m_pp_ever_tolshh_stenki_3_4_naruzh', 'https://www.f58.ru/files/products/557839.800x800.jpg?4266c6a1880b521d77d944decc81b709'),
+  'sewer-pipe-160-external': supplierPhoto('https://www.f58.ru/products/160_truba_1_m_pp_ever_tolshh_stenki_4_9_naruzh', 'https://www.f58.ru/files/products/557843.800x800.jpg?c06fa7675a2abd32ce2b25d57ad99a13'),
+}
+
+function supplierPhoto(pageUrl, imageUrl, representative = false) {
+  return { pageUrl, imageUrl, representative }
+}
+
 function family(titleKg, titleRu, catalogPath, unit = 'даана', productType = 'ППР бириктиргич', productTypeRu = 'ППР фитинг') {
   return { titleKg, titleRu, catalogPath, unit, productType, productTypeRu }
 }
@@ -513,7 +545,9 @@ function buildFamilyProducts(rows, officialProducts, csvBySku) {
       ? '/images/categories/generated/engineering/ppr-system.webp'
       : '/images/categories/generated/engineering/sewerage.webp'
     const generatedAsset = generatedSewerAssetByFamily[group.familyKey]
-    const localImage = group.officialImages.length
+    const verifiedSewerPhoto = verifiedSewerPhotoByFamily[group.familyKey]
+    const sourceImageUrl = group.officialImages[0] || verifiedSewerPhoto?.imageUrl || ''
+    const localImage = sourceImageUrl
       ? `/images/products/${slug}/main.webp`
       : generatedAsset
         ? `/images/products/ever-plast-sewer-assets/${generatedAsset}`
@@ -574,13 +608,30 @@ function buildFamilyProducts(rows, officialProducts, csvBySku) {
       specsRu: { Бренд: 'EVER PLAST', Материал: group.familyKey.startsWith('ppr-') ? 'PPR' : 'Полипропилен', 'Дата прайса': '30.05.2026', Варианты: `${variants.length}` },
       images: [image],
       image,
-      imageStatus: group.officialImages.length ? 'ready-official' : generatedAsset ? 'ready-generated' : 'category-fallback',
+      imageStatus: group.officialImages.length
+        ? 'ready-official'
+        : verifiedSewerPhoto?.representative
+          ? 'ready-supplier-representative'
+          : verifiedSewerPhoto
+            ? 'ready-supplier'
+            : generatedAsset
+              ? 'ready-generated'
+              : 'category-fallback',
       isPlaceholderImage: false,
       variants,
       tags: ['new', 'quality'],
       aliases: [config.titleRu, config.titleKg, ...variants.map((variant) => variant.size)],
-      sourceUrl: group.sourceUrls[0] || EVER_BASE,
-      sourceImageUrl: group.officialImages[0] || '',
+      sourceUrl: group.sourceUrls[0] || verifiedSewerPhoto?.pageUrl || EVER_BASE,
+      sourceImageUrl,
+      imageSourceType: group.officialImages.length
+        ? 'manufacturer-feed'
+        : verifiedSewerPhoto?.representative
+          ? 'supplier-representative'
+          : verifiedSewerPhoto
+            ? 'supplier-product'
+            : generatedAsset
+              ? 'generated'
+              : 'category-fallback',
       priceSource: 'supplier_pdf_markup_20_percent',
       priceDate: PRICE_DATE,
       markupPercent: 20,
@@ -629,7 +680,7 @@ function generatedModule(products, meta) {
 }
 
 function publicSummary(meta) {
-  return `# EVER PLAST import summary\n\nGenerated: ${meta.generatedAt}\n\n- Price date: ${PRICE_DATE}\n- Markup: 20%\n- PDF rows parsed: ${meta.parsedPriceRows}\n- Eligible PPR/sewer rows: ${meta.eligibleRows}\n- Product families: ${meta.productCount}\n- Variants: ${meta.variantCount}\n- Exact/high official matches: ${meta.acceptedMatchCount}\n- Low/no official matches: ${meta.reviewMatchCount}\n- Families with official packshots: ${meta.officialImageFamilyCount}\n- Families with generated studio packshots: ${meta.generatedImageFamilyCount}\n- Families using a category fallback: ${meta.categoryFallbackFamilyCount}\n\nPurchase prices are excluded from tracked/public files. The private reconciliation report is gitignored.\n`
+  return `# EVER PLAST import summary\n\nGenerated: ${meta.generatedAt}\n\n- Price date: ${PRICE_DATE}\n- Markup: 20%\n- PDF rows parsed: ${meta.parsedPriceRows}\n- Eligible PPR/sewer rows: ${meta.eligibleRows}\n- Product families: ${meta.productCount}\n- Variants: ${meta.variantCount}\n- Exact/high official matches: ${meta.acceptedMatchCount}\n- Low/no official matches: ${meta.reviewMatchCount}\n- Families with official packshots: ${meta.officialImageFamilyCount}\n- Families with exact supplier product photos: ${meta.supplierImageFamilyCount}\n- Families with representative supplier product photos: ${meta.representativeImageFamilyCount}\n- Families with generated studio packshots: ${meta.generatedImageFamilyCount}\n- Families using a category fallback: ${meta.categoryFallbackFamilyCount}\n\nPurchase prices are excluded from tracked/public files. The private reconciliation report is gitignored.\n`
 }
 
 async function findPricePdf(prefix) {
@@ -669,6 +720,8 @@ export async function runImport() {
     acceptedMatchCount,
     reviewMatchCount: matchDetails.length - acceptedMatchCount,
     officialImageFamilyCount: products.filter((product) => product.imageStatus === 'ready-official').length,
+    supplierImageFamilyCount: products.filter((product) => product.imageStatus === 'ready-supplier').length,
+    representativeImageFamilyCount: products.filter((product) => product.imageStatus === 'ready-supplier-representative').length,
     generatedImageFamilyCount: products.filter((product) => product.imageStatus === 'ready-generated').length,
     categoryFallbackFamilyCount: products.filter((product) => product.imageStatus === 'category-fallback').length,
   }
