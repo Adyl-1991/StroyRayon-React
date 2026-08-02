@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { auditKyrgyzContent } from './kyrgyz-content-audit.mjs'
+import { products } from '../src/data/products.js'
 import { normalizeKyrgyzContent, normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 
 test('all public Kyrgyz content passes the language and copy audit', () => {
@@ -40,4 +41,14 @@ test('recursive Kyrgyz normalization preserves URLs while translating visible co
   assert.equal(normalized.route, route)
   assert.equal(normalized.canonical, canonical)
   assert.notEqual(normalized.label, 'gidroizolyaciya аралашмасы')
+})
+
+test('verified Knauf descriptions are not replaced by generic catalog copy', () => {
+  const rotband = products.find((product) => product.slug === 'knauf-rotband-30kg')
+  const mp75 = products.find((product) => product.slug === 'knauf-mp-75-30kg')
+
+  assert.match(rotband.descriptionKg, /полимер кошулмалары бар гипс негизиндеги/)
+  assert.match(rotband.descriptionKg, /Q3 сапат деңгээлине/)
+  assert.match(mp75.descriptionKg, /PFT G4, G5 жана Ritmo M\/L\/XL/)
+  assert.match(mp75.descriptionKg, /Q3 сапат деңгээлине/)
 })

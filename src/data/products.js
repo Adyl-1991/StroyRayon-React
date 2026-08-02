@@ -775,7 +775,9 @@ function product(data) {
   const variantPrices = variants.map((variant) => Number(variant.price)).filter((price) => Number.isFinite(price) && price > 0)
   const price = variantPrices.length ? Math.min(...variantPrices) : Number(data.price || 0)
   const stockStatus = getAggregateStockStatus(variants, data.stockStatus)
-  const descriptionKg = buildCommercialDescription(normalizedData, catalogPath, variants)
+  const descriptionKg = data.useVerifiedDescription && (data.fullDescriptionKg || data.descriptionKg)
+    ? normalizeVisibleKg(data.fullDescriptionKg || data.descriptionKg)
+    : buildCommercialDescription(normalizedData, catalogPath, variants)
   const titleRu = getRuTitle(data, titleKg)
   const shortDescriptionKg = data.shortDescriptionKg
     ? normalizeVisibleKg(data.shortDescriptionKg)
@@ -13414,6 +13416,7 @@ const baseProducts = [
     packRu: '30 кг мешок',
     weight: '30 кг',
     size: '30 кг',
+    useVerifiedDescription: true,
     shortDescriptionKg: 'Ички дубалдар менен шыптарды кол менен тегиздөөгө арналган Knauf Rotband универсалдуу гипс штукатуркасы.',
     shortDescriptionRu: 'Универсальная гипсовая штукатурка Knauf Rotband для ручного выравнивания стен и потолков внутри помещений.',
     descriptionKg: 'Knauf Rotband — полимер кошулмалары бар гипс негизиндеги универсалдуу кургак аралашма. Ички дубалдар менен шыптарды кол менен жогорку сапатта тегиздөө үчүн колдонулат.',
@@ -13565,6 +13568,7 @@ const baseProducts = [
     packRu: '30 кг мешок',
     weight: '30 кг',
     size: '30 кг',
+    useVerifiedDescription: true,
     shortDescriptionKg: 'Ички дубалдар менен шыптарды штукатурка станциясы аркылуу тегиздөөгө арналган Knauf MP 75 гипс штукатуркасы.',
     shortDescriptionRu: 'Гипсовая штукатурка Knauf MP 75 для машинного выравнивания стен и потолков внутри помещений.',
     descriptionKg: 'Knauf MP 75 — ички дубалдар менен шыптарды машина аркылуу жогорку сапатта тегиздөөгө арналган гипс негизиндеги кургак аралашма. PFT G4, G5 жана Ritmo M/L/XL станциялары менен иштөөгө ылайыктуу.',
