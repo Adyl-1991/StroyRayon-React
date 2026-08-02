@@ -174,6 +174,31 @@ test('audited products use stable placeholders without requesting missing legacy
   assert.equal(checkedProducts, 3)
 })
 
+test('API-shaped EVER PLAST products keep verified local product photos', async () => {
+  const everPlastProducts = products.filter(
+    (product) => product.isActive !== false && product.slug.startsWith('ever-plast-'),
+  )
+
+  assert.equal(everPlastProducts.length, 49)
+  for (const bundledProduct of everPlastProducts) {
+    const main = `/images/products/${bundledProduct.slug}/main.webp`
+    const apiProduct = {
+      ...bundledProduct,
+      imageStatus: undefined,
+      isPlaceholderImage: undefined,
+      images: [{
+        src: main,
+        alt: bundledProduct.titleKg,
+        storageDriver: 'legacy',
+      }],
+    }
+
+    const image = getProductImage(apiProduct)
+    assert.equal(image.src, main, bundledProduct.slug)
+    await access(path.join(root, 'public', main.replace(/^\//, '')))
+  }
+})
+
 test('every catalog node resolves to an existing realistic image', async () => {
   const nodes = []
   const collect = (items) => items.forEach((item) => {

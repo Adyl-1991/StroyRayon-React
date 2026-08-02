@@ -313,6 +313,10 @@ const priorityProductAssets = Object.fromEntries(
   ]),
 )
 
+function isImportedEverPlastAsset(slug) {
+  return /^ever-plast-(?:ppr|sewer)-[a-z0-9-]+$/u.test(String(slug || ''))
+}
+
 export function getProductAssetEntry(slug) {
   if (!slug) return null
   if (officialProductAssets[slug]) return officialProductAssets[slug]
@@ -335,6 +339,14 @@ export function getProductAssetEntry(slug) {
     }
   }
   if (priorityProductAssets[slug]) return priorityProductAssets[slug]
+  if (isImportedEverPlastAsset(slug)) {
+    return createProductAssetEntry(slug, {
+      available: true,
+      preferAsset: true,
+      galleryCount: 0,
+      imageStatus: 'ready',
+    })
+  }
   if (plannedProductAssets[slug]) return plannedProductAssets[slug]
 
   return createProductAssetEntry(slug)
