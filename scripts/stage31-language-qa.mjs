@@ -61,10 +61,6 @@ const expectedChips = {
   kg: ['Курулуш', 'Инженердик түтүк системалары', 'Сантехникалык жабдуулар', 'Электр жабдуулары', 'Шаймандар', 'Бекиткич', 'Боёк', 'Желдетүү', 'Бак/чарба'],
   ru: ['Стройматериалы', 'Инженерная сантехника', 'Сантехника', 'Электрика', 'Инструменты', 'Крепёж', 'Краски и обои', 'Вентиляция', 'Сад и хозяйство'],
 }
-const expectedCta = {
-  kg: { title: 'Материалдар тизмеси?', action: 'WhatsAppка жөнөтүү' },
-  ru: { title: 'Список материалов?', action: 'Отправить в WhatsApp' },
-}
 const forbiddenUi = {
   kg: ['Главная', 'Стройматериалы', 'Инженерная сантехника', 'Инструменты', 'Крепёж', 'Краски и обои', 'Корзина', 'Оформление заказа', 'Доставка и оплата', 'Контакты', 'Разделы', 'Товары в этом разделе', 'Удалить'],
   ru: ['Башкы бет', 'Курулуш', 'Инженердик сантехника', 'Шаймандар', 'Бекиткич', 'Боёк', 'Себет', 'Буйрутма берүү', 'Жеткирүү жана төлөм', 'Байланыш', 'Бөлүмдөр', 'Бул бөлүмдөгү товарлар', 'Өчүрүү'],
@@ -171,9 +167,6 @@ async function inspect(cdp) {
     const categoryCarousel = document.querySelector('.header-category-carousel');
     const categoryChips = Array.from(document.querySelectorAll('.header-category-chip'));
     const materialsCta = document.querySelector('.header-materials-cta');
-    const carouselRect = categoryCarousel?.getBoundingClientRect();
-    const ctaRect = materialsCta?.getBoundingClientRect();
-    const ctaVisible = Boolean(materialsCta && getComputedStyle(materialsCta).display !== 'none');
     const backArrow = document.querySelector('.header-category-arrow--back');
     const forwardArrow = document.querySelector('.header-category-arrow--forward');
     return {
@@ -188,12 +181,9 @@ async function inspect(cdp) {
       admin: Boolean(document.querySelector('.admin-shell, .admin-login')),
       chips: categoryChips.map((item) => item.textContent.trim()),
       headerText: document.querySelector('.header-category-strip')?.innerText || '',
-      ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
-      ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || '',
+      materialsCtaPresent: Boolean(materialsCta),
       categoryLayout: {
-        ctaVisible,
         carouselVisible: Boolean(categoryCarousel && getComputedStyle(categoryCarousel).display !== 'none'),
-        overlap: Boolean(ctaVisible && carouselRect && ctaRect && carouselRect.right > ctaRect.left - 1),
         scrollClientWidth: categoryScroll?.clientWidth || 0,
         scrollWidth: categoryScroll?.scrollWidth || 0,
         scrollLeft: categoryScroll?.scrollLeft || 0,
@@ -245,17 +235,13 @@ async function main() {
           const kyrgyzLeakage = locale === 'kg' ? findKyrgyzLanguageLeakage(result.text) : []
           const chipMismatch = result.chips.length !== expectedChips[locale].length
             || expectedChips[locale].some((text, index) => result.chips[index] !== text)
-          const ctaMismatch = result.ctaTitle !== expectedCta[locale].title || result.ctaAction !== expectedCta[locale].action
           if (result.lang !== expectedLang) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `html lang ${result.lang}` })
           if (expectedHeading && result.h1 !== expectedHeading) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `h1 "${result.h1}" expected "${expectedHeading}"` })
           if (result.overflow > 1) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `horizontal overflow ${result.overflow}px` })
           if (result.brokenImages.length) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `broken images ${result.brokenImages.length}` })
           if (!result.header || !result.footer) issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'public layout missing' })
           if (chipMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `category chips mismatch: ${result.chips.join(' | ')}` })
-          if (ctaMismatch) issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header CTA mismatch: ${result.ctaTitle} | ${result.ctaAction}` })
-          if (result.categoryLayout.ctaVisible && result.categoryLayout.overlap) {
-            issues.push({ route: route.path, viewport: viewport.width, locale, issue: `header category chips overlap WhatsApp CTA (${result.categoryLayout.scrollWidth}/${result.categoryLayout.scrollClientWidth}px)` })
-          }
+          if (result.materialsCtaPresent) issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'removed header materials CTA is still present' })
           const categoryOverflow = result.categoryLayout.scrollWidth > result.categoryLayout.scrollClientWidth + 1
           if (result.categoryLayout.carouselVisible && categoryOverflow && (!result.categoryLayout.backArrow || !result.categoryLayout.forwardArrow)) {
             issues.push({ route: route.path, viewport: viewport.width, locale, issue: 'overflowing category carousel controls are missing' })
@@ -284,15 +270,13 @@ async function main() {
       return new Promise((resolve) => setTimeout(() => resolve({
         lang: document.documentElement.lang,
         chips: Array.from(document.querySelectorAll('.header-category-chip')).map((item) => item.textContent.trim()),
-        ctaTitle: document.querySelector('.header-materials-cta strong')?.textContent?.trim() || '',
-        ctaAction: document.querySelector('.header-materials-cta small')?.textContent?.trim() || ''
+        materialsCtaPresent: Boolean(document.querySelector('.header-materials-cta'))
       }), 100));
     })()`)
     if (
       switchResult.lang !== 'ru'
       || expectedChips.ru.some((text, index) => switchResult.chips[index] !== text)
-      || switchResult.ctaTitle !== expectedCta.ru.title
-      || switchResult.ctaAction !== expectedCta.ru.action
+      || switchResult.materialsCtaPresent
     ) {
       issues.push({ route: '/catalog', viewport: 390, locale: 'switch', issue: 'live KG → RU switch did not update chips and CTA' })
     }

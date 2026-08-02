@@ -2,7 +2,6 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCart } from '../../hooks/useCart'
 import { useLocale } from '../../i18n/LocaleContext'
-import { getWhatsAppUrl } from '../../config/contact'
 import { Logo } from './Logo'
 
 const quickNavItems = [
@@ -25,8 +24,6 @@ export function Header() {
   const categoryScrollRef = useRef(null)
   const location = useLocation()
   const navigate = useNavigate()
-  const whatsappMaterialsUrl = getWhatsAppUrl(t('header.materialsMessage'))
-
   const updateCategoryScrollState = useCallback(() => {
     const element = categoryScrollRef.current
     if (!element) return
@@ -177,10 +174,6 @@ export function Header() {
             </svg>
           </button>
         </div>
-        <a className="header-materials-cta" href={whatsappMaterialsUrl} target="_blank" rel="noreferrer">
-          <strong>{t('header.materialsTitle')}</strong>
-          <small>{t('header.materialsCta')}</small>
-        </a>
       </nav>
     </>
   )
