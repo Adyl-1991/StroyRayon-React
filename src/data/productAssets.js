@@ -148,8 +148,6 @@ const generatedBuildingProductImageSlugs = [
   'portlandcement-m500-50kg',
   'plitka-kleyi-standard-25kg',
   'gips-shtukaturkasy-30kg',
-  'knauf-rotband-30kg',
-  'knauf-mp-75-30kg',
   'montazh-kobugu-750ml',
   'eshik-tutkasy-komplekt',
   'pvh-podokonnik-200mm',
@@ -285,6 +283,25 @@ const generatedBuildingProductAssets = Object.fromEntries(
   ]),
 )
 
+const officialProductAssets = {
+  'knauf-rotband-30kg': createProductAssetEntry('knauf-rotband-30kg', {
+    available: true,
+    preferAsset: true,
+    galleryCount: 0,
+    imageStatus: 'ready-official',
+    main: `${PRODUCT_IMAGE_BASE_PATH}/knauf-rotband-30kg/main-official.webp`,
+    altKg: 'Knauf Rotband гипс штукатуркасы, 30 кг — расмий товар сүрөтү',
+  }),
+  'knauf-mp-75-30kg': createProductAssetEntry('knauf-mp-75-30kg', {
+    available: true,
+    preferAsset: true,
+    galleryCount: 0,
+    imageStatus: 'ready-official',
+    main: `${PRODUCT_IMAGE_BASE_PATH}/knauf-mp-75-30kg/main-official.webp`,
+    altKg: 'Knauf MP 75 машина гипс штукатуркасы, 30 кг — расмий товар сүрөтү',
+  }),
+}
+
 const priorityProductAssets = Object.fromEntries(
   priorityProductImageSlugs.map((slug) => [
     slug,
@@ -298,6 +315,7 @@ const priorityProductAssets = Object.fromEntries(
 
 export function getProductAssetEntry(slug) {
   if (!slug) return null
+  if (officialProductAssets[slug]) return officialProductAssets[slug]
   if (generatedBuildingProductAssets[slug]) return generatedBuildingProductAssets[slug]
   if (packshotAssets[slug]) {
     const assetType = inferProductAssetType(slug)
