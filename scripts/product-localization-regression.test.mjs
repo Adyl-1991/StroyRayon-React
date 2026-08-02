@@ -72,6 +72,15 @@ test('API-first products resolve Kyrgyz product types from the catalogue tree', 
   assert.doesNotMatch(getProductTitle(apiProduct, 'kg'), /dekorativdik-shtukaturka/)
 })
 
+test('AlinEX primer titles explain the Kyrgyz term with the familiar product name', () => {
+  const primer = products.find((product) => product.slug === 'alinex-gruntovka-alinex-primer')
+  const primer2 = products.find((product) => product.slug === 'alinex-gruntovka-dlia-pola-alinex-primer-2')
+
+  assert.equal(getProductTitle(primer, 'kg'), 'Курулуш астарлары (грунтовкасы) AlinEX PRIMER')
+  assert.equal(getProductTitle(primer2, 'kg'), 'Курулуш астарлары (грунтовкасы) AlinEX PRIMER 2')
+  assert.equal(getProductTitle(primer, 'ru'), 'Грунтовка AlinEX PRIMER')
+})
+
 test('Kyrgyz product variants translate supplier wording but preserve models', () => {
   const product = normalizeProduct({
     id: 'supplier-variants',

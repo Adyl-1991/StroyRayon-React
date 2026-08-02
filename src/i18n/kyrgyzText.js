@@ -810,7 +810,8 @@ export const KYRGYZ_LANGUAGE_LEAKAGE_PATTERNS = [
 
 export function findKyrgyzLanguageLeakage(value) {
   if (typeof value !== 'string') return []
+  const auditableValue = value.replace(/\(грунтовкасы\)/giu, '')
   return KYRGYZ_LANGUAGE_LEAKAGE_PATTERNS
-    .filter((pattern) => pattern.test(value))
+    .filter((pattern) => pattern.test(auditableValue))
     .map((pattern) => pattern.source)
 }

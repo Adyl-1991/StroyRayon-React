@@ -55,11 +55,14 @@ function getAlinexKyrgyzTitle(product) {
   const productType = normalizeKgText(
     catalogProductType || product?.productTypeKg || product?.productType || 'Курулуш материалы',
   )
+  const customerFacingProductType = catalogPath.at(-1) === 'gruntovkalar'
+    ? productType.replace(/астарлары?/iu, (label) => `${label} (грунтовкасы)`)
+    : productType
 
-  if (model) return `${productType} AlinEX ${model}`.replace(/\s+/g, ' ').trim()
+  if (model) return `${customerFacingProductType} AlinEX ${model}`.replace(/\s+/g, ' ').trim()
   if (/добавк/iu.test(rawTitle)) return 'Эки курамдуу суу өткөрбөөчү аралашмага кошулма AlinEX'
   if (/декоратив/iu.test(rawTitle)) return 'Декоративдик шыбак AlinEX'
-  return `${productType} AlinEX`.trim()
+  return `${customerFacingProductType} AlinEX`.trim()
 }
 
 export function normalizeProductKgText(product, value) {

@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { auditKyrgyzContent } from './kyrgyz-content-audit.mjs'
 import { products } from '../src/data/products.js'
-import { normalizeKyrgyzContent, normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
+import { findKyrgyzLanguageLeakage, normalizeKyrgyzContent, normalizeKyrgyzText } from '../src/i18n/kyrgyzText.js'
 
 test('all public Kyrgyz content passes the language and copy audit', () => {
   const result = auditKyrgyzContent()
@@ -51,4 +51,9 @@ test('verified Knauf descriptions are not replaced by generic catalog copy', () 
   assert.match(rotband.descriptionKg, /Q3 сапат деңгээлине/)
   assert.match(mp75.descriptionKg, /PFT G4, G5 жана Ritmo M\/L\/XL/)
   assert.match(mp75.descriptionKg, /Q3 сапат деңгээлине/)
+})
+
+test('customer-facing primer clarification remains allowed only in its exact parenthetical form', () => {
+  assert.deepEqual(findKyrgyzLanguageLeakage('Курулуш астарлары (грунтовкасы)'), [])
+  assert.notDeepEqual(findKyrgyzLanguageLeakage('Грунтовка для стен'), [])
 })
