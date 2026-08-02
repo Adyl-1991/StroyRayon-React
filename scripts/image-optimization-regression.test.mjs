@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { access, readdir, stat } from 'node:fs/promises'
+import { access, readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 import sharp from 'sharp'
@@ -195,8 +195,28 @@ test('API-shaped EVER PLAST products keep verified local product photos', async 
 
     const image = getProductImage(apiProduct)
     assert.equal(image.src, main, bundledProduct.slug)
-    await access(path.join(root, 'public', main.replace(/^\//, '')))
+    const imagePath = path.join(root, 'public', main.replace(/^\//, ''))
+    await access(imagePath)
+    const { data, info } = await sharp(imagePath).raw().toBuffer({ resolveWithObject: true })
+    assert.equal(info.width, 900, bundledProduct.slug)
+    assert.equal(info.height, 900, bundledProduct.slug)
+    const cornerOffsets = [
+      0,
+      (info.width - 1) * info.channels,
+      (info.height - 1) * info.width * info.channels,
+      ((info.height * info.width) - 1) * info.channels,
+    ]
+    for (const offset of cornerOffsets) {
+      assert.deepEqual([...data.subarray(offset, offset + 3)], [255, 255, 255], bundledProduct.slug)
+    }
   }
+})
+
+test('product cards and galleries use one white media background', async () => {
+  const css = await readFile(path.join(root, 'src', 'styles', 'global.css'), 'utf8')
+  assert.match(css, /\.product-card__image\s*\{[^}]*background:\s*#fff;/s)
+  assert.match(css, /\.product-gallery__main\s*\{[^}]*background:\s*#fff;/s)
+  assert.match(css, /\.product-gallery__thumbs img\s*\{[^}]*background:\s*#fff;/s)
 })
 
 test('every catalog node resolves to an existing realistic image', async () => {

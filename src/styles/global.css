@@ -1212,9 +1212,7 @@ html {
   position: relative;
   height: 156px;
   min-height: 0;
-  background:
-    linear-gradient(135deg, rgba(45, 106, 79, 0.08), rgba(234, 183, 95, 0.12)),
-    #f7f8f4;
+  background: #fff;
 }
 
 .product-card__image img {
@@ -1884,7 +1882,7 @@ del {
   padding: 14px;
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  background: #f7f8f4;
+  background: #fff;
 }
 
 .product-gallery__thumbs {
@@ -1910,7 +1908,7 @@ del {
   aspect-ratio: 1;
   object-fit: contain;
   padding: 6px;
-  background: #f7f8f4;
+  background: #fff;
 }
 
 .product-info,

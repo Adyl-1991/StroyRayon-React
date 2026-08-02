@@ -664,10 +664,23 @@ async function downloadImages(products) {
       continue
     }
     const input = Buffer.from(await response.arrayBuffer())
-    await sharp(input)
-      .resize(820, 820, { fit: 'inside', withoutEnlargement: true })
-      .extend({ top: 40, bottom: 40, left: 40, right: 40, background: '#f4f6f3' })
-      .resize(900, 900, { fit: 'contain', background: '#f4f6f3' })
+    const trimmed = await sharp(input)
+      .rotate()
+      .flatten({ background: '#ffffff' })
+      .trim({ threshold: 12 })
+      .toBuffer()
+    const packshot = await sharp(trimmed)
+      .resize(760, 760, { fit: 'inside', withoutEnlargement: false })
+      .toBuffer()
+    await sharp({
+      create: {
+        width: 900,
+        height: 900,
+        channels: 3,
+        background: '#ffffff',
+      },
+    })
+      .composite([{ input: packshot, gravity: 'centre' }])
       .webp({ quality: 84, smartSubsample: true })
       .toFile(outputPath)
     results.push({ slug: product.slug, status: 'ready', bytes: (await stat(outputPath)).size })
