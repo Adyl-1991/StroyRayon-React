@@ -81,6 +81,22 @@ test('AlinEX primer titles explain the Kyrgyz term with the familiar product nam
   assert.equal(getProductTitle(primer, 'ru'), 'Грунтовка AlinEX PRIMER')
 })
 
+test('AlinEX tile adhesive titles explain the Kyrgyz term with the familiar product name', () => {
+  const tileAdhesives = products.filter((product) => (
+    product.slug.startsWith('alinex-') && product.catalogPath?.at(-1) === 'plitka-kleileri'
+  ))
+
+  assert.equal(tileAdhesives.length, 5)
+  assert.equal(
+    tileAdhesives.every((product) => getProductTitle(product, 'kg').startsWith('Плитка желими (клейи) AlinEX ')),
+    true,
+  )
+  assert.equal(
+    getProductTitle(tileAdhesives.find((product) => product.sku === 'ALX-14'), 'kg'),
+    'Плитка желими (клейи) AlinEX SET 308',
+  )
+})
+
 test('Kyrgyz product variants translate supplier wording but preserve models', () => {
   const product = normalizeProduct({
     id: 'supplier-variants',

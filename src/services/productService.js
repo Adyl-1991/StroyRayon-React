@@ -57,7 +57,9 @@ function getAlinexKyrgyzTitle(product) {
   )
   const customerFacingProductType = catalogPath.at(-1) === 'gruntovkalar'
     ? productType.replace(/астарлары?/iu, (label) => `${label} (грунтовкасы)`)
-    : productType
+    : catalogPath.at(-1) === 'plitka-kleileri'
+      ? productType.replace(/желими/iu, (label) => `${label} (клейи)`)
+      : productType
 
   if (model) return `${customerFacingProductType} AlinEX ${model}`.replace(/\s+/g, ' ').trim()
   if (/добавк/iu.test(rawTitle)) return 'Эки курамдуу суу өткөрбөөчү аралашмага кошулма AlinEX'

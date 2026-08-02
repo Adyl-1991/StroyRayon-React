@@ -53,7 +53,9 @@ test('verified Knauf descriptions are not replaced by generic catalog copy', () 
   assert.match(mp75.descriptionKg, /Q3 сапат деңгээлине/)
 })
 
-test('customer-facing primer clarification remains allowed only in its exact parenthetical form', () => {
+test('customer-facing material clarifications remain allowed only in their exact parenthetical forms', () => {
   assert.deepEqual(findKyrgyzLanguageLeakage('Курулуш астарлары (грунтовкасы)'), [])
+  assert.deepEqual(findKyrgyzLanguageLeakage('Плитка желими (клейи)'), [])
   assert.notDeepEqual(findKyrgyzLanguageLeakage('Грунтовка для стен'), [])
+  assert.notDeepEqual(findKyrgyzLanguageLeakage('Клей для плитки'), [])
 })
