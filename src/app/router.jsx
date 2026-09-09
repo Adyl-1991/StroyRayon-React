@@ -16,6 +16,14 @@ export const router = createBrowserRouter([
     errorElement: <RouteError />,
   },
   {
+    path: '/admin/forgot-password',
+    lazy: lazyNamed(() => import('../admin/AdminPasswordResetPage'), 'AdminForgotPasswordPage'),
+  },
+  {
+    path: '/admin/reset-password',
+    lazy: lazyNamed(() => import('../admin/AdminPasswordResetPage'), 'AdminResetPasswordPage'),
+  },
+  {
     path: '/admin',
     lazy: lazyNamed(() => import('../admin/AdminProtectedRoute'), 'AdminProtectedRoute'),
     children: [

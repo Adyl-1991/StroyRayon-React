@@ -32,6 +32,14 @@ export async function adminLogin(credentials) {
   return result
 }
 
+export function requestAdminPasswordReset(email) {
+  return apiPost('/admin/auth/password-reset/request', { email })
+}
+
+export function confirmAdminPasswordReset(token, password) {
+  return apiPost('/admin/auth/password-reset/confirm', { token, password })
+}
+
 export function getAdminProfile() {
   return adminRequest(() => apiGet('/admin/auth/me', authorizedOptions()))
 }

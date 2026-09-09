@@ -6,6 +6,8 @@ import { PrismaService } from '../../prisma/prisma.service'
 import { AuthService } from './auth.service'
 import { hashPassword } from './password.util'
 
+const passwordMailer = { sendResetLink: async () => undefined } as any
+
 const secret = 'stage19-test-secret-with-at-least-32-characters'
 
 function configService() {
@@ -34,7 +36,7 @@ test('admin login succeeds with a valid hashed password', async () => {
     },
   } as unknown as PrismaService
 
-  const result = await new AuthService(prisma, configService()).login({
+  const result = await new AuthService(prisma, configService(), passwordMailer).login({
     email: 'OWNER@example.com',
     password: 'correct horse battery staple',
   })
@@ -62,7 +64,7 @@ test('admin login rejects a wrong password with a safe error', async () => {
 
   await assert.rejects(
     () =>
-      new AuthService(prisma, configService()).login({
+      new AuthService(prisma, configService(), passwordMailer).login({
         email: 'owner@example.com',
         password: 'wrong password',
       }),

@@ -92,6 +92,12 @@
   max-width: 34ch;
 }
 
+.admin-login-link {
+  color: #536c82;
+  text-align: center;
+  text-decoration: underline;
+}
+
 .admin-login-card label,
 .admin-card form,
 .admin-card textarea {

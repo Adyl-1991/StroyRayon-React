@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { adminLogin } from '../api/adminApi'
+import { Link } from 'react-router-dom'
 import { Seo } from '../components/seo/Seo'
 import { hasAdminToken } from './adminSession'
 import '../styles/admin.css'
@@ -70,6 +71,7 @@ export function AdminLoginPage() {
         <button className="admin-primary-button" type="submit" disabled={submitting}>
           {submitting ? 'Входим…' : 'Войти'}
         </button>
+        <Link className="admin-login-link" to="/admin/forgot-password">Забыли пароль?</Link>
       </form>
     </main>
   )

@@ -37,6 +37,18 @@ services:
         sync: false
       - key: ADMIN_INITIAL_ROLE
         value: OWNER
+      - key: ADMIN_APP_ORIGIN
+        value: https://www.stroyrayon.kg
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
       - key: WHATSAPP_MANAGER_PHONE
         sync: false
       - key: PUBLIC_API_ORIGIN
