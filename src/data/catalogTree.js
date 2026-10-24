@@ -316,7 +316,7 @@ export const catalogTree = [
         children: [
           node({
             id: 'internal-sewerage',
-            titleKg: 'Внутренняя канализация',
+            titleKg: 'Ички агынды суу тутуму',
             titleRu: 'Внутренняя канализация',
             slug: 'ichki-kanalizaciya',
             icon: 'sewer',
